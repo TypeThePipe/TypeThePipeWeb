@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Type The Pipe</title>
+    <link>/authors/pablo-canovas/</link>
+      <atom:link href="/authors/pablo-canovas/index.xml" rel="self" type="application/rss+xml" />
+    <description>Type The Pipe</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 02 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Type The Pipe</title>
+      <link>/authors/pablo-canovas/</link>
+    </image>
+    
+    <item>
+      <title>Remove temp files</title>
+      <link>/post/remove-temp-files/</link>
+      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/remove-temp-files/</guid>
+      <description>
+
+
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;/img/1-monkey-pipe&#34; alt=&#34;my-image&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;my-image&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
