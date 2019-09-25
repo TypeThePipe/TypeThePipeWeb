@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>viz | Type The Pipe</title>
+    <link>/tags/viz/</link>
+      <atom:link href="/tags/viz/index.xml" rel="self" type="application/rss+xml" />
+    <description>viz</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 27 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>viz</title>
+      <link>/tags/viz/</link>
+    </image>
+    
+    <item>
+      <title>Turn your GGplot to 3D animation.Awesome 2D to 3D plots in R with Rayshader</title>
+      <link>/post/1c-ggplot-to-3d-in-r-with-rayshader/ggplot-to-3d-in-r-with-rayshader/</link>
+      <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
+      <guid>/post/1c-ggplot-to-3d-in-r-with-rayshader/ggplot-to-3d-in-r-with-rayshader/</guid>
+      <description>
+
+
+&lt;hr /&gt;
+&lt;p&gt;&lt;em&gt;In 3 minutes reading, You will learn how to turn your ggplot visualizations into amazing interactive 3D plots you can export or embed in HTML/Rmarkdown.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Or even better, you will export as mp4 an animation rotating the figure.&lt;/em&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_header.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;1. Introduction&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;During the last weeks a ‘new’ package has received the R community attention. We say ‘new’ because it joined recently the CRAN, althought the very first commits in github repo date back more than a year. Its name is &lt;strong&gt;rayshader&lt;/strong&gt; and in the author’s own words:&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“rayshader uses elevation data in a base R matrix and a combination of raytracing, spherical texture mapping, overlays, and ambient occlusion to generate beautiful topographic 2D and 3D maps”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;In my view, Tyler Morgan-Wall (package’s author) hit the jackpot with the new addition of two specific functions. These are plot_gg() and render_movie(). The first one converts the ggplot to a 3D figure using one or two lines of code making it deadly-simple. The second one renders an animation in which we can set up several parameters like zoom, fps, angles and inclinations… as user-friendly as possible.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_repo.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;lets-try-these-new-functionalities&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;&lt;strong&gt;Let’s try these new functionalities! &lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;The only condition you must have a color or fill &lt;em&gt;aesthetic&lt;/em&gt;, unless you can also play in the same plot wiht size.
+As we discussed in “XXXXXXX” 3D are not the right choice for most of the data visualization cases. Therefore, I tried to bring to this article a non gratuitous example.&lt;/p&gt;
+&lt;p&gt;As a practical challenge, we will visualize in an interactive 3D map the average age in each city of Spain. Cool? First of all we need the population stats. We get it from the INE webpage. Secondly we have to delimiter Spanish cities with they GIS coordinates. Then we are merging these data to create a ggplot chart. Once we have the ggplot object we are going to use the rayshader package to map color aesthetic to the third spatial dimension. To conclude, we are going to render it as rotating 3D video.&lt;/p&gt;
+&lt;p&gt;Let´s do it step by step.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;visualazing-spanish-cities-average-age.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;2. Visualazing Spanish cities average age.&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;We usually want to start our pratical work drawing the main steps in our project and our principal goals. So in a general layer, we want to visualiza the average age. Firstly in a ggplot-color way, go one step further and make the plot 3D and end with an animation where the Z axis will be the average age.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;downloading-census-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;2.1- Downloading census data&lt;/h3&gt;
+&lt;p&gt;As said, for our purpose, we need to collect data from two sources. We use INE open data portal to download census ages data by city. After a not very user-friendly search, we got it. I provide you the following link, where you can find the continuous register statistics:
+&lt;a href=&#34;http://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&amp;amp;cid=1254736177012&amp;amp;menu=resultados&amp;amp;secc=1254736195461&amp;amp;idp=1254734710990&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Aiming to keep focused, we don’t get distracted and we are going to download the 2018 file. However, is worth noting the &lt;a href=&#34;https://github.com/oddworldng/INEbaseR/&#34;&gt;&lt;em&gt;INEbase&lt;/em&gt;&lt;/a&gt; efforts to make easier the INE open data platform.&lt;/p&gt;
+&lt;p&gt;We start loading (or downloading) the packages we are going to use. In other article or tip we will provide a custom function to Load and Download Rpackages in onle line.
+Moreover we define the required functions and download directories.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;if (!require(pxR)) {
+  install.packages(&amp;quot;pxR&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;)
+  require(pxR)
+}
+if (!require(RColorBrewer)) {
+  install.packages(&amp;quot;RColorBrewer&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;)
+  require(RColorBrewer)
+}
+
+if (!require(rgeos)) {
+  install.packages(&amp;quot;rgeos&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;)
+  require(rgeos)
+  install.packages(&amp;quot;rgdal&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;) # reinstall cause gpclib dependencie https://stackoverflow.com/questions/30790036/error-istruegpclibpermitstatus-is-not-true
+  require(rgdal)
+}
+if (!require(rgdal)) {
+  install.packages(&amp;quot;rgdal&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;)
+  require(rgdal)
+}
+if (!require(knitr)) {
+  install.packages(&amp;quot;knitr&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;)
+  require(knitr)
+}
+if (!require(rayshader)) {
+  install.packages(&amp;quot;rayshader&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;)
+  require(rayshader)
+}
+if (!require(magrittr)) {
+  install.packages(&amp;quot;magrittr&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;)
+  require(magrittr)
+}
+if (!require(tidyverse)) {
+  install.packages(&amp;quot;tidyverse&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;)
+  require(tidyverse)
+}
+if (!require(RColorBrewer)) {
+  install.packages(&amp;quot;RColorBrewer&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;)
+  require(RColorBrewer)
+}
+as.numeric.factor &amp;lt;- function(x) {    # Custom function to convert fctr to num factor value
+    return(suppressWarnings(as.numeric(levels(x))[x]))
+}
+ 
+if(!dir.exists(&amp;quot;data&amp;quot;)) dir.create(&amp;quot;data&amp;quot;)  # Create the download directory&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Downloading INE 2018 file:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;utils::download.file(url = &amp;quot;http://www.ine.es/pcaxisdl/t20/e245/p05/a2018/l0/00000006.px&amp;quot;,
+                     destfile = &amp;quot;data/census_2018.px&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;We parse the data to obtain a name,pcode,average age dataframe&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tbl_census_2018 &amp;lt;- read.px(&amp;quot;data/census_2018.px&amp;quot;) %&amp;gt;%              # Load &amp;amp; format
+  as.tibble()
+tbl_census_2018 %&amp;lt;&amp;gt;% 
+  set_names(c(&amp;quot;age&amp;quot;, &amp;quot;city&amp;quot;, &amp;quot;sex&amp;quot;, &amp;quot;population&amp;quot;)) %&amp;gt;%             # Cambiamos los nombre
+  na.omit() %&amp;gt;%                                                    # Na rmv
+  filter((city!=&amp;quot;Total&amp;quot;)&amp;amp;(age!=&amp;quot;Total&amp;quot;)&amp;amp;(sex==&amp;quot;Ambos sexos&amp;quot;)) %&amp;gt;%  # Duplicate info rmv
+  separate(city, c(&amp;#39;postal_code&amp;#39;, &amp;#39;city_name&amp;#39;), sep=&amp;quot;-&amp;quot;) %&amp;gt;%       # Sep City column
+  mutate(age = as.numeric.factor(age)) %&amp;gt;%                         # Conv to numeric
+  group_by(city_name, postal_code) %&amp;gt;%                             # Group to operate
+  summarise(avg_age = sum(population*age,na.rm = T)/sum(population,na.rm=T)) %&amp;gt;%  # Avg age
+  select(city_name, postal_code, avg_age)                          # Discard columns
+kable(                                                             # Just Rmarkdown format
+  tbl_census_2018 %&amp;gt;% head(2)
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;left&#34;&gt;city_name&lt;/th&gt;
+&lt;th align=&#34;left&#34;&gt;postal_code&lt;/th&gt;
+&lt;th align=&#34;right&#34;&gt;avg_age&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Ababuj&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;44001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;52.40789&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr class=&#34;even&#34;&gt;
+&lt;td align=&#34;left&#34;&gt;Abades&lt;/td&gt;
+&lt;td align=&#34;left&#34;&gt;40001&lt;/td&gt;
+&lt;td align=&#34;right&#34;&gt;45.40000&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;downloading-gis-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;2.2- Downloading GIS data&lt;/h3&gt;
+&lt;p&gt;The second source is the Geo data. We will use cities coordinates and matching it with Spanish register data previously obtained.&lt;/p&gt;
+&lt;p&gt;Downloading map overlay:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;temp &amp;lt;- tempfile()                              # Create the tempfile
+u=&amp;quot;http://www.arcgis.com/sharing/rest/content/items/8e31c4c1a0b348f79058f212d0d807a1/data&amp;quot;
+utils::download.file(url = u, destfile = temp,
+                     mode=&amp;quot;wb&amp;quot;)                 # Binary mode for correct download
+
+unzip(temp, exdir = &amp;quot;data/cities_gis&amp;quot;)          # Unzip in data/cities_gis
+unlink(temp)                                    # Delete temp file&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We parse the spatial information to convert it into tabular data. We expect that the Canary Islands coordinates will skew the plot, so it’s our decision to keep focused in our 3D objetive and filter peninsular coordinates. It’s also possible, and a better practice, to move insular coordinates looking for a compact plot, instead of filter them out.&lt;/p&gt;
+&lt;p&gt;To complete this data processing, we use fortify function that allows us to don’t load more packages. However, this function throws a warning suggesting the broom::tidy() one.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tlb_cities_gis &amp;lt;- readOGR(dsn = &amp;quot;data/cities_gis/Municipios_ETRS89_30N.shp&amp;quot;,
+                              verbose=FALSE)    # Spatial data reading
+tlb_cities_gis %&amp;lt;&amp;gt;% 
+  fortify(region = &amp;quot;Codigo&amp;quot;) # %&amp;gt;%             # Conv &amp;quot;spatial object&amp;quot; to data.frame
+  # broom::tidy()
+
+plot_canarias &amp;lt;- F                              # Control param, initial app config
+
+if(plot_canarias==F){                           # Should be moduled in a funct
+  tlb_cities_gis %&amp;lt;&amp;gt;%
+  filter((long&amp;gt;0) &amp;amp; (lat&amp;gt;4000000))              # Filter peninsular data
+} &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Finaly, we join both creating the final dataset, which we are going to use to make the plots. Note that we use left join to keep de geo data.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tbl_cities_avg_age &amp;lt;- tlb_cities_gis %&amp;gt;% 
+  left_join(tbl_census_2018, by = c(&amp;quot;id&amp;quot; = &amp;quot;postal_code&amp;quot;)) &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As a good practice, we are going to check the number of NAs generated after the left join. These NAs meaning is that there are cities localized but without average year information&lt;/p&gt;
+&lt;p&gt;e can see that these missing values represents just 1% of the data, so we are going to impute them with the previous costal pode info. Bet that you can easily improve this procedure but I consider it’s prety good enought seeing the low NA ratio.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;kable(                                                      # RMarkdown output format
+  tbl_cities_avg_age %&amp;gt;%
+    group_by(id) %&amp;gt;%
+    summarise(na = sum(is.na(avg_age))) %&amp;gt;%                 # NAs by city
+    summarise(missing_perc = sum(na&amp;gt;0)/length(na)*100) %&amp;gt;%  # Perc cities with at least 1 na 
+    select(missing_perc)
+  ,
+  align = &amp;quot;c&amp;quot;
+  )&lt;/code&gt;&lt;/pre&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr class=&#34;header&#34;&gt;
+&lt;th align=&#34;center&#34;&gt;missing_perc&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr class=&#34;odd&#34;&gt;
+&lt;td align=&#34;center&#34;&gt;0.9268413&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tbl_cities_avg_age %&amp;lt;&amp;gt;%       
+  arrange(id) %&amp;gt;% 
+  fill(avg_age, .direction = &amp;quot;down&amp;quot;)            # Fill with the previous pc data.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ggplot-visualization&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;2.3- GGplot visualization&lt;/h3&gt;
+&lt;p&gt;Once we have created the final dataset, we are able to start ploting it. Of course longitude in X-axis and latitude en Y-axis. Firstly average city age is represented using a color palette. Red colours are assigned to older people and blue ones to younger city population. We get it in ggplot with the fill aesthetic.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;myPalette &amp;lt;- colorRampPalette(rev(brewer.pal(11, &amp;quot;Spectral&amp;quot;)))      # Create reverse Spectral palette
+
+plot_cities &amp;lt;- ggplot() +
+  geom_polygon(data = tbl_cities_avg_age, aes(fill = avg_age,   
+                                         x = long, 
+                                         y = lat, 
+                                         group = id)) +      # Dummy variable to correct fill by PCode.
+  scale_fill_gradientn(colours=myPalette(4)) +                 # Choose palette colours.
+  labs(fill=&amp;quot;Avg age&amp;quot;)
+plot(plot_cities)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;d-rayshader-visualization&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;2.4- 3D Rayshader Visualization!&lt;/h3&gt;
+&lt;p&gt;That was pretty nice. It’s sure that you can reach the general propose to be able to locate inmediately older an younger zones. Although as we discuss in XXX, human eyes aren’t ready to distinguiss almost nothing but big color contrasts. What about complement color with a third dimension through z axis?&lt;/p&gt;
+&lt;p&gt;Let’s see how it works&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_gg(plot_cities,multicore=TRUE,width=5,height=3,scale=310)    # Plot_gg de rayshader
+render_snapshot()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;200%&#34; height=&#34;200%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Hmm you told something about render_movie()… What if we anime it?&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;d-animation-with-rayshader&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;2.5- 3D animation with rayshader&lt;/h3&gt;
+&lt;p&gt;In the last plot, it results the correct angle election as a key point. But what if we animate it with a rotating effect?&lt;/p&gt;
+&lt;p&gt;This is what the following function take cares on:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;render_movie(&amp;quot;img/movie_spain.mp4&amp;quot;,frames = 720, fps=30,zoom=0.6,fov = 30)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/movie_spain.gif&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
