@@ -21,7 +21,8 @@ name: Carlos Vecina
 organizations:
 - name: Bankinter
   url: "https://www.bankinter.com/banca/en/home"
-role: Data scientist at Bankinter
+
+role: Data scientist at
 social:
 - icon: envelope
   icon_pack: fas
@@ -30,7 +31,7 @@ social:
   icon_pack: fab
   link: https://twitter.com/deepchals
 - icon: linkedin
-  icon_pack: ai
+  icon_pack: fab
   link: https://www.linkedin.com/in/carlos-vecina/
 - icon: github
   icon_pack: fab
