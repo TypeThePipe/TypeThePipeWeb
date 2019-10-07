@@ -33,6 +33,11 @@
   </url>
   
   <url>
+    <loc>/authors/carlos-vecina/</loc>
+    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/authors/</loc>
     <lastmod>2019-09-24T21:56:15+02:00</lastmod>
   </url>
@@ -43,8 +48,8 @@
   </url>
   
   <url>
-    <loc>/authors/pablo-canovas/</loc>
-    <lastmod>2019-09-23T21:24:03+02:00</lastmod>
+    <loc>/tags/ggplot/</loc>
+    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
   </url>
   
   <url>
@@ -54,21 +59,6 @@
   
   <url>
     <loc>/categories/r/</loc>
-    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/remove-temp-files/</loc>
-    <lastmod>2019-09-23T21:24:03+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/carlos-vecina/</loc>
-    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/ggplot/</loc>
     <lastmod>2019-09-24T21:56:15+02:00</lastmod>
   </url>
   
@@ -103,8 +93,18 @@
   </url>
   
   <url>
-    <loc>/post/writing-technical-content/</loc>
-    <lastmod>2019-07-12T00:00:00+00:00</lastmod>
+    <loc>/tags/competitions/</loc>
+    <lastmod>2019-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/project/</loc>
+    <lastmod>2019-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/project/real-state-datathon/</loc>
+    <lastmod>2019-04-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -114,7 +114,7 @@
   
   <url>
     <loc>/authors/admin/</loc>
-    <lastmod>2019-09-05T00:00:00+00:00</lastmod>
+    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -138,11 +138,6 @@
   </url>
   
   <url>
-    <loc>/post/jupyter/</loc>
-    <lastmod>2019-09-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/slides/</loc>
     <lastmod>2019-02-05T00:00:00+00:00</lastmod>
   </url>
@@ -153,6 +148,26 @@
   </url>
   
   <url>
+    <loc>/project/r-hispano-crm-excellency/</loc>
+    <lastmod>2018-11-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/talks/</loc>
+    <lastmod>2018-11-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/project/cryptocurrency-shiny/</loc>
+    <lastmod>2018-10-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/dashboards/</loc>
+    <lastmod>2018-10-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/privacy/</loc>
     <lastmod>2018-06-28T00:00:00+01:00</lastmod>
   </url>
@@ -160,46 +175,6 @@
   <url>
     <loc>/terms/</loc>
     <lastmod>2018-06-28T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/deep-learning/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/demo/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/project/external-project/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/project/internal-project/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/project/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/academic/</loc>
-    <lastmod>2019-04-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/getting-started/</loc>
-    <lastmod>2019-04-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/demo/</loc>
-    <lastmod>2019-04-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -215,26 +190,6 @@
   <url>
     <loc>/authors/robert-ford/</loc>
     <lastmod>2015-09-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2015-07-23-r-rmarkdown/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/plot/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/r-markdown/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/regression/</loc>
-    <lastmod>2015-07-23T21:13:14-05:00</lastmod>
   </url>
   
   <url>

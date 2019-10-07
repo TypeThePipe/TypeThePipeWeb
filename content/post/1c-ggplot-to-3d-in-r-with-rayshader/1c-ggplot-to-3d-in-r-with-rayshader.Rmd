@@ -28,7 +28,7 @@ projects: []
 
 --- 
 
-*In 3 minutes reading, You will learn how to turn your ggplot visualizations into amazing interactive 3D plots you can export or embed in HTML/Rmarkdown.*
+*In 7 minutes reading, You will learn how to turn your ggplot visualizations into amazing interactive 3D plots you can export or embed in HTML/Rmarkdown.*
 
 *Or even better, you will export as mp4 an animation rotating the figure.*
 
@@ -216,7 +216,7 @@ tbl_cities_avg_age <- tlb_cities_gis %>%
 
 As a good practice, we are going to check the number of NAs generated after the left join. These NAs meaning is that there are cities localized but without average year information
 
-e can see that these missing values represents just 1% of the data, so we are going to impute them with the previous costal pode info. Bet that you can easily improve this procedure but I consider it's prety good enought seeing the low NA ratio. 
+We can see that these missing values represents just 1% of the data, so we are going to impute them with the previous postal code info. I bet that you can easily improve this procedure but I consider it's prety acceptable enought seeing the low NA ratio. 
 
 ```{r, fig.align="center"}
 kable(                                                      # RMarkdown output format
@@ -237,6 +237,8 @@ tbl_cities_avg_age %<>%
 <br> 
 
 ### 2.3- GGplot visualization
+
+Inspired in http://blog.manugarri.com/making-a-beautiful-map-of-spain-in-ggplot2/
 
 Once we have created the final dataset, we are able to start ploting it. Of course longitude in X-axis and latitude en Y-axis. Firstly average city age is represented using a color palette. Red colours are assigned to older people and blue ones to younger city population. We get it in ggplot with the fill aesthetic.
 

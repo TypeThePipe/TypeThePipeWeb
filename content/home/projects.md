@@ -26,8 +26,16 @@ subtitle = ""
     tag = "*"
   
   [[content.filter_button]]
-    name = "Deep Learning"
-    tag = "Deep Learning"
+    name = "Competitions"
+    tag = "Competitions"
+	
+  [[content.filter_button]]
+    name = "Dashboards"
+    tag = "Dashboards"
+	
+  [[content.filter_button]]
+    name = "Talks"
+    tag = "Talks"
   
   [[content.filter_button]]
     name = "Other"

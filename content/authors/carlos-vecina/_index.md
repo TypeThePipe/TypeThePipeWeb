@@ -14,15 +14,16 @@ education:
 email: ""
 interests:
 - Artificial Intelligence
+- Time Series Forecasting
 - Graph theory
 - Uncertainity
 - Econometrics
 name: Carlos Vecina
 organizations:
-- name: Bankinter
-  url: "https://www.bankinter.com/banca/en/home"
+- name: 
+  url: ""
 
-role: Data scientist at
+role: Data scientist at Bankinter
 social:
 - icon: envelope
   icon_pack: fas
@@ -39,7 +40,6 @@ social:
 superuser: true
 user_groups:
 - Researchers
-- Visitors
 ---
 
 Carlos Vecina is a data scientist with experience using ML and AI to bring value to business in CRM, Marketing and energy markets environments.

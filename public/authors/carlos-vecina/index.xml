@@ -21,7 +21,7 @@
 
 
 &lt;hr /&gt;
-&lt;p&gt;&lt;em&gt;In 3 minutes reading, You will learn how to turn your ggplot visualizations into amazing interactive 3D plots you can export or embed in HTML/Rmarkdown.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;In 7 minutes reading, You will learn how to turn your ggplot visualizations into amazing interactive 3D plots you can export or embed in HTML/Rmarkdown.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Or even better, you will export as mp4 an animation rotating the figure.&lt;/em&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_header.png&#34; /&gt;&lt;/p&gt;
@@ -175,7 +175,7 @@ if(plot_canarias==F){                           # Should be moduled in a funct
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tbl_cities_avg_age &amp;lt;- tlb_cities_gis %&amp;gt;% 
   left_join(tbl_census_2018, by = c(&amp;quot;id&amp;quot; = &amp;quot;postal_code&amp;quot;)) &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;As a good practice, we are going to check the number of NAs generated after the left join. These NAs meaning is that there are cities localized but without average year information&lt;/p&gt;
-&lt;p&gt;e can see that these missing values represents just 1% of the data, so we are going to impute them with the previous costal pode info. Bet that you can easily improve this procedure but I consider it’s prety good enought seeing the low NA ratio.&lt;/p&gt;
+&lt;p&gt;We can see that these missing values represents just 1% of the data, so we are going to impute them with the previous postal code info. I bet that you can easily improve this procedure but I consider it’s prety acceptable enought seeing the low NA ratio.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;kable(                                                      # RMarkdown output format
   tbl_cities_avg_age %&amp;gt;%
     group_by(id) %&amp;gt;%
@@ -204,6 +204,7 @@ if(plot_canarias==F){                           # Should be moduled in a funct
 &lt;/div&gt;
 &lt;div id=&#34;ggplot-visualization&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;2.3- GGplot visualization&lt;/h3&gt;
+&lt;p&gt;Inspired in &lt;a href=&#34;http://blog.manugarri.com/making-a-beautiful-map-of-spain-in-ggplot2/&#34; class=&#34;uri&#34;&gt;http://blog.manugarri.com/making-a-beautiful-map-of-spain-in-ggplot2/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Once we have created the final dataset, we are able to start ploting it. Of course longitude in X-axis and latitude en Y-axis. Firstly average city age is represented using a color palette. Red colours are assigned to older people and blue ones to younger city population. We get it in ggplot with the fill aesthetic.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;myPalette &amp;lt;- colorRampPalette(rev(brewer.pal(11, &amp;quot;Spectral&amp;quot;)))      # Create reverse Spectral palette
 

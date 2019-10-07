@@ -23,8 +23,16 @@
     <item>
       <title>Posts</title>
       <link>/post/</link>
-      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
       <guid>/post/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Projects</title>
+      <link>/project/</link>
+      <pubDate>Sat, 27 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>/project/</guid>
       <description></description>
     </item>
     
@@ -60,14 +68,6 @@
       <guid>/terms/</guid>
       <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Projects</title>
-      <link>/project/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>/project/</guid>
-      <description></description>
     </item>
     
     <item>

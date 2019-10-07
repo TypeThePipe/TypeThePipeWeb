@@ -5,27 +5,12 @@
     <link>/categories/r/</link>
       <atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 02 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 27 Jul 2019 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>R</title>
       <link>/categories/r/</link>
     </image>
-    
-    <item>
-      <title>Remove temp files</title>
-      <link>/post/remove-temp-files/</link>
-      <pubDate>Fri, 02 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/remove-temp-files/</guid>
-      <description>
-
-
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;/img/1-monkey-pipe&#34; alt=&#34;my-image&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;my-image&lt;/p&gt;
-&lt;/div&gt;
-</description>
-    </item>
     
     <item>
       <title>Turn your GGplot to 3D animation. Awesome 2D to 3D plots in R with Rayshader</title>
@@ -36,7 +21,7 @@
 
 
 &lt;hr /&gt;
-&lt;p&gt;&lt;em&gt;In 3 minutes reading, You will learn how to turn your ggplot visualizations into amazing interactive 3D plots you can export or embed in HTML/Rmarkdown.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;In 7 minutes reading, You will learn how to turn your ggplot visualizations into amazing interactive 3D plots you can export or embed in HTML/Rmarkdown.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Or even better, you will export as mp4 an animation rotating the figure.&lt;/em&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_header.png&#34; /&gt;&lt;/p&gt;
@@ -190,7 +175,7 @@ if(plot_canarias==F){                           # Should be moduled in a funct
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tbl_cities_avg_age &amp;lt;- tlb_cities_gis %&amp;gt;% 
   left_join(tbl_census_2018, by = c(&amp;quot;id&amp;quot; = &amp;quot;postal_code&amp;quot;)) &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;As a good practice, we are going to check the number of NAs generated after the left join. These NAs meaning is that there are cities localized but without average year information&lt;/p&gt;
-&lt;p&gt;e can see that these missing values represents just 1% of the data, so we are going to impute them with the previous costal pode info. Bet that you can easily improve this procedure but I consider it’s prety good enought seeing the low NA ratio.&lt;/p&gt;
+&lt;p&gt;We can see that these missing values represents just 1% of the data, so we are going to impute them with the previous postal code info. I bet that you can easily improve this procedure but I consider it’s prety acceptable enought seeing the low NA ratio.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;kable(                                                      # RMarkdown output format
   tbl_cities_avg_age %&amp;gt;%
     group_by(id) %&amp;gt;%
@@ -219,6 +204,7 @@ if(plot_canarias==F){                           # Should be moduled in a funct
 &lt;/div&gt;
 &lt;div id=&#34;ggplot-visualization&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;2.3- GGplot visualization&lt;/h3&gt;
+&lt;p&gt;Inspired in &lt;a href=&#34;http://blog.manugarri.com/making-a-beautiful-map-of-spain-in-ggplot2/&#34; class=&#34;uri&#34;&gt;http://blog.manugarri.com/making-a-beautiful-map-of-spain-in-ggplot2/&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Once we have created the final dataset, we are able to start ploting it. Of course longitude in X-axis and latitude en Y-axis. Firstly average city age is represented using a color palette. Red colours are assigned to older people and blue ones to younger city population. We get it in ggplot with the fill aesthetic.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;myPalette &amp;lt;- colorRampPalette(rev(brewer.pal(11, &amp;quot;Spectral&amp;quot;)))      # Create reverse Spectral palette
 
@@ -250,56 +236,6 @@ render_snapshot()&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;This is what the following function take cares on:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;render_movie(&amp;quot;img/movie_spain.mp4&amp;quot;,frames = 720, fps=30,zoom=0.6,fov = 30)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/movie_spain.gif&#34; /&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Hello R Markdown</title>
-      <link>/post/2015-07-23-r-rmarkdown/</link>
-      <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
-      <guid>/post/2015-07-23-r-rmarkdown/</guid>
-      <description>
-
-
-&lt;div id=&#34;r-markdown&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;R Markdown&lt;/h1&gt;
-&lt;p&gt;This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see &lt;a href=&#34;http://rmarkdown.rstudio.com&#34; class=&#34;uri&#34;&gt;http://rmarkdown.rstudio.com&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;You can embed an R code chunk like this:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;summary(cars)
-##      speed           dist       
-##  Min.   : 4.0   Min.   :  2.00  
-##  1st Qu.:12.0   1st Qu.: 26.00  
-##  Median :15.0   Median : 36.00  
-##  Mean   :15.4   Mean   : 42.98  
-##  3rd Qu.:19.0   3rd Qu.: 56.00  
-##  Max.   :25.0   Max.   :120.00
-fit &amp;lt;- lm(dist ~ speed, data = cars)
-fit
-## 
-## Call:
-## lm(formula = dist ~ speed, data = cars)
-## 
-## Coefficients:
-## (Intercept)        speed  
-##     -17.579        3.932&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-&lt;div id=&#34;including-plots&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Including Plots&lt;/h1&gt;
-&lt;p&gt;You can also embed plots. See Figure &lt;a href=&#34;#fig:pie&#34;&gt;1&lt;/a&gt; for example:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;par(mar = c(0, 1, 0, 1))
-pie(
-  c(280, 60, 20),
-  c(&amp;#39;Sky&amp;#39;, &amp;#39;Sunny side of pyramid&amp;#39;, &amp;#39;Shady side of pyramid&amp;#39;),
-  col = c(&amp;#39;#0292D8&amp;#39;, &amp;#39;#F7EA39&amp;#39;, &amp;#39;#C4B632&amp;#39;),
-  init.angle = -50, border = NA
-)&lt;/code&gt;&lt;/pre&gt;
-&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:pie&#34;&gt;&lt;/span&gt;
-&lt;img src=&#34;/post/2015-07-23-r-rmarkdown_files/figure-html/pie-1.png&#34; alt=&#34;A fancy pie chart.&#34; width=&#34;672&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;
-Figure 1: A fancy pie chart.
-&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>
