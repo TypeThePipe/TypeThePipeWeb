@@ -50,4 +50,4 @@ subtitle = ""
 
 Welcome to the **our personal blog**.
 
-Here Pablo and Carlos are talking about Data Science Workflows and Pipelines mixing a practical approach with an academic depth.
+Here we are talking about Data Science Workflows and Pipelines mixing a practical approach with an academic depth.
