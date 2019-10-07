@@ -27,9 +27,9 @@ subtitle = ""
   description = ""  
   
 [[feature]]
-  icon = "align-justify"
-  icon_pack = "fas"
-  name = "Scala"
+  icon = "searchengin"
+  icon_pack = "fab"
+  name = "SQL"
   description = ""
 
 +++

@@ -9,7 +9,7 @@ slides: example
 summary: Text Mining use cases in CRM and a light use case with spanish banking apps.
 tags:
 - Talks
-title: Talk. Text Mining for CRM excellency.
+title: Talk - Text Mining for CRM excellency.
 url_code: ""
 url_pdf: ""
 url_slides: ""
