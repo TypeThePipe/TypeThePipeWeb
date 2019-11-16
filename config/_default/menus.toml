@@ -30,7 +30,7 @@
 
 [[main]]
   name = "About Us"
-  url = "authors/carlos-vecina"
+  url = "#people"
   weight = 60
 
 #[[main]]
