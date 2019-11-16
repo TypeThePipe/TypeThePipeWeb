@@ -23,7 +23,7 @@ organizations:
 - name: 
   url: ""
 
-role: Data scientist at Bankinter
+role: Data Scientist at Bankinter
 social:
 - icon: envelope
   icon_pack: fas
