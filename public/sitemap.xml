@@ -30,7 +30,6 @@
   <url>
     <loc>/</loc>
     <lastmod>2030-06-01T13:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -41,7 +40,6 @@
   <url>
     <loc>/authors/</loc>
     <lastmod>2019-10-11T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -62,66 +60,56 @@
   <url>
     <loc>/categories/</loc>
     <lastmod>2019-09-24T21:56:15+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/r/</loc>
-    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/post/1c-ggplot-to-3d-in-r-with-rayshader/ggplot-to-3d-in-r-with-rayshader/</loc>
-    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/ggplot/</loc>
     <lastmod>2019-09-24T21:56:15+02:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/rayshader/</loc>
     <lastmod>2019-09-24T21:56:15+02:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/ggplot-to-3d-in-r-with-rayshader/</loc>
+    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/visualization/</loc>
     <lastmod>2019-09-24T21:56:15+02:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/viz/</loc>
     <lastmod>2019-09-24T21:56:15+02:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/vizr/</loc>
     <lastmod>2019-09-24T21:56:15+02:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/competitions/</loc>
     <lastmod>2019-04-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/project/</loc>
     <lastmod>2019-04-27T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -132,7 +120,11 @@
   <url>
     <loc>/publication_types/3/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/authors/admin/</loc>
+    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -143,7 +135,6 @@
   <url>
     <loc>/publication_types/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -154,19 +145,11 @@
   <url>
     <loc>/tags/source-themes/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/authors/admin/</loc>
-    <lastmod>2019-04-07T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/slides/</loc>
     <lastmod>2019-02-05T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -182,7 +165,6 @@
   <url>
     <loc>/tags/talks/</loc>
     <lastmod>2018-11-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -198,7 +180,6 @@
   <url>
     <loc>/tags/dashboards/</loc>
     <lastmod>2018-10-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -214,7 +195,6 @@
   <url>
     <loc>/publication_types/2/</loc>
     <lastmod>2015-09-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -225,13 +205,11 @@
   <url>
     <loc>/authors/robert-ford/</loc>
     <lastmod>2015-09-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>/publication_types/1/</loc>
     <lastmod>2013-07-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
