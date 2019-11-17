@@ -28,10 +28,10 @@
   
     
   
-  <meta name="description" content="Data Science, ML &amp; AI blog. Workflows, vizs and tips.">
+  <meta name="description" content="a.sourceLine { display: inline-block; line-height: 1.25; }a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }a.sourceLine:empty { height: 1.2em; }.sourceCode { overflow: visible; }code.sourceCode { white-space: pre; position: relative; }div.sourceCode { margin: 1em 0; }pre.sourceCode { margin: 0; }@media screen {div.sourceCode { overflow: auto; }}@media print {code.sourceCode { white-space: pre-wrap; }a.sourceLine { text-indent: -1em; padding-left: 1em; }}pre.">
 
   
-  <link rel="alternate" hreflang="en-us" href="/categories/r/">
+  <link rel="alternate" hreflang="en-us" href="/post/conditional-pipes/">
 
   
 
@@ -92,14 +92,12 @@
   
 
   
-  <link rel="alternate" href="/categories/r/index.xml" type="application/rss+xml" title="TypeThePipe">
-  
 
   <link rel="manifest" href="/index.webmanifest">
   <link rel="icon" type="image/png" href="/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/img/icon-192.png">
 
-  <link rel="canonical" href="/categories/r/">
+  <link rel="canonical" href="/post/conditional-pipes/">
 
   
   
@@ -114,18 +112,65 @@
   <meta property="twitter:creator" content="@typethepipe">
   
   <meta property="og:site_name" content="TypeThePipe">
-  <meta property="og:url" content="/categories/r/">
-  <meta property="og:title" content="R | TypeThePipe">
-  <meta property="og:description" content="Data Science, ML &amp; AI blog. Workflows, vizs and tips."><meta property="og:image" content="/img/icon-192.png">
+  <meta property="og:url" content="/post/conditional-pipes/">
+  <meta property="og:title" content="Conditional Pipes | TypeThePipe">
+  <meta property="og:description" content="a.sourceLine { display: inline-block; line-height: 1.25; }a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }a.sourceLine:empty { height: 1.2em; }.sourceCode { overflow: visible; }code.sourceCode { white-space: pre; position: relative; }div.sourceCode { margin: 1em 0; }pre.sourceCode { margin: 0; }@media screen {div.sourceCode { overflow: auto; }}@media print {code.sourceCode { white-space: pre-wrap; }a.sourceLine { text-indent: -1em; padding-left: 1em; }}pre."><meta property="og:image" content="/img/icon-192.png">
   <meta property="twitter:image" content="/img/icon-192.png"><meta property="og:locale" content="en-us">
   
-    <meta property="og:updated_time" content="2019-11-02T00:00:00&#43;00:00">
+    
+      <meta property="article:published_time" content="2019-11-02T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2019-11-02T00:00:00&#43;00:00">
   
 
   
 
 
+    
 
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/conditional-pipes/"
+  },
+  "headline": "Conditional Pipes",
+  
+  "datePublished": "2019-11-02T00:00:00Z",
+  "dateModified": "2019-11-02T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Pablo Cánovas"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "TypeThePipe",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/img/icon-512.png"
+    }
+  },
+  "description": "a.sourceLine { display: inline-block; line-height: 1.25; }\ra.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }\ra.sourceLine:empty { height: 1.2em; }\r.sourceCode { overflow: visible; }\rcode.sourceCode { white-space: pre; position: relative; }\rdiv.sourceCode { margin: 1em 0; }\rpre.sourceCode { margin: 0; }\r@media screen {\rdiv.sourceCode { overflow: auto; }\r}\r@media print {\rcode.sourceCode { white-space: pre-wrap; }\ra.sourceLine { text-indent: -1em; padding-left: 1em; }\r}\rpre."
+}
+</script>
+
+  
 
   
 
@@ -133,10 +178,13 @@
   
 
 
+  
 
 
 
-  <title>R | TypeThePipe</title>
+
+
+  <title>Conditional Pipes | TypeThePipe</title>
 
 </head>
 
@@ -303,76 +351,323 @@
 </nav>
 
 
-  
-
-
-
-
-
-
-
-
-
-
-
+  <article class="article">
 
   
 
+
+
+
+
+
+
+
+
+
+
+
   
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Conditional Pipes</h1>
+
+  
+
+  
+    
+
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+
+
+  <span><a href="/authors/pablo-canovas/">Pablo Cánovas</a></span>
+
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Nov 2, 2019
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    3 min read
+  </span>
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <a href="/post/conditional-pipes/#disqus_thread"></a>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/r/">R</a>, <a href="/categories/tidyverse/">Tidyverse</a>, <a href="/categories/tips/">Tips</a></span>
+  
+
+  
+    
+
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p>How could we apply certain functions conditionally without leaving the pipeflow?
+This way:</p>
+<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span>{ <span class="cf">if</span>(apply_filter <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>) <span class="kw">filter</span>(., condition) <span class="cf">else</span> . } <span class="op">%&gt;%</span><span class="st"> </span>...</code></pre>
+
+    </div>
+
+    
+
+
+    
+
+
+
+    
+      
+
+
+
+
+
+
+
+
   
   
     
   
-<div class="universal-wrapper pt-3">
-  <h1>R</h1>
-
   
 
-  
-</div>
 
 
 
-<div class="universal-wrapper">
-  
+
 
   
   
-  <div>
-    <h2><a href="/post/conditional-pipes/">Conditional Pipes</a></h2>
-    <div class="article-style">
+  
+  
+  <div class="media author-card">
+    
       
-      a.sourceLine { display: inline-block; line-height: 1.25; }a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }a.sourceLine:empty { height: 1.2em; }.sourceCode { overflow: visible; }code.sourceCode { white-space: pre; position: relative; }div.sourceCode { margin: 1em 0; }pre.sourceCode { margin: 0; }@media screen {div.sourceCode { overflow: auto; }}@media print {code.sourceCode { white-space: pre-wrap; }a.sourceLine { text-indent: -1em; padding-left: 1em; }}pre.
-      
+      <img class="portrait mr-3" src="/authors/pablo-canovas/pablo-avatar_hubb0481beec833bd3372f12c0d11fcb35_605192_250x250_fill_lanczos_center_2.png" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/authors/pablo-canovas/">Pablo Cánovas</a></h5>
+      <h6 class="card-subtitle">Data Scientist at Repsol Electricidad y Gas</h6>
+      <p class="card-text">Data Scientist, formerly physicist  |  Tidyverse believer, piping life  |  Hanging out at TypeThePipe</p>
+      <ul class="network-icon" aria-hidden="true">
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a href="/#contact" >
+              <i class="fas fa-envelope"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a href="https://twitter.com/paul_elotro" target="_blank" rel="noopener">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a href="https://www.linkedin.com/in/pablo-c%c3%a1novas-tourn%c3%a9-2507b6b7" target="_blank" rel="noopener">
+              <i class="fab fa-linkedin"></i>
+            </a>
+          </li>
+        
+          
+          
+          
+            
+          
+          
+          
+          
+          
+            
+          
+          <li>
+            <a href="https://github.com/PabloCanovas" target="_blank" rel="noopener">
+              <i class="fab fa-github"></i>
+            </a>
+          </li>
+        
+      </ul>
     </div>
   </div>
+
+
+
+      
+      
+    
+
+    
+
+    
+<section id="comments">
   
-  <div>
-    <h2><a href="/post/filtering-a-data-frame-by-condition-on-multiple-columns/">Filtering a data frame by condition on multiple columns</a></h2>
-    <div class="article-style">
-      
-      a.sourceLine { display: inline-block; line-height: 1.25; }a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }a.sourceLine:empty { height: 1.2em; }.sourceCode { overflow: visible; }code.sourceCode { white-space: pre; position: relative; }div.sourceCode { margin: 1em 0; }pre.sourceCode { margin: 0; }@media screen {div.sourceCode { overflow: auto; }}@media print {code.sourceCode { white-space: pre-wrap; }a.sourceLine { text-indent: -1em; padding-left: 1em; }}pre.
-      
-    </div>
+    
+
+  
+</section>
+
+
+
   </div>
-  
-  <div>
-    <h2><a href="/post/ggplot-to-3d-in-r-with-rayshader/">Turn your GGplot to 3D animation. Awesome 2D to 3D plots in R with Rayshader</a></h2>
-    <div class="article-style">
-      
-      In 7 minutes reading, You will learn how to turn your ggplot visualizations into amazing interactive 3D plots you can export or embed in HTML/Rmarkdown.
-Or even better, you will export as mp4 an animation rotating the figure.
-
-1. Introduction
-During the last weeks a ‘new’ package has received the R community attention. We say ‘new’ because it joined recently the CRAN, althought the very first commits in github repo date back more than a year.
-      
-    </div>
-  </div>
-  
-
-  
-
-</div>
+</article>
 
       
 
