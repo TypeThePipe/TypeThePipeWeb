@@ -1,7 +1,7 @@
 ---
 authors:
 - pablo-canovas
-bio: Data Scientist, formerly physicist  |  Tidyverse believer, piping life  |  Hanging out at TypeThePipe
+bio: Data scientist, formerly physicist  |  Tidyverse believer, piping life  |  Hanging out at TypeThePipe
 education:
   courses:
   - course: Deep Learning Specialization
@@ -30,7 +30,7 @@ organizations:
 - name:  
   url: ""
 
-role: Data Scientist at Repsol Electricidad y Gas
+role: Data scientist at Repsol Electricidad y Gas
 social:
 - icon: envelope
   icon_pack: fas
@@ -46,7 +46,7 @@ social:
   link: https://github.com/PabloCanovas
 superuser: true
 user_groups:
-- ----
+- Researchers
 ---
 
 Pablo Cánovas is a data scientist with experience developing machine learning models applied to electricity markets.
