@@ -1,0 +1,322 @@
+---
+title: Symmetric MAPE is not symmetric
+author: Pablo Cánovas Tourné
+date: '2019-08-26'
+slug: symmetric-mape-is-not-symmetric
+categories:
+  - metrics
+tags: []
+subtitle: ''
+summary: ''
+authors: [pablo-canovas]
+featured: no
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: no
+projects: []
+---
+
+<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>I recently came across <a href="https://robjhyndman.com/hyndsight/smape">this interesting discussion</a> about percentage errors and I would like to talk about MAPE and its characteristics.</p>
+<p>MAPE is the acronym of Mean Absolute Percentage Error and is defined as</p>
+<p><span class="math display">\[MAPE = \frac{100}{N} \sum_{t=1}^{N} \frac{|A_t - F_t|}{|A_t|}\]</span></p>
+<p>being <span class="math inline">\(A_t\)</span> the <em>Actuals</em> and <span class="math inline">\(F_t\)</span> the <em>Forecasts</em></p>
+<p>There is some confusion and disagreement about the behaviour of MAPE.</p>
+<p>MAPE express the deviation in relative terms and provides a simple interpretation of the error.
+It is easy to calculate and communicate and probably that is why it has been widely used in forecasting business.</p>
+<p>However, it suffers from some known issues.</p>
+</div>
+<div id="the-problems" class="section level2">
+<h2>The problems</h2>
+<ul>
+<li><p>MAPE ranges from 0 to <span class="math inline">\(\infty\)</span>: it diverges with <span class="math inline">\(A_t \to 0\)</span> which leads to problems when dealing with data with zero values such as intermittent demand data or energy forecasting.
+This problem is even worse when working with data with arbitrary zero values, e.g, forecasting temperatures near 0<span class="math inline">\(^o\)</span> in Celsius or Fahrenheit scale. To be fair, this would be an issue using any percentage error metric.</p></li>
+<li><p>MAPE <strong>is said to be asymmetric</strong> in the sense it puts heavier penalty on negative errors. When <span class="math inline">\(F_t &lt; A_t\)</span> the maximum possible error value is 100%,
+however there is no limit when forecasting on the high side. Besides, given the same absolute difference <span class="math inline">\(|A_t - F_t|\)</span>, MAPE is greater when <span class="math inline">\(F_t &gt; A_t\)</span>:</p></li>
+</ul>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Case
+</th>
+<th style="text-align:right;">
+Actual
+</th>
+<th style="text-align:right;">
+Forecast
+</th>
+<th style="text-align:right;">
+AbsoluteDifference
+</th>
+<th style="text-align:right;">
+MAPE
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+150
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+50
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+150
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+33
+</td>
+</tr>
+</tbody>
+</table>
+<p>However, there is some controversy over this last point.
+Some people argue this is a false dichotomy because it doesn’t make sense to compare two situations where you are exchanging forecast and actual values, and defend MAPE actually <strong>is symmetric</strong> because you can’t get a lower MAPE just by lowering your forecasts:</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Case
+</th>
+<th style="text-align:right;">
+Actual
+</th>
+<th style="text-align:right;">
+Forecast
+</th>
+<th style="text-align:right;">
+AbsoluteDifference
+</th>
+<th style="text-align:right;">
+MAPE
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+150
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+50
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+50
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="thesolution" class="section level2">
+<h2>The…solution?</h2>
+<p>Trying to solve the alledgelly asymmetry, some alternative versions have been proposed. The more general one is:</p>
+<p><span class="math display">\[ sMAPE = \frac{200}{N} \sum_{t=1}^{N}\frac{|A_t - F_t|}{|A_t| + |F_t|} \]</span></p>
+<p>First thing to notice is that the range of this symmetric MAPE is <span class="math inline">\(\big[0,200 \big]\)</span> which is somewhat antiintuitive. I can’t see myself explaining model deviations in such metric to anybody with a non-technical background.
+This could be solved simply dividing by 2, although that would be an aesthetic change only.
+On the bright side, this version of sMAPE doesn’t diverge, which brings some sanity and stability to the metric.</p>
+<p>But the aspect that really fascinates me is that the so-called <strong>symmetric MAPE is not symmetric.</strong>
+In fact, sMAPE symmetrizes the asymmetric case above, and the other way around:</p>
+<ul>
+<li>Exchanging actual and forecast values <em>does</em> produce the same sMAPE value.</li>
+</ul>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Case
+</th>
+<th style="text-align:right;">
+Actual
+</th>
+<th style="text-align:right;">
+Forecast
+</th>
+<th style="text-align:right;">
+AbsoluteDifference
+</th>
+<th style="text-align:right;">
+MAPE
+</th>
+<th style="text-align:right;">
+sMAPE
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+150
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+150
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+33
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Modifying the forecast while holding fixed actual values and absolute deviation <em>do not</em> produce the same sMAPE value. This maybe the most important case.</li>
+</ul>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Case
+</th>
+<th style="text-align:right;">
+Actual
+</th>
+<th style="text-align:right;">
+Forecast
+</th>
+<th style="text-align:right;">
+AbsoluteDifference
+</th>
+<th style="text-align:right;">
+MAPE
+</th>
+<th style="text-align:right;">
+sMAPE
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+150
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+100
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+50
+</td>
+<td style="text-align:right;">
+33
+</td>
+</tr>
+</tbody>
+</table>
+<p>This second point is a critical issue: simply <strong>biasing the model without improving its accuracy should never produce different error values.</strong></p>
+<p>Taking all this into account, the proposed metric seems to be even worse than the original one. Quite surprising!</p>
+</div>
+<div id="an-alternative" class="section level2">
+<h2>An alternative</h2>
+<p>Some others have proposed the log ratio <span class="math inline">\(ln(F_t/A_t)\)</span> as a better alternative to MAPE.
+It shows, indeed, better statistical properties than others metrics:</p>
+<ul>
+<li>Applying least squares regression to this metric estimates the geometric mean whereas minimizing MAPE or sMAPE does not lead to an established measure of location.</li>
+<li>Given that geometric mean cannot exceed arithmetic mean, using least squares with log ratio will be more robust to outliers than OLS.</li>
+<li>Its values belong to a symmetric range: <span class="math inline">\([-\infty, \infty]\)</span>. However, it shows the same asymmetric behaviour than sMAPE: Exchanging actuals and forecasts holds the error
+(with a negative value!), but similar absolute deviations with same actual value don’t correspond with equal error values.</li>
+</ul>
+<p>If interested in more information about this less-known metric, check out <a href="https://poseidon01.ssrn.com/delivery.php?ID=912071094074109094069115029093025110000069085067010018086003069122074000022002100121034011107062116011014121092068067002120016015069090069028013066084099122096112019086019005105020067099126068064011082116019102096003091124077118086097090097087121114&amp;EXT=pdf">A better measure of relative prediction accuracy for model selection and model estimation (Chris Tofallis, 2015)</a></p>
+<p>I hope this may have brought some light into this quirky behaviour of MAPE and sMAPE.</p>
+<p>I also wrote a more general discussion about forecasting error metrics in <a href="../Forecasting-error-metrics">this article</a> you might want to take a look at.</p>
+</div>

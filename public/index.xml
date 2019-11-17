@@ -108,18 +108,27 @@
     <item>
       <title>Forecasting Error Metrics</title>
       <link>/post/forecasting-error-metrics/</link>
-      <pubDate>Fri, 11 Oct 2019 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 21 Sep 2019 00:00:00 +0000</pubDate>
       <guid>/post/forecasting-error-metrics/</guid>
       <description>
 &lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#introduction&#34;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#scale-dependent-error-metrics&#34;&gt;Scale dependent error metrics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#percentage-error-metrics&#34;&gt;Percentage-error metrics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#scale-free-error-metrics&#34;&gt;Scale-free error metrics&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#conclusions&#34;&gt;Conclusions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#references&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
 
 &lt;div id=&#34;introduction&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;Introduction&lt;/h1&gt;
-&lt;p&gt;The idea of this post comes from the different error metrics I have dealt with during my work as a data scientist for an energy company.&lt;/p&gt;
-&lt;p&gt;My work usually involves working with time series data and forecasting models.
-Among other things, we make energy production forecasts of renewable power plants of different capacities and technologies.
-The aim of the department I work at is to develop forecasting models that reduce the penalties caused by the deviations.&lt;/p&gt;
+&lt;p&gt;The idea of this post comes from the different error metrics I have dealt with working with time series data and forecasting models.&lt;/p&gt;
+&lt;p&gt;Among other things, we make energy production forecasts of renewable power plants of different capacities and technologies.
+Our aim is to develop forecasting models that reduce the penalties caused by the deviations.&lt;/p&gt;
 &lt;p&gt;Most of the models I work with are regression models, and therefore in this article I am focusing only on regression error metrics.&lt;/p&gt;
 &lt;p&gt;Unfortunately, there is no absolute “right” accuracy metric.
 Choosing the right metric is a problem-specific matter, and it involves answering questions like:&lt;/p&gt;
@@ -130,22 +139,19 @@ Choosing the right metric is a problem-specific matter, and it involves answerin
 &lt;li&gt;Do we care about the percentage error or about the magnitude of the deviation?&lt;/li&gt;
 &lt;li&gt;Does it makes any difference to over-forecast or under-forecast the variable of interest?&lt;/li&gt;
 &lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;We need to find error metrics that are aligned with our business goals.&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;In our use case, answering the above questions led us to determine we needed to find a metric that:&lt;/p&gt;
+&lt;p&gt;Answering the above questions lead us to determine we need to find a metric that:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Is scale independent, so the errors are comparable between power plants.&lt;/li&gt;
 &lt;li&gt;Is symmetric, as we do not want to weight the deviations differently according to their sign.&lt;/li&gt;
 &lt;li&gt;Express the error in absolute terms, so the error reflects the real-life imbalance costs.&lt;/li&gt;
-&lt;li&gt;Having the error calculated over different periods be equivalent to the aggregated of the calculated over those periods individually.&lt;/li&gt;
+&lt;li&gt;The error calculated over different periods should be equivalent to the aggregated calculation over those periods individually.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Each metric behaves in a certain way and therefore reflects in a unique manner the features of the models.
 Depending on their properties, we can classify the metrics in several categories.
 Let’s take a look at them:&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;scale-dependent&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;Scale dependent&lt;/h1&gt;
+&lt;div id=&#34;scale-dependent-error-metrics&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Scale dependent error metrics&lt;/h1&gt;
 &lt;p&gt;Maybe the most popular and simple error metric is &lt;strong&gt;MAE&lt;/strong&gt;:&lt;/p&gt;
 &lt;div id=&#34;mae&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;MAE:&lt;/h3&gt;
@@ -272,7 +278,9 @@ MAPE
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;That is an undesired behaviour for an error metric since we don’t want to assign huge errors to deviations that involve insignificant operating costs. That suggests a first strong conclusion:&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;We need to find error metrics that are aligned with our business goals&lt;/strong&gt;.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;We need to find error metrics that are aligned with our business goals.&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;Besides, in the example above we can see that MAPE isn’t symmetric as it weights differently two residuals whether the forecast is above or below the actual value.
 That idea of symmetry lead us to sMAPE.&lt;/p&gt;
 &lt;/div&gt;
@@ -280,7 +288,7 @@ That idea of symmetry lead us to sMAPE.&lt;/p&gt;
 &lt;h3&gt;sMAPE&lt;/h3&gt;
 &lt;p&gt;Trying to solve that assymetry, an alternative to MAPE was proposed. It is called &lt;strong&gt;sMAPE&lt;/strong&gt;, which stands for Symmetric Mean Absolute Percentage Error:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ sMAPE_\% = \frac{2}{N} \sum_{t=1}^{N}\frac{|A_t - F_t|}{|A_t| + |F_t|} \times 100\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;However, against all odds &lt;a href=&#34;&#34;&gt;Symmetric MAPE is not symmetric&lt;/a&gt;: as MAPE, it may present different values for the same absolute deviation:&lt;/p&gt;
+&lt;p&gt;However, against all odds &lt;a href=&#34;../Symmetric-MAPE-is-asymmetric&#34;&gt;Symmetric MAPE is not symmetric&lt;/a&gt;: as MAPE, it may present different values for the same absolute deviation:&lt;/p&gt;
 &lt;table class=&#34;table&#34; style=&#34;width: auto !important; margin-left: auto; margin-right: auto;&#34;&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -339,11 +347,10 @@ sMAPE
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;For our use case it is very inconvenient that the same absolute deviation may be quantified with two different error values.&lt;/p&gt;
-&lt;!-- Here appears again that key idea: We should evaluate models&#39; accuracy based on the sum of their absolute residuals. --&gt;
 &lt;p&gt;This is a key question: We don’t want to minimize the percentage error but to minimize the economic losses due to forecast deviations, and they are exclusively connected to the sum of the absolute errors.
-Therefore, we should evaluate models’s accuracy based on that criteria.&lt;/p&gt;
+Therefore, we should evaluate the accuracy based on that criteria.&lt;/p&gt;
 &lt;p&gt;As a final point, simply mention that some others have proposed the &lt;strong&gt;Log Ratio&lt;/strong&gt; &lt;span class=&#34;math inline&#34;&gt;\(ln(F_t/A_t)\)&lt;/span&gt; as a better alternative to MAPE.
-You can read a brief description in the &lt;a href=&#34;&#34;&gt;previously mentioned sMAPE article&lt;/a&gt; or
+You can read a brief description in the &lt;a href=&#34;Symmetric-MAPE-is-not-symmetric&#34;&gt;previously mentioned sMAPE article&lt;/a&gt; or
 an extended discussion in the &lt;a href=&#34;https://poseidon01.ssrn.com/delivery.php?ID=912071094074109094069115029093025110000069085067010018086003069122074000022002100121034011107062116011014121092068067002120016015069090069028013066084099122096112019086019005105020067099126068064011082116019102096003091124077118086097090097087121114&amp;amp;EXT=pdf&#34;&gt;original paper&lt;/a&gt; by Chris Tofallis&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -364,14 +371,13 @@ This metric is specific to the energy forecasting business as it is normalized b
 &lt;p&gt;NMAE is expressed as a percentage. It is our preferred metric as it is truly connected with the business goals, it’s easily interpretable and comparable between plants.&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ NMAE_\% = \frac{1}{N}\sum_{t=1}^{N} \frac{|A_t - F_t|}{C} \times 100\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;Besides, it shows the desirable property:&lt;/p&gt;
-&lt;!-- $$ NMAE_{p1 ∪ p2}  =  \frac{L_{p1}}{L_{p1+p2}} * NMAE_{p1}  +  \frac{L_{p2}}{L_{p1+p2}} * NMAE_{p2}$$ --&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ NMAE_{p1 ∪ p2}  = \frac{1}{2}(NMAE_{p1}  +   NMAE_{p2})\]&lt;/span&gt;
 Given both periods have the same length. If not (e.g: consecutive months), you would only have to adjust by their relative length.&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;The real-life cost of a forecast error is proportional to the absolute value of the residuals.&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;The only case when this metric does not apply is whenever the &lt;em&gt;capacity&lt;/em&gt; notion has no sense: If the range of the possible values is not bounded, what normalizing constant should I choose?&lt;/p&gt;
-&lt;p&gt;This would be the case when forecasting temperatures or electricity markets spot prices.
+&lt;p&gt;This would be the case when forecasting temperatures or electricity market prices.
 Using MAE could be appropiate in these cases, as the units are in the same scale than the magnitude (ºC or €/MWh) and so the errors are easily interpretable, although they would not be truly comparable across different markets or locations.&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;madsum-ratio&#34; class=&#34;section level3&#34;&gt;
@@ -379,7 +385,7 @@ Using MAE could be appropiate in these cases, as the units are in the same scale
 &lt;p&gt;In energy-related businesses, I have spotted another error metric usually (and, as far as I know, wrongly) called &lt;strong&gt;WMAE&lt;/strong&gt;.
 Now, WMAE should stand for “Weighted Mean Average Error”. However, the definition I stumbled upon several times was:
 &lt;span class=&#34;math display&#34;&gt;\[ \frac{1}{N}\frac{ \sum_{t=1}^{N}{|A_t - F_t|}}{\sum_{t=1}^{N}{A_t}} \times 100\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;This is basically MAE normalized by acummulated energy production.&lt;/p&gt;
+&lt;p&gt;which is basically the MAE normalized by acummulated energy production.&lt;/p&gt;
 &lt;p&gt;It resembles &lt;strong&gt;MAD/Mean Ratio&lt;/strong&gt;:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ MAD/Mean Ratio_\% = \frac{1}{N}\frac{ \sum_{t=1}^{N}{|A_t - F_t|}}{\frac{1}{N}\sum_{t=1}^{N}{A_t}} \times 100\]&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;From my point of view, and as an analogy of the MAD/Mean Ratio, the first expression should be called &lt;strong&gt;MAD/Sum Ratio&lt;/strong&gt;.
@@ -446,6 +452,318 @@ in our case this metric isn’t optimal for several reasons:&lt;/p&gt;
 &lt;li&gt;&lt;a href=&#34;https://poseidon01.ssrn.com/delivery.php?ID=912071094074109094069115029093025110000069085067010018086003069122074000022002100121034011107062116011014121092068067002120016015069090069028013066084099122096112019086019005105020067099126068064011082116019102096003091124077118086097090097087121114&amp;amp;EXT=pdf&#34;&gt;A better measure of relative prediction accuracty for model selection and model estimation&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;http://www.forecastpro.com/Trends/forecasting101August2011.html&#34;&gt;A Guide to Forecast Error Measurement Statistics and How to Use Them&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Symmetric MAPE is not symmetric</title>
+      <link>/post/symmetric-mape-is-not-symmetric/</link>
+      <pubDate>Mon, 26 Aug 2019 00:00:00 +0000</pubDate>
+      <guid>/post/symmetric-mape-is-not-symmetric/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;I recently came across &lt;a href=&#34;https://robjhyndman.com/hyndsight/smape&#34;&gt;this interesting discussion&lt;/a&gt; about percentage errors and I would like to talk about MAPE and its characteristics.&lt;/p&gt;
+&lt;p&gt;MAPE is the acronym of Mean Absolute Percentage Error and is defined as&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[MAPE = \frac{100}{N} \sum_{t=1}^{N} \frac{|A_t - F_t|}{|A_t|}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;being &lt;span class=&#34;math inline&#34;&gt;\(A_t\)&lt;/span&gt; the &lt;em&gt;Actuals&lt;/em&gt; and &lt;span class=&#34;math inline&#34;&gt;\(F_t\)&lt;/span&gt; the &lt;em&gt;Forecasts&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;There is some confusion and disagreement about the behaviour of MAPE.&lt;/p&gt;
+&lt;p&gt;MAPE express the deviation in relative terms and provides a simple interpretation of the error.
+It is easy to calculate and communicate and probably that is why it has been widely used in forecasting business.&lt;/p&gt;
+&lt;p&gt;However, it suffers from some known issues.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-problems&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The problems&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;MAPE ranges from 0 to &lt;span class=&#34;math inline&#34;&gt;\(\infty\)&lt;/span&gt;: it diverges with &lt;span class=&#34;math inline&#34;&gt;\(A_t \to 0\)&lt;/span&gt; which leads to problems when dealing with data with zero values such as intermittent demand data or energy forecasting.
+This problem is even worse when working with data with arbitrary zero values, e.g, forecasting temperatures near 0&lt;span class=&#34;math inline&#34;&gt;\(^o\)&lt;/span&gt; in Celsius or Fahrenheit scale. To be fair, this would be an issue using any percentage error metric.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;MAPE &lt;strong&gt;is said to be asymmetric&lt;/strong&gt; in the sense it puts heavier penalty on negative errors. When &lt;span class=&#34;math inline&#34;&gt;\(F_t &amp;lt; A_t\)&lt;/span&gt; the maximum possible error value is 100%,
+however there is no limit when forecasting on the high side. Besides, given the same absolute difference &lt;span class=&#34;math inline&#34;&gt;\(|A_t - F_t|\)&lt;/span&gt;, MAPE is greater when &lt;span class=&#34;math inline&#34;&gt;\(F_t &amp;gt; A_t\)&lt;/span&gt;:&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table class=&#34;table&#34; style=&#34;width: auto !important; margin-left: auto; margin-right: auto;&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Case
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Actual
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Forecast
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+AbsoluteDifference
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+MAPE
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+100
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+150
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+150
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+100
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;However, there is some controversy over this last point.
+Some people argue this is a false dichotomy because it doesn’t make sense to compare two situations where you are exchanging forecast and actual values, and defend MAPE actually &lt;strong&gt;is symmetric&lt;/strong&gt; because you can’t get a lower MAPE just by lowering your forecasts:&lt;/p&gt;
+&lt;table class=&#34;table&#34; style=&#34;width: auto !important; margin-left: auto; margin-right: auto;&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Case
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Actual
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Forecast
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+AbsoluteDifference
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+MAPE
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+100
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+150
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+100
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div id=&#34;thesolution&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The…solution?&lt;/h2&gt;
+&lt;p&gt;Trying to solve the alledgelly asymmetry, some alternative versions have been proposed. The more general one is:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ sMAPE = \frac{200}{N} \sum_{t=1}^{N}\frac{|A_t - F_t|}{|A_t| + |F_t|} \]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;First thing to notice is that the range of this symmetric MAPE is &lt;span class=&#34;math inline&#34;&gt;\(\big[0,200 \big]\)&lt;/span&gt; which is somewhat antiintuitive. I can’t see myself explaining model deviations in such metric to anybody with a non-technical background.
+This could be solved simply dividing by 2, although that would be an aesthetic change only.
+On the bright side, this version of sMAPE doesn’t diverge, which brings some sanity and stability to the metric.&lt;/p&gt;
+&lt;p&gt;But the aspect that really fascinates me is that the so-called &lt;strong&gt;symmetric MAPE is not symmetric.&lt;/strong&gt;
+In fact, sMAPE symmetrizes the asymmetric case above, and the other way around:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Exchanging actual and forecast values &lt;em&gt;does&lt;/em&gt; produce the same sMAPE value.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table class=&#34;table&#34; style=&#34;width: auto !important; margin-left: auto; margin-right: auto;&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Case
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Actual
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Forecast
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+AbsoluteDifference
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+MAPE
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+sMAPE
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+100
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+150
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+20
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+150
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+100
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+20
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;Modifying the forecast while holding fixed actual values and absolute deviation &lt;em&gt;do not&lt;/em&gt; produce the same sMAPE value. This maybe the most important case.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table class=&#34;table&#34; style=&#34;width: auto !important; margin-left: auto; margin-right: auto;&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Case
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Actual
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+Forecast
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+AbsoluteDifference
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+MAPE
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+sMAPE
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+1
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+100
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+150
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+20
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+2
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+100
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+50
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+33
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;This second point is a critical issue: simply &lt;strong&gt;biasing the model without improving its accuracy should never produce different error values.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Taking all this into account, the proposed metric seems to be even worse than the original one. Quite surprising!&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;an-alternative&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;An alternative&lt;/h2&gt;
+&lt;p&gt;Some others have proposed the log ratio &lt;span class=&#34;math inline&#34;&gt;\(ln(F_t/A_t)\)&lt;/span&gt; as a better alternative to MAPE.
+It shows, indeed, better statistical properties than others metrics:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Applying least squares regression to this metric estimates the geometric mean whereas minimizing MAPE or sMAPE does not lead to an established measure of location.&lt;/li&gt;
+&lt;li&gt;Given that geometric mean cannot exceed arithmetic mean, using least squares with log ratio will be more robust to outliers than OLS.&lt;/li&gt;
+&lt;li&gt;Its values belong to a symmetric range: &lt;span class=&#34;math inline&#34;&gt;\([-\infty, \infty]\)&lt;/span&gt;. However, it shows the same asymmetric behaviour than sMAPE: Exchanging actuals and forecasts holds the error
+(with a negative value!), but similar absolute deviations with same actual value don’t correspond with equal error values.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If interested in more information about this less-known metric, check out &lt;a href=&#34;https://poseidon01.ssrn.com/delivery.php?ID=912071094074109094069115029093025110000069085067010018086003069122074000022002100121034011107062116011014121092068067002120016015069090069028013066084099122096112019086019005105020067099126068064011082116019102096003091124077118086097090097087121114&amp;amp;EXT=pdf&#34;&gt;A better measure of relative prediction accuracy for model selection and model estimation (Chris Tofallis, 2015)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;I hope this may have brought some light into this quirky behaviour of MAPE and sMAPE.&lt;/p&gt;
+&lt;p&gt;I also wrote a more general discussion about forecasting error metrics in &lt;a href=&#34;../Forecasting-error-metrics&#34;&gt;this article&lt;/a&gt; you might want to take a look at.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>
