@@ -365,9 +365,9 @@ in our case this metric isn’t optimal for several reasons:&lt;/p&gt;
     
     <item>
       <title>Turn your GGplot to 3D animation. Awesome 2D to 3D plots in R with Rayshader</title>
-      <link>/post/1c-ggplot-to-3d-in-r-with-rayshader/ggplot-to-3d-in-r-with-rayshader/</link>
+      <link>/post/ggplot-to-3d-in-r-with-rayshader/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>/post/1c-ggplot-to-3d-in-r-with-rayshader/ggplot-to-3d-in-r-with-rayshader/</guid>
+      <guid>/post/ggplot-to-3d-in-r-with-rayshader/</guid>
       <description>
 
 
@@ -458,11 +458,13 @@ if(!dir.exists(&amp;quot;data&amp;quot;)) dir.create(&amp;quot;data&amp;quot;)  
 &lt;p&gt;Downloading INE 2018 file:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;utils::download.file(url = &amp;quot;http://www.ine.es/pcaxisdl/t20/e245/p05/a2018/l0/00000006.px&amp;quot;,
                      destfile = &amp;quot;data/census_2018.px&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## Warning: `as.tibble()` is deprecated, use `as_tibble()` (but mind the new semantics).
+## This warning is displayed once per session.&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;We parse the data to obtain a name,pcode,average age dataframe&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tbl_census_2018 &amp;lt;- read.px(&amp;quot;data/census_2018.px&amp;quot;) %&amp;gt;%              # Load &amp;amp; format
-  as.tibble()
-tbl_census_2018 %&amp;lt;&amp;gt;% 
+  as.tibble()&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We parse the data to obtain a name,pcode,average age dataframe&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tbl_census_2018 %&amp;lt;&amp;gt;% 
   set_names(c(&amp;quot;age&amp;quot;, &amp;quot;city&amp;quot;, &amp;quot;sex&amp;quot;, &amp;quot;population&amp;quot;)) %&amp;gt;%             # Cambiamos los nombre
   na.omit() %&amp;gt;%                                                    # Na rmv
   filter((city!=&amp;quot;Total&amp;quot;)&amp;amp;(age!=&amp;quot;Total&amp;quot;)&amp;amp;(sex==&amp;quot;Ambos sexos&amp;quot;)) %&amp;gt;%  # Duplicate info rmv
@@ -511,8 +513,8 @@ unlink(temp)                                    # Delete temp file&lt;/code&gt;&
 &lt;p&gt;We parse the spatial information to convert it into tabular data. We expect that the Canary Islands coordinates will skew the plot, so it’s our decision to keep focused in our 3D objetive and filter peninsular coordinates. It’s also possible, and a better practice, to move insular coordinates looking for a compact plot, instead of filter them out.&lt;/p&gt;
 &lt;p&gt;To complete this data processing, we use fortify function that allows us to don’t load more packages. However, this function throws a warning suggesting the broom::tidy() one.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tlb_cities_gis &amp;lt;- readOGR(dsn = &amp;quot;data/cities_gis/Municipios_ETRS89_30N.shp&amp;quot;,
-                              verbose=FALSE)    # Spatial data reading
-tlb_cities_gis %&amp;lt;&amp;gt;% 
+                              verbose=FALSE) # Spatial data reading&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tlb_cities_gis %&amp;lt;&amp;gt;% 
   fortify(region = &amp;quot;Codigo&amp;quot;) # %&amp;gt;%             # Conv &amp;quot;spatial object&amp;quot; to data.frame
   # broom::tidy()
 
@@ -567,7 +569,7 @@ plot_cities &amp;lt;- ggplot() +
   scale_fill_gradientn(colours=myPalette(4)) +                 # Choose palette colours.
   labs(fill=&amp;quot;Avg age&amp;quot;)
 plot(plot_cities)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/ggplot-to-3d-in-r-with-rayshader_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;d-rayshader-visualization&#34; class=&#34;section level3&#34;&gt;
@@ -576,7 +578,7 @@ plot(plot_cities)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Let’s see how it works&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_gg(plot_cities,multicore=TRUE,width=5,height=3,scale=310)    # Plot_gg de rayshader
 render_snapshot()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;200%&#34; height=&#34;200%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/ggplot-to-3d-in-r-with-rayshader_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;200%&#34; height=&#34;200%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;Hmm you told something about render_movie()… What if we anime it?&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
