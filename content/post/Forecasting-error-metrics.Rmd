@@ -1,12 +1,12 @@
 ---
 title: "Forecasting Error Metrics"
 author: "Pablo Cánovas Tourné"
-date: "2019-09-11"
+date: "2019-10-11"
 output: 
-  blogdown::html_page:
+  html_document:
     toc: TRUE
-    toc_depth: 2
-categories: metrics
+    # theme: united 
+    # hightlight: tango
 editor_options: 
   chunk_output_type: inline
 authors: [pablo-canovas]
@@ -21,10 +21,11 @@ library(kableExtra)
 
 # Introduction
 
-The idea of this post comes from the different error metrics I have dealt with working with time series data and forecasting models.
+The idea of this post comes from the different error metrics I have dealt with during my work as a data scientist for an energy company. 
 
+My work usually involves working with time series data and forecasting models.
 Among other things, we make energy production forecasts of renewable power plants of different capacities and technologies.
-Our aim is to develop forecasting models that reduce the penalties caused by the deviations.
+The aim of the department I work at is to develop forecasting models that reduce the penalties caused by the deviations.
 
 Most of the models I work with are regression models, and therefore in this article I am focusing only on regression error metrics.
 
@@ -37,19 +38,21 @@ Choosing the right metric is a problem-specific matter, and it involves answerin
 * Do we care about the percentage error or about the magnitude of the deviation?
 * Does it makes any difference to over-forecast or under-forecast the variable of interest?
 
-Answering the above questions lead us to determine we need to find a metric that:
+> We need to find error metrics that are aligned with our business goals.
+
+In our use case, answering the above questions led us to determine we needed to find a metric that:
 
 * Is scale independent, so the errors are comparable between power plants.
 * Is symmetric, as we do not want to weight the deviations differently according to their sign. 
 * Express the error in absolute terms, so the error reflects the real-life imbalance costs. 
-* The error calculated over different periods should be equivalent to the aggregated calculation  over those periods individually.
+* Having the error calculated over different periods be equivalent to the aggregated of the calculated over those periods individually.
 
 
 Each metric behaves in a certain way and therefore reflects in a unique manner the features of the models.
 Depending on their properties, we can classify the metrics in several categories.
 Let's take a look at them:
 
-# Scale dependent error metrics
+# Scale dependent
 
 Maybe the most popular and simple error metric is **MAE**:
 
@@ -102,7 +105,7 @@ kable_styling(kable_input = kable(assymetricMape), full_width = F)
 
 That is an undesired behaviour for an error metric since we don't want to assign huge errors to deviations that involve insignificant operating costs. That suggests a first strong conclusion:
 
-> We need to find error metrics that are aligned with our business goals.
+**We need to find error metrics that are aligned with our business goals**.
 
 Besides, in the example above we can see that MAPE isn't symmetric as it weights differently two residuals whether the forecast is above or below the actual value.
 That idea of symmetry lead us to sMAPE.
@@ -113,7 +116,7 @@ Trying to solve that assymetry, an alternative to MAPE was proposed. It is calle
 
 $$ sMAPE_\% = \frac{2}{N} \sum_{t=1}^{N}\frac{|A_t - F_t|}{|A_t| + |F_t|} \times 100$$
 
-However, against all odds [Symmetric MAPE is not symmetric](Symmetric-MAPE-is-not-symmetric): as MAPE, it may present different values for the same absolute deviation: 
+However, against all odds [Symmetric MAPE is not symmetric](): as MAPE, it may present different values for the same absolute deviation: 
 
 ```{r, echo = FALSE}
 sMape <- tibble(Case = c(1,2), Actual = c(100, 100), Forecast = c(150,50), AbsoluteDifference = 50, 
@@ -125,12 +128,13 @@ kable_styling(kable_input = kable(sMape),
 
 For our use case it is very inconvenient that the same absolute deviation may be quantified with two different error values.
 
+<!-- Here appears again that key idea: We should evaluate models' accuracy based on the sum of their absolute residuals. -->
 This is a key question: We don't want to minimize the percentage error but to minimize the economic losses due to forecast deviations, and they are exclusively connected to the sum of the absolute errors. 
-Therefore, we should evaluate the accuracy based on that criteria.
+Therefore, we should evaluate models's accuracy based on that criteria.
 
 
 As a final point, simply mention that some others have proposed the **Log Ratio** $ln(F_t/A_t)$ as a better alternative to MAPE. 
-You can read a brief description in the [previously mentioned sMAPE article](Symmetric-MAPE-is-not-symmetric) or 
+You can read a brief description in the [previously mentioned sMAPE article]() or 
 an extended discussion in the [original paper](https://poseidon01.ssrn.com/delivery.php?ID=912071094074109094069115029093025110000069085067010018086003069122074000022002100121034011107062116011014121092068067002120016015069090069028013066084099122096112019086019005105020067099126068064011082116019102096003091124077118086097090097087121114&EXT=pdf) by Chris Tofallis
 
 
@@ -156,6 +160,7 @@ $$ NMAE_\% = \frac{1}{N}\sum_{t=1}^{N} \frac{|A_t - F_t|}{C} \times 100$$
 
 Besides, it shows the desirable property:
 
+<!-- $$ NMAE_{p1 ∪ p2}  =  \frac{L_{p1}}{L_{p1+p2}} * NMAE_{p1}  +  \frac{L_{p2}}{L_{p1+p2}} * NMAE_{p2}$$ -->
 $$ NMAE_{p1 ∪ p2}  = \frac{1}{2}(NMAE_{p1}  +   NMAE_{p2})$$
 Given both periods have the same length. If not (e.g: consecutive months), you would only have to adjust by their relative length.
 
@@ -163,7 +168,7 @@ Given both periods have the same length. If not (e.g: consecutive months), you w
 
 The only case when this metric does not apply is whenever the *capacity* notion has no sense: If the range of the possible values is not bounded, what normalizing constant should I choose? 
 
-This would be the case when forecasting temperatures or electricity market prices. 
+This would be the case when forecasting temperatures or electricity markets spot prices. 
 Using MAE could be appropiate in these cases, as the units are in the same scale than the magnitude (ºC or €/MWh) and so the errors are easily interpretable, although they would not be truly comparable across different markets or locations. 
 
 
@@ -172,7 +177,7 @@ In energy-related businesses, I have spotted another error metric usually (and, 
 Now, WMAE should stand for "Weighted Mean Average Error". However, the definition I stumbled upon several times was:
 $$ \frac{1}{N}\frac{ \sum_{t=1}^{N}{|A_t - F_t|}}{\sum_{t=1}^{N}{A_t}} \times 100$$
 
-which is basically the MAE normalized by acummulated energy production.
+This is basically MAE normalized by acummulated energy production.
 
 It resembles **MAD/Mean Ratio**:
 
