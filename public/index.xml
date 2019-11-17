@@ -418,16 +418,17 @@ in our case this metric isn’t optimal for several reasons:&lt;/p&gt;
 &lt;p&gt;I found yet another scale-free error metric in a &lt;a href=&#34;https://www.google.com/url?sa=t&amp;amp;rct=j&amp;amp;q=&amp;amp;esrc=s&amp;amp;source=web&amp;amp;cd=3&amp;amp;ved=2ahUKEwjA3rihoO7jAhWLzoUKHeKJCZUQFjACegQIABAC&amp;amp;url=https%3A%2F%2Fpdfs.semanticscholar.org%2Fcf04%2F65bce25d78ccda6d8c5d12e141099aa606f4.pdf&amp;amp;usg=AOvVaw0FlIvYKTyxgOYX7xCo0PAz&#34;&gt;recent paper&lt;/a&gt; from the Energy Department of the Politecnico di Milano,&lt;/p&gt;
 &lt;p&gt;They called it &lt;strong&gt;EMAE&lt;/strong&gt; (Envelope-weighted Mean Absolute Error):&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ EMAE_\% = \frac{1}{N}\frac{ \sum_{t=1}^{N}{|A_t - F_t|}}{\sum_{t=1}^{N}{\max(A_t, F_t)}} \times 100\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;This metric is quite similar to the MAD/Sum Ratio above but divides by the sum of the maximum between the forecast and the measured power for each observation. It is also expressed as a percentage.&lt;/p&gt;
-&lt;p&gt;This function shows some nice properties:
-* It is scale-independent.
-* It is symmetric.
-* It maps absolute deviation to one unique value.
-* It is easily interpretable as its range is [0,100].
-* It doesn’t diverge in any point.
-* It’s a nice alternative to NMAE since a &lt;em&gt;capacity&lt;/em&gt; value is not required.&lt;/p&gt;
+&lt;p&gt;This metric is quite similar to the MAD/Sum Ratio above but divides by the sum of the maximum between the forecast and the measured power for each observation. It is also expressed as a percentage. This function shows some nice properties:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;It is scale-independent.&lt;/li&gt;
+&lt;li&gt;It is symmetric.&lt;/li&gt;
+&lt;li&gt;It maps absolute deviation to one unique value.&lt;/li&gt;
+&lt;li&gt;It is easily interpretable as its range is [0,100].&lt;/li&gt;
+&lt;li&gt;It doesn’t diverge in any point.&lt;/li&gt;
+&lt;li&gt;It’s a nice alternative to NMAE since a &lt;em&gt;capacity&lt;/em&gt; value is not required.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;This formula allows for a cool graphic interpretation of the error: the numerator matchs with the yellow area whereas the denominator corresponds to the sum of the blue and yellow areas:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/Metrics/Metricas_files/EMAE_plot.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/Forecasting-error-metrics_files/EMAE_plot.png&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;conclusions&#34; class=&#34;section level1&#34;&gt;

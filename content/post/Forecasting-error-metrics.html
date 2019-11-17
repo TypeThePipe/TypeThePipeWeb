@@ -328,16 +328,17 @@ in our case this metric isn’t optimal for several reasons:</p>
 <p>I found yet another scale-free error metric in a <a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=3&amp;ved=2ahUKEwjA3rihoO7jAhWLzoUKHeKJCZUQFjACegQIABAC&amp;url=https%3A%2F%2Fpdfs.semanticscholar.org%2Fcf04%2F65bce25d78ccda6d8c5d12e141099aa606f4.pdf&amp;usg=AOvVaw0FlIvYKTyxgOYX7xCo0PAz">recent paper</a> from the Energy Department of the Politecnico di Milano,</p>
 <p>They called it <strong>EMAE</strong> (Envelope-weighted Mean Absolute Error):</p>
 <p><span class="math display">\[ EMAE_\% = \frac{1}{N}\frac{ \sum_{t=1}^{N}{|A_t - F_t|}}{\sum_{t=1}^{N}{\max(A_t, F_t)}} \times 100\]</span></p>
-<p>This metric is quite similar to the MAD/Sum Ratio above but divides by the sum of the maximum between the forecast and the measured power for each observation. It is also expressed as a percentage.</p>
-<p>This function shows some nice properties:
-* It is scale-independent.
-* It is symmetric.
-* It maps absolute deviation to one unique value.
-* It is easily interpretable as its range is [0,100].
-* It doesn’t diverge in any point.
-* It’s a nice alternative to NMAE since a <em>capacity</em> value is not required.</p>
+<p>This metric is quite similar to the MAD/Sum Ratio above but divides by the sum of the maximum between the forecast and the measured power for each observation. It is also expressed as a percentage. This function shows some nice properties:</p>
+<ul>
+<li>It is scale-independent.</li>
+<li>It is symmetric.</li>
+<li>It maps absolute deviation to one unique value.</li>
+<li>It is easily interpretable as its range is [0,100].</li>
+<li>It doesn’t diverge in any point.</li>
+<li>It’s a nice alternative to NMAE since a <em>capacity</em> value is not required.</li>
+</ul>
 <p>This formula allows for a cool graphic interpretation of the error: the numerator matchs with the yellow area whereas the denominator corresponds to the sum of the blue and yellow areas:</p>
-<p><img src="/post/Metrics/Metricas_files/EMAE_plot.png" /></p>
+<p><img src="/post/Forecasting-error-metrics_files/EMAE_plot.png" /></p>
 </div>
 </div>
 <div id="conclusions" class="section level1">

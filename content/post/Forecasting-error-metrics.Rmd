@@ -224,9 +224,8 @@ They called it **EMAE** (Envelope-weighted Mean Absolute Error):
 
 $$ EMAE_\% = \frac{1}{N}\frac{ \sum_{t=1}^{N}{|A_t - F_t|}}{\sum_{t=1}^{N}{\max(A_t, F_t)}} \times 100$$
 
-This metric is quite similar to the MAD/Sum Ratio above but divides by the sum of the maximum between the forecast and the measured power for each observation. It is also expressed as a percentage.
+This metric is quite similar to the MAD/Sum Ratio above but divides by the sum of the maximum between the forecast and the measured power for each observation. It is also expressed as a percentage. This function shows some nice properties:
 
-This function shows some nice properties:
 * It is scale-independent.
 * It is symmetric.
 * It maps absolute deviation to one unique value.
@@ -237,7 +236,7 @@ This function shows some nice properties:
 This formula allows for a cool graphic interpretation of the error: the numerator matchs with the yellow area whereas the denominator corresponds to the sum of the blue and yellow areas:
 
 
-![](/post/Metrics/Metricas_files/EMAE_plot.png)
+![](/post/Forecasting-error-metrics_files/EMAE_plot.png)
 
 
 
