@@ -139,7 +139,7 @@ Therefore, we should evaluate the accuracy based on that criteria.
 
 
 As a final point, simply mention that some others have proposed the **Log Ratio** $ln(F_t/A_t)$ as a better alternative to MAPE. 
-You can read a brief description in the [previously mentioned sMAPE article](Symmetric-MAPE-is-not-symmetric) or 
+You can read a brief description in the [previously mentioned sMAPE article](../Symmetric-MAPE-is-not-symmetric) or 
 an extended discussion in the [original paper](https://poseidon01.ssrn.com/delivery.php?ID=912071094074109094069115029093025110000069085067010018086003069122074000022002100121034011107062116011014121092068067002120016015069090069028013066084099122096112019086019005105020067099126068064011082116019102096003091124077118086097090097087121114&EXT=pdf) by Chris Tofallis
 
 

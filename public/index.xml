@@ -350,7 +350,7 @@ sMAPE
 &lt;p&gt;This is a key question: We don’t want to minimize the percentage error but to minimize the economic losses due to forecast deviations, and they are exclusively connected to the sum of the absolute errors.
 Therefore, we should evaluate the accuracy based on that criteria.&lt;/p&gt;
 &lt;p&gt;As a final point, simply mention that some others have proposed the &lt;strong&gt;Log Ratio&lt;/strong&gt; &lt;span class=&#34;math inline&#34;&gt;\(ln(F_t/A_t)\)&lt;/span&gt; as a better alternative to MAPE.
-You can read a brief description in the &lt;a href=&#34;Symmetric-MAPE-is-not-symmetric&#34;&gt;previously mentioned sMAPE article&lt;/a&gt; or
+You can read a brief description in the &lt;a href=&#34;../Symmetric-MAPE-is-not-symmetric&#34;&gt;previously mentioned sMAPE article&lt;/a&gt; or
 an extended discussion in the &lt;a href=&#34;https://poseidon01.ssrn.com/delivery.php?ID=912071094074109094069115029093025110000069085067010018086003069122074000022002100121034011107062116011014121092068067002120016015069090069028013066084099122096112019086019005105020067099126068064011082116019102096003091124077118086097090097087121114&amp;amp;EXT=pdf&#34;&gt;original paper&lt;/a&gt; by Chris Tofallis&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
