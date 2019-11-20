@@ -1,21 +1,24 @@
 ---
-title: "Conditional Pipes"
-author: "Pablo Cánovas Tourné"
+title: Conditional Pipes
+author: Pablo Cánovas Tourné
 date: "2019-11-02"
 slug: conditional-pipes
 output:
-  blogdown::html_page: 
+  blogdown::html_page:
     highlight: tango
 categories:
-  - R
-  - Tidyverse
-  - Tips
+- R
+- Tidyverse
+- Tips
+tags: []
+subtitle: ''
+summary: "Don't leave the pipeflow"
 authors: [pablo-canovas]
 ---
-
+  
 How could we apply certain functions conditionally without leaving the pipeflow?
 This way:
-
+  
 ```{r, eval=FALSE}
 df %>% { if(apply_filter == TRUE) filter(., condition) else . } %>% ...
 ```

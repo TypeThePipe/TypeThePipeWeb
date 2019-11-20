@@ -7,14 +7,8 @@ categories:
   - metrics
 tags: []
 subtitle: ''
-summary: ''
+summary: "Against all odds, it isn't"
 authors: [pablo-canovas]
-featured: no
-image:
-  caption: ''
-  focal_point: ''
-  preview_only: no
-projects: []
 ---
 
 
@@ -121,4 +115,4 @@ If interested in more information about this less-known metric, check out [A bet
 
 I hope this may have brought some light into this quirky behaviour of MAPE and sMAPE.
 
-I also wrote a more general discussion about forecasting error metrics in [this article](../Forecasting-error-metrics) you might want to take a look at.
+I also wrote a more general discussion about [forecasting error metrics](../Energy-forecasting-error-metrics) you might want to take a look at.

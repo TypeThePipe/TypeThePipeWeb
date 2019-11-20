@@ -192,8 +192,9 @@ iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;s
 ## 3     6          5.4         3.9          1.7         0.4 setosa 
 ## 4     7          4.6         3.4          1.4         0.3 setosa 
 ## 5     9          4.4         2.9          1.4         0.2 setosa&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Here we have used the function &lt;code&gt;all_vars&lt;/code&gt; in the predicate to explicit that the condition must be satisfied &lt;strong&gt;in every feature&lt;/strong&gt;.
-To be honest, for that purpose would have been easier to simply use &lt;code&gt;iris %&amp;gt;% na.omit()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Here we have used the function &lt;code&gt;all_vars&lt;/code&gt; in the predicate to explicit that
+&lt;strong&gt;every feature&lt;/strong&gt; must satisfy the condition.
+To be honest, for that purpose it would have been easier to simply use &lt;code&gt;iris %&amp;gt;% na.omit()&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;But what if we wanted the opposite? Keeping only the rows with &lt;em&gt;all the selected features missing&lt;/em&gt; is as easy as changing the predicate part:&lt;/p&gt;
 &lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter_at&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;vars&lt;/span&gt;(features), &lt;span class=&#34;kw&#34;&gt;all_vars&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(.)))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 6
@@ -210,7 +211,7 @@ To be honest, for that purpose would have been easier to simply use &lt;code&gt;
 ## 3     4         NA           3.1          1.5         0.2 setosa 
 ## 4     8         NA           3.4          1.5         0.2 setosa 
 ## 5    10         NA          NA           NA          NA   setosa&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Also, there are some other fancy ways to manipulate data frames with the filter family. One trick is using &lt;code&gt;vars(contains(...))&lt;/code&gt; to select the variables:&lt;/p&gt;
+&lt;p&gt;Also, there are some other fancy ways to manipulate data frames with the filter family. One trick is using &lt;code&gt;contains()&lt;/code&gt; or &lt;code&gt;starts_with()&lt;/code&gt; to select the variables:&lt;/p&gt;
 &lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter_at&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;vars&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;contains&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;Length&amp;quot;&lt;/span&gt;)), &lt;span class=&#34;kw&#34;&gt;all_vars&lt;/span&gt;(. &lt;span class=&#34;op&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;1.4&lt;/span&gt;))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 5 x 6
 ##   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species

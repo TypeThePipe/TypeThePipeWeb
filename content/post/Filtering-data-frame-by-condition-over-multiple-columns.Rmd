@@ -4,15 +4,15 @@ author: Pablo Cánovas Tourné
 date: '2019-10-05'
 slug: filtering-a-data-frame-by-condition-on-multiple-columns
 output:
-  blogdown::html_page: 
+  blogdown::html_page:
     highlight: tango
 categories:
   - R
   - Tidyverse
   - Tips
 tags: []
-subtitle: ''
-summary: ''
+subtitle: 'The magic of filter_at.'
+summary: "You could write the condition over each column, but I would like to see you with 100+ features"
 authors: [pablo-canovas]
 ---
 
@@ -56,8 +56,9 @@ Instead, we just have to select the columns we will filter on and apply the cond
 features <- iris %>% names() %>% keep(~ str_detect(.,"[.]"))
 iris %>% filter_at(vars(features), all_vars(!is.na(.)))
 ```
-Here we have used the function ```all_vars``` in the predicate to explicit that the condition must be satisfied **in every feature**.
-To be honest, for that purpose would have been easier to simply use ```iris %>% na.omit()```.
+Here we have used the function ```all_vars``` in the predicate to explicit that 
+**every feature** must satisfy the condition.
+To be honest, for that purpose it would have been easier to simply use ```iris %>% na.omit()```.
 
 But what if we wanted the opposite? Keeping only the rows with *all the selected features missing* is as easy as changing the predicate part:
 
@@ -71,7 +72,7 @@ Another option is to apply the condition on **any feature**. That's where ```any
 iris %>% filter_at(vars(features), any_vars(is.na(.)))
 ```
 
-Also, there are some other fancy ways to manipulate data frames with the filter family. One trick is using ```vars(contains(...))``` to select the variables:
+Also, there are some other fancy ways to manipulate data frames with the filter family. One trick is using ```contains()``` or ```starts_with()``` to select the variables:
 
 ```{r}
 iris %>% filter_at(vars(contains("Length")), all_vars(. >= 1.4))

@@ -285,8 +285,9 @@ iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;s
 ## 3     6          5.4         3.9          1.7         0.4 setosa 
 ## 4     7          4.6         3.4          1.4         0.3 setosa 
 ## 5     9          4.4         2.9          1.4         0.2 setosa&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Here we have used the function &lt;code&gt;all_vars&lt;/code&gt; in the predicate to explicit that the condition must be satisfied &lt;strong&gt;in every feature&lt;/strong&gt;.
-To be honest, for that purpose would have been easier to simply use &lt;code&gt;iris %&amp;gt;% na.omit()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Here we have used the function &lt;code&gt;all_vars&lt;/code&gt; in the predicate to explicit that
+&lt;strong&gt;every feature&lt;/strong&gt; must satisfy the condition.
+To be honest, for that purpose it would have been easier to simply use &lt;code&gt;iris %&amp;gt;% na.omit()&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;But what if we wanted the opposite? Keeping only the rows with &lt;em&gt;all the selected features missing&lt;/em&gt; is as easy as changing the predicate part:&lt;/p&gt;
 &lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter_at&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;vars&lt;/span&gt;(features), &lt;span class=&#34;kw&#34;&gt;all_vars&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(.)))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 6
@@ -303,7 +304,7 @@ To be honest, for that purpose would have been easier to simply use &lt;code&gt;
 ## 3     4         NA           3.1          1.5         0.2 setosa 
 ## 4     8         NA           3.4          1.5         0.2 setosa 
 ## 5    10         NA          NA           NA          NA   setosa&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Also, there are some other fancy ways to manipulate data frames with the filter family. One trick is using &lt;code&gt;vars(contains(...))&lt;/code&gt; to select the variables:&lt;/p&gt;
+&lt;p&gt;Also, there are some other fancy ways to manipulate data frames with the filter family. One trick is using &lt;code&gt;contains()&lt;/code&gt; or &lt;code&gt;starts_with()&lt;/code&gt; to select the variables:&lt;/p&gt;
 &lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter_at&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;vars&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;contains&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;Length&amp;quot;&lt;/span&gt;)), &lt;span class=&#34;kw&#34;&gt;all_vars&lt;/span&gt;(. &lt;span class=&#34;op&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;1.4&lt;/span&gt;))&lt;/code&gt;&lt;/pre&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 5 x 6
 ##   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species
@@ -328,10 +329,10 @@ To be honest, for that purpose would have been easier to simply use &lt;code&gt;
     </item>
     
     <item>
-      <title>Forecasting Error Metrics</title>
-      <link>/post/forecasting-error-metrics/</link>
+      <title>Energy forecasting error metrics</title>
+      <link>/post/energy-forecasting-error-metrics/</link>
       <pubDate>Sat, 21 Sep 2019 00:00:00 +0000</pubDate>
-      <guid>/post/forecasting-error-metrics/</guid>
+      <guid>/post/energy-forecasting-error-metrics/</guid>
       <description>
 &lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 
@@ -510,7 +511,7 @@ That idea of symmetry lead us to sMAPE.&lt;/p&gt;
 &lt;h3&gt;sMAPE&lt;/h3&gt;
 &lt;p&gt;Trying to solve that assymetry, an alternative to MAPE was proposed. It is called &lt;strong&gt;sMAPE&lt;/strong&gt;, which stands for Symmetric Mean Absolute Percentage Error:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ sMAPE_\% = \frac{2}{N} \sum_{t=1}^{N}\frac{|A_t - F_t|}{|A_t| + |F_t|} \times 100\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;However, against all odds &lt;a href=&#34;../Symmetric-MAPE-is-asymmetric&#34;&gt;Symmetric MAPE is not symmetric&lt;/a&gt;: as MAPE, it may present different values for the same absolute deviation:&lt;/p&gt;
+&lt;p&gt;However, against all odds &lt;a href=&#34;../Symmetric-MAPE-is-not-symmetric&#34;&gt;Symmetric MAPE is not symmetric&lt;/a&gt;: as MAPE, it may present different values for the same absolute deviation:&lt;/p&gt;
 &lt;table class=&#34;table&#34; style=&#34;width: auto !important; margin-left: auto; margin-right: auto;&#34;&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -986,7 +987,7 @@ It shows, indeed, better statistical properties than others metrics:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;If interested in more information about this less-known metric, check out &lt;a href=&#34;https://poseidon01.ssrn.com/delivery.php?ID=912071094074109094069115029093025110000069085067010018086003069122074000022002100121034011107062116011014121092068067002120016015069090069028013066084099122096112019086019005105020067099126068064011082116019102096003091124077118086097090097087121114&amp;amp;EXT=pdf&#34;&gt;A better measure of relative prediction accuracy for model selection and model estimation (Chris Tofallis, 2015)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;I hope this may have brought some light into this quirky behaviour of MAPE and sMAPE.&lt;/p&gt;
-&lt;p&gt;I also wrote a more general discussion about forecasting error metrics in &lt;a href=&#34;../Forecasting-error-metrics&#34;&gt;this article&lt;/a&gt; you might want to take a look at.&lt;/p&gt;
+&lt;p&gt;I also wrote a more general discussion about &lt;a href=&#34;../Energy-forecasting-error-metrics&#34;&gt;forecasting error metrics&lt;/a&gt; you might want to take a look at.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

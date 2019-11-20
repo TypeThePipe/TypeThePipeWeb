@@ -4,15 +4,15 @@ author: Pablo Cánovas Tourné
 date: '2019-10-05'
 slug: filtering-a-data-frame-by-condition-on-multiple-columns
 output:
-  blogdown::html_page: 
+  blogdown::html_page:
     highlight: tango
 categories:
   - R
   - Tidyverse
   - Tips
 tags: []
-subtitle: ''
-summary: ''
+subtitle: 'The magic of filter_at.'
+summary: "You could write the condition over each column, but I would like to see you with 100+ features"
 authors: [pablo-canovas]
 ---
 
@@ -114,8 +114,9 @@ iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fil
 ## 3     6          5.4         3.9          1.7         0.4 setosa 
 ## 4     7          4.6         3.4          1.4         0.3 setosa 
 ## 5     9          4.4         2.9          1.4         0.2 setosa</code></pre>
-<p>Here we have used the function <code>all_vars</code> in the predicate to explicit that the condition must be satisfied <strong>in every feature</strong>.
-To be honest, for that purpose would have been easier to simply use <code>iris %&gt;% na.omit()</code>.</p>
+<p>Here we have used the function <code>all_vars</code> in the predicate to explicit that
+<strong>every feature</strong> must satisfy the condition.
+To be honest, for that purpose it would have been easier to simply use <code>iris %&gt;% na.omit()</code>.</p>
 <p>But what if we wanted the opposite? Keeping only the rows with <em>all the selected features missing</em> is as easy as changing the predicate part:</p>
 <pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter_at</span>(<span class="kw">vars</span>(features), <span class="kw">all_vars</span>(<span class="kw">is.na</span>(.)))</code></pre>
 <pre><code>## # A tibble: 1 x 6
@@ -132,7 +133,7 @@ To be honest, for that purpose would have been easier to simply use <code>iris %
 ## 3     4         NA           3.1          1.5         0.2 setosa 
 ## 4     8         NA           3.4          1.5         0.2 setosa 
 ## 5    10         NA          NA           NA          NA   setosa</code></pre>
-<p>Also, there are some other fancy ways to manipulate data frames with the filter family. One trick is using <code>vars(contains(...))</code> to select the variables:</p>
+<p>Also, there are some other fancy ways to manipulate data frames with the filter family. One trick is using <code>contains()</code> or <code>starts_with()</code> to select the variables:</p>
 <pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter_at</span>(<span class="kw">vars</span>(<span class="kw">contains</span>(<span class="st">&quot;Length&quot;</span>)), <span class="kw">all_vars</span>(. <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.4</span>))</code></pre>
 <pre><code>## # A tibble: 5 x 6
 ##   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species
