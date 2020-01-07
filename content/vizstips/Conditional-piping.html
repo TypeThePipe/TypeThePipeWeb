@@ -82,4 +82,4 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 <p>How could we apply certain functions conditionally without leaving the pipeflow?
 This way:</p>
-<pre class="sourceCode r"><code class="sourceCode r">df <span class="op">%&gt;%</span><span class="st"> </span>{ <span class="cf">if</span>(apply_filter <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>) <span class="kw">filter</span>(., condition) <span class="cf">else</span> . } <span class="op">%&gt;%</span><span class="st"> </span>...</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">df <span class="op">%&gt;%</span><span class="st"> </span>{ <span class="cf">if</span>(apply_filter <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span>) <span class="kw">filter</span>(., condition) <span class="cf">else</span> . } <span class="op">%&gt;%</span><span class="st"> </span>...</a></code></pre></div>

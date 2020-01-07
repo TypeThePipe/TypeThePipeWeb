@@ -1,7 +1,7 @@
 ---
 authors:
 - carlos-vecina
-bio: Data Scientist at Bankinter  |  AI & Data Science for Business
+bio: Data Scientist & TechLead at Bankinter  |  AI & Data Science for Business
 education:
   courses:
   - course: Pre PhD Research in Artificial Intelligence. Computer Vision and pose estimation.
@@ -23,7 +23,7 @@ organizations:
 - name: 
   url: ""
 
-role: Data Scientist at Bankinter
+role: Data Scientist & TechLead at Bankinter
 social:
 - icon: envelope
   icon_pack: fas

@@ -97,15 +97,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 ##  9     9          4.4         2.9          1.4         0.2 setosa 
 ## 10    10         NA          NA           NA          NA   setosa</code></pre>
 <p>We could write the condition on every column, but that would cumbersome:</p>
-<pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span>
-<span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Sepal.Length) <span class="op">&amp;</span><span class="st"> </span>
-<span class="st">           </span><span class="op">!</span><span class="kw">is.na</span>(Sepal.Width) <span class="op">&amp;</span>
-<span class="st">           </span><span class="op">!</span><span class="kw">is.na</span>(Petal.Length) <span class="op">&amp;</span>
-<span class="st">           </span><span class="op">!</span><span class="kw">is.na</span>(Petal.Width)
-  )</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">iris <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Sepal.Length) <span class="op">&amp;</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="st">           </span><span class="op">!</span><span class="kw">is.na</span>(Sepal.Width) <span class="op">&amp;</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="st">           </span><span class="op">!</span><span class="kw">is.na</span>(Petal.Length) <span class="op">&amp;</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="st">           </span><span class="op">!</span><span class="kw">is.na</span>(Petal.Width)</a>
+<a class="sourceLine" id="cb2-6" title="6">  )</a></code></pre></div>
 <p>Instead, we just have to select the columns we will filter on and apply the condition:</p>
-<pre class="sourceCode r"><code class="sourceCode r">features &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">names</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">keep</span>(<span class="op">~</span><span class="st"> </span><span class="kw">str_detect</span>(.,<span class="st">&quot;[.]&quot;</span>))
-iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter_at</span>(<span class="kw">vars</span>(features), <span class="kw">all_vars</span>(<span class="op">!</span><span class="kw">is.na</span>(.)))</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">features &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">names</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">keep</span>(<span class="op">~</span><span class="st"> </span><span class="kw">str_detect</span>(.,<span class="st">&quot;[.]&quot;</span>))</a>
+<a class="sourceLine" id="cb3-2" title="2">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter_at</span>(<span class="kw">vars</span>(features), <span class="kw">all_vars</span>(<span class="op">!</span><span class="kw">is.na</span>(.)))</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 6
 ##   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ##   &lt;int&gt;        &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
@@ -118,13 +118,13 @@ iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">fil
 <strong>every feature</strong> must satisfy the condition.
 To be honest, for that purpose it would have been easier to simply use <code>iris %&gt;% na.omit()</code>.</p>
 <p>But what if we wanted the opposite? Keeping only the rows with <em>all the selected features missing</em> is as easy as changing the predicate part:</p>
-<pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter_at</span>(<span class="kw">vars</span>(features), <span class="kw">all_vars</span>(<span class="kw">is.na</span>(.)))</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter_at</span>(<span class="kw">vars</span>(features), <span class="kw">all_vars</span>(<span class="kw">is.na</span>(.)))</a></code></pre></div>
 <pre><code>## # A tibble: 1 x 6
 ##   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ##   &lt;int&gt;        &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
 ## 1    10           NA          NA           NA          NA setosa</code></pre>
 <p>Another option is to apply the condition on <strong>any feature</strong>. That’s where <code>any_vars</code> comes to rescue. Here we keep only the observations with <em>at least one</em> missing feature:</p>
-<pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter_at</span>(<span class="kw">vars</span>(features), <span class="kw">any_vars</span>(<span class="kw">is.na</span>(.)))</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter_at</span>(<span class="kw">vars</span>(features), <span class="kw">any_vars</span>(<span class="kw">is.na</span>(.)))</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 6
 ##   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ##   &lt;int&gt;        &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
@@ -134,7 +134,7 @@ To be honest, for that purpose it would have been easier to simply use <code>iri
 ## 4     8         NA           3.4          1.5         0.2 setosa 
 ## 5    10         NA          NA           NA          NA   setosa</code></pre>
 <p>Also, there are some other fancy ways to manipulate data frames with the filter family. One trick is using <code>contains()</code> or <code>starts_with()</code> to select the variables:</p>
-<pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter_at</span>(<span class="kw">vars</span>(<span class="kw">contains</span>(<span class="st">&quot;Length&quot;</span>)), <span class="kw">all_vars</span>(. <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.4</span>))</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter_at</span>(<span class="kw">vars</span>(<span class="kw">contains</span>(<span class="st">&quot;Length&quot;</span>)), <span class="kw">all_vars</span>(. <span class="op">&gt;=</span><span class="st"> </span><span class="fl">1.4</span>))</a></code></pre></div>
 <pre><code>## # A tibble: 5 x 6
 ##   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ##   &lt;int&gt;        &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
@@ -144,7 +144,7 @@ To be honest, for that purpose it would have been easier to simply use <code>iri
 ## 4     7          4.6         3.4          1.4         0.3 setosa 
 ## 5     9          4.4         2.9          1.4         0.2 setosa</code></pre>
 <p>Another example is applying the condition on columns that satisfy certain condition with <code>filter_if</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter_if</span>(is.numeric, <span class="kw">any_vars</span>(. <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>))</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter_if</span>(is.numeric, <span class="kw">any_vars</span>(. <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>))</a></code></pre></div>
 <pre><code>## # A tibble: 6 x 6
 ##   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ##   &lt;int&gt;        &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  
