@@ -49,7 +49,7 @@ skills <- tribble(
 ```
 
 
-```{r, skills-plot, warning=FALSE}
+```{r, skills-plot, warning=FALSE, eval=FALSE}
 # plotly(
 ggplot(data=skills,aes(x=reorder(Skill,-desc(Hours)), y= Hours, fill=Class, label=paste0(Hours," h"))) + 
     geom_bar(stat = "identity", colour="black") +
