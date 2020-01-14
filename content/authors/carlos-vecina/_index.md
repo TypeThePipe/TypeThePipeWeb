@@ -1,4 +1,5 @@
 ---
+title: Carlos Vecina
 authors:
 - carlos-vecina
 bio: Data Scientist & TechLead at Bankinter  |  AI & Data Science for Business

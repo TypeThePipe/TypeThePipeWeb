@@ -49,7 +49,7 @@ skills <- tribble(
 ```
 
 
-```{r, skills-plot}
+```{r, skills-plot, warning=FALSE}
 # plotly(
 ggplot(data=skills,aes(x=reorder(Skill,-desc(Hours)), y= Hours, fill=Class, label=paste0(Hours," h"))) + 
     geom_bar(stat = "identity", colour="black") +
@@ -57,7 +57,7 @@ ggplot(data=skills,aes(x=reorder(Skill,-desc(Hours)), y= Hours, fill=Class, labe
     labs(x=" ", y="Hours", fill=" ")  +
     theme_minimal() +
     scale_fill_brewer(palette = "YlOrBr",direction = -1) +
-    geom_label(show_guide  = F, aes(y=400)) 
+    geom_label(show_guide  = F, aes(y=400))                 # Use show_guide despite the warning
 # )
 ```
 

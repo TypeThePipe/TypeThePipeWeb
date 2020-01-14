@@ -1,4 +1,5 @@
 ---
+title: Pablo Canovas
 authors:
 - pablo-canovas
 bio: Data Scientist, formerly physicist  |  Tidyverse believer, piping life  |  Hanging out at TypeThePipe
