@@ -28,7 +28,7 @@
   
     
   
-  <meta name="description" content="Skills snapshot in a 6 Ggplot lines">
+  <meta name="description" content="Skills snapshot in 6 Ggplot lines">
 
   
   <link rel="alternate" hreflang="en-us" href="/vizstips/skills-plot/">
@@ -83,7 +83,7 @@
   
   
   
-  <link rel="stylesheet" href="/css/academic.min.d960cf4b09c792e11076c0fbfd8a060b.css">
+  <link rel="stylesheet" href="/css/academic.min.41d4c1ce660318d30d4a9b15654ee793.css">
 
   
 
@@ -127,8 +127,8 @@
   
   <meta property="og:site_name" content="TypeThePipe">
   <meta property="og:url" content="/vizstips/skills-plot/">
-  <meta property="og:title" content="Skills plot | TypeThePipe">
-  <meta property="og:description" content="Skills snapshot in a 6 Ggplot lines"><meta property="og:image" content="/vizstips/skills-plot/featured.png">
+  <meta property="og:title" content="Skills chart using Gplot2 with R | TypeThePipe">
+  <meta property="og:description" content="Skills snapshot in 6 Ggplot lines"><meta property="og:image" content="/vizstips/skills-plot/featured.png">
   <meta property="twitter:image" content="/vizstips/skills-plot/featured.png"><meta property="og:locale" content="en-us">
   
     
@@ -153,7 +153,7 @@
 
 
 
-  <title>Skills plot | TypeThePipe</title>
+  <title>Skills chart using Gplot2 with R | TypeThePipe</title>
 
 </head>
 
@@ -357,7 +357,7 @@
 
 
 <div class="article-container pt-3">
-  <h1>Skills plot</h1>
+  <h1>Skills chart using Gplot2 with R</h1>
 
   
 
@@ -432,9 +432,9 @@
 </div>
 
 
-<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 514px;">
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 720px; max-height: 388px;">
   <div style="position: relative">
-    <img src="/vizstips/skills-plot/featured_hu260dd347147d00c6296d7f685146ab33_19717_720x0_resize_lanczos_2.png" alt="" class="featured-image">
+    <img src="/vizstips/skills-plot/featured_hu18abb953ae4c93b4d9b987b7809617f6_10134_720x0_resize_lanczos_2.png" alt="" class="featured-image">
     
   </div>
 </div>
@@ -509,7 +509,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<p>You can show the code below :)</p>
+<p>You can see the code below :)</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(ggplot2)</a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="co"># library(plotly)</span></a>
 <a class="sourceLine" id="cb1-3" title="3"><span class="kw">library</span>(tibble)</a>
@@ -535,14 +535,13 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># plotly(</span></a>
 <a class="sourceLine" id="cb2-2" title="2"><span class="kw">ggplot</span>(<span class="dt">data=</span>skills,<span class="kw">aes</span>(<span class="dt">x=</span><span class="kw">reorder</span>(Skill,<span class="op">-</span><span class="kw">desc</span>(Hours)), <span class="dt">y=</span> Hours, <span class="dt">fill=</span>Class, <span class="dt">label=</span><span class="kw">paste0</span>(Hours,<span class="st">&quot; h&quot;</span>))) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb2-3" title="3"><span class="st">    </span><span class="kw">geom_bar</span>(<span class="dt">stat =</span> <span class="st">&quot;identity&quot;</span>, <span class="dt">colour=</span><span class="st">&quot;black&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="st">    </span><span class="co"># geom_hline(yintercept = 10000, colour=&quot;red&quot;)+</span></a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="st">    </span><span class="kw">coord_flip</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot; &quot;</span>, <span class="dt">y=</span><span class="st">&quot;Hours&quot;</span>, <span class="dt">fill=</span><span class="st">&quot; &quot;</span>)  <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="st">    </span><span class="kw">theme_minimal</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="st">    </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;YlOrBr&quot;</span>,<span class="dt">direction =</span> <span class="dv">-1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-9" title="9"><span class="st">    </span><span class="kw">geom_label</span>(<span class="dt">show_guide  =</span> F,</a>
-<a class="sourceLine" id="cb2-10" title="10">               <span class="kw">aes</span>(<span class="dt">y=</span><span class="dv">400</span>)) </a></code></pre></div>
-<pre><code>## Warning: `show_guide` has been deprecated. Please use `show.legend` instead.</code></pre>
+<a class="sourceLine" id="cb2-4" title="4"><span class="st">    </span><span class="kw">coord_flip</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="st">    </span><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot; &quot;</span>, <span class="dt">y=</span><span class="st">&quot;Hours&quot;</span>, <span class="dt">fill=</span><span class="st">&quot; &quot;</span>)  <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="st">    </span><span class="kw">theme_minimal</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="st">    </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette =</span> <span class="st">&quot;YlOrBr&quot;</span>,<span class="dt">direction =</span> <span class="dv">-1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="st">    </span><span class="kw">geom_label</span>(<span class="dt">show_guide  =</span> F, <span class="kw">aes</span>(<span class="dt">y=</span><span class="dv">400</span>)) </a></code></pre></div>
+<pre><code>## Warning: `show_guide` has been deprecated. Please use `show.legend`
+## instead.</code></pre>
 <p><img src="/vizstips/skills_plot/index_files/figure-html/skills-plot-1.png" width="672" /></p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># )</span></a></code></pre></div>
 
