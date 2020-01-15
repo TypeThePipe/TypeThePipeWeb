@@ -2,16 +2,17 @@
 title: Skills chart using Gplot2 with R
 author: Carlos Vecina Tebar
 date: "2020-01-07"
-slug: skills-plot
+slug: skills-chart
 output:
   blogdown::html_page:
     highlight: tango
 categories:
 - R
 - Vizs
+- Ggplot2
 tags: []
 subtitle: ''
-summary: "Skills snapshot in 6 Ggplot lines"
+summary: "Skills snapshot in 6 Ggplot2 lines"
 authors: [carlos-vecina]
 featured: false
 draft: false
@@ -57,7 +58,7 @@ ggplot(data=skills,aes(x=reorder(Skill,-desc(Hours)), y= Hours, fill=Class, labe
     labs(x=" ", y="Hours", fill=" ")  +
     theme_minimal() +
     scale_fill_brewer(palette = "YlOrBr",direction = -1) +
-    geom_label(show_guide  = F, aes(y=400))                 # Use show_guide despite the warning
-# )
+    geom_label(show_guide  = F, aes(y=400))                  # Use show_guide despite the warning
+
 ```
 

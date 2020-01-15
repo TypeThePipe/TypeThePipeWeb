@@ -14,9 +14,9 @@
     
     <item>
       <title>Skills chart using Gplot2 with R</title>
-      <link>/vizstips/skills-plot/</link>
+      <link>/vizs-and-tips/skills-chart/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/vizstips/skills-plot/</guid>
+      <guid>/vizs-and-tips/skills-chart/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -112,9 +112,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;labs&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot; &amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;y=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Hours&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;fill=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot; &amp;quot;&lt;/span&gt;)  &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme_minimal&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_fill_brewer&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;palette =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;YlOrBr&amp;quot;&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;direction =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;-1&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_label&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;show_guide  =&lt;/span&gt; F, &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;y=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;400&lt;/span&gt;))                 &lt;span class=&#34;co&#34;&gt;# Use show_guide despite the warning&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/vizstips/skills_plot/index_files/figure-html/skills-plot-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# )&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_label&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;show_guide  =&lt;/span&gt; F, &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;y=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;400&lt;/span&gt;))                  &lt;span class=&#34;co&#34;&gt;# Use show_guide despite the warning&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 </description>
     </item>
     

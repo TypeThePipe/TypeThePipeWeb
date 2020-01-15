@@ -14,9 +14,9 @@
     
     <item>
       <title>Conditional Pipes</title>
-      <link>/vizstips/conditional-pipes/</link>
+      <link>/vizs-and-tips/conditional-pipes/</link>
       <pubDate>Sat, 02 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/vizstips/conditional-pipes/</guid>
+      <guid>/vizs-and-tips/conditional-pipes/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -90,9 +90,9 @@ This way:&lt;/p&gt;
     
     <item>
       <title>Filtering a data frame by condition on multiple columns</title>
-      <link>/vizstips/filtering-a-data-frame-by-condition-on-multiple-columns/</link>
+      <link>/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</link>
       <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>/vizstips/filtering-a-data-frame-by-condition-on-multiple-columns/</guid>
+      <guid>/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
