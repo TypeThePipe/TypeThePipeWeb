@@ -34,17 +34,42 @@
   
   <url>
     <loc>/authors/</loc>
-    <lastmod>2020-01-07T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/authors/carlos-vecina/</loc>
-    <lastmod>2020-01-07T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2020-01-07T00:00:00+00:00</lastmod>
+    <lastmod>2020-01-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/vizs-and-tips/magic-whos/</loc>
+    <lastmod>2020-01-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/magic/</loc>
+    <lastmod>2020-01-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/python/</loc>
+    <lastmod>2020-01-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/tips/</loc>
+    <lastmod>2020-01-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/vizs-and-tips/</loc>
+    <lastmod>2020-01-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -68,11 +93,6 @@
   </url>
   
   <url>
-    <loc>/vizs-and-tips/</loc>
-    <lastmod>2020-01-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/vizs-and-tips/conditional-pipes/</loc>
     <lastmod>2019-11-02T00:00:00+00:00</lastmod>
   </url>
@@ -84,11 +104,6 @@
   
   <url>
     <loc>/categories/tidyverse/</loc>
-    <lastmod>2019-11-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/tips/</loc>
     <lastmod>2019-11-02T00:00:00+00:00</lastmod>
   </url>
   
