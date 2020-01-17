@@ -41,7 +41,8 @@ survey_data <- tribble(
   group_by(region1, region2, gender) %>% 
   mutate(weight = 1/n()) %>% 
   ungroup() %>% 
-  summarise_at(vars(contains("q")),  funs(weighted_mean = sum(. * weight)/sum(weight)))
+  summarise_at(vars(contains("q")),
+               funs(weighted_mean = sum(. * weight)/sum(weight)))
 ```
 
 ```{r, warning=FALSE, echo=FALSE, message=FALSE}
