@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Post | TypeThePipe</title>
+    <link>/categories/post/</link>
+      <atom:link href="/categories/post/index.xml" rel="self" type="application/rss+xml" />
+    <description>Post</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 17 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Post</title>
+      <link>/categories/post/</link>
+    </image>
+    
+    <item>
+      <title>Pathfinding Algorithms Visualizer using R! (I) Setup the interactive grid.</title>
+      <link>/post/pathfinding-algorithms-visualizar-with-r/</link>
+      <pubDate>Fri, 17 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/post/pathfinding-algorithms-visualizar-with-r/</guid>
+      <description>
+
+
+
+</description>
+    </item>
+    
+  </channel>
+</rss>

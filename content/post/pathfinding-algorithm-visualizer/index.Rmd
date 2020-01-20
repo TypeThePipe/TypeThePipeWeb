@@ -1,0 +1,25 @@
+---
+title: Pathfinding Algorithms Visualizer using R! (I) Setup the interactive grid.
+author: Carlos Vecina Tebar
+date: "2020-01-17"
+slug: pathfinding-algorithms-visualizar-with-r
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- R
+- Post
+- Shiny
+- Ggplot
+tags: []
+subtitle: 'First step. Initialaizing the interactive grid with just Shiny and Ggplot. Setup some kind of randomwalker algorithm.'
+summary: "First step. Initialaizing the interactive grid with just Shiny and Ggplot. Setup some kind of randomwalker algorithm."
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
