@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Shiny | TypeThePipe</title>
-    <link>https://typethepipe.com/categories/shiny/</link>
-      <atom:link href="https://typethepipe.com/categories/shiny/index.xml" rel="self" type="application/rss+xml" />
+    <link>/categories/shiny/</link>
+      <atom:link href="/categories/shiny/index.xml" rel="self" type="application/rss+xml" />
     <description>Shiny</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 21 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://typethepipe.com/img/icon-192.png</url>
+      <url>/img/icon-192.png</url>
       <title>Shiny</title>
-      <link>https://typethepipe.com/categories/shiny/</link>
+      <link>/categories/shiny/</link>
     </image>
     
     <item>
       <title>Pathfinding Algorithms Visualizer using R! (I) Setting up the interactive grid</title>
-      <link>https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/</link>
+      <link>/post/pathfinding-algorithms-visualizer-using-r/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/</guid>
+      <guid>/post/pathfinding-algorithms-visualizer-using-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }

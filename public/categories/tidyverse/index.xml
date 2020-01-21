@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tidyverse | TypeThePipe</title>
-    <link>https://typethepipe.com/categories/tidyverse/</link>
-      <atom:link href="https://typethepipe.com/categories/tidyverse/index.xml" rel="self" type="application/rss+xml" />
+    <link>/categories/tidyverse/</link>
+      <atom:link href="/categories/tidyverse/index.xml" rel="self" type="application/rss+xml" />
     <description>Tidyverse</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 21 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://typethepipe.com/img/icon-192.png</url>
+      <url>/img/icon-192.png</url>
       <title>Tidyverse</title>
-      <link>https://typethepipe.com/categories/tidyverse/</link>
+      <link>/categories/tidyverse/</link>
     </image>
     
     <item>
       <title>Tidylog</title>
-      <link>https://typethepipe.com/vizs-and-tips/tidylog/</link>
+      <link>/vizs-and-tips/tidylog/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/tidylog/</guid>
+      <guid>/vizs-and-tips/tidylog/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -119,11 +119,11 @@ However things get increasingly obscure when chaining multiple functions or deal
     
     <item>
       <title>Using summarise_at(). Weighted mean Tidyverse approach</title>
-      <link>https://typethepipe.com/vizs-and-tips/summarise_at-weighted-mean-tidyverse/</link>
+      <link>/vizs-and-tips/summarise_at-weighted-mean-tidyverse/</link>
       <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/summarise_at-weighted-mean-tidyverse/</guid>
+      <guid>/vizs-and-tips/summarise_at-weighted-mean-tidyverse/</guid>
       <description>
-&lt;script src=&#34;https://typethepipe.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
@@ -231,9 +231,9 @@ q2_weighted_mean
     
     <item>
       <title>Conditional Pipes</title>
-      <link>https://typethepipe.com/vizs-and-tips/conditional-pipes/</link>
+      <link>/vizs-and-tips/conditional-pipes/</link>
       <pubDate>Sat, 02 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/conditional-pipes/</guid>
+      <guid>/vizs-and-tips/conditional-pipes/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -307,9 +307,9 @@ This way:&lt;/p&gt;
     
     <item>
       <title>Filtering a data frame by condition on multiple columns</title>
-      <link>https://typethepipe.com/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</link>
+      <link>/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</link>
       <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</guid>
+      <guid>/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
