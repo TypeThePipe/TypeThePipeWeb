@@ -2,23 +2,128 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vizs &amp; Tips | TypeThePipe</title>
-    <link>/vizs-and-tips/</link>
-      <atom:link href="/vizs-and-tips/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/vizs-and-tips/</link>
+      <atom:link href="https://typethepipe.com/vizs-and-tips/index.xml" rel="self" type="application/rss+xml" />
     <description>Vizs &amp; Tips</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 16 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 21 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://typethepipe.com/img/icon-192.png</url>
       <title>Vizs &amp; Tips</title>
-      <link>/vizs-and-tips/</link>
+      <link>https://typethepipe.com/vizs-and-tips/</link>
     </image>
     
     <item>
-      <title>Using summarise_at(). Weighted mean Tidyverse approach</title>
-      <link>/vizs-and-tips/summarise_at-weighted-mean-tidyverse/</link>
-      <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/summarise_at-weighted-mean-tidyverse/</guid>
+      <title>Tidylog</title>
+      <link>https://typethepipe.com/vizs-and-tips/tidylog/</link>
+      <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://typethepipe.com/vizs-and-tips/tidylog/</guid>
       <description>
-&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;Some time ago I made one of the best discoveries I have ever made in the Tidyverse: a tool called &lt;strong&gt;tidylog&lt;/strong&gt;.
+This package is built on top of &lt;em&gt;dplyr&lt;/em&gt; and &lt;em&gt;tidyr&lt;/em&gt; and provides us with feedback on the results of the operations. Actually, this is a feature that already appeared in the Stata software.&lt;/p&gt;
+&lt;p&gt;When performing one operation at a time, it is easy to track the changes made on a table.
+However things get increasingly obscure when chaining multiple functions or dealing with big data frames.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;We all love piping&lt;/strong&gt; operations. I often ‘play’ to perform the whole transformation &lt;a href=&#34;../Conditional-pipes&#34;&gt;without leaving the pipeflow&lt;/a&gt;. But the counterpart is missing the intermediate states: you can make some big mistakes and be unaware of them until it’s too late and maybe you have to undone some work or rethink your analysis.&lt;/p&gt;
+&lt;p&gt;In this context, some additional info is always welcome. I think this feature is specially convenient for beginners, but not only! I have myself wasted several hours debugging long pipelines and trying to understand where the problems came from.&lt;/p&gt;
+&lt;p&gt;Let’s see a tiny bit of its behaviour with a simple example:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;flights &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(year&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;day, hour, origin, dest, tailnum, carrier) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;month =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;if_else&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;nchar&lt;/span&gt;(month) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;kw&#34;&gt;paste0&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;0&amp;quot;&lt;/span&gt;,month), &lt;span class=&#34;kw&#34;&gt;as.character&lt;/span&gt;(month)),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-4&#34; title=&#34;4&#34;&gt;         &lt;span class=&#34;dt&#34;&gt;day =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;if_else&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;nchar&lt;/span&gt;(day) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;kw&#34;&gt;paste0&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;0&amp;quot;&lt;/span&gt;,day), &lt;span class=&#34;kw&#34;&gt;as.character&lt;/span&gt;(day))) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;unite&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;date&amp;quot;&lt;/span&gt;, year&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;day, &lt;span class=&#34;dt&#34;&gt;sep =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;/&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;remove =&lt;/span&gt; T) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;date =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;ymd&lt;/span&gt;(date)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(hour &lt;span class=&#34;op&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;8&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;anti_join&lt;/span&gt;(planes, &lt;span class=&#34;dt&#34;&gt;by =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;tailnum&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;count&lt;/span&gt;(tailnum, &lt;span class=&#34;dt&#34;&gt;sort =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;) &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-10&#34; title=&#34;10&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-11&#34; title=&#34;11&#34;&gt;&lt;span class=&#34;co&#34;&gt;# select: dropped 11 variables (dep_time, sched_dep_time, dep_delay, arr_time, sched_arr_time, …)&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-12&#34; title=&#34;12&#34;&gt;&lt;span class=&#34;co&#34;&gt;# mutate: converted &amp;#39;month&amp;#39; from integer to character (0 new NA)&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-13&#34; title=&#34;13&#34;&gt;&lt;span class=&#34;co&#34;&gt;#         converted &amp;#39;day&amp;#39; from integer to character (0 new NA)&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-14&#34; title=&#34;14&#34;&gt;&lt;span class=&#34;co&#34;&gt;# mutate: converted &amp;#39;date&amp;#39; from character to double (0 new NA)&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-15&#34; title=&#34;15&#34;&gt;&lt;span class=&#34;co&#34;&gt;# filter: removed 50,726 rows (15%), 286,050 rows remaining&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-16&#34; title=&#34;16&#34;&gt;&lt;span class=&#34;co&#34;&gt;# anti_join: added no columns&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-17&#34; title=&#34;17&#34;&gt;&lt;span class=&#34;co&#34;&gt;#            &amp;gt; rows only in x    45,008&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-18&#34; title=&#34;18&#34;&gt;&lt;span class=&#34;co&#34;&gt;#            &amp;gt; rows only in y  (     39)&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-19&#34; title=&#34;19&#34;&gt;&lt;span class=&#34;co&#34;&gt;#            &amp;gt; matched rows    (241,042)&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-20&#34; title=&#34;20&#34;&gt;&lt;span class=&#34;co&#34;&gt;#            &amp;gt;                 =========&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-21&#34; title=&#34;21&#34;&gt;&lt;span class=&#34;co&#34;&gt;#            &amp;gt; rows total        45,008&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-22&#34; title=&#34;22&#34;&gt;&lt;span class=&#34;co&#34;&gt;# count: now 716 rows and 2 columns, ungrouped&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Pretty neat! It is specially useful with joins, as it provides plenty of details and they can be a source of duplicated or missing rows.&lt;/p&gt;
+&lt;p&gt;I decided to write this little post now to celebrate that &lt;strong&gt;tidylog v1.0.0&lt;/strong&gt; has recently been released! Check the &lt;a href=&#34;https://github.com/elbersb/tidylog&#34;&gt;official repo&lt;/a&gt; out to see more examples or show some love to &lt;a href=&#34;https://twitter.com/elbersb&#34;&gt;@elbersb&lt;/a&gt; on Twitter!&lt;/p&gt;
+&lt;p&gt;All in all, I think this package was a missing piece in the Tidyverse ecosystem: It is incredibly useful, whereas making advantage of it is as simple as writing &lt;code&gt;library(tidylog)&lt;/code&gt;. Integrating this package into our daily R work is a &lt;em&gt;no-brainer&lt;/em&gt;!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Using summarise_at(). Weighted mean Tidyverse approach</title>
+      <link>https://typethepipe.com/vizs-and-tips/summarise_at-weighted-mean-tidyverse/</link>
+      <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://typethepipe.com/vizs-and-tips/summarise_at-weighted-mean-tidyverse/</guid>
+      <description>
+&lt;script src=&#34;https://typethepipe.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
@@ -126,24 +231,24 @@ q2_weighted_mean
     
     <item>
       <title>List all the defined variables in Jupyter Notebooks</title>
-      <link>/vizs-and-tips/magic-whos/</link>
+      <link>https://typethepipe.com/vizs-and-tips/magic-whos/</link>
       <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/magic-whos/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/magic-whos/</guid>
       <description>
 
 
 &lt;p&gt;A recurrent complain about Jupyter Notebooks between beginner users is the lack of information about the self-created environment variables. If you have this question, probably first of all you should be sure about the Jupyter Notebooks main purpose (totally different from IDEs like Spyder or Pycharm).&lt;/p&gt;
 &lt;p&gt;But in case a notebook is all what you need, you have few ways to display this information. The first and easiest one is to use the magic method &lt;strong&gt;%whos&lt;/strong&gt;
-&lt;img src=&#34;/vizs-and-tips/magic-whos/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://typethepipe.com/vizs-and-tips/magic-whos/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Two alternative ways are nbextension and Jupyter Lab variable inspector. You can find more information &lt;a href=&#34;https://stackoverflow.com/questions/37718907/variable-explorer-in-jupyter-notebook&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Skills chart using Gplot2 with R</title>
-      <link>/vizs-and-tips/skills-chart/</link>
+      <link>https://typethepipe.com/vizs-and-tips/skills-chart/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/skills-chart/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/skills-chart/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -245,9 +350,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Conditional Pipes</title>
-      <link>/vizs-and-tips/conditional-pipes/</link>
+      <link>https://typethepipe.com/vizs-and-tips/conditional-pipes/</link>
       <pubDate>Sat, 02 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/conditional-pipes/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/conditional-pipes/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -321,9 +426,9 @@ This way:&lt;/p&gt;
     
     <item>
       <title>Filtering a data frame by condition on multiple columns</title>
-      <link>/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</link>
+      <link>https://typethepipe.com/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</link>
       <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
