@@ -1,8 +1,8 @@
 ---
-title: Pathfinding Algorithms Visualizer using R! (I) Setup the interactive grid.
+title: Pathfinding Algorithms Visualizer using R! (I) Setup the interactive grid
 author: Carlos Vecina Tebar
 date: "2020-01-21"
-slug: pathfinding-algorithms-visualizar-with-r
+slug: pathfinding-algorithms-visualizer-using-r
 output:
   blogdown::html_page:
     highlight: tango
