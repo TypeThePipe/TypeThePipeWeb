@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>TypeThePipe</title>
+    <link>/es/</link>
+      <atom:link href="/es/index.xml" rel="self" type="application/rss+xml" />
+    <description>TypeThePipe</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>TypeThePipe</title>
+      <link>/es/</link>
+    </image>
+    
+    <item>
+      <title></title>
+      <link></link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid></guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Autores</title>
+      <link>/es/autores/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>/es/autores/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,4 +1,5 @@
 # Configuration of Academic
+# Configuration of Academic
 # Documentation: https://sourcethemes.com/academic/
 #
 # This file is formatted using TOML syntax - learn more at https://learnxinyminutes.com/docs/toml/
@@ -29,9 +30,20 @@ theme = "hugo-academic"
 enableGitInfo = false
 
 # Default language to use (if you setup multilingual support)
-defaultContentLanguage = "en"
+DefaultContentLanguage = "en"
+
+[languages]
+  [languages.en]
+    weight = 1
+  [languages.es]
+    weight = 2
+
+
+[params]
+  [params.navigation]
+    help = "Help"
 hasCJKLanguage = false  # Set `true` for Chinese/Japanese/Korean languages.
-defaultContentLanguageInSubdir = false
+DefaultContentLanguageInSubdir = true
 removePathAccents = true  # Workaround for https://github.com/gohugoio/hugo/issues/5687
 
 paginate = 10  # Number of items per page in paginated lists.
