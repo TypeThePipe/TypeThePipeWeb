@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
@@ -17,11 +17,17 @@
   </url>
   
   <url>
-    <loc>/es/autores/</loc>
-  </url>
-  
-  <url>
-    <loc>/es/autores/carlos-vecina/</loc>
+    <loc>/es/authors/carlos-vecina/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/authors/carlos-vecina/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/authors/carlos-vecina/"
+                />
   </url>
   
   <url>
@@ -39,7 +45,17 @@
   </url>
   
   <url>
-    <loc>/es/autores/pablo-canovas/</loc>
+    <loc>/es/authors/pablo-canovas/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/authors/pablo-canovas/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/authors/pablo-canovas/"
+                />
   </url>
   
   <url>

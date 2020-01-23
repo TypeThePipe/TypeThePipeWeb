@@ -128,3 +128,7 @@
   translation: Entendido!
 - id: cookie_learn
   translation: Más información
+- id: authors
+  translation: autores
+- id: people
+  translation: nosotros

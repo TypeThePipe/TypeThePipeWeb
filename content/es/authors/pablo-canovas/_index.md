@@ -2,7 +2,7 @@
 title: Pablo Canovas
 authors:
 - pablo-canovas
-bio: Data Scientist, formerly physicist  |  Tidyverse believer, piping life  |  Hanging out at TypeThePipe
+bio: Data Scientist, físico de formación  |  Tidyverse believer, piping life  |  Hanging out en TypeThePipe
 education:
   courses:
   - course: Deep Learning Specialization
@@ -22,8 +22,8 @@ education:
 email: "pablo.canovastourne@gmail.com"
 interests:
 - Machine Learning
-- Time Series Forecasting
-- Game Theory
+- Predicción de series temporales
+- Teoría de juegos
 - Uncertainty
 
 name: Pablo Cánovas 
@@ -31,7 +31,7 @@ organizations:
 - name:  
   url: ""
 
-role: Data Scientist at Repsol Electricidad y Gas
+role: Data Scientist en Repsol Electricidad y Gas
 social:
 - icon: envelope
   icon_pack: fas
@@ -50,5 +50,5 @@ user_groups:
 - ----
 ---
 
-Pablo Cánovas is a data scientist with experience developing machine learning models applied to electricity markets.
+Pablo Cánovas es un científico de datos con experiencia desarrollando y productivizando modelos de Machine Learning aplicados al mercado energético europeo.
  

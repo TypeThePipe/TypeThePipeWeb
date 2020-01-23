@@ -2,7 +2,7 @@
 title: Carlos Vecina
 authors:
 - carlos-vecina
-bio: Data Scientist & TechLead at Bankinter  |  AI & Data Science for Business
+bio: Data Scientist & TechLead en Bankinter  |  AI & Data Science para aportar valor en la empresa
 education:
   courses:
   - course: Pre PhD Research in Artificial Intelligence. Computer Vision and pose estimation.
@@ -14,17 +14,17 @@ education:
 
 email: ""
 interests:
-- Artificial Intelligence
-- Time Series Forecasting
-- Graph theory
-- Uncertainity
-- Econometrics
+- Inteligencia artificial
+- Predicción de series temporales
+- Teoría de grafos
+- Incertidumbre y teoría de valores extremos
+- Econometría
 name: Carlos Vecina
 organizations:
 - name: 
   url: ""
 
-role: Data Scientist & TechLead at Bankinter
+role: Data Scientist & TechLead en Bankinter
 social:
 - icon: envelope
   icon_pack: fas
@@ -43,5 +43,6 @@ user_groups:
 - ----
 ---
 
-Carlos Vecina is a data scientist with experience using ML and AI to bring value to business in CRM, Marketing and energy markets environments.
+Carlos Vecina es un científico de datos con experienca en la aplicación del Machine Learning y de la Inteligencia Artificial con el objetivo de aportar gran valor a negocio en áreas como el CRM, el Marketing y en la compra-venta dentro del mercado eléctrico.
+
  
