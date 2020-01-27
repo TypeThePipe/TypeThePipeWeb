@@ -67,3 +67,4 @@ I decided to write this little post now to celebrate that **tidylog v1.0.0** has
 
 All in all, I think this package was a missing piece in the Tidyverse ecosystem: It is incredibly useful, whereas making advantage of it is as simple as writing ```library(tidylog)```. Integrating this package into our daily R work is a *no-brainer*!
 
+<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us4.list-manage.com","uuid":"91551f7ed29389a0de4f47665","lid":"d95c503a48","uniqueMethods":true}) })</script>
