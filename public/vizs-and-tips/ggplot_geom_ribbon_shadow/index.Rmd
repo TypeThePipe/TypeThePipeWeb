@@ -1,0 +1,39 @@
+---
+title: Shadowing your ggplot lines. Forecasting bands use case.
+author: Carlos Vecina Tebar
+date: "2019-11-18"
+slug: ggplot_geom_ribbon_shadow
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- R
+- Tips
+- Ggplot
+tags: []
+subtitle: ''
+summary: "Plot your confidence intervals easily"
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, eval=FALSE}
+library(tidyverse)
+huron <- data.frame(year = 1875:1972, 
+                    value = LakeHuron,
+                    std = runif(length(LakeHuron),0,1))
+
+huron %>% 
+  ggplot(aes(year, value)) + 
+  geom_ribbon(aes(ymin = value - std, ymax = value + std), fill = "steelblue2") + 
+  geom_line(color = "firebrick", size = 1)
+
+```
+
+
+

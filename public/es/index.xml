@@ -2,23 +2,15 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>TypeThePipe</title>
-    <link>/es/</link>
-      <atom:link href="/es/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/es/</link>
+      <atom:link href="https://typethepipe.com/es/index.xml" rel="self" type="application/rss+xml" />
     <description>TypeThePipe</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://typethepipe.com/img/icon-192.png</url>
       <title>TypeThePipe</title>
-      <link>/es/</link>
+      <link>https://typethepipe.com/es/</link>
     </image>
-    
-    <item>
-      <title></title>
-      <link></link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid></guid>
-      <description></description>
-    </item>
     
   </channel>
 </rss>
