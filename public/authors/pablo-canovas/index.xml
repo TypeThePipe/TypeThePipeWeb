@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pablo Canovas | TypeThePipe</title>
-    <link>https://typethepipe.com/authors/pablo-canovas/</link>
-      <atom:link href="https://typethepipe.com/authors/pablo-canovas/index.xml" rel="self" type="application/rss+xml" />
+    <link>/authors/pablo-canovas/</link>
+      <atom:link href="/authors/pablo-canovas/index.xml" rel="self" type="application/rss+xml" />
     <description>Pablo Canovas</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 21 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://typethepipe.com/img/icon-192.png</url>
+      <url>/img/icon-192.png</url>
       <title>Pablo Canovas</title>
-      <link>https://typethepipe.com/authors/pablo-canovas/</link>
+      <link>/authors/pablo-canovas/</link>
     </image>
     
     <item>
       <title>Tidylog</title>
-      <link>https://typethepipe.com/vizs-and-tips/tidylog/</link>
+      <link>/vizs-and-tips/tidylog/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/tidylog/</guid>
+      <guid>/vizs-and-tips/tidylog/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -121,9 +121,9 @@ However things get increasingly obscure when chaining multiple functions or deal
     
     <item>
       <title>Conditional Pipes</title>
-      <link>https://typethepipe.com/vizs-and-tips/conditional-pipes/</link>
+      <link>/vizs-and-tips/conditional-pipes/</link>
       <pubDate>Sat, 02 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/conditional-pipes/</guid>
+      <guid>/vizs-and-tips/conditional-pipes/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -197,9 +197,9 @@ This way:&lt;/p&gt;
     
     <item>
       <title>Filtering a data frame by condition on multiple columns</title>
-      <link>https://typethepipe.com/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</link>
+      <link>/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</link>
       <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</guid>
+      <guid>/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -344,11 +344,11 @@ To be honest, for that purpose it would have been easier to simply use &lt;code&
     
     <item>
       <title>Energy forecasting error metrics</title>
-      <link>https://typethepipe.com/post/energy-forecasting-error-metrics/</link>
+      <link>/post/energy-forecasting-error-metrics/</link>
       <pubDate>Sat, 21 Sep 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/post/energy-forecasting-error-metrics/</guid>
+      <guid>/post/energy-forecasting-error-metrics/</guid>
       <description>
-&lt;script src=&#34;https://typethepipe.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 
 &lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
@@ -665,7 +665,7 @@ in our case this metric isn’t optimal for several reasons:&lt;/p&gt;
 &lt;li&gt;It’s a nice alternative to NMAE since a &lt;em&gt;capacity&lt;/em&gt; value is not required.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;This formula allows for a cool graphic interpretation of the error: the numerator matchs with the yellow area whereas the denominator corresponds to the sum of the blue and yellow areas:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/post/Forecasting-error-metrics_files/EMAE_plot.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/Forecasting-error-metrics_files/EMAE_plot.png&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;conclusions&#34; class=&#34;section level1&#34;&gt;
@@ -696,11 +696,11 @@ in our case this metric isn’t optimal for several reasons:&lt;/p&gt;
     
     <item>
       <title>Symmetric MAPE is not symmetric</title>
-      <link>https://typethepipe.com/post/symmetric-mape-is-not-symmetric/</link>
+      <link>/post/symmetric-mape-is-not-symmetric/</link>
       <pubDate>Mon, 26 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/post/symmetric-mape-is-not-symmetric/</guid>
+      <guid>/post/symmetric-mape-is-not-symmetric/</guid>
       <description>
-&lt;script src=&#34;https://typethepipe.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;

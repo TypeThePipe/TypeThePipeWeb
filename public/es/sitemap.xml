@@ -3,100 +3,100 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://typethepipe.com/es/authors/</loc>
+    <loc>/es/authors/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/authors/"
+                href="/authors/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/authors/"
+                href="/es/authors/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/authors/carlos-vecina/</loc>
+    <loc>/es/authors/carlos-vecina/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/authors/carlos-vecina/"
+                href="/authors/carlos-vecina/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/authors/carlos-vecina/"
+                href="/es/authors/carlos-vecina/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/categories/</loc>
+    <loc>/es/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/categories/"
+                href="/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/categories/"
+                href="/es/categories/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/authors/pablo-canovas/</loc>
+    <loc>/es/authors/pablo-canovas/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/authors/pablo-canovas/"
+                href="/authors/pablo-canovas/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/authors/pablo-canovas/"
+                href="/es/authors/pablo-canovas/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/publication_types/</loc>
+    <loc>/es/publication_types/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/publication_types/"
+                href="/publication_types/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/publication_types/"
+                href="/es/publication_types/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/tags/</loc>
+    <loc>/es/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/tags/"
+                href="/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/tags/"
+                href="/es/tags/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/</loc>
+    <loc>/es/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/"
+                href="/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/"
+                href="/es/"
                 />
   </url>
   
