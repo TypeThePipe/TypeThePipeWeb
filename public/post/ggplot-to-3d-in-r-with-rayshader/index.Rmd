@@ -3,6 +3,7 @@ title: "Turn your GGplot to 3D animation. Awesome 2D to 3D plots in R with Raysh
 author: Carlos Vecina
 date: '2019-07-27'
 slug: "ggplot-to-3d-in-r-with-rayshader"
+translationKey: "ggplot-to-3d-in-r-with-rayshader"
 categories:
   - R
 tags:

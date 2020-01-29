@@ -3,100 +3,230 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://typethepipe.com/es/authors/</loc>
+    <loc>/es/authors/</loc>
+    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/authors/"
+                href="/authors/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/authors/"
+                href="/es/authors/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/authors/carlos-vecina/</loc>
+    <loc>/es/authors/carlos-vecina/</loc>
+    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/authors/carlos-vecina/"
+                href="/authors/carlos-vecina/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/authors/carlos-vecina/"
+                href="/es/authors/carlos-vecina/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/categories/</loc>
+    <loc>/es/categories/</loc>
+    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/categories/"
+                href="/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/categories/"
+                href="/es/categories/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/authors/pablo-canovas/</loc>
+    <loc>/es/posts/de-ggplot-a-3d-en-r-con-rayshader/</loc>
+    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/authors/pablo-canovas/"
+                href="/post/ggplot-to-3d-in-r-with-rayshader/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/authors/pablo-canovas/"
+                href="/es/posts/de-ggplot-a-3d-en-r-con-rayshader/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/publication_types/</loc>
+    <loc>/es/tags/ggplot/</loc>
+    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/publication_types/"
+                href="/tags/ggplot/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/publication_types/"
+                href="/es/tags/ggplot/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/tags/</loc>
+    <loc>/es/categories/post/</loc>
+    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/tags/"
+                href="/categories/post/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/tags/"
+                href="/es/categories/post/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/</loc>
+    <loc>/es/posts/</loc>
+    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/es/categories/r/</loc>
+    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/"
+                href="/categories/r/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/"
+                href="/es/categories/r/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/tags/rayshader/</loc>
+    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/rayshader/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/tags/rayshader/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/tags/</loc>
+    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/</loc>
+    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/tags/visualization/</loc>
+    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/visualization/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/tags/visualization/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/tags/viz/</loc>
+    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/viz/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/tags/viz/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/tags/vizr/</loc>
+    <lastmod>2019-09-24T21:56:15+02:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/vizr/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/tags/vizr/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/authors/pablo-canovas/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/authors/pablo-canovas/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/authors/pablo-canovas/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/publication_types/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/publication_types/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/publication_types/"
                 />
   </url>
   
