@@ -28,9 +28,11 @@ projects: []
 
 --- 
 
-*In 7 minutes reading, You will learn how to turn your ggplot visualizations into amazing interactive 3D plots you can export or embed in HTML/Rmarkdown.*
+*In 7 minutes reading, You will learn how to turn your ggplot visualizations into amazing interactive 3D plots you can export or embed in HTML/Rmarkdown. Or even better, you will export as mp4 an animation rotating the figure.*
 
-*Or even better, you will export as mp4 an animation rotating the figure.*
+*As a use case, we are going to join the Spanish demographic data and GIS map, and then visualize it*
+
+
 
 --- 
 
@@ -67,7 +69,7 @@ In my view, Tyler Morgan-Wall (package's author) hit the jackpot with the new ad
 #### **Let's try these new functionalities! **
 
 The only condition you must have a color or fill *aesthetic*, unless you can also play in the same plot wiht size.
-As we discussed in "XXXXXXX" 3D are not the right choice for most of the data visualization cases. Therefore, I tried to bring to this article a non gratuitous example.
+Many times 3D plots are not the right choice for most of the data visualization cases. Therefore, I tried to bring to this article a non gratuitous example.
 
 As a practical challenge, we will visualize in an interactive 3D map the average age in each city of Spain. Cool? First of all we need the population stats. We get it from the INE webpage. Secondly we have to delimiter Spanish cities with they GIS coordinates. Then we are merging these data to create a ggplot chart. Once we have the ggplot object we are going to use the rayshader package to map color aesthetic to the third spatial dimension. To conclude, we are going to render it as rotating 3D video.
 
@@ -95,45 +97,16 @@ We start loading (or downloading) the packages we are going to use. In other art
 Moreover we define the required functions and download directories.
 
 ```{r,  results = 'hide', message=FALSE, warning=FALSE}
-if (!require(pxR)) {
-  install.packages("pxR", repos = "http://cran.us.r-project.org")
-  require(pxR)
-}
-if (!require(RColorBrewer)) {
-  install.packages("RColorBrewer", repos = "http://cran.us.r-project.org")
-  require(RColorBrewer)
-}
+library(pxR)
+library(RColorBrewer)
+library(rgeos)
+#install.packages("rgdal", repos = "http://cran.us.r-project.org") reinstall cause gpclib dependencie https://stackoverflow.com/questions/30790036/error-istruegpclibpermitstatus-is-not-true
+library(rgdal)
+library(rayshader)
+library(knitr)
+library(magrittr)
+library(tidyverse)
 
-if (!require(rgeos)) {
-  install.packages("rgeos", repos = "http://cran.us.r-project.org")
-  require(rgeos)
-  install.packages("rgdal", repos = "http://cran.us.r-project.org") # reinstall cause gpclib dependencie https://stackoverflow.com/questions/30790036/error-istruegpclibpermitstatus-is-not-true
-  require(rgdal)
-}
-if (!require(rgdal)) {
-  install.packages("rgdal", repos = "http://cran.us.r-project.org")
-  require(rgdal)
-}
-if (!require(knitr)) {
-  install.packages("knitr", repos = "http://cran.us.r-project.org")
-  require(knitr)
-}
-if (!require(rayshader)) {
-  install.packages("rayshader", repos = "http://cran.us.r-project.org")
-  require(rayshader)
-}
-if (!require(magrittr)) {
-  install.packages("magrittr", repos = "http://cran.us.r-project.org")
-  require(magrittr)
-}
-if (!require(tidyverse)) {
-  install.packages("tidyverse", repos = "http://cran.us.r-project.org")
-  require(tidyverse)
-}
-if (!require(RColorBrewer)) {
-  install.packages("RColorBrewer", repos = "http://cran.us.r-project.org")
-  require(RColorBrewer)
-}
 as.numeric.factor <- function(x) {    # Custom function to convert fctr to num factor value
     return(suppressWarnings(as.numeric(levels(x))[x]))
 }
@@ -151,15 +124,15 @@ utils::download.file(url = "http://www.ine.es/pcaxisdl/t20/e245/p05/a2018/l0/000
 ```
 
 ```{r, echo=FALSE}
-tbl_census_2018 <- read.px("ggplot-to-3d-in-r-with-rayshader/data/census_2018.px") %>%         # Load & format
-  as.tibble()
+tbl_census_2018 <- read.px("data/census_2018.px") %>%         # Load & format
+  as_tibble()
 ```
 
 <br> 
 
 ```{r, eval=FALSE}
 tbl_census_2018 <- read.px("data/census_2018.px") %>%              # Load & format
-  as.tibble()
+  as_tibble()
 ```
 
 
@@ -184,7 +157,7 @@ kable(                                                             # Just Rmarkd
 
 ### 2.2- Downloading GIS data
 
-The second source is the Geo data. We will use cities coordinates and matching it with Spanish register data previously obtained.
+The second source we are going to use is the Geo data. We will use cities coordinates and matching it with Spanish demographic data previously obtained.
 
 Downloading map overlay:
 ```{r, eval=FALSE}
@@ -202,7 +175,7 @@ We parse the spatial information to convert it into tabular data. We expect that
 To complete this data processing, we use fortify function that allows us to don't load more packages. However, this function throws a warning suggesting the broom::tidy() one.
 
 ```{r, echo=FALSE}
-tlb_cities_gis <- readOGR(dsn = "ggplot-to-3d-in-r-with-rayshader/data/cities_gis/Municipios_ETRS89_30N.shp",
+tlb_cities_gis <- readOGR(dsn ="data/cities_gis/Municipios_ETRS89_30N.shp",
                               verbose=FALSE)
 ```
 
@@ -283,7 +256,7 @@ plot(plot_cities)
 
 ### 2.4- 3D Rayshader Visualization!
 
-That was pretty nice. It's sure that you can reach the general propose to be able to locate inmediately older an younger zones. Although as we discuss in XXX, human eyes aren't ready to distinguiss almost nothing but big color contrasts. What about complement color with a third dimension through z axis?
+That was pretty nice. It's sure that you can reach the general propose to be able to locate inmediately older an younger zones. Although as we will disccuss in a future post, human eyes aren't ready to distinguiss almost nothing but big color contrasts. What about complement color with a third dimension through z axis?
 
 Let's see how it works
 

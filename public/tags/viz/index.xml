@@ -2,29 +2,29 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>viz | TypeThePipe</title>
-    <link>/tags/viz/</link>
-      <atom:link href="/tags/viz/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/tags/viz/</link>
+      <atom:link href="https://typethepipe.com/tags/viz/index.xml" rel="self" type="application/rss+xml" />
     <description>viz</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 27 Jul 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://typethepipe.com/img/icon-192.png</url>
       <title>viz</title>
-      <link>/tags/viz/</link>
+      <link>https://typethepipe.com/tags/viz/</link>
     </image>
     
     <item>
       <title>Turn your GGplot to 3D animation. Awesome 2D to 3D plots in R with Rayshader</title>
-      <link>/post/ggplot-to-3d-in-r-with-rayshader/</link>
+      <link>https://typethepipe.com/post/ggplot-to-3d-in-r-with-rayshader/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>/post/ggplot-to-3d-in-r-with-rayshader/</guid>
+      <guid>https://typethepipe.com/post/ggplot-to-3d-in-r-with-rayshader/</guid>
       <description>
 
 
 &lt;hr /&gt;
-&lt;p&gt;&lt;em&gt;In 7 minutes reading, You will learn how to turn your ggplot visualizations into amazing interactive 3D plots you can export or embed in HTML/Rmarkdown.&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Or even better, you will export as mp4 an animation rotating the figure.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;In 7 minutes reading, You will learn how to turn your ggplot visualizations into amazing interactive 3D plots you can export or embed in HTML/Rmarkdown. Or even better, you will export as mp4 an animation rotating the figure.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;As a use case, we are going to join the Spanish demographic data and GIS map, and then visualize it&lt;/em&gt;&lt;/p&gt;
 &lt;hr /&gt;
-&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_header.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_header.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;&lt;strong&gt;1. Introduction&lt;/strong&gt;&lt;/h2&gt;
@@ -37,12 +37,12 @@
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;In my view, Tyler Morgan-Wall (package’s author) hit the jackpot with the new addition of two specific functions. These are plot_gg() and render_movie(). The first one converts the ggplot to a 3D figure using one or two lines of code making it deadly-simple. The second one renders an animation in which we can set up several parameters like zoom, fps, angles and inclinations… as user-friendly as possible.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_repo.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_repo.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;div id=&#34;lets-try-these-new-functionalities&#34; class=&#34;section level4&#34;&gt;
 &lt;h4&gt;&lt;strong&gt;Let’s try these new functionalities! &lt;/strong&gt;&lt;/h4&gt;
 &lt;p&gt;The only condition you must have a color or fill &lt;em&gt;aesthetic&lt;/em&gt;, unless you can also play in the same plot wiht size.
-As we discussed in “XXXXXXX” 3D are not the right choice for most of the data visualization cases. Therefore, I tried to bring to this article a non gratuitous example.&lt;/p&gt;
+Many times 3D plots are not the right choice for most of the data visualization cases. Therefore, I tried to bring to this article a non gratuitous example.&lt;/p&gt;
 &lt;p&gt;As a practical challenge, we will visualize in an interactive 3D map the average age in each city of Spain. Cool? First of all we need the population stats. We get it from the INE webpage. Secondly we have to delimiter Spanish cities with they GIS coordinates. Then we are merging these data to create a ggplot chart. Once we have the ggplot object we are going to use the rayshader package to map color aesthetic to the third spatial dimension. To conclude, we are going to render it as rotating 3D video.&lt;/p&gt;
 &lt;p&gt;Let´s do it step by step.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
@@ -59,45 +59,16 @@ As we discussed in “XXXXXXX” 3D are not the right choice for most of the dat
 &lt;p&gt;Aiming to keep focused, we don’t get distracted and we are going to download the 2018 file. However, is worth noting the &lt;a href=&#34;https://github.com/oddworldng/INEbaseR/&#34;&gt;&lt;em&gt;INEbase&lt;/em&gt;&lt;/a&gt; efforts to make easier the INE open data platform.&lt;/p&gt;
 &lt;p&gt;We start loading (or downloading) the packages we are going to use. In other article or tip we will provide a custom function to Load and Download Rpackages in onle line.
 Moreover we define the required functions and download directories.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;if (!require(pxR)) {
-  install.packages(&amp;quot;pxR&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;)
-  require(pxR)
-}
-if (!require(RColorBrewer)) {
-  install.packages(&amp;quot;RColorBrewer&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;)
-  require(RColorBrewer)
-}
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(pxR)
+library(RColorBrewer)
+library(rgeos)
+#install.packages(&amp;quot;rgdal&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;) reinstall cause gpclib dependencie https://stackoverflow.com/questions/30790036/error-istruegpclibpermitstatus-is-not-true
+library(rgdal)
+library(rayshader)
+library(knitr)
+library(magrittr)
+library(tidyverse)
 
-if (!require(rgeos)) {
-  install.packages(&amp;quot;rgeos&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;)
-  require(rgeos)
-  install.packages(&amp;quot;rgdal&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;) # reinstall cause gpclib dependencie https://stackoverflow.com/questions/30790036/error-istruegpclibpermitstatus-is-not-true
-  require(rgdal)
-}
-if (!require(rgdal)) {
-  install.packages(&amp;quot;rgdal&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;)
-  require(rgdal)
-}
-if (!require(knitr)) {
-  install.packages(&amp;quot;knitr&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;)
-  require(knitr)
-}
-if (!require(rayshader)) {
-  install.packages(&amp;quot;rayshader&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;)
-  require(rayshader)
-}
-if (!require(magrittr)) {
-  install.packages(&amp;quot;magrittr&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;)
-  require(magrittr)
-}
-if (!require(tidyverse)) {
-  install.packages(&amp;quot;tidyverse&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;)
-  require(tidyverse)
-}
-if (!require(RColorBrewer)) {
-  install.packages(&amp;quot;RColorBrewer&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;)
-  require(RColorBrewer)
-}
 as.numeric.factor &amp;lt;- function(x) {    # Custom function to convert fctr to num factor value
     return(suppressWarnings(as.numeric(levels(x))[x]))
 }
@@ -107,11 +78,9 @@ if(!dir.exists(&amp;quot;data&amp;quot;)) dir.create(&amp;quot;data&amp;quot;)  
 &lt;p&gt;Downloading INE 2018 file:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;utils::download.file(url = &amp;quot;http://www.ine.es/pcaxisdl/t20/e245/p05/a2018/l0/00000006.px&amp;quot;,
                      destfile = &amp;quot;data/census_2018.px&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;pre&gt;&lt;code&gt;## Warning: `as.tibble()` is deprecated, use `as_tibble()` (but mind the new semantics).
-## This warning is displayed once per session.&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tbl_census_2018 &amp;lt;- read.px(&amp;quot;data/census_2018.px&amp;quot;) %&amp;gt;%              # Load &amp;amp; format
-  as.tibble()&lt;/code&gt;&lt;/pre&gt;
+  as_tibble()&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;We parse the data to obtain a name,pcode,average age dataframe&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tbl_census_2018 %&amp;lt;&amp;gt;% 
   set_names(c(&amp;quot;age&amp;quot;, &amp;quot;city&amp;quot;, &amp;quot;sex&amp;quot;, &amp;quot;population&amp;quot;)) %&amp;gt;%             # Cambiamos los nombre
@@ -150,7 +119,7 @@ kable(                                                             # Just Rmarkd
 &lt;/div&gt;
 &lt;div id=&#34;downloading-gis-data&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;2.2- Downloading GIS data&lt;/h3&gt;
-&lt;p&gt;The second source is the Geo data. We will use cities coordinates and matching it with Spanish register data previously obtained.&lt;/p&gt;
+&lt;p&gt;The second source we are going to use is the Geo data. We will use cities coordinates and matching it with Spanish demographic data previously obtained.&lt;/p&gt;
 &lt;p&gt;Downloading map overlay:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;temp &amp;lt;- tempfile()                              # Create the tempfile
 u=&amp;quot;http://www.arcgis.com/sharing/rest/content/items/8e31c4c1a0b348f79058f212d0d807a1/data&amp;quot;
@@ -218,16 +187,16 @@ plot_cities &amp;lt;- ggplot() +
   scale_fill_gradientn(colours=myPalette(4)) +                 # Choose palette colours.
   labs(fill=&amp;quot;Avg age&amp;quot;)
 plot(plot_cities)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/ggplot-to-3d-in-r-with-rayshader/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;d-rayshader-visualization&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;2.4- 3D Rayshader Visualization!&lt;/h3&gt;
-&lt;p&gt;That was pretty nice. It’s sure that you can reach the general propose to be able to locate inmediately older an younger zones. Although as we discuss in XXX, human eyes aren’t ready to distinguiss almost nothing but big color contrasts. What about complement color with a third dimension through z axis?&lt;/p&gt;
+&lt;p&gt;That was pretty nice. It’s sure that you can reach the general propose to be able to locate inmediately older an younger zones. Although as we will disccuss in a future post, human eyes aren’t ready to distinguiss almost nothing but big color contrasts. What about complement color with a third dimension through z axis?&lt;/p&gt;
 &lt;p&gt;Let’s see how it works&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_gg(plot_cities,multicore=TRUE,width=5,height=3,scale=310)    # Plot_gg de rayshader
 render_snapshot()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;200%&#34; height=&#34;200%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/ggplot-to-3d-in-r-with-rayshader/index_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;200%&#34; height=&#34;200%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;Hmm you told something about render_movie()… What if we anime it?&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
@@ -237,7 +206,7 @@ render_snapshot()&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;In the last plot, it results the correct angle election as a key point. But what if we animate it with a rotating effect?&lt;/p&gt;
 &lt;p&gt;This is what the following function take cares on:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;render_movie(&amp;quot;img/movie_spain.mp4&amp;quot;,frames = 720, fps=30,zoom=0.6,fov = 30)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/movie_spain.gif&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/movie_spain.gif&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>

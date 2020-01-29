@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vizs &amp; Tips | TypeThePipe</title>
-    <link>/vizs-and-tips/</link>
-      <atom:link href="/vizs-and-tips/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/vizs-and-tips/</link>
+      <atom:link href="https://typethepipe.com/vizs-and-tips/index.xml" rel="self" type="application/rss+xml" />
     <description>Vizs &amp; Tips</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 21 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://typethepipe.com/img/icon-192.png</url>
       <title>Vizs &amp; Tips</title>
-      <link>/vizs-and-tips/</link>
+      <link>https://typethepipe.com/vizs-and-tips/</link>
     </image>
     
     <item>
       <title>Tidylog</title>
-      <link>/vizs-and-tips/tidylog/</link>
+      <link>https://typethepipe.com/vizs-and-tips/tidylog/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/tidylog/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/tidylog/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -121,11 +121,11 @@ However things get increasingly obscure when chaining multiple functions or deal
     
     <item>
       <title>Using summarise_at(). Weighted mean Tidyverse approach</title>
-      <link>/vizs-and-tips/summarise_at-weighted-mean-tidyverse/</link>
+      <link>https://typethepipe.com/vizs-and-tips/summarise_at-weighted-mean-tidyverse/</link>
       <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/summarise_at-weighted-mean-tidyverse/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/summarise_at-weighted-mean-tidyverse/</guid>
       <description>
-&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://typethepipe.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
@@ -233,24 +233,24 @@ q2_weighted_mean
     
     <item>
       <title>List all the defined variables in Jupyter Notebooks</title>
-      <link>/vizs-and-tips/magic-whos/</link>
+      <link>https://typethepipe.com/vizs-and-tips/magic-whos/</link>
       <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/magic-whos/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/magic-whos/</guid>
       <description>
 
 
 &lt;p&gt;A recurrent complain about Jupyter Notebooks between beginner users is the lack of information about the self-created environment variables. If you have this question, probably first of all you should be sure about the Jupyter Notebooks main purpose (totally different from IDEs like Spyder or Pycharm).&lt;/p&gt;
 &lt;p&gt;But in case a notebook is all what you need, you have few ways to display this information. The first and easiest one is to use the magic method &lt;strong&gt;%whos&lt;/strong&gt;
-&lt;img src=&#34;/vizs-and-tips/magic-whos/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;https://typethepipe.com/vizs-and-tips/magic-whos/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Two alternative ways are nbextension and Jupyter Lab variable inspector. You can find more information &lt;a href=&#34;https://stackoverflow.com/questions/37718907/variable-explorer-in-jupyter-notebook&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Skills chart using Gplot2 with R</title>
-      <link>/vizs-and-tips/skills-chart/</link>
+      <link>https://typethepipe.com/vizs-and-tips/skills-chart/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/skills-chart/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/skills-chart/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -352,9 +352,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Reordering bars in GGanimate visualization</title>
-      <link>/vizs-and-tips/reorder-bars-gganimate/</link>
+      <link>https://typethepipe.com/vizs-and-tips/reorder-bars-gganimate/</link>
       <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/reorder-bars-gganimate/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/reorder-bars-gganimate/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -450,9 +450,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Shadowing your ggplot lines. Forecasting confidence interval use case.</title>
-      <link>/vizs-and-tips/ggplot_geom_ribbon_shadow/</link>
+      <link>https://typethepipe.com/vizs-and-tips/ggplot_geom_ribbon_shadow/</link>
       <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/ggplot_geom_ribbon_shadow/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/ggplot_geom_ribbon_shadow/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -538,15 +538,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(year, value, &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; group)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_ribbon&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;ymin =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std, &lt;span class=&#34;dt&#34;&gt;ymax =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std, &lt;span class=&#34;dt&#34;&gt;group=&lt;/span&gt;group), &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;steelblue2&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_line&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;color =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;firebrick&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/en/vizs-and-tips/ggplot_geom_ribbon_shadow/index_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/vizs-and-tips/ggplot_geom_ribbon_shadow/index_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Conditional Pipes</title>
-      <link>/vizs-and-tips/conditional-pipes/</link>
+      <link>https://typethepipe.com/vizs-and-tips/conditional-pipes/</link>
       <pubDate>Sat, 02 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/conditional-pipes/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/conditional-pipes/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -620,9 +620,9 @@ This way:&lt;/p&gt;
     
     <item>
       <title>Filtering a data frame by condition on multiple columns</title>
-      <link>/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</link>
+      <link>https://typethepipe.com/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</link>
       <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }

@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Carlos Vecina | TypeThePipe</title>
-    <link>/es/authors/carlos-vecina/</link>
-      <atom:link href="/es/authors/carlos-vecina/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/es/authors/carlos-vecina/</link>
+      <atom:link href="https://typethepipe.com/es/authors/carlos-vecina/index.xml" rel="self" type="application/rss+xml" />
     <description>Carlos Vecina</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://typethepipe.com/img/icon-192.png</url>
       <title>Carlos Vecina</title>
-      <link>/es/authors/carlos-vecina/</link>
+      <link>https://typethepipe.com/es/authors/carlos-vecina/</link>
     </image>
     
   </channel>

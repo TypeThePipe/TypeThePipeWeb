@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Talks | TypeThePipe</title>
-    <link>/tags/talks/</link>
-      <atom:link href="/tags/talks/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/tags/talks/</link>
+      <atom:link href="https://typethepipe.com/tags/talks/index.xml" rel="self" type="application/rss+xml" />
     <description>Talks</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 01 Nov 2018 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://typethepipe.com/img/icon-192.png</url>
       <title>Talks</title>
-      <link>/tags/talks/</link>
+      <link>https://typethepipe.com/tags/talks/</link>
     </image>
     
     <item>
       <title>Talk - Text Mining for CRM excellency.</title>
-      <link>/project/r-hispano-crm-excellency/</link>
+      <link>https://typethepipe.com/project/r-hispano-crm-excellency/</link>
       <pubDate>Thu, 01 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>/project/r-hispano-crm-excellency/</guid>
+      <guid>https://typethepipe.com/project/r-hispano-crm-excellency/</guid>
       <description></description>
     </item>
     
