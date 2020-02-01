@@ -50,6 +50,16 @@
   <url>
     <loc>/categories/ggplot/</loc>
     <lastmod>2020-01-21T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/ggplot/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/ggplot/"
+                />
   </url>
   
   <url>
@@ -120,6 +130,16 @@
   <url>
     <loc>/categories/shiny/</loc>
     <lastmod>2020-01-21T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/shiny/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/shiny/"
+                />
   </url>
   
   <url>
