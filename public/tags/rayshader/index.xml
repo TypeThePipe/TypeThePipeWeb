@@ -115,6 +115,13 @@ kable(                                                             # Just Rmarkd
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;style&gt;
+body {
+text-align: justify}
+p {
+  word-spacing: 3px;
+}
+&lt;/style&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;downloading-gis-data&#34; class=&#34;section level3&#34;&gt;

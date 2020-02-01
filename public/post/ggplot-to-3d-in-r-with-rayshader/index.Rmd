@@ -22,8 +22,6 @@ image:
   focal_point: ''
   preview_only: no
 projects: []
-
-
 ---
 
 
@@ -152,6 +150,15 @@ kable(                                                             # Just Rmarkd
   tbl_census_2018 %>% head(2)
   )
 ```
+
+<style>
+body {
+text-align: justify}
+p {
+  word-spacing: 3px;
+}
+</style>
+
 
 
 <br> 

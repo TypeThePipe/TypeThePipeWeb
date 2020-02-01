@@ -48,7 +48,7 @@
   </url>
   
   <url>
-    <loc>/es/posts/de-ggplot-a-3d-en-r-con-rayshader/</loc>
+    <loc>/es/post/de-ggplot-a-3d-en-r-con-rayshader/</loc>
     <lastmod>2019-09-24T21:56:15+02:00</lastmod>
     <xhtml:link
                 rel="alternate"
@@ -58,7 +58,7 @@
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="/es/posts/de-ggplot-a-3d-en-r-con-rayshader/"
+                href="/es/post/de-ggplot-a-3d-en-r-con-rayshader/"
                 />
   </url>
   
@@ -93,8 +93,18 @@
   </url>
   
   <url>
-    <loc>/es/posts/</loc>
+    <loc>/es/post/</loc>
     <lastmod>2019-09-24T21:56:15+02:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/post/"
+                />
   </url>
   
   <url>
