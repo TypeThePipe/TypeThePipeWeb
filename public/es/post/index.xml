@@ -212,6 +212,13 @@ render_snapshot()&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Esto es de lo que se encarga la siguiente función:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;render_movie(&amp;quot;img/movie_spain.mp4&amp;quot;,frames = 720, fps=30,zoom=0.6,fov = 30)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/movie_spain.gif&#34; /&gt;&lt;/p&gt;
+&lt;style&gt;
+body {
+text-align: justify}
+p {
+  word-spacing: 3px;
+}
+&lt;/style&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>

@@ -151,15 +151,6 @@ kable(                                                             # Just Rmarkd
   )
 ```
 
-<style>
-body {
-text-align: justify}
-p {
-  word-spacing: 3px;
-}
-</style>
-
-
 
 <br> 
 
@@ -296,3 +287,10 @@ render_movie("img/movie_spain.mp4",frames = 720, fps=30,zoom=0.6,fov = 30)
 ![](/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/movie_spain.gif)
 
 
+<style>
+body {
+text-align: justify}
+p {
+  word-spacing: 3px;
+}
+</style>
