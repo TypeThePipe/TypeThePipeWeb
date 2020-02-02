@@ -23,16 +23,16 @@ draft: false
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Imagina que estas analizando datos obtenidos en encuestas. Quizá no hace falta que imagines y es realmente tu caso. Cuando trataas de sacar estadísiticos de la distribución que siguen las respuestas, como la media, seguramente trates de hacerlo de una manera representativa, es decir, ponderando cada respuestas dependiendo del número de individuos pertenecientes a un segmento.
+Imagina que estas analizando datos obtenidos en encuestas. Quizá no hace falta que imagines y es realmente tu caso. Cuando tratamos de sacar estadísiticos de la distribución que siguen las respuestas, como la media, solemos hacerlo de una manera representativa, es decir, ponderando las respuestas dependiendo del número de individuos pertenecientes a un segmento.
 
 Es cierto que en R se encuentra la función *weigthed.mean()* y puede ser util en determinados casos. Pero, ¿y qué pasa si aun no tienes calculados los pesos y almacenados como vector o columna? Incluso más importante, ¿qué pasa si quieres utilizar otra función de agregación que no sea la media?
 
-Aquí ofrecemos nuestra versión donde conseguimos obtener os pesos y agregar(de manera flexible, media u otra función) de manera ponderada:
+Aquí ofrecemos nuestra versión donde conseguimos obtener tanto los pesos como la agregación(de manera flexible, media u otra función) de manera ponderada:
 
 ```{r, warning=FALSE, message=FALSE}
 library(tidyverse)
 
-survey_data <- tribble(
+survey_data <- tribble(                           # Creamos el dataset
   ~id, ~region1, ~region2, ~gender, ~q1, ~q2,
   1,"sp","mad","m", 2,5,
   2,"it", "bol", "m", 5, 10,
@@ -42,23 +42,24 @@ survey_data <- tribble(
 ```
 
 ```{r, warning=FALSE, eval=FALSE}
-  survey_data %>% 
-  group_by(region1, region2, gender) %>% 
-  mutate(weight = 1/n()) %>% 
-  ungroup() %>% 
-  summarise_at(vars(contains("q")),
-               funs(weighted_mean = sum(. * weight)/sum(weight)))
+survey_data %>%                           
+  group_by(region1, region2, gender) %>%          # Elegimos nuestros segmentos
+  mutate(weight = 1/n()) %>%                      # Calculamos los pesos
+  ungroup() %>%                                   # Una vez calculados desagrupamos
+  summarise_at(vars(contains("q")),               # Son preguntas columnas que empiezan por q
+               funs(weighted_mean =               # Elegimos como funcion de agregación la media
+                      sum(. * weight)/sum(weight)))  
 ```
 
 ```{r, warning=FALSE, echo=FALSE, message=FALSE}
 library(knitr)
 library(kableExtra)
-  survey_data %>% 
+survey_data %>% 
   group_by(region1, region2, gender) %>% 
   mutate(weight = 1/n()) %>% 
   ungroup() %>% 
   summarise_at(vars(contains("q")),  funs(weighted_mean = sum(. * weight)/sum(weight))) %>% 
-    kable() %>% 
+  kable() %>% 
   kable_styling(bootstrap_options = "striped", full_width = F)
 ```
 

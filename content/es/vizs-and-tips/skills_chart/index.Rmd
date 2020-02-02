@@ -23,15 +23,19 @@ draft: false
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Puedes ver el código en el siguiente *chunk*:
+A la hora de presentar tus habilidades ya sea en una página web o en tu CV, una buena idea sueles ser sintetizarlas mediante una gráfica. Muchas plantillas de CVs incluyen una gráfica por defecto.
+
+En este post queremos dar un *template* el cual poder personalizar con vuestras habilidades y evolucionar incorporando mejoras estéticas. ¡Estaremos encantados de ver tu versión!
+
+Os dejamos el código comentado en el siguiente *chunk*:
 
 ```{r, warning=FALSE, message=FALSE}
 library(ggplot2)
-# library(plotly)
+# library(plotly)                      Es simple transformarlo a plotly
 library(tibble)
 library(dplyr)
 
-skills <- tribble(
+skills <- tribble(                    # Creamos el dataset con las habilidades
     ~ Skill, ~ Hours, ~ Class,
     "AWS", 500, "BigData",
     "Python", 8000, "Language",
@@ -52,14 +56,19 @@ skills <- tribble(
 
 
 ```{r, skills-plot, warning=FALSE, eval=FALSE}
-# plotly(
-ggplot(data=skills,aes(x=reorder(Skill,-desc(Hours)), y= Hours, fill=Class, label=paste0(Hours," h"))) + 
-    geom_bar(stat = "identity", colour="black") +
-    coord_flip() +
-    labs(x=" ", y="Hours", fill=" ")  +
-    theme_minimal() +
-    scale_fill_brewer(palette = "YlOrBr",direction = -1) +
-    geom_label(show_guide  = F, aes(y=400))                  # Use show_guide despite the warning
+# plotly(                              
+ggplot(data=skills,
+       aes(x=reorder(Skill,-desc(Hours)),           # Ordenamos las habilidades según las horas dedicadas
+           y= Hours,                                
+           fill=Class,                              # Coloreamos según ek tipo de habilidad
+           label=paste0(Hours," h"))) +             # Añadimos un label con las horas
+    geom_bar(stat = "identity", colour="black") +   # Stat identity para que pueda tener eje Y
+    coord_flip() +                                  # Hacemos las barras horizontales
+    labs(x=" ", y="Hours", fill=" ")  +             # Definimos el nombre de los ejes
+    theme_minimal() +                               # Theme sin background
+    scale_fill_brewer(palette = "YlOrBr",           # Paleta deseado
+                      direction = -1) +
+    geom_label(show_guide  = F, aes(y=400))         # Usar show_guide a pesar del warning
 
 ```
 
