@@ -155,6 +155,16 @@
   <url>
     <loc>/categories/tips/</loc>
     <lastmod>2020-01-21T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/tips/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/tips/"
+                />
   </url>
   
   <url>
@@ -175,6 +185,16 @@
   <url>
     <loc>/vizs-and-tips/</loc>
     <lastmod>2020-01-21T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/"
+                />
   </url>
   
   <url>
@@ -185,16 +205,46 @@
   <url>
     <loc>/vizs-and-tips/magic-whos/</loc>
     <lastmod>2020-01-14T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/magic-whos/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/magic-whos/"
+                />
   </url>
   
   <url>
     <loc>/categories/magic/</loc>
     <lastmod>2020-01-14T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/magic/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/magic/"
+                />
   </url>
   
   <url>
     <loc>/categories/python/</loc>
     <lastmod>2020-01-14T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/python/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/python/"
+                />
   </url>
   
   <url>
@@ -215,11 +265,31 @@
   <url>
     <loc>/vizs-and-tips/reorder-bars-gganimate/</loc>
     <lastmod>2019-12-17T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/reordenar-grafico-barras-gganimate/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/reorder-bars-gganimate/"
+                />
   </url>
   
   <url>
-    <loc>/vizs-and-tips/ggplot_geom_ribbon_shadow/</loc>
+    <loc>/vizs-and-tips/ggplot-geom_ribbon-shadow/</loc>
     <lastmod>2019-11-18T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/ggplot_geom_ribbon_shadow/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/ggplot-geom_ribbon-shadow/"
+                />
   </url>
   
   <url>

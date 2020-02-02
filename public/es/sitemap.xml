@@ -143,6 +143,111 @@
   </url>
   
   <url>
+    <loc>/es/vizs-and-tips/magic-whos/</loc>
+    <lastmod>2020-01-14T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/magic-whos/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/magic-whos/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/categories/magic/</loc>
+    <lastmod>2020-01-14T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/magic/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/magic/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/categories/python/</loc>
+    <lastmod>2020-01-14T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/python/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/python/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/categories/tips/</loc>
+    <lastmod>2020-01-14T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/tips/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/tips/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/vizs-and-tips/</loc>
+    <lastmod>2020-01-14T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/vizs-and-tips/reordenar-grafico-barras-gganimate/</loc>
+    <lastmod>2019-12-17T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/reorder-bars-gganimate/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/reordenar-grafico-barras-gganimate/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</loc>
+    <lastmod>2019-11-18T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/ggplot-geom_ribbon-shadow/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/ggplot_geom_ribbon_shadow/"
+                />
+  </url>
+  
+  <url>
     <loc>/es/post/de-ggplot-a-3d-en-r-con-rayshader/</loc>
     <lastmod>2019-09-24T21:56:15+02:00</lastmod>
     <xhtml:link

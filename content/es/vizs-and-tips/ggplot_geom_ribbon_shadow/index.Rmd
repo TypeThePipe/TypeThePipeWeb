@@ -1,0 +1,55 @@
+---
+title: Muestra los intervalos de confianza de tus predicciones mediante geom_ribbon() con Ggplot
+author: Carlos Vecina Tebar
+date: "2019-11-18"
+slug: ggplot_geom_ribbon_shadow
+translationKey: "ggplot-geom_ribbon-shadow"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- R
+- Tips
+- Ggplot
+tags: []
+subtitle: ''
+summary: "¡Plotea tus intervalos de confianza de manera muy facil!"
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, eval=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+huron <- data.frame(year = 1875:1972, 
+                    value = LakeHuron,
+                    std = runif(length(LakeHuron),0,1))
+
+huron %>% 
+  ggplot(aes(year, value)) + 
+  geom_ribbon(aes(ymin = value - std, ymax = value + std), fill = "steelblue2") + 
+  geom_line(color = "firebrick", size = 1)
+
+```
+
+Para un grafico con varias lineas, debemos incorporar el *aesthetic* de *group* de la siguiente manera:
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+huron <- data.frame(year = rep(1875:1972,2), 
+                    group = c(rep("a",98),rep("b",98)),
+                    value = c(LakeHuron, LakeHuron + 5),
+                    std = runif(length(LakeHuron)*2,0,1))
+
+huron %>% 
+  ggplot(aes(year, value, fill = group)) + 
+  geom_ribbon(aes(ymin = value - std, ymax = value + std, group=group), fill = "steelblue2") + 
+  geom_line(color = "firebrick", size = 1)
+
+```
+
+

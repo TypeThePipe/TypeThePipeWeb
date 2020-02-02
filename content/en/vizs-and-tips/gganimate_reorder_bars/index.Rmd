@@ -3,6 +3,7 @@ title: Reordering bars in GGanimate visualization
 author: Carlos Vecina Tebar
 date: "2019-12-17"
 slug: reorder-bars-gganimate
+translationKey: "reorder-bars-gganimate"
 output:
   blogdown::html_page:
     highlight: tango

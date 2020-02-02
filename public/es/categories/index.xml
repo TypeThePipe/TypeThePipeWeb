@@ -44,5 +44,29 @@
       <description></description>
     </item>
     
+    <item>
+      <title>Magic</title>
+      <link>/es/categories/magic/</link>
+      <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/es/categories/magic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>/es/categories/python/</link>
+      <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/es/categories/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tips</title>
+      <link>/es/categories/tips/</link>
+      <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/es/categories/tips/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>

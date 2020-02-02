@@ -346,9 +346,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Shadowing your ggplot lines. Forecasting confidence interval use case.</title>
-      <link>/vizs-and-tips/ggplot_geom_ribbon_shadow/</link>
+      <link>/vizs-and-tips/ggplot-geom_ribbon-shadow/</link>
       <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/ggplot_geom_ribbon_shadow/</guid>
+      <guid>/vizs-and-tips/ggplot-geom_ribbon-shadow/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
