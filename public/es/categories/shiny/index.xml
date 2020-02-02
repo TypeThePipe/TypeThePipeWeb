@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Shiny | TypeThePipe</title>
-    <link>/es/categories/shiny/</link>
-      <atom:link href="/es/categories/shiny/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/es/categories/shiny/</link>
+      <atom:link href="https://typethepipe.com/es/categories/shiny/index.xml" rel="self" type="application/rss+xml" />
     <description>Shiny</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Tue, 21 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://typethepipe.com/img/icon-192.png</url>
       <title>Shiny</title>
-      <link>/es/categories/shiny/</link>
+      <link>https://typethepipe.com/es/categories/shiny/</link>
     </image>
     
     <item>
       <title>Visualizador de algoritmos en R! (I) Desarrollando el mapa dinámico</title>
-      <link>/es/post/visualizador-algoritmos-busqueda-caminos/</link>
+      <link>https://typethepipe.com/es/post/visualizador-algoritmos-busqueda-caminos/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/es/post/visualizador-algoritmos-busqueda-caminos/</guid>
+      <guid>https://typethepipe.com/es/post/visualizador-algoritmos-busqueda-caminos/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }

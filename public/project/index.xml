@@ -2,37 +2,37 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Projects | TypeThePipe</title>
-    <link>/project/</link>
-      <atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/project/</link>
+      <atom:link href="https://typethepipe.com/project/index.xml" rel="self" type="application/rss+xml" />
     <description>Projects</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 27 Apr 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://typethepipe.com/img/icon-192.png</url>
       <title>Projects</title>
-      <link>/project/</link>
+      <link>https://typethepipe.com/project/</link>
     </image>
     
     <item>
       <title>Real State Modeling Datathon 2019</title>
-      <link>/project/real-state-datathon/</link>
+      <link>https://typethepipe.com/project/real-state-datathon/</link>
       <pubDate>Sat, 27 Apr 2019 00:00:00 +0000</pubDate>
-      <guid>/project/real-state-datathon/</guid>
+      <guid>https://typethepipe.com/project/real-state-datathon/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Talk - Text Mining for CRM excellency.</title>
-      <link>/project/r-hispano-crm-excellency/</link>
+      <link>https://typethepipe.com/project/r-hispano-crm-excellency/</link>
       <pubDate>Thu, 01 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>/project/r-hispano-crm-excellency/</guid>
+      <guid>https://typethepipe.com/project/r-hispano-crm-excellency/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Bike accidents dashboard.</title>
-      <link>/project/spotbike-shiny/</link>
+      <link>https://typethepipe.com/project/spotbike-shiny/</link>
       <pubDate>Mon, 01 Oct 2018 00:00:00 +0000</pubDate>
-      <guid>/project/spotbike-shiny/</guid>
+      <guid>https://typethepipe.com/project/spotbike-shiny/</guid>
       <description>&lt;p&gt;Explore the most conflictive streets for bikers.&lt;/p&gt;
 &lt;p&gt;Link: &lt;a href=&#34;http://carlosvecina.es/spotbike&#34;&gt;http://carlosvecina.es/spotbike&lt;/a&gt;&lt;/p&gt;
 </description>
@@ -40,9 +40,9 @@
     
     <item>
       <title>Cryptocurrencies exploratory dashboard.</title>
-      <link>/project/cryptocurrency-shiny/</link>
+      <link>https://typethepipe.com/project/cryptocurrency-shiny/</link>
       <pubDate>Mon, 01 Oct 2018 00:00:00 +0000</pubDate>
-      <guid>/project/cryptocurrency-shiny/</guid>
+      <guid>https://typethepipe.com/project/cryptocurrency-shiny/</guid>
       <description>&lt;p&gt;Shiny Dashboard to explore the criptocurrency market, past prices, SMAs&amp;hellip;&lt;/p&gt;
 &lt;p&gt;Link: &lt;a href=&#34;http://carlosvecina.es/crypto-invest&#34;&gt;http://carlosvecina.es/crypto-invest&lt;/a&gt;&lt;/p&gt;
 </description>

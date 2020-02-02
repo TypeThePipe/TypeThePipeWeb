@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dashboards | TypeThePipe</title>
-    <link>/tags/dashboards/</link>
-      <atom:link href="/tags/dashboards/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/tags/dashboards/</link>
+      <atom:link href="https://typethepipe.com/tags/dashboards/index.xml" rel="self" type="application/rss+xml" />
     <description>Dashboards</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 01 Oct 2018 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://typethepipe.com/img/icon-192.png</url>
       <title>Dashboards</title>
-      <link>/tags/dashboards/</link>
+      <link>https://typethepipe.com/tags/dashboards/</link>
     </image>
     
     <item>
       <title>Bike accidents dashboard.</title>
-      <link>/project/spotbike-shiny/</link>
+      <link>https://typethepipe.com/project/spotbike-shiny/</link>
       <pubDate>Mon, 01 Oct 2018 00:00:00 +0000</pubDate>
-      <guid>/project/spotbike-shiny/</guid>
+      <guid>https://typethepipe.com/project/spotbike-shiny/</guid>
       <description>&lt;p&gt;Explore the most conflictive streets for bikers.&lt;/p&gt;
 &lt;p&gt;Link: &lt;a href=&#34;http://carlosvecina.es/spotbike&#34;&gt;http://carlosvecina.es/spotbike&lt;/a&gt;&lt;/p&gt;
 </description>
@@ -24,9 +24,9 @@
     
     <item>
       <title>Cryptocurrencies exploratory dashboard.</title>
-      <link>/project/cryptocurrency-shiny/</link>
+      <link>https://typethepipe.com/project/cryptocurrency-shiny/</link>
       <pubDate>Mon, 01 Oct 2018 00:00:00 +0000</pubDate>
-      <guid>/project/cryptocurrency-shiny/</guid>
+      <guid>https://typethepipe.com/project/cryptocurrency-shiny/</guid>
       <description>&lt;p&gt;Shiny Dashboard to explore the criptocurrency market, past prices, SMAs&amp;hellip;&lt;/p&gt;
 &lt;p&gt;Link: &lt;a href=&#34;http://carlosvecina.es/crypto-invest&#34;&gt;http://carlosvecina.es/crypto-invest&lt;/a&gt;&lt;/p&gt;
 </description>

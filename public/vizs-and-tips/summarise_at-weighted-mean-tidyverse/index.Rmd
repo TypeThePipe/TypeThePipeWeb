@@ -3,6 +3,7 @@ title: Using summarise_at(). Weighted mean Tidyverse approach
 author: Carlos Vecina Tebar
 date: "2020-01-16"
 slug: summarise_at-weighted-mean-tidyverse
+translationKey: "summarise_at-weighted-mean-tidyverse"
 output:
   blogdown::html_page:
     highlight: tango
