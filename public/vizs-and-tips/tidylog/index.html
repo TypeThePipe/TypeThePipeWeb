@@ -581,28 +581,32 @@ However things get increasingly obscure when chaining multiple functions or deal
 <p><strong>We all love piping</strong> operations. I often ‘play’ to perform the whole transformation <a href="../Conditional-pipes">without leaving the pipeflow</a>. But the counterpart is missing the intermediate states: you can make some big mistakes and be unaware of them until it’s too late and maybe you have to undone some work or rethink your analysis.</p>
 <p>In this context, some additional info is always welcome. I think this feature is specially convenient for beginners, but not only! I have myself wasted several hours debugging long pipelines and trying to understand where the problems came from.</p>
 <p>Let’s see a tiny bit of its behaviour with a simple example:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="st">  </span><span class="kw">select</span>(year<span class="op">:</span>day, hour, origin, dest, tailnum, carrier) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">if_else</span>(<span class="kw">nchar</span>(month) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">paste0</span>(<span class="st">&quot;0&quot;</span>,month), <span class="kw">as.character</span>(month)),</a>
-<a class="sourceLine" id="cb1-4" title="4">         <span class="dt">day =</span> <span class="kw">if_else</span>(<span class="kw">nchar</span>(day) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">paste0</span>(<span class="st">&quot;0&quot;</span>,day), <span class="kw">as.character</span>(day))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="st">  </span><span class="kw">unite</span>(<span class="st">&quot;date&quot;</span>, year<span class="op">:</span>day, <span class="dt">sep =</span> <span class="st">&quot;/&quot;</span>, <span class="dt">remove =</span> T) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> <span class="kw">ymd</span>(date)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="st">  </span><span class="kw">filter</span>(hour <span class="op">&gt;=</span><span class="st"> </span><span class="dv">8</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="st">  </span><span class="kw">anti_join</span>(planes, <span class="dt">by =</span> <span class="st">&quot;tailnum&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-9" title="9"><span class="st">  </span><span class="kw">count</span>(tailnum, <span class="dt">sort =</span> <span class="ot">TRUE</span>) </a>
-<a class="sourceLine" id="cb1-10" title="10"></a>
-<a class="sourceLine" id="cb1-11" title="11"><span class="co"># select: dropped 11 variables (dep_time, sched_dep_time, dep_delay, arr_time, sched_arr_time, …)</span></a>
-<a class="sourceLine" id="cb1-12" title="12"><span class="co"># mutate: converted &#39;month&#39; from integer to character (0 new NA)</span></a>
-<a class="sourceLine" id="cb1-13" title="13"><span class="co">#         converted &#39;day&#39; from integer to character (0 new NA)</span></a>
-<a class="sourceLine" id="cb1-14" title="14"><span class="co"># mutate: converted &#39;date&#39; from character to double (0 new NA)</span></a>
-<a class="sourceLine" id="cb1-15" title="15"><span class="co"># filter: removed 50,726 rows (15%), 286,050 rows remaining</span></a>
-<a class="sourceLine" id="cb1-16" title="16"><span class="co"># anti_join: added no columns</span></a>
-<a class="sourceLine" id="cb1-17" title="17"><span class="co">#            &gt; rows only in x    45,008</span></a>
-<a class="sourceLine" id="cb1-18" title="18"><span class="co">#            &gt; rows only in y  (     39)</span></a>
-<a class="sourceLine" id="cb1-19" title="19"><span class="co">#            &gt; matched rows    (241,042)</span></a>
-<a class="sourceLine" id="cb1-20" title="20"><span class="co">#            &gt;                 =========</span></a>
-<a class="sourceLine" id="cb1-21" title="21"><span class="co">#            &gt; rows total        45,008</span></a>
-<a class="sourceLine" id="cb1-22" title="22"><span class="co"># count: now 716 rows and 2 columns, ungrouped</span></a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(nycflights13)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">library</span>(tidylog)</a>
+<a class="sourceLine" id="cb1-4" title="4"></a>
+<a class="sourceLine" id="cb1-5" title="5">flights <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="st">  </span><span class="kw">select</span>(year<span class="op">:</span>day, hour, origin, dest, tailnum, carrier) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">month =</span> <span class="kw">if_else</span>(<span class="kw">nchar</span>(month) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">paste0</span>(<span class="st">&quot;0&quot;</span>,month), <span class="kw">as.character</span>(month)),</a>
+<a class="sourceLine" id="cb1-8" title="8">         <span class="dt">day =</span> <span class="kw">if_else</span>(<span class="kw">nchar</span>(day) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">paste0</span>(<span class="st">&quot;0&quot;</span>,day), <span class="kw">as.character</span>(day))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-9" title="9"><span class="st">  </span><span class="kw">unite</span>(<span class="st">&quot;date&quot;</span>, year<span class="op">:</span>day, <span class="dt">sep =</span> <span class="st">&quot;/&quot;</span>, <span class="dt">remove =</span> T) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-10" title="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">date =</span> lubridate<span class="op">::</span><span class="kw">ymd</span>(date)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="st">  </span><span class="kw">filter</span>(hour <span class="op">&gt;=</span><span class="st"> </span><span class="dv">8</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="st">  </span><span class="kw">anti_join</span>(planes, <span class="dt">by =</span> <span class="st">&quot;tailnum&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="st">  </span><span class="kw">count</span>(tailnum, <span class="dt">sort =</span> <span class="ot">TRUE</span>) </a>
+<a class="sourceLine" id="cb1-14" title="14"></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="co"># select: dropped 11 variables (dep_time, sched_dep_time, dep_delay, arr_time, sched_arr_time, …)</span></a>
+<a class="sourceLine" id="cb1-16" title="16"><span class="co"># mutate: converted &#39;month&#39; from integer to character (0 new NA)</span></a>
+<a class="sourceLine" id="cb1-17" title="17"><span class="co">#         converted &#39;day&#39; from integer to character (0 new NA)</span></a>
+<a class="sourceLine" id="cb1-18" title="18"><span class="co"># mutate: converted &#39;date&#39; from character to double (0 new NA)</span></a>
+<a class="sourceLine" id="cb1-19" title="19"><span class="co"># filter: removed 50,726 rows (15%), 286,050 rows remaining</span></a>
+<a class="sourceLine" id="cb1-20" title="20"><span class="co"># anti_join: added no columns</span></a>
+<a class="sourceLine" id="cb1-21" title="21"><span class="co">#            &gt; rows only in x    45,008</span></a>
+<a class="sourceLine" id="cb1-22" title="22"><span class="co">#            &gt; rows only in y  (     39)</span></a>
+<a class="sourceLine" id="cb1-23" title="23"><span class="co">#            &gt; matched rows    (241,042)</span></a>
+<a class="sourceLine" id="cb1-24" title="24"><span class="co">#            &gt;                 =========</span></a>
+<a class="sourceLine" id="cb1-25" title="25"><span class="co">#            &gt; rows total        45,008</span></a>
+<a class="sourceLine" id="cb1-26" title="26"><span class="co"># count: now 716 rows and 2 columns, ungrouped</span></a></code></pre></div>
 <p>Pretty neat! It is specially useful with joins, as it provides plenty of details and they can be a source of duplicated or missing rows.</p>
 <p>I decided to write this little post now to celebrate that <strong>tidylog v1.0.0</strong> has recently been released! Check the <a href="https://github.com/elbersb/tidylog">official repo</a> out to see more examples or show some love to <a href="https://twitter.com/elbersb">@elbersb</a> on Twitter!</p>
 <p>All in all, I think this package was a missing piece in the Tidyverse ecosystem: It is incredibly useful, whereas making advantage of it is as simple as writing <code>library(tidylog)</code>. Integrating this package into our daily R work is a <em>no-brainer</em>!</p>

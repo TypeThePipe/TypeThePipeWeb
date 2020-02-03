@@ -29,20 +29,18 @@ In this context, some additional info is always welcome. I think this feature is
 
 Let's see a tiny bit of its behaviour with a simple example:
   
-```{r, warning=FALSE, message=FALSE, echo=FALSE}
-library(tidyverse)
-# library(tidylog)
-library(nycflights13)
-library(lubridate)
-```
   
 ```{r, eval=FALSE}
+library(nycflights13)
+library(tidyverse)
+library(tidylog)
+
 flights %>% 
   select(year:day, hour, origin, dest, tailnum, carrier) %>% 
   mutate(month = if_else(nchar(month) == 1, paste0("0",month), as.character(month)),
          day = if_else(nchar(day) == 1, paste0("0",day), as.character(day))) %>% 
   unite("date", year:day, sep = "/", remove = T) %>% 
-  mutate(date = ymd(date)) %>% 
+  mutate(date = lubridate::ymd(date)) %>% 
   filter(hour >= 8) %>% 
   anti_join(planes, by = "tailnum") %>% 
   count(tailnum, sort = TRUE) 
