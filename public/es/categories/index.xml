@@ -2,93 +2,93 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories | TypeThePipe</title>
-    <link>https://typethepipe.com/es/categories/</link>
-      <atom:link href="https://typethepipe.com/es/categories/index.xml" rel="self" type="application/rss+xml" />
+    <link>/es/categories/</link>
+      <atom:link href="/es/categories/index.xml" rel="self" type="application/rss+xml" />
     <description>Categories</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Tue, 21 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://typethepipe.com/img/icon-192.png</url>
+      <url>/img/icon-192.png</url>
       <title>Categories</title>
-      <link>https://typethepipe.com/es/categories/</link>
+      <link>/es/categories/</link>
     </image>
     
     <item>
       <title>Ggplot</title>
-      <link>https://typethepipe.com/es/categories/ggplot/</link>
+      <link>/es/categories/ggplot/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/categories/ggplot/</guid>
+      <guid>/es/categories/ggplot/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Post</title>
-      <link>https://typethepipe.com/es/categories/post/</link>
+      <link>/es/categories/post/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/categories/post/</guid>
+      <guid>/es/categories/post/</guid>
       <description></description>
     </item>
     
     <item>
       <title>R</title>
-      <link>https://typethepipe.com/es/categories/r/</link>
+      <link>/es/categories/r/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/categories/r/</guid>
+      <guid>/es/categories/r/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Shiny</title>
-      <link>https://typethepipe.com/es/categories/shiny/</link>
+      <link>/es/categories/shiny/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/categories/shiny/</guid>
+      <guid>/es/categories/shiny/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tidyverse</title>
-      <link>https://typethepipe.com/es/categories/tidyverse/</link>
+      <link>/es/categories/tidyverse/</link>
       <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/categories/tidyverse/</guid>
+      <guid>/es/categories/tidyverse/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Tips</title>
-      <link>https://typethepipe.com/es/categories/tips/</link>
+      <link>/es/categories/tips/</link>
       <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/categories/tips/</guid>
+      <guid>/es/categories/tips/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Magic</title>
-      <link>https://typethepipe.com/es/categories/magic/</link>
+      <link>/es/categories/magic/</link>
       <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/categories/magic/</guid>
+      <guid>/es/categories/magic/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Python</title>
-      <link>https://typethepipe.com/es/categories/python/</link>
+      <link>/es/categories/python/</link>
       <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/categories/python/</guid>
+      <guid>/es/categories/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Ggplot2</title>
-      <link>https://typethepipe.com/es/categories/ggplot2/</link>
+      <link>/es/categories/ggplot2/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/categories/ggplot2/</guid>
+      <guid>/es/categories/ggplot2/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Vizs</title>
-      <link>https://typethepipe.com/es/categories/vizs/</link>
+      <link>/es/categories/vizs/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/categories/vizs/</guid>
+      <guid>/es/categories/vizs/</guid>
       <description></description>
     </item>
     

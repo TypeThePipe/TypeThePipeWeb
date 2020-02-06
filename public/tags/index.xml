@@ -2,77 +2,53 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags | TypeThePipe</title>
-    <link>https://typethepipe.com/tags/</link>
-      <atom:link href="https://typethepipe.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <link>/tags/</link>
+      <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 27 Jul 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://typethepipe.com/img/icon-192.png</url>
+      <url>/img/icon-192.png</url>
       <title>Tags</title>
-      <link>https://typethepipe.com/tags/</link>
+      <link>/tags/</link>
     </image>
     
     <item>
       <title>ggplot</title>
-      <link>https://typethepipe.com/tags/ggplot/</link>
+      <link>/tags/ggplot/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/tags/ggplot/</guid>
+      <guid>/tags/ggplot/</guid>
       <description></description>
     </item>
     
     <item>
       <title>rayshader</title>
-      <link>https://typethepipe.com/tags/rayshader/</link>
+      <link>/tags/rayshader/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/tags/rayshader/</guid>
+      <guid>/tags/rayshader/</guid>
       <description></description>
     </item>
     
     <item>
       <title>visualization</title>
-      <link>https://typethepipe.com/tags/visualization/</link>
+      <link>/tags/visualization/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/tags/visualization/</guid>
+      <guid>/tags/visualization/</guid>
       <description></description>
     </item>
     
     <item>
       <title>viz</title>
-      <link>https://typethepipe.com/tags/viz/</link>
+      <link>/tags/viz/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/tags/viz/</guid>
+      <guid>/tags/viz/</guid>
       <description></description>
     </item>
     
     <item>
       <title>vizR</title>
-      <link>https://typethepipe.com/tags/vizr/</link>
+      <link>/tags/vizr/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/tags/vizr/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Competitions</title>
-      <link>https://typethepipe.com/tags/competitions/</link>
-      <pubDate>Sat, 27 Apr 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/tags/competitions/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Talks</title>
-      <link>https://typethepipe.com/tags/talks/</link>
-      <pubDate>Thu, 01 Nov 2018 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/tags/talks/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Dashboards</title>
-      <link>https://typethepipe.com/tags/dashboards/</link>
-      <pubDate>Mon, 01 Oct 2018 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/tags/dashboards/</guid>
+      <guid>/tags/vizr/</guid>
       <description></description>
     </item>
     
