@@ -44,11 +44,13 @@ DefaultContentLanguage = "en"
 
 
 [params]
+    custom_css = ["css/custom.css"]
   [params.navigation]
     help = "Help"
 hasCJKLanguage = false  # Set `true` for Chinese/Japanese/Korean languages.
 DefaultContentLanguageInSubdir = true
 removePathAccents = true  # Workaround for https://github.com/gohugoio/hugo/issues/5687
+css_style =  ["css/custom.css"]
 
 paginate = 10  # Number of items per page in paginated lists.
 enableEmoji = true

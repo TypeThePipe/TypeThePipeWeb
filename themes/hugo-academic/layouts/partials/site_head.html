@@ -33,6 +33,9 @@
   {{ else }}
     {{ $desc = $superuser_role }}
   {{ end }}
+  {{ range .Site.Params.custom_css }}
+    <link rel="stylesheet" href="{{ $.Site.BaseURL }}{{ . }}">
+{{ end }}
   <meta name="description" content="{{ $desc }}">
 
   {{ range .Translations }}

@@ -48,7 +48,7 @@ description = "Data Science, ML & AI blog. Workflows, vizs and tips."
 
 # Display a logo in navigation bar rather than title (optional).
 #   To enable, place an image in `static/img/` and reference its filename below. To disable, set the value to "".
-logo = ""
+logo = "c.jpg"
 
 ############################
 ## Site Features
@@ -165,7 +165,7 @@ sharing = true
 #   E.g. To load `/assets/js/custom.js`, set `plugins_js = ["custom"]`.
 plugins_css = []
 plugins_js  = []
-
+custom_css = ["css/custom.css"]
 # Configuration of publication pages.
 [publications]
   # Date format (refer to https://sourcethemes.com/academic/docs/customization/#date-format )
@@ -221,6 +221,7 @@ plugins_js  = []
     api_key = ""
     index_name = ""
     show_logo = false
+
 
 ############################
 ## Maps
