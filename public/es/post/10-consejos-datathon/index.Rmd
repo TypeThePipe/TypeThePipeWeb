@@ -1,17 +1,15 @@
 ---
-title: "10 consejos a la hora de participar en un Datahon"
+title: "10 consejos para triunfar en tu próximo Datathon"
 author: Carlos Vecina Tebar
-date: "2020-01-21"
+date: "2020-02-17"
 slug: "10-consejos-datathon"
 translationKey: "10-advices-datathon"
 output:
   blogdown::html_page:
     highlight: tango
 categories:
-- R
 - Post
-- Shiny
-- Ggplot
+- Datathon
 tags: []
 subtitle: ""
 summary:  "¿Quieres conseguir tus objetivos?"
@@ -28,22 +26,30 @@ knitr::opts_chunk$set(echo = TRUE)
 
 En este post os traemos 10 consejos sobre los puntos clave para conseguir grandes resultados en un Datathon o competición de datos. 
 
-#1. Establece tu objetivo y revisa los recursos(habilidades, tiempo, acceso a máquinas...) con los que cuentas.
+<br>
+
+**1. Establece tu objetivo y revisa los recursos(habilidades, tiempo, acceso a máquinas...) con los que cuentas.**
 
 Comenzamos por un punto esencial. Dependiendo de tu perfil y de la competición, deberás plantearte a priori qué pretendes conseguir participando en el reto. Puede ser aprender y mejorar en un determinado campo o tecnología, conseguir el premio, quedar entre los 3 primeros para incluirlo en tu CV o simplemente por diversión. Cualquiera que sea está bien. 
 
 Lo que recomendamos es evaluarlo de manera sincera, ya que será bastante el tiempo invertido y tener tu objetivo presente te ayudará en los momentos de menor motivación.
 
-#2. Elección del tema/industria/CdUso.
+<br>
 
-Ligado con esta última idea, dado que vamos a dedicar esfuerzos en este proyecto, ¿cómo no elegir un tema, campo o caso de uso que nos motive? Afortunadamente, desde muchas organizaciones y plataformas se están lanzando diferentes e interesantes competiciones. Kaggle es uno de lso máximos exponentes de estas plataformas, pero desde M4 competiton(series financieras) PSG(eventos deportivos) XXXXX
 
-#3. Construye bien tu equipo. Usa herramientas para compartir codigo/archivos.
+**2. Elección del tema/industria/CdUso.**
+
+Ligado con esta última idea, dado que vamos a dedicar esfuerzos en este proyecto, ¿cómo no elegir un tema, campo o caso de uso que nos motive? Afortunadamente, desde muchas organizaciones y plataformas se están lanzando diferentes e interesantes competiciones. Kaggle es uno de lso máximos exponentes de estas plataformas, pero también existen otra, de las que hablamos [aquí](../../vizs-and-tips/plataformas-donde-participar-competiciones-de-datos).
+
+<br>
+
+**3. Construye bien tu equipo. Usa herramientas para compartir codigo/archivos.**
 
 Dependiendo de los dos puntos anteriores, especialmente del primero, dependiendo de tu objetivo deberás elegir a tu equipo de manera consecuente. Elegir a un compañero o amigo con el que te lleves bien y os motiveis mutuamente si tu objetivo es aprender sobre un tema o tecnología nueva. Elige a alguien que comparta tus intereses en el caso que desees dedicarle tiempo a profundizar un un tema, tecnología o algoritmo muy concreto. Si el proyecto lo requiere, y pretendes optar al premio o a posiciones altas, te recomendamos elegir un compañero que te complemente. En el caso de que no se requiera multidisciplinariedad, opta por aquellos que tenga un nivel similar al tuyo.  Si es posible, ligeramente superior.
 
+<br>
 
-#4. Investigación profunda sobre el caso en concreto.
+**4. Investigación profunda sobre el caso en concreto.**
 
 Una vez formado el equipo, os recomendamos comenzar a investigar el negocio o el contexto en la que se enmarca vuestro proyecto. Esto permitirá plantear mejor el trabajo, extraer un valor muy superior a los datos y os evitará iteraciones en el proceso diseñar-implementar-evaluar al partir de premisas más claras, dejando al lado una mala interpretación de conceptos básicos, lo cual puede ser letal.
 
@@ -51,7 +57,9 @@ Un ejemplo. Si la competición trata sobre predecir el número de visitas o el n
 
 Sin esta serie de conocimientos sería dificil *craftear* los datos para conseguir un buen *performance* de los modelos, pero más importate, cualquier resultado que obtengas será malinterpretado. Por lo tanto, todo este *background* no es imprescindible para llegar a algún resultado, pero sí lo será para llegar a resultados potentes y realizar una participación de la que acabeis orgullosos.
 
-#5. Análisis exploratorio de los datos. Recuerda que (usualmente) no son los únicos que puedes usar. 
+<br>
+
+**5. Análisis exploratorio de los datos. Recuerda que (usualmente) no son los únicos que puedes usar.**
 
 Como todo proyecto de datos, consta de una serie de etapas iterativas. Después de investigar sobre el contexto, echarás un primer vistazo a los datos. Si surgen dudas, de nuevo habrá que investigar sobre ellas. 
 
@@ -63,7 +71,9 @@ Por último, recordar que normalmente no hay problema con utilizar datos complem
 
 Datos demográficos que ayuden a poner en contexto las variables geográficas como código postal o provincia, aportar explicabilidad a *spikes* o eventos pasados... son sólo algunos de los ejemplos de datos que se pueden incorporar al dataset original del reto, obviamente teniendo en cuenta cuales de estos datos vamos a tener y cuales no a la hora de predecir.
 
-#6. Establecer la estructura del código.
+<br>
+
+**6. Establecer la estructura del código.**
 
 A continuación os mostramos la estructura que suelen tener nuestros proyectos. Llevamos a cabo una validación cruzada manual con el objetivo de ganar flexibilidad a la hora de usar modelos de diferente naturaleza y poder compararlos y combinarlos. Cierto es que soluciones paquetizadas como scikit-learn o H2O pueden hacer este trabajo en el caso de que el tiempo disponible y características de la competición indiquen su uso.
 
@@ -79,21 +89,26 @@ Predicción OOSample
 Evaluación
 Predicción del conjunto de test a enviar.
 
-#7. Lanzar los primeros modelos. 
+<br>
 
+
+**7. Lanzar los primeros modelos.**
 
 En primer lugar centrate en la familia de algoritmos que a priori mejor se adapten a tus datos, al objetivo a predecir, incluso a la métrica de error por la que se te va a medir. Es importante sacar los primeros resultados, a ser posible dentro de una estructura similar a la propuesta anteriormente. Las primeras métricas de error te ayudaran en muchos aspectos. Por un lado te pueden dar pistas de que *bugs* en el código(metricas de error irrealistas). También te servirá de base la cual ir mejorando, y como estamos seguros de que lo harás, esto será ademañs un *boost* de ánimo.
 
 Como principales familias XXXXXX
 
-Evaluacion
-#8. Validación cruzada, OOS y backtesting.
+<br>
+
+**8. Validación cruzada, OOS y backtesting.**
 
 Especial mención a las métricas de error. Una de las características a la que de manera personal más importancia le damos, se tratata de conocer los intervalos de error de nuestros modelos antes de enviarlos. Conocer las precisión de nuestro modelo bajo diferentes escenarios, partes del dataset e incluso datos sintéticos nos hace sentir un especial orgullo. Quizá sea simplemente un objetivo que nos marcamos(tal y como comentamos en el punto 1), pero el hecho de tener la certeza de cuando bajaos la métrica de error no se debe a algo espúreo, o lo peor de todo a un *bug*, nos permite desarrollar con tranquilidad. Además en el caso de existir un ranking público, controlar tu métrica de evaluación te permite saber con mayor certeza en que percentil te encuentras.
 
 Estas competiciones suelen ir ligadas a una métrica de error por la cual se evalua a cada participante. Será fundamental introducirla en nuestra evaluación de modelos, pero no debe de ser la única. Tanto a la hora de fijar una función objetivo como a la hora de evaluar los modelos, debemos tener en cuenta métricas de error complementarias que nos ayuden a interpretar el desempeño de los modelos. Tener en cuenta el error mediano o el MAPE, cuando la métrica con la que nos evaluarán será el error medio, nos puede ayudar a detectar elegir entre modelos que difieren en sólo un x% en esta métrica pero no en otras, en un determinado conjunto de datos. 
 
-#9. Interpretación y evaluación de resultados desde el punto de vista práctico y/o negocio.
+<br>
+
+**9. Interpretación y evaluación de resultados desde el punto de vista práctico y/o negocio.**
 
 En el caso de que se trate de un Datathon organizado por alguna empresa de tu zona, seguramente los mejores proyectos serán llamados a un evento final de presentación de los trabajos. En otros, te pedirán una memoria presentando los resultados. En el caso de Kaggle, no suelen hacerlo.
 
@@ -101,8 +116,9 @@ Por lo tanto, si la competición a la que te presentas requiere de este tipo de 
 
 En la última competición a la que asistimos donde se nos pedía esta presentación final a los tres mejores proyectos, e incluso aunque no se hubiese pedido, optamos por adentrarnos en el modelado de las imagenes mediante *transfer learning*, cosa que no se nos pedía. Una vez que modelamos la información estructurada y llevamos a cabo ciertas iteraciones sobre estos datos, pensamos que sería más enriquecedor tanto para nosotros como para las personas que proponían el concurso, la investigación sobre la extracción de información de las imagenes (información que en el caso de uso que nos ocupaba, a priori, debería tener un impacto claro sobre la variable a predecir).
 
+<br>
 
-#10. (Personal) Escribir una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.
+**10. (Personal) Escribir una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.**
 
 Una vez finalizado el proyecto, un práctica que nos ha enriquecido y ha supuesto un antes y un después ha sido escribir algún tipo de memoria o documento, reflexionando sobre la reciente participación. Analizando los puntos fuertes, lo que debimos mejorar, tanto a nivel técnico como a nivel de equipo y por qué no a nivel emocional y de actutid. A ser posible nada más entregar y antes de saber el resultado. Sería genial si al tiempo de conocer el mismo se añadiera algún punto o reflexión más.
 

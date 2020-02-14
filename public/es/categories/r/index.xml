@@ -2,87 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R | TypeThePipe</title>
-    <link>/es/categories/r/</link>
-      <atom:link href="/es/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/es/categories/r/</link>
+      <atom:link href="https://typethepipe.com/es/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Tue, 21 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://typethepipe.com/img/icon-192.png</url>
       <title>R</title>
-      <link>/es/categories/r/</link>
+      <link>https://typethepipe.com/es/categories/r/</link>
     </image>
     
     <item>
-      <title>10 consejos a la hora de participar en un Datahon</title>
-      <link>/es/post/10-consejos-datathon/</link>
-      <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/es/post/10-consejos-datathon/</guid>
-      <description>
-
-
-&lt;p&gt;En este post os traemos 10 consejos sobre los puntos clave para conseguir grandes resultados en un Datathon o competición de datos.&lt;/p&gt;
-&lt;p&gt;#1. Establece tu objetivo y revisa los recursos(habilidades, tiempo, acceso a máquinas…) con los que cuentas.&lt;/p&gt;
-&lt;p&gt;Comenzamos por un punto esencial. Dependiendo de tu perfil y de la competición, deberás plantearte a priori qué pretendes conseguir participando en el reto. Puede ser aprender y mejorar en un determinado campo o tecnología, conseguir el premio, quedar entre los 3 primeros para incluirlo en tu CV o simplemente por diversión. Cualquiera que sea está bien.&lt;/p&gt;
-&lt;p&gt;Lo que recomendamos es evaluarlo de manera sincera, ya que será bastante el tiempo invertido y tener tu objetivo presente te ayudará en los momentos de menor motivación.&lt;/p&gt;
-&lt;p&gt;#2. Elección del tema/industria/CdUso.&lt;/p&gt;
-&lt;p&gt;Ligado con esta última idea, dado que vamos a dedicar esfuerzos en este proyecto, ¿cómo no elegir un tema, campo o caso de uso que nos motive? Afortunadamente, desde muchas organizaciones y plataformas se están lanzando diferentes e interesantes competiciones. Kaggle es uno de lso máximos exponentes de estas plataformas, pero desde M4 competiton(series financieras) PSG(eventos deportivos) XXXXX&lt;/p&gt;
-&lt;p&gt;#3. Construye bien tu equipo. Usa herramientas para compartir codigo/archivos.&lt;/p&gt;
-&lt;p&gt;Dependiendo de los dos puntos anteriores, especialmente del primero, dependiendo de tu objetivo deberás elegir a tu equipo de manera consecuente. Elegir a un compañero o amigo con el que te lleves bien y os motiveis mutuamente si tu objetivo es aprender sobre un tema o tecnología nueva. Elige a alguien que comparta tus intereses en el caso que desees dedicarle tiempo a profundizar un un tema, tecnología o algoritmo muy concreto. Si el proyecto lo requiere, y pretendes optar al premio o a posiciones altas, te recomendamos elegir un compañero que te complemente. En el caso de que no se requiera multidisciplinariedad, opta por aquellos que tenga un nivel similar al tuyo. Si es posible, ligeramente superior.&lt;/p&gt;
-&lt;p&gt;#4. Investigación profunda sobre el caso en concreto.&lt;/p&gt;
-&lt;p&gt;Una vez formado el equipo, os recomendamos comenzar a investigar el negocio o el contexto en la que se enmarca vuestro proyecto. Esto permitirá plantear mejor el trabajo, extraer un valor muy superior a los datos y os evitará iteraciones en el proceso diseñar-implementar-evaluar al partir de premisas más claras, dejando al lado una mala interpretación de conceptos básicos, lo cual puede ser letal.&lt;/p&gt;
-&lt;p&gt;Un ejemplo. Si la competición trata sobre predecir el número de visitas o el número de contrataciones de determinados productos en un comercio online, debemos controlar el comportamiento de los datos que recoge Google Analytics. Conocer el significado de tasa de rebote, las mecánicas desde que un usuario se conecta y se le asigna una cookie hasta que convierte, diferentes casuísticas de registros nulos, bots, que la &lt;em&gt;source&lt;/em&gt;(para conocer la fuente de donde viene el visitante) en caso de dudas se asigna como &lt;em&gt;direct&lt;/em&gt;…&lt;/p&gt;
-&lt;p&gt;Sin esta serie de conocimientos sería dificil &lt;em&gt;craftear&lt;/em&gt; los datos para conseguir un buen &lt;em&gt;performance&lt;/em&gt; de los modelos, pero más importate, cualquier resultado que obtengas será malinterpretado. Por lo tanto, todo este &lt;em&gt;background&lt;/em&gt; no es imprescindible para llegar a algún resultado, pero sí lo será para llegar a resultados potentes y realizar una participación de la que acabeis orgullosos.&lt;/p&gt;
-&lt;p&gt;#5. Análisis exploratorio de los datos. Recuerda que (usualmente) no son los únicos que puedes usar.&lt;/p&gt;
-&lt;p&gt;Como todo proyecto de datos, consta de una serie de etapas iterativas. Después de investigar sobre el contexto, echarás un primer vistazo a los datos. Si surgen dudas, de nuevo habrá que investigar sobre ellas.&lt;/p&gt;
-&lt;p&gt;Al margen de este recordatorio, la fase exploratoria se centra en conocer cada una de las variables. Como consejo personal, entre otras cosas, nosotros comenzamos midiendo el porcentaje de NAs y la varianza de las variables. Aquellas que tengan un elevado porcentaje de NAs o una varianza muy pequeña, o bien las apartamos (podría replantearse su entrada en siguientes iteraciones) o bien las &lt;em&gt;encodeamos&lt;/em&gt; de manera dicotómica Si_NA/No_NA o Mayoritaria/No_mayoritaria. Para otro tipo de encodings ver XXXXXX&lt;/p&gt;
-&lt;p&gt;Este paso varía bastante dependiendo del número de variables que contenga tu dataset. En &lt;em&gt;datasets&lt;/em&gt; grandes de 75, 100 o más variables, resultará más complicado hacerse una idea general de las características de cada una de ellas. Esto puede resultar ciertamente abrumador, sin embargo, tras una buen estudio, eleccion y transformación, puede ser que acabes dando las gracias de no tener sólo 5 o 6 variables(caso en el que se suele llegar a un &lt;em&gt;plateau&lt;/em&gt; de desempeño de los modelos más rápido y mayor homogeneidad en los resultados expuestos por los equipos).&lt;/p&gt;
-&lt;p&gt;Por último, recordar que normalmente no hay problema con utilizar datos complementarios a los propios de la competición. En algunos casos como Kaggle, lo que se establece es la obligación de comentar y hacer público el uso de estos datos durante la competición.&lt;/p&gt;
-&lt;p&gt;Datos demográficos que ayuden a poner en contexto las variables geográficas como código postal o provincia, aportar explicabilidad a &lt;em&gt;spikes&lt;/em&gt; o eventos pasados… son sólo algunos de los ejemplos de datos que se pueden incorporar al dataset original del reto, obviamente teniendo en cuenta cuales de estos datos vamos a tener y cuales no a la hora de predecir.&lt;/p&gt;
-&lt;p&gt;#6. Establecer la estructura del código.&lt;/p&gt;
-&lt;p&gt;A continuación os mostramos la estructura que suelen tener nuestros proyectos. Llevamos a cabo una validación cruzada manual con el objetivo de ganar flexibilidad a la hora de usar modelos de diferente naturaleza y poder compararlos y combinarlos. Cierto es que soluciones paquetizadas como scikit-learn o H2O pueden hacer este trabajo en el caso de que el tiempo disponible y características de la competición indiquen su uso.&lt;/p&gt;
-&lt;p&gt;Carga de entorno (paquetes y funciones)
-Diferentes craft de variables
-Seperación en dataset y datasetOOSample
-Separar el dataset en &lt;em&gt;folds&lt;/em&gt;
-Por cada fold:
-Entrenar con el resto
-Predecir en el fold
-Evaluación
-Predicción OOSample
-Evaluación
-Predicción del conjunto de test a enviar.&lt;/p&gt;
-&lt;p&gt;#7. Lanzar los primeros modelos.&lt;/p&gt;
-&lt;p&gt;En primer lugar centrate en la familia de algoritmos que a priori mejor se adapten a tus datos, al objetivo a predecir, incluso a la métrica de error por la que se te va a medir. Es importante sacar los primeros resultados, a ser posible dentro de una estructura similar a la propuesta anteriormente. Las primeras métricas de error te ayudaran en muchos aspectos. Por un lado te pueden dar pistas de que &lt;em&gt;bugs&lt;/em&gt; en el código(metricas de error irrealistas). También te servirá de base la cual ir mejorando, y como estamos seguros de que lo harás, esto será ademañs un &lt;em&gt;boost&lt;/em&gt; de ánimo.&lt;/p&gt;
-&lt;p&gt;Como principales familias XXXXXX&lt;/p&gt;
-&lt;p&gt;Evaluacion
-#8. Validación cruzada, OOS y backtesting.&lt;/p&gt;
-&lt;p&gt;Especial mención a las métricas de error. Una de las características a la que de manera personal más importancia le damos, se tratata de conocer los intervalos de error de nuestros modelos antes de enviarlos. Conocer las precisión de nuestro modelo bajo diferentes escenarios, partes del dataset e incluso datos sintéticos nos hace sentir un especial orgullo. Quizá sea simplemente un objetivo que nos marcamos(tal y como comentamos en el punto 1), pero el hecho de tener la certeza de cuando bajaos la métrica de error no se debe a algo espúreo, o lo peor de todo a un &lt;em&gt;bug&lt;/em&gt;, nos permite desarrollar con tranquilidad. Además en el caso de existir un ranking público, controlar tu métrica de evaluación te permite saber con mayor certeza en que percentil te encuentras.&lt;/p&gt;
-&lt;p&gt;Estas competiciones suelen ir ligadas a una métrica de error por la cual se evalua a cada participante. Será fundamental introducirla en nuestra evaluación de modelos, pero no debe de ser la única. Tanto a la hora de fijar una función objetivo como a la hora de evaluar los modelos, debemos tener en cuenta métricas de error complementarias que nos ayuden a interpretar el desempeño de los modelos. Tener en cuenta el error mediano o el MAPE, cuando la métrica con la que nos evaluarán será el error medio, nos puede ayudar a detectar elegir entre modelos que difieren en sólo un x% en esta métrica pero no en otras, en un determinado conjunto de datos.&lt;/p&gt;
-&lt;p&gt;#9. Interpretación y evaluación de resultados desde el punto de vista práctico y/o negocio.&lt;/p&gt;
-&lt;p&gt;En el caso de que se trate de un Datathon organizado por alguna empresa de tu zona, seguramente los mejores proyectos serán llamados a un evento final de presentación de los trabajos. En otros, te pedirán una memoria presentando los resultados. En el caso de Kaggle, no suelen hacerlo.&lt;/p&gt;
-&lt;p&gt;Por lo tanto, si la competición a la que te presentas requiere de este tipo de resultado, será importante tenerlo presente no sólo al final, sino durante todo el proceso. Una vez que hemos re-optimizado los hiperparámetros con lo última librería bayesiana, que hemos &lt;em&gt;stackeado&lt;/em&gt; nuestros mejores modelos, quizá sea hora de trabajar en la interpretabilidad de los resultados, incorporación de nuevos datos, en definitiva, conclusiones que sean valiosas a la hora de poner en marcha el modelo y que no quede en una simple matriz de pesos.&lt;/p&gt;
-&lt;p&gt;En la última competición a la que asistimos donde se nos pedía esta presentación final a los tres mejores proyectos, e incluso aunque no se hubiese pedido, optamos por adentrarnos en el modelado de las imagenes mediante &lt;em&gt;transfer learning&lt;/em&gt;, cosa que no se nos pedía. Una vez que modelamos la información estructurada y llevamos a cabo ciertas iteraciones sobre estos datos, pensamos que sería más enriquecedor tanto para nosotros como para las personas que proponían el concurso, la investigación sobre la extracción de información de las imagenes (información que en el caso de uso que nos ocupaba, a priori, debería tener un impacto claro sobre la variable a predecir).&lt;/p&gt;
-&lt;p&gt;#10. (Personal) Escribir una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.&lt;/p&gt;
-&lt;p&gt;Una vez finalizado el proyecto, un práctica que nos ha enriquecido y ha supuesto un antes y un después ha sido escribir algún tipo de memoria o documento, reflexionando sobre la reciente participación. Analizando los puntos fuertes, lo que debimos mejorar, tanto a nivel técnico como a nivel de equipo y por qué no a nivel emocional y de actutid. A ser posible nada más entregar y antes de saber el resultado. Sería genial si al tiempo de conocer el mismo se añadiera algún punto o reflexión más.&lt;/p&gt;
-&lt;p&gt;Todas estas anotaciones nos ayudan cada vez que nos enfrentamos a un proyecto a encararlo más preparados y no depender del ‘instinto’ ni de lo que la memoria selectiva nos quiera recordar en momentos puntuales.&lt;/p&gt;
-&lt;p&gt;Una mala predisposición personal, una mala elección de equipo, no estudiar suficientemente y con cariño los valores extremos, no preparar la presentación con tiempo, correr los modelos 30 minutos antes de que acabe el plazo de entrega… son situaciones que nos han pasado a muchos y no ocurre absolutamente nada por reflexionar sore ellas y dejarlo por escrito. Lo fundamental es, dentro de lo posible, ¡que no se repitan en la próxima competición! :)&lt;/p&gt;
-&lt;style&gt;
-body {
-text-align: justify}
-p {
-  word-spacing: 3px;
-}
-&lt;/style&gt;
-&lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
-&lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&#34;mojo/signup-forms/Loader&#34;], function(L) { L.start({&#34;baseUrl&#34;:&#34;mc.us4.list-manage.com&#34;,&#34;uuid&#34;:&#34;91551f7ed29389a0de4f47665&#34;,&#34;lid&#34;:&#34;d95c503a48&#34;,&#34;uniqueMethods&#34;:true}) })&lt;/script&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Visualizador de algoritmos en R! (I) Desarrollando el mapa dinámico</title>
-      <link>/es/post/visualizador-algoritmos-busqueda-caminos/</link>
+      <link>https://typethepipe.com/es/post/visualizador-algoritmos-busqueda-caminos/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/es/post/visualizador-algoritmos-busqueda-caminos/</guid>
+      <guid>https://typethepipe.com/es/post/visualizador-algoritmos-busqueda-caminos/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -369,11 +303,11 @@ p {
     
     <item>
       <title>Dominando la función summarise_at(). Media ponderada con R en el ecosistema Tidyverse.</title>
-      <link>/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse/</link>
+      <link>https://typethepipe.com/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse/</link>
       <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse/</guid>
+      <guid>https://typethepipe.com/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse/</guid>
       <description>
-&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://typethepipe.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
@@ -484,9 +418,9 @@ q2_weighted_mean
     
     <item>
       <title>Muestra tus habilidades o *skills mediante un gráfico en R y su paquete Ggplot</title>
-      <link>/es/vizs-and-tips/skills-chart-curriculum/</link>
+      <link>https://typethepipe.com/es/vizs-and-tips/skills-chart-curriculum/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/skills-chart-curriculum/</guid>
+      <guid>https://typethepipe.com/es/vizs-and-tips/skills-chart-curriculum/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -595,9 +529,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Reordenando gráficos de barras en GGanimate</title>
-      <link>/es/vizs-and-tips/reordenar-grafico-barras-gganimate/</link>
+      <link>https://typethepipe.com/es/vizs-and-tips/reordenar-grafico-barras-gganimate/</link>
       <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/reordenar-grafico-barras-gganimate/</guid>
+      <guid>https://typethepipe.com/es/vizs-and-tips/reordenar-grafico-barras-gganimate/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -710,9 +644,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Muestra los intervalos de confianza de tus predicciones mediante geom_ribbon() con Ggplot</title>
-      <link>/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</link>
+      <link>https://typethepipe.com/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</link>
       <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</guid>
+      <guid>https://typethepipe.com/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -807,15 +741,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-13&#34; title=&#34;13&#34;&gt;                  &lt;span class=&#34;dt&#34;&gt;ymax =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std,&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-14&#34; title=&#34;14&#34;&gt;                  &lt;span class=&#34;dt&#34;&gt;group=&lt;/span&gt;group),&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-15&#34; title=&#34;15&#34;&gt;              &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;steelblue2&amp;quot;&lt;/span&gt;) &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/es/vizs-and-tips/ggplot_geom_ribbon_shadow/index_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/es/vizs-and-tips/ggplot_geom_ribbon_shadow/index_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Convierte tu GGplot en una animación 3D con R y Rayshader</title>
-      <link>/es/post/de-ggplot-a-3d-en-r-con-rayshader/</link>
+      <link>https://typethepipe.com/es/post/de-ggplot-a-3d-en-r-con-rayshader/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>/es/post/de-ggplot-a-3d-en-r-con-rayshader/</guid>
+      <guid>https://typethepipe.com/es/post/de-ggplot-a-3d-en-r-con-rayshader/</guid>
       <description>
 
 
@@ -824,7 +758,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;em&gt;Podrás embebernos en HTML/Rmarkdown, o incluso mejor, podras exportarlo como mp4 en una animacion rotatoria para sacarle todo el jugo a tus datos!&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Como caso de uso, vamos a visualizar la edad media de los municipios españoles cruzando datos del padrón con los datos GIS, para posteriormente visualizarlos en 3 dimensiones.&lt;/em&gt;&lt;/p&gt;
 &lt;hr /&gt;
-&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_header.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_header.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;div id=&#34;introducción&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;&lt;strong&gt;1. Introducción&lt;/strong&gt;&lt;/h2&gt;
@@ -837,7 +771,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;Bajo mi punto de vista, Tyler Morgan-Wall (el autor del paquete) dio con la tecla cuando incorporó al paquete dos nuevas funciones, plot_gg() y render_movie(). La primera de ellas nos permite convertir con 2 líneas de código nuestra visualización en ggplot a una figura 3D de una manera realmente facil y eficiente. La segunda de ellas renderiza esta figura y la anima, poniendo al alcance del usuario diversos parámetros para controlar el zoom, los fps, ángulo, inclinación…&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_repo.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_repo.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;div id=&#34;las-nuevas-funcionalidades-y-planteamiento-del-experimento&#34; class=&#34;section level4&#34;&gt;
 &lt;h4&gt;&lt;strong&gt;Las nuevas funcionalidades y planteamiento del experimento&lt;/strong&gt;&lt;/h4&gt;
@@ -991,7 +925,7 @@ plot_cities &amp;lt;- ggplot() +
   scale_fill_gradientn(colours=myPalette(4)) +                 # Choose palette colours.
   labs(fill=&amp;quot;Avg age&amp;quot;)
 plot(plot_cities)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/es/post/de-ggplot-a-3d-en-r-con-rayshader/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/es/post/de-ggplot-a-3d-en-r-con-rayshader/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;visualización-en-3d-con-rayshader&#34; class=&#34;section level3&#34;&gt;
@@ -1000,7 +934,7 @@ plot(plot_cities)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Veamos como hacerlo y que tal queda&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_gg(plot_cities,multicore=TRUE,width=5,height=3,scale=310)    # Plot_gg de rayshader
 render_snapshot()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/es/post/de-ggplot-a-3d-en-r-con-rayshader/index_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;200%&#34; height=&#34;200%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/es/post/de-ggplot-a-3d-en-r-con-rayshader/index_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;200%&#34; height=&#34;200%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;Hmm dijiste algo sobre render_movie()… Qué tal si lo animamos?&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
@@ -1010,7 +944,7 @@ render_snapshot()&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;En el gráfico anterior, la variable edad media queda bastante más entendible por el ojo humano en la dimensión añadida. Aquí la elección del ángulo e inclinación correctos es un punto esencial. Pero, ¿y mejoramos la interpretabilidad rotando el gráfico?&lt;/p&gt;
 &lt;p&gt;Esto es de lo que se encarga la siguiente función:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;render_movie(&amp;quot;img/movie_spain.mp4&amp;quot;,frames = 720, fps=30,zoom=0.6,fov = 30)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/movie_spain.gif&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/movie_spain.gif&#34; /&gt;&lt;/p&gt;
 &lt;style&gt;
 body {
 text-align: justify}

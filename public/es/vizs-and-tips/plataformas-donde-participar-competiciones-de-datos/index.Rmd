@@ -1,0 +1,37 @@
+---
+title: "Plataformas donde puedes participar en competiciones de datos"
+author: Carlos Vecina Tebar
+date: "2019-10-7"
+slug: plataformas-donde-participar-competiciones-de-datos
+translationKey: ""
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- Tips
+- Datathon
+tags: []
+subtitle: 'No todo es Kaggle'
+summary: "No todo es Kaggle"
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+Kaggle - https://www.kaggle.com
+
+Agorize - https://www.agorize.com/en/challenges
+
+analyticsvidhya - https://datahack.analyticsvidhya.com/contest/all
+
+hackerearth - https://www.hackerearth.com/challenges/competitive/
+
+A nivel nacional y local están comenzando a organizarse todo tipos de eventos relativos al #opendata. Te invitamos a que investigues sobre ellos y te animes a colaborar en mejorar tu entorno a través de la explotación de los datos.
+
+Por ejemplo, en España a fecha de este artículo, los más importantes son:
+CajaMar - https://www.cajamardatalab.com/
+
+Gobierno - https://datos.gob.es/es/event-tags/concurso
+
+Junta Castilla y Leon - https://datosabiertos.jcyl.es/web/es/datos-abiertos-castilla-leon.html
+
