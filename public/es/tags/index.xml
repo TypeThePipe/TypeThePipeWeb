@@ -2,53 +2,53 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags | TypeThePipe</title>
-    <link>https://typethepipe.com/es/tags/</link>
-      <atom:link href="https://typethepipe.com/es/tags/index.xml" rel="self" type="application/rss+xml" />
+    <link>/es/tags/</link>
+      <atom:link href="/es/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Sat, 27 Jul 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://typethepipe.com/img/icon-192.png</url>
+      <url>/img/icon-192.png</url>
       <title>Tags</title>
-      <link>https://typethepipe.com/es/tags/</link>
+      <link>/es/tags/</link>
     </image>
     
     <item>
       <title>ggplot</title>
-      <link>https://typethepipe.com/es/tags/ggplot/</link>
+      <link>/es/tags/ggplot/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/tags/ggplot/</guid>
+      <guid>/es/tags/ggplot/</guid>
       <description></description>
     </item>
     
     <item>
       <title>rayshader</title>
-      <link>https://typethepipe.com/es/tags/rayshader/</link>
+      <link>/es/tags/rayshader/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/tags/rayshader/</guid>
+      <guid>/es/tags/rayshader/</guid>
       <description></description>
     </item>
     
     <item>
       <title>visualization</title>
-      <link>https://typethepipe.com/es/tags/visualization/</link>
+      <link>/es/tags/visualization/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/tags/visualization/</guid>
+      <guid>/es/tags/visualization/</guid>
       <description></description>
     </item>
     
     <item>
       <title>viz</title>
-      <link>https://typethepipe.com/es/tags/viz/</link>
+      <link>/es/tags/viz/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/tags/viz/</guid>
+      <guid>/es/tags/viz/</guid>
       <description></description>
     </item>
     
     <item>
       <title>vizR</title>
-      <link>https://typethepipe.com/es/tags/vizr/</link>
+      <link>/es/tags/vizr/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/tags/vizr/</guid>
+      <guid>/es/tags/vizr/</guid>
       <description></description>
     </item>
     

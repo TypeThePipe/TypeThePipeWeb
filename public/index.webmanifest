@@ -2,8 +2,8 @@
   "name": "TypeThePipe",
   "short_name": "TypeThePipe",
   "lang": "en-us",
-  "theme_color": "#2c52bc",
-  "background_color": "#2c52bc",
+  "theme_color": "#0294A5",
+  "background_color": "#0294A5",
   "icons": [{
     "src": "img/icon-192.png",
     "sizes": "192x192",
