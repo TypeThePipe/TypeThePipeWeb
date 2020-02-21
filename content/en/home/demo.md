@@ -33,11 +33,11 @@ subtitle = ""
   image_darken = 0  # Darken the image? Range 0-1 where 0 is transparent and 1 is opaque.
 
   # Text color (true=light or false=dark).
-  text_color_light = true
-
+  text_color_light = false
+	
 [design.spacing]
   # Customize the section spacing. Order is top, right, bottom, left.
-  padding = ["80px", "0", "20px", "0"]
+  padding = ["35px", "0", "20px", "0"]
 
 [advanced]
  # Custom CSS. 
@@ -46,4 +46,5 @@ subtitle = ""
  # CSS class.
  css_class = ""
 +++
+<h1><font size="8rem"><center><b>Data Science Posts, Vizs & Tips</b></center></font></h1>
 
