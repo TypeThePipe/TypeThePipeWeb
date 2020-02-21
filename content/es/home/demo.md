@@ -37,7 +37,7 @@ subtitle = ""
 	
 [design.spacing]
   # Customize the section spacing. Order is top, right, bottom, left.
-  padding = ["50px", "0", "20px", "0"]
+  padding = ["10px", "0", "60px", "0"]
 
 [advanced]
  # Custom CSS. 
@@ -46,5 +46,5 @@ subtitle = ""
  # CSS class.
  css_class = ""
 +++
-<h1><font size="8rem"><center><b>Data Science Posts, Vizs & Tips</b></center></font></h1>
+<h1><font size="7rem"><center><b>Data Science Posts, Vizs & Tips</b></center></font></h1>
 
