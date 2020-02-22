@@ -41,15 +41,17 @@ subtitle = ""
 
 [advanced]
  # Custom CSS. 
- css_style = ""
+ css_style = "css/csshake.css"
  
- # CSS class.
- css_class = ""
+ # CSS class. <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+
+ css_class = "css/csshake.css"
 +++
 
 
 <!-- Begin Mailchimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="http://csshake.surge.sh/csshake.min.css">
 <style type="text/css">
 	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
 	 #mc_embed_signup .button {
@@ -71,7 +73,7 @@ subtitle = ""
 	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email de contacto" required>
     <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
     <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
-    <div class="clear"><input type="submit" value="¡Mantedme informado!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    <div class="clear"><div class="shake-chunk shake-constant shake-constant--hover"><input type="submit" value="¡Mantedme informado!" name="subscribe" id="mc-embedded-subscribe" class="button"></div></div>
     </div>
 </form>
 </div>
