@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Authors | TypeThePipe</title>
-    <link>/es/authors/</link>
-      <atom:link href="/es/authors/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/es/authors/</link>
+      <atom:link href="https://typethepipe.com/es/authors/index.xml" rel="self" type="application/rss+xml" />
     <description>Authors</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Mon, 17 Feb 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Tue, 21 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://typethepipe.com/img/icon-192.png</url>
       <title>Authors</title>
-      <link>/es/authors/</link>
+      <link>https://typethepipe.com/es/authors/</link>
     </image>
     
     <item>
       <title>Carlos Vecina</title>
-      <link>/es/authors/carlos-vecina/</link>
-      <pubDate>Mon, 17 Feb 2020 00:00:00 +0000</pubDate>
-      <guid>/es/authors/carlos-vecina/</guid>
+      <link>https://typethepipe.com/es/authors/carlos-vecina/</link>
+      <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://typethepipe.com/es/authors/carlos-vecina/</guid>
       <description>&lt;p&gt;Carlos Vecina es un científico de datos con experienca en la aplicación del Machine Learning y de la Inteligencia Artificial con el objetivo de aportar gran valor a negocio en áreas como el CRM, el Marketing y en la compra-venta dentro del mercado eléctrico.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Pablo Canovas</title>
-      <link>/es/authors/pablo-canovas/</link>
+      <link>https://typethepipe.com/es/authors/pablo-canovas/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>/es/authors/pablo-canovas/</guid>
+      <guid>https://typethepipe.com/es/authors/pablo-canovas/</guid>
       <description>&lt;p&gt;Pablo Cánovas es un científico de datos con experiencia desarrollando y productivizando modelos de Machine Learning aplicados al mercado energético europeo.&lt;/p&gt;
 </description>
     </item>

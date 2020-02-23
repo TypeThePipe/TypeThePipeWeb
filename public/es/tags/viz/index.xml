@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>viz | TypeThePipe</title>
-    <link>/es/tags/viz/</link>
-      <atom:link href="/es/tags/viz/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/es/tags/viz/</link>
+      <atom:link href="https://typethepipe.com/es/tags/viz/index.xml" rel="self" type="application/rss+xml" />
     <description>viz</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Sat, 27 Jul 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://typethepipe.com/img/icon-192.png</url>
       <title>viz</title>
-      <link>/es/tags/viz/</link>
+      <link>https://typethepipe.com/es/tags/viz/</link>
     </image>
     
     <item>
       <title>Convierte tu GGplot en una animación 3D con R y Rayshader</title>
-      <link>/es/post/de-ggplot-a-3d-en-r-con-rayshader/</link>
+      <link>https://typethepipe.com/es/post/de-ggplot-a-3d-en-r-con-rayshader/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>/es/post/de-ggplot-a-3d-en-r-con-rayshader/</guid>
+      <guid>https://typethepipe.com/es/post/de-ggplot-a-3d-en-r-con-rayshader/</guid>
       <description>
 
 
@@ -25,7 +25,7 @@
 &lt;em&gt;Podrás embebernos en HTML/Rmarkdown, o incluso mejor, podras exportarlo como mp4 en una animacion rotatoria para sacarle todo el jugo a tus datos!&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Como caso de uso, vamos a visualizar la edad media de los municipios españoles cruzando datos del padrón con los datos GIS, para posteriormente visualizarlos en 3 dimensiones.&lt;/em&gt;&lt;/p&gt;
 &lt;hr /&gt;
-&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_header.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_header.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;div id=&#34;introduccion&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;&lt;strong&gt;1. Introducción&lt;/strong&gt;&lt;/h2&gt;
@@ -38,7 +38,7 @@
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;Bajo mi punto de vista, Tyler Morgan-Wall (el autor del paquete) dio con la tecla cuando incorporó al paquete dos nuevas funciones, plot_gg() y render_movie(). La primera de ellas nos permite convertir con 2 líneas de código nuestra visualización en ggplot a una figura 3D de una manera realmente facil y eficiente. La segunda de ellas renderiza esta figura y la anima, poniendo al alcance del usuario diversos parámetros para controlar el zoom, los fps, ángulo, inclinación…&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_repo.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_repo.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;div id=&#34;las-nuevas-funcionalidades-y-planteamiento-del-experimento&#34; class=&#34;section level4&#34;&gt;
 &lt;h4&gt;&lt;strong&gt;Las nuevas funcionalidades y planteamiento del experimento&lt;/strong&gt;&lt;/h4&gt;
@@ -192,7 +192,7 @@ plot_cities &amp;lt;- ggplot() +
   scale_fill_gradientn(colours=myPalette(4)) +                 # Choose palette colours.
   labs(fill=&amp;quot;Avg age&amp;quot;)
 plot(plot_cities)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/es/post/de-ggplot-a-3d-en-r-con-rayshader/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/es/post/de-ggplot-a-3d-en-r-con-rayshader/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;visualizacion-en-3d-con-rayshader&#34; class=&#34;section level3&#34;&gt;
@@ -201,7 +201,7 @@ plot(plot_cities)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Veamos como hacerlo y que tal queda&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_gg(plot_cities,multicore=TRUE,width=5,height=3,scale=310)    # Plot_gg de rayshader
 render_snapshot()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/es/post/de-ggplot-a-3d-en-r-con-rayshader/index_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;200%&#34; height=&#34;200%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/es/post/de-ggplot-a-3d-en-r-con-rayshader/index_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;200%&#34; height=&#34;200%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;Hmm dijiste algo sobre render_movie()… Qué tal si lo animamos?&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
@@ -211,7 +211,7 @@ render_snapshot()&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;En el gráfico anterior, la variable edad media queda bastante más entendible por el ojo humano en la dimensión añadida. Aquí la elección del ángulo e inclinación correctos es un punto esencial. Pero, ¿y mejoramos la interpretabilidad rotando el gráfico?&lt;/p&gt;
 &lt;p&gt;Esto es de lo que se encarga la siguiente función:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;render_movie(&amp;quot;img/movie_spain.mp4&amp;quot;,frames = 720, fps=30,zoom=0.6,fov = 30)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/movie_spain.gif&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/movie_spain.gif&#34; /&gt;&lt;/p&gt;
 &lt;style&gt;
 body {
 text-align: justify}
