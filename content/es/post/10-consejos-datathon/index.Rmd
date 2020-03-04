@@ -43,9 +43,9 @@ Ligado con esta última idea, dado que vamos a dedicar esfuerzos en este proyect
 
 <br>
 
-**3. Construye bien tu equipo. Usa herramientas para compartir codigo/archivos.**
+**3. Construye tu equipo de manera consciente. Usa herramientas para compartir codigo/archivos.**
 
-Dependiendo de los dos puntos anteriores, especialmente del primero, según tu objetivo deberás elegir a tu equipo de manera consecuente. Este es un tema que no se suele omentar, pero consideramos importante prestarle la debida atención.
+Dependiendo de los dos puntos anteriores, especialmente del primero, según tu objetivo deberás elegir a tu equipo de manera consecuente. Este es un tema que no se suele comentar, pero consideramos importante prestarle la debida atención.
 
 Elige un compañero o amigo con el que te lleves realmente bien y os motiveis mutuamente si tu objetivo es aprender sobre un tema o tecnología nueva. Prioriza a alguien que comparta tus intereses en el caso que desees dedicarle tiempo a profundizar y masterizar un tema, tecnología o algoritmo muy concreto. 
 
@@ -79,9 +79,12 @@ Datos demográficos que ayuden a poner en contexto las variables geográficas co
 
 <br>
 
-**6. Establecer la estructura del código.**
+**6. Establecer la estructura del proyecto y del código.**
 
-A continuación os mostramos la estructura que suelen tener nuestros proyectos. Llevamos a cabo una validación cruzada manual con el objetivo de ganar flexibilidad a la hora de usar modelos de diferente naturaleza y poder compararlos y combinarlos. Cierto es que soluciones paquetizadas como scikit-learn o H2O pueden hacer este trabajo en el caso de que el tiempo disponible y características de la competición indiquen su uso.
+A continuación os mostramos la estructura que suelen tener nuestros proyectos. 
+
+
+En cuanto a la estructura de nuestro programa, solemos llevar a cabo una validación cruzada manual con el objetivo de ganar flexibilidad a la hora de usar modelos de diferente naturaleza y poder compararlos y combinarlos. Cierto es que soluciones paquetizadas como scikit-learn o H2O pueden hacer este trabajo en el caso de que el tiempo disponible y características de la competición indiquen su uso.
 
 Carga de entorno (paquetes y funciones)
 Diferentes craft de variables
