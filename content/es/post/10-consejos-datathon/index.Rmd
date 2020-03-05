@@ -108,13 +108,10 @@ Creemos que esta estructura se podría simplificar un poco dadas las caracterís
 Projecto_Datathon:
 - data:
 - exploratory:
-  - eda.R /eda.py
-  - eda.ypnb
 - helpers:
 - log:
 - main.R / main.py
 - outputs:
-  - exploratory:
   - models:
   - preds:
   - validation:
@@ -141,7 +138,9 @@ Predicción del conjunto de test a enviar.
 
 En primer lugar centrate en la familia de algoritmos y las funciones de coste que a priori mejor se adapten a tus datos, al objetivo a predecir, incluso teniendo en cuenta la métrica de error por la que se te va a medir. Es importante sacar los primeros resultados, a ser posible dentro de una estructura similar a la propuesta anteriormente. Las primeras métricas de error te ayudaran en muchos aspectos. Por un lado te pueden dar pistas de *bugs* en el código(metricas de error no realistas). También te servirá de base a partir de la cual ir mejorando, y como estamos seguros de que lo harás, esto será ademañs un *boost* de ánimo.
 
-Como principales familias XXXXXX y aquí XXXXXXX de las principales funciones de coste a optimizar, dependiendo de si se trata de un problema de clasificación o de regresión.
+Te invitamos a buscar en Google sobre las principales familias de algoritmos supervisados(suele ser el caso en estos Datathones) y de las principales funciones de coste a optimizar, dependiendo de si se trata de un problema de clasificación o de regresión.
+
+Comentar que la participación en el foro y kernels de Kaggle, hilos de Reddit y videos en Youtube será un buen complemento a la lectura de *papers*.
 
 <br>
 
