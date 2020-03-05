@@ -26,7 +26,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ¿Pensando en inscribirte en un Datathon o competición de datos? ¡En este post os traemos 10 consejos sobre los puntos clave para conseguir grandes resultados!
 
-ToC:
+Claves:
+
 - **1. Establece tu objetivo y revisa los recursos(habilidades, tiempo, acceso a máquinas...) con los que cuentas.**
 - **2. Elección del tema/industria/CdUso.**
 
