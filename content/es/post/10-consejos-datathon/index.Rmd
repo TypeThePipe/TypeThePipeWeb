@@ -32,7 +32,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Comenzamos por un punto esencial. Dependiendo de tu perfil y de la competición, deberás plantearte a priori qué pretendes conseguir participando en el reto. Puede ser aprender y mejorar en un determinado campo o tecnología, conseguir el premio, quedar entre los 3 primeros para incluirlo en tu CV o simplemente por diversión. Cualquiera que sea está bien. 
 
-Lo que recomendamos es evaluarlo de manera sincera, ya que será bastante el tiempo invertido y tener tu objetivo presente te ayudará en los momentos de menor motivación.
+Lo que recomendamos es evaluarlo de manera sincera, ya que será bastante el tiempo invertido y tener tu objetivo presente te ayudará en los momentos de menor motivación. 
+
+Por ejemplo, si tu objetivo no es ganar la competición(por ejemplo al participar en tu primer Kaggle) seguramente no quieras entrar en una espiral de hiperoptimización de hiperparámetros para rascar decimales a la métrica de error, sino que quizá prefieras estudiar y aplicar nuevas técnicas o algoritmos, aprender sobre desarrollo y estructuración de un proyecto de Data Science o utilizar fuentes complementarias de datos.
 
 <br>
 
@@ -51,7 +53,7 @@ Elige un compañero o amigo con el que te lleves realmente bien y os motiveis mu
 
 Si el proyecto lo requiere, y pretendes optar al premio o a posiciones altas, te recomendamos elegir un compañero que  complemente tus habilidades. En el caso de que no se requiera multidisciplinariedad, opta por aquellos que tenga un nivel similar al tuyo. Si es posible, ligeramente superior.
 
-De esta forma lograrás minimizar tiranteces y conflictos de objetivos, maximizando el retorno del tiempo invertido.
+Eligiendo tu equipo de manera consciente lograrás minimizar tiranteces y conflictos de objetivos, maximizando el retorno del tiempo invertido.
 
 <br>
 
@@ -59,9 +61,9 @@ De esta forma lograrás minimizar tiranteces y conflictos de objetivos, maximiza
 
 Una vez formado el equipo, os recomendamos comenzar a investigar el negocio o el contexto en la que se enmarca vuestro proyecto. Esto permitirá plantear mejor el trabajo, extraer un valor muy superior a los datos y os evitará iteraciones en el proceso diseñar-implementar-evaluar al partir de premisas más claras, dejando al lado una mala interpretación de conceptos básicos, lo cual puede ser letal.
 
-Un ejemplo. Si la competición trata sobre predecir el número de visitas o el número de contrataciones de determinados productos en un comercio online, en base a su navegación recogida por Google Analytics, debemos controlar el comportamiento de esta fuente de datos. Conocer el significado de tasa de rebote, las mecánicas desde que un usuario se conecta y se le asigna una cookie hasta que convierte, diferentes casuísticas de registros nulos, bots, que la *source*(para conocer la fuente de donde viene el visitante) en caso de dudas se asigna como *direct*...
+Un ejemplo. Si la competición trata sobre predecir el número de visitas o el número de contrataciones de determinados productos en un comercio online, en base a la navegación recogida por Google Analytics, debemos controlar el comportamiento de esta fuente de datos. Conocer el significado de tasa de rebote, las mecánicas desde que un usuario se conecta por primera vez y se le asigna una cookie hasta que convierte, borrado de cookies, diferentes casuísticas de registros nulos, bots, que la *source*(para conocer la fuente de donde viene el visitante) en caso de dudas se asigna como *direct*...
 
-Sin esta serie de conocimientos sería dificil *craftear* variables para conseguir un buen *performance* de los modelos, pero más importate, cualquier resultado que obtengas será malinterpretado. Por lo tanto, todo este *background* no es imprescindible para llegar a algún resultado, pero sí lo será para llegar a resultados potentes y realizar una participación de la que acabes orgulloso.
+Sin esta serie de conocimientos sería dificil *craftear* variables para conseguir un buen *performance* de los modelos, o lo que es más importante, cualquier resultado que obtengas será malinterpretado. Por lo tanto, todo este *background* no es imprescindible para llegar a algún resultado, pero sí lo será para llegar a resultados potentes y realizar una participación de la que acabes orgulloso.
 
 <br>
 
@@ -81,12 +83,45 @@ Datos demográficos que ayuden a poner en contexto las variables geográficas co
 
 **6. Establecer la estructura del proyecto y del código.**
 
-A continuación os mostramos la estructura que suelen tener nuestros proyectos. 
+A continuación os mostramos la estructura que suelen tener nuestros proyectos. La estructuración de los directorios dentro de un proyecto de Data Science dependerá de las características del entorno tanto de desarrollo como el la posterior productivización, siguiendo principios generales como la modularización del código.
+Una estructura bastante generalizada sería la siguiente:
 
+Projecto:
+- data: 
+  - 1_raw:
+  - 2_processed:
+- models:
+- notebooks:
+  - 1_eda:
+  - 2_poc: 
+  - 3_modeling:
+  - 4_evaluation:
+- src:
+  - 1_get_data:
+  - 2_processing:
+  - 3_modeling:
+  - 4_evaluation:
+  - 5_helpers:
 
-En cuanto a la estructura de nuestro programa, solemos llevar a cabo una validación cruzada manual con el objetivo de ganar flexibilidad a la hora de usar modelos de diferente naturaleza y poder compararlos y combinarlos. Cierto es que soluciones paquetizadas como scikit-learn o H2O pueden hacer este trabajo en el caso de que el tiempo disponible y características de la competición indiquen su uso.
+Creemos que esta estructura se podría simplificar un poco dadas las características de un Datathon, en la que no se necesita automatizar la ingesta y el preprocesado de los datos, sino que será una tarea puntual. Además el análisis exploratorio suele tener un papel protagonista, así como el modelado se suele simplificar en un main.exe que ejecute todo el programa llamando a los módulos de preprocesado, train y test.
 
-Carga de entorno (paquetes y funciones)
+Projecto_Datathon:
+- data:
+- exploratory:
+  - eda.R /eda.py
+  - eda.ypnb
+- helpers:
+- log:
+- main.R / main.py
+- outputs:
+  - exploratory:
+  - models:
+  - preds:
+  - validation:
+
+En cuanto a la estructura de nuestro main, solemos llevar a cabo una validación cruzada manual con el objetivo de ganar flexibilidad a la hora de usar modelos de diferente naturaleza y poder compararlos y combinarlos. Cierto es que soluciones paquetizadas como scikit-learn o H2O pueden hacer este trabajo en el caso de que el tiempo disponible y características de la competición indiquen su uso.
+
+Carga de entorno (paquetes, módulos y funciones)
 Diferentes craft de variables
 Seperación en dataset y datasetOOSample
 Separar el dataset en *folds*
@@ -94,6 +129,7 @@ Por cada fold:
   Entrenar con el resto
   Predecir en el fold
   Evaluación
+  (En el último fold, entrenar  si se quiere modelos de stacking con las predicciones en trainSet de los anteriores modelos)
 Predicción OOSample
 Evaluación
 Predicción del conjunto de test a enviar.
@@ -103,37 +139,37 @@ Predicción del conjunto de test a enviar.
 
 **7. Lanzar los primeros modelos.**
 
-En primer lugar centrate en la familia de algoritmos que a priori mejor se adapten a tus datos, al objetivo a predecir, incluso a la métrica de error por la que se te va a medir. Es importante sacar los primeros resultados, a ser posible dentro de una estructura similar a la propuesta anteriormente. Las primeras métricas de error te ayudaran en muchos aspectos. Por un lado te pueden dar pistas de que *bugs* en el código(metricas de error irrealistas). También te servirá de base la cual ir mejorando, y como estamos seguros de que lo harás, esto será ademañs un *boost* de ánimo.
+En primer lugar centrate en la familia de algoritmos y las funciones de coste que a priori mejor se adapten a tus datos, al objetivo a predecir, incluso teniendo en cuenta la métrica de error por la que se te va a medir. Es importante sacar los primeros resultados, a ser posible dentro de una estructura similar a la propuesta anteriormente. Las primeras métricas de error te ayudaran en muchos aspectos. Por un lado te pueden dar pistas de *bugs* en el código(metricas de error no realistas). También te servirá de base a partir de la cual ir mejorando, y como estamos seguros de que lo harás, esto será ademañs un *boost* de ánimo.
 
-Como principales familias XXXXXX
+Como principales familias XXXXXX y aquí XXXXXXX de las principales funciones de coste a optimizar, dependiendo de si se trata de un problema de clasificación o de regresión.
 
 <br>
 
 **8. Validación cruzada, OOS y backtesting.**
 
-Especial mención a las métricas de error. Una de las características a la que de manera personal más importancia le damos, se tratata de conocer los intervalos de error de nuestros modelos antes de enviarlos. Conocer las precisión de nuestro modelo bajo diferentes escenarios, partes del dataset e incluso datos sintéticos nos hace sentir un especial orgullo. Quizá sea simplemente un objetivo que nos marcamos(tal y como comentamos en el punto 1), pero el hecho de tener la certeza de cuando bajaos la métrica de error no se debe a algo espúreo, o lo peor de todo a un *bug*, nos permite desarrollar con tranquilidad. Además en el caso de existir un ranking público, controlar tu métrica de evaluación te permite saber con mayor certeza en que percentil te encuentras.
+Especial mención a las métricas de error. Uno de los puntos a los que de manera personal más importancia le damos, se tratata en conocer con la mayor precisión posible los intervalos de error(confianza o predicción) de nuestros modelos antes de enviarlos. Conocer las precisión de nuestro modelo bajo diferentes escenarios, partes del dataset e incluso datos sintéticos nos hace sentir un especial orgullo. Quizá sea simplemente un objetivo que nos marcamos(tal y como comentamos en el punto 1), pero el hecho de tener la certeza de cuando bajaos la métrica de error no se debe a algo espúreo, o lo peor de todo a un *bug*, nos permite desarrollar con tranquilidad. Además en el caso de existir un ranking público y otro privado, controlar tu métrica de evaluación te permite saber con mayor certeza en que percentil te encuentras.
 
-Estas competiciones suelen ir ligadas a una métrica de error por la cual se evalua a cada participante. Será fundamental introducirla en nuestra evaluación de modelos, pero no debe de ser la única. Tanto a la hora de fijar una función objetivo como a la hora de evaluar los modelos, debemos tener en cuenta métricas de error complementarias que nos ayuden a interpretar el desempeño de los modelos. Tener en cuenta el error mediano o el MAPE, cuando la métrica con la que nos evaluarán será el error medio, nos puede ayudar a detectar elegir entre modelos que difieren en sólo un x% en esta métrica pero no en otras, en un determinado conjunto de datos. 
+La mayoría de competiciones suelen ir ligadas a una métrica de error por la cual se evalua a los participante. Será fundamental introducirla en nuestra evaluación de modelos, pero no debe de ser la única. Tanto a la hora de fijar una función de csote como a la hora de evaluar los modelos, debemos tener en cuenta métricas de error complementarias que nos ayuden a interpretar el desempeño de los modelos. Tener en cuenta el error mediano o el MAPE, cuando la métrica con la que nos evaluarán será el error medio, nos puede ayudar tanto a conocer el comportamiento de nuestro modelo como a decantarnos entre algoritmos que difieren en sólo mínimo porcentaje en la métrica principal en nuestro conjunto de datos, pero no en otras.
 
 <br>
 
 **9. Interpretación y evaluación de resultados desde el punto de vista práctico y/o negocio.**
 
-En el caso de que se trate de un Datathon organizado por alguna empresa de tu zona, seguramente los mejores proyectos serán llamados a un evento final de presentación de los trabajos. En otros, te pedirán una memoria presentando los resultados. En el caso de Kaggle, no suelen hacerlo.
+En el caso de que se trate de un Datathon organizado por alguna empresa de tu zona, seguramente los mejores proyectos serán llamados a un evento final de presentación de los trabajos. En otros, te pedirán una memoria presentando los resultados. Si bien es cierto, en el caso de Kaggle no suelen hacerlo.
 
-Por lo tanto, si la competición a la que te presentas requiere de este tipo de resultado, será importante tenerlo presente no sólo al final, sino durante todo el proceso. Una vez que hemos re-optimizado los hiperparámetros con lo última librería bayesiana, que hemos *stackeado* nuestros mejores modelos, quizá sea hora de trabajar en la interpretabilidad de los resultados, incorporación de nuevos datos, en definitiva, conclusiones que sean valiosas a la hora de poner en marcha el modelo y que no quede en una simple matriz de pesos.
+Por lo tanto, si la competición a la que te presentas requiere de este tipo de resultado, será importante tenerlo presente no sólo al final, sino durante todo el proceso. Una vez que hemos re-optimizado los hiperparámetros con la última librería bayesiana, que hemos *stackeado* nuestros mejores modelos, quizá sea hora de trabajar en la interpretabilidad de los resultados, incorporación de nuevos datos, en definitiva, conclusiones que sean valiosas a la hora de poner en marcha el modelo y que no quede en una simple matriz de pesos.
 
-En la última competición a la que asistimos donde se nos pedía esta presentación final a los tres mejores proyectos, e incluso aunque no se hubiese pedido, optamos por adentrarnos en el modelado de las imagenes mediante *transfer learning*, cosa que no se nos pedía. Una vez que modelamos la información estructurada y llevamos a cabo ciertas iteraciones sobre estos datos, pensamos que sería más enriquecedor tanto para nosotros como para las personas que proponían el concurso, la investigación sobre la extracción de información de las imagenes (información que en el caso de uso que nos ocupaba, a priori, debería tener un impacto claro sobre la variable a predecir).
+En la última competición a la que asistimos donde se nos pedía esta presentación final a los tres mejores proyectos, e incluso aunque no se hubiese pedido, optamos por adentrarnos en el modelado de las imagenes mediante *transfer learning*, cosa que no se nos pedía. Una vez que modelamos la información estructurada y llevamos a cabo ciertas iteraciones sobre estos datos, pensamos que sería más enriquecedor tanto para nosotros como para las personas que proponían el concurso, la investigación sobre la extracción de información de las imagenes (información que en el caso de uso que nos ocupaba, a priori, iba a tener un impacto claro sobre la variable a predecir).
 
 <br>
 
-**10. (Personal) Escribir una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.**
+**10. Escribir una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.**
 
-Una vez finalizado el proyecto, un práctica que nos ha enriquecido y ha supuesto un antes y un después ha sido escribir algún tipo de memoria o documento, reflexionando sobre la reciente participación. Analizando los puntos fuertes, lo que debimos mejorar, tanto a nivel técnico como a nivel de equipo y por qué no a nivel emocional y de actutid. A ser posible nada más entregar y antes de saber el resultado. Sería genial si al tiempo de conocer el mismo se añadiera algún punto o reflexión más.
+Una vez finalizado el proyecto, un práctica que nos ha enriquecido y ha supuesto un antes y un después ha sido escribir algún tipo de memoria o documento para nosotros mismos, reflexionando sobre la reciente participación. Analizando los puntos fuertes, lo que debimos mejorar, tanto a nivel técnico como a nivel de equipo y por qué no a nivel emocional y de actutid. A ser posible nada más entregar y antes de saber el resultado. Sería genial si al tiempo de conocer el mismo se añadiera algún punto o reflexión más.
 
 Todas estas anotaciones nos ayudan cada vez que nos enfrentamos a un proyecto a encararlo más preparados y no depender del 'instinto' ni de lo que la memoria selectiva nos quiera recordar en momentos puntuales. 
 
-Una mala predisposición personal, una mala elección de equipo, no estudiar suficientemente y con cariño los valores extremos, no preparar la presentación con tiempo, correr los modelos 30 minutos antes de que acabe el plazo de entrega... son situaciones que nos han pasado a muchos y no ocurre absolutamente nada por reflexionar sore ellas y dejarlo por escrito. Lo fundamental es, dentro de lo posible, ¡que no se repitan en la próxima competición! :)
+No investigar suficientemente y con cariño la distribución de los datos y sus valores extremos, una mala predisposición personal, no preparar la presentación con tiempo, una mala elección de equipo, seguir corriendo los modelos 30 minutos antes de que acabe el plazo de entrega... son situaciones que nos han pasado a muchos y no ocurre absolutamente nada por reflexionar sore ellas y dejarlo por escrito. Lo fundamental es, dentro de lo posible, ¡que no se repitan en la próxima competición para lograr conseguir aun mejores resultados! :)
 
 
 
