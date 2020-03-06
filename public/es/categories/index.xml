@@ -5,7 +5,7 @@
     <link>https://typethepipe.com/es/categories/</link>
       <atom:link href="https://typethepipe.com/es/categories/index.xml" rel="self" type="application/rss+xml" />
     <description>Categories</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Tue, 21 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Mon, 24 Feb 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://typethepipe.com/img/icon-192.png</url>
       <title>Categories</title>
@@ -13,18 +13,26 @@
     </image>
     
     <item>
-      <title>Ggplot</title>
-      <link>https://typethepipe.com/es/categories/ggplot/</link>
-      <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/categories/ggplot/</guid>
+      <title>Datathon</title>
+      <link>https://typethepipe.com/es/categories/datathon/</link>
+      <pubDate>Mon, 24 Feb 2020 00:00:00 +0000</pubDate>
+      <guid>https://typethepipe.com/es/categories/datathon/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Post</title>
       <link>https://typethepipe.com/es/categories/post/</link>
-      <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 24 Feb 2020 00:00:00 +0000</pubDate>
       <guid>https://typethepipe.com/es/categories/post/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Ggplot</title>
+      <link>https://typethepipe.com/es/categories/ggplot/</link>
+      <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>https://typethepipe.com/es/categories/ggplot/</guid>
       <description></description>
     </item>
     
@@ -89,14 +97,6 @@
       <link>https://typethepipe.com/es/categories/vizs/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
       <guid>https://typethepipe.com/es/categories/vizs/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Datathon</title>
-      <link>https://typethepipe.com/es/categories/datathon/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/categories/datathon/</guid>
       <description></description>
     </item>
     

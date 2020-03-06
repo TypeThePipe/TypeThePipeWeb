@@ -5,7 +5,7 @@
     <link>https://typethepipe.com/es/</link>
       <atom:link href="https://typethepipe.com/es/index.xml" rel="self" type="application/rss+xml" />
     <description>TypeThePipe</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Tue, 21 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Mon, 24 Feb 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>https://typethepipe.com/img/icon-192.png</url>
       <title>TypeThePipe</title>
@@ -15,7 +15,7 @@
     <item>
       <title>Posts</title>
       <link>https://typethepipe.com/es/post/</link>
-      <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 24 Feb 2020 00:00:00 +0000</pubDate>
       <guid>https://typethepipe.com/es/post/</guid>
       <description></description>
     </item>
@@ -25,14 +25,6 @@
       <link>https://typethepipe.com/es/vizs-and-tips/</link>
       <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
       <guid>https://typethepipe.com/es/vizs-and-tips/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link></link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid></guid>
       <description></description>
     </item>
     

@@ -89,7 +89,7 @@ Como caso de uso, vamos a visualizar la edad media de los municipios españoles 
   
   
   
-  <link rel="stylesheet" href="/css/academic.min.8dfc10e379c109c100b9c00a0a3bbf93.css">
+  <link rel="stylesheet" href="/css/academic.min.1750436c7ddbeec3957033478f17222e.css">
 
   
 
@@ -613,7 +613,7 @@ Como caso de uso, vamos a visualizar la edad media de los municipios españoles 
 <hr />
 <p><img src="/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_header.png" /></p>
 <p><br></p>
-<div id="introduccion" class="section level2">
+<div id="introducción" class="section level2">
 <h2><strong>1. Introducción</strong></h2>
 <p><br></p>
 <p>En las últimas semanas, un ‘nuevo’ paquete de R ha centrado el interés de cierta parte de la comunidad. Decimos ‘nuevo’ porque se ha incorporado recientemente al CRAN, aunque realmente el primer commit realizado por su autor su repo de Github data de hace más de un año. Su nombre es <strong>rayshader</strong> y en palabras de su propio creador:</p>
@@ -640,7 +640,7 @@ Como caso de uso, vamos a visualizar la edad media de los municipios españoles 
 <p><br></p>
 </div>
 </div>
-<div id="cdu-visualizando-la-edad-media-de-cada-municipio-en-espana" class="section level2">
+<div id="cdu-visualizando-la-edad-media-de-cada-municipio-en-españa" class="section level2">
 <h2><strong>2. CdU: Visualizando la edad media de cada municipio en España</strong></h2>
 <p>Una vez hemos establecido el objetivo principal y las diferentes fuentes de los datos, podemos proceder a la descarga y tratamiento de los mismos.</p>
 <p><br></p>
@@ -764,7 +764,7 @@ if(plot_canarias==F){                           # Should be moduled in a funct
   fill(avg_age, .direction = &quot;down&quot;)            # Fill with the previous pc data.</code></pre>
 <p><br></p>
 </div>
-<div id="visualizacion-con-ggplot" class="section level3">
+<div id="visualización-con-ggplot" class="section level3">
 <h3>2.3- Visualización con Ggplot</h3>
 <p>Inspirado en gran medida en <a href="http://blog.manugarri.com/making-a-beautiful-map-of-spain-in-ggplot2/" class="uri">http://blog.manugarri.com/making-a-beautiful-map-of-spain-in-ggplot2/</a></p>
 <p>Con este dataset final, plotearemos las variables que representan las coordenadas en el eje X e Y y en primer lugar representaremos la edad media mediante la paleta de color. Las tonalidades rojas son asignadas a edades superiores y las azules a las edades medias más jóvenes. Conseguimos esto mediante el <em>aesthetic fill</em> de Ggplot.</p>
@@ -781,7 +781,7 @@ plot(plot_cities)</code></pre>
 <p><img src="/es/post/de-ggplot-a-3d-en-r-con-rayshader/index_files/figure-html/unnamed-chunk-13-1.png" width="672" style="display: block; margin: auto;" /></p>
 <p><br></p>
 </div>
-<div id="visualizacion-en-3d-con-rayshader" class="section level3">
+<div id="visualización-en-3d-con-rayshader" class="section level3">
 <h3>2.4- Visualización en 3D con Rayshader!</h3>
 <p>El anterior gráfico estaba bastante bien. En el podemos facilmente distinguir los municipios con la edad media más alta y los municipios más jóvenes. Sin embargo, los ojos humanos no son capaces de distinguir fácilmente entre colores próximos ni distinguir la magnitud de las diferencias en esta escala. Por lo tanto, ¿qué tal complementarlo con un nuevo eje?</p>
 <p>Veamos como hacerlo y que tal queda</p>
@@ -792,7 +792,7 @@ render_snapshot()</code></pre>
 <p>Hmm dijiste algo sobre render_movie()… Qué tal si lo animamos?</p>
 <p><br></p>
 </div>
-<div id="animacion-3d-con-rayshader" class="section level3">
+<div id="animación-3d-con-rayshader" class="section level3">
 <h3>2.5- Animación 3D con Rayshader</h3>
 <p>En el gráfico anterior, la variable edad media queda bastante más entendible por el ojo humano en la dimensión añadida. Aquí la elección del ángulo e inclinación correctos es un punto esencial. Pero, ¿y mejoramos la interpretabilidad rotando el gráfico?</p>
 <p>Esto es de lo que se encarga la siguiente función:</p>
