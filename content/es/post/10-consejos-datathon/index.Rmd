@@ -6,8 +6,6 @@ slug: "10-consejos-datathon"
 translationKey: "10-advices-datathon"
 output: 
   blogdown::html_page:
-    toc: TRUE
-    toc_depth: 2
     highlight: tango
 categories:
 - Post
@@ -33,7 +31,7 @@ Claves:
 - <font size="2">1. Establece tu objetivo y revisa los recursos(habilidades, tiempo, acceso a máquinas...) con los que cuentas.</font>
 - <font size="2">2. Elección del tema/industria/CdUso.</font>
 - <font size="2">3. Construye tu equipo de manera consciente. Usa herramientas para compartir código/archivos.</font>
-- <font size="2">4. Investiga previa y profundamente sobre el caso en concreto.</font>
+- <font size="2">4. Investiga previa y profundamente sobre el caso de uso en concreto.</font>
 - <font size="2">5. Análisis exploratorio de los datos. Recuerda que (usualmente) no son los únicos que puedes usar.</font>
 - <font size="2">6. Establece la estructura del proyecto y del código.</font>
 - <font size="2">7. Lanza los primeros modelos.</font>
@@ -76,7 +74,7 @@ Eligiendo tu equipo de manera consciente lograrás minimizar tiranteces y confli
 
 <br>
 
-**4. Investigación previa y profunda sobre el caso en concreto.**
+**4. Investigación previa y profunda sobre el caso de uso en concreto.**
 <img src="./pez_tecleando.gif" height="100px" width="200px" />
 
 Una vez formado el equipo, os recomendamos comenzar a investigar el negocio o el contexto en el que se enmarca vuestro proyecto. Esto permitirá plantear mejor el trabajo, extraer un valor muy superior a los datos y os evitará iteraciones en el proceso diseñar-implementar-evaluar al partir de premisas más claras. De esta manera dejareis al lado una mala interpretación de conceptos básicos, lo cual puede ser letal.

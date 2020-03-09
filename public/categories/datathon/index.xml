@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Datathon | TypeThePipe</title>
+    <link>/categories/datathon/</link>
+      <atom:link href="/categories/datathon/index.xml" rel="self" type="application/rss+xml" />
+    <description>Datathon</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 11 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Datathon</title>
+      <link>/categories/datathon/</link>
+    </image>
+    
+    <item>
+      <title>10 Tips to make the most of your Datathon</title>
+      <link>/post/10-tips-datathon/</link>
+      <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/post/10-tips-datathon/</guid>
+      <description>
+
+
+&lt;p&gt;Are you considering to check in a Datathon or data competition? In this post we’ll present 10 tips that can help you to outperform your rivals. So without further ado, let’s get started.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. Set your main goal and check your time and resources(skills, hardware…)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. Choose the challenge field/industry according your interests&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. Build the right team. Set up tools to exchange code.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4. Deep research about the challenge topic and environment.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;5. Excel your exploratory analysis. Remember you could use external data sources.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;6. Set your project and code structure.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;7. Run your models.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;8. Cross Validation, OOS and backtesting.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;9. Model interpretability&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;10. Write down your observed strengths and weaknesses. It will be the starting point for your next proyect. &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;font size=&#34;2&#34;&gt;6. Establece la estructura del proyecto y del código.&lt;/font&gt;&lt;/li&gt;
+&lt;li&gt;&lt;font size=&#34;2&#34;&gt;7. Lanza los primeros modelos.&lt;/font&gt;&lt;/li&gt;
+&lt;li&gt;&lt;font size=&#34;2&#34;&gt;8. Validación cruzada, OOS y backtesting.&lt;/font&gt;&lt;/li&gt;
+&lt;li&gt;&lt;font size=&#34;2&#34;&gt;9. Interpretación y evaluación de resultados desde el punto de vista práctico y/o negocio.&lt;/font&gt;&lt;/li&gt;
+&lt;li&gt;&lt;font size=&#34;2&#34;&gt;10. Escribe una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.&lt;/font&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

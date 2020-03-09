@@ -1,0 +1,53 @@
+---
+title: "10 Tips to make the most of your Datathon"
+author: Carlos Vecina Tebar
+date: "2020-03-11"
+slug: "10-tips-datathon"
+translationKey: "10-advices-datathon"
+output: 
+  blogdown::html_page:
+    highlight: tango
+categories:
+- Post
+- Datathon
+tags: []
+subtitle: ""
+summary:  "Do you want to achieve your goals?"
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Are you considering to check in a Datathon or data competition? In this post we'll present 10 tips that can help you to outperform your rivals. So without further ado, let’s get started.
+
+<br>
+
+**1. Set your main goal and check your time and resources(skills, hardware...)**
+
+**2. Choose the challenge field/industry according your interests**
+
+**3. Build the right team. Set up tools to exchange code.**
+
+**4. Deep research about the challenge topic and environment.**
+
+**5. Excel your exploratory analysis. Remember you could use external data sources.**
+
+**6. Set your project and code structure.**
+
+**7. Run your models.**
+
+**8. Cross Validation, OOS and backtesting.**
+
+**9. Model interpretability**
+
+**10. Write down your observed strengths and weaknesses. It will be the starting point for your next proyect. **
+
+- <font size="2">6. Establece la estructura del proyecto y del código.</font>
+- <font size="2">7. Lanza los primeros modelos.</font>
+- <font size="2">8. Validación cruzada, OOS y backtesting.</font>
+- <font size="2">9. Interpretación y evaluación de resultados desde el punto de vista práctico y/o negocio.</font>
+- <font size="2">10. Escribe una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.</font>
