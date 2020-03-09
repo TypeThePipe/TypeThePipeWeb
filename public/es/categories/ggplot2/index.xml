@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ggplot2 | TypeThePipe</title>
-    <link>/es/categories/ggplot2/</link>
-      <atom:link href="/es/categories/ggplot2/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/es/categories/ggplot2/</link>
+      <atom:link href="https://typethepipe.com/es/categories/ggplot2/index.xml" rel="self" type="application/rss+xml" />
     <description>Ggplot2</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Tue, 07 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://typethepipe.com/img/icon-192.png</url>
       <title>Ggplot2</title>
-      <link>/es/categories/ggplot2/</link>
+      <link>https://typethepipe.com/es/categories/ggplot2/</link>
     </image>
     
     <item>
       <title>Muestra tus habilidades o *skills mediante un gráfico en R y su paquete Ggplot</title>
-      <link>/es/vizs-and-tips/skills-chart-curriculum/</link>
+      <link>https://typethepipe.com/es/vizs-and-tips/skills-chart-curriculum/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/skills-chart-curriculum/</guid>
+      <guid>https://typethepipe.com/es/vizs-and-tips/skills-chart-curriculum/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }

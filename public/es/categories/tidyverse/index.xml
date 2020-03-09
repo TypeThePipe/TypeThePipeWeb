@@ -2,23 +2,23 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tidyverse | TypeThePipe</title>
-    <link>/es/categories/tidyverse/</link>
-      <atom:link href="/es/categories/tidyverse/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/es/categories/tidyverse/</link>
+      <atom:link href="https://typethepipe.com/es/categories/tidyverse/index.xml" rel="self" type="application/rss+xml" />
     <description>Tidyverse</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Thu, 16 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://typethepipe.com/img/icon-192.png</url>
       <title>Tidyverse</title>
-      <link>/es/categories/tidyverse/</link>
+      <link>https://typethepipe.com/es/categories/tidyverse/</link>
     </image>
     
     <item>
       <title>Dominando la función summarise_at(). Media ponderada con R en el ecosistema Tidyverse.</title>
-      <link>/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse/</link>
+      <link>https://typethepipe.com/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse/</link>
       <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse/</guid>
+      <guid>https://typethepipe.com/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse/</guid>
       <description>
-&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://typethepipe.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }

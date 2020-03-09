@@ -4,8 +4,10 @@ author: Carlos Vecina Tebar
 date: "2020-02-24"
 slug: "10-consejos-datathon"
 translationKey: "10-advices-datathon"
-output:
+output: 
   blogdown::html_page:
+    toc: TRUE
+    toc_depth: 2
     highlight: tango
 categories:
 - Post
@@ -30,14 +32,14 @@ Claves:
 
 - <font size="2">1. Establece tu objetivo y revisa los recursos(habilidades, tiempo, acceso a máquinas...) con los que cuentas.</font>
 - <font size="2">2. Elección del tema/industria/CdUso.</font>
-- <font size="2">3. Construye tu equipo de manera consciente. Usa herramientas para compartir codigo/archivos.</font>
-- <font size="2">4. Investigación previa y profunda sobre el caso en concreto.</font>
+- <font size="2">3. Construye tu equipo de manera consciente. Usa herramientas para compartir código/archivos.</font>
+- <font size="2">4. Investiga previa y profundamente sobre el caso en concreto.</font>
 - <font size="2">5. Análisis exploratorio de los datos. Recuerda que (usualmente) no son los únicos que puedes usar.</font>
-- <font size="2">6. Establecer la estructura del proyecto y del código.</font>
-- <font size="2">7. Lanzar los primeros modelos.</font>
+- <font size="2">6. Establece la estructura del proyecto y del código.</font>
+- <font size="2">7. Lanza los primeros modelos.</font>
 - <font size="2">8. Validación cruzada, OOS y backtesting.</font>
 - <font size="2">9. Interpretación y evaluación de resultados desde el punto de vista práctico y/o negocio.</font>
-- <font size="2">10. Escribir una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.</font>
+- <font size="2">10. Escribe una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.</font>
 
 
 
@@ -62,11 +64,11 @@ Ligado con esta última idea, dado que vamos a dedicar muchos esfuerzos en este 
 
 <br>
 
-**3. Construye tu equipo de manera consciente. Usa herramientas para compartir codigo/archivos.**
+**3. Construye tu equipo de manera consciente. Usa herramientas para compartir código/archivos.**
 
 Dependiendo de los dos puntos anteriores, especialmente del primero, según tu objetivo deberás elegir a tu equipo de manera consecuente. Este es un tema que no se suele comentar, pero consideramos importante prestarle la debida atención.
 
-Elige un compañero o amigo con el que te lleves realmente bien y os motiveis mutuamente si tu objetivo es aprender sobre un tema o tecnología nueva. Prioriza a alguien que comparta tus intereses en el caso que desees dedicarle tiempo a profundizar y masterizar un tema, tecnología o algoritmo muy concreto. 
+Elige un compañero o amigo con el que te lleves realmente bien y os motivéis mutuamente si tu objetivo es aprender sobre un tema o tecnología nueva. Prioriza a alguien que comparta tus intereses en el caso que desees dedicarle tiempo a profundizar y masterizar un tema, tecnología o algoritmo muy concreto. 
 
 Si el proyecto lo requiere, y pretendes optar al premio o a posiciones altas, te recomendamos elegir un compañero que  complemente tus habilidades. En el caso de que no se requiera multidisciplinariedad, opta por aquellos que tengan un nivel similar al tuyo. Si es posible, ligeramente superior.
 
@@ -79,19 +81,19 @@ Eligiendo tu equipo de manera consciente lograrás minimizar tiranteces y confli
 
 Una vez formado el equipo, os recomendamos comenzar a investigar el negocio o el contexto en el que se enmarca vuestro proyecto. Esto permitirá plantear mejor el trabajo, extraer un valor muy superior a los datos y os evitará iteraciones en el proceso diseñar-implementar-evaluar al partir de premisas más claras. De esta manera dejareis al lado una mala interpretación de conceptos básicos, lo cual puede ser letal.
 
-Un ejemplo. Si la competición trata sobre predecir el número de visitas o el número de contrataciones de determinados productos en un comercio online, en base a la navegación recogida por Google Analytics, debeis controlar el comportamiento de esta fuente de datos. Conocer el significado de tasa de rebote, las mecánicas desde que un usuario se conecta por primera vez y se le asigna una cookie hasta que convierte, borrado de cookies, diferentes casuísticas de registros nulos, bots, que la *source* (para conocer la fuente de donde viene el visitante) en caso de dudas se asigna como *direct*...
+Un ejemplo. Si la competición trata sobre predecir el número de visitas o el número de contrataciones de determinados productos en un comercio online, en base a la navegación recogida por Google Analytics, debéis controlar el comportamiento de esta fuente de datos. Conocer el significado de tasa de rebote, las mecánicas desde que un usuario se conecta por primera vez y se le asigna una cookie hasta que convierte, borrado de cookies, diferentes casuísticas de registros nulos, bots, que la *source* (para conocer la fuente de donde viene el visitante) en caso de dudas se asigna como *direct*...
 
-Sin esta serie de conocimientos será dificil *craftear* variables para conseguir un buen *performance* de los modelos, o lo que es más importante, cualquier resultado que obtengais será malinterpretado. Por lo tanto, todo este *background* no es imprescindible para llegar a algún resultado, pero sí lo será para llegar a resultados potentes y realizar una participación de la que acabes orgullosos.
+Sin esta serie de conocimientos será difícil *craftear* variables para conseguir un buen *performance* de los modelos, o lo que es más importante, cualquier resultado que obtengáis será malinterpretado. Por lo tanto, todo este *background* no es imprescindible para llegar a algún resultado, pero sí lo será para llegar a resultados potentes y realizar una participación de la que acabes orgullosos.
 
 <br>
 
 **5. Análisis exploratorio de los datos. Recuerda que (usualmente) no son los únicos que puedes usar.**
 
-Como todo proyecto de datos, consta de una serie de etapas iterativas. Después de investigar sobre el contexto, echareis un primer vistazo a los datos. Si surgen dudas, de nuevo tendreis que investigar para resolverlas.
+Como todo proyecto de datos, consta de una serie de etapas iterativas. Después de investigar sobre el contexto, echareis un primer vistazo a los datos. Si surgen dudas, de nuevo tendréis que investigar para resolverlas.
 
-Al margen de este recordatorio, la fase exploratoria se centra en conocer cada una de las variables. Como consejo personal, entre otras cosas, nosotros comenzamos midiendo el porcentaje de NAs y la distribución y la varianza de las variables. Aquellas que tengan un elevado porcentaje de NAs o una varianza muy pequeña, o bien las apartamos (podría replantearse su entrada en siguientes iteraciones) o bien las *encodeamos* de manera dicotómica Si_NA/No_NA o Mayoritaria/No_mayoritaria. Para otro tipo de encodings [ver](https://www.kaggle.com/waydeherman/tutorial-categorical-encoding).
+Al margen de este recordatorio, la fase exploratoria se centra en conocer cada una de las variables. Como consejo personal, entre otras cosas, nosotros comenzamos midiendo el porcentaje de NAs y la distribución y la varianza de las variables. Aquellas que tengan un elevado porcentaje de NAs o una varianza muy pequeña, o bien las apartamos (podría replantearse su entrada en siguientes iteraciones) o bien las *encodeamos* de manera dicotómica Si_NA/No_NA o Mayoritaria/No_mayoritaria. Para otro tipo de *encodings* [ver](https://www.kaggle.com/waydeherman/tutorial-categorical-encoding).
 
-Esta etapa exploratoria varía bastante dependiendo del número de variables que contenga vuestro dataset. En *datasets* con 75, 100 o más variables, resultará más complicado hacerse una idea general de las características de cada una de ellas. Enfrentarnos a este tipo de *datasets* puede resultar ciertamente abrumador, sin embargo tras una buen estudio, eleccion y transformación puede ser que acabeis dando las gracias de no tener sólo 5 o 10 variables(caso en el que se suele llegar a un *plateau* de desempeño de los modelos más rápido y mayor homogeneidad en los resultados expuestos por los diferentes equipos).
+Esta etapa exploratoria varía bastante dependiendo del número de variables que contenga vuestro dataset. En *datasets* con 75, 100 o más variables, resultará más complicado hacerse una idea general de las características de cada una de ellas. Enfrentarnos a este tipo de *datasets* puede resultar ciertamente abrumador, sin embargo tras una buen estudio, eleccion y transformación puede ser que acabéis dando las gracias de no tener sólo 5 o 10 variables(caso en el que se suele llegar a un *plateau* de desempeño de los modelos más rápido y mayor homogeneidad en los resultados expuestos por los diferentes equipos).
 
 Además de esto; análisis de correlaciones, distribución de variables, de outliers univariante y multivariante, tests estadísticos preliminares... son análisis que os permitirán poner en contexto los datos y modelarlos mejor.
 
@@ -124,7 +126,7 @@ Projecto:
   - 4_evaluation:
   - 5_helpers:
 
-Creemos que esta estructura se podría simplificar un poco dadas las características de un Datathon, en la que no se necesita automatizar la ingesta y el preprocesado de los datos, sino que será una tarea puntual. Además el análisis exploratorio aquí suele tener un papel protagonista, así como el modelado se suele simplificar en un main.exe que ejecute todo el programa llamando a los módulos de preprocesado, train, test y evaluación.
+Creemos que esta estructura se podría simplificar un poco dadas las características de un Datathon, en la que no se necesita automatizar la ingesta y el preprocesado de los datos, sino que será una tarea puntual. Además el análisis exploratorio aquí suele tener un papel protagonista, así como el modelado se suele simplificar en un main.exe que ejecute todo el programa llamando a los módulos de preprocesado, *train*, *test* y evaluación.
 
 Projecto_Datathon:
 
@@ -142,8 +144,8 @@ En cuanto a la estructura del main, solemos llevar a cabo una validación cruzad
 
 Carga de entorno (paquetes, módulos y funciones)
 Diferentes craft de variables
-Seperación en dataset y datasetOOSample
-Separar el dataset en *folds*
+Separación en dataset y datasetOOSample
+Separar el dataset en folds
 Por cada fold:
   Entrenar con el resto
   Predecir en el fold
@@ -158,7 +160,7 @@ Predicción del conjunto de test a enviar.
 
 **7. Lanzar los primeros modelos.**
 
-En primer lugar debeis centraros en una familia de algoritmos y función de coste que a priori mejor se adapten a los datos, al objetivo a predecir, incluso teniendo en cuenta la métrica de error por la que se os va a medir. Es importante sacar los primeros resultados, a ser posible dentro de una estructura similar a la propuesta anteriormente. Las primeras métricas de error os ayudaran en muchos aspectos. Por un lado os pueden dar pistas de *bugs* en el código (metricas de error no realistas). También os servirá de base a partir de la cual ir mejorando, y como estamos seguros de que lo hareis, esto será ademañs un *boost* de ánimo.
+En primer lugar debéis centraros en una familia de algoritmos y función de coste que a priori mejor se adapten a los datos, al objetivo a predecir, incluso teniendo en cuenta la métrica de error por la que se os va a medir. Es importante sacar los primeros resultados, a ser posible dentro de una estructura similar a la propuesta anteriormente. Las primeras métricas de error os ayudaran en muchos aspectos. Por un lado os pueden dar pistas de *bugs* en el código (métricas de error no realistas). También os servirá de base a partir de la cual ir mejorando, y como estamos seguros de que lo haréis, esto será ademañs un *boost* de ánimo.
 
 Os invitamos a buscar en Google sobre las principales familias de algoritmos supervisados (suele ser el caso en estos Datathones) y de las principales funciones de coste a optimizar, dependiendo de si se trata de un problema de clasificación o de regresión.
 
@@ -168,9 +170,9 @@ Comentar que la participación en el foro y kernels de Kaggle, hilos de Reddit y
 
 **8. Validación cruzada, OOS y backtesting.**
 
-Especial mención a las métricas de error. Uno de los puntos a los que de manera personal más importancia le damos, se tratata de conocer con la mayor precisión posible los intervalos de error(confianza o predicción) de nuestros modelos antes de enviarlos. Conocer las precisión de nuestro modelo bajo diferentes escenarios, partes del dataset e incluso datos sintéticos nos hace sentir un especial orgullo. Quizá sea simplemente un objetivo que nos marcamos(tal y como comentamos en el punto 1), pero el hecho de tener la certeza de cuando se baja la métrica de error no se debe a algo espúreo, o lo peor de todo a un *bug*, nos permite desarrollar con tranquilidad. Además en el caso de existir un ranking público y otro privado, controlar tu métrica de evaluación te permite saber con mayor certeza en que percentil te encuentras.
+Especial mención a las métricas de error. Uno de los puntos a los que de manera personal más importancia le damos, es el conocer con la mayor precisión posible los intervalos de error(confianza o predicción) de nuestros modelos antes de enviarlos. Conocer las precisión de nuestro modelo bajo diferentes escenarios, partes del dataset e incluso datos sintéticos nos hace sentir un especial orgullo. Quizá sea simplemente un objetivo que nos marcamos(tal y como comentamos en el punto 1), pero el hecho de tener la certeza de cuando se baja la métrica de error no se debe a algo espúreo, o lo peor de todo a un *bug*, nos permite desarrollar con tranquilidad. Además en el caso de existir un ranking público y otro privado, controlar tu métrica de evaluación te permite saber con mayor certeza en que percentil te encuentras.
 
-La mayoría de competiciones suelen ir ligadas a una métrica de error por la cual se evalua a los participantes. Será fundamental introducirla en la evaluación de modelos, pero no debe de ser la única. Tanto a la hora de fijar una función de coste como a la hora de evaluar los modelos, deberíais tener en cuenta métricas de error complementarias que os ayuden a interpretar el desempeño de los modelos. Calcular el error mediano o el MAPE, cuando la métrica con la que os evaluarán será el error medio, puede ayudar tanto a conocer el comportamiento de vuestro modelo como a decantaros entre algoritmos que difieren en sólo mínimo porcentaje en la métrica principal en el conjunto de datos, pero no en otras.
+La mayoría de competiciones suelen ir ligadas a una métrica de error por la cual se evalúa a los participantes. Será fundamental introducirla en la evaluación de modelos, pero no debe de ser la única. Tanto a la hora de fijar una función de coste como a la hora de evaluar los modelos, deberíais tener en cuenta métricas de error complementarias que os ayuden a interpretar el desempeño de los modelos. Calcular el error mediano o el MAPE, cuando la métrica con la que os evaluarán será el error medio, puede ayudar tanto a conocer el comportamiento de vuestro modelo como a decantaros entre algoritmos que difieren en sólo mínimo porcentaje en la métrica principal en el conjunto de datos, pero no en otras.
 
 <br>
 
@@ -179,9 +181,9 @@ La mayoría de competiciones suelen ir ligadas a una métrica de error por la cu
 
 En el caso de que se trate de un Datathon organizado por alguna empresa de vuestra zona, seguramente los mejores proyectos serán llamados a un evento final de presentación de los trabajos. En otros, os pedirán una memoria presentando los resultados. Si bien es cierto, en el caso de Kaggle no suelen hacerlo.
 
-Por lo tanto, si la competición a la que te/os presentais requiere de este tipo de resultado, será importante tenerlo presente no sólo al final, sino durante todo el proceso. Una vez que se ha re-optimizado los hiperparámetros con la última librería bayesiana y *stackeado* nuestros mejores modelos, quizá sea hora de trabajar en la interpretabilidad de los resultados e incorporación de nuevos datos. En definitiva, conclusiones que sean valiosas a la hora de poner en marcha el modelo y que no quede en una simple matriz de pesos o de reglas.
+Por lo tanto, si la competición a la que te/os presentáis requiere de este tipo de resultado, será importante tenerlo presente no sólo al final, sino durante todo el proceso. Una vez que se ha re-optimizado los hiperparámetros con la última librería bayesiana y *stackeado* nuestros mejores modelos, quizá sea hora de trabajar en la interpretabilidad de los resultados e incorporación de nuevos datos. En definitiva, conclusiones que sean valiosas a la hora de poner en marcha el modelo y que no quede en una simple matriz de pesos o de reglas.
 
-En la última competición a la que asistimos se nos pedía esta presentación final a los tres mejores proyectos. Optamos por adentrarnos en el modelado de unas imagenes que se nos aportaban mediante *transfer learning*, cosa que no se nos pedía explícitamente. Una vez que modelamos la información estructurada y llevamos a cabo ciertas iteraciones sobre estos datos, pensamos que sería más enriquecedor tanto para nosotros como para las personas que proponían el concurso, la investigación sobre la extracción de información de las imagenes (información que en el caso de uso que nos ocupaba, a priori, iba a tener un impacto claro sobre la variable a predecir).
+En la última competición a la que asistimos se nos pedía esta presentación final a los tres mejores proyectos. Optamos por adentrarnos en el modelado de unas imágenes que se nos aportaban mediante *transfer learning*, cosa que no se nos pedía explícitamente. Una vez que modelamos la información estructurada y llevamos a cabo ciertas iteraciones sobre estos datos, pensamos que sería más enriquecedor tanto para nosotros como para las personas que proponían el concurso, la investigación sobre la extracción de información de las imágenes (información que en el caso de uso que nos ocupaba, a priori, iba a tener un impacto claro sobre la variable a predecir).
 
 <br>
 
@@ -189,11 +191,13 @@ En la última competición a la que asistimos se nos pedía esta presentación f
 
 Una vez finalizado el proyecto, un práctica que nos ha enriquecido y ha supuesto un antes y un después ha sido escribir algún tipo de memoria o documento para nosotros mismos. En él reflexionamos sobre la reciente participación. Analizamos los puntos fuertes y lo que debemos mejorar, tanto a nivel técnico como a nivel de equipo y por qué no a nivel emocional y de actitud. A ser posible nada más entregar y antes de saber el resultado. Sería genial si al tiempo de conocer el mismo se añadiera algún punto o reflexión más.
 
-Todas estas anotaciones os ayudarán, cada vez que os enfrenteis a un nuevo proyecto, a encararlo más preparados y no depender del 'instinto' ni de lo que la memoria selectiva os quiera recordar en momentos puntuales. 
+Todas estas anotaciones os ayudarán, cada vez que os enfrentéis a un nuevo proyecto, a encararlo más preparados y no depender del 'instinto' ni de lo que la memoria selectiva os quiera recordar en momentos puntuales. 
 
-Una mala predisposición personal, no investigar suficientemente y con cariño la distribución de los datos y sus valores extremos, una mala elección de equipo, seguir corriendo los modelos 30 minutos antes de que acabe el plazo de entrega, no preparar la exposición final con tiempo,... son situaciones que nos han pasado a muchos y no ocurre absolutamente nada por reflexionar sore ello y dejarlo por escrito. Lo fundamental es, dentro de lo posible, ¡que no se repitan en la próxima competición para **lograr conseguir aun mejores resultados! :)**
+Una mala predisposición personal, no investigar suficientemente y con cariño la distribución de los datos y sus valores extremos, una mala elección de equipo, seguir corriendo los modelos 30 minutos antes de que acabe el plazo de entrega, no preparar la exposición final con tiempo,... son situaciones que nos han pasado a muchos y no ocurre absolutamente nada por reflexionar sobre ello y dejarlo por escrito. Lo fundamental es, dentro de lo posible, ¡que no se repitan en la próxima competición para **lograr conseguir aun mejores resultados! :)**
 
 <img src="./pez_guitarra.gif" height="100px" width="200px" />
+
+
 
 <style>
 body {
