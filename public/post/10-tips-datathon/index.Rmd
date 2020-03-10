@@ -1,7 +1,7 @@
 ---
 title: "10 Tips to make the most of your Datathon"
 author: Carlos Vecina Tebar
-date: "2020-03-11"
+date: "2020-03-12"
 slug: "10-tips-datathon"
 translationKey: "10-advices-datathon"
 output: 
@@ -22,13 +22,19 @@ draft: false
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Are you considering to check in a Datathon or data competition? In this post we'll present 10 tips that can help you to outperform your rivals. So without further ado, let’s get started.
+Are you considering to join a Datathon or data competition? In this post we'll bring you 10 tips that can help you to outperform your competitors. So without further ado;
 
 <br>
 
-**1. Set your main goal and check your time and resources(skills, hardware...)**
+**1. Set your main goal and check your time and resources (skills, hardware...)**
 
-**2. Choose the challenge field/industry according your interests**
+Depending on your profile and the competition requirements, you should think about your main goal by joining a data challenge. It could be learning about a new tool, improve your coding and algorithmical skills, achieve the 1st position and therefore the prize, or just for fun. Whatever it is, that's great,
+
+It's important to have a bright and well-defined picture of your goal, because you are going to invest so much time in the project. Having clear your personal idea of success will help you in your valley of despair.
+
+**2. Choose the challenge field/industry according your interests.**
+
+Following with the 'you're going to invest so much time' idea, how are you joining a challange in a field that doesn't inspire you? Hopefully, many organizations and platforms are launching it's own data challanges open to the public. Kaggle is the principal one, nevertheless there are many more. We propose several options  [here](../../vizs-and-tips/plataformas-donde-participar-competiciones-de-datos).
 
 **3. Build the right team. Set up tools to exchange code.**
 
@@ -46,8 +52,6 @@ Are you considering to check in a Datathon or data competition? In this post we'
 
 **10. Write down your observed strengths and weaknesses. It will be the starting point for your next proyect. **
 
-- <font size="2">6. Establece la estructura del proyecto y del código.</font>
-- <font size="2">7. Lanza los primeros modelos.</font>
-- <font size="2">8. Validación cruzada, OOS y backtesting.</font>
-- <font size="2">9. Interpretación y evaluación de resultados desde el punto de vista práctico y/o negocio.</font>
-- <font size="2">10. Escribe una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.</font>
+<img src="./pez_guitarra.gif" height="100px" width="200px" />
+
+

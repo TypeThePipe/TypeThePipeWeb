@@ -5,7 +5,7 @@
     <link>/es/authors/</link>
       <atom:link href="/es/authors/index.xml" rel="self" type="application/rss+xml" />
     <description>Authors</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Tue, 10 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Thu, 12 Mar 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Authors</title>
@@ -15,7 +15,7 @@
     <item>
       <title>Carlos Vecina</title>
       <link>/es/authors/carlos-vecina/</link>
-      <pubDate>Tue, 10 Mar 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 12 Mar 2020 00:00:00 +0000</pubDate>
       <guid>/es/authors/carlos-vecina/</guid>
       <description>&lt;p&gt;Carlos Vecina es un científico de datos con experienca en la aplicación del Machine Learning y de la Inteligencia Artificial con el objetivo de aportar gran valor a negocio en áreas como el CRM, el Marketing y en la compra-venta dentro del mercado eléctrico.&lt;/p&gt;
 </description>

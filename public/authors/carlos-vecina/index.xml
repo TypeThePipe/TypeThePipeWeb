@@ -5,7 +5,7 @@
     <link>/authors/carlos-vecina/</link>
       <atom:link href="/authors/carlos-vecina/index.xml" rel="self" type="application/rss+xml" />
     <description>Carlos Vecina</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 11 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 12 Mar 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Carlos Vecina</title>
@@ -15,15 +15,18 @@
     <item>
       <title>10 Tips to make the most of your Datathon</title>
       <link>/post/10-tips-datathon/</link>
-      <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
+      <pubDate>Thu, 12 Mar 2020 00:00:00 +0000</pubDate>
       <guid>/post/10-tips-datathon/</guid>
       <description>
 
 
-&lt;p&gt;Are you considering to check in a Datathon or data competition? In this post we’ll present 10 tips that can help you to outperform your rivals. So without further ado, let’s get started.&lt;/p&gt;
+&lt;p&gt;Are you considering to join a Datathon or data competition? In this post we’ll bring you 10 tips that can help you to outperform your competitors. So without further ado;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1. Set your main goal and check your time and resources(skills, hardware…)&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2. Choose the challenge field/industry according your interests&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. Set your main goal and check your time and resources (skills, hardware…)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Depending on your profile and the competition requirements, you should think about your main goal by joining a data challenge. It could be learning about a new tool, improve your coding and algorithmical skills, achieve the 1st position and therefore the prize, or just for fun. Whatever it is, that’s great,&lt;/p&gt;
+&lt;p&gt;It’s important to have a bright and well-defined picture of your goal, because you are going to invest so much time in the project. Having clear your personal idea of success will help you in your valley of despair.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. Choose the challenge field/industry according your interests.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Following with the ‘you’re going to invest so much time’ idea, how are you joining a challange in a field that doesn’t inspire you? Hopefully, many organizations and platforms are launching it’s own data challanges open to the public. Kaggle is the principal one, nevertheless there are many more. We propose several options &lt;a href=&#34;../../vizs-and-tips/plataformas-donde-participar-competiciones-de-datos&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;3. Build the right team. Set up tools to exchange code.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;4. Deep research about the challenge topic and environment.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;5. Excel your exploratory analysis. Remember you could use external data sources.&lt;/strong&gt;&lt;/p&gt;
@@ -32,13 +35,7 @@
 &lt;p&gt;&lt;strong&gt;8. Cross Validation, OOS and backtesting.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;9. Model interpretability&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;10. Write down your observed strengths and weaknesses. It will be the starting point for your next proyect. &lt;/strong&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;font size=&#34;2&#34;&gt;6. Establece la estructura del proyecto y del código.&lt;/font&gt;&lt;/li&gt;
-&lt;li&gt;&lt;font size=&#34;2&#34;&gt;7. Lanza los primeros modelos.&lt;/font&gt;&lt;/li&gt;
-&lt;li&gt;&lt;font size=&#34;2&#34;&gt;8. Validación cruzada, OOS y backtesting.&lt;/font&gt;&lt;/li&gt;
-&lt;li&gt;&lt;font size=&#34;2&#34;&gt;9. Interpretación y evaluación de resultados desde el punto de vista práctico y/o negocio.&lt;/font&gt;&lt;/li&gt;
-&lt;li&gt;&lt;font size=&#34;2&#34;&gt;10. Escribe una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.&lt;/font&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;pez_guitarra.gif&#34; height=&#34;100px&#34; width=&#34;200px&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     

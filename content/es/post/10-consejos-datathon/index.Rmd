@@ -1,7 +1,7 @@
 ---
 title: "10 consejos para triunfar en tu próximo Datathon"
 author: Carlos Vecina Tebar
-date: "2020-03-10"
+date: "2020-03-12"
 slug: "10-consejos-datathon"
 translationKey: "10-advices-datathon"
 output: 
