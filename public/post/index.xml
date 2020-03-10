@@ -2,21 +2,51 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts | TypeThePipe</title>
-    <link>https://typethepipe.com/post/</link>
-      <atom:link href="https://typethepipe.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <link>/post/</link>
+      <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 21 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 11 Mar 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://typethepipe.com/img/icon-192.png</url>
+      <url>/img/icon-192.png</url>
       <title>Posts</title>
-      <link>https://typethepipe.com/post/</link>
+      <link>/post/</link>
     </image>
     
     <item>
+      <title>10 Tips to make the most of your Datathon</title>
+      <link>/post/10-tips-datathon/</link>
+      <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/post/10-tips-datathon/</guid>
+      <description>
+
+
+&lt;p&gt;Are you considering to check in a Datathon or data competition? In this post we’ll present 10 tips that can help you to outperform your rivals. So without further ado, let’s get started.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. Set your main goal and check your time and resources(skills, hardware…)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. Choose the challenge field/industry according your interests&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;3. Build the right team. Set up tools to exchange code.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;4. Deep research about the challenge topic and environment.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;5. Excel your exploratory analysis. Remember you could use external data sources.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;6. Set your project and code structure.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;7. Run your models.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;8. Cross Validation, OOS and backtesting.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;9. Model interpretability&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;10. Write down your observed strengths and weaknesses. It will be the starting point for your next proyect. &lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;font size=&#34;2&#34;&gt;6. Establece la estructura del proyecto y del código.&lt;/font&gt;&lt;/li&gt;
+&lt;li&gt;&lt;font size=&#34;2&#34;&gt;7. Lanza los primeros modelos.&lt;/font&gt;&lt;/li&gt;
+&lt;li&gt;&lt;font size=&#34;2&#34;&gt;8. Validación cruzada, OOS y backtesting.&lt;/font&gt;&lt;/li&gt;
+&lt;li&gt;&lt;font size=&#34;2&#34;&gt;9. Interpretación y evaluación de resultados desde el punto de vista práctico y/o negocio.&lt;/font&gt;&lt;/li&gt;
+&lt;li&gt;&lt;font size=&#34;2&#34;&gt;10. Escribe una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.&lt;/font&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Pathfinding Algorithms Visualizer using R! (I) Setting up the interactive grid</title>
-      <link>https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/</link>
+      <link>/post/pathfinding-algorithms-visualizer-using-r/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/</guid>
+      <guid>/post/pathfinding-algorithms-visualizer-using-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -303,11 +333,11 @@ p {
     
     <item>
       <title>Energy forecasting error metrics</title>
-      <link>https://typethepipe.com/post/energy-forecasting-error-metrics/</link>
+      <link>/post/energy-forecasting-error-metrics/</link>
       <pubDate>Sat, 21 Sep 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/post/energy-forecasting-error-metrics/</guid>
+      <guid>/post/energy-forecasting-error-metrics/</guid>
       <description>
-&lt;script src=&#34;https://typethepipe.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 
 &lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
@@ -624,7 +654,7 @@ in our case this metric isn’t optimal for several reasons:&lt;/p&gt;
 &lt;li&gt;It’s a nice alternative to NMAE since a &lt;em&gt;capacity&lt;/em&gt; value is not required.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;This formula allows for a cool graphic interpretation of the error: the numerator matchs with the yellow area whereas the denominator corresponds to the sum of the blue and yellow areas:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/post/Forecasting-error-metrics_files/EMAE_plot.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/Forecasting-error-metrics_files/EMAE_plot.png&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;conclusions&#34; class=&#34;section level1&#34;&gt;
@@ -655,11 +685,11 @@ in our case this metric isn’t optimal for several reasons:&lt;/p&gt;
     
     <item>
       <title>Symmetric MAPE is not symmetric</title>
-      <link>https://typethepipe.com/post/symmetric-mape-is-not-symmetric/</link>
+      <link>/post/symmetric-mape-is-not-symmetric/</link>
       <pubDate>Mon, 26 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/post/symmetric-mape-is-not-symmetric/</guid>
+      <guid>/post/symmetric-mape-is-not-symmetric/</guid>
       <description>
-&lt;script src=&#34;https://typethepipe.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
@@ -967,9 +997,9 @@ It shows, indeed, better statistical properties than others metrics:&lt;/p&gt;
     
     <item>
       <title>Turn your GGplot to 3D animation. Awesome 2D to 3D plots in R with Rayshader</title>
-      <link>https://typethepipe.com/post/ggplot-to-3d-in-r-with-rayshader/</link>
+      <link>/post/ggplot-to-3d-in-r-with-rayshader/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/post/ggplot-to-3d-in-r-with-rayshader/</guid>
+      <guid>/post/ggplot-to-3d-in-r-with-rayshader/</guid>
       <description>
 
 
@@ -977,7 +1007,7 @@ It shows, indeed, better statistical properties than others metrics:&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;In 7 minutes reading, You will learn how to turn your ggplot visualizations into amazing interactive 3D plots you can export or embed in HTML/Rmarkdown. Or even better, you will export as mp4 an animation rotating the figure.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;As a use case, we are going to join the Spanish demographic data and GIS map, and then visualize it&lt;/em&gt;&lt;/p&gt;
 &lt;hr /&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_header.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_header.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;&lt;strong&gt;1. Introduction&lt;/strong&gt;&lt;/h2&gt;
@@ -990,7 +1020,7 @@ It shows, indeed, better statistical properties than others metrics:&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;In my view, Tyler Morgan-Wall (package’s author) hit the jackpot with the new addition of two specific functions. These are plot_gg() and render_movie(). The first one converts the ggplot to a 3D figure using one or two lines of code making it deadly-simple. The second one renders an animation in which we can set up several parameters like zoom, fps, angles and inclinations… as user-friendly as possible.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_repo.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_repo.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;div id=&#34;lets-try-these-new-functionalities&#34; class=&#34;section level4&#34;&gt;
 &lt;h4&gt;&lt;strong&gt;Let’s try these new functionalities! &lt;/strong&gt;&lt;/h4&gt;
@@ -1140,7 +1170,7 @@ plot_cities &amp;lt;- ggplot() +
   scale_fill_gradientn(colours=myPalette(4)) +                 # Choose palette colours.
   labs(fill=&amp;quot;Avg age&amp;quot;)
 plot(plot_cities)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/ggplot-to-3d-in-r-with-rayshader/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;d-rayshader-visualization&#34; class=&#34;section level3&#34;&gt;
@@ -1149,7 +1179,7 @@ plot(plot_cities)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Let’s see how it works&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_gg(plot_cities,multicore=TRUE,width=5,height=3,scale=310)    # Plot_gg de rayshader
 render_snapshot()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/ggplot-to-3d-in-r-with-rayshader/index_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;200%&#34; height=&#34;200%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader/index_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;200%&#34; height=&#34;200%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;Hmm you told something about render_movie()… What if we anime it?&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
@@ -1159,7 +1189,7 @@ render_snapshot()&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;In the last plot, it results the correct angle election as a key point. But what if we animate it with a rotating effect?&lt;/p&gt;
 &lt;p&gt;This is what the following function take cares on:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;render_movie(&amp;quot;img/movie_spain.mp4&amp;quot;,frames = 720, fps=30,zoom=0.6,fov = 30)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/movie_spain.gif&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/movie_spain.gif&#34; /&gt;&lt;/p&gt;
 &lt;style&gt;
 body {
 text-align: justify}

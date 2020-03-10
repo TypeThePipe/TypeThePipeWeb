@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Authors | TypeThePipe</title>
-    <link>https://typethepipe.com/authors/</link>
-      <atom:link href="https://typethepipe.com/authors/index.xml" rel="self" type="application/rss+xml" />
+    <link>/authors/</link>
+      <atom:link href="/authors/index.xml" rel="self" type="application/rss+xml" />
     <description>Authors</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 21 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 11 Mar 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://typethepipe.com/img/icon-192.png</url>
+      <url>/img/icon-192.png</url>
       <title>Authors</title>
-      <link>https://typethepipe.com/authors/</link>
+      <link>/authors/</link>
     </image>
     
     <item>
       <title>Carlos Vecina</title>
-      <link>https://typethepipe.com/authors/carlos-vecina/</link>
-      <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/authors/carlos-vecina/</guid>
+      <link>/authors/carlos-vecina/</link>
+      <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/authors/carlos-vecina/</guid>
       <description>&lt;p&gt;Carlos Vecina is a data scientist with experience using ML and AI to bring value to business in CRM, Marketing and energy markets environments.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Pablo Canovas</title>
-      <link>https://typethepipe.com/authors/pablo-canovas/</link>
+      <link>/authors/pablo-canovas/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/authors/pablo-canovas/</guid>
+      <guid>/authors/pablo-canovas/</guid>
       <description>&lt;p&gt;Pablo Cánovas is a data scientist with experience developing machine learning models applied to electricity markets.&lt;/p&gt;
 </description>
     </item>
