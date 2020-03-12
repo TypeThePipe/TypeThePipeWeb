@@ -88,7 +88,7 @@
   
   
   
-  <link rel="stylesheet" href="/css/academic.min.8dfc10e379c109c100b9c00a0a3bbf93.css">
+  <link rel="stylesheet" href="/css/academic.min.1750436c7ddbeec3957033478f17222e.css">
 
   
 
@@ -462,7 +462,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    2 min read
+    5 min read
   </span>
   
 
@@ -612,10 +612,76 @@
 <p><strong>2. Choose the challenge field/industry according your interests.</strong></p>
 <p>Following with the ‘you’re going to invest so much time’ idea, how are you joining a challange in a field that doesn’t inspire you? Hopefully, many organizations and platforms are launching it’s own data challanges open to the public. Kaggle is the principal one, nevertheless there are many more. We propose several options <a href="../../vizs-and-tips/plataformas-donde-participar-competiciones-de-datos">here</a>.</p>
 <p><strong>3. Build the right team. Set up tools to exchange code.</strong></p>
+<p>You should choose your teammates depending on you principal objective. It’s an unseen topic in related posts, but we consider it is sufficiently important one.</p>
+<p>You better choose an inspiring teammate you feel good with and encourage you if you want to learn about a new topic or technology. If the project needs different profiles and you want to be among the prize winners, go for a multidisciplinary team. If the projects doesn’t need it, choose a teammate with your skills level. If it’s possible, a little more skilled.</p>
+<p>These are just a few examples. The main point here is choosing teammates to maximize invested time return by minimizing interpersonal problems and strengthen synergies.</p>
 <p><strong>4. Deep research about the challenge topic and environment.</strong></p>
+<p>Once you have built the team, we propose you to start a research about the industry your challenge is on. This effort will lead you to a better understanding of the problem and the solution, avoiding useless iterations in you data science workflow. By starting with clear premises you will take apart basic concetps missunderstandings, fact that could fool your whole solution and conclusions.</p>
+<p>Let’s explain this concept. Supose your challange consist on forecasting the conversion rate given a product porfolio, based on the online activity recorded by Google Analytics. Here, we must have clear-minded and relevant knowdlege about this data source behaviour. How the bounce rate works, the customer journey recording from he open our webpage and is matched with a cookie to the final conversion, leaving the web or logging as user. Also different behaviours of null records, bots, several cases where the default source is ‘direct’…</p>
+<p>Without this kind of information it could be difficult to craft meaningful variables to increase de model performance. But worst of all, any conclusion you get is most likely to be missunderstood and impossible to get powerful and business-disruption insights.</p>
+<p>Without this kind of environmental information it could be difficult to craft meaningful variables to increase de model performance. But worst of all, any conclusion you get is most likely to be missunderstood and impossible to get powerful and business-disruption insights.</p>
 <p><strong>5. Excel your exploratory analysis. Remember you could use external data sources.</strong></p>
+<p>As any data science project, it consist on iterative phases. Since you have an industry landscape understanding, you will take a look on the data. If any doubt come to your mind, return to the research stage.</p>
+<p>So in this exploratory phase, you are focused in your data and extract information about features itself and interactions. We usually start summarizing the features by its distribution, number of NAs, categories… Features wiht high NAs percentaje or with a minimal varianze we can choose between removing or encoding it as binary variable NA/Not_NA Majoritay_Class/Not_Majoritary class. Many other encoding techniques can be applied, <a href="https://www.kaggle.com/waydeherman/tutorial-categorical-encoding">like these.</a>. The full exploratory toolbox can be found on Google or Kaggle.</p>
+<p>Finally, as a reminder, you usually you can use external data sources to enrich the providen data. Demographic data to contextualize your zip code feature. Or a past event to explain a spikes in your data. Obviously, you must take into account which kind of this information you will have in your forecasting set.</p>
+<p><br></p>
 <p><strong>6. Set your project and code structure.</strong></p>
+<p>Here we will show you our most common project structure. The directory structure of a Data Science CdU depends on the project nature, its develop and production environments.</p>
+<p>Project:</p>
+<ul>
+<li>data:
+<ul>
+<li>1_raw:</li>
+<li>2_processed:</li>
+</ul></li>
+<li>models:</li>
+<li>notebooks:
+<ul>
+<li>1_eda:</li>
+<li>2_poc:</li>
+<li>3_modeling:</li>
+<li>4_evaluation:</li>
+</ul></li>
+<li>src:
+<ul>
+<li>1_get_data:</li>
+<li>2_processing:</li>
+<li>3_modeling:</li>
+<li>4_evaluation:</li>
+<li>5_helpers:</li>
+</ul></li>
+</ul>
+<p>We consider we can simplify this structure in the Datathon case, because we don’t need to automate the ETL or de assesment and validation process inside a productive workflow. In fact, the exploratory analysis and the main script are the principal points here. Our main script calls to the preprocess, train, test and evaluation modules.</p>
+<p>Datathon_Project:</p>
+<ul>
+<li>data:</li>
+<li>exploratory:</li>
+<li>helpers:</li>
+<li>log:</li>
+<li>main.R / main.py</li>
+<li>outputs:
+<ul>
+<li>models:</li>
+<li>preds:</li>
+<li>validation:</li>
+</ul></li>
+</ul>
+<p>Regarding the <strong>main script structure</strong>, we usually build a custom cross validation with the objective of being flexible to train different models and stack its predictions. Our project template is as follows:</p>
+<p>Loading environment (packages, modules and functions)
+Crafting features
+Split dataset and datasetOOSample
+Split dataset into folds
+For each fold in folds:
+Training with the rest
+Predict in fold
+Evalutaion
+(In the last fold, stacking models training if you want it)
+Out of Sample prediction
+Evaluación (Base models and stacking comparaison)
+Test set prediction.</p>
+<p><br></p>
 <p><strong>7. Run your models.</strong></p>
+<p>Firs of all, we advise you to focus in a model family and loss function that better fit a priori our data, response variable and evaluated metric. The first results let you to test your code and pipeline and will be the starting point for further improvements.</p>
 <p><strong>8. Cross Validation, OOS and backtesting.</strong></p>
 <p><strong>9. Model interpretability</strong></p>
 <p><strong>10. Write down your observed strengths and weaknesses. It will be the starting point for your next proyect. </strong></p>
