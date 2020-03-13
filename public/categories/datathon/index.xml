@@ -112,10 +112,7 @@ Also, there such an amazing info in Kaggle kernels, Reddit feed and YouTube spea
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;9. Model interpretability&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;In some data competitions, the best teams have to expose their projects in a final event. Here, in addition to talk about your data flow and research done, you probably want to talk about some insights and interpretable interactions between data and not only the model prediction.&lt;/p&gt;
-&lt;div class=&#34;figure&#34;&gt;
-&lt;img src=&#34;shap_vs_gain.png&#34; alt=&#34;interpretabilidad shap xgboost&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;interpretabilidad shap xgboost&lt;/p&gt;
-&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;shap_vs_gain.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Many packages like SHAP or LIME integrate different modules focused on the model and predictions interpretability. These modules instead of looking for a “mean” variable importance in a global point of view, compose additionally a local feature contribution in each predicted observation.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;10. Write down your observed strengths and weaknesses. It will be the starting point for your next proyect. &lt;/strong&gt;&lt;/p&gt;

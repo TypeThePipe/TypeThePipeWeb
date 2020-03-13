@@ -153,7 +153,7 @@ To know about our forecast uncertainity behind several scenarios, data subsets a
 
 In some data competitions, the best teams have to expose their projects in a final event. Here, in addition to talk about your data flow and research done, you probably want to talk about some insights and interpretable interactions between data and not only the model prediction.
 
-![interpretabilidad shap xgboost](./shap_vs_gain.png)
+![](./shap_vs_gain.png)
 
 Many packages like SHAP or LIME integrate different modules focused on the model and predictions interpretability. These modules instead of looking for a "mean" variable importance in a global point of view, compose additionally a local feature contribution in each predicted observation. 
 
