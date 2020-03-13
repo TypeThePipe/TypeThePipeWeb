@@ -16,7 +16,7 @@ email: ""
 interests:
 - Artificial Intelligence
 - Time Series Forecasting
-- Graph theory
+- Deep Learning
 - Uncertainity
 - Econometrics
 name: Carlos Vecina

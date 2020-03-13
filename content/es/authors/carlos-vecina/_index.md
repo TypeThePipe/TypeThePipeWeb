@@ -16,7 +16,7 @@ email: ""
 interests:
 - Inteligencia artificial
 - Predicción de series temporales
-- Teoría de grafos
+- Deep Learning
 - Incertidumbre y teoría de valores extremos
 - Econometría
 name: Carlos Vecina
