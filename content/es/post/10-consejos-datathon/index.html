@@ -1,7 +1,7 @@
 ---
 title: "10 consejos para triunfar en tu próximo Datathon"
 author: Carlos Vecina Tebar
-date: "2020-03-12"
+date: "2020-03-11"
 slug: "10-consejos-datathon"
 translationKey: "10-advices-datathon"
 output: 
@@ -107,18 +107,22 @@ Una estructura bastante generalizada sería la siguiente:</p>
 </ul></li>
 </ul>
 <p>En cuanto a la <strong>estructura del main</strong>, solemos llevar a cabo una validación cruzada manual con el objetivo de ganar flexibilidad a la hora de usar modelos de diferente naturaleza y poder <em>stackear</em> sus predicciones y compararlos. Cierto es que soluciones paquetizadas como scikit-learn o H2O pueden hacer este trabajo en el caso de que el tiempo disponible y características de la competición indiquen su uso. Nuestra propuesta tendría este esqueleto:</p>
-<p>Carga de entorno (paquetes, módulos y funciones)
-Diferentes craft de variables
-Separación en dataset y datasetOOSample
-Separar el dataset en folds
-Por cada fold:
-Entrenar con el resto
-Predecir en el fold
-Evaluación
-(En el último fold, entrenar si se quiere modelos de stacking con las predicciones en trainSet de los anteriores modelos)
-Predicción OOSample (Comparación de modelos base y de stacking)
-Evaluación
-Predicción del conjunto de test a enviar.</p>
+<ul>
+<li>Carga de entorno (paquetes, módulos y funciones)</li>
+<li>Diferentes craft de variables</li>
+<li>Separación en dataset y datasetOOSample</li>
+<li>Separar el dataset en folds</li>
+<li>Por cada fold:
+<ul>
+<li>Entrenar con el resto</li>
+<li>Predecir en el fold</li>
+<li>Evaluación</li>
+<li>(En el último fold, entrenar si se quiere modelos de stacking con las predicciones en trainSet de los anteriores modelos)</li>
+</ul></li>
+<li>Predicción OOSample (Comparación de modelos base y de stacking)</li>
+<li>Evaluación</li>
+<li>Predicción del conjunto de test a enviar.</li>
+</ul>
 <p><br></p>
 <p><strong>7. Lanzar los primeros modelos.</strong></p>
 <p>En primer lugar os aconsejamos <strong>centraros en una familia de algoritmos y función de coste que a priori mejor se adapten a los datos y a la variable a predecir</strong>. Incluso teniendo en cuenta la métrica de error por la que se os va a medir. Es importante sacar los primeros resultados, a ser posible dentro de una estructura similar a la propuesta anteriormente. Las primeras métricas de error os ayudaran en muchos aspectos. Por un lado os pueden dar pistas de <em>bugs</em> en el código (métricas de error no realistas). También os servirá como base a partir de la cual ir mejorando, y como estamos seguros de que lo haréis, esto será ademañs un <em>boost</em> de ánimo.</p>
@@ -126,7 +130,7 @@ Predicción del conjunto de test a enviar.</p>
 <p>Comentar que la participación en el foro y <strong>kernels de Kaggle, hilos de Reddit y videos en Youtube</strong> será un buen complemento a la lectura de <em>papers</em>.</p>
 <p><br></p>
 <p><strong>8. Validación cruzada, OOS y backtesting.</strong></p>
-<p>Especial mención a las métricas de error. Uno de los puntos a los que de manera personal más importancia le damos, es el <strong>conocer con la mayor precisión posible los intervalos de error(confianza o predicción) de nuestros modelos antes de enviar sus predicciones.</strong></p>
+<p>Especial mención a las métricas de error. Uno de los puntos a los que de manera personal más importancia le damos, es el <strong>conocer con la mayor precisión posible los intervalos de error (confianza o predicción) de nuestros modelos antes de enviar sus predicciones.</strong></p>
 <p>Conocer las precisión de nuestro modelo bajo diferentes escenarios, partes del dataset e incluso datos sintéticos nos hace sentir un especial orgullo. Quizá sea simplemente un objetivo que nos marcamos(tal y como comentamos en el punto 1), pero el hecho de tener la certeza de cuando se baja la métrica de error no se debe a algo espúreo, o lo peor de todo a un <em>bug</em> o <em>leakage</em> de información, nos permite desarrollar con tranquilidad. Además en el caso de existir un ranking público y otro privado, controlar tu métrica de evaluación te permite saber con mayor certeza en que percentil te encuentras.</p>
 <p>La mayoría de competiciones suelen ir ligadas a una métrica de error por la cual se evalúa a los participantes. Será fundamental introducirla en la evaluación de modelos, pero no debe de ser la única. Tanto a la hora de fijar una función de coste como a la hora de evaluar los modelos, deberíais tener en cuenta métricas de error complementarias que os ayuden a interpretar el desempeño de los modelos. Calcular el error mediano o el MAPE, cuando la métrica con la que os evaluarán será el error medio, puede ayudar tanto a conocer el comportamiento de vuestro modelo como a decantaros entre algoritmos que difieren en sólo mínimo porcentaje en la métrica principal en el conjunto de datos, pero no en otras.</p>
 <p>Casos especiales serán aquellos en los cuales nuestros datos tienen un <strong>fuerte componente temporal</strong>, o directamente están estructurados en forma de serie temporal. Aquí en contramos discusiones específicas: variaciones de método de cross validation para evitar el <em>leakage</em> de información entre sets, la validación walk forward o utilización de datos del futuro para entrenar, el estudio del <em>decay</em> de la precisión, clustering de series temporales. Temas no triviales a los que dedicaremos otro post.</p>
@@ -134,8 +138,8 @@ Predicción del conjunto de test a enviar.</p>
 <p><strong>9. Interpretabilidad de modelos. Evaluación de resultados desde el punto de vista práctico y/o negocio.</strong>
 <img src="shap_vs_gain.png" alt="interpretabilidad shap xgboost" /></p>
 <p>En el caso de que se trate de un Datathon organizado por alguna empresa de vuestra zona, seguramente los mejores proyectos serán llamados a un evento final en el que se expondrán vuestros trabajos. En otros, os pedirán una memoria presentando los resultados. Si bien es cierto, en el caso de Kaggle no suelen hacerlo.</p>
-<p>Por lo tanto, si la competición a la que te/os presentáis requiere de este tipo de resultado, será importante tenerlo presente no sólo al final, sino durante todo el proceso. Además, una vez que se ha re-optimizado los hiperparámetros con la última librería bayesiana y <em>stackeado</em> nuestros mejores modelos, quizá sea hora de trabajar en la interpretabilidad de los resultados e incorporación de nuevos datos. En definitiva, conclusiones que sean valiosas a la hora de poner en marcha el modelo y que no quede en una simple estructura de pesos optimizados o de reglas.</p>
-<p>Paquetes y módulos como SHAP o LIME incorporan métodos enfocados en la interpretabilidad de cada una de las predicciones. Esto supone un paso más allá a la hora de interpretar nuestros modelos, ya que además de la importancia global “media” de cada variable en el modelo, obtenida en los coeficientes o por métricas como la importancia de variables que suelen traer los algoritmos de árboles y bagging/boosting, podemos obtener el peso de cada variable en una observación específica del set de test.</p>
+<p>Por lo tanto, si la competición a la que te/os presentáis requiere de este tipo de resultado, será importante tenerlo presente no sólo al final, sino durante todo el proceso. Además, una vez que se ha “re-optimizado” los hiperparámetros con la última librería bayesiana y <em>stackeado</em> nuestros mejores modelos, quizá sea hora de trabajar en la interpretabilidad de los resultados e incorporación de nuevos datos. En definitiva, conclusiones que sean valiosas a la hora de poner en marcha el modelo y que no quede en una simple estructura de pesos optimizados o de reglas.</p>
+<p>Paquetes y módulos como SHAP o LIME incorporan métodos enfocados en la interpretabilidad de cada una de las predicciones. Esto supone un paso más allá a la hora de examinar y entender nuestros modelos, ya que además de la importancia global “media” de cada variable en el modelo, obtenida en los coeficientes o por métricas como la importancia de variables que suelen traer los algoritmos de árboles y bagging/boosting, podemos obtener el peso de cada variable en una determinada observación.</p>
 <p>Por ejemplo, en nuestra última competición a la que asistimos se nos pedía esta presentación final a los tres mejores proyectos. Una vez que modelamos la información estructurada y llevamos a cabo ciertas iteraciones sobre estos datos, <strong>pensamos que sería más enriquecedor tanto para nosotros como para las personas que proponían el concurso, la investigación sobre la extracción de información de las imágenes</strong> (información que en el caso de uso que nos ocupaba, a priori, iba a tener un impacto claro sobre la variable a predecir). Por lo tanto optamos por adentrarnos en el modelado de unas imágenes que se nos aportaban, haciendo uso del <em>transfer learning</em>, cosa que no se nos pedía explícitamente. Llegamos a bastantes <em>insights</em> interpretando los que las convoluciones de estos modelos preentrenados detectaban en nuestras imágenes, y lo que esmás importante, aprendimos mucho durante el proceso.</p>
 <p><br></p>
 <p><strong>10. Escribir una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.</strong></p>

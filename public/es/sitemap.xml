@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>/es/post/10-consejos-datathon/</loc>
-    <lastmod>2020-03-12T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -19,7 +19,7 @@
   
   <url>
     <loc>/es/authors/</loc>
-    <lastmod>2020-03-12T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -34,7 +34,7 @@
   
   <url>
     <loc>/es/authors/carlos-vecina/</loc>
-    <lastmod>2020-03-12T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -49,7 +49,7 @@
   
   <url>
     <loc>/es/categories/</loc>
-    <lastmod>2020-03-12T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -64,7 +64,7 @@
   
   <url>
     <loc>/es/categories/datathon/</loc>
-    <lastmod>2020-03-12T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -79,7 +79,7 @@
   
   <url>
     <loc>/es/categories/post/</loc>
-    <lastmod>2020-03-12T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -94,7 +94,7 @@
   
   <url>
     <loc>/es/post/</loc>
-    <lastmod>2020-03-12T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -109,7 +109,7 @@
   
   <url>
     <loc>/es/</loc>
-    <lastmod>2020-03-12T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -353,6 +353,21 @@
   </url>
   
   <url>
+    <loc>/es/vizs-and-tips/plataformas-competiciones-de-datos/</loc>
+    <lastmod>2019-10-07T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/data-competition-platforms/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/plataformas-competiciones-de-datos/"
+                />
+  </url>
+  
+  <url>
     <loc>/es/post/de-ggplot-a-3d-en-r-con-rayshader/</loc>
     <lastmod>2019-09-24T21:56:15+02:00</lastmod>
     <xhtml:link
@@ -469,10 +484,6 @@
                 hreflang="es"
                 href="/es/authors/pablo-canovas/"
                 />
-  </url>
-  
-  <url>
-    <loc>/es/vizs-and-tips/plataformas-donde-participar-competiciones-de-datos/</loc>
   </url>
   
   <url>

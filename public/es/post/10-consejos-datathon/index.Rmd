@@ -1,7 +1,7 @@
 ---
 title: "10 consejos para triunfar en tu próximo Datathon"
 author: Carlos Vecina Tebar
-date: "2020-03-12"
+date: "2020-03-11"
 slug: "10-consejos-datathon"
 translationKey: "10-advices-datathon"
 output: 
@@ -140,18 +140,18 @@ Projecto_Datathon:
 
 En cuanto a la **estructura del main**, solemos llevar a cabo una validación cruzada manual con el objetivo de ganar flexibilidad a la hora de usar modelos de diferente naturaleza y poder *stackear* sus predicciones y compararlos. Cierto es que soluciones paquetizadas como scikit-learn o H2O pueden hacer este trabajo en el caso de que el tiempo disponible y características de la competición indiquen su uso. Nuestra propuesta tendría este esqueleto:
 
-Carga de entorno (paquetes, módulos y funciones)
-Diferentes craft de variables
-Separación en dataset y datasetOOSample
-Separar el dataset en folds
-Por cada fold:
-  Entrenar con el resto
-  Predecir en el fold
-  Evaluación
-  (En el último fold, entrenar  si se quiere modelos de stacking con las predicciones en trainSet de los anteriores modelos)
-Predicción OOSample (Comparación de modelos base y de stacking)
-Evaluación
-Predicción del conjunto de test a enviar.
+- Carga de entorno (paquetes, módulos y funciones)
+- Diferentes craft de variables
+- Separación en dataset y datasetOOSample
+- Separar el dataset en folds
+- Por cada fold:
+  - Entrenar con el resto
+  - Predecir en el fold
+  - Evaluación
+  - (En el último fold, entrenar  si se quiere modelos de stacking con las predicciones en trainSet de los anteriores modelos)
+- Predicción OOSample (Comparación de modelos base y de stacking)
+- Evaluación
+- Predicción del conjunto de test a enviar.
 
 <br>
 
@@ -168,7 +168,7 @@ Comentar que la participación en el foro y **kernels de Kaggle, hilos de Reddit
 
 **8. Validación cruzada, OOS y backtesting.**
 
-Especial mención a las métricas de error. Uno de los puntos a los que de manera personal más importancia le damos, es el **conocer con la mayor precisión posible los intervalos de error(confianza o predicción) de nuestros modelos antes de enviar sus predicciones.**
+Especial mención a las métricas de error. Uno de los puntos a los que de manera personal más importancia le damos, es el **conocer con la mayor precisión posible los intervalos de error (confianza o predicción) de nuestros modelos antes de enviar sus predicciones.**
 
 Conocer las precisión de nuestro modelo bajo diferentes escenarios, partes del dataset e incluso datos sintéticos nos hace sentir un especial orgullo. Quizá sea simplemente un objetivo que nos marcamos(tal y como comentamos en el punto 1), pero el hecho de tener la certeza de cuando se baja la métrica de error no se debe a algo espúreo, o lo peor de todo a un *bug* o *leakage* de información, nos permite desarrollar con tranquilidad. Además en el caso de existir un ranking público y otro privado, controlar tu métrica de evaluación te permite saber con mayor certeza en que percentil te encuentras.
 
@@ -183,9 +183,9 @@ Casos especiales serán aquellos en los cuales nuestros datos tienen un **fuerte
 
 En el caso de que se trate de un Datathon organizado por alguna empresa de vuestra zona, seguramente los mejores proyectos serán llamados a un evento final en el que se expondrán vuestros trabajos. En otros, os pedirán una memoria presentando los resultados. Si bien es cierto, en el caso de Kaggle no suelen hacerlo.
 
-Por lo tanto, si la competición a la que te/os presentáis requiere de este tipo de resultado, será importante tenerlo presente no sólo al final, sino durante todo el proceso. Además, una vez que se ha re-optimizado los hiperparámetros con la última librería bayesiana y *stackeado* nuestros mejores modelos, quizá sea hora de trabajar en la interpretabilidad de los resultados e incorporación de nuevos datos. En definitiva, conclusiones que sean valiosas a la hora de poner en marcha el modelo y que no quede en una simple estructura de pesos optimizados o de reglas.
+Por lo tanto, si la competición a la que te/os presentáis requiere de este tipo de resultado, será importante tenerlo presente no sólo al final, sino durante todo el proceso. Además, una vez que se ha "re-optimizado" los hiperparámetros con la última librería bayesiana y *stackeado* nuestros mejores modelos, quizá sea hora de trabajar en la interpretabilidad de los resultados e incorporación de nuevos datos. En definitiva, conclusiones que sean valiosas a la hora de poner en marcha el modelo y que no quede en una simple estructura de pesos optimizados o de reglas.
 
-Paquetes y módulos como SHAP o LIME incorporan métodos enfocados en la interpretabilidad de cada una de las predicciones. Esto supone un paso más allá a la hora de interpretar nuestros modelos, ya que además de la importancia global "media" de cada variable en el modelo, obtenida en los coeficientes o por métricas como la importancia de variables que suelen traer los algoritmos de árboles y bagging/boosting, podemos obtener el peso de cada variable en una observación específica del set de test.
+Paquetes y módulos como SHAP o LIME incorporan métodos enfocados en la interpretabilidad de cada una de las predicciones. Esto supone un paso más allá a la hora de examinar y entender nuestros modelos, ya que además de la importancia global "media" de cada variable en el modelo, obtenida en los coeficientes o por métricas como la importancia de variables que suelen traer los algoritmos de árboles y bagging/boosting, podemos obtener el peso de cada variable en una determinada observación.
 
 Por ejemplo, en nuestra última competición a la que asistimos se nos pedía esta presentación final a los tres mejores proyectos. Una vez que modelamos la información estructurada y llevamos a cabo ciertas iteraciones sobre estos datos, **pensamos que sería más enriquecedor tanto para nosotros como para las personas que proponían el concurso, la investigación sobre la extracción de información de las imágenes** (información que en el caso de uso que nos ocupaba, a priori, iba a tener un impacto claro sobre la variable a predecir). Por lo tanto optamos por adentrarnos en el modelado de unas imágenes que se nos aportaban, haciendo uso del *transfer learning*, cosa que no se nos pedía explícitamente. Llegamos a bastantes *insights* interpretando los que las convoluciones de estos modelos preentrenados detectaban en nuestras imágenes, y lo que esmás importante, aprendimos mucho durante el proceso.
 
