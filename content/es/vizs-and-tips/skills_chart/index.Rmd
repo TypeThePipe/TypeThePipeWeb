@@ -23,6 +23,8 @@ draft: false
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+<img src="./featured.png" height="250px" width="400px" />
+
 A la hora de presentar tus habilidades ya sea en una página web o en tu CV, una buena idea sueles ser sintetizarlas mediante una gráfica. Muchas plantillas de CVs incluyen una gráfica por defecto.
 
 En este post queremos dar un *template* el cual poder personalizar con vuestras habilidades y evolucionar incorporando mejoras estéticas. ¡Estaremos encantados de ver tu versión!

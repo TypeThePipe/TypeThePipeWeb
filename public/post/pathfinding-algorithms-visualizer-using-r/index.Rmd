@@ -23,6 +23,7 @@ draft: false
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+<img src="./featured.png" height="250px" width="400px" />
 
 
 Here you can find the R code. It's an 'in progress' script. I will develop basic features like:

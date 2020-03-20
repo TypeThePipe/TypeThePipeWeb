@@ -82,6 +82,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Here you can find the R code. It’s an ‘in progress’ script. I will develop basic features like:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;ploting/rendering code refactoring;&lt;/p&gt;&lt;/li&gt;

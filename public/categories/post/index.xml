@@ -17,9 +17,7 @@
       <link>/post/10-tips-datathon/</link>
       <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
       <guid>/post/10-tips-datathon/</guid>
-      <description>
-
-
+      <description>&lt;p&gt;&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Are you considering join a Datathon or data competition? In this post we’ll bring you 10 tips that can help you to outperform your competitors. So without further ado;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;1. Set your main goal and check your time and resources (skills, hardware…)&lt;/strong&gt;&lt;/p&gt;
@@ -129,7 +127,7 @@ p {
 }
 &lt;/style&gt;
 &lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
-&lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&#34;mojo/signup-forms/Loader&#34;], function(L) { L.start({&#34;baseUrl&#34;:&#34;mc.us4.list-manage.com&#34;,&#34;uuid&#34;:&#34;91551f7ed29389a0de4f47665&#34;,&#34;lid&#34;:&#34;d95c503a48&#34;,&#34;uniqueMethods&#34;:true}) })&lt;/script&gt;
+&lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&amp;ldquo;mojo/signup-forms/Loader&amp;rdquo;], function(L) { L.start({&amp;ldquo;baseUrl&amp;rdquo;:&amp;ldquo;mc.us4.list-manage.com&amp;rdquo;,&amp;ldquo;uuid&amp;rdquo;:&amp;ldquo;91551f7ed29389a0de4f47665&amp;rdquo;,&amp;ldquo;lid&amp;rdquo;:&amp;ldquo;d95c503a48&amp;rdquo;,&amp;ldquo;uniqueMethods&amp;rdquo;:true}) })&lt;/script&gt;&lt;/p&gt;
 </description>
     </item>
     
@@ -203,6 +201,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Here you can find the R code. It’s an ‘in progress’ script. I will develop basic features like:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;ploting/rendering code refactoring;&lt;/p&gt;&lt;/li&gt;

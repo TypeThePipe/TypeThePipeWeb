@@ -1,0 +1,47 @@
+---
+title: "Selecting columns based on NAs percentage in R."
+author: Carlos Vecina Tebar
+date: "2019-10-03"
+slug: selecting-columns-based-on-nas-percentage-r
+translationKey: "counting-nas-by-column-r-benchmark"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- R
+- Tips
+- Tidyverse
+tags: []
+subtitle: "Benchmarking several functions"
+summary: "Benchmarking several functions"
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+Are you developing an automated exploration tool? Here we propose some alternatives and evaluate their performance.
+
+How much not leaving the pipeflow cost? ;)
+
+```{r, warning=FALSE, message=FALSE}
+library(microbenchmark)
+library(tidyverse)
+
+tidy_select_if <- airquality %>% select_if(~mean(is.na(.))) < 0.2
+tidy_select_colMeans <- airquality %>% select(which(colMeans(is.na(.)) < 0.2))
+lapply_base_r <- airquality[lapply(airquality, function(x) sum(is.na(x)))< 0.2]
+
+microbenchmark(
+
+  tidy_select_if,
+  tidy_select_colMeans,
+  lapply_base_r
+
+)
+
+```
+
+
+
+<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us4.list-manage.com","uuid":"91551f7ed29389a0de4f47665","lid":"d95c503a48","uniqueMethods":true}) })</script>
+

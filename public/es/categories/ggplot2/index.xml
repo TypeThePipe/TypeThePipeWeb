@@ -82,6 +82,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;A la hora de presentar tus habilidades ya sea en una página web o en tu CV, una buena idea sueles ser sintetizarlas mediante una gráfica. Muchas plantillas de CVs incluyen una gráfica por defecto.&lt;/p&gt;
 &lt;p&gt;En este post queremos dar un &lt;em&gt;template&lt;/em&gt; el cual poder personalizar con vuestras habilidades y evolucionar incorporando mejoras estéticas. ¡Estaremos encantados de ver tu versión!&lt;/p&gt;
 &lt;p&gt;Os dejamos el código comentado en el siguiente &lt;em&gt;chunk&lt;/em&gt;:&lt;/p&gt;

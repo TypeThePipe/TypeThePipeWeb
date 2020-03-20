@@ -20,6 +20,7 @@
       <description>
 
 
+&lt;p&gt;&lt;img src=&#34;featured.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;&lt;em&gt;En 7 minutos, seremos capaces de convertir nuestras gráficas generadas con ggplot en espectaculares plots en 3D, ¡y ademas interactivos!&lt;/em&gt;
 &lt;em&gt;Podrás embebernos en HTML/Rmarkdown, o incluso mejor, podras exportarlo como mp4 en una animacion rotatoria para sacarle todo el jugo a tus datos!&lt;/em&gt;&lt;/p&gt;

@@ -19,6 +19,14 @@ copyright = ""
 # Enable analytics by entering your Google Analytics tracking ID
 googleAnalytics = "UA-155621946-1"
 
+# Codefolding
+# Set to true to disable code folding
+disable_codefolding = false
+# Set to "hide" or "show" all codes by default
+codefolding_show = "hide"
+# Set to true to exclude the "Show/hide all" button
+codefolding_nobutton = false
+
 ############################
 ## Advanced options below ##
 ############################
@@ -42,9 +50,9 @@ DefaultContentLanguage = "en"
     languageName = "Spanish"
     weight = 20
 
-
+custom_css = ["codefolding.css"]
 [params]
-    custom_css = ["css/custom.css"]
+    custom_css = ["codefolding.css"]
   [params.navigation]
     help = "Help"
 hasCJKLanguage = false  # Set `true` for Chinese/Japanese/Korean languages.

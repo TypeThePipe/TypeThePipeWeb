@@ -29,7 +29,7 @@
     
   
   
-    <link rel="stylesheet" href="/css/custom.css">
+    <link rel="stylesheet" href="/codefolding.css">
 
   <meta name="description" content="Mostramos como reordenar las barras en las animaciones de ggplot realizadas con gganimate.">
 
@@ -88,7 +88,7 @@
   
   
   
-  <link rel="stylesheet" href="/css/academic.min.8dfc10e379c109c100b9c00a0a3bbf93.css">
+  <link rel="stylesheet" href="/css/academic.min.1750436c7ddbeec3957033478f17222e.css">
 
   
 
@@ -530,12 +530,7 @@
 </div>
 
 
-<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 480px; max-height: 480px;">
-  <div style="position: relative">
-    <img src="/es/vizs-and-tips/reordenar-grafico-barras-gganimate/featured.gif" alt="" class="featured-image">
-    
-  </div>
-</div>
+
 
 
 
@@ -607,6 +602,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
+<p><img src="./featured.png" height="250px" width="400px" /></p>
 <p><br></p>
 <p>GGanimate es una libraría de R que está generando bastantes posts y comentarios debido al potencial que introduce en el aspecto de visualizaciones en el ecosistema R.</p>
 <p>Intentando aplicar esta librería a gráficos de barras y suevolución temporal, nos encontramos usuarios preguntando la posibilidad de que las barras no solo aumenten y disminuyan a lo largo del tiempo(de la animación) sino que también el orden de las mismas variara en función si eran mayores o menores y no permaneciesen en el orden del primer <em>timestamp</em>, en definitiva que se reordenaran.</p>
@@ -651,6 +647,19 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb2-25" title="25"><span class="st">  </span><span class="kw">enter_fly</span>(<span class="dt">x_loc =</span> <span class="dv">0</span>, <span class="dt">y_loc =</span> <span class="dv">0</span>)               <span class="co"># Entrada de la ciudad al top4</span></a></code></pre></div>
 
     </div>
+
+    
+<div id="code-folding-buttons" class="btn-group pull-right">
+  <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-_extension-text-contrast="">
+    <span>Show/hide code</span> 
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" style="min-width: 50px;">
+  <li><a id="rmd-show-all-code" href="#">Show all</a>
+  </li><li><a id="rmd-hide-all-code" href="#">Hide all</a></li>
+  </ul>
+</div>
+
 
     
 

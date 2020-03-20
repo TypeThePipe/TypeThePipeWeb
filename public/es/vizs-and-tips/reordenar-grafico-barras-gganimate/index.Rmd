@@ -23,6 +23,8 @@ draft: false
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+<img src="./featured.png" height="250px" width="400px" />
+
 <br>
 
 GGanimate es una libraría de R que está generando bastantes posts y comentarios debido al potencial que introduce en el aspecto de visualizaciones en el ecosistema R.

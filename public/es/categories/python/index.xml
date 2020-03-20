@@ -20,6 +20,7 @@
       <description>
 
 
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Una queja o comentario recurrente entre los usuarios que empiezan a usar los Jupyter Notebooks es la falta de informacion sobre las variables y funciones definidas en el entorno. Si te realizas esta pregunta, seguramente necesites informacion sobre el uso y el principal objetivo de estos &lt;em&gt;notebooks&lt;/em&gt;, el cual es muy diferente al de IDEs como Spyder, Pycharm o RStudio.&lt;/p&gt;
 &lt;p&gt;Una vez que confirmamos que este tipo de &lt;em&gt;notebooks&lt;/em&gt; son lo que necesitamos, existen diferentes maneras de mostrar esta información. La primera y más facil de ellas es mediante el método mágico &lt;strong&gt;%whos&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/vizs-and-tips/magic-whos/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;

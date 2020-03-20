@@ -23,6 +23,8 @@ draft: false
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+<img src="./featured.png" height="250px" width="400px" />
+
 <br>
 
 Aquí mostramos el código comentado.
