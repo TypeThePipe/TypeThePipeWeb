@@ -1,7 +1,7 @@
 ---
-title: "Selecting columns based on NAs percentage in R."
+title: "Drop columns based on NAs percentage in R"
 author: Carlos Vecina Tebar
-date: "2019-10-03"
+date: "2020-03-23"
 slug: selecting-columns-based-on-nas-percentage-r
 translationKey: "counting-nas-by-column-r-benchmark"
 output:
@@ -12,36 +12,39 @@ categories:
 - Tips
 - Tidyverse
 tags: []
-subtitle: "Benchmarking several functions"
-summary: "Benchmarking several functions"
+subtitle: "Showing several ways"
+summary: "Showing several ways"
 authors: [carlos-vecina]
 featured: false
 draft: false
 ---
 
-Are you developing an automated exploration tool? Here we propose some alternatives and evaluate their performance.
+<img src="./featured.png" height="250px" width="400px" />
 
-How much not leaving the pipeflow cost? ;)
+Are you developing an automated exploration tool? Here we propose some alternatives to drop columns with high percentage of NAs.
 
-```{r, warning=FALSE, message=FALSE}
-library(microbenchmark)
+[In this previous tip](../../vizs-and-tips/counting-nas-by-column-r-benchmark) we talk about BaseR vs Tidy & Purrr  counting NAs performance. 
+
+**Not leaving the pipeflow. How much does it cost?;)  It depends on the NA distribution between features and its number, but not much that a few nanoseconds in small and big datasets**
+
+```{r, warning=FALSE, message=FALSE, eval=FALSE}
+
+# library(microbenchmark)  You can benchmark them in small and big datasets
 library(tidyverse)
 
-tidy_select_if <- airquality %>% select_if(~mean(is.na(.))) < 0.2
-tidy_select_colMeans <- airquality %>% select(which(colMeans(is.na(.)) < 0.2))
-lapply_base_r <- airquality[lapply(airquality, function(x) sum(is.na(x)))< 0.2]
+airquality %>% select_if(~mean(is.na(.)) < 0.2)
 
-microbenchmark(
+airquality %>% select(which(colMeans(is.na(.)) < 0.2))
 
-  tidy_select_if,
-  tidy_select_colMeans,
-  lapply_base_r
-
-)
+airquality[lapply(airquality, function(x) mean(is.na(x))) < 0.2]
 
 ```
 
+<br>
 
+Soooo  what's your choice??
+
+<br>
 
 <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us4.list-manage.com","uuid":"91551f7ed29389a0de4f47665","lid":"d95c503a48","uniqueMethods":true}) })</script>
 

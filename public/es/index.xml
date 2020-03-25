@@ -5,7 +5,7 @@
     <link>/es/</link>
       <atom:link href="/es/index.xml" rel="self" type="application/rss+xml" />
     <description>TypeThePipe</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Wed, 11 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Mon, 23 Mar 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>TypeThePipe</title>
@@ -13,18 +13,18 @@
     </image>
     
     <item>
-      <title>Posts</title>
-      <link>/es/post/</link>
-      <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/es/post/</guid>
+      <title>Vizs &amp; Tips</title>
+      <link>/es/vizs-and-tips/</link>
+      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/es/vizs-and-tips/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Vizs &amp; Tips</title>
-      <link>/es/vizs-and-tips/</link>
-      <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/</guid>
+      <title>Posts</title>
+      <link>/es/post/</link>
+      <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/es/post/</guid>
       <description></description>
     </item>
     

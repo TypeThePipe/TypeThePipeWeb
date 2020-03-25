@@ -1,7 +1,7 @@
 ---
-title: "Selecting columns based on NAs percentage in R."
+title: "Drop columns based on NAs percentage in R"
 author: Carlos Vecina Tebar
-date: "2019-10-03"
+date: "2020-03-23"
 slug: selecting-columns-based-on-nas-percentage-r
 translationKey: "counting-nas-by-column-r-benchmark"
 output:
@@ -12,8 +12,8 @@ categories:
 - Tips
 - Tidyverse
 tags: []
-subtitle: "Benchmarking several functions"
-summary: "Benchmarking several functions"
+subtitle: "Showing several ways"
+summary: "Showing several ways"
 authors: [carlos-vecina]
 featured: false
 draft: false
@@ -83,26 +83,20 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<p>Are you developing an automated exploration tool? Here we propose some alternatives and evaluate their performance.</p>
-<p>How much not leaving the pipeflow cost? ;)</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(microbenchmark)</a>
+<p><img src="featured.png" height="250px" width="400px" /></p>
+<p>Are you developing an automated exploration tool? Here we propose some alternatives to drop columns with high percentage of NAs.</p>
+<p><a href="../../vizs-and-tips/counting-nas-by-column-r-benchmark">In this previous tip</a> we talk about BaseR vs Tidy &amp; Purrr counting NAs performance.</p>
+<p><strong>Not leaving the pipeflow. How much does it cost?;) It depends on the NA distribution between features and its number, but not much that a few nanoseconds in small and big datasets</strong></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># library(microbenchmark)  You can benchmark them in small and big datasets</span></a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(tidyverse)</a>
 <a class="sourceLine" id="cb1-3" title="3"></a>
-<a class="sourceLine" id="cb1-4" title="4">tidy_select_if &lt;-<span class="st"> </span>airquality <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select_if</span>(<span class="op">~</span><span class="kw">mean</span>(<span class="kw">is.na</span>(.))) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span></a>
-<a class="sourceLine" id="cb1-5" title="5">tidy_select_colMeans &lt;-<span class="st"> </span>airquality <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">which</span>(<span class="kw">colMeans</span>(<span class="kw">is.na</span>(.)) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span>))</a>
-<a class="sourceLine" id="cb1-6" title="6">lapply_base_r &lt;-<span class="st"> </span>airquality[<span class="kw">lapply</span>(airquality, <span class="cf">function</span>(x) <span class="kw">sum</span>(<span class="kw">is.na</span>(x)))<span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span>]</a>
+<a class="sourceLine" id="cb1-4" title="4">airquality <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select_if</span>(<span class="op">~</span><span class="kw">mean</span>(<span class="kw">is.na</span>(.)) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span>)</a>
+<a class="sourceLine" id="cb1-5" title="5"></a>
+<a class="sourceLine" id="cb1-6" title="6">airquality <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="kw">which</span>(<span class="kw">colMeans</span>(<span class="kw">is.na</span>(.)) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span>))</a>
 <a class="sourceLine" id="cb1-7" title="7"></a>
-<a class="sourceLine" id="cb1-8" title="8"><span class="kw">microbenchmark</span>(</a>
-<a class="sourceLine" id="cb1-9" title="9"></a>
-<a class="sourceLine" id="cb1-10" title="10">  tidy_select_if,</a>
-<a class="sourceLine" id="cb1-11" title="11">  tidy_select_colMeans,</a>
-<a class="sourceLine" id="cb1-12" title="12">  lapply_base_r</a>
-<a class="sourceLine" id="cb1-13" title="13"></a>
-<a class="sourceLine" id="cb1-14" title="14">)</a></code></pre></div>
-<pre><code>## Unit: nanoseconds
-##                  expr min lq  mean median uq  max neval
-##        tidy_select_if   0  0 23.85      1  2  601   100
-##  tidy_select_colMeans   0  1 30.13      1  2 1101   100
-##         lapply_base_r   0  1 49.00      1  2 3300   100</code></pre>
+<a class="sourceLine" id="cb1-8" title="8">airquality[<span class="kw">lapply</span>(airquality, <span class="cf">function</span>(x) <span class="kw">mean</span>(<span class="kw">is.na</span>(x))) <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span>]</a></code></pre></div>
+<p><br></p>
+<p>Soooo what’s your choice??</p>
+<p><br></p>
 <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
 <script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us4.list-manage.com","uuid":"91551f7ed29389a0de4f47665","lid":"d95c503a48","uniqueMethods":true}) })</script>

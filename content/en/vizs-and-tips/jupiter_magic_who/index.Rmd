@@ -25,7 +25,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <img src="./featured.png" height="250px" width="400px" />
 
-A recurrent complain about Jupyter Notebooks between beginner users is the lack of information about the self-created environment variables. If you have this question, probably first of all you should be sure about the Jupyter Notebooks main purpose (totally different from IDEs like Spyder or Pycharm).
+A recurrent complaint beginner users have about Jupyter Notebooks is the lack of information about the self-created environment variables. If you have this question, probably first of all you should be sure about the Jupyter Notebooks main purpose (totally different from IDEs like Spyder or Pycharm).
 
 But in case a notebook is all what you need, you have few ways to display this information. The first and easiest one is to use the magic method **%whos**
 ![](/vizs-and-tips/magic-whos/jupyter_magic_who.png)

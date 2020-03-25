@@ -5,12 +5,36 @@
     <link>/es/categories/</link>
       <atom:link href="/es/categories/index.xml" rel="self" type="application/rss+xml" />
     <description>Categories</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Wed, 11 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Mon, 23 Mar 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-192.png</url>
       <title>Categories</title>
       <link>/es/categories/</link>
     </image>
+    
+    <item>
+      <title>R</title>
+      <link>/es/categories/r/</link>
+      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/es/categories/r/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tidyverse</title>
+      <link>/es/categories/tidyverse/</link>
+      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/es/categories/tidyverse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tips</title>
+      <link>/es/categories/tips/</link>
+      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/es/categories/tips/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Datathon</title>
@@ -37,34 +61,10 @@
     </item>
     
     <item>
-      <title>R</title>
-      <link>/es/categories/r/</link>
-      <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/es/categories/r/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Shiny</title>
       <link>/es/categories/shiny/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
       <guid>/es/categories/shiny/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tidyverse</title>
-      <link>/es/categories/tidyverse/</link>
-      <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/es/categories/tidyverse/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tips</title>
-      <link>/es/categories/tips/</link>
-      <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/es/categories/tips/</guid>
       <description></description>
     </item>
     

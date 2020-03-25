@@ -3,23 +3,8 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/es/post/10-consejos-datathon/</loc>
-    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/post/10-tips-datathon/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/post/10-consejos-datathon/"
-                />
-  </url>
-  
-  <url>
     <loc>/es/authors/</loc>
-    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-23T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -34,7 +19,7 @@
   
   <url>
     <loc>/es/authors/carlos-vecina/</loc>
-    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-23T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -49,7 +34,7 @@
   
   <url>
     <loc>/es/categories/</loc>
-    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-23T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -59,6 +44,121 @@
                 rel="alternate"
                 hreflang="es"
                 href="/es/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/vizs-and-tips/descartando-columnas-porcentaje-nas/</loc>
+    <lastmod>2020-03-23T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/selecting-columns-based-on-nas-percentage-r/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/counting-nas-by-column-r-benchmark/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/recuento-nas-por-columna-r/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/descartando-columnas-porcentaje-nas/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/categories/r/</loc>
+    <lastmod>2020-03-23T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/r/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/r/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/categories/tidyverse/</loc>
+    <lastmod>2020-03-23T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/tidyverse/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/tidyverse/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/categories/tips/</loc>
+    <lastmod>2020-03-23T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/tips/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/tips/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/</loc>
+    <lastmod>2020-03-23T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/vizs-and-tips/</loc>
+    <lastmod>2020-03-23T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/post/10-consejos-datathon/</loc>
+    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/10-tips-datathon/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/post/10-consejos-datathon/"
                 />
   </url>
   
@@ -108,21 +208,6 @@
   </url>
   
   <url>
-    <loc>/es/</loc>
-    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/"
-                />
-  </url>
-  
-  <url>
     <loc>/es/categories/ggplot/</loc>
     <lastmod>2020-01-21T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -134,21 +219,6 @@
                 rel="alternate"
                 hreflang="es"
                 href="/es/categories/ggplot/"
-                />
-  </url>
-  
-  <url>
-    <loc>/es/categories/r/</loc>
-    <lastmod>2020-01-21T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/r/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/r/"
                 />
   </url>
   
@@ -184,51 +254,6 @@
                 rel="alternate"
                 hreflang="es"
                 href="/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse/"
-                />
-  </url>
-  
-  <url>
-    <loc>/es/categories/tidyverse/</loc>
-    <lastmod>2020-01-16T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/tidyverse/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/tidyverse/"
-                />
-  </url>
-  
-  <url>
-    <loc>/es/categories/tips/</loc>
-    <lastmod>2020-01-16T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/tips/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/tips/"
-                />
-  </url>
-  
-  <url>
-    <loc>/es/vizs-and-tips/</loc>
-    <lastmod>2020-01-16T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/vizs-and-tips/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/vizs-and-tips/"
                 />
   </url>
   
@@ -364,6 +389,31 @@
                 rel="alternate"
                 hreflang="es"
                 href="/es/vizs-and-tips/plataformas-competiciones-de-datos/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/vizs-and-tips/recuento-nas-por-columna-r/</loc>
+    <lastmod>2019-10-02T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/selecting-columns-based-on-nas-percentage-r/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/counting-nas-by-column-r-benchmark/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/descartando-columnas-porcentaje-nas/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/recuento-nas-por-columna-r/"
                 />
   </url>
   

@@ -3,23 +3,8 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/post/10-tips-datathon/</loc>
-    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/post/10-consejos-datathon/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/post/10-tips-datathon/"
-                />
-  </url>
-  
-  <url>
     <loc>/authors/</loc>
-    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-23T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -34,7 +19,7 @@
   
   <url>
     <loc>/authors/carlos-vecina/</loc>
-    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-23T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -49,7 +34,7 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
+    <lastmod>2020-03-23T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -59,6 +44,106 @@
                 rel="alternate"
                 hreflang="en"
                 href="/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>/vizs-and-tips/selecting-columns-based-on-nas-percentage-r/</loc>
+    <lastmod>2020-03-23T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/counting-nas-by-column-r-benchmark/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/descartando-columnas-porcentaje-nas/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/recuento-nas-por-columna-r/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/selecting-columns-based-on-nas-percentage-r/"
+                />
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2020-03-23T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/r/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/r/"
+                />
+  </url>
+  
+  <url>
+    <loc>/categories/tidyverse/</loc>
+    <lastmod>2020-03-23T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/tidyverse/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/tidyverse/"
+                />
+  </url>
+  
+  <url>
+    <loc>/categories/tips/</loc>
+    <lastmod>2020-03-23T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/tips/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/tips/"
+                />
+  </url>
+  
+  <url>
+    <loc>/vizs-and-tips/</loc>
+    <lastmod>2020-03-23T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/"
+                />
+  </url>
+  
+  <url>
+    <loc>/post/10-tips-datathon/</loc>
+    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/post/10-consejos-datathon/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/10-tips-datathon/"
                 />
   </url>
   
@@ -108,21 +193,6 @@
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/"
-                />
-  </url>
-  
-  <url>
     <loc>/categories/ggplot/</loc>
     <lastmod>2020-01-21T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -158,21 +228,6 @@
   </url>
   
   <url>
-    <loc>/categories/r/</loc>
-    <lastmod>2020-01-21T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/r/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/r/"
-                />
-  </url>
-  
-  <url>
     <loc>/categories/shiny/</loc>
     <lastmod>2020-01-21T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -190,51 +245,6 @@
   <url>
     <loc>/vizs-and-tips/tidylog/</loc>
     <lastmod>2020-01-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/tidyverse/</loc>
-    <lastmod>2020-01-21T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/tidyverse/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/tidyverse/"
-                />
-  </url>
-  
-  <url>
-    <loc>/categories/tips/</loc>
-    <lastmod>2020-01-21T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/tips/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/tips/"
-                />
-  </url>
-  
-  <url>
-    <loc>/vizs-and-tips/</loc>
-    <lastmod>2020-01-21T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/vizs-and-tips/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/vizs-and-tips/"
-                />
   </url>
   
   <url>
@@ -398,27 +408,22 @@
   </url>
   
   <url>
-    <loc>/vizs-and-tips/selecting-columns-based-on-nas-percentage-r/</loc>
-    <lastmod>2019-10-03T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/vizs-and-tips/counting-nas-by-column-r-benchmark/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/vizs-and-tips/selecting-columns-based-on-nas-percentage-r/"
-                />
-  </url>
-  
-  <url>
     <loc>/vizs-and-tips/counting-nas-by-column-r-benchmark/</loc>
     <lastmod>2019-10-02T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
                 href="/vizs-and-tips/selecting-columns-based-on-nas-percentage-r/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/descartando-columnas-porcentaje-nas/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/recuento-nas-por-columna-r/"
                 />
     <xhtml:link
                 rel="alternate"
@@ -555,6 +560,21 @@
   <url>
     <loc>/terms/</loc>
     <lastmod>2018-06-28T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/"
+                />
   </url>
   
   <url>
