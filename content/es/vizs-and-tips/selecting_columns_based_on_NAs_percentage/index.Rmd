@@ -10,10 +10,9 @@ output:
 categories:
 - R
 - Tips
-- Tidyverse
-tags: []
-subtitle: ""
-summary: ""
+tags: ["tidyverse", "datacleaning"]
+subtitle: "¿Qué manera utilizas tú?"
+summary: "¿Qué manera utilizas tú?"
 authors: [carlos-vecina]
 featured: false
 draft: false

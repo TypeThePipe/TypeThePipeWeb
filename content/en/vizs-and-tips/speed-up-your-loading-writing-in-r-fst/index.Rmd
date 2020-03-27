@@ -1,0 +1,87 @@
+---
+title: "Speed up your R scripts. A cool optimized way to load, write and store big files with FST package!"
+author: Carlos Vecina Tebar
+date: "2020-03-30"
+slug: speed-up-load-write-files-fst-package-r
+translationKey: "speed-up-load-write-files-fst-package-r"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- R
+- Tips
+tags: ["fst","dataloading"]
+subtitle: "Unbeaten speed and file size! It's FST! x100 faster than write.csv()"
+summary: "Unbeaten speed and file size! It's FST! x100 faster than write.csv()"
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+<img src="./featured.png" height="300px" width="600px" />
+
+```{r, warning=FALSE, echo=FALSE, eval=FALSE}
+big_dataset <- read.csv(file=gzfile("../../../../static/shared_files/big_dataset.csv.gz"))
+path <- "../../../../static/shared_files/"
+big_dataset <- rbind(big_dataset,big_dataset,big_dataset,big_dataset,big_dataset,big_dataset,big_dataset)
+```
+
+Are you trying to save and load your DL model or a big dataset? Here we show you a performance boost to your scripts and reduction in disk memory storage with the FST package. We are going to benchmark it with R base functions (csv and RDS extensions) and with another great package like readr:
+
+```{r, eval = FALSE, warning=FALSE}
+library(tidyverse)
+big_dataset %>% nrow() # 700k rows, 15 cols(8 factor, 4int, 3 logi)
+```
+
+```{r, eval=FALSE}
+library(microbenchmark)
+library(readr)
+library(fst)
+
+microbenchmark(
+  write.csv(big_dataset, paste0(path,"big_dataset.csv"),),     # utils
+  write_csv(big_dataset, paste0(path,"big_dataset.csv")),     # readr
+  write_csv(big_dataset, paste0(path,"big_dataset.csv.gz"),), # readr GZ
+  saveRDS(big_dataset, paste0(path,"big_dataset.RDS")),       # utils
+  write_rds(big_dataset, paste0(path,"big_dataset.RDS")),     # readr
+  write_fst(big_dataset, paste0(path,"big_dataset.fst")),     # fst
+  times = 10
+)
+
+```
+
+```{r, eval=FALSE, echo=FALSE, warning=FALSE}
+file.remove(paste0(path,"big_dataset.csv"))
+file.remove(paste0(path,"big_dataset.RDS"))
+file.remove(paste0(path,"big_dataset.fst"))
+```
+
+```{r, eval=FALSE}
+##  Unit: milliseconds
+##            min 		    mean		      median        max			      neval	    file_size
+##utils     10943.1161  	11232.20073   11098.66610	  12011.1538    10        109 MB
+##readr     3140.4450	    3442.92772	  3388.14280	  3768.4109	    10        109 MB
+##readrGZ   6993.8850	    7332.31976	  7260.95040	  7946.9233	    10        23  MB
+##base      4800.3516	    5122.22345	  5024.69395	  5833.9807	    10        15  MB
+##readr     187.0765	    210.74584     211.70760     246.6369      10        46  MB
+"fst        60.3065		    87.30611      74.94375      154.7718      10        16  MB"
+  
+```
+
+<br>
+
+**Wow! That was cool! We can achieve an amazing reading and writing speed plus an incredible file size!**
+
+We can see a *x3* and *x50* performance improvements over the readr::write_rds() and base saveRDS() functions!
+
+An incredible *x100 performance* between fst and csv writing functions, but it's true that they are not directly comparable as they work with quite different file formats. 
+
+<br>
+
+**Are you going to add FST to your projects toolbox too?**
+
+<br>
+
+<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us4.list-manage.com","uuid":"91551f7ed29389a0de4f47665","lid":"d95c503a48","uniqueMethods":true}) })</script>
+
+

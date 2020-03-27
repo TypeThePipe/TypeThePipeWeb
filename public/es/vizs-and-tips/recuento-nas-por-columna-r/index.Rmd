@@ -10,8 +10,7 @@ output:
 categories:
 - R
 - Tips
-- Tidyverse
-tags: []
+tags: ["tidyverse", "datacleaning"]
 subtitle: 'Comparando la manera tidy con base R'
 summary: "Comparando la manera tidy con base R"
 authors: [carlos-vecina]
