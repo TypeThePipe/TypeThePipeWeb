@@ -1,0 +1,168 @@
+---
+title: Playing with a new R package; welcome ggcharts!
+author: Carlos Vecina Tebar
+date: "2020-04-01"
+slug: ggcharts-lollipop-plot-in-r
+translationKey: "ggcharts-lollipop-plot-in-r"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- R
+- Tips
+- Ggplot
+tags: []
+subtitle: ''
+summary: "Thomas Neitman's ggcharts"
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p>Yesterday I was playing with the new and first of many Thomas Neitman’s CRAN package!</p>
+<p>Its documentation reminded me that more than a year ago we did a talk series about text mining. In one of them, we analized the reviews of the most important spanish banks’ APPs.</p>
+<p>One of the plots was a lollipop chart showing the users score in the Play Store, and its deviation from the mean. I used to remember this plot cooler than it actually seems to me lol
+It’s maybe telling us that we have improved our skills. Hope it.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(purrr)</a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="co"># Data Prep</span></a>
+<a class="sourceLine" id="cb1-5" title="5">reviews_score &lt;-<span class="st"> </span>fst<span class="op">::</span><span class="kw">read_fst</span>(<span class="st">&quot;reviews_score.fst&quot;</span>)</a>
+<a class="sourceLine" id="cb1-6" title="6">globalMean &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">mean</span>(reviews_score<span class="op">$</span>Mean),<span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb1-7" title="7">center_formatter &lt;-<span class="st"> </span><span class="cf">function</span>(x) {x <span class="op">+</span><span class="st"> </span>globalMean}   <span class="co"># Set the mean as a center</span></a>
+<a class="sourceLine" id="cb1-8" title="8">custom_labs &lt;-<span class="st"> </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Ranking Spanish Banking APPs reviews (1 to 5 stars) &quot;</span>, </a>
+<a class="sourceLine" id="cb1-9" title="9">                    <span class="dt">subtitle=</span><span class="kw">paste0</span>(<span class="st">&quot;Filtering out reviews without comment. Last week data. The mean score is: &quot;</span>, globalMean), </a>
+<a class="sourceLine" id="cb1-10" title="10">                    <span class="dt">x=</span><span class="st">&quot;&quot;</span>,</a>
+<a class="sourceLine" id="cb1-11" title="11">                    <span class="dt">y=</span><span class="st">&quot;Score&quot;</span>)</a>
+<a class="sourceLine" id="cb1-12" title="12"></a>
+<a class="sourceLine" id="cb1-13" title="13"></a>
+<a class="sourceLine" id="cb1-14" title="14"><span class="kw">ggplot</span>(reviews_score, <span class="kw">aes</span>(<span class="dt">x=</span>Bank, <span class="dt">y=</span>MeanDev, <span class="dt">label=</span>Mean)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-15" title="15"><span class="st">  </span><span class="kw">geom_segment</span>(<span class="kw">aes</span>(<span class="dt">x =</span> Bank, <span class="dt">y =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb1-16" title="16">                   <span class="dt">yend =</span> MeanDev, <span class="dt">xend =</span> Bank,</a>
+<a class="sourceLine" id="cb1-17" title="17">                   <span class="dt">col=</span>AboveBelow),<span class="dt">size=</span><span class="dv">2</span>)<span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-18" title="18"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">stat=</span><span class="st">&#39;identity&#39;</span>, <span class="kw">aes</span>(<span class="dt">col=</span>AboveBelow), <span class="dt">size =</span> <span class="dv">14</span>)  <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-19" title="19"><span class="st">  </span><span class="kw">guides</span>(<span class="dt">colour =</span> <span class="kw">guide_legend</span>(<span class="dt">override.aes =</span> <span class="kw">list</span>(<span class="dt">size=</span><span class="dv">2</span>))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-20" title="20"><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">name=</span><span class="st">&quot;Scoring&quot;</span>, </a>
+<a class="sourceLine" id="cb1-21" title="21">                     <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Above&quot;</span>=<span class="st">&quot;Above the mean&quot;</span>,</a>
+<a class="sourceLine" id="cb1-22" title="22">                                <span class="st">&quot;Below&quot;</span>=<span class="st">&quot;Below the mean&quot;</span>), </a>
+<a class="sourceLine" id="cb1-23" title="23">                     <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;Above&quot;</span>=<span class="st">&quot;#00ba38&quot;</span>,</a>
+<a class="sourceLine" id="cb1-24" title="24">                                <span class="st">&quot;Below&quot;</span>=<span class="st">&quot;#f8766d&quot;</span>)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-25" title="25"><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">color=</span><span class="st">&quot;black&quot;</span>, <span class="dt">size=</span><span class="dv">5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-26" title="26"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-27" title="27"><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-28" title="28"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>center_formatter) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-29" title="29"><span class="st">  </span>custom_labs</a></code></pre></div>
+<p><img src="/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Well, it’s quite good if you don’t pay attention to the big circles and to the long code to write such a “standart” chart.</p>
+<p>Here is where <strong>ggcharts</strong> shines. And it’s only the 0.1.0 version. But having reusable plot templates but in a flexible way seems such a cool idea for me,</p>
+<p>See an three-liner aprox to the above plot:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># install.packages(&quot;ggcharts&quot;) :)</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="kw">library</span>(ggcharts)</a>
+<a class="sourceLine" id="cb2-3" title="3"></a>
+<a class="sourceLine" id="cb2-4" title="4">  <span class="kw">lollipop_chart</span>(reviews_score, <span class="dt">x=</span>Bank, <span class="dt">y=</span>MeanDev, <span class="dt">color=</span>AboveBelow) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="st">  </span><span class="kw">scale_color_manual</span>(<span class="dt">name=</span><span class="st">&quot;Scoring&quot;</span>, </a>
+<a class="sourceLine" id="cb2-6" title="6">                     <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;Above&quot;</span>=<span class="st">&quot;Above the mean&quot;</span>,<span class="st">&quot;Below&quot;</span>=<span class="st">&quot;Below the mean&quot;</span>), </a>
+<a class="sourceLine" id="cb2-7" title="7">                     <span class="dt">values =</span> <span class="kw">c</span>(<span class="st">&quot;Above&quot;</span>=<span class="st">&quot;#00ba38&quot;</span>, <span class="st">&quot;Below&quot;</span>=<span class="st">&quot;#f8766d&quot;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>center_formatter) <span class="op">+</span><span class="st"> </span>custom_labs </a></code></pre></div>
+<p><img src="/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>That was so cool and quite much cleaner.</p>
+<p>There are several paths to keep improving its capabilities. So here are some enancements. Tell him yours… <strong>see you in his <a href="">repo</a>!</strong></p>
+<p><br></p>
+<p>Proposed enhancements:</p>
+<ul>
+<li>Easy &amp; Quick auto-aligned Annotations:</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">reviews_score <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="st">  </span><span class="kw">lollipop_chart</span>(<span class="dt">x=</span>Bank, <span class="dt">y=</span>MeanDev, <span class="dt">limit =</span> <span class="dv">25</span>, <span class="co">#line_color = colours,</span></a>
+<a class="sourceLine" id="cb3-3" title="3">                 <span class="dt">highlight =</span> <span class="st">&quot;BBVA&quot;</span>,<span class="dt">point_color =</span> <span class="st">&quot;blue&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>center_formatter) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;segment&quot;</span>, <span class="dt">x =</span> <span class="dv">5</span>, <span class="dt">xend =</span> <span class="fl">5.3</span>, <span class="dt">y =</span> <span class="fl">0.55</span>, <span class="dt">yend =</span> <span class="fl">0.7</span>, <span class="dt">colour =</span> <span class="st">&quot;black&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="st">  </span><span class="kw">annotate</span>(<span class="st">&quot;text&quot;</span>, <span class="dt">x =</span> <span class="fl">5.4</span>, <span class="dt">y =</span> <span class="fl">0.75</span>, <span class="dt">label =</span> <span class="st">&quot;4.05&quot;</span>) <span class="op">+</span><span class="st"> </span>custom_labs</a></code></pre></div>
+<p><img src="/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<ul>
+<li>Easy Image axis and plot insertion:</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># https://gist.github.com/jonocarroll/2f9490f1f5e7c82ef8b791a4b91fc9ca</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="co"># https://stackoverflow.com/questions/54973129/including-images-on-axis-label-in-an-animated-ggplot2</span></a></code></pre></div>
+<ul>
+<li>Easy non 0 centered in lolliplot and diverging lolliplot:</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># center parameter?</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> <span class="cf">function</span>(x) {x <span class="op">+</span><span class="st"> </span>center})</a></code></pre></div>
+<ul>
+<li>Color aes and highlight conflict</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># Counter intuitive line_color parameter when highlight</span></a>
+<a class="sourceLine" id="cb6-2" title="2">colours &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;green, green&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;red&quot;</span>)</a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="kw">lollipop_chart</span>(reviews_score, <span class="dt">x=</span>Bank, <span class="dt">y=</span>MeanDev, <span class="dt">limit =</span> <span class="dv">25</span>, <span class="dt">line_color =</span> colours) <span class="co"># BBVA is green</span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="kw">lollipop_chart</span>(reviews_score, <span class="dt">x=</span>Bank, <span class="dt">y=</span>MeanDev, <span class="dt">limit =</span> <span class="dv">25</span>, <span class="dt">line_color =</span> colours,</a>
+<a class="sourceLine" id="cb6-5" title="5">                 <span class="dt">highlight =</span> <span class="st">&quot;BBVA&quot;</span>) <span class="co"># the highlighting BBVA now red</span></a>
+<a class="sourceLine" id="cb6-6" title="6"></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="kw">diverging_lollipop_chart</span>(reviews_score, Bank, Mean) <span class="co"># not working with all positive values (linked with  to center in non 0 value)</span></a></code></pre></div>
+<p><br></p>
+<p>Enjoy ggcharts!</p>
+<p><br></p>

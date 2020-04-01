@@ -5,7 +5,7 @@ date: '2019-07-27'
 slug: "ggplot-to-3d-in-r-with-rayshader"
 translationKey: "ggplot-to-3d-in-r-with-rayshader"
 categories:
-  - R
+  - R-post-visualization
 tags:
   - rayshader
   - ggplot
