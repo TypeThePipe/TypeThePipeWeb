@@ -47,7 +47,7 @@ social:
   link: https://github.com/PabloCanovas
 superuser: true
 user_groups:
-- ----
+- ---
 ---
 
 Pablo Cánovas is a data scientist with experience developing machine learning models applied to electricity markets.

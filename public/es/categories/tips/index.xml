@@ -7,16 +7,16 @@
     <description>Tips</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Mon, 30 Mar 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_300x300_fit_lanczos_2.png</url>
       <title>Tips</title>
       <link>/es/categories/tips/</link>
     </image>
     
     <item>
       <title>¡Aumenta la velocidad de tus scripts de R!. Optimiza la lectura, escritura y almacenamiento de modelos y grandes datasets con el paquete FST</title>
-      <link>/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-paquete/</link>
+      <link>/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/</link>
       <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-paquete/</guid>
+      <guid>/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -123,9 +123,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Descartando columnas basándonos en su porcentaje de NAs</title>
-      <link>/es/vizs-and-tips/descartando-columnas-porcentaje-nas/</link>
+      <link>/es/vizs-and-tips/descartando-columnas-porcentaje-nas-r-tidyverse/</link>
       <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/descartando-columnas-porcentaje-nas/</guid>
+      <guid>/es/vizs-and-tips/descartando-columnas-porcentaje-nas-r-tidyverse/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -211,10 +211,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     </item>
     
     <item>
-      <title>Dominando la función summarise_at(). Media ponderada con R en el ecosistema Tidyverse.</title>
-      <link>/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse/</link>
+      <title>Dominando la función summarise_at(). Media ponderada con R en el ecosistema Tidyverse. </title>
+      <link>/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse-r/</link>
       <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse/</guid>
+      <guid>/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse-r/</guid>
       <description>
 &lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
@@ -327,25 +327,25 @@ q2_weighted_mean
     
     <item>
       <title>Lista todas las variables definidas en Jupyter Notebooks</title>
-      <link>/es/vizs-and-tips/magic-whos/</link>
+      <link>/es/vizs-and-tips/magic-whos-metodo-jupyter-notebook/</link>
       <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/magic-whos/</guid>
+      <guid>/es/vizs-and-tips/magic-whos-metodo-jupyter-notebook/</guid>
       <description>
 
 
 &lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Una queja o comentario recurrente entre los usuarios que empiezan a usar los Jupyter Notebooks es la falta de informacion sobre las variables y funciones definidas en el entorno. Si te realizas esta pregunta, seguramente necesites informacion sobre el uso y el principal objetivo de estos &lt;em&gt;notebooks&lt;/em&gt;, el cual es muy diferente al de IDEs como Spyder, Pycharm o RStudio.&lt;/p&gt;
 &lt;p&gt;Una vez que confirmamos que este tipo de &lt;em&gt;notebooks&lt;/em&gt; son lo que necesitamos, existen diferentes maneras de mostrar esta información. La primera y más facil de ellas es mediante el método mágico &lt;strong&gt;%whos&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/vizs-and-tips/magic-whos/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/vizs-and-tips/magic-whos-metodo-jupyter-notebook/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Otras alternativas son, por un lado la extensión &lt;em&gt;nbextension&lt;/em&gt; y dentro de Jupyter Lab el inspector de variables. Puedes encontrar más información &lt;a href=&#34;https://stackoverflow.com/questions/37718907/variable-explorer-in-jupyter-notebook&#34;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
-      <title>Reordenando gráficos de barras en GGanimate</title>
-      <link>/es/vizs-and-tips/reordenar-grafico-barras-gganimate/</link>
+      <title>Reordenando gráficos de barras en R con GGanimate</title>
+      <link>/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/</link>
       <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/reordenar-grafico-barras-gganimate/</guid>
+      <guid>/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -414,7 +414,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;&lt;img src=&#34;./featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;GGanimate es una libraría de R que está generando bastantes posts y comentarios debido al potencial que introduce en el aspecto de visualizaciones en el ecosistema R.&lt;/p&gt;
-&lt;p&gt;Intentando aplicar esta librería a gráficos de barras y suevolución temporal, nos encontramos usuarios preguntando la posibilidad de que las barras no solo aumenten y disminuyan a lo largo del tiempo(de la animación) sino que también el orden de las mismas variara en función si eran mayores o menores y no permaneciesen en el orden del primer &lt;em&gt;timestamp&lt;/em&gt;, en definitiva que se reordenaran.&lt;/p&gt;
+&lt;p&gt;Intentando aplicar esta librería a gráficos de barras y su evolución temporal, nos encontramos usuarios preguntando la posibilidad de que las barras no solo aumenten y disminuyan a lo largo del tiempo(de la animación) sino que también el orden de las mismas variara en función si eran mayores o menores y no permaneciesen en el orden del primer &lt;em&gt;timestamp&lt;/em&gt;, en definitiva que se reordenaran.&lt;/p&gt;
 &lt;p&gt;Por tanto, compartimos el siguiente código en el que las barras se reordenan a lo largo del tiempo. Es más en este ejemplo, tenemos 5 ciudades que entran y salen del gráfico en función de su valor durante el tiempo y visualizando el top 4.&lt;/p&gt;
 &lt;p&gt;Os dejamos el código comentado:&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(ggplot2)&lt;/a&gt;
@@ -458,7 +458,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     </item>
     
     <item>
-      <title>Muestra los intervalos de confianza de tus predicciones mediante geom_ribbon() con Ggplot</title>
+      <title>Muestra los intervalos de confianza de tus predicciones mediante geom_ribbon() con R Ggplot</title>
       <link>/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</link>
       <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
       <guid>/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</guid>
@@ -529,7 +529,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 &lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;Aquí mostramos el código comentado.&lt;/p&gt;
+&lt;p&gt;A continuación te mostramos el código:&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;huron &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;data.frame&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;year =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1875&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1972&lt;/span&gt;,                        &lt;span class=&#34;co&#34;&gt;# Creamos el conjunto de datos&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;                    &lt;span class=&#34;dt&#34;&gt;value =&lt;/span&gt; LakeHuron,&lt;/a&gt;
@@ -557,15 +557,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-13&#34; title=&#34;13&#34;&gt;                  &lt;span class=&#34;dt&#34;&gt;ymax =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std,&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-14&#34; title=&#34;14&#34;&gt;                  &lt;span class=&#34;dt&#34;&gt;group=&lt;/span&gt;group),&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-15&#34; title=&#34;15&#34;&gt;              &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;steelblue2&amp;quot;&lt;/span&gt;) &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/es/vizs-and-tips/ggplot_geom_ribbon_shadow/index_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/es/vizs-and-tips/grafica-intervalos-confianza-ggplot-geom_ribbon-plot-R/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Plataformas donde puedes participar en competiciones de datos</title>
-      <link>/es/vizs-and-tips/plataformas-competiciones-de-datos/</link>
+      <link>/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/</link>
       <pubDate>Mon, 07 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/plataformas-competiciones-de-datos/</guid>
+      <guid>/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/</guid>
       <description>
 
 
@@ -599,9 +599,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>La mejor manera de hacer recuento de NAs por columna</title>
-      <link>/es/vizs-and-tips/recuento-nas-por-columna-r/</link>
+      <link>/es/vizs-and-tips/recuento-nas-por-columna-en-r-comparativa/</link>
       <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/recuento-nas-por-columna-r/</guid>
+      <guid>/es/vizs-and-tips/recuento-nas-por-columna-en-r-comparativa/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }

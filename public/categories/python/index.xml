@@ -7,23 +7,23 @@
     <description>Python</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 14 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_300x300_fit_lanczos_2.png</url>
       <title>Python</title>
       <link>/categories/python/</link>
     </image>
     
     <item>
       <title>List all the defined variables in Jupyter Notebooks</title>
-      <link>/vizs-and-tips/magic-whos/</link>
+      <link>/vizs-and-tips/magic-whos-method-jupyter-notebook/</link>
       <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/magic-whos/</guid>
+      <guid>/vizs-and-tips/magic-whos-method-jupyter-notebook/</guid>
       <description>
 
 
 &lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;A recurrent complaint beginner users have about Jupyter Notebooks is the lack of information about the self-created environment variables. If you have this question, probably first of all you should be sure about the Jupyter Notebooks main purpose (totally different from IDEs like Spyder or Pycharm).&lt;/p&gt;
 &lt;p&gt;But in case a notebook is all what you need, you have few ways to display this information. The first and easiest one is to use the magic method &lt;strong&gt;%whos&lt;/strong&gt;
-&lt;img src=&#34;/vizs-and-tips/magic-whos/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/vizs-and-tips/magic-whos-metodo-jupyter-notebook/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Two alternative ways are nbextension and Jupyter Lab variable inspector. You can find more information &lt;a href=&#34;https://stackoverflow.com/questions/37718907/variable-explorer-in-jupyter-notebook&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>

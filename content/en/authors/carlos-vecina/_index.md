@@ -40,7 +40,7 @@ social:
   link: https://github.com/CarlosVecina
 superuser: true
 user_groups:
-- ----
+- ---
 ---
 
 Carlos Vecina is a data scientist with experience using ML and AI to bring value to business in CRM, Marketing and energy markets environments.

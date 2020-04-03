@@ -5,84 +5,12 @@
     <link>/es/tags/</link>
       <atom:link href="/es/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Mon, 30 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_300x300_fit_lanczos_2.png</url>
       <title>Tags</title>
       <link>/es/tags/</link>
     </image>
-    
-    <item>
-      <title>dataloading</title>
-      <link>/es/tags/dataloading/</link>
-      <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/es/tags/dataloading/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>fst</title>
-      <link>/es/tags/fst/</link>
-      <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/es/tags/fst/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>datacleaning</title>
-      <link>/es/tags/datacleaning/</link>
-      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/es/tags/datacleaning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tidyverse</title>
-      <link>/es/tags/tidyverse/</link>
-      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/es/tags/tidyverse/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ggplot</title>
-      <link>/es/tags/ggplot/</link>
-      <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>/es/tags/ggplot/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>rayshader</title>
-      <link>/es/tags/rayshader/</link>
-      <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>/es/tags/rayshader/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>visualization</title>
-      <link>/es/tags/visualization/</link>
-      <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>/es/tags/visualization/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>viz</title>
-      <link>/es/tags/viz/</link>
-      <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>/es/tags/viz/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>vizR</title>
-      <link>/es/tags/vizr/</link>
-      <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>/es/tags/vizr/</guid>
-      <description></description>
-    </item>
     
   </channel>
 </rss>

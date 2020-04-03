@@ -5,137 +5,18 @@
     <link>/categories/datathon/</link>
       <atom:link href="/categories/datathon/index.xml" rel="self" type="application/rss+xml" />
     <description>Datathon</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 11 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 07 Oct 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_300x300_fit_lanczos_2.png</url>
       <title>Datathon</title>
       <link>/categories/datathon/</link>
     </image>
     
     <item>
-      <title>10 Tips to ace your Datathon!</title>
-      <link>/post/10-tips-datathon/</link>
-      <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/post/10-tips-datathon/</guid>
-      <description>&lt;p&gt;&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Are you considering join a Datathon or data competition? In this post we’ll bring you 10 tips that can help you to outperform your competitors. So without further ado;&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1. Set your main goal and check your time and resources (skills, hardware…)&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Depending on your profile and the competition requirements, you should think about your main goal by joining a data challenge. It could be learning about a new tool, improve your coding and algorithmical skills, achieve the 1st position and therefore the prize, or just for fun. Whatever it is, that’s great.&lt;/p&gt;
-&lt;p&gt;It’s important to have a bright and well-defined picture of your goal, because you are going to invest so much time in the project. Having clear your personal idea of success will help you in your valley of despair.&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2. Choose the challenge field/industry according your interests.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;choosing_simpson.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Following with the ‘you’re going to invest so much time’ idea, how are you joining a challange in a field that doesn’t inspire you? Hopefully, many organizations and platforms are launching it’s own data challanges open to the public. Kaggle is the principal one, nevertheless there are many more. We propose several options &lt;a href=&#34;../../vizs-and-tips/data-competition-platforms&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;3. Build the right team. Set up tools to exchange code.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;You should choose your teammates depending on your principal objective. It’s an unseen topic with related posts, but we consider it is sufficiently important one.&lt;/p&gt;
-&lt;p&gt;You better choose an inspiring teammate you feel good with and encourage you if you want to learn about a new topic or technology. If the project needs different profiles and you want to be among the prize winners, go for a multidisciplinary team. If the project doesn’t need it, choose a teammate with your skill level. If it’s possible, a little more skilled.&lt;/p&gt;
-&lt;p&gt;These are just a few examples. The main point here is choosing teammates to maximize invested time return by minimizing interpersonal problems and strengthen synergies.&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;4. Deep research about the challenge topic and environment.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;pez_tecleando.gif&#34; height=&#34;100px&#34; width=&#34;200px&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Once you have built the team, we propose you to start a research about the industry your challenge is on. This effort will lead you to a better understanding of the problem and the solution, avoiding useless iterations in your data science workflow. By starting with clear premises you will take apart basic concetps missunderstandings, a fact that could fool your whole solution and conclusions.&lt;/p&gt;
-&lt;p&gt;Let’s explain this concept. Suppose your challenge consist on forecasting the conversion rate given a product portfolio, based on the online activity recorded by Google Analytics. Here, we must have clear-minded and relevant knowledge about this data source behaviour. How the bounce rate works, the customer journey recording since he open our web page and is matched with a cookie to the final conversion, leaving the web or logging as a user. Also, different behaviours of null records, bots, several cases where the default source is ‘direct’…&lt;/p&gt;
-&lt;p&gt;Without this kind of information it could be difficult to craft meaningful variables to increase the model performance. But worst of all, any conclusion you get is most likely to be misunderstood and impossible to get powerful and business-disruption insights.&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;5. Excel your exploratory analysis. Remember you could use external data sources.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;As any data science project, it consist of iterative phases. Since you have an industry landscape understanding, you will take a look on the data. If any doubt comes to your mind, return to the research stage.&lt;/p&gt;
-&lt;p&gt;So in this exploratory phase, you are focused on your data and extract information about features itself and interactions. We usually start summarizing the features by its distribution, number of NAs, categories… Features with high NAs percentage or with a minimal variance we can choose between removing or encoding it as binary variable NA/Not_NA Majoritay_Class/Not_Majoritary class. Many other encoding techniques can be applied, &lt;a href=&#34;https://www.kaggle.com/waydeherman/tutorial-categorical-encoding&#34;&gt;like these.&lt;/a&gt;. The full exploratory toolbox can be found on Google or Kaggle.&lt;/p&gt;
-&lt;p&gt;Finally, as a reminder, you usually can use external data sources to enrich the provided data. Demographic data to contextualize your zip code feature. Or a past event to explain a spike in your data. Obviously, you must take into account which kind of this information you will have in your forecasting set.&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;6. Set your project and code structure.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Here we will show you our most common project structure. The directory structure of a Data Science CdU depends on the project nature, its development and production environments.&lt;/p&gt;
-&lt;p&gt;Project:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;data:
-&lt;ul&gt;
-&lt;li&gt;1_raw:&lt;/li&gt;
-&lt;li&gt;2_processed:&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;models:&lt;/li&gt;
-&lt;li&gt;notebooks:
-&lt;ul&gt;
-&lt;li&gt;1_eda:&lt;/li&gt;
-&lt;li&gt;2_poc:&lt;/li&gt;
-&lt;li&gt;3_modeling:&lt;/li&gt;
-&lt;li&gt;4_evaluation:&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;src:
-&lt;ul&gt;
-&lt;li&gt;1_get_data:&lt;/li&gt;
-&lt;li&gt;2_processing:&lt;/li&gt;
-&lt;li&gt;3_modeling:&lt;/li&gt;
-&lt;li&gt;4_evaluation:&lt;/li&gt;
-&lt;li&gt;5_helpers:&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;We consider we can simplify this structure in the Datathon case, because we don’t need to automate the ETL or the assessment and validation process inside a productive workflow. In fact, the exploratory analysis and the main script are the principal points here. Our main script calls to the preprocess, train, test and evaluation modules.&lt;/p&gt;
-&lt;p&gt;Datathon_Project:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;data:&lt;/li&gt;
-&lt;li&gt;exploratory:&lt;/li&gt;
-&lt;li&gt;helpers:&lt;/li&gt;
-&lt;li&gt;log:&lt;/li&gt;
-&lt;li&gt;main.R / main.py&lt;/li&gt;
-&lt;li&gt;outputs:
-&lt;ul&gt;
-&lt;li&gt;models:&lt;/li&gt;
-&lt;li&gt;preds:&lt;/li&gt;
-&lt;li&gt;validation:&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Regarding the &lt;strong&gt;main script structure&lt;/strong&gt;, we usually build a custom cross validation with the objective of being flexible to train different models and stack its predictions. Our project template is as follows:&lt;/p&gt;
-&lt;p&gt;Loading environment (packages, modules and functions)
-Crafting features
-Split dataset and datasetOOSample
-Split dataset into folds
-For each fold in folds:
-Training with the rest
-Predict in fold
-Evalutaion
-(In the last fold, stacking models training if you want it)
-Out of Sample prediction
-Evaluación (Base models and stacking comparaison)
-Test set prediction.&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;7. Run your models.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Firs of all, we advise you to focus in a model family and loss function that better fit a priori our data, response variable and evaluated metric. The first results let you to test your code and pipeline and will be the starting point for further improvements.&lt;/p&gt;
-&lt;p&gt;You can use Google to search about different algorithm families and loss functions according your data and objective.
-Also, there such an amazing info in Kaggle kernels, Reddit feed and YouTube speaks.&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;8. Cross Validation, OOS and backtesting.&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Special attention to the error metrics. One of the goals that we set in our data competitions is to know as precisely as possible the error interval (confidence or prediction) of our models before we submit predictions.&lt;/p&gt;
-&lt;p&gt;To know about our forecast uncertainity behind several scenarios, data subsets and synthetic data make us feel proud. Also, it could helps us to be sure about our error metrics improvements are not due to spurious behaviour or bugs.&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;9. Model interpretability&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;In some data competitions, the best teams have to expose their projects in a final event. Here, in addition to talk about your data flow and research done, you probably want to talk about some insights and interpretable interactions between data and not only the model prediction.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;shap_vs_gain.png&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;Many packages like SHAP or LIME integrate different modules focused on the model and predictions interpretability. These modules instead of looking for a “mean” variable importance in a global point of view, compose additionally a local feature contribution in each predicted observation.&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;10. Write down your observed strengths and weaknesses. It will be the starting point for your next proyect. &lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Once you have finished the project and committed the predictions, writing down your strengths and weaknesses is a cool idea. These thoughts are such a fantastic starting point to the next competition or project.&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;So here is our contribution, hoping you will &lt;strong&gt;ace your competition!&lt;/strong&gt; And the most important, &lt;strong&gt;have fun!!&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;pez_guitarra.gif&#34; height=&#34;100px&#34; width=&#34;200px&#34; /&gt;&lt;/p&gt;
-&lt;style&gt;
-body {
-text-align: justify}
-p {
-  word-spacing: 3px;
-  text-indent: 20px;
-}
-&lt;/style&gt;
-&lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
-&lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&amp;ldquo;mojo/signup-forms/Loader&amp;rdquo;], function(L) { L.start({&amp;ldquo;baseUrl&amp;rdquo;:&amp;ldquo;mc.us4.list-manage.com&amp;rdquo;,&amp;ldquo;uuid&amp;rdquo;:&amp;ldquo;91551f7ed29389a0de4f47665&amp;rdquo;,&amp;ldquo;lid&amp;rdquo;:&amp;ldquo;d95c503a48&amp;rdquo;,&amp;ldquo;uniqueMethods&amp;rdquo;:true}) })&lt;/script&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
       <title>Data competition platforms</title>
-      <link>/vizs-and-tips/data-competition-platforms/</link>
+      <link>/vizs-and-tips/data-competition-platforms-beyond-kaggle/</link>
       <pubDate>Mon, 07 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/data-competition-platforms/</guid>
+      <guid>/vizs-and-tips/data-competition-platforms-beyond-kaggle/</guid>
       <description>
 
 

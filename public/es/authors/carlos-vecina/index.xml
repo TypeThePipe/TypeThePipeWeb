@@ -7,16 +7,16 @@
     <description>Carlos Vecina</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Mon, 30 Mar 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_300x300_fit_lanczos_2.png</url>
       <title>Carlos Vecina</title>
       <link>/es/authors/carlos-vecina/</link>
     </image>
     
     <item>
       <title>¡Aumenta la velocidad de tus scripts de R!. Optimiza la lectura, escritura y almacenamiento de modelos y grandes datasets con el paquete FST</title>
-      <link>/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-paquete/</link>
+      <link>/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/</link>
       <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-paquete/</guid>
+      <guid>/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -123,9 +123,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Descartando columnas basándonos en su porcentaje de NAs</title>
-      <link>/es/vizs-and-tips/descartando-columnas-porcentaje-nas/</link>
+      <link>/es/vizs-and-tips/descartando-columnas-porcentaje-nas-r-tidyverse/</link>
       <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/descartando-columnas-porcentaje-nas/</guid>
+      <guid>/es/vizs-and-tips/descartando-columnas-porcentaje-nas-r-tidyverse/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -211,51 +211,61 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     </item>
     
     <item>
-      <title>10 consejos para triunfar en tu próximo Datathon</title>
-      <link>/es/post/10-consejos-datathon/</link>
+      <title>¡10 consejos para triunfar en tu próximo Kaggle, Datathon o competición de datos!</title>
+      <link>/es/post/10-consejos-datathon-kaggle-data-science/</link>
       <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/es/post/10-consejos-datathon/</guid>
+      <guid>/es/post/10-consejos-datathon-kaggle-data-science/</guid>
       <description>
 
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#establece-tu-objetivo-y-revisa-los-recursos-habilidades-tiempo-acceso-a-máquinas-con-los-que-cuentas.&#34;&gt;&lt;strong&gt;1. Establece tu objetivo y revisa los recursos (habilidades, tiempo, acceso a máquinas…) con los que cuentas.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#elección-del-tema-o-cduso.&#34;&gt;&lt;strong&gt;2. Elección del tema o CdUso.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#construye-tu-equipo-de-manera-consciente.-usa-herramientas-para-compartir-códigoarchivos.&#34;&gt;&lt;strong&gt;3. Construye tu equipo de manera consciente. Usa herramientas para compartir código/archivos.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#investigación-previa-y-profunda-sobre-el-caso-de-uso-en-concreto.&#34;&gt;&lt;strong&gt;4. Investigación previa y profunda sobre el caso de uso en concreto.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#análisis-exploratorio-de-los-datos.-recuerda-que-normalmente-no-son-los-únicos-que-puedes-usar.&#34;&gt;&lt;strong&gt;5. Análisis exploratorio de los datos. Recuerda que (normalmente) no son los únicos que puedes usar.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#establecer-la-estructura-del-proyecto-y-del-código.&#34;&gt;&lt;strong&gt;6. Establecer la estructura del proyecto y del código.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#lanzar-los-primeros-modelos.&#34;&gt;&lt;strong&gt;7. Lanzar los primeros modelos.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#validación-cruzada-oos-y-backtesting.&#34;&gt;&lt;strong&gt;8. Validación cruzada, OOS y backtesting.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#interpretabilidad-de-modelos.-evaluación-de-resultados-desde-el-punto-de-vista-práctico-yo-negocio.&#34;&gt;&lt;strong&gt;9. Interpretabilidad de modelos. Evaluación de resultados desde el punto de vista práctico y/o negocio.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#escribir-una-memoria-con-puntos-fuertes-y-puntos-a-mejorar-detectados-que-te-sirvan-de-partida-en-el-próximo-reto.&#34;&gt;&lt;strong&gt;10. Escribir una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
 
 &lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;¿Pensando en inscribirte en un Datathon o competición de datos? ¡En este post os traemos 10 consejos sobre los puntos clave para conseguir grandes resultados!&lt;/p&gt;
-&lt;p&gt;Tips:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;font size=&#34;2&#34;&gt;1. Establece tu objetivo y revisa los recursos (habilidades, tiempo, acceso a máquinas…) con los que cuentas.&lt;/font&gt;&lt;/li&gt;
-&lt;li&gt;&lt;font size=&#34;2&#34;&gt;2. Elección del tema/industria/CdUso.&lt;/font&gt;&lt;/li&gt;
-&lt;li&gt;&lt;font size=&#34;2&#34;&gt;3. Construye tu equipo de manera consciente. Usa herramientas para compartir código/archivos.&lt;/font&gt;&lt;/li&gt;
-&lt;li&gt;&lt;font size=&#34;2&#34;&gt;4. Investiga previa y profundamente sobre el caso de uso en concreto.&lt;/font&gt;&lt;/li&gt;
-&lt;li&gt;&lt;font size=&#34;2&#34;&gt;5. Análisis exploratorio de los datos. Recuerda que (usualmente) no son los únicos que puedes usar.&lt;/font&gt;&lt;/li&gt;
-&lt;li&gt;&lt;font size=&#34;2&#34;&gt;6. Establece la estructura del proyecto y del código.&lt;/font&gt;&lt;/li&gt;
-&lt;li&gt;&lt;font size=&#34;2&#34;&gt;7. Lanza los primeros modelos.&lt;/font&gt;&lt;/li&gt;
-&lt;li&gt;&lt;font size=&#34;2&#34;&gt;8. Validación cruzada, OOS y backtesting.&lt;/font&gt;&lt;/li&gt;
-&lt;li&gt;&lt;font size=&#34;2&#34;&gt;9. Interpretabilidad de modelos. Evaluación de resultados desde el punto de vista práctico y/o negocio.&lt;/font&gt;&lt;/li&gt;
-&lt;li&gt;&lt;font size=&#34;2&#34;&gt;10. Escribe una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de de punto de partida en el próximo reto.&lt;/font&gt;&lt;/li&gt;
-&lt;/ul&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;1. Establece tu objetivo y revisa los recursos (habilidades, tiempo, acceso a máquinas…) con los que cuentas.&lt;/strong&gt;&lt;/p&gt;
+&lt;div id=&#34;establece-tu-objetivo-y-revisa-los-recursos-habilidades-tiempo-acceso-a-máquinas-con-los-que-cuentas.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;1. Establece tu objetivo y revisa los recursos (habilidades, tiempo, acceso a máquinas…) con los que cuentas.&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;Comenzamos por un punto esencial. Dependiendo de tu perfil y de la competición, deberás plantearte a priori qué pretendes conseguir participando en el reto. Puede ser aprender y mejorar en un determinado campo o tecnología, conseguir el premio, quedar entre los 3 primeros para incluirlo en tu CV o simplemente por diversión. Cualquiera que sea está bien.&lt;/p&gt;
 &lt;p&gt;Lo que recomendamos es evaluarlo de manera sincera, ya que será bastante el tiempo invertido y &lt;strong&gt;tener tu objetivo presente te ayudará en los momentos de menor motivación.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Por ejemplo, si tu objetivo no es ganar la competición (el caso de participar en tu primer Kaggle) seguramente prefieras no entrar en una espiral de ‘hiperoptimización’ de hiperparámetros para rascar mínimas mejoras en la métrica de error, sino que quizá prefieras estudiar y aplicar nuevas técnicas o algoritmos, aprender sobre desarrollo y estructuración de un proyecto de Data Science o integrar fuentes complementarias de datos.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;2. Elección del tema/industria/CdUso.&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;elección-del-tema-o-cduso.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;2. Elección del tema o CdUso.&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;&lt;img src=&#34;choosing_simpson.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Ligado con el anterior punto, dado que vamos a dedicar muchos esfuerzos en este proyecto, ¿cómo no elegir un tema, campo o caso de uso que nos motive? Afortunadamente, desde muchas organizaciones y plataformas se están lanzando diferentes e interesantes competiciones. Kaggle es uno de los máximos exponentes de estas plataformas, pero también existen otras, las cuales presentamos &lt;a href=&#34;../../vizs-and-tips/plataformas-donde-participar-competiciones-de-datos&#34;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;3. Construye tu equipo de manera consciente. Usa herramientas para compartir código/archivos.&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;construye-tu-equipo-de-manera-consciente.-usa-herramientas-para-compartir-códigoarchivos.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;3. Construye tu equipo de manera consciente. Usa herramientas para compartir código/archivos.&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;Dependiendo de los dos puntos anteriores, especialmente del primero, según tu objetivo deberás elegir a tu equipo de manera consecuente. Este es un tema que no se suele comentar, pero consideramos importante prestarle la debida atención.&lt;/p&gt;
 &lt;p&gt;Elige un compañero o amigo con el que te lleves realmente bien y os motivéis mutuamente si tu objetivo es aprender sobre un tema o tecnología nueva. Prioriza a alguien que comparta tus intereses en el caso que desees dedicarle tiempo a profundizar y masterizar un tema, tecnología o algoritmo muy concreto.&lt;/p&gt;
 &lt;p&gt;Si el proyecto lo requiere, y pretendes optar al premio o a posiciones altas, te recomendamos elegir un compañero que complemente tus habilidades. En el caso de que no se requiera multidisciplinariedad, opta por aquellos que tengan un nivel similar al tuyo. Si es posible, ligeramente superior.&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Eligiendo tu equipo de manera consciente&lt;/strong&gt; lograrás minimizar tiranteces y conflictos de objetivos, maximizando el retorno del tiempo invertido.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;4. Investigación previa y profunda sobre el caso de uso en concreto.&lt;/strong&gt;
-&lt;img src=&#34;pez_tecleando.gif&#34; height=&#34;100px&#34; width=&#34;200px&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;investigación-previa-y-profunda-sobre-el-caso-de-uso-en-concreto.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;4. Investigación previa y profunda sobre el caso de uso en concreto.&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;pez_tecleando.gif&#34; height=&#34;100px&#34; width=&#34;200px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Una vez formado el equipo, os recomendamos comenzar a &lt;strong&gt;investigar el negocio o el contexto en el que se enmarca vuestro proyecto.&lt;/strong&gt; Esto permitirá plantear mejor el trabajo, extraer un valor muy superior a los datos y os evitará iteraciones en el proceso diseñar-implementar-evaluar al partir de premisas más claras. De esta manera dejareis al lado una mala interpretación de conceptos básicos, lo cual puede ser letal.&lt;/p&gt;
 &lt;p&gt;Un ejemplo. Si la competición trata sobre predecir el número de visitas o el número de contrataciones de determinados productos en un comercio online, en base a la navegación recogida por Google Analytics, debéis controlar el comportamiento de esta fuente de datos. Conocer el significado de tasa de rebote, las mecánicas desde que un usuario se conecta por primera vez y se le asigna una cookie hasta que convierte, borrado de cookies, diferentes casuísticas de registros nulos, bots, que la &lt;em&gt;source&lt;/em&gt; (para conocer la fuente de donde viene el visitante) puede ser ruidosa porque en caso de dudas se asigna como &lt;em&gt;direct&lt;/em&gt;…&lt;/p&gt;
 &lt;p&gt;Sin esta serie de conocimientos será difícil &lt;strong&gt;&lt;em&gt;craftear&lt;/em&gt; variables para conseguir un buen &lt;em&gt;performance&lt;/em&gt; de los modelos&lt;/strong&gt;, o lo que es más importante, cualquier resultado que obtengáis es posible que sea malinterpretado. Por lo tanto, todo este &lt;em&gt;background&lt;/em&gt; no es imprescindible para llegar a algún resultado, pero sí lo será para llegar a resultados potentes y realizar una participación de la que acabes orgullosos.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;5. Análisis exploratorio de los datos. Recuerda que (usualmente) no son los únicos que puedes usar.&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;análisis-exploratorio-de-los-datos.-recuerda-que-normalmente-no-son-los-únicos-que-puedes-usar.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;5. Análisis exploratorio de los datos. Recuerda que (normalmente) no son los únicos que puedes usar.&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;Como todo proyecto de datos, consta de una serie de &lt;strong&gt;etapas iterativas&lt;/strong&gt;. Después de investigar sobre el contexto, echareis un primer vistazo a los datos. Si surgen dudas, de nuevo tendréis que investigar para resolverlas.&lt;/p&gt;
 &lt;p&gt;Al margen de este recordatorio, la fase exploratoria se centra en conocer cada una de las variables. Como consejo personal, entre otras cosas, nosotros comenzamos midiendo el porcentaje de NAs y la distribución y varianza de las variables. Aquellas que tengan un elevado porcentaje de NAs o una varianza muy pequeña, o bien las apartamos (podría replantearse su entrada en siguientes iteraciones) o bien las &lt;em&gt;encodeamos&lt;/em&gt; de manera dicotómica Si_NA/No_NA o Mayoritaria/No_mayoritaria. Para otro tipo de &lt;em&gt;encodings&lt;/em&gt; &lt;a href=&#34;https://www.kaggle.com/waydeherman/tutorial-categorical-encoding&#34;&gt;ver&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;Esta etapa exploratoria varía bastante dependiendo del número de variables que contenga vuestro dataset. En &lt;em&gt;datasets&lt;/em&gt; con 75, 100 o más variables, resultará más complicado hacerse una idea general de las características de cada una de ellas. Enfrentarnos a este tipo de &lt;em&gt;datasets&lt;/em&gt; puede resultar ciertamente abrumador, sin embargo tras una buen estudio, reducción dimensional / eleccion y transformación puede ser que acabéis dando las gracias de no tener sólo 5 o 10 variables(caso en el que se suele llegar a un &lt;em&gt;plateau&lt;/em&gt; de desempeño de los modelos más rápido y mayor homogeneidad en los resultados expuestos por los diferentes equipos).&lt;/p&gt;
@@ -263,7 +273,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;Por último, recordar que normalmente no hay problema con utilizar &lt;strong&gt;fuentes de datos complementarias&lt;/strong&gt; a las propios de la competición. En algunos casos como Kaggle, lo que se establece es la obligación de comentar y hacer público el uso de estos datos durante la competición.&lt;/p&gt;
 &lt;p&gt;Datos demográficos que ayuden a poner en contexto las variables geográficas como código postal o provincia, recoger eventos para aportar explicabilidad a &lt;em&gt;spikes&lt;/em&gt; o comportamientos pasados… son sólo algunos de los ejemplos de datos que se pueden incorporar al &lt;em&gt;dataset&lt;/em&gt; original del reto. Obviamente tendréis que tener en cuenta cuales de estos datos vais a tener y cuales no a la hora de predecir.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;6. Establecer la estructura del proyecto y del código.&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;establecer-la-estructura-del-proyecto-y-del-código.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;6. Establecer la estructura del proyecto y del código.&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;A continuación os mostramos la estructura que suelen tener nuestros proyectos. La &lt;strong&gt;estructuración de los directorios&lt;/strong&gt; dentro de un proyecto de Data Science dependerá de las características del entorno tanto de desarrollo como la posterior productivización, siguiendo principios generales como la modularización del código.
 Una estructura bastante generalizada sería la siguiente:&lt;/p&gt;
 &lt;p&gt;Projecto:&lt;/p&gt;
@@ -323,25 +335,36 @@ Una estructura bastante generalizada sería la siguiente:&lt;/p&gt;
 &lt;li&gt;Predicción del conjunto de test a enviar.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;7. Lanzar los primeros modelos.&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;lanzar-los-primeros-modelos.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;7. Lanzar los primeros modelos.&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;En primer lugar os aconsejamos &lt;strong&gt;centraros en una familia de algoritmos y función de coste que a priori mejor se adapten a los datos y a la variable a predecir&lt;/strong&gt;. Incluso teniendo en cuenta la métrica de error por la que se os va a medir. Es importante sacar los primeros resultados, a ser posible dentro de una estructura similar a la propuesta anteriormente. Las primeras métricas de error os ayudaran en muchos aspectos. Por un lado os pueden dar pistas de &lt;em&gt;bugs&lt;/em&gt; en el código (métricas de error no realistas). También os servirá como base a partir de la cual ir mejorando, y como estamos seguros de que lo haréis, esto será ademañs un &lt;em&gt;boost&lt;/em&gt; de ánimo.&lt;/p&gt;
 &lt;p&gt;Os invitamos a buscar en Google sobre las principales familias de algoritmos supervisados (suele ser el caso en estos Datathones) y de las principales funciones de coste a optimizar, dependiendo de si se trata de un problema de clasificación o de regresión.&lt;/p&gt;
 &lt;p&gt;Comentar que la participación en el foro y &lt;strong&gt;kernels de Kaggle, hilos de Reddit y videos en Youtube&lt;/strong&gt; será un buen complemento a la lectura de &lt;em&gt;papers&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;8. Validación cruzada, OOS y backtesting.&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;validación-cruzada-oos-y-backtesting.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;8. Validación cruzada, OOS y backtesting.&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;Especial mención a las métricas de error. Uno de los puntos a los que de manera personal más importancia le damos, es el &lt;strong&gt;conocer con la mayor precisión posible los intervalos de error (confianza o predicción) de nuestros modelos antes de enviar sus predicciones.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Conocer las precisión de nuestro modelo bajo diferentes escenarios, partes del dataset e incluso datos sintéticos nos hace sentir un especial orgullo. Quizá sea simplemente un objetivo que nos marcamos(tal y como comentamos en el punto 1), pero el hecho de tener la certeza de cuando se baja la métrica de error no se debe a algo espúreo, o lo peor de todo a un &lt;em&gt;bug&lt;/em&gt; o &lt;em&gt;leakage&lt;/em&gt; de información, nos permite desarrollar con tranquilidad. Además en el caso de existir un ranking público y otro privado, controlar tu métrica de evaluación te permite saber con mayor certeza en que percentil te encuentras.&lt;/p&gt;
 &lt;p&gt;La mayoría de competiciones suelen ir ligadas a una métrica de error por la cual se evalúa a los participantes. Será fundamental introducirla en la evaluación de modelos, pero no debe de ser la única. Tanto a la hora de fijar una función de coste como a la hora de evaluar los modelos, deberíais tener en cuenta métricas de error complementarias que os ayuden a interpretar el desempeño de los modelos. Calcular el error mediano o el MAPE, cuando la métrica con la que os evaluarán será el error medio, puede ayudar tanto a conocer el comportamiento de vuestro modelo como a decantaros entre algoritmos que difieren en sólo mínimo porcentaje en la métrica principal en el conjunto de datos, pero no en otras.&lt;/p&gt;
 &lt;p&gt;Casos especiales serán aquellos en los cuales nuestros datos tienen un &lt;strong&gt;fuerte componente temporal&lt;/strong&gt;, o directamente están estructurados en forma de serie temporal. Aquí en contramos discusiones específicas: variaciones de método de cross validation para evitar el &lt;em&gt;leakage&lt;/em&gt; de información entre sets, la validación walk forward o utilización de datos del futuro para entrenar, el estudio del &lt;em&gt;decay&lt;/em&gt; de la precisión, clustering de series temporales. Temas no triviales a los que dedicaremos otro post.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;9. Interpretabilidad de modelos. Evaluación de resultados desde el punto de vista práctico y/o negocio.&lt;/strong&gt;
-&lt;img src=&#34;shap_vs_gain.png&#34; alt=&#34;interpretabilidad shap xgboost&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;interpretabilidad-de-modelos.-evaluación-de-resultados-desde-el-punto-de-vista-práctico-yo-negocio.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;9. Interpretabilidad de modelos. Evaluación de resultados desde el punto de vista práctico y/o negocio.&lt;/strong&gt;&lt;/h1&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;shap_vs_gain.png&#34; alt=&#34;interpretabilidad shap xgboost&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;interpretabilidad shap xgboost&lt;/p&gt;
+&lt;/div&gt;
 &lt;p&gt;En el caso de que se trate de un Datathon organizado por alguna empresa de vuestra zona, seguramente los mejores proyectos serán llamados a un evento final en el que se expondrán vuestros trabajos. En otros, os pedirán una memoria presentando los resultados. Si bien es cierto, en el caso de Kaggle no suelen hacerlo.&lt;/p&gt;
 &lt;p&gt;Por lo tanto, si la competición a la que te/os presentáis requiere de este tipo de resultado, será importante tenerlo presente no sólo al final, sino durante todo el proceso. Además, una vez que se ha “re-optimizado” los hiperparámetros con la última librería bayesiana y &lt;em&gt;stackeado&lt;/em&gt; nuestros mejores modelos, quizá sea hora de trabajar en la interpretabilidad de los resultados e incorporación de nuevos datos. En definitiva, conclusiones que sean valiosas a la hora de poner en marcha el modelo y que no quede en una simple estructura de pesos optimizados o de reglas.&lt;/p&gt;
 &lt;p&gt;Paquetes y módulos como SHAP o LIME incorporan métodos enfocados en la interpretabilidad de cada una de las predicciones. Esto supone un paso más allá a la hora de examinar y entender nuestros modelos, ya que además de la importancia global “media” de cada variable en el modelo, obtenida en los coeficientes o por métricas como la importancia de variables que suelen traer los algoritmos de árboles y bagging/boosting, podemos obtener el peso de cada variable en una determinada observación.&lt;/p&gt;
 &lt;p&gt;Por ejemplo, en nuestra última competición a la que asistimos se nos pedía esta presentación final a los tres mejores proyectos. Una vez que modelamos la información estructurada y llevamos a cabo ciertas iteraciones sobre estos datos, &lt;strong&gt;pensamos que sería más enriquecedor tanto para nosotros como para las personas que proponían el concurso, la investigación sobre la extracción de información de las imágenes&lt;/strong&gt; (información que en el caso de uso que nos ocupaba, a priori, iba a tener un impacto claro sobre la variable a predecir). Por lo tanto optamos por adentrarnos en el modelado de unas imágenes que se nos aportaban, haciendo uso del &lt;em&gt;transfer learning&lt;/em&gt;, cosa que no se nos pedía explícitamente. Llegamos a bastantes &lt;em&gt;insights&lt;/em&gt; interpretando los que las convoluciones de estos modelos preentrenados detectaban en nuestras imágenes, y lo que esmás importante, aprendimos mucho durante el proceso.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;10. Escribir una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.&lt;/strong&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;escribir-una-memoria-con-puntos-fuertes-y-puntos-a-mejorar-detectados-que-te-sirvan-de-partida-en-el-próximo-reto.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;10. Escribir una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;Una vez finalizado el proyecto, un práctica que nos ha enriquecido y ha supuesto un antes y un después ha sido escribir algún tipo de memoria o documento para nosotros mismos. En él reflexionamos sobre la reciente participación. Analizamos los puntos fuertes y lo que debemos mejorar, tanto a nivel técnico como a nivel de equipo y por qué no a nivel emocional y de actitud. A ser posible nada más entregar y antes de saber el resultado. Sería genial si al tiempo de conocer el mismo se añadiera algún punto o reflexión más.&lt;/p&gt;
 &lt;p&gt;Todas estas anotaciones os ayudarán, cada vez que os enfrentéis a un nuevo proyecto, a encararlo más preparados y no depender del ‘instinto’ ni de lo que la memoria selectiva os quiera recordar en momentos puntuales.&lt;/p&gt;
 &lt;p&gt;Una mala predisposición personal, no investigar suficientemente y con cariño la distribución de los datos y sus valores extremos, una mala elección de equipo, seguir corriendo los modelos 30 minutos antes de que acabe el plazo de entrega, no preparar la exposición final con tiempo,… son situaciones que nos han pasado a muchos y no ocurre absolutamente nada por reflexionar sobre ello y dejarlo por escrito. Lo fundamental es, dentro de lo posible, ¡que no se repitan en la próxima competición para &lt;strong&gt;lograr conseguir aun mejores resultados! :)&lt;/strong&gt;&lt;/p&gt;
@@ -356,14 +379,15 @@ p {
 &lt;/style&gt;
 &lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
 &lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&#34;mojo/signup-forms/Loader&#34;], function(L) { L.start({&#34;baseUrl&#34;:&#34;mc.us4.list-manage.com&#34;,&#34;uuid&#34;:&#34;91551f7ed29389a0de4f47665&#34;,&#34;lid&#34;:&#34;d95c503a48&#34;,&#34;uniqueMethods&#34;:true}) })&lt;/script&gt;
+&lt;/div&gt;
 </description>
     </item>
     
     <item>
       <title>Visualizador de algoritmos en R! (I) Desarrollando el mapa dinámico</title>
-      <link>/es/post/visualizador-algoritmos-busqueda-caminos/</link>
+      <link>/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/es/post/visualizador-algoritmos-busqueda-caminos/</guid>
+      <guid>/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -429,6 +453,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Aquí os mostramps el código de R. Como podeis ver, solo cargamos shiny, ggplot2 y tidyverse. Es un script en curso, ya que aun queda por desarrollar características básicas como:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;refactorizar el código ;&lt;/p&gt;&lt;/li&gt;
@@ -649,10 +674,10 @@ p {
     </item>
     
     <item>
-      <title>Dominando la función summarise_at(). Media ponderada con R en el ecosistema Tidyverse.</title>
-      <link>/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse/</link>
+      <title>Dominando la función summarise_at(). Media ponderada con R en el ecosistema Tidyverse. </title>
+      <link>/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse-r/</link>
       <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse/</guid>
+      <guid>/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse-r/</guid>
       <description>
 &lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
@@ -765,25 +790,25 @@ q2_weighted_mean
     
     <item>
       <title>Lista todas las variables definidas en Jupyter Notebooks</title>
-      <link>/es/vizs-and-tips/magic-whos/</link>
+      <link>/es/vizs-and-tips/magic-whos-metodo-jupyter-notebook/</link>
       <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/magic-whos/</guid>
+      <guid>/es/vizs-and-tips/magic-whos-metodo-jupyter-notebook/</guid>
       <description>
 
 
 &lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Una queja o comentario recurrente entre los usuarios que empiezan a usar los Jupyter Notebooks es la falta de informacion sobre las variables y funciones definidas en el entorno. Si te realizas esta pregunta, seguramente necesites informacion sobre el uso y el principal objetivo de estos &lt;em&gt;notebooks&lt;/em&gt;, el cual es muy diferente al de IDEs como Spyder, Pycharm o RStudio.&lt;/p&gt;
 &lt;p&gt;Una vez que confirmamos que este tipo de &lt;em&gt;notebooks&lt;/em&gt; son lo que necesitamos, existen diferentes maneras de mostrar esta información. La primera y más facil de ellas es mediante el método mágico &lt;strong&gt;%whos&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/vizs-and-tips/magic-whos/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/vizs-and-tips/magic-whos-metodo-jupyter-notebook/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Otras alternativas son, por un lado la extensión &lt;em&gt;nbextension&lt;/em&gt; y dentro de Jupyter Lab el inspector de variables. Puedes encontrar más información &lt;a href=&#34;https://stackoverflow.com/questions/37718907/variable-explorer-in-jupyter-notebook&#34;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
-      <title>Muestra tus habilidades o *skills mediante un gráfico en R y su paquete Ggplot</title>
-      <link>/es/vizs-and-tips/skills-chart-curriculum/</link>
+      <title>Muestra tus habilidades o skills mediante un gráfico en R y su paquete ggplot</title>
+      <link>/es/vizs-and-tips/skills-chart-curriculum-r-ggplot/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/skills-chart-curriculum/</guid>
+      <guid>/es/vizs-and-tips/skills-chart-curriculum-r-ggplot/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -892,10 +917,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     </item>
     
     <item>
-      <title>Reordenando gráficos de barras en GGanimate</title>
-      <link>/es/vizs-and-tips/reordenar-grafico-barras-gganimate/</link>
+      <title>Reordenando gráficos de barras en R con GGanimate</title>
+      <link>/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/</link>
       <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/reordenar-grafico-barras-gganimate/</guid>
+      <guid>/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -964,7 +989,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;&lt;img src=&#34;./featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;GGanimate es una libraría de R que está generando bastantes posts y comentarios debido al potencial que introduce en el aspecto de visualizaciones en el ecosistema R.&lt;/p&gt;
-&lt;p&gt;Intentando aplicar esta librería a gráficos de barras y suevolución temporal, nos encontramos usuarios preguntando la posibilidad de que las barras no solo aumenten y disminuyan a lo largo del tiempo(de la animación) sino que también el orden de las mismas variara en función si eran mayores o menores y no permaneciesen en el orden del primer &lt;em&gt;timestamp&lt;/em&gt;, en definitiva que se reordenaran.&lt;/p&gt;
+&lt;p&gt;Intentando aplicar esta librería a gráficos de barras y su evolución temporal, nos encontramos usuarios preguntando la posibilidad de que las barras no solo aumenten y disminuyan a lo largo del tiempo(de la animación) sino que también el orden de las mismas variara en función si eran mayores o menores y no permaneciesen en el orden del primer &lt;em&gt;timestamp&lt;/em&gt;, en definitiva que se reordenaran.&lt;/p&gt;
 &lt;p&gt;Por tanto, compartimos el siguiente código en el que las barras se reordenan a lo largo del tiempo. Es más en este ejemplo, tenemos 5 ciudades que entran y salen del gráfico en función de su valor durante el tiempo y visualizando el top 4.&lt;/p&gt;
 &lt;p&gt;Os dejamos el código comentado:&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(ggplot2)&lt;/a&gt;
@@ -1008,7 +1033,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     </item>
     
     <item>
-      <title>Muestra los intervalos de confianza de tus predicciones mediante geom_ribbon() con Ggplot</title>
+      <title>Muestra los intervalos de confianza de tus predicciones mediante geom_ribbon() con R Ggplot</title>
       <link>/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</link>
       <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
       <guid>/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</guid>
@@ -1079,7 +1104,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 &lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;Aquí mostramos el código comentado.&lt;/p&gt;
+&lt;p&gt;A continuación te mostramos el código:&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;huron &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;data.frame&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;year =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1875&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1972&lt;/span&gt;,                        &lt;span class=&#34;co&#34;&gt;# Creamos el conjunto de datos&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;                    &lt;span class=&#34;dt&#34;&gt;value =&lt;/span&gt; LakeHuron,&lt;/a&gt;
@@ -1107,15 +1132,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-13&#34; title=&#34;13&#34;&gt;                  &lt;span class=&#34;dt&#34;&gt;ymax =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std,&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-14&#34; title=&#34;14&#34;&gt;                  &lt;span class=&#34;dt&#34;&gt;group=&lt;/span&gt;group),&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-15&#34; title=&#34;15&#34;&gt;              &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;steelblue2&amp;quot;&lt;/span&gt;) &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/es/vizs-and-tips/ggplot_geom_ribbon_shadow/index_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/es/vizs-and-tips/grafica-intervalos-confianza-ggplot-geom_ribbon-plot-R/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Plataformas donde puedes participar en competiciones de datos</title>
-      <link>/es/vizs-and-tips/plataformas-competiciones-de-datos/</link>
+      <link>/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/</link>
       <pubDate>Mon, 07 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/plataformas-competiciones-de-datos/</guid>
+      <guid>/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/</guid>
       <description>
 
 
@@ -1149,9 +1174,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>La mejor manera de hacer recuento de NAs por columna</title>
-      <link>/es/vizs-and-tips/recuento-nas-por-columna-r/</link>
+      <link>/es/vizs-and-tips/recuento-nas-por-columna-en-r-comparativa/</link>
       <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/recuento-nas-por-columna-r/</guid>
+      <guid>/es/vizs-and-tips/recuento-nas-por-columna-en-r-comparativa/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1271,219 +1296,6 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb7-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;co&#34;&gt;##map_df()          2.6913   3.42045   7.694863   3.56720   3.89715 122.2030   100   tbl_df&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
 &lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&#34;mojo/signup-forms/Loader&#34;], function(L) { L.start({&#34;baseUrl&#34;:&#34;mc.us4.list-manage.com&#34;,&#34;uuid&#34;:&#34;91551f7ed29389a0de4f47665&#34;,&#34;lid&#34;:&#34;d95c503a48&#34;,&#34;uniqueMethods&#34;:true}) })&lt;/script&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Convierte tu GGplot en una animación 3D con R y Rayshader</title>
-      <link>/es/post/de-ggplot-a-3d-en-r-con-rayshader/</link>
-      <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>/es/post/de-ggplot-a-3d-en-r-con-rayshader/</guid>
-      <description>
-
-
-&lt;p&gt;&lt;img src=&#34;featured.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;em&gt;En 7 minutos, seremos capaces de convertir nuestras gráficas generadas con ggplot en espectaculares plots en 3D, ¡y ademas interactivos!&lt;/em&gt;
-&lt;em&gt;Podrás embebernos en HTML/Rmarkdown, o incluso mejor, podras exportarlo como mp4 en una animacion rotatoria para sacarle todo el jugo a tus datos!&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;Como caso de uso, vamos a visualizar la edad media de los municipios españoles cruzando datos del padrón con los datos GIS, para posteriormente visualizarlos en 3 dimensiones.&lt;/em&gt;&lt;/p&gt;
-&lt;hr /&gt;
-&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_header.png&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;div id=&#34;introducción&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;&lt;strong&gt;1. Introducción&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;En las últimas semanas, un ‘nuevo’ paquete de R ha centrado el interés de cierta parte de la comunidad. Decimos ‘nuevo’ porque se ha incorporado recientemente al CRAN, aunque realmente el primer commit realizado por su autor su repo de Github data de hace más de un año. Su nombre es &lt;strong&gt;rayshader&lt;/strong&gt; y en palabras de su propio creador:&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;“rayshader uses elevation data in a base R matrix and a combination of raytracing, spherical texture mapping, overlays, and ambient occlusion to generate beautiful topographic 2D and 3D maps”&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;Bajo mi punto de vista, Tyler Morgan-Wall (el autor del paquete) dio con la tecla cuando incorporó al paquete dos nuevas funciones, plot_gg() y render_movie(). La primera de ellas nos permite convertir con 2 líneas de código nuestra visualización en ggplot a una figura 3D de una manera realmente facil y eficiente. La segunda de ellas renderiza esta figura y la anima, poniendo al alcance del usuario diversos parámetros para controlar el zoom, los fps, ángulo, inclinación…&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/rayshader_repo.png&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;div id=&#34;las-nuevas-funcionalidades-y-planteamiento-del-experimento&#34; class=&#34;section level4&#34;&gt;
-&lt;h4&gt;&lt;strong&gt;Las nuevas funcionalidades y planteamiento del experimento&lt;/strong&gt;&lt;/h4&gt;
-&lt;p&gt;La única condicion que debe cunplir tu gg-visualización es tener como &lt;em&gt;aesthetic&lt;/em&gt; color o &lt;em&gt;fill&lt;/em&gt;, y en algunos casos también puedes jugar con el &lt;em&gt;size&lt;/em&gt;&lt;/p&gt;
-&lt;p&gt;En demasiadas ocasiones, la visualización de datos en 3D no es la mejor opción a elegir, tal y como hablaremos un un futuro post. Por este motivo, he intentado traer un ejemplo donde el uso de la tercera dimensión aporte valor al análisis.&lt;/p&gt;
-&lt;p&gt;Este ejemplo práctico consistirá, como ya hemos avanzado, en la visualización en el mapa de España la edad media en cada municipio. ¿Chulo? Para ello necesitaremos:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;Los datos del censo sobre las estadísticas de la población (en este caso la edad media) por cada municipio. Estos datos los obtenemos de la web del INE.&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Los datos GIS con las coordenadas de cada uno de los municipios que componen España.&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Una vez que tengamos estas dos fuentes de datos combinados, los visualizaremos y posteriormente exploraremos su renderización en un clip 3D con la figura rotando tal y como se ve en la imagen que encabeza este post.&lt;/p&gt;
-&lt;p&gt;¡Vayamos paso por paso!&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div id=&#34;cdu-visualizando-la-edad-media-de-cada-municipio-en-españa&#34; class=&#34;section level2&#34;&gt;
-&lt;h2&gt;&lt;strong&gt;2. CdU: Visualizando la edad media de cada municipio en España&lt;/strong&gt;&lt;/h2&gt;
-&lt;p&gt;Una vez hemos establecido el objetivo principal y las diferentes fuentes de los datos, podemos proceder a la descarga y tratamiento de los mismos.&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;div id=&#34;descargando-los-datos-del-censo&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;2.1- Descargando los datos del censo&lt;/h3&gt;
-&lt;p&gt;Como digimos, para llevar a cabo nuestro propósito, necesitamos acceder a dos fuentes diferentes de datos. Usaremos el portal de datos abiertos del INE para descargar la edad media en cada municipio español. Después de una búsqueda bastante ardua por su web, encontramos la información que buscábamos. Os dejo este link donde teneis acceso a lo que ellos llaman como estadísticas contínuas&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;http://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&amp;amp;cid=1254736177012&amp;amp;menu=resultados&amp;amp;secc=1254736195461&amp;amp;idp=1254734710990&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
-&lt;p&gt;Con el objetivo de no irnos por las ramas, descargaremos directamente el fichero del 2018. Sin embargo, sí que es interesante citar la iniciativa &lt;a href=&#34;https://github.com/oddworldng/INEbaseR/&#34;&gt;&lt;em&gt;INEbase&lt;/em&gt;&lt;/a&gt; de facilitar el acceso y la navegación en esta fuente de datos de INE.&lt;/p&gt;
-&lt;p&gt;Comenzamos cargando (o descargando) los paquetes necesarios para nuestro análisis. En un futuro post o tip compartiremos una función nuestra para la carga (o descarga en caso necesario) múltiple de paquetes en una sola linea.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(pxR)
-library(RColorBrewer)
-library(rgeos)
-#install.packages(&amp;quot;rgdal&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;) reinstall cause gpclib dependencie https://stackoverflow.com/questions/30790036/error-istruegpclibpermitstatus-is-not-true
-library(rgdal)
-library(rayshader)
-library(knitr)
-library(magrittr)
-library(tidyverse)
-
-as.numeric.factor &amp;lt;- function(x) {    # Custom function to convert fctr to num factor value
-    return(suppressWarnings(as.numeric(levels(x))[x]))
-}
- 
-if(!dir.exists(&amp;quot;data&amp;quot;)) dir.create(&amp;quot;data&amp;quot;)  # Create the download directory&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;Descargando el fichero del INE 2018:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;utils::download.file(url = &amp;quot;http://www.ine.es/pcaxisdl/t20/e245/p05/a2018/l0/00000006.px&amp;quot;,
-                     destfile = &amp;quot;data/census_2018.px&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tbl_census_2018 &amp;lt;- read.px(&amp;quot;data/census_2018.px&amp;quot;) %&amp;gt;%              # Load &amp;amp; format
-  as_tibble()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Parseamos los datos con el objetivo de conseguir un dataframe que consista en &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;postal_code&lt;/em&gt;, &lt;em&gt;average_age&lt;/em&gt;&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tbl_census_2018 %&amp;lt;&amp;gt;% 
-  set_names(c(&amp;quot;age&amp;quot;, &amp;quot;city&amp;quot;, &amp;quot;sex&amp;quot;, &amp;quot;population&amp;quot;)) %&amp;gt;%             # Cambiamos los nombre
-  na.omit() %&amp;gt;%                                                    # Na rmv
-  filter((city!=&amp;quot;Total&amp;quot;)&amp;amp;(age!=&amp;quot;Total&amp;quot;)&amp;amp;(sex==&amp;quot;Ambos sexos&amp;quot;)) %&amp;gt;%  # Duplicate info rmv
-  separate(city, c(&amp;#39;postal_code&amp;#39;, &amp;#39;city_name&amp;#39;), sep=&amp;quot;-&amp;quot;) %&amp;gt;%       # Sep City column
-  mutate(age = as.numeric.factor(age)) %&amp;gt;%                         # Conv to numeric
-  group_by(city_name, postal_code) %&amp;gt;%                             # Group to operate
-  summarise(avg_age = sum(population*age,na.rm = T)/sum(population,na.rm=T)) %&amp;gt;%  # Avg age
-  select(city_name, postal_code, avg_age)                          # Discard columns
-kable(                                                             # Just Rmarkdown format
-  tbl_census_2018 %&amp;gt;% head(2)
-  )&lt;/code&gt;&lt;/pre&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr class=&#34;header&#34;&gt;
-&lt;th align=&#34;left&#34;&gt;city_name&lt;/th&gt;
-&lt;th align=&#34;left&#34;&gt;postal_code&lt;/th&gt;
-&lt;th align=&#34;right&#34;&gt;avg_age&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Ababuj&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;44001&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;52.40789&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr class=&#34;even&#34;&gt;
-&lt;td align=&#34;left&#34;&gt;Abades&lt;/td&gt;
-&lt;td align=&#34;left&#34;&gt;40001&lt;/td&gt;
-&lt;td align=&#34;right&#34;&gt;45.40000&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;descargando-datos-gis&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;2.2- Descargando datos GIS&lt;/h3&gt;
-&lt;p&gt;La segunda fuente de datos que vamos a utilizar son los datos geográficos de los municipios españoles, los cuales cruzaremos con los censales anteriormente descargados para pintar la edad media en sus respectivas coordenadas.&lt;/p&gt;
-&lt;p&gt;Descargando los daots GIS:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;temp &amp;lt;- tempfile()                              # Create the tempfile
-u=&amp;quot;http://www.arcgis.com/sharing/rest/content/items/8e31c4c1a0b348f79058f212d0d807a1/data&amp;quot;
-utils::download.file(url = u, destfile = temp,
-                     mode=&amp;quot;wb&amp;quot;)                 # Binary mode for correct download
-
-unzip(temp, exdir = &amp;quot;data/cities_gis&amp;quot;)          # Unzip in data/cities_gis
-unlink(temp)                                    # Delete temp file&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Tratamos estos datos para convertirlos de formato espacial a datos tabulares. Para este caso concreto de 3D, las Islas Canarias podrían deformarnos el gráfico, por lo que decidimos permanecer concentrados en nuestro objetivo didáctico y filtramos estas coordenadas. Por supuesto es posible mantenerlas sin perjudicar el gráfico, alterando sus coordenadas y acercándolas a la península. ¡Esto te queda como tarea para ti!&lt;/p&gt;
-&lt;p&gt;Para llevar a cabo este procesado de los datos, usamos la función &lt;em&gt;fortify&lt;/em&gt; para no depender de más paquetes. No obstante esta funcion nos lanza un &lt;em&gt;warning&lt;/em&gt; sugiriendonos el uso de la función &lt;em&gt;tidy()&lt;/em&gt; del paquete &lt;em&gt;broom&lt;/em&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tlb_cities_gis &amp;lt;- readOGR(dsn = &amp;quot;data/cities_gis/Municipios_ETRS89_30N.shp&amp;quot;,
-                              verbose=FALSE) # Spatial data reading&lt;/code&gt;&lt;/pre&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tlb_cities_gis %&amp;lt;&amp;gt;% 
-  fortify(region = &amp;quot;Codigo&amp;quot;) # %&amp;gt;%             # Conv &amp;quot;spatial object&amp;quot; to data.frame
-  # broom::tidy()
-
-plot_canarias &amp;lt;- F                              # Control param, initial app config
-
-if(plot_canarias==F){                           # Should be moduled in a funct
-  tlb_cities_gis %&amp;lt;&amp;gt;%
-  filter((long&amp;gt;0) &amp;amp; (lat&amp;gt;4000000))              # Filter peninsular data
-} &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Para terminar, &lt;em&gt;joineamos&lt;/em&gt; los dos datasets creados para conformar el tablón final, el cual vamos a usar como base para crear las gráficas. Apuntar que usamos &lt;em&gt;left join&lt;/em&gt; como forma de mantener los datos geos y no perder coordenadas en el &lt;em&gt;plot&lt;/em&gt;.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tbl_cities_avg_age &amp;lt;- tlb_cities_gis %&amp;gt;% 
-  left_join(tbl_census_2018, by = c(&amp;quot;id&amp;quot; = &amp;quot;postal_code&amp;quot;)) &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;Como buena práctica, comprobamos el número de NAs generados a partir de este &lt;em&gt;left join&lt;/em&gt;. Estos NAs serán municipios de los que tenemos coordenadas pero no contamos con información sobre la edad media.&lt;/p&gt;
-&lt;p&gt;Vemos que los valores perdidos representan únicamente el 1% del total de filas, por lo que vamos a imputarlos con el dato del código postal previo. Es cierto que podemos mejorar esta imputación, pero para nuestro propósito será suficiente debido al pequeño porcetaje del total que representan. ¡Vuelve a quedar de tu mano mejorarlo y comentárnoslo!&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;kable(                                                      # RMarkdown output format
-  tbl_cities_avg_age %&amp;gt;%
-    group_by(id) %&amp;gt;%
-    summarise(na = sum(is.na(avg_age))) %&amp;gt;%                 # NAs by city
-    summarise(missing_perc = sum(na&amp;gt;0)/length(na)*100) %&amp;gt;%  # Perc cities with at least 1 na 
-    select(missing_perc)
-  ,
-  align = &amp;quot;c&amp;quot;
-  )&lt;/code&gt;&lt;/pre&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr class=&#34;header&#34;&gt;
-&lt;th align=&#34;center&#34;&gt;missing_perc&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr class=&#34;odd&#34;&gt;
-&lt;td align=&#34;center&#34;&gt;0.9268413&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;tbl_cities_avg_age %&amp;lt;&amp;gt;%       
-  arrange(id) %&amp;gt;% 
-  fill(avg_age, .direction = &amp;quot;down&amp;quot;)            # Fill with the previous pc data.&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;visualización-con-ggplot&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;2.3- Visualización con Ggplot&lt;/h3&gt;
-&lt;p&gt;Inspirado en gran medida en &lt;a href=&#34;http://blog.manugarri.com/making-a-beautiful-map-of-spain-in-ggplot2/&#34; class=&#34;uri&#34;&gt;http://blog.manugarri.com/making-a-beautiful-map-of-spain-in-ggplot2/&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;Con este dataset final, plotearemos las variables que representan las coordenadas en el eje X e Y y en primer lugar representaremos la edad media mediante la paleta de color. Las tonalidades rojas son asignadas a edades superiores y las azules a las edades medias más jóvenes. Conseguimos esto mediante el &lt;em&gt;aesthetic fill&lt;/em&gt; de Ggplot.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;myPalette &amp;lt;- colorRampPalette(rev(brewer.pal(11, &amp;quot;Spectral&amp;quot;)))      # Create reverse Spectral palette
-
-plot_cities &amp;lt;- ggplot() +
-  geom_polygon(data = tbl_cities_avg_age, aes(fill = avg_age,   
-                                         x = long, 
-                                         y = lat, 
-                                         group = id)) +      # Dummy variable to correct fill by PCode.
-  scale_fill_gradientn(colours=myPalette(4)) +                 # Choose palette colours.
-  labs(fill=&amp;quot;Avg age&amp;quot;)
-plot(plot_cities)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/es/post/de-ggplot-a-3d-en-r-con-rayshader/index_files/figure-html/unnamed-chunk-13-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;visualización-en-3d-con-rayshader&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;2.4- Visualización en 3D con Rayshader!&lt;/h3&gt;
-&lt;p&gt;El anterior gráfico estaba bastante bien. En el podemos facilmente distinguir los municipios con la edad media más alta y los municipios más jóvenes. Sin embargo, los ojos humanos no son capaces de distinguir fácilmente entre colores próximos ni distinguir la magnitud de las diferencias en esta escala. Por lo tanto, ¿qué tal complementarlo con un nuevo eje?&lt;/p&gt;
-&lt;p&gt;Veamos como hacerlo y que tal queda&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;plot_gg(plot_cities,multicore=TRUE,width=5,height=3,scale=310)    # Plot_gg de rayshader
-render_snapshot()&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/es/post/de-ggplot-a-3d-en-r-con-rayshader/index_files/figure-html/unnamed-chunk-14-1.png&#34; width=&#34;200%&#34; height=&#34;200%&#34; style=&#34;display: block; margin: auto;&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;Hmm dijiste algo sobre render_movie()… Qué tal si lo animamos?&lt;/p&gt;
-&lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;/div&gt;
-&lt;div id=&#34;animación-3d-con-rayshader&#34; class=&#34;section level3&#34;&gt;
-&lt;h3&gt;2.5- Animación 3D con Rayshader&lt;/h3&gt;
-&lt;p&gt;En el gráfico anterior, la variable edad media queda bastante más entendible por el ojo humano en la dimensión añadida. Aquí la elección del ángulo e inclinación correctos es un punto esencial. Pero, ¿y mejoramos la interpretabilidad rotando el gráfico?&lt;/p&gt;
-&lt;p&gt;Esto es de lo que se encarga la siguiente función:&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;render_movie(&amp;quot;img/movie_spain.mp4&amp;quot;,frames = 720, fps=30,zoom=0.6,fov = 30)&lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;img src=&#34;/post/1c-ggplot-to-3d-in-r-with-rayshader/1c-ggplot-to-3d-in-r-with-rayshader_files/movie_spain.gif&#34; /&gt;&lt;/p&gt;
-&lt;style&gt;
-body {
-text-align: justify}
-p {
-  word-spacing: 3px;
-}
-&lt;/style&gt;
-&lt;/div&gt;
-&lt;/div&gt;
 </description>
     </item>
     

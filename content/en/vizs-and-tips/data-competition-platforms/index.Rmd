@@ -1,9 +1,9 @@
 ---
 title: "Data competition platforms"
-author: Carlos Vecina Tebar
+author: "Carlos Vecina Tebar"
 date: "2019-10-07"
-slug: data-competition-platforms
-translationKey: "data-competition-platforms"
+slug: "data-competition-platforms-beyond-kaggle"
+translationKey: "plataformas-competiciones-de-datos-kaggle-datathon"
 output:
   blogdown::html_page:
     highlight: tango
@@ -11,12 +11,16 @@ categories:
 - Tips
 - Datathon
 tags: []
-subtitle: 'Kaggle is not all there!'
+subtitle: "In this post we show up the main data challenges platforms. Kaggle is not all there!"
 summary: "Kaggle is not all there!"
 authors: [carlos-vecina]
 featured: false
 draft: false
 ---
+
+```{r, include=FALSE}
+nchar("In this post we show up the main data challenges platforms. Kaggle is not all there!")
+```
 
 <br>
 

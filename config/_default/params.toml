@@ -48,11 +48,13 @@ description = "Data Science, ML & AI blog. Workflows, vizs and tips."
 
 # Display a logo in navigation bar rather than title (optional).
 #   To enable, place an image in `static/img/` and reference its filename below. To disable, set the value to "".
-logo = "c.jpg"
-
+###logo = "typethepipe_logo.jpg"
 ############################
 ## Site Features
 ############################
+
+robots = "index,follow"
+canonical = "{{ .Permalink }} "
 
 # Enable source code highlighting? true/false
 # Documentation: https://sourcethemes.com/academic/docs/writing-markdown-latex/#highlighting-options
@@ -75,7 +77,7 @@ privacy_pack = false
 
 # Enable visitors to edit pages?
 #   `repo` defines the repository URL. `editable` defines which page types can be edited.
-edit_page = {repo_url = "https://github.com/gcushen/hugo-academic", repo_branch = "master", editable = {docs = false, page = false, post = false}}
+edit_page = {repo_url = "https://github.com/gcushen/hugo-academic", content_dir = "", repo_branch = "master", editable = {docs = true, page = false, post = false}}
 
 ############################
 ## Contact details
@@ -121,10 +123,10 @@ contact_links = [
 ############################
 
 # Default image for social sharing and search engines. Place image in `static/img/` folder and specify image name here.
-sharing_image = "icon-192.png"
+sharing_image = ""
 
 # Twitter username (without @). Used when a visitor shares your site on Twitter.
-twitter = "typethepipe"
+twitter = ""
 
 ############################
 ## Regional Settings
@@ -136,19 +138,15 @@ date_format = "Jan 2, 2006"
 #   Examples: "3:04 pm" or "15:04"
 time_format = "3:04 PM"
 
-# List delimiter (separates parts of an address)
-# Popular separators are ", " (comma), "<br>" (new line), " " (space)
-list_delimiter = ", "
+# Address format (choose from the [address_formats] list below or add you own to the list).
+address_format = "en-us"
 
 ############################
 ## Advanced
 ############################
 
-# Get user avatars from Gravatar.com? (true/false)
-gravatar = false
-
-# Align the main menu to the right of the page? (true/false)
-menu_align_right = false
+# Main menu alignment (l = left, c = center, r = right) and logo options.
+main_menu = {align = "l", show_logo = true}
 
 # Show estimated reading time for posts? (true/false)
 reading_time = true
@@ -160,12 +158,34 @@ docs_section_pager = true  # Display pager in Docs layout (e.g. tutorials)?
 # Enable in-built social sharing buttons? (true/false)
 sharing = true
 
-# Load CSS and JS plugins
-#   E.g. To load `/assets/css/custom.css`, set `plugins_css = ["custom"]`.
+# Link authors to their profile page? (true/false)
+link_authors = true
+
+# Abstract length (characters) in the Compact and Portfolio Card list views. Also, see `summaryLength` in `config.toml`.
+abstract_length = 135
+
+# Load JS plugins
 #   E.g. To load `/assets/js/custom.js`, set `plugins_js = ["custom"]`.
-plugins_css = []
 plugins_js  = []
-custom_css = ["css/custom.css"]
+
+# Avatars.
+# An avatar is an image that appears next to a user's name.
+# An avatar can be uploaded as an image named `avatar` to each user's profile or fetched from Gravatar.com.
+[avatar]
+  # Get user avatars from Gravatar.com? (true/false)
+  gravatar = false
+
+  # Choose a shape for avatar images. Options: circle, square.
+  shape = "circle"
+
+# Available address formats.
+[address_formats]
+  en-us = {order = ['street', 'city', 'region', 'postcode'], delimiters = [', ', ', ', ' ', '']}
+  en-gb = {order = ['street', 'city', 'region', 'postcode'], delimiters = [', ', ', ', ', ', '']}
+  de = {order = ['street', 'postcode', 'city'], delimiters = ['<br>', ' ', '']}
+  fr-fr = {order = ['street', 'postcode', 'city'], delimiters = ['<br>', ' ', '']}
+  zh = {order = ['postcode', 'region', 'city', 'street'], delimiters = [' ', ' ', ' ', '']}
+
 # Configuration of publication pages.
 [publications]
   # Date format (refer to https://sourcethemes.com/academic/docs/customization/#date-format )
@@ -194,15 +214,20 @@ custom_css = ["css/custom.css"]
   #   0: Disabled
   #   1: Disqus (https://disqus.com)
   #   2: Commento (https://commento.io)
-  engine = 1
+  engine = 0
 
   # Which page types are commentable?
-  commentable = {page = false, post = true, docs = false, project = false, publication = false, talk = false}
+  commentable = {page = true, post = true, docs = true, project = true, publication = true, talk = true}
 
   # Configuration of Disqus.
   [comments.disqus]
     shortname = ""  # Paste the shortname from your Disqus dashboard.
     show_count = true  # Show comment count in page header? (true/false)
+
+  # Configuration of Commento.
+  [comments.commento]
+    # If self-hosting Commento, enter its URL here (e.g. "https://commento.?.com"), otherwise leave empty.
+    url = ""
 
 ############################
 ## Search
@@ -221,7 +246,6 @@ custom_css = ["css/custom.css"]
     api_key = ""
     index_name = ""
     show_logo = false
-
 
 ############################
 ## Maps
@@ -244,3 +268,10 @@ custom_css = ["css/custom.css"]
   engine = 2
   api_key = ""
   zoom = 15
+
+############################
+## Marketing
+############################
+[marketing]
+  google_analytics = "UA-155621946-1"
+  google_tag_manager = ""

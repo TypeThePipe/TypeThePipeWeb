@@ -47,7 +47,7 @@ social:
   link: https://github.com/PabloCanovas
 superuser: true
 user_groups:
-- ----
+- ---
 ---
 
 Pablo Cánovas es un científico de datos con experiencia desarrollando y productivizando modelos de Machine Learning aplicados al mercado energético europeo.

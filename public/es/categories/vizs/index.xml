@@ -7,16 +7,16 @@
     <description>Vizs</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Tue, 07 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_300x300_fit_lanczos_2.png</url>
       <title>Vizs</title>
       <link>/es/categories/vizs/</link>
     </image>
     
     <item>
-      <title>Muestra tus habilidades o *skills mediante un gráfico en R y su paquete Ggplot</title>
-      <link>/es/vizs-and-tips/skills-chart-curriculum/</link>
+      <title>Muestra tus habilidades o skills mediante un gráfico en R y su paquete ggplot</title>
+      <link>/es/vizs-and-tips/skills-chart-curriculum-r-ggplot/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/es/vizs-and-tips/skills-chart-curriculum/</guid>
+      <guid>/es/vizs-and-tips/skills-chart-curriculum-r-ggplot/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }

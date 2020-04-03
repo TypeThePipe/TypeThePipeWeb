@@ -1,0 +1,60 @@
+---
+title: "Shadowing your ggplot lines. Forecasting confidence interval use case."
+author: Carlos Vecina Tebar
+date: "2019-11-18"
+slug: "ggplot-geom_ribbon-shadow-confidence-interval"
+translationKey: "grafica-intervalos-confianza-ggplot-geom_ribbon-plot-R"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- R
+- Tips
+tags: []
+subtitle: '¡Plot your confidence interval easily with R! With ggplot geom_ribbon() you can add shadowed areas to your lines. We show you how to deal with it!'
+summary: "Plot your confidence intervals easily"
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+<img src="./featured.png" height="250px" width="400px" />
+
+<br>
+```{r, include=FALSE}
+nchar("¡Plot your confidence interval easily with R! With ggplot geom_ribbon() de ggplot you can add shadow areas to your lines. We show you how to deal with it!")
+```
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, eval=FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+huron <- data.frame(year = 1875:1972, 
+                    value = LakeHuron,
+                    std = runif(length(LakeHuron),0,1))
+
+huron %>% 
+  ggplot(aes(year, value)) + 
+  geom_ribbon(aes(ymin = value - std, ymax = value + std), fill = "steelblue2") + 
+  geom_line(color = "firebrick", size = 1)
+
+```
+
+For a multi-line plot, you should include the colour and group aesthetic as follows:
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+huron <- data.frame(year = rep(1875:1972,2), 
+                    group = c(rep("a",98),rep("b",98)),
+                    value = c(LakeHuron, LakeHuron + 5),
+                    std = runif(length(LakeHuron)*2,0,1))
+
+huron %>% 
+  ggplot(aes(year, value, fill = group)) + 
+  geom_ribbon(aes(ymin = value - std, ymax = value + std, group=group), fill = "steelblue2") + 
+  geom_line(color = "firebrick", size = 1)
+
+```
+
+

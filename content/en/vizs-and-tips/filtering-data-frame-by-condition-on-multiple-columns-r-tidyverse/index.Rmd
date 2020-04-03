@@ -1,0 +1,91 @@
+---
+title: "Filtering a data frame by condition on multiple columns"
+author: Pablo Cánovas Tourné
+date: '2019-10-05'
+slug: "filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+  - R
+  - Tips
+tags: []
+subtitle: 'Filtering data frames by condition over multiple columns in R Tidyverse. The magic of filter_at(). You could write the condition over each column, but...'
+summary: "You could write the condition over each column, but we will show you how to deal with 100+ features"
+authors: [pablo-canovas]
+---
+
+filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse
+Some times you need to filter a data frame applying the same condition over multiple columns. Obviously you could explicitly write the condition over every column, but that's not very handy. 
+
+For those situations, it is much better to use ```filter_at``` in combination with ```all_vars```.
+
+Imagine we have the famous iris dataset with some attributes missing and want to get rid of those observations with any missing value.
+
+```{r, include=FALSE}
+nchar("Filtering data frames by condition over multiple columns in R Tidyverse. The magic of filter_at(). You could write the condition over each column, but...")
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+iris <- iris %>% as_tibble() %>% rowid_to_column() %>% head(10) 
+
+iris[c(4,8,2,10),2] <- NA
+iris[c(1,10),3] <- NA
+iris[c(10),4] <- NA
+iris[c(2,10),5] <- NA
+```
+
+
+```{r, echo=FALSE}
+print(iris)
+```
+
+We could write the condition on every column, but that would cumbersome:
+
+```{r, eval=FALSE}
+iris %>%
+  filter(!is.na(Sepal.Length) & 
+           !is.na(Sepal.Width) &
+           !is.na(Petal.Length) &
+           !is.na(Petal.Width)
+  )
+```
+
+Instead, we just have to select the columns we will filter on and apply the condition:
+
+```{r}
+features <- iris %>% names() %>% keep(~ str_detect(.,"[.]"))
+iris %>% filter_at(vars(features), all_vars(!is.na(.)))
+```
+Here we have used the function ```all_vars``` in the predicate to explicit that 
+**every feature** must satisfy the condition.
+To be honest, for that purpose it would have been easier to simply use ```iris %>% na.omit()```.
+
+But what if we wanted the opposite? Keeping only the rows with *all the selected features missing* is as easy as changing the predicate part:
+
+```{r}
+iris %>% filter_at(vars(features), all_vars(is.na(.)))
+```
+
+Another option is to apply the condition on **any feature**. That's where ```any_vars``` comes to rescue. Here we keep only the observations with *at least one* missing feature:
+
+```{r}
+iris %>% filter_at(vars(features), any_vars(is.na(.)))
+```
+
+Also, there are some other fancy ways to manipulate data frames with the filter family. One trick is using ```contains()``` or ```starts_with()``` to select the variables:
+
+```{r}
+iris %>% filter_at(vars(contains("Length")), all_vars(. >= 1.4))
+```
+
+Another example is applying the condition on columns that satisfy certain condition with ```filter_if```:
+
+```{r}
+iris %>% filter_if(is.numeric, any_vars(. > 5))
+```
+
+
+

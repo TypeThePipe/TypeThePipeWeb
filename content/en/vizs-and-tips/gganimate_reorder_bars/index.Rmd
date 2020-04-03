@@ -1,23 +1,25 @@
 ---
-title: Reordering bars in GGanimate visualization
-author: Carlos Vecina Tebar
+title: "Reordering bars in GGanimate visualization"
+author: "Carlos Vecina Tebar"
 date: "2019-12-17"
-slug: reorder-bars-gganimate
-translationKey: "reorder-bars-gganimate"
+slug: "reorder-bars-R-ggplot-gganimate"
+translationKey: "reordenar-grafico-barras-R-ggplot-gganimate"
 output:
   blogdown::html_page:
     highlight: tango
 categories:
 - R
 - Tips
-- Ggplot
 tags: []
-subtitle: ''
+subtitle: 'Dynamic ggplots with GGanimate! In this post we code evolution of a barplot over time and reordering its bar. ¡Click on and discover it!'
 summary: "Reorder your groups over time in gganimate plot."
 authors: [carlos-vecina]
 featured: false
 draft: false
 ---
+```{r, include=FALSE}
+nchar("Dynamic ggplots with GGanimate! In this post we code evolution of a barplot over time and reordering its bar. ¡Click on and discover it!")
+```
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)

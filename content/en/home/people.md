@@ -8,8 +8,9 @@ weight = 8  # Order that this section will appear.
 title = "About Us"
 subtitle = ""
 
-# List user groups to display.
+[content]
 #   Edit each user's `user_groups` to add them to one or more of these groups.
-user_groups = ["----"]
+  user_groups = ["---"]
+
 
 +++

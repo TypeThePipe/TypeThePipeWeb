@@ -1,0 +1,23 @@
+---
+title: "Conditional Pipes"
+author: "Pablo Cánovas Tourné"
+date: "2019-11-02"
+slug: "conditional-pipes-R-tidyverse"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- R
+- Tips
+tags: []
+subtitle: "Conditional pipes in R Tidyverse. Don't leave the pipeflow"
+summary: "Don't leave the pipeflow"
+authors: [pablo-canovas]
+---
+  
+How could we apply certain functions conditionally without leaving the pipeflow?
+This way:
+  
+```{r, eval=FALSE}
+df %>% { if(apply_filter == TRUE) filter(., condition) else . } %>% ...
+```

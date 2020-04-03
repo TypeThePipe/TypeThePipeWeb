@@ -7,7 +7,7 @@
     <description>Vizs &amp; Tips</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 01 Apr 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_300x300_fit_lanczos_2.png</url>
       <title>Vizs &amp; Tips</title>
       <link>/vizs-and-tips/</link>
     </image>
@@ -277,9 +277,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Drop columns based on NAs percentage in R</title>
-      <link>/vizs-and-tips/selecting-columns-based-on-nas-percentage-r/</link>
+      <link>/vizs-and-tips/selecting-columns-based-on-nas-percentage-r-tidyverse/</link>
       <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/selecting-columns-based-on-nas-percentage-r/</guid>
+      <guid>/vizs-and-tips/selecting-columns-based-on-nas-percentage-r-tidyverse/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -366,10 +366,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     </item>
     
     <item>
-      <title>Tidylog</title>
-      <link>/vizs-and-tips/tidylog/</link>
+      <title>Tidylog. Logging your pipelines</title>
+      <link>/vizs-and-tips/tidylog-logging-pipelines-r/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/tidylog/</guid>
+      <guid>/vizs-and-tips/tidylog-logging-pipelines-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -478,9 +478,9 @@ However things get increasingly obscure when chaining multiple functions or deal
     
     <item>
       <title>Using summarise_at(). Weighted mean Tidyverse approach</title>
-      <link>/vizs-and-tips/summarise_at-weighted-mean-tidyverse/</link>
+      <link>/vizs-and-tips/summarise_at-weighted-mean-tidyverse-r/</link>
       <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/summarise_at-weighted-mean-tidyverse/</guid>
+      <guid>/vizs-and-tips/summarise_at-weighted-mean-tidyverse-r/</guid>
       <description>
 &lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
@@ -590,25 +590,25 @@ q2_weighted_mean
     
     <item>
       <title>List all the defined variables in Jupyter Notebooks</title>
-      <link>/vizs-and-tips/magic-whos/</link>
+      <link>/vizs-and-tips/magic-whos-method-jupyter-notebook/</link>
       <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/magic-whos/</guid>
+      <guid>/vizs-and-tips/magic-whos-method-jupyter-notebook/</guid>
       <description>
 
 
 &lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;A recurrent complaint beginner users have about Jupyter Notebooks is the lack of information about the self-created environment variables. If you have this question, probably first of all you should be sure about the Jupyter Notebooks main purpose (totally different from IDEs like Spyder or Pycharm).&lt;/p&gt;
 &lt;p&gt;But in case a notebook is all what you need, you have few ways to display this information. The first and easiest one is to use the magic method &lt;strong&gt;%whos&lt;/strong&gt;
-&lt;img src=&#34;/vizs-and-tips/magic-whos/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/vizs-and-tips/magic-whos-metodo-jupyter-notebook/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Two alternative ways are nbextension and Jupyter Lab variable inspector. You can find more information &lt;a href=&#34;https://stackoverflow.com/questions/37718907/variable-explorer-in-jupyter-notebook&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Skills chart using Gplot2 with R</title>
-      <link>/vizs-and-tips/skills-chart/</link>
+      <link>/vizs-and-tips/skills-plot-curriculum-r-ggplot/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/skills-chart/</guid>
+      <guid>/vizs-and-tips/skills-plot-curriculum-r-ggplot/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -674,6 +674,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;You can see the code below :)&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(ggplot2)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;co&#34;&gt;# library(plotly)&lt;/span&gt;&lt;/a&gt;
@@ -710,9 +712,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Reordering bars in GGanimate visualization</title>
-      <link>/vizs-and-tips/reorder-bars-gganimate/</link>
+      <link>/vizs-and-tips/reorder-bars-r-ggplot-gganimate/</link>
       <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/reorder-bars-gganimate/</guid>
+      <guid>/vizs-and-tips/reorder-bars-r-ggplot-gganimate/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -809,9 +811,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Shadowing your ggplot lines. Forecasting confidence interval use case.</title>
-      <link>/vizs-and-tips/ggplot-geom_ribbon-shadow/</link>
+      <link>/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/</link>
       <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/ggplot-geom_ribbon-shadow/</guid>
+      <guid>/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -877,6 +879,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;huron &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;data.frame&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;year =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1875&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1972&lt;/span&gt;, &lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;                    &lt;span class=&#34;dt&#34;&gt;value =&lt;/span&gt; LakeHuron,&lt;/a&gt;
@@ -897,15 +901,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(year, value, &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; group)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_ribbon&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;ymin =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std, &lt;span class=&#34;dt&#34;&gt;ymax =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std, &lt;span class=&#34;dt&#34;&gt;group=&lt;/span&gt;group), &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;steelblue2&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_line&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;color =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;firebrick&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/en/vizs-and-tips/ggplot_geom_ribbon_shadow/index_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/en/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Conditional Pipes</title>
-      <link>/vizs-and-tips/conditional-pipes/</link>
+      <link>/vizs-and-tips/conditional-pipes-r-tidyverse/</link>
       <pubDate>Sat, 02 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/conditional-pipes/</guid>
+      <guid>/vizs-and-tips/conditional-pipes-r-tidyverse/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -979,9 +983,9 @@ This way:&lt;/p&gt;
     
     <item>
       <title>Data competition platforms</title>
-      <link>/vizs-and-tips/data-competition-platforms/</link>
+      <link>/vizs-and-tips/data-competition-platforms-beyond-kaggle/</link>
       <pubDate>Mon, 07 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/data-competition-platforms/</guid>
+      <guid>/vizs-and-tips/data-competition-platforms-beyond-kaggle/</guid>
       <description>
 
 
@@ -1010,9 +1014,9 @@ This way:&lt;/p&gt;
     
     <item>
       <title>Filtering a data frame by condition on multiple columns</title>
-      <link>/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</link>
+      <link>/vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse/</link>
       <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/filtering-a-data-frame-by-condition-on-multiple-columns/</guid>
+      <guid>/vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1078,7 +1082,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
-&lt;p&gt;Some times you need to filter a data frame applying the same condition over multiple columns. Obviously you could explicitly write the condition over every column, but that’s not very handy.&lt;/p&gt;
+&lt;p&gt;filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse
+Some times you need to filter a data frame applying the same condition over multiple columns. Obviously you could explicitly write the condition over every column, but that’s not very handy.&lt;/p&gt;
 &lt;p&gt;For those situations, it is much better to use &lt;code&gt;filter_at&lt;/code&gt; in combination with &lt;code&gt;all_vars&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;Imagine we have the famous iris dataset with some attributes missing and want to get rid of those observations with any missing value.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;## # A tibble: 10 x 6

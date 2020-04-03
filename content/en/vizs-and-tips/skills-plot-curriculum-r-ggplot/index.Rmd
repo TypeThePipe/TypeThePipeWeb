@@ -1,0 +1,72 @@
+---
+title: "Skills chart using Gplot2 with R"
+author: "Carlos Vecina Tebar"
+date: "2020-01-07"
+slug: "skills-plot-curriculum-r-ggplot"
+translationKey: "skills-chart-curriculum-r-ggplot"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- R
+- Vizs
+tags: []
+subtitle: 'Do you want to include a skills chart to your Data Scientist CV? We shoy you how to achieve it with a few line of R code and ggplot!'
+summary: "Skills snapshot in 6 Ggplot2 lines"
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+```{r, include=FALSE}
+nchar("Do you want to include a skills chart to your Data Scientist CV? We shoy you how to achieve it with a few line of R code and ggplot!")
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<img src="./featured.png" height="250px" width="400px" />
+
+<br>
+
+You can see the code below :)
+
+```{r, warning=FALSE, message=FALSE}
+library(ggplot2)
+# library(plotly)
+library(tibble)
+library(dplyr)
+
+skills <- tribble(
+    ~ Skill, ~ Hours, ~ Class,
+    "AWS", 500, "BigData",
+    "Python", 8000, "Language",
+    "Spark", 4000, "BigData",
+    "R", 9000, "Language",
+    "Git", 2000, "Tools",
+    "Jira", 2000, "Tools",
+    "Forecasting", 5000, "Objetive",
+    "Segmentation", 2000, "Objetive",
+    "Computer Vision", 600, "Objetive",
+    "SQL", 4500, "Language",
+    "IBM Data Stage & SPSS", 1200, "Tools",
+    "Shiny R", 1500, "Visualization",
+    "Tableau", 1000, "Visualization",
+    "Spotfire", 500, "Visualization"
+) 
+```
+
+
+```{r, skills-plot, warning=FALSE, eval=FALSE}
+# plotly(
+ggplot(data=skills,aes(x=reorder(Skill,-desc(Hours)), y= Hours, fill=Class, label=paste0(Hours," h"))) + 
+    geom_bar(stat = "identity", colour="black") +
+    coord_flip() +
+    labs(x=" ", y="Hours", fill=" ")  +
+    theme_minimal() +
+    scale_fill_brewer(palette = "YlOrBr",direction = -1) +
+    geom_label(show_guide  = F, aes(y=400))                  # Use show_guide despite the warning
+
+```
+
