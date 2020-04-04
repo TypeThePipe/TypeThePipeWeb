@@ -11,7 +11,7 @@ categories:
 - R
 - Tips
 tags: []
-subtitle: ''
+subtitle: 'In this post we download and try out the new CRAN package ggcharts. A ggplot extension with some default oneliner plots.'
 summary: "Thomas Neitman's ggcharts"
 authors: [carlos-vecina]
 featured: false
@@ -83,7 +83,7 @@ library(ggcharts)
 
 That was so cool and quite much cleaner.
 
-There are several paths to keep improving its capabilities. So here are some enancements. Tell him yours... **see you in his [repo]()!**
+There are several paths to keep improving its capabilities. So here are some enancements. Tell him yours... **see you in his ggcharts [repo.](https://github.com/thomas-neitmann/ggcharts)!**
 
 <br>
 

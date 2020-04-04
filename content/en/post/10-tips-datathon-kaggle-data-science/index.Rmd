@@ -177,11 +177,14 @@ So here is our contribution, hoping you will **ace your competition!** And the m
 <img src="./pez_guitarra.gif" height="100px" width="200px" />
 
 <style>
-body {
-text-align: justify}
 p {
   word-spacing: 3px;
   text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
 }
 </style>
 

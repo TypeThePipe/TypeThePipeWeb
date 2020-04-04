@@ -34,7 +34,7 @@ Intentando aplicar esta librería a gráficos de barras y su evolución temporal
 
 Por tanto, compartimos el siguiente código en el que las barras se reordenan a lo largo del tiempo. Es más en este ejemplo, tenemos 5 ciudades que entran y salen del gráfico en función de su valor durante el tiempo y visualizando el top 4.
 
-Os dejamos el código comentado:
+Os dejamos el código para realizar la animación del gráfico de barras:
 
 ```{r, eval=FALSE}
 library(ggplot2)
