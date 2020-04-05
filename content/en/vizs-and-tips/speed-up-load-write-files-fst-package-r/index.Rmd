@@ -1,5 +1,5 @@
 ---
-title: "Speed up your R scripts. A cool optimized way to load, write and store big files with FST package!"
+title: "Speed up your R scripts. A cool optimized way to load, write and store big data frames with FST package!"
 author: "Carlos Vecina Tebar"
 date: "2020-03-30"
 slug: "speed-up-load-write-files-fst-package-r"
@@ -30,7 +30,7 @@ path <- "../../../../static/shared_files/"
 big_dataset <- rbind(big_dataset,big_dataset,big_dataset,big_dataset,big_dataset,big_dataset,big_dataset)
 ```
 
-Are you trying to save and load your DL model or a big dataset? Here we show you a performance boost to your scripts and reduction in disk memory storage with the FST package. We are going to benchmark it with R base functions (csv and RDS extensions) and with another great package like readr:
+Are you trying to save and load your DL model or a big dataset in R? Here we show you a performance boost to your scripts and reduction in disk memory storage with the FST CRAN package. We are going to benchmark it with R base functions (csv and RDS extensions) and another great package like readr:
 
 ```{r, eval = FALSE, warning=FALSE}
 library(tidyverse)
@@ -78,11 +78,11 @@ file.remove(paste0(path,"big_dataset.fst"))
 
 We can see a *x3* and *x50* performance improvements over the readr::write_rds() and base saveRDS() functions!
 
-An incredible *x100 performance* between fst and csv writing functions, but it's true that they are not directly comparable as they work with quite different file formats. 
+An incredible *x100 performance* between fst and csv writing functions, but the true here is that they are not directly comparable as they work with quite different file formats. 
 
 <br>
 
-**Are you going to add FST to your projects toolbox too?**
+**Are you going to add FST to your R projects toolbox too?**
 
 <br>
 

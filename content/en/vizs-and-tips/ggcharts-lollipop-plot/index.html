@@ -1,8 +1,8 @@
 ---
-title: Playing with a new R package; welcome ggcharts!
-author: Carlos Vecina Tebar
+title: "Playing with a new R package; Welcome ggcharts!"
+author: "Carlos Vecina Tebar"
 date: "2020-04-01"
-slug: ggcharts-lollipop-plot-in-r
+slug: "ggcharts-lollipop-plot-in-r"
 translationKey: "ggcharts-lollipop-plot-in-r"
 output:
   blogdown::html_page:
@@ -11,7 +11,7 @@ categories:
 - R
 - Tips
 tags: []
-subtitle: 'In this post we download and try out the new CRAN package ggcharts. A ggplot extension with some default oneliner plots.'
+subtitle: 'In this post we are downloading and checking out the new CRAN package ggcharts. A ggplot extension with some cool oneliner plots.'
 summary: "Thomas Neitman's ggcharts"
 authors: [carlos-vecina]
 featured: false
@@ -82,8 +82,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<p>Yesterday I was playing with the new and first of many Thomas Neitman’s CRAN package!</p>
-<p>Its documentation reminded me that more than a year ago we did a talk series about text mining. In one of them, we analized the reviews of the most important spanish banks’ APPs.</p>
+<p>Yesterday I was playing with the new and first Thomas Neitman’s CRAN package!</p>
+<p>Its documentation reminded me that more than a year ago Type The Pipe did a talk series about text mining. In one of them, we analized the reviews of the most important spanish banks’ APPs.</p>
 <p>One of the plots was a lollipop chart showing the users score in the Play Store, and its deviation from the mean. I used to remember this plot cooler than it actually seems to me lol
 It’s maybe telling us that we have improved our skills. Hope it.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(tidyverse)</a>
@@ -116,8 +116,8 @@ It’s maybe telling us that we have improved our skills. Hope it.</p>
 <a class="sourceLine" id="cb1-28" title="28"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>center_formatter) <span class="op">+</span></a>
 <a class="sourceLine" id="cb1-29" title="29"><span class="st">  </span>custom_labs</a></code></pre></div>
 <p><img src="/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
-<p>Well, it’s quite good if you don’t pay attention to the big circles and to the long code to write such a “standart” chart.</p>
-<p>Here is where <strong>ggcharts</strong> shines. And it’s only the 0.1.0 version. But having reusable plot templates but in a flexible way seems such a cool idea for me,</p>
+<p>Well, it’s quite good if you don’t pay attention to the big circles or to the long code to write such an “standard” chart.</p>
+<p>Here is where <strong>ggcharts</strong> shines. And it’s only the 0.1.0 version. But having reusable plot templates in a quite flexible way seems such a cool idea for me.</p>
 <p>See an three-liner aprox to the above plot:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># install.packages(&quot;ggcharts&quot;) :)</span></a>
 <a class="sourceLine" id="cb2-2" title="2"><span class="kw">library</span>(ggcharts)</a>
@@ -129,9 +129,9 @@ It’s maybe telling us that we have improved our skills. Hope it.</p>
 <a class="sourceLine" id="cb2-8" title="8"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>center_formatter) <span class="op">+</span><span class="st"> </span>custom_labs </a></code></pre></div>
 <p><img src="/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>That was so cool and quite much cleaner.</p>
-<p>There are several paths to keep improving its capabilities. So here are some enancements. Tell him yours… <strong>see you in his ggcharts <a href="https://github.com/thomas-neitmann/ggcharts">repo.</a>!</strong></p>
+<p>There are several paths to keep improving its capabilities. So here are some enhancement. Tell him yours… <strong>see you in his ggcharts <a href="https://github.com/thomas-neitmann/ggcharts">repo.</a>!</strong></p>
 <p><br></p>
-<p>Proposed enhancements:</p>
+<p>Proposed enhancements to R ggcharts:</p>
 <ul>
 <li>Easy &amp; Quick auto-aligned Annotations:</li>
 </ul>

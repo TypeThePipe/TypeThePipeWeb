@@ -1,8 +1,8 @@
 ---
-title: "¡Aumenta la velocidad de tus scripts de R!. Optimiza la lectura, escritura y almacenamiento de modelos y grandes datasets con el paquete FST"
-author: Carlos Vecina Tebar
+title: "¡Aumenta la velocidad de tus scripts de R!. Optimiza la lectura, escritura y almacenamiento de grandes datasets con el paquete FST"
+author: "Carlos Vecina Tebar"
 date: "2020-03-30"
-slug: aumenta-velocidad-scripts-r-lectura-escritura-fst-R
+slug: "aumenta-velocidad-scripts-r-lectura-escritura-fst-R"
 translationKey: "aumenta-velocidad-scripts-r-lectura-escritura-fst-R"
 output:
   blogdown::html_page:
@@ -83,8 +83,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 
 <p><img src="featured.png" height="300px" width="600px" /></p>
-<p>¿Quieres guardar tu modelo de Deep Learning o un gran dataset? A continuación te mostramos la manera que hemos encontrado de optimizar la lectura, la escritura y almacenaje de ficheros con el paquete FST. Si incorporar un paquete a tu <em>environment</em> no te supone un gran problema, te lo recomendamos.</p>
-<p>En la repo del paquete hay un perqueño <em>benchmark</em>. Queremos comprobarlo por nosotros mismos y vamos a comparar su rendimiento con las funciones que hasta hoy eran parte de nuestra caja de herramientas de R para la lectura y escritura de ficheros en projectos de datos. Veamos:</p>
+<p>¿Quieres guardar tu modelo de DL o un gran dataset? A continuación te mostramos la manera que hemos encontrado de optimizar la lectura, la escritura y almacenaje de data frames con el paquete FST. Si incorporar un paquete a tu <em>environment</em> no te supone un gran problema, te lo recomendamos.</p>
+<p>En la repo del paquete hay un pequeño <em>benchmark</em> reliazado por sus autores. Queremos comprobarlo por nosotros mismos y vamos a comparar su rendimiento. Para ello compararemos su <em>performance</em> con el de las funciones que hasta hoy eran parte de nuestra caja de herramientas de R para la lectura y escritura de ficheros en proyectos de datos. Veamos:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(tidyverse)</a>
 <a class="sourceLine" id="cb1-2" title="2">big_dataset <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">nrow</span>() <span class="co"># 700k filas, 15 columnas(8 factor, 4int, 3 logi)</span></a></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">library</span>(microbenchmark)</a>
@@ -114,7 +114,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Podemos apreciar una mejora <em>x3</em> y <em>x50</em> en el <em>performance</em> comparado con las funciones readr::write_rds() y base R saveRDS()!</p>
 <p>Una incremento increible de un <em>x100 performance</em> entre fst y las funciones que trabajan con csv y que anteriormente utilizábamos, aunque realmente esta no es una comparación del todo justa al tratarse de dos extensiones completamente diferentes (csv y bin).</p>
 <p><br></p>
-<p><strong>¿Y tú? ¿Estás pensando en incluir FST al <em>toolbox</em> de tu proyecto también?</strong></p>
+<p><strong>¿Y tú? ¿Estás pensando en incluir FST al <em>toolbox</em> de tu proyecto en R también?</strong></p>
 <p><br></p>
 <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
 <script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us4.list-manage.com","uuid":"91551f7ed29389a0de4f47665","lid":"d95c503a48","uniqueMethods":true}) })</script>

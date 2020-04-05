@@ -270,7 +270,7 @@
   
   <meta property="og:site_name" content="TypeThePipe">
   <meta property="og:url" content="/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/">
-  <meta property="og:title" content="¡Aumenta la velocidad de tus scripts de R!. Optimiza la lectura, escritura y almacenamiento de modelos y grandes datasets con el paquete FST | TypeThePipe">
+  <meta property="og:title" content="¡Aumenta la velocidad de tus scripts de R!. Optimiza la lectura, escritura y almacenamiento de grandes datasets con el paquete FST | TypeThePipe">
   <meta property="og:description" content="Velocidad imbatida y almacenaje óptimo, Es FST! x100 más rápido que write.csv()"><meta property="og:image" content="/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/featured.png">
   <meta property="twitter:image" content="/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/featured.png"><meta property="og:locale" content="es">
   
@@ -298,7 +298,7 @@
 
 
 
-  <title>¡Aumenta la velocidad de tus scripts de R!. Optimiza la lectura, escritura y almacenamiento de modelos y grandes datasets con el paquete FST | TypeThePipe</title>
+  <title>¡Aumenta la velocidad de tus scripts de R!. Optimiza la lectura, escritura y almacenamiento de grandes datasets con el paquete FST | TypeThePipe</title>
 
 </head>
 
@@ -533,7 +533,7 @@
 
 
 <div class="article-container pt-3">
-  <h1>¡Aumenta la velocidad de tus scripts de R!. Optimiza la lectura, escritura y almacenamiento de modelos y grandes datasets con el paquete FST</h1>
+  <h1>¡Aumenta la velocidad de tus scripts de R!. Optimiza la lectura, escritura y almacenamiento de grandes datasets con el paquete FST</h1>
 
   
   <p class="page-subtitle">¡Un must en nuestro R environment! Velocidad imbatidad escritura y lectura. Es el paquete FST! x100 más rápido que write.csv(). Además comprime el tamaño de tu data frame.</p>
@@ -673,8 +673,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 
 <p><img src="featured.png" height="300px" width="600px" /></p>
-<p>¿Quieres guardar tu modelo de Deep Learning o un gran dataset? A continuación te mostramos la manera que hemos encontrado de optimizar la lectura, la escritura y almacenaje de ficheros con el paquete FST. Si incorporar un paquete a tu <em>environment</em> no te supone un gran problema, te lo recomendamos.</p>
-<p>En la repo del paquete hay un perqueño <em>benchmark</em>. Queremos comprobarlo por nosotros mismos y vamos a comparar su rendimiento con las funciones que hasta hoy eran parte de nuestra caja de herramientas de R para la lectura y escritura de ficheros en projectos de datos. Veamos:</p>
+<p>¿Quieres guardar tu modelo de DL o un gran dataset? A continuación te mostramos la manera que hemos encontrado de optimizar la lectura, la escritura y almacenaje de data frames con el paquete FST. Si incorporar un paquete a tu <em>environment</em> no te supone un gran problema, te lo recomendamos.</p>
+<p>En la repo del paquete hay un pequeño <em>benchmark</em> reliazado por sus autores. Queremos comprobarlo por nosotros mismos y vamos a comparar su rendimiento. Para ello compararemos su <em>performance</em> con el de las funciones que hasta hoy eran parte de nuestra caja de herramientas de R para la lectura y escritura de ficheros en proyectos de datos. Veamos:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(tidyverse)</a>
 <a class="sourceLine" id="cb1-2" title="2">big_dataset <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">nrow</span>() <span class="co"># 700k filas, 15 columnas(8 factor, 4int, 3 logi)</span></a></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">library</span>(microbenchmark)</a>
@@ -704,7 +704,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p>Podemos apreciar una mejora <em>x3</em> y <em>x50</em> en el <em>performance</em> comparado con las funciones readr::write_rds() y base R saveRDS()!</p>
 <p>Una incremento increible de un <em>x100 performance</em> entre fst y las funciones que trabajan con csv y que anteriormente utilizábamos, aunque realmente esta no es una comparación del todo justa al tratarse de dos extensiones completamente diferentes (csv y bin).</p>
 <p><br></p>
-<p><strong>¿Y tú? ¿Estás pensando en incluir FST al <em>toolbox</em> de tu proyecto también?</strong></p>
+<p><strong>¿Y tú? ¿Estás pensando en incluir FST al <em>toolbox</em> de tu proyecto en R también?</strong></p>
 <p><br></p>
 <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
 <script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us4.list-manage.com","uuid":"91551f7ed29389a0de4f47665","lid":"d95c503a48","uniqueMethods":true}) })</script>
@@ -729,7 +729,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/&amp;text=%c2%a1Aumenta%20la%20velocidad%20de%20tus%20scripts%20de%20R!.%20Optimiza%20la%20lectura,%20escritura%20y%20almacenamiento%20de%20modelos%20y%20grandes%20datasets%20con%20el%20paquete%20FST" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/&amp;text=%c2%a1Aumenta%20la%20velocidad%20de%20tus%20scripts%20de%20R!.%20Optimiza%20la%20lectura,%20escritura%20y%20almacenamiento%20de%20grandes%20datasets%20con%20el%20paquete%20FST" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -742,7 +742,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/&amp;t=%c2%a1Aumenta%20la%20velocidad%20de%20tus%20scripts%20de%20R!.%20Optimiza%20la%20lectura,%20escritura%20y%20almacenamiento%20de%20modelos%20y%20grandes%20datasets%20con%20el%20paquete%20FST" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/&amp;t=%c2%a1Aumenta%20la%20velocidad%20de%20tus%20scripts%20de%20R!.%20Optimiza%20la%20lectura,%20escritura%20y%20almacenamiento%20de%20grandes%20datasets%20con%20el%20paquete%20FST" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -755,7 +755,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       
       
       <li>
-        <a href="mailto:?subject=%c2%a1Aumenta%20la%20velocidad%20de%20tus%20scripts%20de%20R!.%20Optimiza%20la%20lectura,%20escritura%20y%20almacenamiento%20de%20modelos%20y%20grandes%20datasets%20con%20el%20paquete%20FST&amp;body=/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=%c2%a1Aumenta%20la%20velocidad%20de%20tus%20scripts%20de%20R!.%20Optimiza%20la%20lectura,%20escritura%20y%20almacenamiento%20de%20grandes%20datasets%20con%20el%20paquete%20FST&amp;body=/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -768,7 +768,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/&amp;title=%c2%a1Aumenta%20la%20velocidad%20de%20tus%20scripts%20de%20R!.%20Optimiza%20la%20lectura,%20escritura%20y%20almacenamiento%20de%20modelos%20y%20grandes%20datasets%20con%20el%20paquete%20FST" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/&amp;title=%c2%a1Aumenta%20la%20velocidad%20de%20tus%20scripts%20de%20R!.%20Optimiza%20la%20lectura,%20escritura%20y%20almacenamiento%20de%20grandes%20datasets%20con%20el%20paquete%20FST" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -781,7 +781,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=%c2%a1Aumenta%20la%20velocidad%20de%20tus%20scripts%20de%20R!.%20Optimiza%20la%20lectura,%20escritura%20y%20almacenamiento%20de%20modelos%20y%20grandes%20datasets%20con%20el%20paquete%20FST%20/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=%c2%a1Aumenta%20la%20velocidad%20de%20tus%20scripts%20de%20R!.%20Optimiza%20la%20lectura,%20escritura%20y%20almacenamiento%20de%20grandes%20datasets%20con%20el%20paquete%20FST%20/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -794,7 +794,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/&amp;title=%c2%a1Aumenta%20la%20velocidad%20de%20tus%20scripts%20de%20R!.%20Optimiza%20la%20lectura,%20escritura%20y%20almacenamiento%20de%20modelos%20y%20grandes%20datasets%20con%20el%20paquete%20FST" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/&amp;title=%c2%a1Aumenta%20la%20velocidad%20de%20tus%20scripts%20de%20R!.%20Optimiza%20la%20lectura,%20escritura%20y%20almacenamiento%20de%20grandes%20datasets%20con%20el%20paquete%20FST" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>

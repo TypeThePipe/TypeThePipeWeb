@@ -1,7 +1,7 @@
 ---
 title: "Reordenando gráficos de barras en R con GGanimate"
 author: "Carlos Vecina Tebar"
-date: "2019-12-17"
+date: "2019-12-16"
 slug: "reordenar-grafico-barras-R-ggplot-gganimate"
 translationKey: "reordenar-grafico-barras-R-ggplot-gganimate"
 output:
@@ -11,7 +11,7 @@ categories:
 - R
 - Tips
 tags: []
-subtitle: '¡Gráficos interactivos con GGanimate! En este post te enseñamos no solo barras que evolucionan con el tiempo, sino que se reordenan. ¡Entra y descúbrelo!'
+subtitle: '¡Gráficos interactivos en R con GGanimate! En este post te enseñamos barras que evolucionan con el tiempo y además que se reordenan. ¡Entra y descúbrelo!'
 summary: "Mostramos como reordenar las barras en las animaciones de ggplot realizadas con gganimate."
 authors: [carlos-vecina]
 featured: false
@@ -28,11 +28,11 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <br>
 
-GGanimate es una libraría de R que está generando bastantes posts y comentarios debido al potencial que introduce en el aspecto de visualizaciones en el ecosistema R.
+GGanimate es una libraría de R que está generando bastantes casos de uso, comentarios y posts debido al potencial que introduce en el aspecto de visualizaciones en el ecosistema R.
 
-Intentando aplicar esta librería a gráficos de barras y su evolución temporal, nos encontramos usuarios preguntando la posibilidad de que las barras no solo aumenten y disminuyan a lo largo del tiempo(de la animación) sino que también el orden de las mismas variara en función si eran mayores o menores y no permaneciesen en el orden del primer *timestamp*, en definitiva que se reordenaran.
+Nos encontramos usuarios preguntando la posibilidad de que las barras no solo aumenten y disminuyan a lo largo del tiempo(de la animación) sino que también el orden de las mismas se modificara en función de si eran mayores o menores y no permaneciesen en el orden del primer *timestamp*, en definitiva que se reordenaran.
 
-Por tanto, compartimos el siguiente código en el que las barras se reordenan a lo largo del tiempo. Es más en este ejemplo, tenemos 5 ciudades que entran y salen del gráfico en función de su valor durante el tiempo y visualizando el top 4.
+Por tanto, compartimos el siguiente código en el cual se consigue que las barras se reordenan a lo largo del tiempo. Es más, en este ejemplo, tenemos 5 ciudades que entran y salen del gráfico en función de su valor durante el tiempo y visualizando el top 4.
 
 Os dejamos el código para realizar la animación del gráfico de barras:
 

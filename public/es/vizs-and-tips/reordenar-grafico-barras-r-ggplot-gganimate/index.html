@@ -275,9 +275,9 @@
   <meta property="twitter:image" content="/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/featured.gif"><meta property="og:locale" content="es">
   
     
-      <meta property="article:published_time" content="2019-12-17T00:00:00&#43;00:00">
+      <meta property="article:published_time" content="2019-12-16T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2019-12-17T00:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2019-12-16T00:00:00&#43;00:00">
   
 
   
@@ -534,7 +534,7 @@
   <h1>Reordenando gráficos de barras en R con GGanimate</h1>
 
   
-  <p class="page-subtitle">¡Gráficos interactivos con GGanimate! En este post te enseñamos no solo barras que evolucionan con el tiempo, sino que se reordenan. ¡Entra y descúbrelo!</p>
+  <p class="page-subtitle">¡Gráficos interactivos en R con GGanimate! En este post te enseñamos barras que evolucionan con el tiempo y además que se reordenan. ¡Entra y descúbrelo!</p>
   
 
   
@@ -561,7 +561,7 @@
     
       
     
-    2019-12-17
+    2019-12-16
   </span>
   
 
@@ -672,9 +672,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 <p><img src="./featured.png" height="250px" width="400px" /></p>
 <p><br></p>
-<p>GGanimate es una libraría de R que está generando bastantes posts y comentarios debido al potencial que introduce en el aspecto de visualizaciones en el ecosistema R.</p>
-<p>Intentando aplicar esta librería a gráficos de barras y su evolución temporal, nos encontramos usuarios preguntando la posibilidad de que las barras no solo aumenten y disminuyan a lo largo del tiempo(de la animación) sino que también el orden de las mismas variara en función si eran mayores o menores y no permaneciesen en el orden del primer <em>timestamp</em>, en definitiva que se reordenaran.</p>
-<p>Por tanto, compartimos el siguiente código en el que las barras se reordenan a lo largo del tiempo. Es más en este ejemplo, tenemos 5 ciudades que entran y salen del gráfico en función de su valor durante el tiempo y visualizando el top 4.</p>
+<p>GGanimate es una libraría de R que está generando bastantes casos de uso, comentarios y posts debido al potencial que introduce en el aspecto de visualizaciones en el ecosistema R.</p>
+<p>Nos encontramos usuarios preguntando la posibilidad de que las barras no solo aumenten y disminuyan a lo largo del tiempo(de la animación) sino que también el orden de las mismas se modificara en función de si eran mayores o menores y no permaneciesen en el orden del primer <em>timestamp</em>, en definitiva que se reordenaran.</p>
+<p>Por tanto, compartimos el siguiente código en el cual se consigue que las barras se reordenan a lo largo del tiempo. Es más, en este ejemplo, tenemos 5 ciudades que entran y salen del gráfico en función de su valor durante el tiempo y visualizando el top 4.</p>
 <p>Os dejamos el código para realizar la animación del gráfico de barras:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(ggplot2)</a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(gganimate)</a>

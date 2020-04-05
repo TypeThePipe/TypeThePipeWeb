@@ -1,8 +1,8 @@
 ---
-title: "¡Aumenta la velocidad de tus scripts de R!. Optimiza la lectura, escritura y almacenamiento de modelos y grandes datasets con el paquete FST"
-author: Carlos Vecina Tebar
+title: "¡Aumenta la velocidad de tus scripts de R!. Optimiza la lectura, escritura y almacenamiento de grandes datasets con el paquete FST"
+author: "Carlos Vecina Tebar"
 date: "2020-03-30"
-slug: aumenta-velocidad-scripts-r-lectura-escritura-fst-R
+slug: "aumenta-velocidad-scripts-r-lectura-escritura-fst-R"
 translationKey: "aumenta-velocidad-scripts-r-lectura-escritura-fst-R"
 output:
   blogdown::html_page:
@@ -32,9 +32,9 @@ big_dataset <- rbind(big_dataset,big_dataset,big_dataset,big_dataset,big_dataset
 
 
 
-¿Quieres guardar tu modelo de Deep Learning o un gran dataset? A continuación te mostramos la manera que hemos encontrado de optimizar la lectura, la escritura y almacenaje de ficheros con el paquete FST. Si incorporar un paquete a tu *environment* no te supone un gran problema, te lo recomendamos.
+¿Quieres guardar tu modelo de DL o un gran dataset? A continuación te mostramos la manera que hemos encontrado de optimizar la lectura, la escritura y almacenaje de data frames con el paquete FST. Si incorporar un paquete a tu *environment* no te supone un gran problema, te lo recomendamos.
 
-En la repo del paquete hay un perqueño *benchmark*. Queremos comprobarlo por nosotros mismos y vamos a comparar su rendimiento con las funciones que hasta hoy eran parte de nuestra caja de herramientas de R para la lectura y escritura de ficheros en projectos de datos. Veamos:
+En la repo del paquete hay un pequeño *benchmark* reliazado por sus autores. Queremos comprobarlo por nosotros mismos y vamos a comparar su rendimiento. Para ello compararemos su *performance* con el de las funciones que hasta hoy eran parte de nuestra caja de herramientas de R para la lectura y escritura de ficheros en proyectos de datos. Veamos:
 
 ```{r, eval = FALSE, warning=FALSE}
 library(tidyverse)
@@ -86,7 +86,7 @@ Una incremento increible de un *x100 performance* entre fst y las funciones que 
 
 <br>
 
-**¿Y tú? ¿Estás pensando en incluir FST al *toolbox* de tu proyecto también?**
+**¿Y tú? ¿Estás pensando en incluir FST al *toolbox* de tu proyecto en R también?**
 
 <br>
 

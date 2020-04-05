@@ -13,7 +13,7 @@
     </image>
     
     <item>
-      <title>¡Aumenta la velocidad de tus scripts de R!. Optimiza la lectura, escritura y almacenamiento de modelos y grandes datasets con el paquete FST</title>
+      <title>¡Aumenta la velocidad de tus scripts de R!. Optimiza la lectura, escritura y almacenamiento de grandes datasets con el paquete FST</title>
       <link>/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/</link>
       <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
       <guid>/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/</guid>
@@ -83,8 +83,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 
 &lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;300px&#34; width=&#34;600px&#34; /&gt;&lt;/p&gt;
-&lt;p&gt;¿Quieres guardar tu modelo de Deep Learning o un gran dataset? A continuación te mostramos la manera que hemos encontrado de optimizar la lectura, la escritura y almacenaje de ficheros con el paquete FST. Si incorporar un paquete a tu &lt;em&gt;environment&lt;/em&gt; no te supone un gran problema, te lo recomendamos.&lt;/p&gt;
-&lt;p&gt;En la repo del paquete hay un perqueño &lt;em&gt;benchmark&lt;/em&gt;. Queremos comprobarlo por nosotros mismos y vamos a comparar su rendimiento con las funciones que hasta hoy eran parte de nuestra caja de herramientas de R para la lectura y escritura de ficheros en projectos de datos. Veamos:&lt;/p&gt;
+&lt;p&gt;¿Quieres guardar tu modelo de DL o un gran dataset? A continuación te mostramos la manera que hemos encontrado de optimizar la lectura, la escritura y almacenaje de data frames con el paquete FST. Si incorporar un paquete a tu &lt;em&gt;environment&lt;/em&gt; no te supone un gran problema, te lo recomendamos.&lt;/p&gt;
+&lt;p&gt;En la repo del paquete hay un pequeño &lt;em&gt;benchmark&lt;/em&gt; reliazado por sus autores. Queremos comprobarlo por nosotros mismos y vamos a comparar su rendimiento. Para ello compararemos su &lt;em&gt;performance&lt;/em&gt; con el de las funciones que hasta hoy eran parte de nuestra caja de herramientas de R para la lectura y escritura de ficheros en proyectos de datos. Veamos:&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;big_dataset &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;nrow&lt;/span&gt;() &lt;span class=&#34;co&#34;&gt;# 700k filas, 15 columnas(8 factor, 4int, 3 logi)&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(microbenchmark)&lt;/a&gt;
@@ -114,7 +114,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;Podemos apreciar una mejora &lt;em&gt;x3&lt;/em&gt; y &lt;em&gt;x50&lt;/em&gt; en el &lt;em&gt;performance&lt;/em&gt; comparado con las funciones readr::write_rds() y base R saveRDS()!&lt;/p&gt;
 &lt;p&gt;Una incremento increible de un &lt;em&gt;x100 performance&lt;/em&gt; entre fst y las funciones que trabajan con csv y que anteriormente utilizábamos, aunque realmente esta no es una comparación del todo justa al tratarse de dos extensiones completamente diferentes (csv y bin).&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;¿Y tú? ¿Estás pensando en incluir FST al &lt;em&gt;toolbox&lt;/em&gt; de tu proyecto también?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;¿Y tú? ¿Estás pensando en incluir FST al &lt;em&gt;toolbox&lt;/em&gt; de tu proyecto en R también?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
 &lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&#34;mojo/signup-forms/Loader&#34;], function(L) { L.start({&#34;baseUrl&#34;:&#34;mc.us4.list-manage.com&#34;,&#34;uuid&#34;:&#34;91551f7ed29389a0de4f47665&#34;,&#34;lid&#34;:&#34;d95c503a48&#34;,&#34;uniqueMethods&#34;:true}) })&lt;/script&gt;
@@ -344,7 +344,7 @@ q2_weighted_mean
     <item>
       <title>Reordenando gráficos de barras en R con GGanimate</title>
       <link>/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/</link>
-      <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
       <guid>/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
@@ -413,9 +413,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 &lt;p&gt;&lt;img src=&#34;./featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;GGanimate es una libraría de R que está generando bastantes posts y comentarios debido al potencial que introduce en el aspecto de visualizaciones en el ecosistema R.&lt;/p&gt;
-&lt;p&gt;Intentando aplicar esta librería a gráficos de barras y su evolución temporal, nos encontramos usuarios preguntando la posibilidad de que las barras no solo aumenten y disminuyan a lo largo del tiempo(de la animación) sino que también el orden de las mismas variara en función si eran mayores o menores y no permaneciesen en el orden del primer &lt;em&gt;timestamp&lt;/em&gt;, en definitiva que se reordenaran.&lt;/p&gt;
-&lt;p&gt;Por tanto, compartimos el siguiente código en el que las barras se reordenan a lo largo del tiempo. Es más en este ejemplo, tenemos 5 ciudades que entran y salen del gráfico en función de su valor durante el tiempo y visualizando el top 4.&lt;/p&gt;
+&lt;p&gt;GGanimate es una libraría de R que está generando bastantes casos de uso, comentarios y posts debido al potencial que introduce en el aspecto de visualizaciones en el ecosistema R.&lt;/p&gt;
+&lt;p&gt;Nos encontramos usuarios preguntando la posibilidad de que las barras no solo aumenten y disminuyan a lo largo del tiempo(de la animación) sino que también el orden de las mismas se modificara en función de si eran mayores o menores y no permaneciesen en el orden del primer &lt;em&gt;timestamp&lt;/em&gt;, en definitiva que se reordenaran.&lt;/p&gt;
+&lt;p&gt;Por tanto, compartimos el siguiente código en el cual se consigue que las barras se reordenan a lo largo del tiempo. Es más, en este ejemplo, tenemos 5 ciudades que entran y salen del gráfico en función de su valor durante el tiempo y visualizando el top 4.&lt;/p&gt;
 &lt;p&gt;Os dejamos el código para realizar la animación del gráfico de barras:&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(ggplot2)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(gganimate)&lt;/a&gt;

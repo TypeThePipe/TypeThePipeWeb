@@ -270,7 +270,7 @@
   
   <meta property="og:site_name" content="TypeThePipe">
   <meta property="og:url" content="/vizs-and-tips/speed-up-load-write-files-fst-package-r/">
-  <meta property="og:title" content="Speed up your R scripts. A cool optimized way to load, write and store big files with FST package! | TypeThePipe">
+  <meta property="og:title" content="Speed up your R scripts. A cool optimized way to load, write and store big data frames with FST package! | TypeThePipe">
   <meta property="og:description" content="Unbeaten speed and file size! It&#39;s FST! x100 faster than write.csv()"><meta property="og:image" content="/vizs-and-tips/speed-up-load-write-files-fst-package-r/featured.png">
   <meta property="twitter:image" content="/vizs-and-tips/speed-up-load-write-files-fst-package-r/featured.png"><meta property="og:locale" content="en-us">
   
@@ -298,7 +298,7 @@
 
 
 
-  <title>Speed up your R scripts. A cool optimized way to load, write and store big files with FST package! | TypeThePipe</title>
+  <title>Speed up your R scripts. A cool optimized way to load, write and store big data frames with FST package! | TypeThePipe</title>
 
 </head>
 
@@ -533,7 +533,7 @@
 
 
 <div class="article-container pt-3">
-  <h1>Speed up your R scripts. A cool optimized way to load, write and store big files with FST package!</h1>
+  <h1>Speed up your R scripts. A cool optimized way to load, write and store big data frames with FST package!</h1>
 
   
   <p class="page-subtitle">A must in our R environment! Unbeaten speed and data frame compression. It&rsquo;s FST! x100 faster than write.csv()</p>
@@ -673,7 +673,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 
 <p><img src="featured.png" height="300px" width="600px" /></p>
-<p>Are you trying to save and load your DL model or a big dataset? Here we show you a performance boost to your scripts and reduction in disk memory storage with the FST package. We are going to benchmark it with R base functions (csv and RDS extensions) and with another great package like readr:</p>
+<p>Are you trying to save and load your DL model or a big dataset in R? Here we show you a performance boost to your scripts and reduction in disk memory storage with the FST CRAN package. We are going to benchmark it with R base functions (csv and RDS extensions) and another great package like readr:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(tidyverse)</a>
 <a class="sourceLine" id="cb1-2" title="2">big_dataset <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">nrow</span>() <span class="co"># 700k rows, 15 cols(8 factor, 4int, 3 logi)</span></a></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">library</span>(microbenchmark)</a>
@@ -700,9 +700,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><br></p>
 <p><strong>Wow! That was cool! We can achieve an amazing reading and writing speed plus an incredible file size!</strong></p>
 <p>We can see a <em>x3</em> and <em>x50</em> performance improvements over the readr::write_rds() and base saveRDS() functions!</p>
-<p>An incredible <em>x100 performance</em> between fst and csv writing functions, but it’s true that they are not directly comparable as they work with quite different file formats.</p>
+<p>An incredible <em>x100 performance</em> between fst and csv writing functions, but the true here is that they are not directly comparable as they work with quite different file formats.</p>
 <p><br></p>
-<p><strong>Are you going to add FST to your projects toolbox too?</strong></p>
+<p><strong>Are you going to add FST to your R projects toolbox too?</strong></p>
 <p><br></p>
 <script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
 <script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us4.list-manage.com","uuid":"91551f7ed29389a0de4f47665","lid":"d95c503a48","uniqueMethods":true}) })</script>
@@ -727,7 +727,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/vizs-and-tips/speed-up-load-write-files-fst-package-r/&amp;text=Speed%20up%20your%20R%20scripts.%20A%20cool%20optimized%20way%20to%20load,%20write%20and%20store%20big%20files%20with%20FST%20package!" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=/vizs-and-tips/speed-up-load-write-files-fst-package-r/&amp;text=Speed%20up%20your%20R%20scripts.%20A%20cool%20optimized%20way%20to%20load,%20write%20and%20store%20big%20data%20frames%20with%20FST%20package!" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -740,7 +740,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/vizs-and-tips/speed-up-load-write-files-fst-package-r/&amp;t=Speed%20up%20your%20R%20scripts.%20A%20cool%20optimized%20way%20to%20load,%20write%20and%20store%20big%20files%20with%20FST%20package!" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=/vizs-and-tips/speed-up-load-write-files-fst-package-r/&amp;t=Speed%20up%20your%20R%20scripts.%20A%20cool%20optimized%20way%20to%20load,%20write%20and%20store%20big%20data%20frames%20with%20FST%20package!" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -753,7 +753,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       
       
       <li>
-        <a href="mailto:?subject=Speed%20up%20your%20R%20scripts.%20A%20cool%20optimized%20way%20to%20load,%20write%20and%20store%20big%20files%20with%20FST%20package!&amp;body=/vizs-and-tips/speed-up-load-write-files-fst-package-r/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Speed%20up%20your%20R%20scripts.%20A%20cool%20optimized%20way%20to%20load,%20write%20and%20store%20big%20data%20frames%20with%20FST%20package!&amp;body=/vizs-and-tips/speed-up-load-write-files-fst-package-r/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -766,7 +766,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/vizs-and-tips/speed-up-load-write-files-fst-package-r/&amp;title=Speed%20up%20your%20R%20scripts.%20A%20cool%20optimized%20way%20to%20load,%20write%20and%20store%20big%20files%20with%20FST%20package!" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=/vizs-and-tips/speed-up-load-write-files-fst-package-r/&amp;title=Speed%20up%20your%20R%20scripts.%20A%20cool%20optimized%20way%20to%20load,%20write%20and%20store%20big%20data%20frames%20with%20FST%20package!" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -779,7 +779,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Speed%20up%20your%20R%20scripts.%20A%20cool%20optimized%20way%20to%20load,%20write%20and%20store%20big%20files%20with%20FST%20package!%20/vizs-and-tips/speed-up-load-write-files-fst-package-r/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Speed%20up%20your%20R%20scripts.%20A%20cool%20optimized%20way%20to%20load,%20write%20and%20store%20big%20data%20frames%20with%20FST%20package!%20/vizs-and-tips/speed-up-load-write-files-fst-package-r/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -792,7 +792,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/vizs-and-tips/speed-up-load-write-files-fst-package-r/&amp;title=Speed%20up%20your%20R%20scripts.%20A%20cool%20optimized%20way%20to%20load,%20write%20and%20store%20big%20files%20with%20FST%20package!" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=/vizs-and-tips/speed-up-load-write-files-fst-package-r/&amp;title=Speed%20up%20your%20R%20scripts.%20A%20cool%20optimized%20way%20to%20load,%20write%20and%20store%20big%20data%20frames%20with%20FST%20package!" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>

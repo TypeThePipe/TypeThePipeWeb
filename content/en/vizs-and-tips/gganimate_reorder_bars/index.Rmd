@@ -1,7 +1,7 @@
 ---
 title: "Reordering bars in GGanimate visualization"
 author: "Carlos Vecina Tebar"
-date: "2019-12-17"
+date: "2019-12-16"
 slug: "reorder-bars-R-ggplot-gganimate"
 translationKey: "reordenar-grafico-barras-R-ggplot-gganimate"
 output:
