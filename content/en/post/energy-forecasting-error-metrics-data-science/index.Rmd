@@ -237,7 +237,7 @@ This metric is quite similar to the MAD/Sum Ratio above but divides by the sum o
 This formula allows for a cool graphic interpretation of the error: the numerator matchs with the yellow area whereas the denominator corresponds to the sum of the blue and yellow areas:
 
 
-![](/post/Forecasting-error-metrics_files/EMAE_plot.png)
+![](/en/post/energy-forecasting-error-metrics-data-science/EMAE_plot.png)
 
 
 

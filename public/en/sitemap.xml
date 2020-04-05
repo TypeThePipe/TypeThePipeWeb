@@ -398,6 +398,20 @@
   </url>
   
   <url>
+    <loc>/false/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/false/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/false/"
+                />
+  </url>
+  
+  <url>
     <loc>/publication_types/</loc>
     <xhtml:link
                 rel="alternate"
@@ -408,6 +422,20 @@
                 rel="alternate"
                 hreflang="en"
                 href="/publication_types/"
+                />
+  </url>
+  
+  <url>
+    <loc>/show/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/show/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/show/"
                 />
   </url>
   

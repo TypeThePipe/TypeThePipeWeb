@@ -338,6 +338,20 @@
   </url>
   
   <url>
+    <loc>/es/false/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/false/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/false/"
+                />
+  </url>
+  
+  <url>
     <loc>/es/authors/pablo-canovas/</loc>
     <xhtml:link
                 rel="alternate"
@@ -362,6 +376,20 @@
                 rel="alternate"
                 hreflang="es"
                 href="/es/publication_types/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/show/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/show/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/show/"
                 />
   </url>
   

@@ -108,7 +108,6 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;co&#34;&gt;##base      4800.3516       5122.22345    5024.69395      5833.9807     10        15  MB&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;##readr     187.0765        210.74584     211.70760     246.6369      10        46  MB&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;fst        60.3065         87.30611      74.94375      154.7718      10        16  MB&amp;quot;&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;fst        60.3065\t\t    87.30611      74.94375      154.7718      10        16  MB&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;¡Wow! Los resultados son impresionantes&lt;/strong&gt;, incluso mejores que los expuestos en la web de los creadores.&lt;/p&gt;
 &lt;p&gt;Podemos apreciar una mejora &lt;em&gt;x3&lt;/em&gt; y &lt;em&gt;x50&lt;/em&gt; en el &lt;em&gt;performance&lt;/em&gt; comparado con las funciones readr::write_rds() y base R saveRDS()!&lt;/p&gt;

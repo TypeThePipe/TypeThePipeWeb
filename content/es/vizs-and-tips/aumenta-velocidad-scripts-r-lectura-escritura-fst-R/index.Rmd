@@ -64,7 +64,7 @@ file.remove(paste0(path,"big_dataset.RDS"))
 file.remove(paste0(path,"big_dataset.fst"))
 ```
 
-```{r}
+```{r, eval=FALSE}
 ##  Unit: milliseconds
 ##            min 		    mean		      median        max			      neval	    file_size
 ##utils     10943.1161  	11232.20073   11098.66610	  12011.1538    10        109 MB

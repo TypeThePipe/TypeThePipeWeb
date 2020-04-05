@@ -25,7 +25,7 @@ nchar("Dynamic ggplots with GGanimate! In this post we code evolution of a barpl
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-<img src="./featured.png" height="250px" width="400px" />
+<img src="./featured.gif" height="250px" width="400px" />
 
 ```{r, eval=FALSE}
 library(ggplot2)

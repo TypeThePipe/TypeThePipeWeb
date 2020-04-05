@@ -309,7 +309,7 @@ It shows, indeed, better statistical properties than others metrics:</p>
 <ul>
 <li>Applying least squares regression to this metric estimates the geometric mean whereas minimizing MAPE or sMAPE does not lead to an established measure of location.</li>
 <li>Given that geometric mean cannot exceed arithmetic mean, using least squares with log ratio will be more robust to outliers than OLS.</li>
-<li>Its values belong to a symmetric range: <span class="math inline">\([-\infty, \infty]\)</span>. However, it shows the same asymmetric behaviour than sMAPE: Exchanging actuals and forecasts holds the error
+<li>Its values belong to a symmetric range: <span class="math inline">\((-\infty, \infty)\)</span>. However, it shows the same asymmetric behaviour than sMAPE: Exchanging actuals and forecasts holds the error
 (with a negative value!), but similar absolute deviations with same actual value don’t correspond with equal error values.</li>
 </ul>
 <p>If interested in more information about this less-known metric, check out <a href="https://poseidon01.ssrn.com/delivery.php?ID=912071094074109094069115029093025110000069085067010018086003069122074000022002100121034011107062116011014121092068067002120016015069090069028013066084099122096112019086019005105020067099126068064011082116019102096003091124077118086097090097087121114&amp;EXT=pdf">A better measure of relative prediction accuracy for model selection and model estimation (Chris Tofallis, 2015)</a></p>

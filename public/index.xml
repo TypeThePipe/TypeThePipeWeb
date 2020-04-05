@@ -238,7 +238,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
-&lt;p&gt;&lt;img src=&#34;./featured.gif&#34; height=&#34;300px&#34; width=&#34;600px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;300px&#34; width=&#34;600px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Are you trying to save and load your DL model or a big dataset in R? Here we show you a performance boost to your scripts and reduction in disk memory storage with the FST CRAN package. We are going to benchmark it with R base functions (csv and RDS extensions) and another great package like readr:&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;big_dataset &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;nrow&lt;/span&gt;() &lt;span class=&#34;co&#34;&gt;# 700k rows, 15 cols(8 factor, 4int, 3 logi)&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -1229,7 +1229,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
-&lt;p&gt;&lt;img src=&#34;./featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;featured.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(ggplot2)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(gganimate)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
@@ -2058,7 +2058,7 @@ in our case this metric isn’t optimal for several reasons:&lt;/p&gt;
 &lt;li&gt;It’s a nice alternative to NMAE since a &lt;em&gt;capacity&lt;/em&gt; value is not required.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;This formula allows for a cool graphic interpretation of the error: the numerator matchs with the yellow area whereas the denominator corresponds to the sum of the blue and yellow areas:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/post/Forecasting-error-metrics_files/EMAE_plot.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/en/post/energy-forecasting-error-metrics-data-science/EMAE_plot.png&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;conclusions&#34; class=&#34;section level1&#34;&gt;
@@ -2389,7 +2389,7 @@ It shows, indeed, better statistical properties than others metrics:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Applying least squares regression to this metric estimates the geometric mean whereas minimizing MAPE or sMAPE does not lead to an established measure of location.&lt;/li&gt;
 &lt;li&gt;Given that geometric mean cannot exceed arithmetic mean, using least squares with log ratio will be more robust to outliers than OLS.&lt;/li&gt;
-&lt;li&gt;Its values belong to a symmetric range: &lt;span class=&#34;math inline&#34;&gt;\([-\infty, \infty]\)&lt;/span&gt;. However, it shows the same asymmetric behaviour than sMAPE: Exchanging actuals and forecasts holds the error
+&lt;li&gt;Its values belong to a symmetric range: &lt;span class=&#34;math inline&#34;&gt;\((-\infty, \infty)\)&lt;/span&gt;. However, it shows the same asymmetric behaviour than sMAPE: Exchanging actuals and forecasts holds the error
 (with a negative value!), but similar absolute deviations with same actual value don’t correspond with equal error values.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;If interested in more information about this less-known metric, check out &lt;a href=&#34;https://poseidon01.ssrn.com/delivery.php?ID=912071094074109094069115029093025110000069085067010018086003069122074000022002100121034011107062116011014121092068067002120016015069090069028013066084099122096112019086019005105020067099126068064011082116019102096003091124077118086097090097087121114&amp;amp;EXT=pdf&#34;&gt;A better measure of relative prediction accuracy for model selection and model estimation (Chris Tofallis, 2015)&lt;/a&gt;&lt;/p&gt;

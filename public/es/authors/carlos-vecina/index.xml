@@ -108,7 +108,6 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;co&#34;&gt;##base      4800.3516       5122.22345    5024.69395      5833.9807     10        15  MB&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;##readr     187.0765        210.74584     211.70760     246.6369      10        46  MB&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;fst        60.3065         87.30611      74.94375      154.7718      10        16  MB&amp;quot;&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;fst        60.3065\t\t    87.30611      74.94375      154.7718      10        16  MB&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;¡Wow! Los resultados son impresionantes&lt;/strong&gt;, incluso mejores que los expuestos en la web de los creadores.&lt;/p&gt;
 &lt;p&gt;Podemos apreciar una mejora &lt;em&gt;x3&lt;/em&gt; y &lt;em&gt;x50&lt;/em&gt; en el &lt;em&gt;performance&lt;/em&gt; comparado con las funciones readr::write_rds() y base R saveRDS()!&lt;/p&gt;
@@ -370,11 +369,14 @@ Una estructura bastante generalizada sería la siguiente:&lt;/p&gt;
 &lt;p&gt;Una mala predisposición personal, no investigar suficientemente y con cariño la distribución de los datos y sus valores extremos, una mala elección de equipo, seguir corriendo los modelos 30 minutos antes de que acabe el plazo de entrega, no preparar la exposición final con tiempo,… son situaciones que nos han pasado a muchos y no ocurre absolutamente nada por reflexionar sobre ello y dejarlo por escrito. Lo fundamental es, dentro de lo posible, ¡que no se repitan en la próxima competición para &lt;strong&gt;lograr conseguir aun mejores resultados! :)&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;pez_guitarra.gif&#34; height=&#34;100px&#34; width=&#34;200px&#34; /&gt;&lt;/p&gt;
 &lt;style&gt;
-body {
-text-align: justify}
 p {
   word-spacing: 3px;
   text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
 }
 &lt;/style&gt;
 &lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
