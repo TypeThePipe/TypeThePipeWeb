@@ -24,7 +24,7 @@ nchar("¡Gráficos interactivos con GGanimate! En este post te enseñamos no sol
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-<img src="./featured.png" height="250px" width="400px" />
+<img src="./featured.gif" height="250px" width="400px" />
 
 <br>
 

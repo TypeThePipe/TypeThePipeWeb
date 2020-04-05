@@ -22,7 +22,7 @@ draft: false
 nchar("A must in our R environment! Unbeaten speed and data frame compression. It's FST! x100 faster than write.csv()")
 ```
 
-<img src="./featured.png" height="300px" width="600px" />
+<img src="./featured.gif" height="300px" width="600px" />
 
 ```{r, warning=FALSE, echo=FALSE, eval=FALSE}
 big_dataset <- read.csv(file=gzfile("../../../../static/shared_files/big_dataset.csv.gz"))

@@ -986,7 +986,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
-&lt;p&gt;&lt;img src=&#34;./featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;featured.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;GGanimate es una libraría de R que está generando bastantes casos de uso, comentarios y posts debido al potencial que introduce en el aspecto de visualizaciones en el ecosistema R.&lt;/p&gt;
 &lt;p&gt;Nos encontramos usuarios preguntando la posibilidad de que las barras no solo aumenten y disminuyan a lo largo del tiempo(de la animación) sino que también el orden de las mismas se modificara en función de si eran mayores o menores y no permaneciesen en el orden del primer &lt;em&gt;timestamp&lt;/em&gt;, en definitiva que se reordenaran.&lt;/p&gt;
