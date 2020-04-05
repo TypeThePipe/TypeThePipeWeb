@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Datathon | TypeThePipe</title>
+    <link>/es/categories/datathon/</link>
+      <atom:link href="/es/categories/datathon/index.xml" rel="self" type="application/rss+xml" />
+    <description>Datathon</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Mon, 07 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Datathon</title>
+      <link>/es/categories/datathon/</link>
+    </image>
+    
+    <item>
+      <title>Plataformas donde puedes participar en competiciones de datos</title>
+      <link>/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/</link>
+      <pubDate>Mon, 07 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/</guid>
+      <description>
+
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Kaggle - &lt;a href=&#34;https://www.kaggle.com&#34; class=&#34;uri&#34;&gt;https://www.kaggle.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Driven Data - &lt;a href=&#34;https://www.drivendata.org/competitions/&#34; class=&#34;uri&#34;&gt;https://www.drivendata.org/competitions/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;CodaLab - &lt;a href=&#34;https://competitions.codalab.org/&#34; class=&#34;uri&#34;&gt;https://competitions.codalab.org/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Alibaba Tianchi - &lt;a href=&#34;https://tianchi.aliyun.com/competition/gameList/activeList&#34; class=&#34;uri&#34;&gt;https://tianchi.aliyun.com/competition/gameList/activeList&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Analyticsvidhya - &lt;a href=&#34;https://datahack.analyticsvidhya.com/contest/all&#34; class=&#34;uri&#34;&gt;https://datahack.analyticsvidhya.com/contest/all&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;hackerearth - &lt;a href=&#34;https://www.hackerearth.com/challenges/competitive/&#34; class=&#34;uri&#34;&gt;https://www.hackerearth.com/challenges/competitive/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Agorize - &lt;a href=&#34;https://www.agorize.com/en/challenges&#34; class=&#34;uri&#34;&gt;https://www.agorize.com/en/challenges&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;También existen eventos concretos, que se celebran anualmente.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;IDA (international Data Analysis Olympiad) (Registro en Enero) - &lt;a href=&#34;https://idao.world/&#34; class=&#34;uri&#34;&gt;https://idao.world/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;IronViz - &lt;a href=&#34;https://www.tableau.com/iron-viz&#34; class=&#34;uri&#34;&gt;https://www.tableau.com/iron-viz&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;TopCoder - &lt;a href=&#34;https://tco19.topcoder.com/competition-overview/algorithm&#34; class=&#34;uri&#34;&gt;https://tco19.topcoder.com/competition-overview/algorithm&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Data Mining Cup - &lt;a href=&#34;https://www.data-mining-cup.com/&#34; class=&#34;uri&#34;&gt;https://www.data-mining-cup.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;A nivel nacional y local están comenzando a organizarse todo tipos de eventos relativos al #opendata. Te invitamos a que investigues sobre ellos y te animes a colaborar en mejorar tu entorno a través de la explotación de los datos.&lt;/p&gt;
+&lt;p&gt;Por ejemplo, en España a fecha de este artículo, los más importantes son:&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;CajaMar - &lt;a href=&#34;https://www.cajamardatalab.com/&#34; class=&#34;uri&#34;&gt;https://www.cajamardatalab.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Gobierno - &lt;a href=&#34;https://datos.gob.es/es/event-tags/concurso&#34; class=&#34;uri&#34;&gt;https://datos.gob.es/es/event-tags/concurso&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Junta Castilla y Leon - &lt;a href=&#34;https://datosabiertos.jcyl.es/web/es/datos-abiertos-castilla-leon.html&#34; class=&#34;uri&#34;&gt;https://datosabiertos.jcyl.es/web/es/datos-abiertos-castilla-leon.html&lt;/a&gt;&lt;/p&gt;
+&lt;/style&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
+&lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&#34;mojo/signup-forms/Loader&#34;], function(L) { L.start({&#34;baseUrl&#34;:&#34;mc.us4.list-manage.com&#34;,&#34;uuid&#34;:&#34;91551f7ed29389a0de4f47665&#34;,&#34;lid&#34;:&#34;d95c503a48&#34;,&#34;uniqueMethods&#34;:true}) })&lt;/script&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

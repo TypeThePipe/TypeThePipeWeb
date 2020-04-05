@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+  <meta name="robots" content="index,follow">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Carlos Vecina">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Do you want to achieve your goals?">
+
+  
+  <link rel="alternate" hreflang="es" href="/es/post/10-consejos-datathon-kaggle-data-science/">
+  
+  <link rel="alternate" hreflang="en-us" href="/post/10-tips-datathon-kaggle-data-science/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#0294A5">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155621946-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-155621946-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu7deb2a6bfe7da9ae71f9387d98d158da_12352_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu7deb2a6bfe7da9ae71f9387d98d158da_12352_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/post/10-tips-datathon-kaggle-data-science/">
+
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="TypeThePipe">
+  <meta property="og:url" content="/post/10-tips-datathon-kaggle-data-science/">
+  <meta property="og:title" content="10 Tips to ace your Kaggle, Datathon or any data competition! | TypeThePipe">
+  <meta property="og:description" content="Do you want to achieve your goals?"><meta property="og:image" content="/post/10-tips-datathon-kaggle-data-science/featured.png">
+  <meta property="twitter:image" content="/post/10-tips-datathon-kaggle-data-science/featured.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2020-03-11T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2020-03-11T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/10-tips-datathon-kaggle-data-science/"
+  },
+  "headline": "10 Tips to ace your Kaggle, Datathon or any data competition!",
+  
+  "image": [
+    "/post/10-tips-datathon-kaggle-data-science/featured.png"
+  ],
+  
+  "datePublished": "2020-03-11T00:00:00Z",
+  "dateModified": "2020-03-11T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Carlos Vecina"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "TypeThePipe",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_192x192_fit_lanczos_2.png"
+    }
+  },
+  "description": "Do you want to achieve your goals?"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  <title>10 Tips to ace your Kaggle, Datathon or any data competition! | TypeThePipe</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+  
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_0x70_resize_lanczos_2.png" alt="TypeThePipe"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_0x70_resize_lanczos_2.png" alt="TypeThePipe"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#vizstips"><span>Vizs & Tips</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#people"><span>About Us</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+      
+      <li class="nav-item dropdown i18n-dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-globe mr-1" aria-hidden="true"></i><span class="d-none d-lg-inline">English</span>
+        </a>
+        <div class="dropdown-menu">
+          <div class="dropdown-item dropdown-item-active">
+            <span>English</span>
+          </div>
+          
+          <a class="dropdown-item" href="/es/post/10-consejos-datathon-kaggle-data-science/">
+            <span>Español</span>
+          </a>
+          
+        </div>
+      </li>
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+        <article class="article">
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>10 Tips to ace your Kaggle, Datathon or any data competition!</h1>
+
+  
+  <p class="page-subtitle">In this post you will find our experience and best tips to face and outperform your next Kaggle, Datathon or any data competition.</p>
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  
+  <span><a href="/authors/carlos-vecina/">Carlos Vecina</a></span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    2020-03-11
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    7 min read
+  </span>
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/post/">Post</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+            <div class="article-container">
+              <div class="article-style">
+                
+
+<div id="TOC">
+<ul>
+<li><a href="#set-your-main-goal-and-check-your-time-and-resources-skills-hardware"><strong>1. Set your main goal and check your time and resources (skills, hardware…)</strong></a></li>
+<li><a href="#choose-the-challenge-fieldindustry-according-your-interests."><strong>2. Choose the challenge field/industry according your interests.</strong></a></li>
+<li><a href="#build-the-right-team.-set-up-tools-to-exchange-code."><strong>3. Build the right team. Set up tools to exchange code.</strong></a></li>
+<li><a href="#deep-research-about-the-challenge-topic-and-environment."><strong>4. Deep research about the challenge topic and environment.</strong></a></li>
+<li><a href="#excel-your-exploratory-analysis.-remember-you-could-use-external-data-sources."><strong>5. Excel your exploratory analysis. Remember you could use external data sources.</strong></a></li>
+<li><a href="#set-your-project-and-code-structure."><strong>6. Set your project and code structure.</strong></a></li>
+<li><a href="#run-your-models."><strong>7. Run your models.</strong></a></li>
+<li><a href="#cross-validation-oos-and-backtesting."><strong>8. Cross Validation, OOS and backtesting.</strong></a></li>
+<li><a href="#model-interpretability"><strong>9. Model interpretability</strong></a></li>
+<li><a href="#write-down-your-observed-strengths-and-weaknesses.-it-will-be-the-starting-point-for-your-next-proyect."><strong>10. Write down your observed strengths and weaknesses. It will be the starting point for your next proyect. </strong></a></li>
+</ul>
+</div>
+
+<p><img src="featured.png" height="250px" width="400px" /></p>
+<p>Are you considering join a Datathon or data competition? In this post we’ll bring you 10 tips that can help you to outperform your competitors. So without further ado;</p>
+<p><br></p>
+<div id="set-your-main-goal-and-check-your-time-and-resources-skills-hardware" class="section level1">
+<h1><strong>1. Set your main goal and check your time and resources (skills, hardware…)</strong></h1>
+<p>Depending on your profile and the competition requirements, you should think about your main goal by joining a data challenge. It could be learning about a new tool, improve your coding and algorithmical skills, achieve the 1st position and therefore the prize, or just for fun. Whatever it is, that’s great.</p>
+<p>It’s important to have a bright and well-defined picture of your goal, because you are going to invest so much time in the project. Having clear your personal idea of success will help you in your valley of despair.</p>
+<p><br></p>
+</div>
+<div id="choose-the-challenge-fieldindustry-according-your-interests." class="section level1">
+<h1><strong>2. Choose the challenge field/industry according your interests.</strong></h1>
+<p><img src="choosing_simpson.gif" height="250px" width="400px" /></p>
+<p>Following with the ‘you’re going to invest so much time’ idea, how are you joining a challange in a field that doesn’t inspire you? Hopefully, many organizations and platforms are launching it’s own data challanges open to the public. Kaggle is the principal one, nevertheless there are many more. We propose several options <a href="../../vizs-and-tips/data-competition-platforms">here</a>.</p>
+<p><br></p>
+</div>
+<div id="build-the-right-team.-set-up-tools-to-exchange-code." class="section level1">
+<h1><strong>3. Build the right team. Set up tools to exchange code.</strong></h1>
+<p>You should choose your teammates depending on your principal objective. It’s an unseen topic with related posts, but we consider it is sufficiently important one.</p>
+<p>You better choose an inspiring teammate you feel good with and encourage you if you want to learn about a new topic or technology. If the project needs different profiles and you want to be among the prize winners, go for a multidisciplinary team. If the project doesn’t need it, choose a teammate with your skill level. If it’s possible, a little more skilled.</p>
+<p>These are just a few examples. The main point here is choosing teammates to maximize invested time return by minimizing interpersonal problems and strengthen synergies.</p>
+<p><br></p>
+</div>
+<div id="deep-research-about-the-challenge-topic-and-environment." class="section level1">
+<h1><strong>4. Deep research about the challenge topic and environment.</strong></h1>
+<p><img src="pez_tecleando.gif" height="100px" width="200px" /></p>
+<p>Once you have built the team, we propose you to start a research about the industry your challenge is on. This effort will lead you to a better understanding of the problem and the solution, avoiding useless iterations in your data science workflow. By starting with clear premises you will take apart basic concetps missunderstandings, a fact that could fool your whole solution and conclusions.</p>
+<p>Let’s explain this concept. Suppose your challenge consist on forecasting the conversion rate given a product portfolio, based on the online activity recorded by Google Analytics. Here, we must have clear-minded and relevant knowledge about this data source behaviour. How the bounce rate works, the customer journey recording since he open our web page and is matched with a cookie to the final conversion, leaving the web or logging as a user. Also, different behaviours of null records, bots, several cases where the default source is ‘direct’…</p>
+<p>Without this kind of information it could be difficult to craft meaningful variables to increase the model performance. But worst of all, any conclusion you get is most likely to be misunderstood and impossible to get powerful and business-disruption insights.</p>
+<p><br></p>
+</div>
+<div id="excel-your-exploratory-analysis.-remember-you-could-use-external-data-sources." class="section level1">
+<h1><strong>5. Excel your exploratory analysis. Remember you could use external data sources.</strong></h1>
+<p>As any data science project, it consist of iterative phases. Since you have an industry landscape understanding, you will take a look on the data. If any doubt comes to your mind, return to the research stage.</p>
+<p>So in this exploratory phase, you are focused on your data and extract information about features itself and interactions. We usually start summarizing the features by its distribution, number of NAs, categories… Features with high NAs percentage or with a minimal variance we can choose between removing or encoding it as binary variable NA/Not_NA Majoritay_Class/Not_Majoritary class. Many other encoding techniques can be applied, <a href="https://www.kaggle.com/waydeherman/tutorial-categorical-encoding">like these.</a>. The full exploratory toolbox can be found on Google or Kaggle.</p>
+<p>Finally, as a reminder, you usually can use external data sources to enrich the provided data. Demographic data to contextualize your zip code feature. Or a past event to explain a spike in your data. Obviously, you must take into account which kind of this information you will have in your forecasting set.</p>
+<p><br></p>
+</div>
+<div id="set-your-project-and-code-structure." class="section level1">
+<h1><strong>6. Set your project and code structure.</strong></h1>
+<p>Here we will show you our most common project structure. The directory structure of a Data Science CdU depends on the project nature, its development and production environments.</p>
+<p>Project:</p>
+<ul>
+<li>data:
+<ul>
+<li>1_raw:</li>
+<li>2_processed:</li>
+</ul></li>
+<li>models:</li>
+<li>notebooks:
+<ul>
+<li>1_eda:</li>
+<li>2_poc:</li>
+<li>3_modeling:</li>
+<li>4_evaluation:</li>
+</ul></li>
+<li>src:
+<ul>
+<li>1_get_data:</li>
+<li>2_processing:</li>
+<li>3_modeling:</li>
+<li>4_evaluation:</li>
+<li>5_helpers:</li>
+</ul></li>
+</ul>
+<p>We consider we can simplify this structure in the Datathon case, because we don’t need to automate the ETL or the assessment and validation process inside a productive workflow. In fact, the exploratory analysis and the main script are the principal points here. Our main script calls to the preprocess, train, test and evaluation modules.</p>
+<p>Datathon_Project:</p>
+<ul>
+<li>data:</li>
+<li>exploratory:</li>
+<li>helpers:</li>
+<li>log:</li>
+<li>main.R / main.py</li>
+<li>outputs:
+<ul>
+<li>models:</li>
+<li>preds:</li>
+<li>validation:</li>
+</ul></li>
+</ul>
+<p>Regarding the <strong>main script structure</strong>, we usually build a custom cross validation with the objective of being flexible to train different models and stack its predictions. Our project template is as follows:</p>
+<p>Loading environment (packages, modules and functions)
+Crafting features
+Split dataset and datasetOOSample
+Split dataset into folds
+For each fold in folds:
+Training with the rest
+Predict in fold
+Evalutaion
+(In the last fold, stacking models training if you want it)
+Out of Sample prediction
+Evaluación (Base models and stacking comparaison)
+Test set prediction.</p>
+<p><br></p>
+</div>
+<div id="run-your-models." class="section level1">
+<h1><strong>7. Run your models.</strong></h1>
+<p>Firs of all, we advise you to focus in a model family and loss function that better fit a priori our data, response variable and evaluated metric. The first results let you to test your code and pipeline and will be the starting point for further improvements.</p>
+<p>You can use Google to search about different algorithm families and loss functions according your data and objective.
+Also, there such an amazing info in Kaggle kernels, Reddit feed and YouTube speaks.</p>
+<p><br></p>
+</div>
+<div id="cross-validation-oos-and-backtesting." class="section level1">
+<h1><strong>8. Cross Validation, OOS and backtesting.</strong></h1>
+<p>Special attention to the error metrics. One of the goals that we set in our data competitions is to know as precisely as possible the error interval (confidence or prediction) of our models before we submit predictions.</p>
+<p>To know about our forecast uncertainity behind several scenarios, data subsets and synthetic data make us feel proud. Also, it could helps us to be sure about our error metrics improvements are not due to spurious behaviour or bugs.</p>
+<p><br></p>
+</div>
+<div id="model-interpretability" class="section level1">
+<h1><strong>9. Model interpretability</strong></h1>
+<p>In some data competitions, the best teams have to expose their projects in a final event. Here, in addition to talk about your data flow and research done, you probably want to talk about some insights and interpretable interactions between data and not only the model prediction.</p>
+<p><img src="shap_vs_gain.png" /></p>
+<p>Many packages like SHAP or LIME integrate different modules focused on the model and predictions interpretability. These modules instead of looking for a “mean” variable importance in a global point of view, compose additionally a local feature contribution in each predicted observation.</p>
+<p><br></p>
+</div>
+<div id="write-down-your-observed-strengths-and-weaknesses.-it-will-be-the-starting-point-for-your-next-proyect." class="section level1">
+<h1><strong>10. Write down your observed strengths and weaknesses. It will be the starting point for your next proyect. </strong></h1>
+<p>Once you have finished the project and committed the predictions, writing down your strengths and weaknesses is a cool idea. These thoughts are such a fantastic starting point to the next competition or project.</p>
+<p><br></p>
+<p>So here is our contribution, hoping you will <strong>ace your competition!</strong> And the most important, <strong>have fun!!</strong></p>
+<p><img src="pez_guitarra.gif" height="100px" width="200px" /></p>
+<style>
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+</style>
+<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+<script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us4.list-manage.com","uuid":"91551f7ed29389a0de4f47665","lid":"d95c503a48","uniqueMethods":true}) })</script>
+</div>
+
+              </div>
+              
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/10-tips-datathon-kaggle-data-science/&amp;text=10%20Tips%20to%20ace%20your%20Kaggle,%20Datathon%20or%20any%20data%20competition!" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/10-tips-datathon-kaggle-data-science/&amp;t=10%20Tips%20to%20ace%20your%20Kaggle,%20Datathon%20or%20any%20data%20competition!" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=10%20Tips%20to%20ace%20your%20Kaggle,%20Datathon%20or%20any%20data%20competition!&amp;body=/post/10-tips-datathon-kaggle-data-science/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/10-tips-datathon-kaggle-data-science/&amp;title=10%20Tips%20to%20ace%20your%20Kaggle,%20Datathon%20or%20any%20data%20competition!" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=10%20Tips%20to%20ace%20your%20Kaggle,%20Datathon%20or%20any%20data%20competition!%20/post/10-tips-datathon-kaggle-data-science/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/10-tips-datathon-kaggle-data-science/&amp;title=10%20Tips%20to%20ace%20your%20Kaggle,%20Datathon%20or%20any%20data%20competition!" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+
+
+
+
+
+  
+  
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/authors/carlos-vecina/carlos-vecina-avatar_hudcecee8c8ed4dd07fd2b73e656fad71c_149347_270x270_fill_lanczos_center_2.png" alt="Carlos Vecina">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/authors/carlos-vecina/">Carlos Vecina</a></h5>
+      <h6 class="card-subtitle">Data Scientist &amp; TechLead at Bankinter</h6>
+      <p class="card-text">Data Scientist &amp; TechLead at Bankinter  |  AI &amp; Data Science for Business</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/deepchals" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/carlos-vecina/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/CarlosVecina" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+            </div>
+        </article>
+  
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.37431be2d92d7fb0160054761ab79602.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+  <p class="powered-by">
+    
+      <a href="/privacy/">Privacy Policy</a>
+    
+    
+       &middot; 
+      <a href="/terms/">Terms</a>
+    
+  </p>
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

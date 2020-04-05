@@ -1,0 +1,1303 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Carlos Vecina | TypeThePipe</title>
+    <link>/es/authors/carlos-vecina/</link>
+      <atom:link href="/es/authors/carlos-vecina/index.xml" rel="self" type="application/rss+xml" />
+    <description>Carlos Vecina</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Mon, 30 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-192.png</url>
+      <title>Carlos Vecina</title>
+      <link>/es/authors/carlos-vecina/</link>
+    </image>
+    
+    <item>
+      <title>¡Aumenta la velocidad de tus scripts de R!. Optimiza la lectura, escritura y almacenamiento de modelos y grandes datasets con el paquete FST</title>
+      <link>/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/</link>
+      <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/</guid>
+      <description>
+&lt;style type=&#34;text/css&#34;&gt;
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;300px&#34; width=&#34;600px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;¿Quieres guardar tu modelo de Deep Learning o un gran dataset? A continuación te mostramos la manera que hemos encontrado de optimizar la lectura, la escritura y almacenaje de ficheros con el paquete FST. Si incorporar un paquete a tu &lt;em&gt;environment&lt;/em&gt; no te supone un gran problema, te lo recomendamos.&lt;/p&gt;
+&lt;p&gt;En la repo del paquete hay un perqueño &lt;em&gt;benchmark&lt;/em&gt;. Queremos comprobarlo por nosotros mismos y vamos a comparar su rendimiento con las funciones que hasta hoy eran parte de nuestra caja de herramientas de R para la lectura y escritura de ficheros en projectos de datos. Veamos:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;big_dataset &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;nrow&lt;/span&gt;() &lt;span class=&#34;co&#34;&gt;# 700k filas, 15 columnas(8 factor, 4int, 3 logi)&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(microbenchmark)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(readr)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(fst)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-4&#34; title=&#34;4&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;kw&#34;&gt;microbenchmark&lt;/span&gt;(&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; title=&#34;6&#34;&gt;  &lt;span class=&#34;kw&#34;&gt;write.csv&lt;/span&gt;(big_dataset, &lt;span class=&#34;kw&#34;&gt;paste0&lt;/span&gt;(path,&lt;span class=&#34;st&#34;&gt;&amp;quot;big_dataset.csv&amp;quot;&lt;/span&gt;),),     &lt;span class=&#34;co&#34;&gt;# utils&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; title=&#34;7&#34;&gt;  &lt;span class=&#34;kw&#34;&gt;write_csv&lt;/span&gt;(big_dataset, &lt;span class=&#34;kw&#34;&gt;paste0&lt;/span&gt;(path,&lt;span class=&#34;st&#34;&gt;&amp;quot;big_dataset.csv&amp;quot;&lt;/span&gt;)),     &lt;span class=&#34;co&#34;&gt;# readr&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;  &lt;span class=&#34;kw&#34;&gt;write_csv&lt;/span&gt;(big_dataset, &lt;span class=&#34;kw&#34;&gt;paste0&lt;/span&gt;(path,&lt;span class=&#34;st&#34;&gt;&amp;quot;big_dataset.csv.gz&amp;quot;&lt;/span&gt;),), &lt;span class=&#34;co&#34;&gt;# readr GZ&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-9&#34; title=&#34;9&#34;&gt;  &lt;span class=&#34;kw&#34;&gt;saveRDS&lt;/span&gt;(big_dataset, &lt;span class=&#34;kw&#34;&gt;paste0&lt;/span&gt;(path,&lt;span class=&#34;st&#34;&gt;&amp;quot;big_dataset.RDS&amp;quot;&lt;/span&gt;)),       &lt;span class=&#34;co&#34;&gt;# utils&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-10&#34; title=&#34;10&#34;&gt;  &lt;span class=&#34;kw&#34;&gt;write_rds&lt;/span&gt;(big_dataset, &lt;span class=&#34;kw&#34;&gt;paste0&lt;/span&gt;(path,&lt;span class=&#34;st&#34;&gt;&amp;quot;big_dataset.RDS&amp;quot;&lt;/span&gt;)),     &lt;span class=&#34;co&#34;&gt;# readr&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-11&#34; title=&#34;11&#34;&gt;  &lt;span class=&#34;kw&#34;&gt;write_fst&lt;/span&gt;(big_dataset, &lt;span class=&#34;kw&#34;&gt;paste0&lt;/span&gt;(path,&lt;span class=&#34;st&#34;&gt;&amp;quot;big_dataset.fst&amp;quot;&lt;/span&gt;)),     &lt;span class=&#34;co&#34;&gt;# fst&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-12&#34; title=&#34;12&#34;&gt;  &lt;span class=&#34;dt&#34;&gt;times =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-13&#34; title=&#34;13&#34;&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;##  Unit: milliseconds&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;co&#34;&gt;##            min           mean              median        max               neval     file_size&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;co&#34;&gt;##utils     10943.1161      11232.20073   11098.66610     12011.1538    10        109 MB&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;co&#34;&gt;##readr     3140.4450       3442.92772    3388.14280      3768.4109     10        109 MB&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;co&#34;&gt;##readrGZ   6993.8850       7332.31976    7260.95040      7946.9233     10        23  MB&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;co&#34;&gt;##base      4800.3516       5122.22345    5024.69395      5833.9807     10        15  MB&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;##readr     187.0765        210.74584     211.70760     246.6369      10        46  MB&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;fst        60.3065         87.30611      74.94375      154.7718      10        16  MB&amp;quot;&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## [1] &amp;quot;fst        60.3065\t\t    87.30611      74.94375      154.7718      10        16  MB&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;¡Wow! Los resultados son impresionantes&lt;/strong&gt;, incluso mejores que los expuestos en la web de los creadores.&lt;/p&gt;
+&lt;p&gt;Podemos apreciar una mejora &lt;em&gt;x3&lt;/em&gt; y &lt;em&gt;x50&lt;/em&gt; en el &lt;em&gt;performance&lt;/em&gt; comparado con las funciones readr::write_rds() y base R saveRDS()!&lt;/p&gt;
+&lt;p&gt;Una incremento increible de un &lt;em&gt;x100 performance&lt;/em&gt; entre fst y las funciones que trabajan con csv y que anteriormente utilizábamos, aunque realmente esta no es una comparación del todo justa al tratarse de dos extensiones completamente diferentes (csv y bin).&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;¿Y tú? ¿Estás pensando en incluir FST al &lt;em&gt;toolbox&lt;/em&gt; de tu proyecto también?&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
+&lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&#34;mojo/signup-forms/Loader&#34;], function(L) { L.start({&#34;baseUrl&#34;:&#34;mc.us4.list-manage.com&#34;,&#34;uuid&#34;:&#34;91551f7ed29389a0de4f47665&#34;,&#34;lid&#34;:&#34;d95c503a48&#34;,&#34;uniqueMethods&#34;:true}) })&lt;/script&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Descartando columnas basándonos en su porcentaje de NAs</title>
+      <link>/es/vizs-and-tips/descartando-columnas-porcentaje-nas-r-tidyverse/</link>
+      <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/es/vizs-and-tips/descartando-columnas-porcentaje-nas-r-tidyverse/</guid>
+      <description>
+&lt;style type=&#34;text/css&#34;&gt;
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Los NAs pueden ser muy informativos, y estudiar cómo se distribuyen en base a una segunda variable suele ser una genial idea. Esto puede aportarnos un extra de información o mostrarnos un fenómeno que de otra manera(mediante imputación o descarte de observaciones) nos pasaría desapercibido.&lt;/p&gt;
+&lt;p&gt;Sin embargo, para un estudio preliminar o tras haber analizado los valores faltantes, nos encontramos casos en los que queremos quitarlos de manera automatizada basándonos en el porcentaje de NAs.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../../vizs-and-tips/recuento-nas-por-columna-r&#34;&gt;En este artículo&lt;/a&gt; hablamos y comparamos diferentes funciones de BaseR vs Tidy &amp;amp; Purrr para contar el número de NAs por columna.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;¿Cuanto cuesta no salir del &lt;em&gt;pipeflow&lt;/em&gt;?&lt;/strong&gt; Dependerá del número de variables, del porcentaje que elijas como frontera y la distribución de NAs a lo largo de las variables, &lt;strong&gt;pero no suele ser más que unos pocos nanosegundos.&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# library(microbenchmark)  Puedes comparar su performance en diferentes datasets&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-4&#34; title=&#34;4&#34;&gt;airquality &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select_if&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mean&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(.)) &lt;span class=&#34;op&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;0.2&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-5&#34; title=&#34;5&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-6&#34; title=&#34;6&#34;&gt;airquality &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;which&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;colMeans&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(.)) &lt;span class=&#34;op&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;0.2&lt;/span&gt;))&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-7&#34; title=&#34;7&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-8&#34; title=&#34;8&#34;&gt;airquality[&lt;span class=&#34;kw&#34;&gt;lapply&lt;/span&gt;(airquality, &lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(x) &lt;span class=&#34;kw&#34;&gt;mean&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(x))) &lt;span class=&#34;op&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;0.2&lt;/span&gt;]&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;¿Qué forma eliges tú?&lt;/p&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
+&lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&#34;mojo/signup-forms/Loader&#34;], function(L) { L.start({&#34;baseUrl&#34;:&#34;mc.us4.list-manage.com&#34;,&#34;uuid&#34;:&#34;91551f7ed29389a0de4f47665&#34;,&#34;lid&#34;:&#34;d95c503a48&#34;,&#34;uniqueMethods&#34;:true}) })&lt;/script&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>¡10 consejos para triunfar en tu próximo Kaggle, Datathon o competición de datos!</title>
+      <link>/es/post/10-consejos-datathon-kaggle-data-science/</link>
+      <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/es/post/10-consejos-datathon-kaggle-data-science/</guid>
+      <description>
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#establece-tu-objetivo-y-revisa-los-recursos-habilidades-tiempo-acceso-a-máquinas-con-los-que-cuentas.&#34;&gt;&lt;strong&gt;1. Establece tu objetivo y revisa los recursos (habilidades, tiempo, acceso a máquinas…) con los que cuentas.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#elección-del-tema-o-cduso.&#34;&gt;&lt;strong&gt;2. Elección del tema o CdUso.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#construye-tu-equipo-de-manera-consciente.-usa-herramientas-para-compartir-códigoarchivos.&#34;&gt;&lt;strong&gt;3. Construye tu equipo de manera consciente. Usa herramientas para compartir código/archivos.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#investigación-previa-y-profunda-sobre-el-caso-de-uso-en-concreto.&#34;&gt;&lt;strong&gt;4. Investigación previa y profunda sobre el caso de uso en concreto.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#análisis-exploratorio-de-los-datos.-recuerda-que-normalmente-no-son-los-únicos-que-puedes-usar.&#34;&gt;&lt;strong&gt;5. Análisis exploratorio de los datos. Recuerda que (normalmente) no son los únicos que puedes usar.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#establecer-la-estructura-del-proyecto-y-del-código.&#34;&gt;&lt;strong&gt;6. Establecer la estructura del proyecto y del código.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#lanzar-los-primeros-modelos.&#34;&gt;&lt;strong&gt;7. Lanzar los primeros modelos.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#validación-cruzada-oos-y-backtesting.&#34;&gt;&lt;strong&gt;8. Validación cruzada, OOS y backtesting.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#interpretabilidad-de-modelos.-evaluación-de-resultados-desde-el-punto-de-vista-práctico-yo-negocio.&#34;&gt;&lt;strong&gt;9. Interpretabilidad de modelos. Evaluación de resultados desde el punto de vista práctico y/o negocio.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#escribir-una-memoria-con-puntos-fuertes-y-puntos-a-mejorar-detectados-que-te-sirvan-de-partida-en-el-próximo-reto.&#34;&gt;&lt;strong&gt;10. Escribir una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;¿Pensando en inscribirte en un Datathon o competición de datos? ¡En este post os traemos 10 consejos sobre los puntos clave para conseguir grandes resultados!&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;establece-tu-objetivo-y-revisa-los-recursos-habilidades-tiempo-acceso-a-máquinas-con-los-que-cuentas.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;1. Establece tu objetivo y revisa los recursos (habilidades, tiempo, acceso a máquinas…) con los que cuentas.&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;Comenzamos por un punto esencial. Dependiendo de tu perfil y de la competición, deberás plantearte a priori qué pretendes conseguir participando en el reto. Puede ser aprender y mejorar en un determinado campo o tecnología, conseguir el premio, quedar entre los 3 primeros para incluirlo en tu CV o simplemente por diversión. Cualquiera que sea está bien.&lt;/p&gt;
+&lt;p&gt;Lo que recomendamos es evaluarlo de manera sincera, ya que será bastante el tiempo invertido y &lt;strong&gt;tener tu objetivo presente te ayudará en los momentos de menor motivación.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Por ejemplo, si tu objetivo no es ganar la competición (el caso de participar en tu primer Kaggle) seguramente prefieras no entrar en una espiral de ‘hiperoptimización’ de hiperparámetros para rascar mínimas mejoras en la métrica de error, sino que quizá prefieras estudiar y aplicar nuevas técnicas o algoritmos, aprender sobre desarrollo y estructuración de un proyecto de Data Science o integrar fuentes complementarias de datos.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;elección-del-tema-o-cduso.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;2. Elección del tema o CdUso.&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;choosing_simpson.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Ligado con el anterior punto, dado que vamos a dedicar muchos esfuerzos en este proyecto, ¿cómo no elegir un tema, campo o caso de uso que nos motive? Afortunadamente, desde muchas organizaciones y plataformas se están lanzando diferentes e interesantes competiciones. Kaggle es uno de los máximos exponentes de estas plataformas, pero también existen otras, las cuales presentamos &lt;a href=&#34;../../vizs-and-tips/plataformas-donde-participar-competiciones-de-datos&#34;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;construye-tu-equipo-de-manera-consciente.-usa-herramientas-para-compartir-códigoarchivos.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;3. Construye tu equipo de manera consciente. Usa herramientas para compartir código/archivos.&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;Dependiendo de los dos puntos anteriores, especialmente del primero, según tu objetivo deberás elegir a tu equipo de manera consecuente. Este es un tema que no se suele comentar, pero consideramos importante prestarle la debida atención.&lt;/p&gt;
+&lt;p&gt;Elige un compañero o amigo con el que te lleves realmente bien y os motivéis mutuamente si tu objetivo es aprender sobre un tema o tecnología nueva. Prioriza a alguien que comparta tus intereses en el caso que desees dedicarle tiempo a profundizar y masterizar un tema, tecnología o algoritmo muy concreto.&lt;/p&gt;
+&lt;p&gt;Si el proyecto lo requiere, y pretendes optar al premio o a posiciones altas, te recomendamos elegir un compañero que complemente tus habilidades. En el caso de que no se requiera multidisciplinariedad, opta por aquellos que tengan un nivel similar al tuyo. Si es posible, ligeramente superior.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Eligiendo tu equipo de manera consciente&lt;/strong&gt; lograrás minimizar tiranteces y conflictos de objetivos, maximizando el retorno del tiempo invertido.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;investigación-previa-y-profunda-sobre-el-caso-de-uso-en-concreto.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;4. Investigación previa y profunda sobre el caso de uso en concreto.&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;img src=&#34;pez_tecleando.gif&#34; height=&#34;100px&#34; width=&#34;200px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Una vez formado el equipo, os recomendamos comenzar a &lt;strong&gt;investigar el negocio o el contexto en el que se enmarca vuestro proyecto.&lt;/strong&gt; Esto permitirá plantear mejor el trabajo, extraer un valor muy superior a los datos y os evitará iteraciones en el proceso diseñar-implementar-evaluar al partir de premisas más claras. De esta manera dejareis al lado una mala interpretación de conceptos básicos, lo cual puede ser letal.&lt;/p&gt;
+&lt;p&gt;Un ejemplo. Si la competición trata sobre predecir el número de visitas o el número de contrataciones de determinados productos en un comercio online, en base a la navegación recogida por Google Analytics, debéis controlar el comportamiento de esta fuente de datos. Conocer el significado de tasa de rebote, las mecánicas desde que un usuario se conecta por primera vez y se le asigna una cookie hasta que convierte, borrado de cookies, diferentes casuísticas de registros nulos, bots, que la &lt;em&gt;source&lt;/em&gt; (para conocer la fuente de donde viene el visitante) puede ser ruidosa porque en caso de dudas se asigna como &lt;em&gt;direct&lt;/em&gt;…&lt;/p&gt;
+&lt;p&gt;Sin esta serie de conocimientos será difícil &lt;strong&gt;&lt;em&gt;craftear&lt;/em&gt; variables para conseguir un buen &lt;em&gt;performance&lt;/em&gt; de los modelos&lt;/strong&gt;, o lo que es más importante, cualquier resultado que obtengáis es posible que sea malinterpretado. Por lo tanto, todo este &lt;em&gt;background&lt;/em&gt; no es imprescindible para llegar a algún resultado, pero sí lo será para llegar a resultados potentes y realizar una participación de la que acabes orgullosos.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;análisis-exploratorio-de-los-datos.-recuerda-que-normalmente-no-son-los-únicos-que-puedes-usar.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;5. Análisis exploratorio de los datos. Recuerda que (normalmente) no son los únicos que puedes usar.&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;Como todo proyecto de datos, consta de una serie de &lt;strong&gt;etapas iterativas&lt;/strong&gt;. Después de investigar sobre el contexto, echareis un primer vistazo a los datos. Si surgen dudas, de nuevo tendréis que investigar para resolverlas.&lt;/p&gt;
+&lt;p&gt;Al margen de este recordatorio, la fase exploratoria se centra en conocer cada una de las variables. Como consejo personal, entre otras cosas, nosotros comenzamos midiendo el porcentaje de NAs y la distribución y varianza de las variables. Aquellas que tengan un elevado porcentaje de NAs o una varianza muy pequeña, o bien las apartamos (podría replantearse su entrada en siguientes iteraciones) o bien las &lt;em&gt;encodeamos&lt;/em&gt; de manera dicotómica Si_NA/No_NA o Mayoritaria/No_mayoritaria. Para otro tipo de &lt;em&gt;encodings&lt;/em&gt; &lt;a href=&#34;https://www.kaggle.com/waydeherman/tutorial-categorical-encoding&#34;&gt;ver&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Esta etapa exploratoria varía bastante dependiendo del número de variables que contenga vuestro dataset. En &lt;em&gt;datasets&lt;/em&gt; con 75, 100 o más variables, resultará más complicado hacerse una idea general de las características de cada una de ellas. Enfrentarnos a este tipo de &lt;em&gt;datasets&lt;/em&gt; puede resultar ciertamente abrumador, sin embargo tras una buen estudio, reducción dimensional / eleccion y transformación puede ser que acabéis dando las gracias de no tener sólo 5 o 10 variables(caso en el que se suele llegar a un &lt;em&gt;plateau&lt;/em&gt; de desempeño de los modelos más rápido y mayor homogeneidad en los resultados expuestos por los diferentes equipos).&lt;/p&gt;
+&lt;p&gt;Además de esto; &lt;strong&gt;análisis de correlaciones, detección de outliers univariante y multivariante, tests estadísticos preliminares…&lt;/strong&gt; son análisis que os permitirán poner en contexto los datos y modelarlos mejor.&lt;/p&gt;
+&lt;p&gt;Por último, recordar que normalmente no hay problema con utilizar &lt;strong&gt;fuentes de datos complementarias&lt;/strong&gt; a las propios de la competición. En algunos casos como Kaggle, lo que se establece es la obligación de comentar y hacer público el uso de estos datos durante la competición.&lt;/p&gt;
+&lt;p&gt;Datos demográficos que ayuden a poner en contexto las variables geográficas como código postal o provincia, recoger eventos para aportar explicabilidad a &lt;em&gt;spikes&lt;/em&gt; o comportamientos pasados… son sólo algunos de los ejemplos de datos que se pueden incorporar al &lt;em&gt;dataset&lt;/em&gt; original del reto. Obviamente tendréis que tener en cuenta cuales de estos datos vais a tener y cuales no a la hora de predecir.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;establecer-la-estructura-del-proyecto-y-del-código.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;6. Establecer la estructura del proyecto y del código.&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;A continuación os mostramos la estructura que suelen tener nuestros proyectos. La &lt;strong&gt;estructuración de los directorios&lt;/strong&gt; dentro de un proyecto de Data Science dependerá de las características del entorno tanto de desarrollo como la posterior productivización, siguiendo principios generales como la modularización del código.
+Una estructura bastante generalizada sería la siguiente:&lt;/p&gt;
+&lt;p&gt;Projecto:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;data:
+&lt;ul&gt;
+&lt;li&gt;1_raw:&lt;/li&gt;
+&lt;li&gt;2_processed:&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;models:&lt;/li&gt;
+&lt;li&gt;notebooks:
+&lt;ul&gt;
+&lt;li&gt;1_eda:&lt;/li&gt;
+&lt;li&gt;2_poc:&lt;/li&gt;
+&lt;li&gt;3_modeling:&lt;/li&gt;
+&lt;li&gt;4_evaluation:&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;src:
+&lt;ul&gt;
+&lt;li&gt;1_get_data:&lt;/li&gt;
+&lt;li&gt;2_processing:&lt;/li&gt;
+&lt;li&gt;3_modeling:&lt;/li&gt;
+&lt;li&gt;4_evaluation:&lt;/li&gt;
+&lt;li&gt;5_helpers:&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Creemos que esta estructura se podría simplificar un poco dadas las características de un Datathon, en la que no se suele necesitar automatizar la ingesta y el preprocesado de los datos, sino que será una tarea puntual. Además el análisis exploratorio aquí suele tener un papel protagonista, así como el modelado se suele simplificar en un main.exe que ejecute todo el programa llamando a los módulos de preprocesado, &lt;em&gt;train&lt;/em&gt;, &lt;em&gt;test&lt;/em&gt; y evaluación.&lt;/p&gt;
+&lt;p&gt;Projecto_Datathon:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;data:&lt;/li&gt;
+&lt;li&gt;exploratory:&lt;/li&gt;
+&lt;li&gt;helpers:&lt;/li&gt;
+&lt;li&gt;log:&lt;/li&gt;
+&lt;li&gt;main.R / main.py&lt;/li&gt;
+&lt;li&gt;outputs:
+&lt;ul&gt;
+&lt;li&gt;models:&lt;/li&gt;
+&lt;li&gt;preds:&lt;/li&gt;
+&lt;li&gt;validation:&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;En cuanto a la &lt;strong&gt;estructura del main&lt;/strong&gt;, solemos llevar a cabo una validación cruzada manual con el objetivo de ganar flexibilidad a la hora de usar modelos de diferente naturaleza y poder &lt;em&gt;stackear&lt;/em&gt; sus predicciones y compararlos. Cierto es que soluciones paquetizadas como scikit-learn o H2O pueden hacer este trabajo en el caso de que el tiempo disponible y características de la competición indiquen su uso. Nuestra propuesta tendría este esqueleto:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Carga de entorno (paquetes, módulos y funciones)&lt;/li&gt;
+&lt;li&gt;Diferentes craft de variables&lt;/li&gt;
+&lt;li&gt;Separación en dataset y datasetOOSample&lt;/li&gt;
+&lt;li&gt;Separar el dataset en folds&lt;/li&gt;
+&lt;li&gt;Por cada fold:
+&lt;ul&gt;
+&lt;li&gt;Entrenar con el resto&lt;/li&gt;
+&lt;li&gt;Predecir en el fold&lt;/li&gt;
+&lt;li&gt;Evaluación&lt;/li&gt;
+&lt;li&gt;(En el último fold, entrenar si se quiere modelos de stacking con las predicciones en trainSet de los anteriores modelos)&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;Predicción OOSample (Comparación de modelos base y de stacking)&lt;/li&gt;
+&lt;li&gt;Evaluación&lt;/li&gt;
+&lt;li&gt;Predicción del conjunto de test a enviar.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;lanzar-los-primeros-modelos.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;7. Lanzar los primeros modelos.&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;En primer lugar os aconsejamos &lt;strong&gt;centraros en una familia de algoritmos y función de coste que a priori mejor se adapten a los datos y a la variable a predecir&lt;/strong&gt;. Incluso teniendo en cuenta la métrica de error por la que se os va a medir. Es importante sacar los primeros resultados, a ser posible dentro de una estructura similar a la propuesta anteriormente. Las primeras métricas de error os ayudaran en muchos aspectos. Por un lado os pueden dar pistas de &lt;em&gt;bugs&lt;/em&gt; en el código (métricas de error no realistas). También os servirá como base a partir de la cual ir mejorando, y como estamos seguros de que lo haréis, esto será ademañs un &lt;em&gt;boost&lt;/em&gt; de ánimo.&lt;/p&gt;
+&lt;p&gt;Os invitamos a buscar en Google sobre las principales familias de algoritmos supervisados (suele ser el caso en estos Datathones) y de las principales funciones de coste a optimizar, dependiendo de si se trata de un problema de clasificación o de regresión.&lt;/p&gt;
+&lt;p&gt;Comentar que la participación en el foro y &lt;strong&gt;kernels de Kaggle, hilos de Reddit y videos en Youtube&lt;/strong&gt; será un buen complemento a la lectura de &lt;em&gt;papers&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;validación-cruzada-oos-y-backtesting.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;8. Validación cruzada, OOS y backtesting.&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;Especial mención a las métricas de error. Uno de los puntos a los que de manera personal más importancia le damos, es el &lt;strong&gt;conocer con la mayor precisión posible los intervalos de error (confianza o predicción) de nuestros modelos antes de enviar sus predicciones.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Conocer las precisión de nuestro modelo bajo diferentes escenarios, partes del dataset e incluso datos sintéticos nos hace sentir un especial orgullo. Quizá sea simplemente un objetivo que nos marcamos(tal y como comentamos en el punto 1), pero el hecho de tener la certeza de cuando se baja la métrica de error no se debe a algo espúreo, o lo peor de todo a un &lt;em&gt;bug&lt;/em&gt; o &lt;em&gt;leakage&lt;/em&gt; de información, nos permite desarrollar con tranquilidad. Además en el caso de existir un ranking público y otro privado, controlar tu métrica de evaluación te permite saber con mayor certeza en que percentil te encuentras.&lt;/p&gt;
+&lt;p&gt;La mayoría de competiciones suelen ir ligadas a una métrica de error por la cual se evalúa a los participantes. Será fundamental introducirla en la evaluación de modelos, pero no debe de ser la única. Tanto a la hora de fijar una función de coste como a la hora de evaluar los modelos, deberíais tener en cuenta métricas de error complementarias que os ayuden a interpretar el desempeño de los modelos. Calcular el error mediano o el MAPE, cuando la métrica con la que os evaluarán será el error medio, puede ayudar tanto a conocer el comportamiento de vuestro modelo como a decantaros entre algoritmos que difieren en sólo mínimo porcentaje en la métrica principal en el conjunto de datos, pero no en otras.&lt;/p&gt;
+&lt;p&gt;Casos especiales serán aquellos en los cuales nuestros datos tienen un &lt;strong&gt;fuerte componente temporal&lt;/strong&gt;, o directamente están estructurados en forma de serie temporal. Aquí en contramos discusiones específicas: variaciones de método de cross validation para evitar el &lt;em&gt;leakage&lt;/em&gt; de información entre sets, la validación walk forward o utilización de datos del futuro para entrenar, el estudio del &lt;em&gt;decay&lt;/em&gt; de la precisión, clustering de series temporales. Temas no triviales a los que dedicaremos otro post.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;interpretabilidad-de-modelos.-evaluación-de-resultados-desde-el-punto-de-vista-práctico-yo-negocio.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;9. Interpretabilidad de modelos. Evaluación de resultados desde el punto de vista práctico y/o negocio.&lt;/strong&gt;&lt;/h1&gt;
+&lt;div class=&#34;figure&#34;&gt;
+&lt;img src=&#34;shap_vs_gain.png&#34; alt=&#34;interpretabilidad shap xgboost&#34; /&gt;
+&lt;p class=&#34;caption&#34;&gt;interpretabilidad shap xgboost&lt;/p&gt;
+&lt;/div&gt;
+&lt;p&gt;En el caso de que se trate de un Datathon organizado por alguna empresa de vuestra zona, seguramente los mejores proyectos serán llamados a un evento final en el que se expondrán vuestros trabajos. En otros, os pedirán una memoria presentando los resultados. Si bien es cierto, en el caso de Kaggle no suelen hacerlo.&lt;/p&gt;
+&lt;p&gt;Por lo tanto, si la competición a la que te/os presentáis requiere de este tipo de resultado, será importante tenerlo presente no sólo al final, sino durante todo el proceso. Además, una vez que se ha “re-optimizado” los hiperparámetros con la última librería bayesiana y &lt;em&gt;stackeado&lt;/em&gt; nuestros mejores modelos, quizá sea hora de trabajar en la interpretabilidad de los resultados e incorporación de nuevos datos. En definitiva, conclusiones que sean valiosas a la hora de poner en marcha el modelo y que no quede en una simple estructura de pesos optimizados o de reglas.&lt;/p&gt;
+&lt;p&gt;Paquetes y módulos como SHAP o LIME incorporan métodos enfocados en la interpretabilidad de cada una de las predicciones. Esto supone un paso más allá a la hora de examinar y entender nuestros modelos, ya que además de la importancia global “media” de cada variable en el modelo, obtenida en los coeficientes o por métricas como la importancia de variables que suelen traer los algoritmos de árboles y bagging/boosting, podemos obtener el peso de cada variable en una determinada observación.&lt;/p&gt;
+&lt;p&gt;Por ejemplo, en nuestra última competición a la que asistimos se nos pedía esta presentación final a los tres mejores proyectos. Una vez que modelamos la información estructurada y llevamos a cabo ciertas iteraciones sobre estos datos, &lt;strong&gt;pensamos que sería más enriquecedor tanto para nosotros como para las personas que proponían el concurso, la investigación sobre la extracción de información de las imágenes&lt;/strong&gt; (información que en el caso de uso que nos ocupaba, a priori, iba a tener un impacto claro sobre la variable a predecir). Por lo tanto optamos por adentrarnos en el modelado de unas imágenes que se nos aportaban, haciendo uso del &lt;em&gt;transfer learning&lt;/em&gt;, cosa que no se nos pedía explícitamente. Llegamos a bastantes &lt;em&gt;insights&lt;/em&gt; interpretando los que las convoluciones de estos modelos preentrenados detectaban en nuestras imágenes, y lo que esmás importante, aprendimos mucho durante el proceso.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;escribir-una-memoria-con-puntos-fuertes-y-puntos-a-mejorar-detectados-que-te-sirvan-de-partida-en-el-próximo-reto.&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;10. Escribir una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;Una vez finalizado el proyecto, un práctica que nos ha enriquecido y ha supuesto un antes y un después ha sido escribir algún tipo de memoria o documento para nosotros mismos. En él reflexionamos sobre la reciente participación. Analizamos los puntos fuertes y lo que debemos mejorar, tanto a nivel técnico como a nivel de equipo y por qué no a nivel emocional y de actitud. A ser posible nada más entregar y antes de saber el resultado. Sería genial si al tiempo de conocer el mismo se añadiera algún punto o reflexión más.&lt;/p&gt;
+&lt;p&gt;Todas estas anotaciones os ayudarán, cada vez que os enfrentéis a un nuevo proyecto, a encararlo más preparados y no depender del ‘instinto’ ni de lo que la memoria selectiva os quiera recordar en momentos puntuales.&lt;/p&gt;
+&lt;p&gt;Una mala predisposición personal, no investigar suficientemente y con cariño la distribución de los datos y sus valores extremos, una mala elección de equipo, seguir corriendo los modelos 30 minutos antes de que acabe el plazo de entrega, no preparar la exposición final con tiempo,… son situaciones que nos han pasado a muchos y no ocurre absolutamente nada por reflexionar sobre ello y dejarlo por escrito. Lo fundamental es, dentro de lo posible, ¡que no se repitan en la próxima competición para &lt;strong&gt;lograr conseguir aun mejores resultados! :)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;pez_guitarra.gif&#34; height=&#34;100px&#34; width=&#34;200px&#34; /&gt;&lt;/p&gt;
+&lt;style&gt;
+body {
+text-align: justify}
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+}
+&lt;/style&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
+&lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&#34;mojo/signup-forms/Loader&#34;], function(L) { L.start({&#34;baseUrl&#34;:&#34;mc.us4.list-manage.com&#34;,&#34;uuid&#34;:&#34;91551f7ed29389a0de4f47665&#34;,&#34;lid&#34;:&#34;d95c503a48&#34;,&#34;uniqueMethods&#34;:true}) })&lt;/script&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Visualizador de algoritmos en R! (I) Desarrollando el mapa dinámico</title>
+      <link>/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/</link>
+      <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/</guid>
+      <description>
+&lt;style type=&#34;text/css&#34;&gt;
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Aquí os mostramps el código de R. Como podeis ver, solo cargamos shiny, ggplot2 y tidyverse. Es un script en curso, ya que aun queda por desarrollar características básicas como:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;refactorizar el código ;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;visualización con GGanimate de los pasos recorridos por los algoritmos;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;y, por supuesto, implementar diferentes algoritmos &lt;em&gt;pathfinding&lt;/em&gt; y evolutivos.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;¡Todas estas nuevos desarrollos y mucho más en siguientes posts! ¡Sigue informado!&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt; (shiny)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt; (ggplot2)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt; (tidyverse)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;kw&#34;&gt;source&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;helpers/ColourBorders.R&amp;quot;&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;kw&#34;&gt;source&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;helpers/PlotMapGrid.R&amp;quot;&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-6&#34; title=&#34;6&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-7&#34; title=&#34;7&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-8&#34; title=&#34;8&#34;&gt;ui &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;fluidPage&lt;/span&gt;(&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-9&#34; title=&#34;9&#34;&gt;    &lt;span class=&#34;kw&#34;&gt;mainPanel&lt;/span&gt;(&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-10&#34; title=&#34;10&#34;&gt;        &lt;span class=&#34;kw&#34;&gt;column&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;12&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;offset =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;, &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-11&#34; title=&#34;11&#34;&gt;               &lt;span class=&#34;kw&#34;&gt;titlePanel&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;Pathfinding Algorithm Visualization using R!&amp;quot;&lt;/span&gt;)),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-12&#34; title=&#34;12&#34;&gt;        &lt;span class=&#34;kw&#34;&gt;HTML&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;&amp;amp;nbsp&amp;quot;&lt;/span&gt;),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-13&#34; title=&#34;13&#34;&gt;        &lt;span class=&#34;kw&#34;&gt;column&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;12&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;offset =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;kw&#34;&gt;HTML&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;&amp;amp;nbsp&amp;quot;&lt;/span&gt;),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-14&#34; title=&#34;14&#34;&gt;               &lt;span class=&#34;kw&#34;&gt;actionButton&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;go_search_actionButton&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;Go Search!&amp;quot;&lt;/span&gt;),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-15&#34; title=&#34;15&#34;&gt;               &lt;span class=&#34;kw&#34;&gt;actionButton&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;clean_all_actionButton&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;Clean All&amp;quot;&lt;/span&gt;)),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-16&#34; title=&#34;16&#34;&gt;        &lt;span class=&#34;kw&#34;&gt;HTML&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;&amp;amp;nbsp&amp;quot;&lt;/span&gt;),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-17&#34; title=&#34;17&#34;&gt;        &lt;span class=&#34;kw&#34;&gt;column&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;12&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;offset=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;, &lt;span class=&#34;kw&#34;&gt;plotOutput&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;map_grid_plotOutput&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-18&#34; title=&#34;18&#34;&gt;                                       &lt;span class=&#34;dt&#34;&gt;click=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;map_grid_plotOutput_click&amp;quot;&lt;/span&gt;))&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-19&#34; title=&#34;19&#34;&gt;    ))&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-20&#34; title=&#34;20&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-21&#34; title=&#34;21&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-22&#34; title=&#34;22&#34;&gt;server &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(input, output){&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-23&#34; title=&#34;23&#34;&gt;    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-24&#34; title=&#34;24&#34;&gt;    &lt;span class=&#34;co&#34;&gt;## Initial params&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-25&#34; title=&#34;25&#34;&gt;    max_steps &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;50&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-26&#34; title=&#34;26&#34;&gt;    matrix_x_size &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;20&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-27&#34; title=&#34;27&#34;&gt;    matrix_y_size &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;20&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-28&#34; title=&#34;28&#34;&gt;    grid_map_reactive &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;matrix&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;ncol =&lt;/span&gt; matrix_x_size,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-29&#34; title=&#34;29&#34;&gt;                                &lt;span class=&#34;dt&#34;&gt;nrow =&lt;/span&gt; matrix_y_size,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-30&#34; title=&#34;30&#34;&gt;                                &lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;)    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-31&#34; title=&#34;31&#34;&gt;    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-32&#34; title=&#34;32&#34;&gt;    &lt;span class=&#34;co&#34;&gt;## Colours Dict (in progress)&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-33&#34; title=&#34;33&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# 1- Wall&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-34&#34; title=&#34;34&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# 2- Init&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-35&#34; title=&#34;35&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# 3- Obj&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-36&#34; title=&#34;36&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# 4- Step done&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-37&#34; title=&#34;37&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# 5- Goal achieved&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-38&#34; title=&#34;38&#34;&gt;    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-39&#34; title=&#34;39&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# Initialize objts&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-40&#34; title=&#34;40&#34;&gt;    grid_map_reactive[&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;15&lt;/span&gt;] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;                                                           &lt;span class=&#34;co&#34;&gt;# obj&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-41&#34; title=&#34;41&#34;&gt;    grid_map_reactive[&lt;span class=&#34;dv&#34;&gt;17&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;                                                           &lt;span class=&#34;co&#34;&gt;# init&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-42&#34; title=&#34;42&#34;&gt;    initial_step &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;which&lt;/span&gt;(grid_map_reactive &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-43&#34; title=&#34;43&#34;&gt;                          &lt;span class=&#34;dt&#34;&gt;arr.ind =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-44&#34; title=&#34;44&#34;&gt;    grid_map_reactive &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ColourBorders&lt;/span&gt;(grid_map_reactive, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)                               &lt;span class=&#34;co&#34;&gt;# rounding walls&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-45&#34; title=&#34;45&#34;&gt;    react_df &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;reactiveValues&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;df =&lt;/span&gt; grid_map_reactive,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-46&#34; title=&#34;46&#34;&gt;                               &lt;span class=&#34;dt&#34;&gt;orig =&lt;/span&gt; grid_map_reactive,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-47&#34; title=&#34;47&#34;&gt;                               &lt;span class=&#34;dt&#34;&gt;walls =&lt;/span&gt; grid_map_reactive)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-48&#34; title=&#34;48&#34;&gt;    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-49&#34; title=&#34;49&#34;&gt;    &lt;span class=&#34;kw&#34;&gt;observe&lt;/span&gt;({&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-50&#34; title=&#34;50&#34;&gt;        &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;is.null&lt;/span&gt;(input&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;map_grid_plotOutput_click)){&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-51&#34; title=&#34;51&#34;&gt;            new_x_value &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;trunc&lt;/span&gt;(input&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;map_grid_plotOutput_click&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;x)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-52&#34; title=&#34;52&#34;&gt;            new_y_value &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;trunc&lt;/span&gt;(input&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;map_grid_plotOutput_click&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;y)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-53&#34; title=&#34;53&#34;&gt;            &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-54&#34; title=&#34;54&#34;&gt;            &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;between&lt;/span&gt;(new_x_value,&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;,matrix_x_size&lt;span class=&#34;dv&#34;&gt;-1&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;between&lt;/span&gt;(new_y_value,&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;,matrix_y_size&lt;span class=&#34;dv&#34;&gt;-1&lt;/span&gt;)){&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-55&#34; title=&#34;55&#34;&gt;                &lt;span class=&#34;kw&#34;&gt;isolate&lt;/span&gt;(react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;df[new_y_value,new_x_value] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;if_else&lt;/span&gt;(react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;df[new_y_value,new_x_value]&lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-56&#34; title=&#34;56&#34;&gt;                                                                        &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;))&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-57&#34; title=&#34;57&#34;&gt;                &lt;span class=&#34;kw&#34;&gt;isolate&lt;/span&gt;(react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;df[&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;15&lt;/span&gt;] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-58&#34; title=&#34;58&#34;&gt;                &lt;span class=&#34;kw&#34;&gt;isolate&lt;/span&gt;(react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;df[&lt;span class=&#34;dv&#34;&gt;17&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-59&#34; title=&#34;59&#34;&gt;                &lt;span class=&#34;kw&#34;&gt;isolate&lt;/span&gt;(react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;df[&lt;span class=&#34;dv&#34;&gt;17&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-60&#34; title=&#34;60&#34;&gt;                &lt;span class=&#34;kw&#34;&gt;isolate&lt;/span&gt;(react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;walls &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;df)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-61&#34; title=&#34;61&#34;&gt;                &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-62&#34; title=&#34;62&#34;&gt;                output&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;map_grid_plotOutput &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;renderPlot&lt;/span&gt;({&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-63&#34; title=&#34;63&#34;&gt;                    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-64&#34; title=&#34;64&#34;&gt;                    &lt;span class=&#34;kw&#34;&gt;PlotMapGrid&lt;/span&gt;(react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;df,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-65&#34; title=&#34;65&#34;&gt;                                matrix_x_size,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-66&#34; title=&#34;66&#34;&gt;                                matrix_y_size)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-67&#34; title=&#34;67&#34;&gt;                    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-68&#34; title=&#34;68&#34;&gt;                }, &lt;span class=&#34;dt&#34;&gt;width=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;600&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;height=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;600&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;position=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;center&amp;quot;&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-69&#34; title=&#34;69&#34;&gt;            }}&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-70&#34; title=&#34;70&#34;&gt;    }) &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-71&#34; title=&#34;71&#34;&gt;    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-72&#34; title=&#34;72&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# Go search! Pseudo-random pathfinding algortihm&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-73&#34; title=&#34;73&#34;&gt;    &lt;span class=&#34;kw&#34;&gt;observeEvent&lt;/span&gt;(input&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;go_search_actionButton,{&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-74&#34; title=&#34;74&#34;&gt;        &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-75&#34; title=&#34;75&#34;&gt;        &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;nrow&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;which&lt;/span&gt;(react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;df &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;arr.ind =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;))&lt;span class=&#34;op&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;) react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;df &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;walls   &lt;span class=&#34;co&#34;&gt;# click search without clean&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-76&#34; title=&#34;76&#34;&gt;        current_step &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;initial_step &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-77&#34; title=&#34;77&#34;&gt;        obj &amp;lt;-&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;which&lt;/span&gt;(react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;df &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;arr.ind =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-78&#34; title=&#34;78&#34;&gt;        previous_steps_with_opt &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;current_step&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-79&#34; title=&#34;79&#34;&gt;        &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-80&#34; title=&#34;80&#34;&gt;        &lt;span class=&#34;cf&#34;&gt;for&lt;/span&gt;(i &lt;span class=&#34;cf&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;max_steps){&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-81&#34; title=&#34;81&#34;&gt;            next_step_col &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;tribble&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;row, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;col,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-82&#34; title=&#34;82&#34;&gt;                                     current_step[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;,current_step[&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;]&lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-83&#34; title=&#34;83&#34;&gt;                                     current_step[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;,current_step[&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;]&lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-84&#34; title=&#34;84&#34;&gt;                                     current_step[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;,current_step[&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;]&lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-85&#34; title=&#34;85&#34;&gt;                                     current_step[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]&lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;,current_step[&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;]&lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-86&#34; title=&#34;86&#34;&gt;            next_values &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;ot&#34;&gt;NULL&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-87&#34; title=&#34;87&#34;&gt;            &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-88&#34; title=&#34;88&#34;&gt;            &lt;span class=&#34;cf&#34;&gt;for&lt;/span&gt;(r &lt;span class=&#34;cf&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;nrow&lt;/span&gt;(next_step_col)){&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-89&#34; title=&#34;89&#34;&gt;                next_values &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(next_values,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-90&#34; title=&#34;90&#34;&gt;                                 react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;df[next_step_col[[r,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]],&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-91&#34; title=&#34;91&#34;&gt;                                             next_step_col[[r,&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;]]])&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-92&#34; title=&#34;92&#34;&gt;            }&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-93&#34; title=&#34;93&#34;&gt;            &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;%in%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;next_values){&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-94&#34; title=&#34;94&#34;&gt;                &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-95&#34; title=&#34;95&#34;&gt;                current_step &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;next_step_col[next_values&lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;,] &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-96&#34; title=&#34;96&#34;&gt;&lt;span class=&#34;st&#34;&gt;                  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.matrix&lt;/span&gt;()&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-97&#34; title=&#34;97&#34;&gt;                &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-98&#34; title=&#34;98&#34;&gt;                react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;df[current_step] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-99&#34; title=&#34;99&#34;&gt;                &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-100&#34; title=&#34;100&#34;&gt;                &lt;span class=&#34;cf&#34;&gt;break&lt;/span&gt;()&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-101&#34; title=&#34;101&#34;&gt;                &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-102&#34; title=&#34;102&#34;&gt;            } &lt;span class=&#34;cf&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;%in%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;next_values){&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-103&#34; title=&#34;103&#34;&gt;                &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-104&#34; title=&#34;104&#34;&gt;                &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(next_values&lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;){&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-105&#34; title=&#34;105&#34;&gt;                    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-106&#34; title=&#34;106&#34;&gt;                    previous_steps_with_opt &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;current_step&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-107&#34; title=&#34;107&#34;&gt;                    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-108&#34; title=&#34;108&#34;&gt;                }&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-109&#34; title=&#34;109&#34;&gt;                &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-110&#34; title=&#34;110&#34;&gt;                current_step &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;next_step_col[next_values&lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;,] &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-111&#34; title=&#34;111&#34;&gt;&lt;span class=&#34;st&#34;&gt;                  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;sample_n&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-112&#34; title=&#34;112&#34;&gt;&lt;span class=&#34;st&#34;&gt;                  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as.matrix&lt;/span&gt;()&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-113&#34; title=&#34;113&#34;&gt;                &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-114&#34; title=&#34;114&#34;&gt;                react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;df[current_step] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-115&#34; title=&#34;115&#34;&gt;                &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-116&#34; title=&#34;116&#34;&gt;            } &lt;span class=&#34;cf&#34;&gt;else&lt;/span&gt; {&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-117&#34; title=&#34;117&#34;&gt;                &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-118&#34; title=&#34;118&#34;&gt;                current_step &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;previous_steps_with_opt&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-119&#34; title=&#34;119&#34;&gt;                &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-120&#34; title=&#34;120&#34;&gt;            }&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-121&#34; title=&#34;121&#34;&gt;        }&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-122&#34; title=&#34;122&#34;&gt;    })&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-123&#34; title=&#34;123&#34;&gt;    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-124&#34; title=&#34;124&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# Reset all&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-125&#34; title=&#34;125&#34;&gt;    &lt;span class=&#34;kw&#34;&gt;observeEvent&lt;/span&gt;(input&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;clean_all_actionButton,{&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-126&#34; title=&#34;126&#34;&gt;        &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-127&#34; title=&#34;127&#34;&gt;        react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;df &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;orig&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-128&#34; title=&#34;128&#34;&gt;        react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;walls &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;orig&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-129&#34; title=&#34;129&#34;&gt;        &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-130&#34; title=&#34;130&#34;&gt;    })&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-131&#34; title=&#34;131&#34;&gt;    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-132&#34; title=&#34;132&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# First panel&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-133&#34; title=&#34;133&#34;&gt;    output&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;map_grid_plotOutput &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;renderPlot&lt;/span&gt;({&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-134&#34; title=&#34;134&#34;&gt;        &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-135&#34; title=&#34;135&#34;&gt;        &lt;span class=&#34;kw&#34;&gt;PlotMapGrid&lt;/span&gt;(react_df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;df,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-136&#34; title=&#34;136&#34;&gt;                    matrix_x_size,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-137&#34; title=&#34;137&#34;&gt;                    matrix_y_size)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-138&#34; title=&#34;138&#34;&gt;        &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-139&#34; title=&#34;139&#34;&gt;    }, &lt;span class=&#34;dt&#34;&gt;width=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;550&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;height=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;600&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;position=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;center&amp;quot;&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-140&#34; title=&#34;140&#34;&gt;    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-141&#34; title=&#34;141&#34;&gt;}&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-142&#34; title=&#34;142&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-143&#34; title=&#34;143&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-144&#34; title=&#34;144&#34;&gt;&lt;span class=&#34;kw&#34;&gt;shinyApp&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;ui=&lt;/span&gt;ui, &lt;span class=&#34;dt&#34;&gt;server =&lt;/span&gt; server)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Para acabar, las funciones &lt;em&gt;helpers&lt;/em&gt;:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-1&#34; title=&#34;1&#34;&gt;ColourBorders &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(df, col_value){&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-2&#34; title=&#34;2&#34;&gt;    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-3&#34; title=&#34;3&#34;&gt;    &lt;span class=&#34;co&#34;&gt;## Rounding walls &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-4&#34; title=&#34;4&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# Params: df  -  Map grid&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-5&#34; title=&#34;5&#34;&gt;    &lt;span class=&#34;co&#34;&gt;#         col_value - Colour to fill the rounding blocks&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; title=&#34;6&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# Return: df with the filled roundings&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; title=&#34;7&#34;&gt;    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;    df[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;,] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;col_value&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-9&#34; title=&#34;9&#34;&gt;    df[,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;col_value&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-10&#34; title=&#34;10&#34;&gt;    df[&lt;span class=&#34;kw&#34;&gt;nrow&lt;/span&gt;(df),] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;col_value&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-11&#34; title=&#34;11&#34;&gt;    df[,&lt;span class=&#34;kw&#34;&gt;ncol&lt;/span&gt;(df)] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;col_value&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-12&#34; title=&#34;12&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-13&#34; title=&#34;13&#34;&gt;    &lt;span class=&#34;kw&#34;&gt;return&lt;/span&gt;(df)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-14&#34; title=&#34;14&#34;&gt;    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-15&#34; title=&#34;15&#34;&gt;}&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-16&#34; title=&#34;16&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-17&#34; title=&#34;17&#34;&gt;PlotMapGrid &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(df, matrix_x_size, matrix_y_size){&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-18&#34; title=&#34;18&#34;&gt;    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-19&#34; title=&#34;19&#34;&gt;    &lt;span class=&#34;co&#34;&gt;## Plot the interactive grid &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-20&#34; title=&#34;20&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# Params: df  -  Map grid&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-21&#34; title=&#34;21&#34;&gt;    &lt;span class=&#34;co&#34;&gt;#         matrix_x_size - X_axis limit&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-22&#34; title=&#34;22&#34;&gt;    &lt;span class=&#34;co&#34;&gt;#         matrix_y_size - Y_axis limit&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-23&#34; title=&#34;23&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# Return: plot with the pathfinding&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-24&#34; title=&#34;24&#34;&gt;    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-25&#34; title=&#34;25&#34;&gt;    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-26&#34; title=&#34;26&#34;&gt;    plot &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;rbind&lt;/span&gt;(&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-27&#34; title=&#34;27&#34;&gt;            &lt;span class=&#34;kw&#34;&gt;which&lt;/span&gt;(df&lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;arr.ind =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;cbind&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;fill_col=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;#623B17&amp;quot;&lt;/span&gt;),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-28&#34; title=&#34;28&#34;&gt;            &lt;span class=&#34;kw&#34;&gt;which&lt;/span&gt;(df &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;arr.ind =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;cbind&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;fill_col=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;#13293D&amp;quot;&lt;/span&gt;),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-29&#34; title=&#34;29&#34;&gt;            &lt;span class=&#34;kw&#34;&gt;which&lt;/span&gt;(df &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;arr.ind =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;cbind&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;fill_col=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;#ffff66&amp;quot;&lt;/span&gt;),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-30&#34; title=&#34;30&#34;&gt;            &lt;span class=&#34;kw&#34;&gt;which&lt;/span&gt;(df &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;arr.ind =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;cbind&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;fill_col=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;#99ccff&amp;quot;&lt;/span&gt;),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-31&#34; title=&#34;31&#34;&gt;            &lt;span class=&#34;kw&#34;&gt;which&lt;/span&gt;(df &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;arr.ind =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;cbind&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;fill_col=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;#1B998B&amp;quot;&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-32&#34; title=&#34;32&#34;&gt;            &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-33&#34; title=&#34;33&#34;&gt;        ) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-34&#34; title=&#34;34&#34;&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;data.frame&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;stringsAsFactors =&lt;/span&gt; F) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-35&#34; title=&#34;35&#34;&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;transmute&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;as.numeric&lt;/span&gt;(row), &lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;as.numeric&lt;/span&gt;(col), &lt;span class=&#34;dt&#34;&gt;fill_col=&lt;/span&gt;fill_col) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-36&#34; title=&#34;36&#34;&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(x&lt;span class=&#34;fl&#34;&gt;+0.5&lt;/span&gt;,y&lt;span class=&#34;fl&#34;&gt;+0.5&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-37&#34; title=&#34;37&#34;&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_tile&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;width =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;height =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; df&lt;span class=&#34;op&#34;&gt;$&lt;/span&gt;fill_col, &lt;span class=&#34;dt&#34;&gt;col=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-38&#34; title=&#34;38&#34;&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_y_reverse&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-39&#34; title=&#34;39&#34;&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_x_continuous&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;breaks =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;seq&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, matrix_x_size, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-40&#34; title=&#34;40&#34;&gt;                           &lt;span class=&#34;dt&#34;&gt;limits =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;+0.5&lt;/span&gt;, matrix_x_size&lt;span class=&#34;fl&#34;&gt;+1.5&lt;/span&gt;), &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-41&#34; title=&#34;41&#34;&gt;                           &lt;span class=&#34;dt&#34;&gt;minor_breaks =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;NULL&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-42&#34; title=&#34;42&#34;&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_y_continuous&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;breaks =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;seq&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, matrix_y_size, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-43&#34; title=&#34;43&#34;&gt;                           &lt;span class=&#34;dt&#34;&gt;limits =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;+0.5&lt;/span&gt;, matrix_y_size&lt;span class=&#34;fl&#34;&gt;+1.5&lt;/span&gt;),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-44&#34; title=&#34;44&#34;&gt;                           &lt;span class=&#34;dt&#34;&gt;minor_breaks =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;NULL&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-45&#34; title=&#34;45&#34;&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme_linedraw&lt;/span&gt;()&lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-46&#34; title=&#34;46&#34;&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;axis.title.x=&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;element_blank&lt;/span&gt;(),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-47&#34; title=&#34;47&#34;&gt;              &lt;span class=&#34;dt&#34;&gt;axis.title.y=&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;element_blank&lt;/span&gt;(),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-48&#34; title=&#34;48&#34;&gt;              &lt;span class=&#34;dt&#34;&gt;axis.text.x=&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;element_blank&lt;/span&gt;(),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-49&#34; title=&#34;49&#34;&gt;              &lt;span class=&#34;dt&#34;&gt;axis.text.y=&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;element_blank&lt;/span&gt;(),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-50&#34; title=&#34;50&#34;&gt;              &lt;span class=&#34;dt&#34;&gt;axis.ticks.x=&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;element_blank&lt;/span&gt;(),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-51&#34; title=&#34;51&#34;&gt;              &lt;span class=&#34;dt&#34;&gt;axis.ticks.y=&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;element_blank&lt;/span&gt;())&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-52&#34; title=&#34;52&#34;&gt;    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-53&#34; title=&#34;53&#34;&gt;        &lt;span class=&#34;kw&#34;&gt;return&lt;/span&gt;(plot)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-54&#34; title=&#34;54&#34;&gt;    &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-55&#34; title=&#34;55&#34;&gt;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;style&gt;
+body {
+text-align: justify}
+p {
+  word-spacing: 3px;
+}
+&lt;/style&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
+&lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&#34;mojo/signup-forms/Loader&#34;], function(L) { L.start({&#34;baseUrl&#34;:&#34;mc.us4.list-manage.com&#34;,&#34;uuid&#34;:&#34;91551f7ed29389a0de4f47665&#34;,&#34;lid&#34;:&#34;d95c503a48&#34;,&#34;uniqueMethods&#34;:true}) })&lt;/script&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Dominando la función summarise_at(). Media ponderada con R en el ecosistema Tidyverse. </title>
+      <link>/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse-r/</link>
+      <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse-r/</guid>
+      <description>
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;Imagina que estas analizando datos obtenidos en encuestas. Quizá no hace falta que imagines y es realmente tu caso. Cuando tratamos de sacar estadísiticos de la distribución que siguen las respuestas, como la media, solemos hacerlo de una manera representativa, es decir, ponderando las respuestas dependiendo del número de individuos pertenecientes a un segmento.&lt;/p&gt;
+&lt;p&gt;Es cierto que en R se encuentra la función &lt;em&gt;weigthed.mean()&lt;/em&gt; y puede ser util en determinados casos. Pero, ¿y qué pasa si aun no tienes calculados los pesos y almacenados como vector o columna? Incluso más importante, ¿qué pasa si quieres utilizar otra función de agregación que no sea la media?&lt;/p&gt;
+&lt;p&gt;Aquí ofrecemos nuestra versión donde conseguimos obtener tanto los pesos como la agregación(de manera flexible, media u otra función) de manera ponderada:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;survey_data &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;tribble&lt;/span&gt;(                           &lt;span class=&#34;co&#34;&gt;# Creamos el dataset&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-4&#34; title=&#34;4&#34;&gt;  &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;id, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;region1, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;region2, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;gender, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;q1, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;q2,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-5&#34; title=&#34;5&#34;&gt;  &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;,&lt;span class=&#34;st&#34;&gt;&amp;quot;sp&amp;quot;&lt;/span&gt;,&lt;span class=&#34;st&#34;&gt;&amp;quot;mad&amp;quot;&lt;/span&gt;,&lt;span class=&#34;st&#34;&gt;&amp;quot;m&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-6&#34; title=&#34;6&#34;&gt;  &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;,&lt;span class=&#34;st&#34;&gt;&amp;quot;it&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;bol&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;m&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-7&#34; title=&#34;7&#34;&gt;  &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;,&lt;span class=&#34;st&#34;&gt;&amp;quot;sp&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;bar&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;f&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-8&#34; title=&#34;8&#34;&gt;  &lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;,&lt;span class=&#34;st&#34;&gt;&amp;quot;sp&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;bar&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;f&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;7&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;7&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-9&#34; title=&#34;9&#34;&gt;  &lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;st&#34;&gt;&amp;quot;it&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;bol&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;m&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;7&lt;/span&gt;)  &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-1&#34; title=&#34;1&#34;&gt;survey_data &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                           &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(region1, region2, gender) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;          &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Elegimos nuestros segmentos&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;weight =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;n&lt;/span&gt;()) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                      &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Calculamos los pesos&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ungroup&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                                   &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Una vez calculados desagrupamos&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;summarise_at&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;vars&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;contains&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;q&amp;quot;&lt;/span&gt;)),               &lt;span class=&#34;co&#34;&gt;# Son preguntas columnas que empiezan por q&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; title=&#34;6&#34;&gt;               &lt;span class=&#34;kw&#34;&gt;funs&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;weighted_mean =&lt;/span&gt;               &lt;span class=&#34;co&#34;&gt;# Elegimos como funcion de agregación la media&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; title=&#34;7&#34;&gt;                      &lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(. &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;weight)&lt;span class=&#34;op&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(weight)))  &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;table class=&#34;table table-striped&#34; style=&#34;width: auto !important; margin-left: auto; margin-right: auto;&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+q1_weighted_mean
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+q2_weighted_mean
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3.333333
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Lista todas las variables definidas en Jupyter Notebooks</title>
+      <link>/es/vizs-and-tips/magic-whos-metodo-jupyter-notebook/</link>
+      <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/es/vizs-and-tips/magic-whos-metodo-jupyter-notebook/</guid>
+      <description>
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Una queja o comentario recurrente entre los usuarios que empiezan a usar los Jupyter Notebooks es la falta de informacion sobre las variables y funciones definidas en el entorno. Si te realizas esta pregunta, seguramente necesites informacion sobre el uso y el principal objetivo de estos &lt;em&gt;notebooks&lt;/em&gt;, el cual es muy diferente al de IDEs como Spyder, Pycharm o RStudio.&lt;/p&gt;
+&lt;p&gt;Una vez que confirmamos que este tipo de &lt;em&gt;notebooks&lt;/em&gt; son lo que necesitamos, existen diferentes maneras de mostrar esta información. La primera y más facil de ellas es mediante el método mágico &lt;strong&gt;%whos&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/vizs-and-tips/magic-whos-metodo-jupyter-notebook/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Otras alternativas son, por un lado la extensión &lt;em&gt;nbextension&lt;/em&gt; y dentro de Jupyter Lab el inspector de variables. Puedes encontrar más información &lt;a href=&#34;https://stackoverflow.com/questions/37718907/variable-explorer-in-jupyter-notebook&#34;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Muestra tus habilidades o skills mediante un gráfico en R y su paquete ggplot</title>
+      <link>/es/vizs-and-tips/skills-chart-curriculum-r-ggplot/</link>
+      <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/es/vizs-and-tips/skills-chart-curriculum-r-ggplot/</guid>
+      <description>
+&lt;style type=&#34;text/css&#34;&gt;
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;A la hora de presentar tus habilidades ya sea en una página web o en tu CV, una buena idea sueles ser sintetizarlas mediante una gráfica. Muchas plantillas de CVs incluyen una gráfica por defecto.&lt;/p&gt;
+&lt;p&gt;En este post queremos dar un &lt;em&gt;template&lt;/em&gt; el cual poder personalizar con vuestras habilidades y evolucionar incorporando mejoras estéticas. ¡Estaremos encantados de ver tu versión!&lt;/p&gt;
+&lt;p&gt;Os dejamos el código comentado en el siguiente &lt;em&gt;chunk&lt;/em&gt;:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(ggplot2)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;co&#34;&gt;# library(plotly)                      Es simple transformarlo a plotly&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tibble)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(dplyr)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-5&#34; title=&#34;5&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-6&#34; title=&#34;6&#34;&gt;skills &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;tribble&lt;/span&gt;(                    &lt;span class=&#34;co&#34;&gt;# Creamos el dataset con las habilidades&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-7&#34; title=&#34;7&#34;&gt;    &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;Skill, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;Hours, &lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;Class,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-8&#34; title=&#34;8&#34;&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;AWS&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;500&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;BigData&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-9&#34; title=&#34;9&#34;&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;Python&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;8000&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;Language&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-10&#34; title=&#34;10&#34;&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;Spark&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;4000&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;BigData&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-11&#34; title=&#34;11&#34;&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;R&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;9000&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;Language&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-12&#34; title=&#34;12&#34;&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;Git&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;2000&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;Tools&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-13&#34; title=&#34;13&#34;&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;Jira&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;2000&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;Tools&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-14&#34; title=&#34;14&#34;&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;Forecasting&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;5000&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;Objetive&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-15&#34; title=&#34;15&#34;&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;Segmentation&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;2000&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;Objetive&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-16&#34; title=&#34;16&#34;&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;Computer Vision&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;600&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;Objetive&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-17&#34; title=&#34;17&#34;&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;SQL&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;4500&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;Language&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-18&#34; title=&#34;18&#34;&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;IBM Data Stage &amp;amp; SPSS&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;1200&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;Tools&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-19&#34; title=&#34;19&#34;&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;Shiny R&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;1500&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;Visualization&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-20&#34; title=&#34;20&#34;&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;Tableau&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;1000&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;Visualization&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-21&#34; title=&#34;21&#34;&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;Spotfire&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;500&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;Visualization&amp;quot;&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-22&#34; title=&#34;22&#34;&gt;) &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# plotly(                              &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;data=&lt;/span&gt;skills,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-3&#34; title=&#34;3&#34;&gt;       &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x=&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;reorder&lt;/span&gt;(Skill,&lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;desc&lt;/span&gt;(Hours)),           &lt;span class=&#34;co&#34;&gt;# Ordenamos las habilidades según las horas dedicadas&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-4&#34; title=&#34;4&#34;&gt;           &lt;span class=&#34;dt&#34;&gt;y=&lt;/span&gt; Hours,                                &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-5&#34; title=&#34;5&#34;&gt;           &lt;span class=&#34;dt&#34;&gt;fill=&lt;/span&gt;Class,                              &lt;span class=&#34;co&#34;&gt;# Coloreamos según ek tipo de habilidad&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; title=&#34;6&#34;&gt;           &lt;span class=&#34;dt&#34;&gt;label=&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;paste0&lt;/span&gt;(Hours,&lt;span class=&#34;st&#34;&gt;&amp;quot; h&amp;quot;&lt;/span&gt;))) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;             &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Añadimos un label con las horas&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_bar&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;stat =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;identity&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;colour=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;   &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Stat identity para que pueda tener eje Y&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;coord_flip&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                                  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Hacemos las barras horizontales&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;labs&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot; &amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;y=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Hours&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;fill=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot; &amp;quot;&lt;/span&gt;)  &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;             &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Definimos el nombre de los ejes&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme_minimal&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                               &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Theme sin background&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-11&#34; title=&#34;11&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_fill_brewer&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;palette =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;YlOrBr&amp;quot;&lt;/span&gt;,           &lt;span class=&#34;co&#34;&gt;# Paleta deseado&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-12&#34; title=&#34;12&#34;&gt;                      &lt;span class=&#34;dt&#34;&gt;direction =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;-1&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-13&#34; title=&#34;13&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_label&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;show_guide  =&lt;/span&gt; F, &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;y=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;400&lt;/span&gt;))         &lt;span class=&#34;co&#34;&gt;# Usar show_guide a pesar del warning&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Reordenando gráficos de barras en R con GGanimate</title>
+      <link>/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/</link>
+      <pubDate>Tue, 17 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/</guid>
+      <description>
+&lt;style type=&#34;text/css&#34;&gt;
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;./featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;GGanimate es una libraría de R que está generando bastantes posts y comentarios debido al potencial que introduce en el aspecto de visualizaciones en el ecosistema R.&lt;/p&gt;
+&lt;p&gt;Intentando aplicar esta librería a gráficos de barras y su evolución temporal, nos encontramos usuarios preguntando la posibilidad de que las barras no solo aumenten y disminuyan a lo largo del tiempo(de la animación) sino que también el orden de las mismas variara en función si eran mayores o menores y no permaneciesen en el orden del primer &lt;em&gt;timestamp&lt;/em&gt;, en definitiva que se reordenaran.&lt;/p&gt;
+&lt;p&gt;Por tanto, compartimos el siguiente código en el que las barras se reordenan a lo largo del tiempo. Es más en este ejemplo, tenemos 5 ciudades que entran y salen del gráfico en función de su valor durante el tiempo y visualizando el top 4.&lt;/p&gt;
+&lt;p&gt;Os dejamos el código para realizar la animación del gráfico de barras:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(ggplot2)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(gganimate)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-4&#34; title=&#34;4&#34;&gt;df_evolution_data &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;data.frame&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;Name=&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;rep&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;Madrid&amp;quot;&lt;/span&gt;,&lt;span class=&#34;st&#34;&gt;&amp;quot;Barcelona&amp;quot;&lt;/span&gt;,   &lt;span class=&#34;co&#34;&gt;# Creamos el dataset&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-5&#34; title=&#34;5&#34;&gt;                              &lt;span class=&#34;st&#34;&gt;&amp;quot;Valencia&amp;quot;&lt;/span&gt;,&lt;span class=&#34;st&#34;&gt;&amp;quot;Alicante&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-6&#34; title=&#34;6&#34;&gt;                              &lt;span class=&#34;st&#34;&gt;&amp;quot;Sevilla&amp;quot;&lt;/span&gt;),&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-7&#34; title=&#34;7&#34;&gt;                   &lt;span class=&#34;dt&#34;&gt;Year =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;factor&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;sort&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;rep&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;2001&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2005&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;))),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-8&#34; title=&#34;8&#34;&gt;                   &lt;span class=&#34;dt&#34;&gt;Value =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;runif&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;25&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1000&lt;/span&gt;))&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-9&#34; title=&#34;9&#34;&gt;df_evolution_data_filtered &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;df_evolution_data &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(Year) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                                               &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-11&#34; title=&#34;11&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;Rank =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;rank&lt;/span&gt;(Value)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                                   &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Añadimos la columna rank y&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-12&#34; title=&#34;12&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(Rank &lt;span class=&#34;op&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;)                                                &lt;span class=&#34;co&#34;&gt;# descartamos el de menor valor&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;ggplot&lt;/span&gt;(df_evolution_data_filtered) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_col&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x=&lt;/span&gt;Rank,                          &lt;span class=&#34;co&#34;&gt;# Creamos el gráfico de barras&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-3&#34; title=&#34;3&#34;&gt;               &lt;span class=&#34;dt&#34;&gt;y=&lt;/span&gt;Value,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-4&#34; title=&#34;4&#34;&gt;               &lt;span class=&#34;dt&#34;&gt;group=&lt;/span&gt;Name,                      &lt;span class=&#34;co&#34;&gt;# Afrumando y filleando por ciudad&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-5&#34; title=&#34;5&#34;&gt;               &lt;span class=&#34;dt&#34;&gt;fill=&lt;/span&gt;Name),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; title=&#34;6&#34;&gt;           &lt;span class=&#34;dt&#34;&gt;width=&lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;0.4&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_text&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x=&lt;/span&gt;Rank,                         &lt;span class=&#34;co&#34;&gt;# Etiquetamos las barras con los nombres&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;                &lt;span class=&#34;dt&#34;&gt;y=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-9&#34; title=&#34;9&#34;&gt;                &lt;span class=&#34;dt&#34;&gt;label=&lt;/span&gt;Name,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-10&#34; title=&#34;10&#34;&gt;                &lt;span class=&#34;dt&#34;&gt;group=&lt;/span&gt;Name),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-11&#34; title=&#34;11&#34;&gt;            &lt;span class=&#34;dt&#34;&gt;hjust=&lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;1.25&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-12&#34; title=&#34;12&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme_minimal&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                             &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Elegimos un theme que no sea gris&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-13&#34; title=&#34;13&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ylab&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;Value&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-14&#34; title=&#34;14&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;axis.title.y =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;element_blank&lt;/span&gt;(),         &lt;span class=&#34;co&#34;&gt;# Eliminamos los labels y titles &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-15&#34; title=&#34;15&#34;&gt;        &lt;span class=&#34;dt&#34;&gt;axis.text.y =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;element_blank&lt;/span&gt;(),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-16&#34; title=&#34;16&#34;&gt;        &lt;span class=&#34;dt&#34;&gt;axis.ticks.y =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;element_blank&lt;/span&gt;(),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-17&#34; title=&#34;17&#34;&gt;        &lt;span class=&#34;dt&#34;&gt;plot.margin =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;unit&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;), &lt;span class=&#34;st&#34;&gt;&amp;#39;lines&amp;#39;&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Escogemos el zoom&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-18&#34; title=&#34;18&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_fill_brewer&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;palette=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Dark2&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;          &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Paleta de colores de las barras&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-19&#34; title=&#34;19&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;coord_flip&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;clip=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;off&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                      &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Hacemos las barras horizontales&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-20&#34; title=&#34;20&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ggtitle&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;{closest_state}&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Tilulo == al valor de la columna que&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-21&#34; title=&#34;21&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;transition_states&lt;/span&gt;(Year,                       &lt;span class=&#34;co&#34;&gt;# Animamos la columna Year&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-22&#34; title=&#34;22&#34;&gt;                    &lt;span class=&#34;dt&#34;&gt;transition_length =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;,      &lt;span class=&#34;co&#34;&gt;# Duración de la animación de transición&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-23&#34; title=&#34;23&#34;&gt;                    &lt;span class=&#34;dt&#34;&gt;state_length =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;         &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Duración de cada Year&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-24&#34; title=&#34;24&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;exit_fly&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x_loc =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;y_loc =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;              &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Salida de la ciudad no top4&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-25&#34; title=&#34;25&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;enter_fly&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x_loc =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;y_loc =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;)               &lt;span class=&#34;co&#34;&gt;# Entrada de la ciudad al top4&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Muestra los intervalos de confianza de tus predicciones mediante geom_ribbon() con R Ggplot</title>
+      <link>/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</link>
+      <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
+      <guid>/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</guid>
+      <description>
+&lt;style type=&#34;text/css&#34;&gt;
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;A continuación te mostramos el código:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;huron &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;data.frame&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;year =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1875&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1972&lt;/span&gt;,                        &lt;span class=&#34;co&#34;&gt;# Creamos el conjunto de datos&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;                    &lt;span class=&#34;dt&#34;&gt;value =&lt;/span&gt; LakeHuron,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-4&#34; title=&#34;4&#34;&gt;                    &lt;span class=&#34;dt&#34;&gt;std =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;runif&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;length&lt;/span&gt;(LakeHuron),&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;))      &lt;span class=&#34;co&#34;&gt;# Valores random para representar la desviación   &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-5&#34; title=&#34;5&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-6&#34; title=&#34;6&#34;&gt;huron &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                                                    &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Fijamos los ejes X e Y&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(year, value)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;          &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_line&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;color =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;firebrick&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                 &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Creamos la gráfica de linea &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_ribbon&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;ymin =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-10&#34; title=&#34;10&#34;&gt;                  &lt;span class=&#34;dt&#34;&gt;ymax =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std),                       &lt;span class=&#34;co&#34;&gt;# Creamos los intervalos con valor +- std&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-11&#34; title=&#34;11&#34;&gt;              &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;steelblue2&amp;quot;&lt;/span&gt;) &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Para un grafico con varias lineas, debemos incorporar el &lt;em&gt;aesthetic&lt;/em&gt; de &lt;em&gt;group&lt;/em&gt; de la siguiente manera:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-2&#34; title=&#34;2&#34;&gt;huron &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;data.frame&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;year =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;rep&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;1875&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1972&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;), &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-3&#34; title=&#34;3&#34;&gt;                    &lt;span class=&#34;dt&#34;&gt;group =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;rep&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;a&amp;quot;&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;98&lt;/span&gt;),&lt;span class=&#34;kw&#34;&gt;rep&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;b&amp;quot;&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;98&lt;/span&gt;)),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-4&#34; title=&#34;4&#34;&gt;                    &lt;span class=&#34;dt&#34;&gt;value =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(LakeHuron, LakeHuron &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-5&#34; title=&#34;5&#34;&gt;                    &lt;span class=&#34;dt&#34;&gt;std =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;runif&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;length&lt;/span&gt;(LakeHuron)&lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;))     &lt;span class=&#34;co&#34;&gt;# Creamos el conjunto de datos con dos series&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; title=&#34;6&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;# Seguimos la misma estructura para crear el plot, pero añadiendo fill=group y group=group para indicar que&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;# coloree y trate las dos series de manera diferenciada.&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-9&#34; title=&#34;9&#34;&gt;huron &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(year, value, &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; group)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                    &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-11&#34; title=&#34;11&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_line&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;color =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;firebrick&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-12&#34; title=&#34;12&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_ribbon&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;ymin =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-13&#34; title=&#34;13&#34;&gt;                  &lt;span class=&#34;dt&#34;&gt;ymax =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-14&#34; title=&#34;14&#34;&gt;                  &lt;span class=&#34;dt&#34;&gt;group=&lt;/span&gt;group),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-15&#34; title=&#34;15&#34;&gt;              &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;steelblue2&amp;quot;&lt;/span&gt;) &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/es/vizs-and-tips/grafica-intervalos-confianza-ggplot-geom_ribbon-plot-R/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Plataformas donde puedes participar en competiciones de datos</title>
+      <link>/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/</link>
+      <pubDate>Mon, 07 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/</guid>
+      <description>
+
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Kaggle - &lt;a href=&#34;https://www.kaggle.com&#34; class=&#34;uri&#34;&gt;https://www.kaggle.com&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Driven Data - &lt;a href=&#34;https://www.drivendata.org/competitions/&#34; class=&#34;uri&#34;&gt;https://www.drivendata.org/competitions/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;CodaLab - &lt;a href=&#34;https://competitions.codalab.org/&#34; class=&#34;uri&#34;&gt;https://competitions.codalab.org/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Alibaba Tianchi - &lt;a href=&#34;https://tianchi.aliyun.com/competition/gameList/activeList&#34; class=&#34;uri&#34;&gt;https://tianchi.aliyun.com/competition/gameList/activeList&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Analyticsvidhya - &lt;a href=&#34;https://datahack.analyticsvidhya.com/contest/all&#34; class=&#34;uri&#34;&gt;https://datahack.analyticsvidhya.com/contest/all&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;hackerearth - &lt;a href=&#34;https://www.hackerearth.com/challenges/competitive/&#34; class=&#34;uri&#34;&gt;https://www.hackerearth.com/challenges/competitive/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Agorize - &lt;a href=&#34;https://www.agorize.com/en/challenges&#34; class=&#34;uri&#34;&gt;https://www.agorize.com/en/challenges&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;También existen eventos concretos, que se celebran anualmente.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;IDA (international Data Analysis Olympiad) (Registro en Enero) - &lt;a href=&#34;https://idao.world/&#34; class=&#34;uri&#34;&gt;https://idao.world/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;IronViz - &lt;a href=&#34;https://www.tableau.com/iron-viz&#34; class=&#34;uri&#34;&gt;https://www.tableau.com/iron-viz&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;TopCoder - &lt;a href=&#34;https://tco19.topcoder.com/competition-overview/algorithm&#34; class=&#34;uri&#34;&gt;https://tco19.topcoder.com/competition-overview/algorithm&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Data Mining Cup - &lt;a href=&#34;https://www.data-mining-cup.com/&#34; class=&#34;uri&#34;&gt;https://www.data-mining-cup.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;A nivel nacional y local están comenzando a organizarse todo tipos de eventos relativos al #opendata. Te invitamos a que investigues sobre ellos y te animes a colaborar en mejorar tu entorno a través de la explotación de los datos.&lt;/p&gt;
+&lt;p&gt;Por ejemplo, en España a fecha de este artículo, los más importantes son:&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;CajaMar - &lt;a href=&#34;https://www.cajamardatalab.com/&#34; class=&#34;uri&#34;&gt;https://www.cajamardatalab.com/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Gobierno - &lt;a href=&#34;https://datos.gob.es/es/event-tags/concurso&#34; class=&#34;uri&#34;&gt;https://datos.gob.es/es/event-tags/concurso&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Junta Castilla y Leon - &lt;a href=&#34;https://datosabiertos.jcyl.es/web/es/datos-abiertos-castilla-leon.html&#34; class=&#34;uri&#34;&gt;https://datosabiertos.jcyl.es/web/es/datos-abiertos-castilla-leon.html&lt;/a&gt;&lt;/p&gt;
+&lt;/style&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
+&lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&#34;mojo/signup-forms/Loader&#34;], function(L) { L.start({&#34;baseUrl&#34;:&#34;mc.us4.list-manage.com&#34;,&#34;uuid&#34;:&#34;91551f7ed29389a0de4f47665&#34;,&#34;lid&#34;:&#34;d95c503a48&#34;,&#34;uniqueMethods&#34;:true}) })&lt;/script&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>La mejor manera de hacer recuento de NAs por columna</title>
+      <link>/es/vizs-and-tips/recuento-nas-por-columna-en-r-comparativa/</link>
+      <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/es/vizs-and-tips/recuento-nas-por-columna-en-r-comparativa/</guid>
+      <description>
+&lt;style type=&#34;text/css&#34;&gt;
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;¿Estás comenzando tu etapa de exploración de datos? Una de las primeras cosas que solemos hacer es calcular el porcentaje de NAs por variable. Existen muchas maneras de llegar a este resultado, partiendo de R base con summary (obtenemos más estadísticos y con muchas variables puede no interesar todo de golpe)&lt;/p&gt;
+&lt;p&gt;Vamos a comprobar el &lt;em&gt;performance&lt;/em&gt; de las funciones que más usamos para este conteo/porcentaje. Destacamos que el output de ellas no es exactamente igual, así que además de los tiempos, dependerá de la estructura de nuestro programa elegir una u otra.&lt;/p&gt;
+&lt;p&gt;Comenzamos definiendo la función de comparación para probar con datasets cos más filas y más columnas para ver como escalan:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(microbenchmark)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-4&#34; title=&#34;4&#34;&gt;benchmark_count_na_by_column &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(dataset){&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-5&#34; title=&#34;5&#34;&gt;  &lt;span class=&#34;kw&#34;&gt;microbenchmark&lt;/span&gt;(&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-6&#34; title=&#34;6&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# Summary table output&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-7&#34; title=&#34;7&#34;&gt;    dataset &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;summary&lt;/span&gt;(),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-8&#34; title=&#34;8&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# Numeric output&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-9&#34; title=&#34;9&#34;&gt;    &lt;span class=&#34;kw&#34;&gt;colSums&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(dataset)),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-10&#34; title=&#34;10&#34;&gt;    &lt;span class=&#34;kw&#34;&gt;sapply&lt;/span&gt;(dataset, &lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(x) &lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(x))),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-11&#34; title=&#34;11&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# List output&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-12&#34; title=&#34;12&#34;&gt;    dataset &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;map&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(.))),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-13&#34; title=&#34;13&#34;&gt;    &lt;span class=&#34;kw&#34;&gt;lapply&lt;/span&gt;( dataset, &lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(x) &lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(x))),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-14&#34; title=&#34;14&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# Df output&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-15&#34; title=&#34;15&#34;&gt;    dataset &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-16&#34; title=&#34;16&#34;&gt;&lt;span class=&#34;st&#34;&gt;      &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;everything&lt;/span&gt;()) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-17&#34; title=&#34;17&#34;&gt;&lt;span class=&#34;st&#34;&gt;      &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;summarise_all&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;funs&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(.)))),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-18&#34; title=&#34;18&#34;&gt;    dataset &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-19&#34; title=&#34;19&#34;&gt;&lt;span class=&#34;st&#34;&gt;      &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;summarise_each&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;funs&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(.)))),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-20&#34; title=&#34;20&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# Tibble output&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-21&#34; title=&#34;21&#34;&gt;    dataset &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;map_df&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(.)))&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-22&#34; title=&#34;22&#34;&gt;  )&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-23&#34; title=&#34;23&#34;&gt;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Veamos el rendimiento entre datasets:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;print&lt;/span&gt;(airquality &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;nrow&lt;/span&gt;()) &lt;span class=&#34;co&#34;&gt;# 153 rows&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;benchmark_count_na_by_column&lt;/span&gt;(airquality)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;## Unit: microseconds&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;co&#34;&gt;##funct             min       lq     mean     median      uq    max     neval  class&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;co&#34;&gt;##summary()         1480.5   1582.60 1979.676 1897.30  2100.45 6403.2   100    table&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;co&#34;&gt;##colSums()         24.4     38.45   47.854   44.70   53.90    152.4    100    integer&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;co&#34;&gt;##sapply()          23.2     35.05   67.891   39.65   50.30    2494.8   100    integer&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;co&#34;&gt;##map()             140.2    182.60  214.092  200.75  238.50   549.6    100    list&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;##lapply()          11.2     15.65   27.093   18.85   22.45    750.1    100    list&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;##summarise_all()   1996.9   2147.80 2650.223 2382.90 2798.55  8133.7   100    data.frame&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;co&#34;&gt;##summarise_each()  2277.9   2497.05 2951.477 2898.40 3080.65  7977.2   100    data.frame&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;co&#34;&gt;##map_df()          190.0    249.00  331.368  275.40  326.05   383      100    tbl_df&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Y para acaba, veamos como escala cada una de estas funciones a un dataset de 100000 filas:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-1&#34; title=&#34;1&#34;&gt;big_dataset &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;nrow&lt;/span&gt;() &lt;span class=&#34;co&#34;&gt;# 100 000 rows&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;benchmark_count_na_by_column&lt;/span&gt;(big_dataset)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;## Unit: milliseconds&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;co&#34;&gt;##funct             min        lq       mean      median        uq    max    neval class&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;co&#34;&gt;##summary()         113.7535 129.35070 138.716624 133.14050 143.45920 252.0149 100   table&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;co&#34;&gt;##colSums()         4.4280   5.31080  12.502741   5.65005  18.77570 124.8206   100   integer&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;co&#34;&gt;##sapply()          2.2452   3.03095   6.788395   3.15310  15.04010  18.6061   100   integer&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;co&#34;&gt;##map()             2.5950   3.28390   5.760602   3.38020   3.69445  19.4527   100   list&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;##lapply()          2.2018   2.95700   6.219106   3.03605   3.62860  19.5514   100   list&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;##summarise_all()   5.0982   5.85135  10.093431   6.05940   6.87070 127.5107   100   data.frame&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;co&#34;&gt;##summarise_each()  5.7251   6.16980  10.191426   6.33065   6.72210 125.2943   100   data.frame&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;co&#34;&gt;##map_df()          2.6913   3.42045   7.694863   3.56720   3.89715 122.2030   100   tbl_df&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
+&lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&#34;mojo/signup-forms/Loader&#34;], function(L) { L.start({&#34;baseUrl&#34;:&#34;mc.us4.list-manage.com&#34;,&#34;uuid&#34;:&#34;91551f7ed29389a0de4f47665&#34;,&#34;lid&#34;:&#34;d95c503a48&#34;,&#34;uniqueMethods&#34;:true}) })&lt;/script&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
