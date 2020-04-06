@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Post | TypeThePipe</title>
-    <link>/es/categories/post/</link>
-      <atom:link href="/es/categories/post/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/es/categories/post/</link>
+      <atom:link href="https://typethepipe.com/es/categories/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Post</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Wed, 11 Mar 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://typethepipe.com/img/icon-192.png</url>
       <title>Post</title>
-      <link>/es/categories/post/</link>
+      <link>https://typethepipe.com/es/categories/post/</link>
     </image>
     
     <item>
       <title>¡10 consejos para triunfar en tu próximo Kaggle, Datathon o competición de datos!</title>
-      <link>/es/post/10-consejos-datathon-kaggle-data-science/</link>
+      <link>https://typethepipe.com/es/post/10-consejos-datathon-kaggle-data-science/</link>
       <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/es/post/10-consejos-datathon-kaggle-data-science/</guid>
+      <guid>https://typethepipe.com/es/post/10-consejos-datathon-kaggle-data-science/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -190,9 +190,9 @@ p {
     
     <item>
       <title>Visualizador de algoritmos en R! (I) Desarrollando el mapa dinámico</title>
-      <link>/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/</link>
+      <link>https://typethepipe.com/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/</guid>
+      <guid>https://typethepipe.com/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }

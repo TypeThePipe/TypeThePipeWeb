@@ -27,9 +27,9 @@ knitr::opts_chunk$set(message=FALSE)
 
 Yesterday I was playing with the new and first Thomas Neitman's CRAN package!
 
-Its documentation reminded me that more than a year ago Type The Pipe did a talk series about text mining. In one of them, we analized the reviews of the most important spanish banks' APPs.
+Its documentation reminded me that more than a year ago Type The Pipe did a talk series about text mining. In one of them, we analized the reviews of the most important spanish banking APPs.
 
-One of the plots was a lollipop chart showing the users score in the Play Store, and its deviation from the mean. I used to remember this plot cooler than it actually seems to me lol
+One of the first plots was a lollipop chart showing the ratings in the Play Store, and its deviation from the mean. I used to remember this plot cooler than it actually seems to me lol
 It's maybe telling us that we have improved our skills. Hope it.
 
 ```{r}
@@ -69,7 +69,7 @@ Well, it's quite good if you don't pay attention to the big circles or to the lo
 
 Here is where **ggcharts** shines. And it's only the 0.1.0 version. But having reusable plot templates in a quite flexible way seems such a cool idea for me.
 
-See an three-liner aprox to the above plot:
+See this three-liner approach to the above plot:
 ```{r}
 # install.packages("ggcharts") :)
 library(ggcharts)
@@ -83,7 +83,7 @@ library(ggcharts)
 
 That was so cool and quite much cleaner.
 
-There are several paths to keep improving its capabilities. So here are some enhancement. Tell him yours... **see you in his ggcharts [repo.](https://github.com/thomas-neitmann/ggcharts)!**
+There are several paths to keep improving its capabilities. So here are some possible enhancements. Ask him for yours... **see you in his ggcharts [repo](https://github.com/thomas-neitmann/ggcharts)!**
 
 <br>
 
@@ -105,7 +105,7 @@ reviews_score %>%
 # https://stackoverflow.com/questions/54973129/including-images-on-axis-label-in-an-animated-ggplot2
 ```
 
-- Easy non 0 centered in lolliplot and diverging lolliplot:
+- Non 0 centered in lolliplot and diverging lolliplot:
 ```{r, eval=FALSE}
 # center parameter?
 scale_y_continuous(labels = function(x) {x + center})

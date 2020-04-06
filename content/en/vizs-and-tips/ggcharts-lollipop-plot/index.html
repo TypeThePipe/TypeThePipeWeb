@@ -83,8 +83,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 
 <p>Yesterday I was playing with the new and first Thomas Neitman’s CRAN package!</p>
-<p>Its documentation reminded me that more than a year ago Type The Pipe did a talk series about text mining. In one of them, we analized the reviews of the most important spanish banks’ APPs.</p>
-<p>One of the plots was a lollipop chart showing the users score in the Play Store, and its deviation from the mean. I used to remember this plot cooler than it actually seems to me lol
+<p>Its documentation reminded me that more than a year ago Type The Pipe did a talk series about text mining. In one of them, we analized the reviews of the most important spanish banking APPs.</p>
+<p>One of the first plots was a lollipop chart showing the ratings in the Play Store, and its deviation from the mean. I used to remember this plot cooler than it actually seems to me lol
 It’s maybe telling us that we have improved our skills. Hope it.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(tidyverse)</a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(purrr)</a>
@@ -118,7 +118,7 @@ It’s maybe telling us that we have improved our skills. Hope it.</p>
 <p><img src="/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 <p>Well, it’s quite good if you don’t pay attention to the big circles or to the long code to write such an “standard” chart.</p>
 <p>Here is where <strong>ggcharts</strong> shines. And it’s only the 0.1.0 version. But having reusable plot templates in a quite flexible way seems such a cool idea for me.</p>
-<p>See an three-liner aprox to the above plot:</p>
+<p>See this three-liner approach to the above plot:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># install.packages(&quot;ggcharts&quot;) :)</span></a>
 <a class="sourceLine" id="cb2-2" title="2"><span class="kw">library</span>(ggcharts)</a>
 <a class="sourceLine" id="cb2-3" title="3"></a>
@@ -129,7 +129,7 @@ It’s maybe telling us that we have improved our skills. Hope it.</p>
 <a class="sourceLine" id="cb2-8" title="8"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>center_formatter) <span class="op">+</span><span class="st"> </span>custom_labs </a></code></pre></div>
 <p><img src="/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
 <p>That was so cool and quite much cleaner.</p>
-<p>There are several paths to keep improving its capabilities. So here are some enhancement. Tell him yours… <strong>see you in his ggcharts <a href="https://github.com/thomas-neitmann/ggcharts">repo.</a>!</strong></p>
+<p>There are several paths to keep improving its capabilities. So here are some possible enhancements. Ask him for yours… <strong>see you in his ggcharts <a href="https://github.com/thomas-neitmann/ggcharts">repo</a>!</strong></p>
 <p><br></p>
 <p>Proposed enhancements to R ggcharts:</p>
 <ul>
@@ -148,7 +148,7 @@ It’s maybe telling us that we have improved our skills. Hope it.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># https://gist.github.com/jonocarroll/2f9490f1f5e7c82ef8b791a4b91fc9ca</span></a>
 <a class="sourceLine" id="cb4-2" title="2"><span class="co"># https://stackoverflow.com/questions/54973129/including-images-on-axis-label-in-an-animated-ggplot2</span></a></code></pre></div>
 <ul>
-<li>Easy non 0 centered in lolliplot and diverging lolliplot:</li>
+<li>Non 0 centered in lolliplot and diverging lolliplot:</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># center parameter?</span></a>
 <a class="sourceLine" id="cb5-2" title="2"><span class="kw">scale_y_continuous</span>(<span class="dt">labels =</span> <span class="cf">function</span>(x) {x <span class="op">+</span><span class="st"> </span>center})</a></code></pre></div>
