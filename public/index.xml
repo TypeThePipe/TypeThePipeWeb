@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>TypeThePipe</title>
-    <link>https://typethepipe.com/</link>
-      <atom:link href="https://typethepipe.com/index.xml" rel="self" type="application/rss+xml" />
+    <link>/</link>
+      <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>TypeThePipe</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 01 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 28 Jun 2018 00:00:00 +0100</lastBuildDate>
     <image>
-      <url>https://typethepipe.com/img/icon-192.png</url>
+      <url>/img/icon-192.png</url>
       <title>TypeThePipe</title>
-      <link>https://typethepipe.com/</link>
+      <link>/</link>
     </image>
     
     <item>
       <title>Playing with a new R package; Welcome ggcharts!</title>
-      <link>https://typethepipe.com/vizs-and-tips/ggcharts-lollipop-plot-in-r/</link>
+      <link>/vizs-and-tips/ggcharts-lollipop-plot-in-r/</link>
       <pubDate>Wed, 01 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/ggcharts-lollipop-plot-in-r/</guid>
+      <guid>/vizs-and-tips/ggcharts-lollipop-plot-in-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -115,7 +115,7 @@ It’s maybe telling us that we have improved our skills. Hope it.&lt;/p&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-27&#34; title=&#34;27&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme_minimal&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-28&#34; title=&#34;28&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_y_continuous&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;labels=&lt;/span&gt;center_formatter) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-29&#34; title=&#34;29&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;custom_labs&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Well, it’s quite good if you don’t pay attention to the big circles or to the long code to write such an “standard” chart.&lt;/p&gt;
 &lt;p&gt;Here is where &lt;strong&gt;ggcharts&lt;/strong&gt; shines. And it’s only the 0.1.0 version. But having reusable plot templates in a quite flexible way seems such a cool idea for me.&lt;/p&gt;
 &lt;p&gt;See this three-liner approach to the above plot:&lt;/p&gt;
@@ -127,7 +127,7 @@ It’s maybe telling us that we have improved our skills. Hope it.&lt;/p&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; title=&#34;6&#34;&gt;                     &lt;span class=&#34;dt&#34;&gt;labels =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;Above&amp;quot;&lt;/span&gt;=&lt;span class=&#34;st&#34;&gt;&amp;quot;Above the mean&amp;quot;&lt;/span&gt;,&lt;span class=&#34;st&#34;&gt;&amp;quot;Below&amp;quot;&lt;/span&gt;=&lt;span class=&#34;st&#34;&gt;&amp;quot;Below the mean&amp;quot;&lt;/span&gt;), &lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; title=&#34;7&#34;&gt;                     &lt;span class=&#34;dt&#34;&gt;values =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;Above&amp;quot;&lt;/span&gt;=&lt;span class=&#34;st&#34;&gt;&amp;quot;#00ba38&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;Below&amp;quot;&lt;/span&gt;=&lt;span class=&#34;st&#34;&gt;&amp;quot;#f8766d&amp;quot;&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_y_continuous&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;labels=&lt;/span&gt;center_formatter) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;custom_labs &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;That was so cool and quite much cleaner.&lt;/p&gt;
 &lt;p&gt;There are several paths to keep improving its capabilities. So here are some possible enhancements. Ask him for yours… &lt;strong&gt;see you in his ggcharts &lt;a href=&#34;https://github.com/thomas-neitmann/ggcharts&#34;&gt;repo&lt;/a&gt;!&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
@@ -141,7 +141,7 @@ It’s maybe telling us that we have improved our skills. Hope it.&lt;/p&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_y_continuous&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;labels=&lt;/span&gt;center_formatter) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;annotate&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;segment&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;xend =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;5.3&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.55&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;yend =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.7&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;colour =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;annotate&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;text&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;5.4&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.75&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;4.05&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;custom_labs&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Easy Image axis and plot insertion:&lt;/li&gt;
 &lt;/ul&gt;
@@ -170,9 +170,9 @@ It’s maybe telling us that we have improved our skills. Hope it.&lt;/p&gt;
     
     <item>
       <title>Speed up your R scripts. A cool optimized way to load, write and store big data frames with FST package!</title>
-      <link>https://typethepipe.com/vizs-and-tips/speed-up-load-write-files-fst-package-r/</link>
+      <link>/vizs-and-tips/speed-up-load-write-files-fst-package-r/</link>
       <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/speed-up-load-write-files-fst-package-r/</guid>
+      <guid>/vizs-and-tips/speed-up-load-write-files-fst-package-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -277,9 +277,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Drop columns based on NAs percentage in R</title>
-      <link>https://typethepipe.com/vizs-and-tips/selecting-columns-based-on-nas-percentage-r-tidyverse/</link>
+      <link>/vizs-and-tips/selecting-columns-based-on-nas-percentage-r-tidyverse/</link>
       <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/selecting-columns-based-on-nas-percentage-r-tidyverse/</guid>
+      <guid>/vizs-and-tips/selecting-columns-based-on-nas-percentage-r-tidyverse/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -367,9 +367,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>10 Tips to ace your Kaggle, Datathon or any data competition!</title>
-      <link>https://typethepipe.com/post/10-tips-datathon-kaggle-data-science/</link>
+      <link>/post/10-tips-datathon-kaggle-data-science/</link>
       <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/post/10-tips-datathon-kaggle-data-science/</guid>
+      <guid>/post/10-tips-datathon-kaggle-data-science/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -526,9 +526,9 @@ p {
     
     <item>
       <title>Pathfinding Algorithms Visualizer using R! (I) Setting up the interactive grid</title>
-      <link>https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/</link>
+      <link>/post/pathfinding-algorithms-visualizer-using-r/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/</guid>
+      <guid>/post/pathfinding-algorithms-visualizer-using-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -816,9 +816,9 @@ p {
     
     <item>
       <title>Tidylog. Logging your pipelines</title>
-      <link>https://typethepipe.com/vizs-and-tips/tidylog-logging-pipelines-r/</link>
+      <link>/vizs-and-tips/tidylog-logging-pipelines-r/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/tidylog-logging-pipelines-r/</guid>
+      <guid>/vizs-and-tips/tidylog-logging-pipelines-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -927,11 +927,11 @@ However things get increasingly obscure when chaining multiple functions or deal
     
     <item>
       <title>Using summarise_at(). Weighted mean Tidyverse approach</title>
-      <link>https://typethepipe.com/vizs-and-tips/summarise_at-weighted-mean-tidyverse-r/</link>
+      <link>/vizs-and-tips/summarise_at-weighted-mean-tidyverse-r/</link>
       <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/summarise_at-weighted-mean-tidyverse-r/</guid>
+      <guid>/vizs-and-tips/summarise_at-weighted-mean-tidyverse-r/</guid>
       <description>
-&lt;script src=&#34;https://typethepipe.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
@@ -1039,25 +1039,25 @@ q2_weighted_mean
     
     <item>
       <title>List all the defined variables in Jupyter Notebooks</title>
-      <link>https://typethepipe.com/vizs-and-tips/magic-whos-method-jupyter-notebook/</link>
+      <link>/vizs-and-tips/magic-whos-method-jupyter-notebook/</link>
       <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/magic-whos-method-jupyter-notebook/</guid>
+      <guid>/vizs-and-tips/magic-whos-method-jupyter-notebook/</guid>
       <description>
 
 
 &lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;A recurrent complaint beginner users have about Jupyter Notebooks is the lack of information about the self-created environment variables. If you have this question, probably first of all you should be sure about the Jupyter Notebooks main purpose (totally different from IDEs like Spyder or Pycharm).&lt;/p&gt;
 &lt;p&gt;But in case a notebook is all what you need, you have few ways to display this information. The first and easiest one is to use the magic method &lt;strong&gt;%whos&lt;/strong&gt;
-&lt;img src=&#34;https://typethepipe.com/vizs-and-tips/magic-whos-metodo-jupyter-notebook/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;/vizs-and-tips/magic-whos-metodo-jupyter-notebook/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Two alternative ways are nbextension and Jupyter Lab variable inspector. You can find more information &lt;a href=&#34;https://stackoverflow.com/questions/37718907/variable-explorer-in-jupyter-notebook&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Skills chart using Gplot2 with R</title>
-      <link>https://typethepipe.com/vizs-and-tips/skills-plot-curriculum-r-ggplot/</link>
+      <link>/vizs-and-tips/skills-plot-curriculum-r-ggplot/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/skills-plot-curriculum-r-ggplot/</guid>
+      <guid>/vizs-and-tips/skills-plot-curriculum-r-ggplot/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1161,9 +1161,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Reordering bars in GGanimate visualization</title>
-      <link>https://typethepipe.com/vizs-and-tips/reorder-bars-r-ggplot-gganimate/</link>
+      <link>/vizs-and-tips/reorder-bars-r-ggplot-gganimate/</link>
       <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/reorder-bars-r-ggplot-gganimate/</guid>
+      <guid>/vizs-and-tips/reorder-bars-r-ggplot-gganimate/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1260,9 +1260,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Shadowing your ggplot lines. Forecasting confidence interval use case.</title>
-      <link>https://typethepipe.com/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/</link>
+      <link>/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/</link>
       <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/</guid>
+      <guid>/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1350,15 +1350,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(year, value, &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; group)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_ribbon&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;ymin =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std, &lt;span class=&#34;dt&#34;&gt;ymax =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std, &lt;span class=&#34;dt&#34;&gt;group=&lt;/span&gt;group), &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;steelblue2&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_line&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;color =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;firebrick&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/en/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Conditional Pipes</title>
-      <link>https://typethepipe.com/vizs-and-tips/conditional-pipes-r-tidyverse/</link>
+      <link>/vizs-and-tips/conditional-pipes-r-tidyverse/</link>
       <pubDate>Sat, 02 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/conditional-pipes-r-tidyverse/</guid>
+      <guid>/vizs-and-tips/conditional-pipes-r-tidyverse/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1432,9 +1432,9 @@ This way:&lt;/p&gt;
     
     <item>
       <title>Data competition platforms</title>
-      <link>https://typethepipe.com/vizs-and-tips/data-competition-platforms-beyond-kaggle/</link>
+      <link>/vizs-and-tips/data-competition-platforms-beyond-kaggle/</link>
       <pubDate>Mon, 07 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/data-competition-platforms-beyond-kaggle/</guid>
+      <guid>/vizs-and-tips/data-competition-platforms-beyond-kaggle/</guid>
       <description>
 
 
@@ -1463,9 +1463,9 @@ This way:&lt;/p&gt;
     
     <item>
       <title>Filtering a data frame by condition on multiple columns</title>
-      <link>https://typethepipe.com/vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse/</link>
+      <link>/vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse/</link>
       <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse/</guid>
+      <guid>/vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1611,9 +1611,9 @@ To be honest, for that purpose it would have been easier to simply use &lt;code&
     
     <item>
       <title>Counting NAs by column in R</title>
-      <link>https://typethepipe.com/vizs-and-tips/counting-nas-by-column-r-benchmark/</link>
+      <link>/vizs-and-tips/counting-nas-by-column-r-benchmark/</link>
       <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/counting-nas-by-column-r-benchmark/</guid>
+      <guid>/vizs-and-tips/counting-nas-by-column-r-benchmark/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1737,11 +1737,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Energy forecasting error metrics</title>
-      <link>https://typethepipe.com/post/energy-forecasting-error-metrics-data-science/</link>
+      <link>/post/energy-forecasting-error-metrics-data-science/</link>
       <pubDate>Sat, 21 Sep 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/post/energy-forecasting-error-metrics-data-science/</guid>
+      <guid>/post/energy-forecasting-error-metrics-data-science/</guid>
       <description>
-&lt;script src=&#34;https://typethepipe.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 
 &lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
@@ -2058,7 +2058,7 @@ in our case this metric isn’t optimal for several reasons:&lt;/p&gt;
 &lt;li&gt;It’s a nice alternative to NMAE since a &lt;em&gt;capacity&lt;/em&gt; value is not required.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;This formula allows for a cool graphic interpretation of the error: the numerator matchs with the yellow area whereas the denominator corresponds to the sum of the blue and yellow areas:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/energy-forecasting-error-metrics-data-science/EMAE_plot.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/en/post/energy-forecasting-error-metrics-data-science/EMAE_plot.png&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;conclusions&#34; class=&#34;section level1&#34;&gt;
@@ -2089,11 +2089,11 @@ in our case this metric isn’t optimal for several reasons:&lt;/p&gt;
     
     <item>
       <title>Symmetric MAPE is not symmetric</title>
-      <link>https://typethepipe.com/post/symmetric-mape-is-not-symmetric-data-science/</link>
+      <link>/post/symmetric-mape-is-not-symmetric-data-science/</link>
       <pubDate>Mon, 26 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/post/symmetric-mape-is-not-symmetric-data-science/</guid>
+      <guid>/post/symmetric-mape-is-not-symmetric-data-science/</guid>
       <description>
-&lt;script src=&#34;https://typethepipe.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
@@ -2396,6 +2396,24 @@ It shows, indeed, better statistical properties than others metrics:&lt;/p&gt;
 &lt;p&gt;I hope this may have brought some light into this quirky behaviour of MAPE and sMAPE.&lt;/p&gt;
 &lt;p&gt;I also wrote a more general discussion about &lt;a href=&#34;../Energy-forecasting-error-metrics&#34;&gt;forecasting error metrics&lt;/a&gt; you might want to take a look at.&lt;/p&gt;
 &lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Privacy Policy</title>
+      <link>/privacy/</link>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
+      <guid>/privacy/</guid>
+      <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Terms</title>
+      <link>/terms/</link>
+      <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
+      <guid>/terms/</guid>
+      <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
 </description>
     </item>
     

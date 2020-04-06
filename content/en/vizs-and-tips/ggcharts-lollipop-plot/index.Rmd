@@ -16,6 +16,8 @@ summary: "Thomas Neitman's ggcharts"
 authors: [carlos-vecina]
 featured: false
 draft: false
+disable_codefolding: true
+
 ---
 
 ```{r setup, include=FALSE}

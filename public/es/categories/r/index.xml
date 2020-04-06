@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R | TypeThePipe</title>
-    <link>https://typethepipe.com/es/categories/r/</link>
-      <atom:link href="https://typethepipe.com/es/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    <link>/es/categories/r/</link>
+      <atom:link href="/es/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Mon, 30 Mar 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://typethepipe.com/img/icon-192.png</url>
+      <url>/img/icon-192.png</url>
       <title>R</title>
-      <link>https://typethepipe.com/es/categories/r/</link>
+      <link>/es/categories/r/</link>
     </image>
     
     <item>
       <title>¡Aumenta la velocidad de tus scripts de R!. Optimiza la lectura, escritura y almacenamiento de grandes datasets con el paquete FST</title>
-      <link>https://typethepipe.com/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/</link>
+      <link>/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/</link>
       <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/</guid>
+      <guid>/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -122,9 +122,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Descartando columnas basándonos en su porcentaje de NAs</title>
-      <link>https://typethepipe.com/es/vizs-and-tips/descartando-columnas-porcentaje-nas-r-tidyverse/</link>
+      <link>/es/vizs-and-tips/descartando-columnas-porcentaje-nas-r-tidyverse/</link>
       <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/vizs-and-tips/descartando-columnas-porcentaje-nas-r-tidyverse/</guid>
+      <guid>/es/vizs-and-tips/descartando-columnas-porcentaje-nas-r-tidyverse/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -211,9 +211,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Visualizador de algoritmos en R! (I) Desarrollando el mapa dinámico</title>
-      <link>https://typethepipe.com/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/</link>
+      <link>/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/</guid>
+      <guid>/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -501,11 +501,11 @@ p {
     
     <item>
       <title>Dominando la función summarise_at(). Media ponderada con R en el ecosistema Tidyverse. </title>
-      <link>https://typethepipe.com/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse-r/</link>
+      <link>/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse-r/</link>
       <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse-r/</guid>
+      <guid>/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse-r/</guid>
       <description>
-&lt;script src=&#34;https://typethepipe.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
@@ -616,9 +616,9 @@ q2_weighted_mean
     
     <item>
       <title>Muestra tus habilidades o skills mediante un gráfico en R y su paquete ggplot</title>
-      <link>https://typethepipe.com/es/vizs-and-tips/skills-chart-curriculum-r-ggplot/</link>
+      <link>/es/vizs-and-tips/skills-chart-curriculum-r-ggplot/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/vizs-and-tips/skills-chart-curriculum-r-ggplot/</guid>
+      <guid>/es/vizs-and-tips/skills-chart-curriculum-r-ggplot/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -728,9 +728,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Reordenando gráficos de barras en R con GGanimate</title>
-      <link>https://typethepipe.com/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/</link>
+      <link>/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/</link>
       <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/</guid>
+      <guid>/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -844,9 +844,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Muestra los intervalos de confianza de tus predicciones mediante geom_ribbon() con R Ggplot</title>
-      <link>https://typethepipe.com/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</link>
+      <link>/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</link>
       <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</guid>
+      <guid>/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -942,15 +942,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-13&#34; title=&#34;13&#34;&gt;                  &lt;span class=&#34;dt&#34;&gt;ymax =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std,&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-14&#34; title=&#34;14&#34;&gt;                  &lt;span class=&#34;dt&#34;&gt;group=&lt;/span&gt;group),&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-15&#34; title=&#34;15&#34;&gt;              &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;steelblue2&amp;quot;&lt;/span&gt;) &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/es/vizs-and-tips/grafica-intervalos-confianza-ggplot-geom_ribbon-plot-R/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/es/vizs-and-tips/grafica-intervalos-confianza-ggplot-geom_ribbon-plot-R/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>La mejor manera de hacer recuento de NAs por columna</title>
-      <link>https://typethepipe.com/es/vizs-and-tips/recuento-nas-por-columna-en-r-comparativa/</link>
+      <link>/es/vizs-and-tips/recuento-nas-por-columna-en-r-comparativa/</link>
       <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/vizs-and-tips/recuento-nas-por-columna-en-r-comparativa/</guid>
+      <guid>/es/vizs-and-tips/recuento-nas-por-columna-en-r-comparativa/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
