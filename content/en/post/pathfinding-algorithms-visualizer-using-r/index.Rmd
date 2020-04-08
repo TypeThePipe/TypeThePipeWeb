@@ -24,8 +24,8 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, include=FALSE}
 nchar("Setting up the interactive grid with R Shiny and ggplot! Trial with some kind of random-walker algorithm.")
 ```
-<img src="./featured.png" height="250px" width="400px" />
 
+<img src="/en/post/pathfinding-algorithms-visualizer-using-r/featured.gif" height="250px" width="400px" alt="R Shiny and GGplot2 pathfinding algorithm exploring grid map. It's an interactive ggplot2 plot." />
 
 Here you can find the R code. It's an 'in progress' script. I will develop basic features like:
 
@@ -38,6 +38,8 @@ Here you can find the R code. It's an 'in progress' script. I will develop basic
 
 
 **All these features and much more in following posts! Stay tuned! **
+
+Below you can find the main code you can use to template. As I said a refactor is needed, but you can extract te core logic and functionalities of the interactive R Shiny framework:
 ```{r, eval=FALSE}
 library (shiny)
 library (ggplot2)
@@ -78,12 +80,12 @@ server <- function(input, output){
     # 5- Goal achieved
     
     # Initialize objts
-    grid_map_reactive[4,15] <- 3                                                           # obj
-    grid_map_reactive[17,3] <- 2                                                           # init
+    grid_map_reactive[4,15] <- 3                                      # obj
+    grid_map_reactive[17,3] <- 2                                      # init
     initial_step <- which(grid_map_reactive == 2,
                           arr.ind = TRUE)
-    grid_map_reactive <- ColourBorders(grid_map_reactive, 1)                               # rounding walls
-    react_df <- reactiveValues(df = grid_map_reactive,
+    grid_map_reactive <- ColourBorders(grid_map_reactive, 1)          # rounding walls
+    react_df <- reactiveValues(df = grid_map_reactive,                # reactive init
                                orig = grid_map_reactive,
                                walls = grid_map_reactive)
     
@@ -186,7 +188,7 @@ shinyApp(ui=ui, server = server)
 ```
  
  
-Here the helpers:
+Here are the helpers to construct the grid:
 
 ```{r}
 
@@ -247,6 +249,12 @@ PlotMapGrid <- function(df, matrix_x_size, matrix_y_size){
 }
 
 ```
+
+<br>
+
+You can find the Pathfinding Visualization using R series on [TypeThePipe](https://typethepipe.com)
+
+<br>
 
 <style>
 body {

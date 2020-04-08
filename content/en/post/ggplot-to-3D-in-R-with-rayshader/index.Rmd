@@ -20,8 +20,7 @@ draft: false
 
 ---
 
-<img src="./featured.gif" height="250px" width="400px" />
-
+<img src="/en/post/ggplot-to-3d-in-r-with-rayshader/featured.gif" height="250px" width="400px" alt="3D Spanish map rotating. Showing average age of eac municipy in a third dimension." />
 
 --- 
 
@@ -277,10 +276,13 @@ This is what the following function take cares on:
 render_movie("img/movie_spain.mp4",frames = 720, fps=30,zoom=0.6,fov = 30)
 ```
 
+**This way you can achieve the header 3D rotating image!**
 
+<br>
 
-<img src="./featured.gif" height="250px" width="400px" />
+You can see related posts on [TypeThePipe](https://typethepipe.com)
 
+<br>
 
 <style>
 p {

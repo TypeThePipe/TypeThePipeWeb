@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vizs | TypeThePipe</title>
-    <link>/categories/vizs/</link>
-      <atom:link href="/categories/vizs/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/categories/vizs/</link>
+      <atom:link href="https://typethepipe.com/categories/vizs/index.xml" rel="self" type="application/rss+xml" />
     <description>Vizs</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 07 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-32.png</url>
+      <url>https://typethepipe.com/img/icon-32.png</url>
       <title>Vizs</title>
-      <link>/categories/vizs/</link>
+      <link>https://typethepipe.com/categories/vizs/</link>
     </image>
     
     <item>
       <title>Skills chart using Gplot2 with R</title>
-      <link>/vizs-and-tips/skills-plot-curriculum-r-ggplot/</link>
+      <link>https://typethepipe.com/vizs-and-tips/skills-plot-curriculum-r-ggplot/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/skills-plot-curriculum-r-ggplot/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/skills-plot-curriculum-r-ggplot/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -82,8 +82,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
-&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/vizs-and-tips/skills-plot-curriculum-r-ggplot/featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; alt=&#34;R ggplot2 plot showing our skills info in and orange palette. X axis for hours spent and y-axis for skills&#39; name.&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;In this TypeThePipe tip we are bringing you a skills plot template using R and ggplot2. Maybe its a good idea to evolve this plot and add an unique skill plot to your CV. And it’s only a few lines of R code!&lt;/p&gt;
 &lt;p&gt;You can see the code below :)&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(ggplot2)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;co&#34;&gt;# library(plotly)&lt;/span&gt;&lt;/a&gt;
@@ -115,6 +116,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme_minimal&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_fill_brewer&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;palette =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;YlOrBr&amp;quot;&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;direction =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;-1&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_label&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;show_guide  =&lt;/span&gt; F, &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;y=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;400&lt;/span&gt;))                  &lt;span class=&#34;co&#34;&gt;# Use show_guide despite the warning&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Tune up your R visualizations on &lt;a href=&#34;https://typethepipe.com&#34;&gt;TypeThePipe&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
 </description>
     </item>
     

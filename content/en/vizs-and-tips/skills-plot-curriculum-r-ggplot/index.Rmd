@@ -26,9 +26,11 @@ nchar("Do you want to include a skills chart to your Data Scientist CV? We shoy 
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-<img src="./featured.png" height="250px" width="400px" />
+<img src="/en/vizs-and-tips/skills-plot-curriculum-r-ggplot/featured.png" height="250px" width="400px" alt="R ggplot2 plot showing our skills info in and orange palette. X axis for hours spent and y-axis for skills' name." />
 
 <br>
+
+In this TypeThePipe tip we are bringing you a skills plot template using R and ggplot2. Maybe its a good idea to evolve this plot and add an unique skill plot to your CV. And it's only a few lines of R code!
 
 You can see the code below :)
 
@@ -70,3 +72,8 @@ ggplot(data=skills,aes(x=reorder(Skill,-desc(Hours)), y= Hours, fill=Class, labe
 
 ```
 
+<br>
+
+Tune up your R visualizations on [TypeThePipe](https://typethepipe.com)
+
+<br>

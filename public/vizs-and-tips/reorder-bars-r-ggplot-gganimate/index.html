@@ -29,12 +29,12 @@
   
     
   
-  <meta name="description" content="Reorder your groups over time in gganimate plot.">
+  <meta name="description" content="Reorder your bar groups over time in gganimate plot.">
 
   
-  <link rel="alternate" hreflang="es" href="/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/">
+  <link rel="alternate" hreflang="es" href="https://typethepipe.com/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/">
   
-  <link rel="alternate" hreflang="en-us" href="/vizs-and-tips/reorder-bars-r-ggplot-gganimate/">
+  <link rel="alternate" hreflang="en-us" href="https://typethepipe.com/vizs-and-tips/reorder-bars-r-ggplot-gganimate/">
 
   
 
@@ -256,7 +256,7 @@
   <link rel="icon" type="image/png" href="/images/icon_hu7deb2a6bfe7da9ae71f9387d98d158da_12352_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu7deb2a6bfe7da9ae71f9387d98d158da_12352_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="/vizs-and-tips/reorder-bars-r-ggplot-gganimate/">
+  <link rel="canonical" href="https://typethepipe.com/vizs-and-tips/reorder-bars-r-ggplot-gganimate/">
 
   
   
@@ -269,10 +269,10 @@
   <meta property="twitter:card" content="summary_large_image">
   
   <meta property="og:site_name" content="TypeThePipe">
-  <meta property="og:url" content="/vizs-and-tips/reorder-bars-r-ggplot-gganimate/">
+  <meta property="og:url" content="https://typethepipe.com/vizs-and-tips/reorder-bars-r-ggplot-gganimate/">
   <meta property="og:title" content="Reordering bars in GGanimate visualization | TypeThePipe">
-  <meta property="og:description" content="Reorder your groups over time in gganimate plot."><meta property="og:image" content="/vizs-and-tips/reorder-bars-r-ggplot-gganimate/featured.gif">
-  <meta property="twitter:image" content="/vizs-and-tips/reorder-bars-r-ggplot-gganimate/featured.gif"><meta property="og:locale" content="en-us">
+  <meta property="og:description" content="Reorder your bar groups over time in gganimate plot."><meta property="og:image" content="https://typethepipe.com/vizs-and-tips/reorder-bars-r-ggplot-gganimate/featured.gif">
+  <meta property="twitter:image" content="https://typethepipe.com/vizs-and-tips/reorder-bars-r-ggplot-gganimate/featured.gif"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2019-12-16T00:00:00&#43;00:00">
@@ -488,7 +488,7 @@
             <span>English</span>
           </div>
           
-          <a class="dropdown-item" href="/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/">
+          <a class="dropdown-item" href="https://typethepipe.com/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/">
             <span>Español</span>
           </a>
           
@@ -685,7 +685,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<p><img src="featured.gif" height="250px" width="400px" /></p>
+<p><img src="/en/vizs-and-tips/gganimate_reorder_bars/featured.gif" height="250px" width="400px" alt="R gganimate and ggplot2 plot where the bars are reordering in time and also entering and leaving the screen remaining the top 4 countries." /></p>
+<p>Last week several gganimate visualizations came to my feed. Some R users were wondering about reordering gganimate and ggplot2 bars as long as them are evolving (over animation time).</p>
+<p>Then, we came up with this R viz where several bars are not only evolving and reordering over time but leaving and joining the chart. We want the top 4 countries over time, then the remaining countries in each timestamp should leave.</p>
+<p>You can achieve this effect and this kind of gganimate visualization following this commented code:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(ggplot2)</a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(gganimate)</a>
 <a class="sourceLine" id="cb1-3" title="3"><span class="kw">library</span>(tidyverse)</a>
@@ -694,23 +697,35 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-6" title="6">                              <span class="st">&quot;Sevilla&quot;</span>),<span class="dv">5</span>),</a>
 <a class="sourceLine" id="cb1-7" title="7">                   <span class="dt">Year =</span> <span class="kw">factor</span>(<span class="kw">sort</span>(<span class="kw">rep</span>(<span class="dv">2001</span><span class="op">:</span><span class="dv">2005</span>, <span class="dv">5</span>))),</a>
 <a class="sourceLine" id="cb1-8" title="8">                   <span class="dt">Value =</span> <span class="kw">runif</span>(<span class="dv">25</span>,<span class="dv">100</span>,<span class="dv">1000</span>))</a>
-<a class="sourceLine" id="cb1-9" title="9">df_evolution_data_filtered &lt;-<span class="st"> </span>df_evolution_data <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-10" title="10"><span class="st">  </span><span class="kw">group_by</span>(Year) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-11" title="11"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Rank =</span> <span class="kw">rank</span>(Value)) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-12" title="12"><span class="st">  </span><span class="kw">filter</span>(Rank <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb1-9" title="9"></a>
+<a class="sourceLine" id="cb1-10" title="10">df_evolution_data_filtered &lt;-<span class="st"> </span>df_evolution_data <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-11" title="11"><span class="st">  </span><span class="kw">group_by</span>(Year) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-12" title="12"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Rank =</span> <span class="kw">rank</span>(Value)) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Rank 1 the lowest 5 the higest</span></a>
+<a class="sourceLine" id="cb1-13" title="13"><span class="st">  </span><span class="kw">filter</span>(Rank <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span>)              <span class="co"># Top 4 countries</span></a></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">ggplot</span>(df_evolution_data_filtered) <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Rank, <span class="dt">y=</span>Value, <span class="dt">group=</span>Name, <span class="dt">fill=</span>Name), <span class="dt">width=</span><span class="fl">0.4</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Rank, <span class="dt">y=</span><span class="dv">0</span>, <span class="dt">label=</span>Name, <span class="dt">group=</span>Name), <span class="dt">hjust=</span><span class="fl">1.25</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&#39;Value&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title.y =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb2-6" title="6">        <span class="dt">axis.text.y =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb2-7" title="7">        <span class="dt">axis.ticks.y =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb2-8" title="8">        <span class="dt">plot.margin =</span> <span class="kw">unit</span>(<span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>), <span class="st">&#39;lines&#39;</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-9" title="9"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-10" title="10"><span class="st">  </span><span class="kw">coord_flip</span>(<span class="dt">clip=</span><span class="st">&#39;off&#39;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-11" title="11"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&#39;{closest_state}&#39;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-12" title="12"><span class="st">  </span><span class="kw">transition_states</span>(Year, <span class="dt">transition_length =</span> <span class="dv">1</span>, <span class="dt">state_length =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-13" title="13"><span class="st">  </span><span class="kw">exit_fly</span>(<span class="dt">x_loc =</span> <span class="dv">0</span>, <span class="dt">y_loc =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st"> </span><span class="kw">enter_fly</span>(<span class="dt">x_loc =</span> <span class="dv">0</span>, <span class="dt">y_loc =</span> <span class="dv">0</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb2-2" title="2"><span class="st">  </span><span class="kw">geom_col</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Rank, <span class="dt">y=</span>Value,</a>
+<a class="sourceLine" id="cb2-3" title="3">               <span class="dt">group=</span>Name, <span class="dt">fill=</span>Name),</a>
+<a class="sourceLine" id="cb2-4" title="4">           <span class="dt">width=</span><span class="fl">0.4</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">x=</span>Rank, <span class="dt">y=</span><span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb2-6" title="6">                <span class="dt">label=</span>Name, <span class="dt">group=</span>Name),</a>
+<a class="sourceLine" id="cb2-7" title="7">            <span class="dt">hjust=</span><span class="fl">1.25</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span><span class="kw">ylab</span>(<span class="st">&#39;Value&#39;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">axis.title.y =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb2-10" title="10">        <span class="dt">axis.text.y =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb2-11" title="11">        <span class="dt">axis.ticks.y =</span> <span class="kw">element_blank</span>(),</a>
+<a class="sourceLine" id="cb2-12" title="12">        <span class="dt">plot.margin =</span> <span class="kw">unit</span>(<span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>),</a>
+<a class="sourceLine" id="cb2-13" title="13">                           <span class="st">&#39;lines&#39;</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="st">&quot;Dark2&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="st">  </span><span class="kw">coord_flip</span>(<span class="dt">clip=</span><span class="st">&#39;off&#39;</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&#39;{closest_state}&#39;</span>) <span class="op">+</span><span class="st">             </span><span class="co"># title with the timestamp period</span></a>
+<a class="sourceLine" id="cb2-17" title="17"><span class="st">  </span><span class="kw">transition_states</span>(Year,</a>
+<a class="sourceLine" id="cb2-18" title="18">                    <span class="dt">transition_length =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb2-19" title="19">                    <span class="dt">state_length =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb2-20" title="20"><span class="st">  </span><span class="kw">exit_fly</span>(<span class="dt">x_loc =</span> <span class="dv">0</span>, <span class="dt">y_loc =</span> <span class="dv">0</span>) <span class="op">+</span><span class="st">         </span><span class="co"># chart exit animation params</span></a>
+<a class="sourceLine" id="cb2-21" title="21"><span class="st">  </span><span class="kw">enter_fly</span>(<span class="dt">x_loc =</span> <span class="dv">0</span>, <span class="dt">y_loc =</span> <span class="dv">0</span>)          <span class="co"># chart enter animation params</span></a></code></pre></div>
+<p><br></p>
+<p>Tune up your R visualizations on <a href="https://typethepipe.com">TypeThePipe</a></p>
+<p><br></p>
 
               </div>
               
@@ -732,7 +747,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/vizs-and-tips/reorder-bars-r-ggplot-gganimate/&amp;text=Reordering%20bars%20in%20GGanimate%20visualization" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://typethepipe.com/vizs-and-tips/reorder-bars-r-ggplot-gganimate/&amp;text=Reordering%20bars%20in%20GGanimate%20visualization" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -745,7 +760,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/vizs-and-tips/reorder-bars-r-ggplot-gganimate/&amp;t=Reordering%20bars%20in%20GGanimate%20visualization" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://typethepipe.com/vizs-and-tips/reorder-bars-r-ggplot-gganimate/&amp;t=Reordering%20bars%20in%20GGanimate%20visualization" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -758,7 +773,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       
       
       <li>
-        <a href="mailto:?subject=Reordering%20bars%20in%20GGanimate%20visualization&amp;body=/vizs-and-tips/reorder-bars-r-ggplot-gganimate/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Reordering%20bars%20in%20GGanimate%20visualization&amp;body=https://typethepipe.com/vizs-and-tips/reorder-bars-r-ggplot-gganimate/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -771,7 +786,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/vizs-and-tips/reorder-bars-r-ggplot-gganimate/&amp;title=Reordering%20bars%20in%20GGanimate%20visualization" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://typethepipe.com/vizs-and-tips/reorder-bars-r-ggplot-gganimate/&amp;title=Reordering%20bars%20in%20GGanimate%20visualization" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -784,7 +799,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Reordering%20bars%20in%20GGanimate%20visualization%20/vizs-and-tips/reorder-bars-r-ggplot-gganimate/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Reordering%20bars%20in%20GGanimate%20visualization%20https://typethepipe.com/vizs-and-tips/reorder-bars-r-ggplot-gganimate/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -797,7 +812,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/vizs-and-tips/reorder-bars-r-ggplot-gganimate/&amp;title=Reordering%20bars%20in%20GGanimate%20visualization" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://typethepipe.com/vizs-and-tips/reorder-bars-r-ggplot-gganimate/&amp;title=Reordering%20bars%20in%20GGanimate%20visualization" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -1057,16 +1072,6 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   
   <div class="container">
     <footer class="site-footer">
-  
-  <p class="powered-by">
-    
-      <a href="/privacy/">Privacy Policy</a>
-    
-    
-       &middot; 
-      <a href="/terms/">Terms</a>
-    
-  </p>
   
 
   <p class="powered-by">

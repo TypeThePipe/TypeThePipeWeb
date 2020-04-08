@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Post | TypeThePipe</title>
-    <link>/categories/post/</link>
-      <atom:link href="/categories/post/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/categories/post/</link>
+      <atom:link href="https://typethepipe.com/categories/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Post</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 11 Mar 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-32.png</url>
+      <url>https://typethepipe.com/img/icon-32.png</url>
       <title>Post</title>
-      <link>/categories/post/</link>
+      <link>https://typethepipe.com/categories/post/</link>
     </image>
     
     <item>
       <title>10 Tips to ace your Kaggle, Datathon or any data competition!</title>
-      <link>/post/10-tips-datathon-kaggle-data-science/</link>
+      <link>https://typethepipe.com/post/10-tips-datathon-kaggle-data-science/</link>
       <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/post/10-tips-datathon-kaggle-data-science/</guid>
+      <guid>https://typethepipe.com/post/10-tips-datathon-kaggle-data-science/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -177,9 +177,9 @@ p {
     
     <item>
       <title>Pathfinding Algorithms Visualizer using R! (I) Setting up the interactive grid</title>
-      <link>/post/pathfinding-algorithms-visualizer-using-r/</link>
+      <link>https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/post/pathfinding-algorithms-visualizer-using-r/</guid>
+      <guid>https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -245,7 +245,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
-&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/pathfinding-algorithms-visualizer-using-r/featured.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; alt=&#34;R Shiny and GGplot2 pathfinding algorithm exploring grid map. It&#39;s an interactive ggplot2 plot.&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Here you can find the R code. It’s an ‘in progress’ script. I will develop basic features like:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;ploting/rendering code refactoring;&lt;/p&gt;&lt;/li&gt;
@@ -253,6 +253,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;li&gt;&lt;p&gt;and, of course, several pathfinding algorithms and evolutionary ones.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;All these features and much more in following posts! Stay tuned! &lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Below you can find the main code you can use to template. As I said a refactor is needed, but you can extract te core logic and functionalities of the interactive R Shiny framework:&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt; (shiny)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt; (ggplot2)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt; (tidyverse)&lt;/a&gt;
@@ -292,12 +293,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-37&#34; title=&#34;37&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# 5- Goal achieved&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-38&#34; title=&#34;38&#34;&gt;    &lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-39&#34; title=&#34;39&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# Initialize objts&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-40&#34; title=&#34;40&#34;&gt;    grid_map_reactive[&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;15&lt;/span&gt;] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;                                                           &lt;span class=&#34;co&#34;&gt;# obj&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-41&#34; title=&#34;41&#34;&gt;    grid_map_reactive[&lt;span class=&#34;dv&#34;&gt;17&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;                                                           &lt;span class=&#34;co&#34;&gt;# init&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-40&#34; title=&#34;40&#34;&gt;    grid_map_reactive[&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;15&lt;/span&gt;] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;                                      &lt;span class=&#34;co&#34;&gt;# obj&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-41&#34; title=&#34;41&#34;&gt;    grid_map_reactive[&lt;span class=&#34;dv&#34;&gt;17&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;                                      &lt;span class=&#34;co&#34;&gt;# init&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-42&#34; title=&#34;42&#34;&gt;    initial_step &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;which&lt;/span&gt;(grid_map_reactive &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;,&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-43&#34; title=&#34;43&#34;&gt;                          &lt;span class=&#34;dt&#34;&gt;arr.ind =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-44&#34; title=&#34;44&#34;&gt;    grid_map_reactive &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ColourBorders&lt;/span&gt;(grid_map_reactive, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)                               &lt;span class=&#34;co&#34;&gt;# rounding walls&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-45&#34; title=&#34;45&#34;&gt;    react_df &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;reactiveValues&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;df =&lt;/span&gt; grid_map_reactive,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-44&#34; title=&#34;44&#34;&gt;    grid_map_reactive &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ColourBorders&lt;/span&gt;(grid_map_reactive, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)          &lt;span class=&#34;co&#34;&gt;# rounding walls&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-45&#34; title=&#34;45&#34;&gt;    react_df &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;reactiveValues&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;df =&lt;/span&gt; grid_map_reactive,                &lt;span class=&#34;co&#34;&gt;# reactive init&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-46&#34; title=&#34;46&#34;&gt;                               &lt;span class=&#34;dt&#34;&gt;orig =&lt;/span&gt; grid_map_reactive,&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-47&#34; title=&#34;47&#34;&gt;                               &lt;span class=&#34;dt&#34;&gt;walls =&lt;/span&gt; grid_map_reactive)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-48&#34; title=&#34;48&#34;&gt;    &lt;/a&gt;
@@ -397,7 +398,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-142&#34; title=&#34;142&#34;&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-143&#34; title=&#34;143&#34;&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-144&#34; title=&#34;144&#34;&gt;&lt;span class=&#34;kw&#34;&gt;shinyApp&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;ui=&lt;/span&gt;ui, &lt;span class=&#34;dt&#34;&gt;server =&lt;/span&gt; server)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Here the helpers:&lt;/p&gt;
+&lt;p&gt;Here are the helpers to construct the grid:&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-1&#34; title=&#34;1&#34;&gt;ColourBorders &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(df, col_value){&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-2&#34; title=&#34;2&#34;&gt;    &lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-3&#34; title=&#34;3&#34;&gt;    &lt;span class=&#34;co&#34;&gt;## Rounding walls &lt;/span&gt;&lt;/a&gt;
@@ -453,6 +454,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-53&#34; title=&#34;53&#34;&gt;        &lt;span class=&#34;kw&#34;&gt;return&lt;/span&gt;(plot)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-54&#34; title=&#34;54&#34;&gt;    &lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-55&#34; title=&#34;55&#34;&gt;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;You can find the Pathfinding Visualization using R series on &lt;a href=&#34;https://typethepipe.com&#34;&gt;TypeThePipe&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;style&gt;
 body {
 text-align: justify}
@@ -467,11 +471,11 @@ p {
     
     <item>
       <title>Energy forecasting error metrics</title>
-      <link>/post/energy-forecasting-error-metrics-data-science/</link>
+      <link>https://typethepipe.com/post/energy-forecasting-error-metrics-data-science/</link>
       <pubDate>Sat, 21 Sep 2019 00:00:00 +0000</pubDate>
-      <guid>/post/energy-forecasting-error-metrics-data-science/</guid>
+      <guid>https://typethepipe.com/post/energy-forecasting-error-metrics-data-science/</guid>
       <description>
-&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://typethepipe.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 
 &lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
@@ -788,7 +792,7 @@ in our case this metric isn’t optimal for several reasons:&lt;/p&gt;
 &lt;li&gt;It’s a nice alternative to NMAE since a &lt;em&gt;capacity&lt;/em&gt; value is not required.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;This formula allows for a cool graphic interpretation of the error: the numerator matchs with the yellow area whereas the denominator corresponds to the sum of the blue and yellow areas:&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/en/post/energy-forecasting-error-metrics-data-science/EMAE_plot.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/energy-forecasting-error-metrics-data-science/EMAE_plot.png&#34; /&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;conclusions&#34; class=&#34;section level1&#34;&gt;
@@ -819,11 +823,11 @@ in our case this metric isn’t optimal for several reasons:&lt;/p&gt;
     
     <item>
       <title>Symmetric MAPE is not symmetric</title>
-      <link>/post/symmetric-mape-is-not-symmetric-data-science/</link>
+      <link>https://typethepipe.com/post/symmetric-mape-is-not-symmetric-data-science/</link>
       <pubDate>Mon, 26 Aug 2019 00:00:00 +0000</pubDate>
-      <guid>/post/symmetric-mape-is-not-symmetric-data-science/</guid>
+      <guid>https://typethepipe.com/post/symmetric-mape-is-not-symmetric-data-science/</guid>
       <description>
-&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://typethepipe.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
@@ -1131,9 +1135,9 @@ It shows, indeed, better statistical properties than others metrics:&lt;/p&gt;
     
     <item>
       <title>Turn your GGplot to 3D animation. Awesome 2D to 3D plots in R with Rayshader</title>
-      <link>/post/ggplot-to-3d-in-r-with-rayshader/</link>
+      <link>https://typethepipe.com/post/ggplot-to-3d-in-r-with-rayshader/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>/post/ggplot-to-3d-in-r-with-rayshader/</guid>
+      <guid>https://typethepipe.com/post/ggplot-to-3d-in-r-with-rayshader/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1199,12 +1203,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
-&lt;p&gt;&lt;img src=&#34;featured.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/ggplot-to-3d-in-r-with-rayshader/featured.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; alt=&#34;3D Spanish map rotating. Showing average age of eac municipy in a third dimension.&#34; /&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;&lt;em&gt;In 7 minutes reading, You will learn how to turn your ggplot visualizations into amazing interactive 3D plots you can export or embed in HTML/Rmarkdown. Or even better, you will export as mp4 an animation rotating the figure.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;As a use case, we are going to join the Spanish demographic data and GIS map, and then visualize it&lt;/em&gt;&lt;/p&gt;
 &lt;hr /&gt;
-&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_header.png&#34; height=&#34;350px&#34; width=&#34;500px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_header.png&#34; height=&#34;350px&#34; width=&#34;500px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;&lt;strong&gt;1. Introduction&lt;/strong&gt;&lt;/h2&gt;
@@ -1217,7 +1221,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;In my view, Tyler Morgan-Wall (package’s author) hit the jackpot with the new addition of two specific functions. These are plot_gg() and render_movie(). The first one converts the ggplot to a 3D figure using one or two lines of code making it deadly-simple. The second one renders an animation in which we can set up several parameters like zoom, fps, angles and inclinations… as user-friendly as possible.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_repo.png&#34; height=&#34;770px&#34; width=&#34;770px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_repo.png&#34; height=&#34;770px&#34; width=&#34;770px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;div id=&#34;lets-try-these-new-functionalities&#34; class=&#34;section level4&#34;&gt;
 &lt;h4&gt;&lt;strong&gt;Let’s try these new functionalities! &lt;/strong&gt;&lt;/h4&gt;
@@ -1329,7 +1333,7 @@ Moreover we define the required functions and download directories.&lt;/p&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb10-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_fill_gradientn&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;colours=&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;myPalette&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                 &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Choose palette colours.&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb10-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;labs&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;fill=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Avg age&amp;quot;&lt;/span&gt;)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb10-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;kw&#34;&gt;plot&lt;/span&gt;(plot_cities)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader/ggplot_spain_map_average_age.png&#34; height=&#34;770px&#34; width=&#34;770px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/ggplot-to-3d-in-r-with-rayshader/ggplot_spain_map_average_age.png&#34; height=&#34;770px&#34; width=&#34;770px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;d-rayshader-visualization&#34; class=&#34;section level3&#34;&gt;
@@ -1338,7 +1342,7 @@ Moreover we define the required functions and download directories.&lt;/p&gt;
 &lt;p&gt;Let’s see how it works&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb11-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;plot_gg&lt;/span&gt;(plot_cities,&lt;span class=&#34;dt&#34;&gt;multicore=&lt;/span&gt;&lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;width=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;height=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;scale=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;310&lt;/span&gt;)    &lt;span class=&#34;co&#34;&gt;# Plot_gg de rayshader&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb11-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;render_snapshot&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;filename =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;3D_spain&amp;quot;&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_3D_spain_map.png&#34; height=&#34;600px&#34; width=&#34;600px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_3D_spain_map.png&#34; height=&#34;600px&#34; width=&#34;600px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;Hmm you told something about render_movie()… What if we anime it?&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
@@ -1348,7 +1352,10 @@ Moreover we define the required functions and download directories.&lt;/p&gt;
 &lt;p&gt;In the last plot, it results the correct angle election as a key point. But what if we animate it with a rotating effect?&lt;/p&gt;
 &lt;p&gt;This is what the following function take cares on:&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb12&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb12-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;render_movie&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;img/movie_spain.mp4&amp;quot;&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;frames =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;720&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;fps=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;30&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;zoom=&lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;0.6&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;fov =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;30&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;featured.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;This way you can achieve the header 3D rotating image!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;You can see related posts on &lt;a href=&#34;https://typethepipe.com&#34;&gt;TypeThePipe&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;style&gt;
 p {
   word-spacing: 3px;

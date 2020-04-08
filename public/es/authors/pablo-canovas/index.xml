@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pablo Canovas | TypeThePipe</title>
-    <link>/es/authors/pablo-canovas/</link>
-      <atom:link href="/es/authors/pablo-canovas/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/es/authors/pablo-canovas/</link>
+      <atom:link href="https://typethepipe.com/es/authors/pablo-canovas/index.xml" rel="self" type="application/rss+xml" />
     <description>Pablo Canovas</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language>
     <image>
-      <url>/img/icon-32.png</url>
+      <url>https://typethepipe.com/img/icon-32.png</url>
       <title>Pablo Canovas</title>
-      <link>/es/authors/pablo-canovas/</link>
+      <link>https://typethepipe.com/es/authors/pablo-canovas/</link>
     </image>
     
   </channel>

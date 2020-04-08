@@ -18,7 +18,7 @@ featured: false
 draft: false
 ---
 
-<img src="./featured.png" height="250px" width="400px" />
+<img src="/en/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/featured.png" height="250px" width="400px" alt="R ggplot2 plot of the forecast(in red) and it's condidence intervals(in blue) using geom_ribbon function." />
 
 <br>
 ```{r, include=FALSE}
@@ -28,6 +28,12 @@ nchar("¡Plot your confidence interval easily with R! With ggplot geom_ribbon() 
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+Yesterday I was asked to easily plot confidence intervals at ggplot2 chart. Then I came up with this shadowing ggplot2 feature called geom_ribbon(). 
+
+It's not a trivial issue as long as you need to gather your data in order to achieve a *tidy* format. When you already have this data frame, all you need is **geom:_ribbon()**
+
+By using the following commented code you are able to show up not only your point estimated forecast but its confidence or prediction intervals.
+
 ```{r, eval=FALSE, warning=FALSE, message=FALSE}
 library(tidyverse)
 huron <- data.frame(year = 1875:1972, 
@@ -36,8 +42,11 @@ huron <- data.frame(year = 1875:1972,
 
 huron %>% 
   ggplot(aes(year, value)) + 
-  geom_ribbon(aes(ymin = value - std, ymax = value + std), fill = "steelblue2") + 
-  geom_line(color = "firebrick", size = 1)
+  geom_ribbon(aes(ymin = value - std,
+                  ymax = value + std),    # shadowing cnf intervals
+              fill = "steelblue2") + 
+  geom_line(color = "firebrick",
+            size = 1)                     # point estimate
 
 ```
 
@@ -52,9 +61,16 @@ huron <- data.frame(year = rep(1875:1972,2),
 
 huron %>% 
   ggplot(aes(year, value, fill = group)) + 
-  geom_ribbon(aes(ymin = value - std, ymax = value + std, group=group), fill = "steelblue2") + 
+  geom_ribbon(aes(ymin = value - std,
+                  ymax = value + std,
+                  group=group),
+              fill = "steelblue2") + 
   geom_line(color = "firebrick", size = 1)
 
 ```
 
+<br>
 
+You can see related R visualizations and tips on [TypeThePipe](https://typethepipe.com)
+
+<br>

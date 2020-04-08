@@ -32,9 +32,9 @@
   <meta name="description" content="Setting up the interactive grid with Shiny and ggplot! Trail with some kind of random-walker algorithm.">
 
   
-  <link rel="alternate" hreflang="es" href="/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/">
+  <link rel="alternate" hreflang="es" href="https://typethepipe.com/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/">
   
-  <link rel="alternate" hreflang="en-us" href="/post/pathfinding-algorithms-visualizer-using-r/">
+  <link rel="alternate" hreflang="en-us" href="https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/">
 
   
 
@@ -256,7 +256,7 @@
   <link rel="icon" type="image/png" href="/images/icon_hu7deb2a6bfe7da9ae71f9387d98d158da_12352_32x32_fill_lanczos_center_2.png">
   <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu7deb2a6bfe7da9ae71f9387d98d158da_12352_192x192_fill_lanczos_center_2.png">
 
-  <link rel="canonical" href="/post/pathfinding-algorithms-visualizer-using-r/">
+  <link rel="canonical" href="https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/">
 
   
   
@@ -269,10 +269,10 @@
   <meta property="twitter:card" content="summary_large_image">
   
   <meta property="og:site_name" content="TypeThePipe">
-  <meta property="og:url" content="/post/pathfinding-algorithms-visualizer-using-r/">
+  <meta property="og:url" content="https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/">
   <meta property="og:title" content="Pathfinding Algorithms Visualizer using R! (I) Setting up the interactive grid | TypeThePipe">
-  <meta property="og:description" content="Setting up the interactive grid with Shiny and ggplot! Trail with some kind of random-walker algorithm."><meta property="og:image" content="/post/pathfinding-algorithms-visualizer-using-r/featured.png">
-  <meta property="twitter:image" content="/post/pathfinding-algorithms-visualizer-using-r/featured.png"><meta property="og:locale" content="en-us">
+  <meta property="og:description" content="Setting up the interactive grid with Shiny and ggplot! Trail with some kind of random-walker algorithm."><meta property="og:image" content="https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/featured.png">
+  <meta property="twitter:image" content="https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/featured.png"><meta property="og:locale" content="en-us">
   
     
       <meta property="article:published_time" content="2020-01-21T00:00:00&#43;00:00">
@@ -301,12 +301,12 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "/post/pathfinding-algorithms-visualizer-using-r/"
+    "@id": "https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/"
   },
   "headline": "Pathfinding Algorithms Visualizer using R! (I) Setting up the interactive grid",
   
   "image": [
-    "/post/pathfinding-algorithms-visualizer-using-r/featured.png"
+    "https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/featured.png"
   ],
   
   "datePublished": "2020-01-21T00:00:00Z",
@@ -322,7 +322,7 @@
     "name": "TypeThePipe",
     "logo": {
       "@type": "ImageObject",
-      "url": "/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_192x192_fit_lanczos_2.png"
+      "url": "https://typethepipe.com/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_192x192_fit_lanczos_2.png"
     }
   },
   "description": "Setting up the interactive grid with Shiny and ggplot! Trail with some kind of random-walker algorithm."
@@ -535,7 +535,7 @@
             <span>English</span>
           </div>
           
-          <a class="dropdown-item" href="/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/">
+          <a class="dropdown-item" href="https://typethepipe.com/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/">
             <span>Español</span>
           </a>
           
@@ -737,7 +737,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<p><img src="featured.png" height="250px" width="400px" /></p>
+<p><img src="/en/post/pathfinding-algorithms-visualizer-using-r/featured.gif" height="250px" width="400px" alt="R Shiny and GGplot2 pathfinding algorithm exploring grid map. It's an interactive ggplot2 plot." /></p>
 <p>Here you can find the R code. It’s an ‘in progress’ script. I will develop basic features like:</p>
 <ul>
 <li><p>ploting/rendering code refactoring;</p></li>
@@ -745,6 +745,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <li><p>and, of course, several pathfinding algorithms and evolutionary ones.</p></li>
 </ul>
 <p><strong>All these features and much more in following posts! Stay tuned! </strong></p>
+<p>Below you can find the main code you can use to template. As I said a refactor is needed, but you can extract te core logic and functionalities of the interactive R Shiny framework:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span> (shiny)</a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span> (ggplot2)</a>
 <a class="sourceLine" id="cb1-3" title="3"><span class="kw">library</span> (tidyverse)</a>
@@ -784,12 +785,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-37" title="37">    <span class="co"># 5- Goal achieved</span></a>
 <a class="sourceLine" id="cb1-38" title="38">    </a>
 <a class="sourceLine" id="cb1-39" title="39">    <span class="co"># Initialize objts</span></a>
-<a class="sourceLine" id="cb1-40" title="40">    grid_map_reactive[<span class="dv">4</span>,<span class="dv">15</span>] &lt;-<span class="st"> </span><span class="dv">3</span>                                                           <span class="co"># obj</span></a>
-<a class="sourceLine" id="cb1-41" title="41">    grid_map_reactive[<span class="dv">17</span>,<span class="dv">3</span>] &lt;-<span class="st"> </span><span class="dv">2</span>                                                           <span class="co"># init</span></a>
+<a class="sourceLine" id="cb1-40" title="40">    grid_map_reactive[<span class="dv">4</span>,<span class="dv">15</span>] &lt;-<span class="st"> </span><span class="dv">3</span>                                      <span class="co"># obj</span></a>
+<a class="sourceLine" id="cb1-41" title="41">    grid_map_reactive[<span class="dv">17</span>,<span class="dv">3</span>] &lt;-<span class="st"> </span><span class="dv">2</span>                                      <span class="co"># init</span></a>
 <a class="sourceLine" id="cb1-42" title="42">    initial_step &lt;-<span class="st"> </span><span class="kw">which</span>(grid_map_reactive <span class="op">==</span><span class="st"> </span><span class="dv">2</span>,</a>
 <a class="sourceLine" id="cb1-43" title="43">                          <span class="dt">arr.ind =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb1-44" title="44">    grid_map_reactive &lt;-<span class="st"> </span><span class="kw">ColourBorders</span>(grid_map_reactive, <span class="dv">1</span>)                               <span class="co"># rounding walls</span></a>
-<a class="sourceLine" id="cb1-45" title="45">    react_df &lt;-<span class="st"> </span><span class="kw">reactiveValues</span>(<span class="dt">df =</span> grid_map_reactive,</a>
+<a class="sourceLine" id="cb1-44" title="44">    grid_map_reactive &lt;-<span class="st"> </span><span class="kw">ColourBorders</span>(grid_map_reactive, <span class="dv">1</span>)          <span class="co"># rounding walls</span></a>
+<a class="sourceLine" id="cb1-45" title="45">    react_df &lt;-<span class="st"> </span><span class="kw">reactiveValues</span>(<span class="dt">df =</span> grid_map_reactive,                <span class="co"># reactive init</span></a>
 <a class="sourceLine" id="cb1-46" title="46">                               <span class="dt">orig =</span> grid_map_reactive,</a>
 <a class="sourceLine" id="cb1-47" title="47">                               <span class="dt">walls =</span> grid_map_reactive)</a>
 <a class="sourceLine" id="cb1-48" title="48">    </a>
@@ -889,7 +890,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb1-142" title="142"></a>
 <a class="sourceLine" id="cb1-143" title="143"></a>
 <a class="sourceLine" id="cb1-144" title="144"><span class="kw">shinyApp</span>(<span class="dt">ui=</span>ui, <span class="dt">server =</span> server)</a></code></pre></div>
-<p>Here the helpers:</p>
+<p>Here are the helpers to construct the grid:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">ColourBorders &lt;-<span class="st"> </span><span class="cf">function</span>(df, col_value){</a>
 <a class="sourceLine" id="cb2-2" title="2">    </a>
 <a class="sourceLine" id="cb2-3" title="3">    <span class="co">## Rounding walls </span></a>
@@ -945,6 +946,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb2-53" title="53">        <span class="kw">return</span>(plot)</a>
 <a class="sourceLine" id="cb2-54" title="54">    </a>
 <a class="sourceLine" id="cb2-55" title="55">}</a></code></pre></div>
+<p><br></p>
+<p>You can find the Pathfinding Visualization using R series on <a href="https://typethepipe.com">TypeThePipe</a></p>
+<p><br></p>
 <style>
 body {
 text-align: justify}
@@ -975,7 +979,7 @@ p {
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=/post/pathfinding-algorithms-visualizer-using-r/&amp;text=Pathfinding%20Algorithms%20Visualizer%20using%20R!%20%28I%29%20Setting%20up%20the%20interactive%20grid" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/&amp;text=Pathfinding%20Algorithms%20Visualizer%20using%20R!%20%28I%29%20Setting%20up%20the%20interactive%20grid" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -988,7 +992,7 @@ p {
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=/post/pathfinding-algorithms-visualizer-using-r/&amp;t=Pathfinding%20Algorithms%20Visualizer%20using%20R!%20%28I%29%20Setting%20up%20the%20interactive%20grid" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/&amp;t=Pathfinding%20Algorithms%20Visualizer%20using%20R!%20%28I%29%20Setting%20up%20the%20interactive%20grid" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -1001,7 +1005,7 @@ p {
       
       
       <li>
-        <a href="mailto:?subject=Pathfinding%20Algorithms%20Visualizer%20using%20R!%20%28I%29%20Setting%20up%20the%20interactive%20grid&amp;body=/post/pathfinding-algorithms-visualizer-using-r/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Pathfinding%20Algorithms%20Visualizer%20using%20R!%20%28I%29%20Setting%20up%20the%20interactive%20grid&amp;body=https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -1014,7 +1018,7 @@ p {
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=/post/pathfinding-algorithms-visualizer-using-r/&amp;title=Pathfinding%20Algorithms%20Visualizer%20using%20R!%20%28I%29%20Setting%20up%20the%20interactive%20grid" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/&amp;title=Pathfinding%20Algorithms%20Visualizer%20using%20R!%20%28I%29%20Setting%20up%20the%20interactive%20grid" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -1027,7 +1031,7 @@ p {
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Pathfinding%20Algorithms%20Visualizer%20using%20R!%20%28I%29%20Setting%20up%20the%20interactive%20grid%20/post/pathfinding-algorithms-visualizer-using-r/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Pathfinding%20Algorithms%20Visualizer%20using%20R!%20%28I%29%20Setting%20up%20the%20interactive%20grid%20https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -1040,7 +1044,7 @@ p {
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=/post/pathfinding-algorithms-visualizer-using-r/&amp;title=Pathfinding%20Algorithms%20Visualizer%20using%20R!%20%28I%29%20Setting%20up%20the%20interactive%20grid" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/&amp;title=Pathfinding%20Algorithms%20Visualizer%20using%20R!%20%28I%29%20Setting%20up%20the%20interactive%20grid" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -1300,16 +1304,6 @@ p {
   
   <div class="container">
     <footer class="site-footer">
-  
-  <p class="powered-by">
-    
-      <a href="/privacy/">Privacy Policy</a>
-    
-    
-       &middot; 
-      <a href="/terms/">Terms</a>
-    
-  </p>
   
 
   <p class="powered-by">

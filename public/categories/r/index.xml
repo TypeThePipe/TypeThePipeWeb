@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R | TypeThePipe</title>
-    <link>/categories/r/</link>
-      <atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/categories/r/</link>
+      <atom:link href="https://typethepipe.com/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 01 Apr 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-32.png</url>
+      <url>https://typethepipe.com/img/icon-32.png</url>
       <title>R</title>
-      <link>/categories/r/</link>
+      <link>https://typethepipe.com/categories/r/</link>
     </image>
     
     <item>
       <title>Playing with a new R package; Welcome ggcharts!</title>
-      <link>/vizs-and-tips/ggcharts-lollipop-plot-in-r/</link>
+      <link>https://typethepipe.com/vizs-and-tips/ggcharts-lollipop-plot-in-r/</link>
       <pubDate>Wed, 01 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/ggcharts-lollipop-plot-in-r/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/ggcharts-lollipop-plot-in-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -115,7 +115,7 @@ It’s maybe telling us that we have improved our skills. Hope it.&lt;/p&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-27&#34; title=&#34;27&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme_minimal&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-28&#34; title=&#34;28&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_y_continuous&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;labels=&lt;/span&gt;center_formatter) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-29&#34; title=&#34;29&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;custom_labs&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Well, it’s quite good if you don’t pay attention to the big circles or to the long code to write such an “standard” chart.&lt;/p&gt;
 &lt;p&gt;Here is where &lt;strong&gt;ggcharts&lt;/strong&gt; shines. And it’s only the 0.1.0 version. But having reusable plot templates in a quite flexible way seems such a cool idea for me.&lt;/p&gt;
 &lt;p&gt;See this three-liner approach to the above plot:&lt;/p&gt;
@@ -127,7 +127,7 @@ It’s maybe telling us that we have improved our skills. Hope it.&lt;/p&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; title=&#34;6&#34;&gt;                     &lt;span class=&#34;dt&#34;&gt;labels =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;Above&amp;quot;&lt;/span&gt;=&lt;span class=&#34;st&#34;&gt;&amp;quot;Above the mean&amp;quot;&lt;/span&gt;,&lt;span class=&#34;st&#34;&gt;&amp;quot;Below&amp;quot;&lt;/span&gt;=&lt;span class=&#34;st&#34;&gt;&amp;quot;Below the mean&amp;quot;&lt;/span&gt;), &lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; title=&#34;7&#34;&gt;                     &lt;span class=&#34;dt&#34;&gt;values =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;Above&amp;quot;&lt;/span&gt;=&lt;span class=&#34;st&#34;&gt;&amp;quot;#00ba38&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;Below&amp;quot;&lt;/span&gt;=&lt;span class=&#34;st&#34;&gt;&amp;quot;#f8766d&amp;quot;&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_y_continuous&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;labels=&lt;/span&gt;center_formatter) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;custom_labs &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;That was so cool and quite much cleaner.&lt;/p&gt;
 &lt;p&gt;There are several paths to keep improving its capabilities. So here are some possible enhancements. Ask him for yours… &lt;strong&gt;see you in his ggcharts &lt;a href=&#34;https://github.com/thomas-neitmann/ggcharts&#34;&gt;repo&lt;/a&gt;!&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
@@ -141,7 +141,7 @@ It’s maybe telling us that we have improved our skills. Hope it.&lt;/p&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_y_continuous&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;labels=&lt;/span&gt;center_formatter) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;annotate&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;segment&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;xend =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;5.3&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.55&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;yend =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.7&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;colour =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;annotate&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;text&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;5.4&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.75&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;4.05&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;custom_labs&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Easy Image axis and plot insertion:&lt;/li&gt;
 &lt;/ul&gt;
@@ -172,9 +172,9 @@ It’s maybe telling us that we have improved our skills. Hope it.&lt;/p&gt;
     
     <item>
       <title>Speed up your R scripts. A cool optimized way to load, write and store big data frames with FST package!</title>
-      <link>/vizs-and-tips/speed-up-load-write-files-fst-package-r/</link>
+      <link>https://typethepipe.com/vizs-and-tips/speed-up-load-write-files-fst-package-r/</link>
       <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/speed-up-load-write-files-fst-package-r/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/speed-up-load-write-files-fst-package-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -240,7 +240,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
-&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;300px&#34; width=&#34;600px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/vizs-and-tips/speed-up-load-write-files-fst-package-r/featured.png&#34; height=&#34;300px&#34; width=&#34;600px&#34; alt=&#34;R Code Snippet Bencmarking Writting and Loading functions. Fst vs Readr vs Base R&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Are you trying to save and load your DL model or a big dataset in R? Here we show you a performance boost to your scripts and reduction in disk memory storage with the FST CRAN package. We are going to benchmark it with R base functions (csv and RDS extensions) and another great package like readr:&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;big_dataset &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;nrow&lt;/span&gt;() &lt;span class=&#34;co&#34;&gt;# 700k rows, 15 cols(8 factor, 4int, 3 logi)&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -272,6 +272,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Are you going to add FST to your R projects toolbox too?&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;See related useful tips on &lt;a href=&#34;https://typethepipe.com&#34;&gt;TypeThePipe&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
 &lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&#34;mojo/signup-forms/Loader&#34;], function(L) { L.start({&#34;baseUrl&#34;:&#34;mc.us4.list-manage.com&#34;,&#34;uuid&#34;:&#34;91551f7ed29389a0de4f47665&#34;,&#34;lid&#34;:&#34;d95c503a48&#34;,&#34;uniqueMethods&#34;:true}) })&lt;/script&gt;
 </description>
@@ -279,9 +281,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Drop columns based on NAs percentage in R</title>
-      <link>/vizs-and-tips/selecting-columns-based-on-nas-percentage-r-tidyverse/</link>
+      <link>https://typethepipe.com/vizs-and-tips/selecting-columns-based-on-nas-percentage-r-tidyverse/</link>
       <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/selecting-columns-based-on-nas-percentage-r-tidyverse/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/selecting-columns-based-on-nas-percentage-r-tidyverse/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -369,9 +371,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Pathfinding Algorithms Visualizer using R! (I) Setting up the interactive grid</title>
-      <link>/post/pathfinding-algorithms-visualizer-using-r/</link>
+      <link>https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/post/pathfinding-algorithms-visualizer-using-r/</guid>
+      <guid>https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -437,7 +439,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
-&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/pathfinding-algorithms-visualizer-using-r/featured.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; alt=&#34;R Shiny and GGplot2 pathfinding algorithm exploring grid map. It&#39;s an interactive ggplot2 plot.&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Here you can find the R code. It’s an ‘in progress’ script. I will develop basic features like:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;ploting/rendering code refactoring;&lt;/p&gt;&lt;/li&gt;
@@ -445,6 +447,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;li&gt;&lt;p&gt;and, of course, several pathfinding algorithms and evolutionary ones.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;All these features and much more in following posts! Stay tuned! &lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Below you can find the main code you can use to template. As I said a refactor is needed, but you can extract te core logic and functionalities of the interactive R Shiny framework:&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt; (shiny)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt; (ggplot2)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt; (tidyverse)&lt;/a&gt;
@@ -484,12 +487,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-37&#34; title=&#34;37&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# 5- Goal achieved&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-38&#34; title=&#34;38&#34;&gt;    &lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-39&#34; title=&#34;39&#34;&gt;    &lt;span class=&#34;co&#34;&gt;# Initialize objts&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-40&#34; title=&#34;40&#34;&gt;    grid_map_reactive[&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;15&lt;/span&gt;] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;                                                           &lt;span class=&#34;co&#34;&gt;# obj&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-41&#34; title=&#34;41&#34;&gt;    grid_map_reactive[&lt;span class=&#34;dv&#34;&gt;17&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;                                                           &lt;span class=&#34;co&#34;&gt;# init&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-40&#34; title=&#34;40&#34;&gt;    grid_map_reactive[&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;15&lt;/span&gt;] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;                                      &lt;span class=&#34;co&#34;&gt;# obj&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-41&#34; title=&#34;41&#34;&gt;    grid_map_reactive[&lt;span class=&#34;dv&#34;&gt;17&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;] &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;                                      &lt;span class=&#34;co&#34;&gt;# init&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-42&#34; title=&#34;42&#34;&gt;    initial_step &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;which&lt;/span&gt;(grid_map_reactive &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;,&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-43&#34; title=&#34;43&#34;&gt;                          &lt;span class=&#34;dt&#34;&gt;arr.ind =&lt;/span&gt; &lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-44&#34; title=&#34;44&#34;&gt;    grid_map_reactive &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ColourBorders&lt;/span&gt;(grid_map_reactive, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)                               &lt;span class=&#34;co&#34;&gt;# rounding walls&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-45&#34; title=&#34;45&#34;&gt;    react_df &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;reactiveValues&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;df =&lt;/span&gt; grid_map_reactive,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-44&#34; title=&#34;44&#34;&gt;    grid_map_reactive &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ColourBorders&lt;/span&gt;(grid_map_reactive, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)          &lt;span class=&#34;co&#34;&gt;# rounding walls&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-45&#34; title=&#34;45&#34;&gt;    react_df &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;reactiveValues&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;df =&lt;/span&gt; grid_map_reactive,                &lt;span class=&#34;co&#34;&gt;# reactive init&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-46&#34; title=&#34;46&#34;&gt;                               &lt;span class=&#34;dt&#34;&gt;orig =&lt;/span&gt; grid_map_reactive,&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-47&#34; title=&#34;47&#34;&gt;                               &lt;span class=&#34;dt&#34;&gt;walls =&lt;/span&gt; grid_map_reactive)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-48&#34; title=&#34;48&#34;&gt;    &lt;/a&gt;
@@ -589,7 +592,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-142&#34; title=&#34;142&#34;&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-143&#34; title=&#34;143&#34;&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-144&#34; title=&#34;144&#34;&gt;&lt;span class=&#34;kw&#34;&gt;shinyApp&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;ui=&lt;/span&gt;ui, &lt;span class=&#34;dt&#34;&gt;server =&lt;/span&gt; server)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;Here the helpers:&lt;/p&gt;
+&lt;p&gt;Here are the helpers to construct the grid:&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-1&#34; title=&#34;1&#34;&gt;ColourBorders &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(df, col_value){&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-2&#34; title=&#34;2&#34;&gt;    &lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-3&#34; title=&#34;3&#34;&gt;    &lt;span class=&#34;co&#34;&gt;## Rounding walls &lt;/span&gt;&lt;/a&gt;
@@ -645,6 +648,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-53&#34; title=&#34;53&#34;&gt;        &lt;span class=&#34;kw&#34;&gt;return&lt;/span&gt;(plot)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-54&#34; title=&#34;54&#34;&gt;    &lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-55&#34; title=&#34;55&#34;&gt;}&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;You can find the Pathfinding Visualization using R series on &lt;a href=&#34;https://typethepipe.com&#34;&gt;TypeThePipe&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;style&gt;
 body {
 text-align: justify}
@@ -659,9 +665,9 @@ p {
     
     <item>
       <title>Tidylog. Logging your pipelines</title>
-      <link>/vizs-and-tips/tidylog-logging-pipelines-r/</link>
+      <link>https://typethepipe.com/vizs-and-tips/tidylog-logging-pipelines-r/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/tidylog-logging-pipelines-r/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/tidylog-logging-pipelines-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -770,11 +776,11 @@ However things get increasingly obscure when chaining multiple functions or deal
     
     <item>
       <title>Using summarise_at(). Weighted mean Tidyverse approach</title>
-      <link>/vizs-and-tips/summarise_at-weighted-mean-tidyverse-r/</link>
+      <link>https://typethepipe.com/vizs-and-tips/summarise_at-weighted-mean-tidyverse-r/</link>
       <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/summarise_at-weighted-mean-tidyverse-r/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/summarise_at-weighted-mean-tidyverse-r/</guid>
       <description>
-&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://typethepipe.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
@@ -882,9 +888,9 @@ q2_weighted_mean
     
     <item>
       <title>Skills chart using Gplot2 with R</title>
-      <link>/vizs-and-tips/skills-plot-curriculum-r-ggplot/</link>
+      <link>https://typethepipe.com/vizs-and-tips/skills-plot-curriculum-r-ggplot/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/skills-plot-curriculum-r-ggplot/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/skills-plot-curriculum-r-ggplot/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -950,8 +956,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
-&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/vizs-and-tips/skills-plot-curriculum-r-ggplot/featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; alt=&#34;R ggplot2 plot showing our skills info in and orange palette. X axis for hours spent and y-axis for skills&#39; name.&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;In this TypeThePipe tip we are bringing you a skills plot template using R and ggplot2. Maybe its a good idea to evolve this plot and add an unique skill plot to your CV. And it’s only a few lines of R code!&lt;/p&gt;
 &lt;p&gt;You can see the code below :)&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(ggplot2)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;co&#34;&gt;# library(plotly)&lt;/span&gt;&lt;/a&gt;
@@ -983,14 +990,17 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme_minimal&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_fill_brewer&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;palette =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;YlOrBr&amp;quot;&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;direction =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;-1&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_label&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;show_guide  =&lt;/span&gt; F, &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;y=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;400&lt;/span&gt;))                  &lt;span class=&#34;co&#34;&gt;# Use show_guide despite the warning&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Tune up your R visualizations on &lt;a href=&#34;https://typethepipe.com&#34;&gt;TypeThePipe&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Reordering bars in GGanimate visualization</title>
-      <link>/vizs-and-tips/reorder-bars-r-ggplot-gganimate/</link>
+      <link>https://typethepipe.com/vizs-and-tips/reorder-bars-r-ggplot-gganimate/</link>
       <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/reorder-bars-r-ggplot-gganimate/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/reorder-bars-r-ggplot-gganimate/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1056,7 +1066,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
-&lt;p&gt;&lt;img src=&#34;featured.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/vizs-and-tips/gganimate_reorder_bars/featured.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; alt=&#34;R gganimate and ggplot2 plot where the bars are reordering in time and also entering and leaving the screen remaining the top 4 countries.&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Last week several gganimate visualizations came to my feed. Some R users were wondering about reordering gganimate and ggplot2 bars as long as them are evolving (over animation time).&lt;/p&gt;
+&lt;p&gt;Then, we came up with this R viz where several bars are not only evolving and reordering over time but leaving and joining the chart. We want the top 4 countries over time, then the remaining countries in each timestamp should leave.&lt;/p&gt;
+&lt;p&gt;You can achieve this effect and this kind of gganimate visualization following this commented code:&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(ggplot2)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(gganimate)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
@@ -1065,31 +1078,43 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-6&#34; title=&#34;6&#34;&gt;                              &lt;span class=&#34;st&#34;&gt;&amp;quot;Sevilla&amp;quot;&lt;/span&gt;),&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;),&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-7&#34; title=&#34;7&#34;&gt;                   &lt;span class=&#34;dt&#34;&gt;Year =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;factor&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;sort&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;rep&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;2001&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2005&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;))),&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-8&#34; title=&#34;8&#34;&gt;                   &lt;span class=&#34;dt&#34;&gt;Value =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;runif&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;25&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1000&lt;/span&gt;))&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-9&#34; title=&#34;9&#34;&gt;df_evolution_data_filtered &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;df_evolution_data &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(Year) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-11&#34; title=&#34;11&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;Rank =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;rank&lt;/span&gt;(Value)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-12&#34; title=&#34;12&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(Rank &lt;span class=&#34;op&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-9&#34; title=&#34;9&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-10&#34; title=&#34;10&#34;&gt;df_evolution_data_filtered &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;df_evolution_data &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-11&#34; title=&#34;11&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(Year) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-12&#34; title=&#34;12&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;Rank =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;rank&lt;/span&gt;(Value)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Rank 1 the lowest 5 the higest&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-13&#34; title=&#34;13&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(Rank &lt;span class=&#34;op&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;)              &lt;span class=&#34;co&#34;&gt;# Top 4 countries&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;ggplot&lt;/span&gt;(df_evolution_data_filtered) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_col&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x=&lt;/span&gt;Rank, &lt;span class=&#34;dt&#34;&gt;y=&lt;/span&gt;Value, &lt;span class=&#34;dt&#34;&gt;group=&lt;/span&gt;Name, &lt;span class=&#34;dt&#34;&gt;fill=&lt;/span&gt;Name), &lt;span class=&#34;dt&#34;&gt;width=&lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;0.4&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_text&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x=&lt;/span&gt;Rank, &lt;span class=&#34;dt&#34;&gt;y=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;label=&lt;/span&gt;Name, &lt;span class=&#34;dt&#34;&gt;group=&lt;/span&gt;Name), &lt;span class=&#34;dt&#34;&gt;hjust=&lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;1.25&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme_minimal&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ylab&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;Value&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;axis.title.y =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;element_blank&lt;/span&gt;(),&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; title=&#34;6&#34;&gt;        &lt;span class=&#34;dt&#34;&gt;axis.text.y =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;element_blank&lt;/span&gt;(),&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; title=&#34;7&#34;&gt;        &lt;span class=&#34;dt&#34;&gt;axis.ticks.y =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;element_blank&lt;/span&gt;(),&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;        &lt;span class=&#34;dt&#34;&gt;plot.margin =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;unit&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;), &lt;span class=&#34;st&#34;&gt;&amp;#39;lines&amp;#39;&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_fill_brewer&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;palette=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Dark2&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;coord_flip&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;clip=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;off&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-11&#34; title=&#34;11&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ggtitle&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;{closest_state}&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-12&#34; title=&#34;12&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;transition_states&lt;/span&gt;(Year, &lt;span class=&#34;dt&#34;&gt;transition_length =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;state_length =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-13&#34; title=&#34;13&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;exit_fly&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x_loc =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;y_loc =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;enter_fly&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x_loc =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;y_loc =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_col&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x=&lt;/span&gt;Rank, &lt;span class=&#34;dt&#34;&gt;y=&lt;/span&gt;Value,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-3&#34; title=&#34;3&#34;&gt;               &lt;span class=&#34;dt&#34;&gt;group=&lt;/span&gt;Name, &lt;span class=&#34;dt&#34;&gt;fill=&lt;/span&gt;Name),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-4&#34; title=&#34;4&#34;&gt;           &lt;span class=&#34;dt&#34;&gt;width=&lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;0.4&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_text&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x=&lt;/span&gt;Rank, &lt;span class=&#34;dt&#34;&gt;y=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; title=&#34;6&#34;&gt;                &lt;span class=&#34;dt&#34;&gt;label=&lt;/span&gt;Name, &lt;span class=&#34;dt&#34;&gt;group=&lt;/span&gt;Name),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; title=&#34;7&#34;&gt;            &lt;span class=&#34;dt&#34;&gt;hjust=&lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;1.25&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme_minimal&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ylab&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;Value&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;axis.title.y =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;element_blank&lt;/span&gt;(),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-10&#34; title=&#34;10&#34;&gt;        &lt;span class=&#34;dt&#34;&gt;axis.text.y =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;element_blank&lt;/span&gt;(),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-11&#34; title=&#34;11&#34;&gt;        &lt;span class=&#34;dt&#34;&gt;axis.ticks.y =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;element_blank&lt;/span&gt;(),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-12&#34; title=&#34;12&#34;&gt;        &lt;span class=&#34;dt&#34;&gt;plot.margin =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;unit&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-13&#34; title=&#34;13&#34;&gt;                           &lt;span class=&#34;st&#34;&gt;&amp;#39;lines&amp;#39;&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-14&#34; title=&#34;14&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_fill_brewer&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;palette=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Dark2&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-15&#34; title=&#34;15&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;coord_flip&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;clip=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;off&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-16&#34; title=&#34;16&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ggtitle&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;{closest_state}&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;             &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# title with the timestamp period&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-17&#34; title=&#34;17&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;transition_states&lt;/span&gt;(Year,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-18&#34; title=&#34;18&#34;&gt;                    &lt;span class=&#34;dt&#34;&gt;transition_length =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-19&#34; title=&#34;19&#34;&gt;                    &lt;span class=&#34;dt&#34;&gt;state_length =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-20&#34; title=&#34;20&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;exit_fly&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x_loc =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;y_loc =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;         &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# chart exit animation params&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-21&#34; title=&#34;21&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;enter_fly&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;x_loc =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;y_loc =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;)          &lt;span class=&#34;co&#34;&gt;# chart enter animation params&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Tune up your R visualizations on &lt;a href=&#34;https://typethepipe.com&#34;&gt;TypeThePipe&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Shadowing your ggplot lines. Forecasting confidence interval use case.</title>
-      <link>/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/</link>
+      <link>https://typethepipe.com/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/</link>
       <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1155,8 +1180,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
-&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; alt=&#34;R ggplot2 plot of the forecast(in red) and it&#39;s condidence intervals(in blue) using geom_ribbon function.&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Yesterday I was asked to easily plot confidence intervals at ggplot2 chart. Then I came up with this shadowing ggplot2 feature called geom_ribbon().&lt;/p&gt;
+&lt;p&gt;It’s not a trivial issue as long as you need to gather your data in order to achieve a &lt;em&gt;tidy&lt;/em&gt; format. When you already have this data frame, all you need is **geom:_ribbon()**&lt;/p&gt;
+&lt;p&gt;By using the following commented code you are able to show up not only your point estimated forecast but its confidence or prediction intervals.&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;huron &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;data.frame&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;year =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1875&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1972&lt;/span&gt;, &lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;                    &lt;span class=&#34;dt&#34;&gt;value =&lt;/span&gt; LakeHuron,&lt;/a&gt;
@@ -1164,8 +1192,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-5&#34; title=&#34;5&#34;&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-6&#34; title=&#34;6&#34;&gt;huron &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(year, value)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_ribbon&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;ymin =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std, &lt;span class=&#34;dt&#34;&gt;ymax =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std), &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;steelblue2&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_line&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;color =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;firebrick&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_ribbon&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;ymin =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-9&#34; title=&#34;9&#34;&gt;                  &lt;span class=&#34;dt&#34;&gt;ymax =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std),    &lt;span class=&#34;co&#34;&gt;# shadowing cnf intervals&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-10&#34; title=&#34;10&#34;&gt;              &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;steelblue2&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-11&#34; title=&#34;11&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_line&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;color =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;firebrick&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-12&#34; title=&#34;12&#34;&gt;            &lt;span class=&#34;dt&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)                     &lt;span class=&#34;co&#34;&gt;# point estimate&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;For a multi-line plot, you should include the colour and group aesthetic as follows:&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-2&#34; title=&#34;2&#34;&gt;huron &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;data.frame&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;year =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;rep&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;1875&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1972&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;), &lt;/a&gt;
@@ -1175,17 +1206,23 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; title=&#34;6&#34;&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; title=&#34;7&#34;&gt;huron &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(year, value, &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; group)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_ribbon&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;ymin =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std, &lt;span class=&#34;dt&#34;&gt;ymax =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std, &lt;span class=&#34;dt&#34;&gt;group=&lt;/span&gt;group), &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;steelblue2&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_line&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;color =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;firebrick&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/en/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_ribbon&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;ymin =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-10&#34; title=&#34;10&#34;&gt;                  &lt;span class=&#34;dt&#34;&gt;ymax =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-11&#34; title=&#34;11&#34;&gt;                  &lt;span class=&#34;dt&#34;&gt;group=&lt;/span&gt;group),&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-12&#34; title=&#34;12&#34;&gt;              &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;steelblue2&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-13&#34; title=&#34;13&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_line&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;color =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;firebrick&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;You can see related R visualizations and tips on &lt;a href=&#34;https://typethepipe.com&#34;&gt;TypeThePipe&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Conditional Pipes</title>
-      <link>/vizs-and-tips/conditional-pipes-r-tidyverse/</link>
+      <link>https://typethepipe.com/vizs-and-tips/conditional-pipes-r-tidyverse/</link>
       <pubDate>Sat, 02 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/conditional-pipes-r-tidyverse/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/conditional-pipes-r-tidyverse/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1259,9 +1296,9 @@ This way:&lt;/p&gt;
     
     <item>
       <title>Filtering a data frame by condition on multiple columns</title>
-      <link>/vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse/</link>
+      <link>https://typethepipe.com/vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse/</link>
       <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1407,9 +1444,9 @@ To be honest, for that purpose it would have been easier to simply use &lt;code&
     
     <item>
       <title>Counting NAs by column in R</title>
-      <link>/vizs-and-tips/counting-nas-by-column-r-benchmark/</link>
+      <link>https://typethepipe.com/vizs-and-tips/counting-nas-by-column-r-benchmark/</link>
       <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/counting-nas-by-column-r-benchmark/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/counting-nas-by-column-r-benchmark/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1533,9 +1570,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Turn your GGplot to 3D animation. Awesome 2D to 3D plots in R with Rayshader</title>
-      <link>/post/ggplot-to-3d-in-r-with-rayshader/</link>
+      <link>https://typethepipe.com/post/ggplot-to-3d-in-r-with-rayshader/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>/post/ggplot-to-3d-in-r-with-rayshader/</guid>
+      <guid>https://typethepipe.com/post/ggplot-to-3d-in-r-with-rayshader/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1601,12 +1638,12 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
-&lt;p&gt;&lt;img src=&#34;featured.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/ggplot-to-3d-in-r-with-rayshader/featured.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; alt=&#34;3D Spanish map rotating. Showing average age of eac municipy in a third dimension.&#34; /&gt;&lt;/p&gt;
 &lt;hr /&gt;
 &lt;p&gt;&lt;em&gt;In 7 minutes reading, You will learn how to turn your ggplot visualizations into amazing interactive 3D plots you can export or embed in HTML/Rmarkdown. Or even better, you will export as mp4 an animation rotating the figure.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;As a use case, we are going to join the Spanish demographic data and GIS map, and then visualize it&lt;/em&gt;&lt;/p&gt;
 &lt;hr /&gt;
-&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_header.png&#34; height=&#34;350px&#34; width=&#34;500px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_header.png&#34; height=&#34;350px&#34; width=&#34;500px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;&lt;strong&gt;1. Introduction&lt;/strong&gt;&lt;/h2&gt;
@@ -1619,7 +1656,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;In my view, Tyler Morgan-Wall (package’s author) hit the jackpot with the new addition of two specific functions. These are plot_gg() and render_movie(). The first one converts the ggplot to a 3D figure using one or two lines of code making it deadly-simple. The second one renders an animation in which we can set up several parameters like zoom, fps, angles and inclinations… as user-friendly as possible.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_repo.png&#34; height=&#34;770px&#34; width=&#34;770px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_repo.png&#34; height=&#34;770px&#34; width=&#34;770px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;div id=&#34;lets-try-these-new-functionalities&#34; class=&#34;section level4&#34;&gt;
 &lt;h4&gt;&lt;strong&gt;Let’s try these new functionalities! &lt;/strong&gt;&lt;/h4&gt;
@@ -1731,7 +1768,7 @@ Moreover we define the required functions and download directories.&lt;/p&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb10-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_fill_gradientn&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;colours=&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;myPalette&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                 &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Choose palette colours.&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb10-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;labs&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;fill=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Avg age&amp;quot;&lt;/span&gt;)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb10-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;kw&#34;&gt;plot&lt;/span&gt;(plot_cities)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader/ggplot_spain_map_average_age.png&#34; height=&#34;770px&#34; width=&#34;770px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/ggplot-to-3d-in-r-with-rayshader/ggplot_spain_map_average_age.png&#34; height=&#34;770px&#34; width=&#34;770px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;d-rayshader-visualization&#34; class=&#34;section level3&#34;&gt;
@@ -1740,7 +1777,7 @@ Moreover we define the required functions and download directories.&lt;/p&gt;
 &lt;p&gt;Let’s see how it works&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb11-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;plot_gg&lt;/span&gt;(plot_cities,&lt;span class=&#34;dt&#34;&gt;multicore=&lt;/span&gt;&lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;width=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;height=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;scale=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;310&lt;/span&gt;)    &lt;span class=&#34;co&#34;&gt;# Plot_gg de rayshader&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb11-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;render_snapshot&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;filename =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;3D_spain&amp;quot;&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_3D_spain_map.png&#34; height=&#34;600px&#34; width=&#34;600px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_3D_spain_map.png&#34; height=&#34;600px&#34; width=&#34;600px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;Hmm you told something about render_movie()… What if we anime it?&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
@@ -1750,7 +1787,10 @@ Moreover we define the required functions and download directories.&lt;/p&gt;
 &lt;p&gt;In the last plot, it results the correct angle election as a key point. But what if we animate it with a rotating effect?&lt;/p&gt;
 &lt;p&gt;This is what the following function take cares on:&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb12&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb12-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;render_movie&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;img/movie_spain.mp4&amp;quot;&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;frames =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;720&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;fps=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;30&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;zoom=&lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;0.6&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;fov =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;30&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;featured.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;This way you can achieve the header 3D rotating image!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;You can see related posts on &lt;a href=&#34;https://typethepipe.com&#34;&gt;TypeThePipe&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;style&gt;
 p {
   word-spacing: 3px;
