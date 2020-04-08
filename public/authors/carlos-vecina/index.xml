@@ -165,6 +165,8 @@ It’s maybe telling us that we have improved our skills. Hope it.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;Enjoy ggcharts!&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
+&lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&#34;mojo/signup-forms/Loader&#34;], function(L) { L.start({&#34;baseUrl&#34;:&#34;mc.us4.list-manage.com&#34;,&#34;uuid&#34;:&#34;91551f7ed29389a0de4f47665&#34;,&#34;lid&#34;:&#34;d95c503a48&#34;,&#34;uniqueMethods&#34;:true}) })&lt;/script&gt;
 </description>
     </item>
     
@@ -514,6 +516,10 @@ p {
   text-align: justify;
 }
 .page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
   text-align: left  !important;
     text-indent: 0px !important;
 }
@@ -1397,6 +1403,248 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb7-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;co&#34;&gt;##map_df()          2.6913   3.42045   7.694863   3.56720   3.89715 122.2030   100   tbl_df&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
 &lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&#34;mojo/signup-forms/Loader&#34;], function(L) { L.start({&#34;baseUrl&#34;:&#34;mc.us4.list-manage.com&#34;,&#34;uuid&#34;:&#34;91551f7ed29389a0de4f47665&#34;,&#34;lid&#34;:&#34;d95c503a48&#34;,&#34;uniqueMethods&#34;:true}) })&lt;/script&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Turn your GGplot to 3D animation. Awesome 2D to 3D plots in R with Rayshader</title>
+      <link>/post/ggplot-to-3d-in-r-with-rayshader/</link>
+      <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
+      <guid>/post/ggplot-to-3d-in-r-with-rayshader/</guid>
+      <description>
+&lt;style type=&#34;text/css&#34;&gt;
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;em&gt;In 7 minutes reading, You will learn how to turn your ggplot visualizations into amazing interactive 3D plots you can export or embed in HTML/Rmarkdown. Or even better, you will export as mp4 an animation rotating the figure.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;As a use case, we are going to join the Spanish demographic data and GIS map, and then visualize it&lt;/em&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_header.png&#34; height=&#34;350px&#34; width=&#34;500px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;1. Introduction&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;During the last weeks a ‘new’ package has received the R community attention. We say ‘new’ because it joined recently the CRAN, althought the very first commits in github repo date back more than a year. Its name is &lt;strong&gt;rayshader&lt;/strong&gt; and in the author’s own words:&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“rayshader uses elevation data in a base R matrix and a combination of raytracing, spherical texture mapping, overlays, and ambient occlusion to generate beautiful topographic 2D and 3D maps”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;In my view, Tyler Morgan-Wall (package’s author) hit the jackpot with the new addition of two specific functions. These are plot_gg() and render_movie(). The first one converts the ggplot to a 3D figure using one or two lines of code making it deadly-simple. The second one renders an animation in which we can set up several parameters like zoom, fps, angles and inclinations… as user-friendly as possible.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_repo.png&#34; height=&#34;770px&#34; width=&#34;770px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;lets-try-these-new-functionalities&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;&lt;strong&gt;Let’s try these new functionalities! &lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;The only condition you must have a color or fill &lt;em&gt;aesthetic&lt;/em&gt;, unless you can also play in the same plot wiht size.
+Many times 3D plots are not the right choice for most of the data visualization cases. Therefore, I tried to bring to this article a non gratuitous example.&lt;/p&gt;
+&lt;p&gt;As a practical challenge, we will visualize in an interactive 3D map the average age in each city of Spain. Cool? First of all we need the population stats. We get it from the INE webpage. Secondly we have to delimiter Spanish cities with they GIS coordinates. Then we are merging these data to create a ggplot chart. Once we have the ggplot object we are going to use the rayshader package to map color aesthetic to the third spatial dimension. To conclude, we are going to render it as rotating 3D video.&lt;/p&gt;
+&lt;p&gt;Let´s do it step by step.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;visualazing-spanish-cities-average-age.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;2. Visualazing Spanish cities average age.&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;We usually want to start our pratical work drawing the main steps in our project and our principal goals. So in a general layer, we want to visualiza the average age. Firstly in a ggplot-color way, go one step further and make the plot 3D and end with an animation where the Z axis will be the average age.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;downloading-census-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;2.1- Downloading census data&lt;/h3&gt;
+&lt;p&gt;As said, for our purpose, we need to collect data from two sources. We use INE open data portal to download census ages data by city. After a not very user-friendly search, we got it. I provide you the following link, where you can find the continuous register statistics:
+&lt;a href=&#34;http://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&amp;amp;cid=1254736177012&amp;amp;menu=resultados&amp;amp;secc=1254736195461&amp;amp;idp=1254734710990&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Aiming to keep focused, we don’t get distracted and we are going to download the 2018 file. However, is worth noting the &lt;a href=&#34;https://github.com/oddworldng/INEbaseR/&#34;&gt;&lt;em&gt;INEbase&lt;/em&gt;&lt;/a&gt; efforts to make easier the INE open data platform.&lt;/p&gt;
+&lt;p&gt;We start loading (or downloading) the packages we are going to use. In other article or tip we will provide a custom function to Load and Download Rpackages in onle line.
+Moreover we define the required functions and download directories.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(pxR)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(RColorBrewer)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(rgeos)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;co&#34;&gt;#install.packages(&amp;quot;rgdal&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;) reinstall cause gpclib dependencie https://stackoverflow.com/questions/30790036/error-istruegpclibpermitstatus-is-not-true&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(rgdal)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(rayshader)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(knitr)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(magrittr)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-10&#34; title=&#34;10&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-11&#34; title=&#34;11&#34;&gt;as.numeric.factor &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(x) {    &lt;span class=&#34;co&#34;&gt;# Custom function to convert fctr to num factor value&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-12&#34; title=&#34;12&#34;&gt;    &lt;span class=&#34;kw&#34;&gt;return&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;suppressWarnings&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;as.numeric&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;levels&lt;/span&gt;(x))[x]))&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-13&#34; title=&#34;13&#34;&gt;}&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-14&#34; title=&#34;14&#34;&gt; &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-15&#34; title=&#34;15&#34;&gt;&lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;dir.exists&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;data&amp;quot;&lt;/span&gt;)) &lt;span class=&#34;kw&#34;&gt;dir.create&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;data&amp;quot;&lt;/span&gt;)  &lt;span class=&#34;co&#34;&gt;# Create the download directory&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Downloading INE 2018 file:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-1&#34; title=&#34;1&#34;&gt;utils&lt;span class=&#34;op&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;download.file&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;url =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;http://www.ine.es/pcaxisdl/t20/e245/p05/a2018/l0/00000006.px&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-2&#34; title=&#34;2&#34;&gt;                     &lt;span class=&#34;dt&#34;&gt;destfile =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;data/census_2018.px&amp;quot;&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-1&#34; title=&#34;1&#34;&gt;tbl_census_&lt;span class=&#34;dv&#34;&gt;2018&lt;/span&gt; &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;read.px&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;data/census_2018.px&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;              &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Load &amp;amp; format&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as_tibble&lt;/span&gt;()&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We parse the data to obtain a name,pcode,average age dataframe&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-1&#34; title=&#34;1&#34;&gt;tbl_census_&lt;span class=&#34;dv&#34;&gt;2018&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;%&amp;lt;&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;set_names&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;age&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;city&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;sex&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;population&amp;quot;&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;             &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Cambiamos los nombre&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;na.omit&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                                                    &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Na rmv&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;((city&lt;span class=&#34;op&#34;&gt;!=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Total&amp;quot;&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;(age&lt;span class=&#34;op&#34;&gt;!=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Total&amp;quot;&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;(sex&lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Ambos sexos&amp;quot;&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Duplicate info rmv&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;separate&lt;/span&gt;(city, &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;postal_code&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;city_name&amp;#39;&lt;/span&gt;), &lt;span class=&#34;dt&#34;&gt;sep=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;-&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;       &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Sep City column&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;age =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;as.numeric.factor&lt;/span&gt;(age)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                         &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Conv to numeric&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(city_name, postal_code) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                             &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Group to operate&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;summarise&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;avg_age =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(population&lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;age,&lt;span class=&#34;dt&#34;&gt;na.rm =&lt;/span&gt; T)&lt;span class=&#34;op&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(population,&lt;span class=&#34;dt&#34;&gt;na.rm=&lt;/span&gt;T)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Avg age&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(city_name, postal_code, avg_age)                          &lt;span class=&#34;co&#34;&gt;# Discard columns&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;downloading-gis-data&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;2.2- Downloading GIS data&lt;/h3&gt;
+&lt;p&gt;The second source we are going to use is the Geo data. We will use cities coordinates and matching it with Spanish demographic data previously obtained.&lt;/p&gt;
+&lt;p&gt;Downloading map overlay:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-1&#34; title=&#34;1&#34;&gt;temp &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;tempfile&lt;/span&gt;()                              &lt;span class=&#34;co&#34;&gt;# Create the tempfile&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-2&#34; title=&#34;2&#34;&gt;u=&lt;span class=&#34;st&#34;&gt;&amp;quot;http://www.arcgis.com/sharing/rest/content/items/8e31c4c1a0b348f79058f212d0d807a1/data&amp;quot;&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-3&#34; title=&#34;3&#34;&gt;utils&lt;span class=&#34;op&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;download.file&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;url =&lt;/span&gt; u, &lt;span class=&#34;dt&#34;&gt;destfile =&lt;/span&gt; temp,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-4&#34; title=&#34;4&#34;&gt;                     &lt;span class=&#34;dt&#34;&gt;mode=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;wb&amp;quot;&lt;/span&gt;)                 &lt;span class=&#34;co&#34;&gt;# Binary mode for correct download&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-5&#34; title=&#34;5&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;kw&#34;&gt;unzip&lt;/span&gt;(temp, &lt;span class=&#34;dt&#34;&gt;exdir =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;data/cities_gis&amp;quot;&lt;/span&gt;)          &lt;span class=&#34;co&#34;&gt;# Unzip in data/cities_gis&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;kw&#34;&gt;unlink&lt;/span&gt;(temp)                                    &lt;span class=&#34;co&#34;&gt;# Delete temp file&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We parse the spatial information to convert it into tabular data. We expect that the Canary Islands coordinates will skew the plot, so it’s our decision to keep focused in our 3D objetive and filter peninsular coordinates. It’s also possible, and a better practice, to move insular coordinates looking for a compact plot, instead of filter them out.&lt;/p&gt;
+&lt;p&gt;To complete this data processing, we use fortify function that allows us to don’t load more packages. However, this function throws a warning suggesting the broom::tidy() one.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-1&#34; title=&#34;1&#34;&gt;tlb_cities_gis &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;readOGR&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;dsn =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;./data/cities_gis/Municipios_ETRS89_30N.shp&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-2&#34; title=&#34;2&#34;&gt;                              &lt;span class=&#34;dt&#34;&gt;verbose=&lt;/span&gt;&lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;) &lt;span class=&#34;co&#34;&gt;# Spatial data reading&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-1&#34; title=&#34;1&#34;&gt;tlb_cities_gis &lt;span class=&#34;op&#34;&gt;%&amp;lt;&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;fortify&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;region =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Codigo&amp;quot;&lt;/span&gt;) &lt;span class=&#34;co&#34;&gt;# %&amp;gt;%             # Conv &amp;quot;spatial object&amp;quot; to data.frame&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-3&#34; title=&#34;3&#34;&gt;  &lt;span class=&#34;co&#34;&gt;# broom::tidy()&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-4&#34; title=&#34;4&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-5&#34; title=&#34;5&#34;&gt;plot_canarias &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;F                              &lt;span class=&#34;co&#34;&gt;# Control param, initial app config&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-6&#34; title=&#34;6&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt;(plot_canarias&lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;F){                           &lt;span class=&#34;co&#34;&gt;# Should be moduled in a funct&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-8&#34; title=&#34;8&#34;&gt;  tlb_cities_gis &lt;span class=&#34;op&#34;&gt;%&amp;lt;&amp;gt;%&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;((long&lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;(lat&lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;4000000&lt;/span&gt;))              &lt;span class=&#34;co&#34;&gt;# Filter peninsular data&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-10&#34; title=&#34;10&#34;&gt;} &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Finaly, we join both creating the final dataset, which we are going to use to make the plots. Note that we use left join to keep de geo data.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-1&#34; title=&#34;1&#34;&gt;tbl_cities_avg_age &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;tlb_cities_gis &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;left_join&lt;/span&gt;(tbl_census_&lt;span class=&#34;dv&#34;&gt;2018&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;by =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; =&lt;span class=&#34;st&#34;&gt; &amp;quot;postal_code&amp;quot;&lt;/span&gt;)) &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;As a good practice, we are going to check the number of NAs generated after the left join. These NAs meaning is that there are cities localized but without average year information&lt;/p&gt;
+&lt;p&gt;We can see that these missing values represents just 1% of the data, so we are going to impute them with the previous postal code info. I bet that you can easily improve this procedure but I consider it’s prety acceptable enought seeing the low NA ratio.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb9&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-1&#34; title=&#34;1&#34;&gt;  tbl_cities_avg_age &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(id) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;summarise&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;na =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(avg_age))) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                 &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# NAs by city&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;summarise&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;missing_perc =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(na&lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;length&lt;/span&gt;(na)&lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Perc cities with at least 1 na &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(missing_perc)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-6&#34; title=&#34;6&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-7&#34; title=&#34;7&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-8&#34; title=&#34;8&#34;&gt;tbl_cities_avg_age &lt;span class=&#34;op&#34;&gt;%&amp;lt;&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;       &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;arrange&lt;/span&gt;(id) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;fill&lt;/span&gt;(avg_age, &lt;span class=&#34;dt&#34;&gt;.direction =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;down&amp;quot;&lt;/span&gt;)            &lt;span class=&#34;co&#34;&gt;# Fill with the previous pc data.&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;ggplot-visualization&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;2.3- GGplot visualization&lt;/h3&gt;
+&lt;p&gt;Inspired in &lt;a href=&#34;http://blog.manugarri.com/making-a-beautiful-map-of-spain-in-ggplot2/&#34; class=&#34;uri&#34;&gt;http://blog.manugarri.com/making-a-beautiful-map-of-spain-in-ggplot2/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Once we have created the final dataset, we are able to start ploting it. Of course longitude in X-axis and latitude en Y-axis. Firstly average city age is represented using a color palette. Red colours are assigned to older people and blue ones to younger city population. We get it in ggplot with the fill aesthetic.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb10&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-1&#34; title=&#34;1&#34;&gt;myPalette &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;colorRampPalette&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;rev&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;brewer.pal&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;11&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;Spectral&amp;quot;&lt;/span&gt;)))      &lt;span class=&#34;co&#34;&gt;# Create reverse Spectral palette&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-2&#34; title=&#34;2&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-3&#34; title=&#34;3&#34;&gt;plot_cities &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ggplot&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_polygon&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; tbl_cities_avg_age, &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; avg_age,   &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-5&#34; title=&#34;5&#34;&gt;                                         &lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; long, &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-6&#34; title=&#34;6&#34;&gt;                                         &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; lat, &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-7&#34; title=&#34;7&#34;&gt;                                         &lt;span class=&#34;dt&#34;&gt;group =&lt;/span&gt; id)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;      &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Dummy variable to correct fill by PCode.&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_fill_gradientn&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;colours=&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;myPalette&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                 &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Choose palette colours.&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;labs&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;fill=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Avg age&amp;quot;&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;kw&#34;&gt;plot&lt;/span&gt;(plot_cities)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader/ggplot_spain_map_average_age.png&#34; height=&#34;770px&#34; width=&#34;770px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;d-rayshader-visualization&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;2.4- 3D Rayshader Visualization!&lt;/h3&gt;
+&lt;p&gt;That was pretty nice. It’s sure that you can reach the general propose to be able to locate inmediately older an younger zones. Although as we will disccuss in a future post, human eyes aren’t ready to distinguiss almost nothing but big color contrasts. What about complement color with a third dimension through z axis?&lt;/p&gt;
+&lt;p&gt;Let’s see how it works&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb11-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;plot_gg&lt;/span&gt;(plot_cities,&lt;span class=&#34;dt&#34;&gt;multicore=&lt;/span&gt;&lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;width=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;height=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;scale=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;310&lt;/span&gt;)    &lt;span class=&#34;co&#34;&gt;# Plot_gg de rayshader&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb11-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;render_snapshot&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;filename =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;3D_spain&amp;quot;&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_3D_spain_map.png&#34; height=&#34;600px&#34; width=&#34;600px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Hmm you told something about render_movie()… What if we anime it?&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;d-animation-with-rayshader&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;2.5- 3D animation with rayshader&lt;/h3&gt;
+&lt;p&gt;In the last plot, it results the correct angle election as a key point. But what if we animate it with a rotating effect?&lt;/p&gt;
+&lt;p&gt;This is what the following function take cares on:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb12&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb12-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;render_movie&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;img/movie_spain.mp4&amp;quot;&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;frames =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;720&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;fps=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;30&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;zoom=&lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;0.6&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;fov =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;30&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;featured.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;style&gt;
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+&lt;/style&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
+&lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&#34;mojo/signup-forms/Loader&#34;], function(L) { L.start({&#34;baseUrl&#34;:&#34;mc.us4.list-manage.com&#34;,&#34;uuid&#34;:&#34;91551f7ed29389a0de4f47665&#34;,&#34;lid&#34;:&#34;d95c503a48&#34;,&#34;uniqueMethods&#34;:true}) })&lt;/script&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 </description>
     </item>
     

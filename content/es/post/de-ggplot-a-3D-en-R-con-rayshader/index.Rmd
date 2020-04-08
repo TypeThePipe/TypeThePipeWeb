@@ -1,0 +1,311 @@
+---
+title: "Convierte tu GGplot en una animación 3D con R y Rayshader"
+author: "Carlos Vecina"
+date: '2019-07-27'
+slug: "de-ggplot-a-3D-en-R-con-rayshader"
+translationKey: "de-ggplot-a-3D-en-R-con-rayshader"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- R
+- Post
+tags: []
+subtitle: "¿Pensando en usar 3D en R? En este post te enseñamos a convertir tus gráficos R ggplot en gráficos 3D. ¡Lleva tus gráficos en R a otra dimensión! ;)"
+summary: '¿Pensando en usar 3D en R? En este post te enseñamos a convertir tus gráficos R ggplot en gráficos 3D. ¡Lleva tus gráficos en R a otra dimensión!'
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+```{r, include=FALSE}
+nchar("¿Pensando en usar 3D en R? En este post te enseñamos a convertir tus gráficos R ggplot en gráficos 3D¡Lleva tus gráficos a otra dimensión! ;)")
+```
+
+<img src="./featured.gif" height="250px" width="400px" />
+
+--- 
+
+*En 7 minutos, seremos capaces de convertir nuestras gráficas generadas con ggplot en espectaculares plots en 3D, ¡y ademas interactivos!*
+*Podrás embebernos en HTML/Rmarkdown, o incluso mejor, podras exportarlo como mp4 en una animacion rotatoria para sacarle todo el jugo a tus datos!*
+
+*Como caso de uso, vamos a visualizar la edad media de los municipios españoles cruzando datos del padrón con los datos GIS, para posteriormente visualizarlos en 3 dimensiones.*
+
+
+
+
+--- 
+
+```{r echo=FALSE, out.width='70%', fig.align='center', fig.cap="\\label{fig:figs} GGplot to 3D example.      <br> <https://github.com/tylermorganwall/rayshader>"}
+
+```
+
+<img src="/es/post/de-ggplot-a-3d-en-r-con-rayshader/rayshader_header.png" height="350px" width="500px" />
+
+<br> 
+
+## **1. Introducción**
+
+<br> 
+
+En las últimas semanas, un 'nuevo' paquete de R ha centrado el interés de cierta parte de la comunidad. Decimos 'nuevo' porque se ha incorporado recientemente al CRAN, aunque realmente el primer commit realizado por su autor su repo de Github data de hace más de un año. Su nombre es **rayshader** y en palabras de su propio creador:
+
+<br> 
+
+
+>"rayshader uses elevation data in a base R matrix and a combination of raytracing, spherical texture mapping, overlays, and ambient occlusion to generate beautiful topographic 2D and 3D maps"
+
+<br> 
+
+Bajo mi punto de vista,  Tyler Morgan-Wall (el autor del paquete) dio con la tecla cuando incorporó al paquete dos nuevas funciones, plot_gg() y render_movie(). La primera de ellas nos permite convertir con 2 líneas de código nuestra visualización en ggplot a una figura 3D de una manera realmente facil y eficiente. La segunda de ellas renderiza esta figura y la anima, poniendo al alcance del usuario diversos parámetros para controlar el zoom, los fps, ángulo, inclinación...
+
+
+
+<br> 
+
+<img src="/es/post/de-ggplot-a-3d-en-r-con-rayshader/rayshader_repositorio_github.png" height="770px" width="770px" />
+
+<br> 
+
+#### **Las nuevas funcionalidades y planteamiento del experimento**
+
+La única condicion que debe cunplir tu gg-visualización es tener como *aesthetic* color o *fill*, y en algunos casos también puedes jugar con el *size*
+
+En demasiadas ocasiones, la visualización de datos en 3D no es la mejor opción a elegir, tal y como hablaremos un un futuro post. Por este motivo, he intentado traer un ejemplo donde el uso de la tercera dimensión aporte valor al análisis.
+
+Este ejemplo práctico consistirá, como ya hemos avanzado, en la visualización en el mapa de España la edad media en cada municipio. ¿Chulo? Para ello necesitaremos:
+
+- Los datos del censo sobre las estadísticas de la población (en este caso la edad media) por cada municipio. Estos datos los obtenemos de la web del INE. 
+
+- Los datos GIS con las coordenadas de cada uno de los municipios que componen España.
+
+Una vez que tengamos estas dos fuentes de datos combinados, los visualizaremos y posteriormente exploraremos su renderización en un clip 3D con la figura rotando tal y como se ve en la imagen que encabeza este post.
+
+¡Vayamos paso por paso!
+
+<br>
+
+## **2. CdU: Visualizando la edad media de cada municipio en España**
+
+Una vez hemos establecido el objetivo principal y las diferentes fuentes de los datos, podemos proceder a la descarga y tratamiento de los mismos.
+
+<br> 
+
+### 2.1- Descargando los datos del censo
+
+Como digimos, para llevar a cabo nuestro propósito, necesitamos acceder a dos fuentes diferentes de datos. Usaremos el portal de datos abiertos del INE para descargar la edad media en cada municipio español. Después de una búsqueda bastante ardua por su web, encontramos la información que buscábamos. Os dejo este link donde teneis acceso a lo que ellos llaman como estadísticas contínuas
+
+[link](<http://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&cid=1254736177012&menu=resultados&secc=1254736195461&idp=1254734710990>). 
+
+Con el objetivo de no irnos por las ramas, descargaremos directamente el fichero del 2018. Sin embargo, sí que es interesante citar la iniciativa [*INEbase*](<https://github.com/oddworldng/INEbaseR/>) de facilitar el acceso y la navegación en esta fuente de datos de INE.
+
+Comenzamos cargando (o descargando) los paquetes necesarios para nuestro análisis. En un futuro post o tip compartiremos una función nuestra para la carga (o descarga en caso necesario) múltiple de paquetes en una sola linea.
+
+
+```{r,  results = 'hide', message=FALSE, warning=FALSE, eval=FALSE}
+library(pxR)
+library(RColorBrewer)
+library(rgeos)
+#install.packages("rgdal", repos = "http://cran.us.r-project.org") reinstall cause gpclib dependencie https://stackoverflow.com/questions/30790036/error-istruegpclibpermitstatus-is-not-true
+library(rgdal)
+library(rayshader)
+library(knitr)
+library(magrittr)
+library(tidyverse)
+
+as.numeric.factor <- function(x) {    # Custom function to convert fctr to num factor value
+    return(suppressWarnings(as.numeric(levels(x))[x]))
+}
+ 
+if(!dir.exists("data")) dir.create("data")  # Create the download directory
+```
+
+<br> 
+
+Descargando el fichero del INE 2018:
+```{r, eval=FALSE}
+utils::download.file(url = "http://www.ine.es/pcaxisdl/t20/e245/p05/a2018/l0/00000006.px",
+                     destfile = "data/census_2018.px")
+
+```
+
+```{r, echo=FALSE, eval=FALSE}
+tbl_census_2018 <- read.px("data/census_2018.px") %>%         # Load & format
+  as_tibble()
+```
+
+<br> 
+
+```{r, eval=FALSE}
+tbl_census_2018 <- read.px("data/census_2018.px") %>%              # Load & format
+  as_tibble()
+```
+
+
+Parseamos los datos con el objetivo de conseguir un dataframe que consista en *name*, *postal_code*, *average_age* 
+```{r, message=FALSE, warning=FALSE, eval=FALSE}
+tbl_census_2018 %<>% 
+  set_names(c("age", "city", "sex", "population")) %>%             # Cambiamos los nombre
+  na.omit() %>%                                                    # Na rmv
+  filter((city!="Total")&(age!="Total")&(sex=="Ambos sexos")) %>%  # Duplicate info rmv
+  separate(city, c('postal_code', 'city_name'), sep="-") %>%       # Sep City column
+  mutate(age = as.numeric.factor(age)) %>%                         # Conv to numeric
+  group_by(city_name, postal_code) %>%                             # Group to operate
+  summarise(avg_age = sum(population*age,na.rm = T)/sum(population,na.rm=T)) %>%  # Avg age
+  select(city_name, postal_code, avg_age)                          # Discard columns
+
+```
+
+
+<br> 
+
+### 2.2- Descargando datos GIS
+
+La segunda fuente de datos que vamos a utilizar son los datos geográficos de los municipios españoles, los cuales cruzaremos con los censales anteriormente descargados para pintar la edad media en sus respectivas coordenadas.
+
+Descargando los daots GIS:
+```{r, eval=FALSE}
+temp <- tempfile()                              # Create the tempfile
+u="http://www.arcgis.com/sharing/rest/content/items/8e31c4c1a0b348f79058f212d0d807a1/data"
+utils::download.file(url = u, destfile = temp,
+                     mode="wb")                 # Binary mode for correct download
+
+unzip(temp, exdir = "data/cities_gis")          # Unzip in data/cities_gis
+unlink(temp)                                    # Delete temp file
+```
+
+Tratamos estos datos para convertirlos de formato espacial a datos tabulares. Para este caso concreto de 3D, las Islas Canarias podrían deformarnos el gráfico, por lo que decidimos permanecer concentrados en nuestro objetivo didáctico y filtramos estas coordenadas. Por supuesto es posible mantenerlas sin perjudicar el gráfico, alterando sus coordenadas y acercándolas a la península. ¡Esto te queda como tarea para ti!
+
+Para llevar a cabo este procesado de los datos, usamos la función *fortify* para no depender de más paquetes. No obstante esta funcion nos lanza un *warning* sugiriendonos el uso de la función *tidy()* del paquete *broom*.
+
+```{r, echo=FALSE, eval=FALSE}
+tlb_cities_gis <- readOGR(dsn ="data/cities_gis/Municipios_ETRS89_30N.shp",
+                              verbose=FALSE)
+```
+
+```{r, eval=FALSE}
+tlb_cities_gis <- readOGR(dsn = "data/cities_gis/Municipios_ETRS89_30N.shp",
+                              verbose=FALSE) # Spatial data reading
+```
+
+
+
+```{r, message=FALSE, warning=FALSE, comment=FALSE, prompt=FALSE, eval=FALSE}
+tlb_cities_gis %<>% 
+  fortify(region = "Codigo") # %>%             # Conv "spatial object" to data.frame
+  # broom::tidy()
+
+plot_canarias <- F                              # Control param, initial app config
+
+if(plot_canarias==F){                           # Should be moduled in a funct
+  tlb_cities_gis %<>%
+  filter((long>0) & (lat>4000000))              # Filter peninsular data
+} 
+
+```
+
+Para terminar, *joineamos* los dos datasets creados para conformar el tablón final, el cual vamos a usar como base para crear las gráficas. Apuntar que usamos *left join* como forma de mantener los datos geos y no perder coordenadas en el *plot*.
+
+```{r, eval=FALSE}
+tbl_cities_avg_age <- tlb_cities_gis %>% 
+  left_join(tbl_census_2018, by = c("id" = "postal_code")) 
+
+```
+
+Como buena práctica, comprobamos el número de NAs generados a partir de este *left join*. Estos NAs serán municipios de los que tenemos coordenadas pero no contamos con información sobre la edad media.
+
+Vemos que los valores perdidos representan únicamente el 1% del total de filas, por lo que vamos a imputarlos con el dato del código postal previo. Es cierto que podemos mejorar esta imputación, pero para nuestro propósito será suficiente debido al pequeño porcetaje del total que representan. ¡Vuelve a quedar de tu mano mejorarlo y comentárnoslo!
+
+```{r, fig.align="center", eval=FALSE}
+  tbl_cities_avg_age %>%
+    group_by(id) %>%
+    summarise(na = sum(is.na(avg_age))) %>%                 # NAs by city
+    summarise(missing_perc = sum(na>0)/length(na)*100) %>%  # Perc cities with at least 1 na 
+    select(missing_perc)
+
+tbl_cities_avg_age %<>%       
+  arrange(id) %>% 
+  fill(avg_age, .direction = "down")            # Fill with the previous pc data.
+```
+
+<br> 
+
+### 2.3- Visualización con Ggplot
+
+Inspirado en gran medida en  http://blog.manugarri.com/making-a-beautiful-map-of-spain-in-ggplot2/
+
+Con este dataset final, plotearemos las variables que representan las coordenadas en el eje X e Y y en primer lugar representaremos la edad media mediante la paleta de color. Las tonalidades rojas son asignadas a edades superiores y las azules a las edades medias más jóvenes. Conseguimos esto mediante el *aesthetic fill* de Ggplot. 
+
+
+```{r, fig.align="center", eval=FALSE}
+myPalette <- colorRampPalette(rev(brewer.pal(11, "Spectral")))      # Create reverse Spectral palette
+
+plot_cities <- ggplot() +
+  geom_polygon(data = tbl_cities_avg_age, aes(fill = avg_age,   
+                                         x = long, 
+                                         y = lat, 
+                                         group = id)) +      # Dummy variable to correct fill by PCode.
+  scale_fill_gradientn(colours=myPalette(4)) +                 # Choose palette colours.
+  labs(fill="Avg age")
+plot(plot_cities)
+```
+
+<img src="/es/post/de-ggplot-a-3d-en-r-con-rayshader/ggplot_españa_edad_media_municipio.png" height="790px" width="790px" />
+
+<br> 
+
+
+### 2.4- Visualización en 3D con Rayshader!
+
+El anterior gráfico estaba bastante bien. En el podemos facilmente distinguir los municipios con la edad media más alta y los municipios más jóvenes. Sin embargo, los ojos humanos no son capaces de distinguir fácilmente entre colores próximos ni distinguir la magnitud de las diferencias en esta escala. Por lo tanto, ¿qué tal complementarlo con un nuevo eje?
+
+Veamos como hacerlo y que tal queda
+
+
+```{r, fig.align='center', out.height="200%", out.width="200%", eval=FALSE}
+plot_gg(plot_cities,multicore=TRUE,width=5,height=3,scale=310)    # Plot_gg de rayshader
+render_snapshot()
+```
+
+<img src="/es/post/de-ggplot-a-3d-en-r-con-rayshader/rayshader_3D_mapa_españa.png" height="600px" width="600px" />
+
+
+<br> 
+
+Hmm dijiste algo sobre render_movie()... Qué tal si lo animamos?
+
+<br> 
+
+### 2.5- Animación 3D con Rayshader 
+
+En el gráfico anterior, la variable edad media queda bastante más entendible por el ojo humano en la dimensión añadida. Aquí la elección del ángulo e inclinación correctos es un punto esencial. Pero, ¿y mejoramos la interpretabilidad rotando el gráfico?
+
+Esto es de lo que se encarga la siguiente función:
+
+```{r, eval=FALSE}
+render_movie("img/movie_spain.mp4",frames = 720, fps=30,zoom=0.6,fov = 30)
+```
+
+
+
+<img src="./featured.gif" height="250px" width="400px" />
+
+
+<style>
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+</style>
+
+<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us4.list-manage.com","uuid":"91551f7ed29389a0de4f47665","lid":"d95c503a48","uniqueMethods":true}) })</script>
+

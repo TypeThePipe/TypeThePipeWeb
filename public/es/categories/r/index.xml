@@ -1073,5 +1073,251 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </description>
     </item>
     
+    <item>
+      <title>Convierte tu GGplot en una animación 3D con R y Rayshader</title>
+      <link>/es/post/de-ggplot-a-3d-en-r-con-rayshader/</link>
+      <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
+      <guid>/es/post/de-ggplot-a-3d-en-r-con-rayshader/</guid>
+      <description>
+&lt;style type=&#34;text/css&#34;&gt;
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;em&gt;En 7 minutos, seremos capaces de convertir nuestras gráficas generadas con ggplot en espectaculares plots en 3D, ¡y ademas interactivos!&lt;/em&gt;
+&lt;em&gt;Podrás embebernos en HTML/Rmarkdown, o incluso mejor, podras exportarlo como mp4 en una animacion rotatoria para sacarle todo el jugo a tus datos!&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Como caso de uso, vamos a visualizar la edad media de los municipios españoles cruzando datos del padrón con los datos GIS, para posteriormente visualizarlos en 3 dimensiones.&lt;/em&gt;&lt;/p&gt;
+&lt;hr /&gt;
+&lt;p&gt;&lt;img src=&#34;/es/post/de-ggplot-a-3d-en-r-con-rayshader/rayshader_header.png&#34; height=&#34;350px&#34; width=&#34;500px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;introducción&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;1. Introducción&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;En las últimas semanas, un ‘nuevo’ paquete de R ha centrado el interés de cierta parte de la comunidad. Decimos ‘nuevo’ porque se ha incorporado recientemente al CRAN, aunque realmente el primer commit realizado por su autor su repo de Github data de hace más de un año. Su nombre es &lt;strong&gt;rayshader&lt;/strong&gt; y en palabras de su propio creador:&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;“rayshader uses elevation data in a base R matrix and a combination of raytracing, spherical texture mapping, overlays, and ambient occlusion to generate beautiful topographic 2D and 3D maps”&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Bajo mi punto de vista, Tyler Morgan-Wall (el autor del paquete) dio con la tecla cuando incorporó al paquete dos nuevas funciones, plot_gg() y render_movie(). La primera de ellas nos permite convertir con 2 líneas de código nuestra visualización en ggplot a una figura 3D de una manera realmente facil y eficiente. La segunda de ellas renderiza esta figura y la anima, poniendo al alcance del usuario diversos parámetros para controlar el zoom, los fps, ángulo, inclinación…&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/es/post/de-ggplot-a-3d-en-r-con-rayshader/rayshader_repositorio_github.png&#34; height=&#34;770px&#34; width=&#34;770px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;las-nuevas-funcionalidades-y-planteamiento-del-experimento&#34; class=&#34;section level4&#34;&gt;
+&lt;h4&gt;&lt;strong&gt;Las nuevas funcionalidades y planteamiento del experimento&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;La única condicion que debe cunplir tu gg-visualización es tener como &lt;em&gt;aesthetic&lt;/em&gt; color o &lt;em&gt;fill&lt;/em&gt;, y en algunos casos también puedes jugar con el &lt;em&gt;size&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;En demasiadas ocasiones, la visualización de datos en 3D no es la mejor opción a elegir, tal y como hablaremos un un futuro post. Por este motivo, he intentado traer un ejemplo donde el uso de la tercera dimensión aporte valor al análisis.&lt;/p&gt;
+&lt;p&gt;Este ejemplo práctico consistirá, como ya hemos avanzado, en la visualización en el mapa de España la edad media en cada municipio. ¿Chulo? Para ello necesitaremos:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Los datos del censo sobre las estadísticas de la población (en este caso la edad media) por cada municipio. Estos datos los obtenemos de la web del INE.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Los datos GIS con las coordenadas de cada uno de los municipios que componen España.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Una vez que tengamos estas dos fuentes de datos combinados, los visualizaremos y posteriormente exploraremos su renderización en un clip 3D con la figura rotando tal y como se ve en la imagen que encabeza este post.&lt;/p&gt;
+&lt;p&gt;¡Vayamos paso por paso!&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;cdu-visualizando-la-edad-media-de-cada-municipio-en-españa&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;2. CdU: Visualizando la edad media de cada municipio en España&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Una vez hemos establecido el objetivo principal y las diferentes fuentes de los datos, podemos proceder a la descarga y tratamiento de los mismos.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;descargando-los-datos-del-censo&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;2.1- Descargando los datos del censo&lt;/h3&gt;
+&lt;p&gt;Como digimos, para llevar a cabo nuestro propósito, necesitamos acceder a dos fuentes diferentes de datos. Usaremos el portal de datos abiertos del INE para descargar la edad media en cada municipio español. Después de una búsqueda bastante ardua por su web, encontramos la información que buscábamos. Os dejo este link donde teneis acceso a lo que ellos llaman como estadísticas contínuas&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://www.ine.es/dyngs/INEbase/es/operacion.htm?c=Estadistica_C&amp;amp;cid=1254736177012&amp;amp;menu=resultados&amp;amp;secc=1254736195461&amp;amp;idp=1254734710990&#34;&gt;link&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Con el objetivo de no irnos por las ramas, descargaremos directamente el fichero del 2018. Sin embargo, sí que es interesante citar la iniciativa &lt;a href=&#34;https://github.com/oddworldng/INEbaseR/&#34;&gt;&lt;em&gt;INEbase&lt;/em&gt;&lt;/a&gt; de facilitar el acceso y la navegación en esta fuente de datos de INE.&lt;/p&gt;
+&lt;p&gt;Comenzamos cargando (o descargando) los paquetes necesarios para nuestro análisis. En un futuro post o tip compartiremos una función nuestra para la carga (o descarga en caso necesario) múltiple de paquetes en una sola linea.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(pxR)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(RColorBrewer)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(rgeos)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;co&#34;&gt;#install.packages(&amp;quot;rgdal&amp;quot;, repos = &amp;quot;http://cran.us.r-project.org&amp;quot;) reinstall cause gpclib dependencie https://stackoverflow.com/questions/30790036/error-istruegpclibpermitstatus-is-not-true&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(rgdal)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(rayshader)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(knitr)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(magrittr)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-10&#34; title=&#34;10&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-11&#34; title=&#34;11&#34;&gt;as.numeric.factor &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(x) {    &lt;span class=&#34;co&#34;&gt;# Custom function to convert fctr to num factor value&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-12&#34; title=&#34;12&#34;&gt;    &lt;span class=&#34;kw&#34;&gt;return&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;suppressWarnings&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;as.numeric&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;levels&lt;/span&gt;(x))[x]))&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-13&#34; title=&#34;13&#34;&gt;}&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-14&#34; title=&#34;14&#34;&gt; &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-15&#34; title=&#34;15&#34;&gt;&lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;dir.exists&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;data&amp;quot;&lt;/span&gt;)) &lt;span class=&#34;kw&#34;&gt;dir.create&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;data&amp;quot;&lt;/span&gt;)  &lt;span class=&#34;co&#34;&gt;# Create the download directory&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Descargando el fichero del INE 2018:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-1&#34; title=&#34;1&#34;&gt;utils&lt;span class=&#34;op&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;download.file&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;url =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;http://www.ine.es/pcaxisdl/t20/e245/p05/a2018/l0/00000006.px&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-2&#34; title=&#34;2&#34;&gt;                     &lt;span class=&#34;dt&#34;&gt;destfile =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;data/census_2018.px&amp;quot;&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-1&#34; title=&#34;1&#34;&gt;tbl_census_&lt;span class=&#34;dv&#34;&gt;2018&lt;/span&gt; &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;read.px&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;data/census_2018.px&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;              &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Load &amp;amp; format&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;as_tibble&lt;/span&gt;()&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Parseamos los datos con el objetivo de conseguir un dataframe que consista en &lt;em&gt;name&lt;/em&gt;, &lt;em&gt;postal_code&lt;/em&gt;, &lt;em&gt;average_age&lt;/em&gt;&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-1&#34; title=&#34;1&#34;&gt;tbl_census_&lt;span class=&#34;dv&#34;&gt;2018&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;%&amp;lt;&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;set_names&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;age&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;city&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;sex&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;population&amp;quot;&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;             &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Cambiamos los nombre&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;na.omit&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                                                    &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Na rmv&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;((city&lt;span class=&#34;op&#34;&gt;!=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Total&amp;quot;&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;(age&lt;span class=&#34;op&#34;&gt;!=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Total&amp;quot;&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;(sex&lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Ambos sexos&amp;quot;&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Duplicate info rmv&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;separate&lt;/span&gt;(city, &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;postal_code&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;city_name&amp;#39;&lt;/span&gt;), &lt;span class=&#34;dt&#34;&gt;sep=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;-&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;       &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Sep City column&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;age =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;as.numeric.factor&lt;/span&gt;(age)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                         &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Conv to numeric&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(city_name, postal_code) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                             &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Group to operate&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;summarise&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;avg_age =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(population&lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;age,&lt;span class=&#34;dt&#34;&gt;na.rm =&lt;/span&gt; T)&lt;span class=&#34;op&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(population,&lt;span class=&#34;dt&#34;&gt;na.rm=&lt;/span&gt;T)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Avg age&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(city_name, postal_code, avg_age)                          &lt;span class=&#34;co&#34;&gt;# Discard columns&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;descargando-datos-gis&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;2.2- Descargando datos GIS&lt;/h3&gt;
+&lt;p&gt;La segunda fuente de datos que vamos a utilizar son los datos geográficos de los municipios españoles, los cuales cruzaremos con los censales anteriormente descargados para pintar la edad media en sus respectivas coordenadas.&lt;/p&gt;
+&lt;p&gt;Descargando los daots GIS:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-1&#34; title=&#34;1&#34;&gt;temp &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;tempfile&lt;/span&gt;()                              &lt;span class=&#34;co&#34;&gt;# Create the tempfile&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-2&#34; title=&#34;2&#34;&gt;u=&lt;span class=&#34;st&#34;&gt;&amp;quot;http://www.arcgis.com/sharing/rest/content/items/8e31c4c1a0b348f79058f212d0d807a1/data&amp;quot;&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-3&#34; title=&#34;3&#34;&gt;utils&lt;span class=&#34;op&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;download.file&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;url =&lt;/span&gt; u, &lt;span class=&#34;dt&#34;&gt;destfile =&lt;/span&gt; temp,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-4&#34; title=&#34;4&#34;&gt;                     &lt;span class=&#34;dt&#34;&gt;mode=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;wb&amp;quot;&lt;/span&gt;)                 &lt;span class=&#34;co&#34;&gt;# Binary mode for correct download&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-5&#34; title=&#34;5&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;kw&#34;&gt;unzip&lt;/span&gt;(temp, &lt;span class=&#34;dt&#34;&gt;exdir =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;data/cities_gis&amp;quot;&lt;/span&gt;)          &lt;span class=&#34;co&#34;&gt;# Unzip in data/cities_gis&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;kw&#34;&gt;unlink&lt;/span&gt;(temp)                                    &lt;span class=&#34;co&#34;&gt;# Delete temp file&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Tratamos estos datos para convertirlos de formato espacial a datos tabulares. Para este caso concreto de 3D, las Islas Canarias podrían deformarnos el gráfico, por lo que decidimos permanecer concentrados en nuestro objetivo didáctico y filtramos estas coordenadas. Por supuesto es posible mantenerlas sin perjudicar el gráfico, alterando sus coordenadas y acercándolas a la península. ¡Esto te queda como tarea para ti!&lt;/p&gt;
+&lt;p&gt;Para llevar a cabo este procesado de los datos, usamos la función &lt;em&gt;fortify&lt;/em&gt; para no depender de más paquetes. No obstante esta funcion nos lanza un &lt;em&gt;warning&lt;/em&gt; sugiriendonos el uso de la función &lt;em&gt;tidy()&lt;/em&gt; del paquete &lt;em&gt;broom&lt;/em&gt;.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-1&#34; title=&#34;1&#34;&gt;tlb_cities_gis &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;readOGR&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;dsn =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;data/cities_gis/Municipios_ETRS89_30N.shp&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-2&#34; title=&#34;2&#34;&gt;                              &lt;span class=&#34;dt&#34;&gt;verbose=&lt;/span&gt;&lt;span class=&#34;ot&#34;&gt;FALSE&lt;/span&gt;) &lt;span class=&#34;co&#34;&gt;# Spatial data reading&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-1&#34; title=&#34;1&#34;&gt;tlb_cities_gis &lt;span class=&#34;op&#34;&gt;%&amp;lt;&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;fortify&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;region =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Codigo&amp;quot;&lt;/span&gt;) &lt;span class=&#34;co&#34;&gt;# %&amp;gt;%             # Conv &amp;quot;spatial object&amp;quot; to data.frame&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-3&#34; title=&#34;3&#34;&gt;  &lt;span class=&#34;co&#34;&gt;# broom::tidy()&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-4&#34; title=&#34;4&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-5&#34; title=&#34;5&#34;&gt;plot_canarias &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;F                              &lt;span class=&#34;co&#34;&gt;# Control param, initial app config&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-6&#34; title=&#34;6&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt;(plot_canarias&lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;F){                           &lt;span class=&#34;co&#34;&gt;# Should be moduled in a funct&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-8&#34; title=&#34;8&#34;&gt;  tlb_cities_gis &lt;span class=&#34;op&#34;&gt;%&amp;lt;&amp;gt;%&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;((long&lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;(lat&lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;4000000&lt;/span&gt;))              &lt;span class=&#34;co&#34;&gt;# Filter peninsular data&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-10&#34; title=&#34;10&#34;&gt;} &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Para terminar, &lt;em&gt;joineamos&lt;/em&gt; los dos datasets creados para conformar el tablón final, el cual vamos a usar como base para crear las gráficas. Apuntar que usamos &lt;em&gt;left join&lt;/em&gt; como forma de mantener los datos geos y no perder coordenadas en el &lt;em&gt;plot&lt;/em&gt;.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-1&#34; title=&#34;1&#34;&gt;tbl_cities_avg_age &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;tlb_cities_gis &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;left_join&lt;/span&gt;(tbl_census_&lt;span class=&#34;dv&#34;&gt;2018&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;by =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;id&amp;quot;&lt;/span&gt; =&lt;span class=&#34;st&#34;&gt; &amp;quot;postal_code&amp;quot;&lt;/span&gt;)) &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Como buena práctica, comprobamos el número de NAs generados a partir de este &lt;em&gt;left join&lt;/em&gt;. Estos NAs serán municipios de los que tenemos coordenadas pero no contamos con información sobre la edad media.&lt;/p&gt;
+&lt;p&gt;Vemos que los valores perdidos representan únicamente el 1% del total de filas, por lo que vamos a imputarlos con el dato del código postal previo. Es cierto que podemos mejorar esta imputación, pero para nuestro propósito será suficiente debido al pequeño porcetaje del total que representan. ¡Vuelve a quedar de tu mano mejorarlo y comentárnoslo!&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb9&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-1&#34; title=&#34;1&#34;&gt;  tbl_cities_avg_age &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(id) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;summarise&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;na =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(avg_age))) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                 &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# NAs by city&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;summarise&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;missing_perc =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(na&lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;length&lt;/span&gt;(na)&lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Perc cities with at least 1 na &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;st&#34;&gt;    &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(missing_perc)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-6&#34; title=&#34;6&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-7&#34; title=&#34;7&#34;&gt;tbl_cities_avg_age &lt;span class=&#34;op&#34;&gt;%&amp;lt;&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;       &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;arrange&lt;/span&gt;(id) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;fill&lt;/span&gt;(avg_age, &lt;span class=&#34;dt&#34;&gt;.direction =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;down&amp;quot;&lt;/span&gt;)            &lt;span class=&#34;co&#34;&gt;# Fill with the previous pc data.&lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;visualización-con-ggplot&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;2.3- Visualización con Ggplot&lt;/h3&gt;
+&lt;p&gt;Inspirado en gran medida en &lt;a href=&#34;http://blog.manugarri.com/making-a-beautiful-map-of-spain-in-ggplot2/&#34; class=&#34;uri&#34;&gt;http://blog.manugarri.com/making-a-beautiful-map-of-spain-in-ggplot2/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Con este dataset final, plotearemos las variables que representan las coordenadas en el eje X e Y y en primer lugar representaremos la edad media mediante la paleta de color. Las tonalidades rojas son asignadas a edades superiores y las azules a las edades medias más jóvenes. Conseguimos esto mediante el &lt;em&gt;aesthetic fill&lt;/em&gt; de Ggplot.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb10&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-1&#34; title=&#34;1&#34;&gt;myPalette &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;colorRampPalette&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;rev&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;brewer.pal&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;11&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;Spectral&amp;quot;&lt;/span&gt;)))      &lt;span class=&#34;co&#34;&gt;# Create reverse Spectral palette&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-2&#34; title=&#34;2&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-3&#34; title=&#34;3&#34;&gt;plot_cities &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ggplot&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_polygon&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;data =&lt;/span&gt; tbl_cities_avg_age, &lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; avg_age,   &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-5&#34; title=&#34;5&#34;&gt;                                         &lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; long, &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-6&#34; title=&#34;6&#34;&gt;                                         &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; lat, &lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-7&#34; title=&#34;7&#34;&gt;                                         &lt;span class=&#34;dt&#34;&gt;group =&lt;/span&gt; id)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;      &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Dummy variable to correct fill by PCode.&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_fill_gradientn&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;colours=&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;myPalette&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                 &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Choose palette colours.&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;labs&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;fill=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Avg age&amp;quot;&lt;/span&gt;)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb10-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;kw&#34;&gt;plot&lt;/span&gt;(plot_cities)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/es/post/de-ggplot-a-3d-en-r-con-rayshader/ggplot_españa_edad_media_municipio.png&#34; height=&#34;790px&#34; width=&#34;790px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;visualización-en-3d-con-rayshader&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;2.4- Visualización en 3D con Rayshader!&lt;/h3&gt;
+&lt;p&gt;El anterior gráfico estaba bastante bien. En el podemos facilmente distinguir los municipios con la edad media más alta y los municipios más jóvenes. Sin embargo, los ojos humanos no son capaces de distinguir fácilmente entre colores próximos ni distinguir la magnitud de las diferencias en esta escala. Por lo tanto, ¿qué tal complementarlo con un nuevo eje?&lt;/p&gt;
+&lt;p&gt;Veamos como hacerlo y que tal queda&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb11-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;plot_gg&lt;/span&gt;(plot_cities,&lt;span class=&#34;dt&#34;&gt;multicore=&lt;/span&gt;&lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;width=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;height=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;scale=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;310&lt;/span&gt;)    &lt;span class=&#34;co&#34;&gt;# Plot_gg de rayshader&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb11-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;render_snapshot&lt;/span&gt;()&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/es/post/de-ggplot-a-3d-en-r-con-rayshader/rayshader_3D_mapa_españa.png&#34; height=&#34;600px&#34; width=&#34;600px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Hmm dijiste algo sobre render_movie()… Qué tal si lo animamos?&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;animación-3d-con-rayshader&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;2.5- Animación 3D con Rayshader&lt;/h3&gt;
+&lt;p&gt;En el gráfico anterior, la variable edad media queda bastante más entendible por el ojo humano en la dimensión añadida. Aquí la elección del ángulo e inclinación correctos es un punto esencial. Pero, ¿y mejoramos la interpretabilidad rotando el gráfico?&lt;/p&gt;
+&lt;p&gt;Esto es de lo que se encarga la siguiente función:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb12&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb12-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;render_movie&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;img/movie_spain.mp4&amp;quot;&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;frames =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;720&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;fps=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;30&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;zoom=&lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;0.6&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;fov =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;30&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;featured.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;style&gt;
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+&lt;/style&gt;
+&lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
+&lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&#34;mojo/signup-forms/Loader&#34;], function(L) { L.start({&#34;baseUrl&#34;:&#34;mc.us4.list-manage.com&#34;,&#34;uuid&#34;:&#34;91551f7ed29389a0de4f47665&#34;,&#34;lid&#34;:&#34;d95c503a48&#34;,&#34;uniqueMethods&#34;:true}) })&lt;/script&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
   </channel>
 </rss>
