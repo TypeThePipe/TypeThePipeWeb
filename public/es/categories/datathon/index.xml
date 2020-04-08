@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Datathon | TypeThePipe</title>
-    <link>https://typethepipe.com/es/categories/datathon/</link>
-      <atom:link href="https://typethepipe.com/es/categories/datathon/index.xml" rel="self" type="application/rss+xml" />
+    <link>/es/categories/datathon/</link>
+      <atom:link href="/es/categories/datathon/index.xml" rel="self" type="application/rss+xml" />
     <description>Datathon</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Mon, 07 Oct 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://typethepipe.com/img/icon-192.png</url>
+      <url>/img/icon-32.png</url>
       <title>Datathon</title>
-      <link>https://typethepipe.com/es/categories/datathon/</link>
+      <link>/es/categories/datathon/</link>
     </image>
     
     <item>
       <title>Plataformas donde puedes participar en competiciones de datos</title>
-      <link>https://typethepipe.com/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/</link>
+      <link>/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/</link>
       <pubDate>Mon, 07 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/</guid>
+      <guid>/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/</guid>
       <description>
 
 

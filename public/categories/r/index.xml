@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R | TypeThePipe</title>
-    <link>https://typethepipe.com/categories/r/</link>
-      <atom:link href="https://typethepipe.com/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    <link>/categories/r/</link>
+      <atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
     <description>R</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 01 Apr 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://typethepipe.com/img/icon-192.png</url>
+      <url>/img/icon-32.png</url>
       <title>R</title>
-      <link>https://typethepipe.com/categories/r/</link>
+      <link>/categories/r/</link>
     </image>
     
     <item>
       <title>Playing with a new R package; Welcome ggcharts!</title>
-      <link>https://typethepipe.com/vizs-and-tips/ggcharts-lollipop-plot-in-r/</link>
+      <link>/vizs-and-tips/ggcharts-lollipop-plot-in-r/</link>
       <pubDate>Wed, 01 Apr 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/ggcharts-lollipop-plot-in-r/</guid>
+      <guid>/vizs-and-tips/ggcharts-lollipop-plot-in-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -115,7 +115,7 @@ It’s maybe telling us that we have improved our skills. Hope it.&lt;/p&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-27&#34; title=&#34;27&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;theme_minimal&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-28&#34; title=&#34;28&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_y_continuous&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;labels=&lt;/span&gt;center_formatter) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-29&#34; title=&#34;29&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;custom_labs&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Well, it’s quite good if you don’t pay attention to the big circles or to the long code to write such an “standard” chart.&lt;/p&gt;
 &lt;p&gt;Here is where &lt;strong&gt;ggcharts&lt;/strong&gt; shines. And it’s only the 0.1.0 version. But having reusable plot templates in a quite flexible way seems such a cool idea for me.&lt;/p&gt;
 &lt;p&gt;See this three-liner approach to the above plot:&lt;/p&gt;
@@ -127,7 +127,7 @@ It’s maybe telling us that we have improved our skills. Hope it.&lt;/p&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; title=&#34;6&#34;&gt;                     &lt;span class=&#34;dt&#34;&gt;labels =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;Above&amp;quot;&lt;/span&gt;=&lt;span class=&#34;st&#34;&gt;&amp;quot;Above the mean&amp;quot;&lt;/span&gt;,&lt;span class=&#34;st&#34;&gt;&amp;quot;Below&amp;quot;&lt;/span&gt;=&lt;span class=&#34;st&#34;&gt;&amp;quot;Below the mean&amp;quot;&lt;/span&gt;), &lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; title=&#34;7&#34;&gt;                     &lt;span class=&#34;dt&#34;&gt;values =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;Above&amp;quot;&lt;/span&gt;=&lt;span class=&#34;st&#34;&gt;&amp;quot;#00ba38&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;Below&amp;quot;&lt;/span&gt;=&lt;span class=&#34;st&#34;&gt;&amp;quot;#f8766d&amp;quot;&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_y_continuous&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;labels=&lt;/span&gt;center_formatter) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;custom_labs &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;That was so cool and quite much cleaner.&lt;/p&gt;
 &lt;p&gt;There are several paths to keep improving its capabilities. So here are some possible enhancements. Ask him for yours… &lt;strong&gt;see you in his ggcharts &lt;a href=&#34;https://github.com/thomas-neitmann/ggcharts&#34;&gt;repo&lt;/a&gt;!&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
@@ -141,7 +141,7 @@ It’s maybe telling us that we have improved our skills. Hope it.&lt;/p&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_y_continuous&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;labels=&lt;/span&gt;center_formatter) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;annotate&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;segment&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;xend =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;5.3&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.55&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;yend =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.7&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;colour =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;annotate&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;text&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;x =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;5.4&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;y =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.75&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;label =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;4.05&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;custom_labs&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/en/vizs-and-tips/ggcharts-lollipop-plot/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Easy Image axis and plot insertion:&lt;/li&gt;
 &lt;/ul&gt;
@@ -172,9 +172,9 @@ It’s maybe telling us that we have improved our skills. Hope it.&lt;/p&gt;
     
     <item>
       <title>Speed up your R scripts. A cool optimized way to load, write and store big data frames with FST package!</title>
-      <link>https://typethepipe.com/vizs-and-tips/speed-up-load-write-files-fst-package-r/</link>
+      <link>/vizs-and-tips/speed-up-load-write-files-fst-package-r/</link>
       <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/speed-up-load-write-files-fst-package-r/</guid>
+      <guid>/vizs-and-tips/speed-up-load-write-files-fst-package-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -279,9 +279,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Drop columns based on NAs percentage in R</title>
-      <link>https://typethepipe.com/vizs-and-tips/selecting-columns-based-on-nas-percentage-r-tidyverse/</link>
+      <link>/vizs-and-tips/selecting-columns-based-on-nas-percentage-r-tidyverse/</link>
       <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/selecting-columns-based-on-nas-percentage-r-tidyverse/</guid>
+      <guid>/vizs-and-tips/selecting-columns-based-on-nas-percentage-r-tidyverse/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -369,9 +369,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Pathfinding Algorithms Visualizer using R! (I) Setting up the interactive grid</title>
-      <link>https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/</link>
+      <link>/post/pathfinding-algorithms-visualizer-using-r/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/</guid>
+      <guid>/post/pathfinding-algorithms-visualizer-using-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -659,9 +659,9 @@ p {
     
     <item>
       <title>Tidylog. Logging your pipelines</title>
-      <link>https://typethepipe.com/vizs-and-tips/tidylog-logging-pipelines-r/</link>
+      <link>/vizs-and-tips/tidylog-logging-pipelines-r/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/tidylog-logging-pipelines-r/</guid>
+      <guid>/vizs-and-tips/tidylog-logging-pipelines-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -770,11 +770,11 @@ However things get increasingly obscure when chaining multiple functions or deal
     
     <item>
       <title>Using summarise_at(). Weighted mean Tidyverse approach</title>
-      <link>https://typethepipe.com/vizs-and-tips/summarise_at-weighted-mean-tidyverse-r/</link>
+      <link>/vizs-and-tips/summarise_at-weighted-mean-tidyverse-r/</link>
       <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/summarise_at-weighted-mean-tidyverse-r/</guid>
+      <guid>/vizs-and-tips/summarise_at-weighted-mean-tidyverse-r/</guid>
       <description>
-&lt;script src=&#34;https://typethepipe.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
@@ -882,9 +882,9 @@ q2_weighted_mean
     
     <item>
       <title>Skills chart using Gplot2 with R</title>
-      <link>https://typethepipe.com/vizs-and-tips/skills-plot-curriculum-r-ggplot/</link>
+      <link>/vizs-and-tips/skills-plot-curriculum-r-ggplot/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/skills-plot-curriculum-r-ggplot/</guid>
+      <guid>/vizs-and-tips/skills-plot-curriculum-r-ggplot/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -988,9 +988,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Reordering bars in GGanimate visualization</title>
-      <link>https://typethepipe.com/vizs-and-tips/reorder-bars-r-ggplot-gganimate/</link>
+      <link>/vizs-and-tips/reorder-bars-r-ggplot-gganimate/</link>
       <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/reorder-bars-r-ggplot-gganimate/</guid>
+      <guid>/vizs-and-tips/reorder-bars-r-ggplot-gganimate/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1087,9 +1087,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Shadowing your ggplot lines. Forecasting confidence interval use case.</title>
-      <link>https://typethepipe.com/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/</link>
+      <link>/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/</link>
       <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/</guid>
+      <guid>/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1177,15 +1177,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(year, value, &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; group)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_ribbon&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;ymin =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std, &lt;span class=&#34;dt&#34;&gt;ymax =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std, &lt;span class=&#34;dt&#34;&gt;group=&lt;/span&gt;group), &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;steelblue2&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;geom_line&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;color =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;firebrick&amp;quot;&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/en/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Conditional Pipes</title>
-      <link>https://typethepipe.com/vizs-and-tips/conditional-pipes-r-tidyverse/</link>
+      <link>/vizs-and-tips/conditional-pipes-r-tidyverse/</link>
       <pubDate>Sat, 02 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/conditional-pipes-r-tidyverse/</guid>
+      <guid>/vizs-and-tips/conditional-pipes-r-tidyverse/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1259,9 +1259,9 @@ This way:&lt;/p&gt;
     
     <item>
       <title>Filtering a data frame by condition on multiple columns</title>
-      <link>https://typethepipe.com/vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse/</link>
+      <link>/vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse/</link>
       <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse/</guid>
+      <guid>/vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1407,9 +1407,9 @@ To be honest, for that purpose it would have been easier to simply use &lt;code&
     
     <item>
       <title>Counting NAs by column in R</title>
-      <link>https://typethepipe.com/vizs-and-tips/counting-nas-by-column-r-benchmark/</link>
+      <link>/vizs-and-tips/counting-nas-by-column-r-benchmark/</link>
       <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/vizs-and-tips/counting-nas-by-column-r-benchmark/</guid>
+      <guid>/vizs-and-tips/counting-nas-by-column-r-benchmark/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1533,9 +1533,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Turn your GGplot to 3D animation. Awesome 2D to 3D plots in R with Rayshader</title>
-      <link>https://typethepipe.com/post/ggplot-to-3d-in-r-with-rayshader/</link>
+      <link>/post/ggplot-to-3d-in-r-with-rayshader/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/post/ggplot-to-3d-in-r-with-rayshader/</guid>
+      <guid>/post/ggplot-to-3d-in-r-with-rayshader/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1606,7 +1606,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;&lt;em&gt;In 7 minutes reading, You will learn how to turn your ggplot visualizations into amazing interactive 3D plots you can export or embed in HTML/Rmarkdown. Or even better, you will export as mp4 an animation rotating the figure.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;As a use case, we are going to join the Spanish demographic data and GIS map, and then visualize it&lt;/em&gt;&lt;/p&gt;
 &lt;hr /&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_header.png&#34; height=&#34;350px&#34; width=&#34;500px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_header.png&#34; height=&#34;350px&#34; width=&#34;500px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;div id=&#34;introduction&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;&lt;strong&gt;1. Introduction&lt;/strong&gt;&lt;/h2&gt;
@@ -1619,7 +1619,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;In my view, Tyler Morgan-Wall (package’s author) hit the jackpot with the new addition of two specific functions. These are plot_gg() and render_movie(). The first one converts the ggplot to a 3D figure using one or two lines of code making it deadly-simple. The second one renders an animation in which we can set up several parameters like zoom, fps, angles and inclinations… as user-friendly as possible.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_repo.png&#34; height=&#34;770px&#34; width=&#34;770px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_repo.png&#34; height=&#34;770px&#34; width=&#34;770px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;div id=&#34;lets-try-these-new-functionalities&#34; class=&#34;section level4&#34;&gt;
 &lt;h4&gt;&lt;strong&gt;Let’s try these new functionalities! &lt;/strong&gt;&lt;/h4&gt;
@@ -1731,7 +1731,7 @@ Moreover we define the required functions and download directories.&lt;/p&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb10-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_fill_gradientn&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;colours=&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;myPalette&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                 &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Choose palette colours.&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb10-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;labs&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;fill=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Avg age&amp;quot;&lt;/span&gt;)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb10-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;kw&#34;&gt;plot&lt;/span&gt;(plot_cities)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/ggplot-to-3d-in-r-with-rayshader/ggplot_spain_map_average_age.png&#34; height=&#34;770px&#34; width=&#34;770px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader/ggplot_spain_map_average_age.png&#34; height=&#34;770px&#34; width=&#34;770px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;d-rayshader-visualization&#34; class=&#34;section level3&#34;&gt;
@@ -1740,7 +1740,7 @@ Moreover we define the required functions and download directories.&lt;/p&gt;
 &lt;p&gt;Let’s see how it works&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb11-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;plot_gg&lt;/span&gt;(plot_cities,&lt;span class=&#34;dt&#34;&gt;multicore=&lt;/span&gt;&lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;width=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;height=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;scale=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;310&lt;/span&gt;)    &lt;span class=&#34;co&#34;&gt;# Plot_gg de rayshader&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb11-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;render_snapshot&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;filename =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;3D_spain&amp;quot;&lt;/span&gt;)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_3D_spain_map.png&#34; height=&#34;600px&#34; width=&#34;600px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/en/post/ggplot-to-3d-in-r-with-rayshader/rayshader_3D_spain_map.png&#34; height=&#34;600px&#34; width=&#34;600px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;Hmm you told something about render_movie()… What if we anime it?&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;

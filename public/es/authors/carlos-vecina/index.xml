@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Carlos Vecina | TypeThePipe</title>
-    <link>https://typethepipe.com/es/authors/carlos-vecina/</link>
-      <atom:link href="https://typethepipe.com/es/authors/carlos-vecina/index.xml" rel="self" type="application/rss+xml" />
+    <link>/es/authors/carlos-vecina/</link>
+      <atom:link href="/es/authors/carlos-vecina/index.xml" rel="self" type="application/rss+xml" />
     <description>Carlos Vecina</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Mon, 30 Mar 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://typethepipe.com/img/icon-192.png</url>
+      <url>/img/icon-32.png</url>
       <title>Carlos Vecina</title>
-      <link>https://typethepipe.com/es/authors/carlos-vecina/</link>
+      <link>/es/authors/carlos-vecina/</link>
     </image>
     
     <item>
       <title>¡Aumenta la velocidad de tus scripts de R!. Optimiza la lectura, escritura y almacenamiento de grandes datasets con el paquete FST</title>
-      <link>https://typethepipe.com/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/</link>
+      <link>/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/</link>
       <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/</guid>
+      <guid>/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -122,9 +122,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Descartando columnas basándonos en su porcentaje de NAs</title>
-      <link>https://typethepipe.com/es/vizs-and-tips/descartando-columnas-porcentaje-nas-r-tidyverse/</link>
+      <link>/es/vizs-and-tips/descartando-columnas-porcentaje-nas-r-tidyverse/</link>
       <pubDate>Mon, 23 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/vizs-and-tips/descartando-columnas-porcentaje-nas-r-tidyverse/</guid>
+      <guid>/es/vizs-and-tips/descartando-columnas-porcentaje-nas-r-tidyverse/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -211,9 +211,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>¡10 consejos para triunfar en tu próximo Kaggle, Datathon o competición de datos!</title>
-      <link>https://typethepipe.com/es/post/10-consejos-datathon-kaggle-data-science/</link>
+      <link>/es/post/10-consejos-datathon-kaggle-data-science/</link>
       <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/post/10-consejos-datathon-kaggle-data-science/</guid>
+      <guid>/es/post/10-consejos-datathon-kaggle-data-science/</guid>
       <description>
 
 &lt;div id=&#34;TOC&#34;&gt;
@@ -391,9 +391,9 @@ p {
     
     <item>
       <title>Visualizador de algoritmos en R! (I) Desarrollando el mapa dinámico</title>
-      <link>https://typethepipe.com/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/</link>
+      <link>/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/</link>
       <pubDate>Tue, 21 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/</guid>
+      <guid>/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -681,11 +681,11 @@ p {
     
     <item>
       <title>Dominando la función summarise_at(). Media ponderada con R en el ecosistema Tidyverse. </title>
-      <link>https://typethepipe.com/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse-r/</link>
+      <link>/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse-r/</link>
       <pubDate>Thu, 16 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse-r/</guid>
+      <guid>/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse-r/</guid>
       <description>
-&lt;script src=&#34;https://typethepipe.com/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
@@ -796,25 +796,25 @@ q2_weighted_mean
     
     <item>
       <title>Lista todas las variables definidas en Jupyter Notebooks</title>
-      <link>https://typethepipe.com/es/vizs-and-tips/magic-whos-metodo-jupyter-notebook/</link>
+      <link>/es/vizs-and-tips/magic-whos-metodo-jupyter-notebook/</link>
       <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/vizs-and-tips/magic-whos-metodo-jupyter-notebook/</guid>
+      <guid>/es/vizs-and-tips/magic-whos-metodo-jupyter-notebook/</guid>
       <description>
 
 
 &lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Una queja o comentario recurrente entre los usuarios que empiezan a usar los Jupyter Notebooks es la falta de informacion sobre las variables y funciones definidas en el entorno. Si te realizas esta pregunta, seguramente necesites informacion sobre el uso y el principal objetivo de estos &lt;em&gt;notebooks&lt;/em&gt;, el cual es muy diferente al de IDEs como Spyder, Pycharm o RStudio.&lt;/p&gt;
 &lt;p&gt;Una vez que confirmamos que este tipo de &lt;em&gt;notebooks&lt;/em&gt; son lo que necesitamos, existen diferentes maneras de mostrar esta información. La primera y más facil de ellas es mediante el método mágico &lt;strong&gt;%whos&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/vizs-and-tips/magic-whos-metodo-jupyter-notebook/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/vizs-and-tips/magic-whos-metodo-jupyter-notebook/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Otras alternativas son, por un lado la extensión &lt;em&gt;nbextension&lt;/em&gt; y dentro de Jupyter Lab el inspector de variables. Puedes encontrar más información &lt;a href=&#34;https://stackoverflow.com/questions/37718907/variable-explorer-in-jupyter-notebook&#34;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Muestra tus habilidades o skills mediante un gráfico en R y su paquete ggplot</title>
-      <link>https://typethepipe.com/es/vizs-and-tips/skills-chart-curriculum-r-ggplot/</link>
+      <link>/es/vizs-and-tips/skills-chart-curriculum-r-ggplot/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/vizs-and-tips/skills-chart-curriculum-r-ggplot/</guid>
+      <guid>/es/vizs-and-tips/skills-chart-curriculum-r-ggplot/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -924,9 +924,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Reordenando gráficos de barras en R con GGanimate</title>
-      <link>https://typethepipe.com/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/</link>
+      <link>/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/</link>
       <pubDate>Mon, 16 Dec 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/</guid>
+      <guid>/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1040,9 +1040,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Muestra los intervalos de confianza de tus predicciones mediante geom_ribbon() con R Ggplot</title>
-      <link>https://typethepipe.com/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</link>
+      <link>/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</link>
       <pubDate>Mon, 18 Nov 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</guid>
+      <guid>/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1138,15 +1138,15 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-13&#34; title=&#34;13&#34;&gt;                  &lt;span class=&#34;dt&#34;&gt;ymax =&lt;/span&gt; value &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;std,&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-14&#34; title=&#34;14&#34;&gt;                  &lt;span class=&#34;dt&#34;&gt;group=&lt;/span&gt;group),&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-15&#34; title=&#34;15&#34;&gt;              &lt;span class=&#34;dt&#34;&gt;fill =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;steelblue2&amp;quot;&lt;/span&gt;) &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/es/vizs-and-tips/grafica-intervalos-confianza-ggplot-geom_ribbon-plot-R/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/es/vizs-and-tips/grafica-intervalos-confianza-ggplot-geom_ribbon-plot-R/index_files/figure-html/unnamed-chunk-3-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 </description>
     </item>
     
     <item>
       <title>Plataformas donde puedes participar en competiciones de datos</title>
-      <link>https://typethepipe.com/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/</link>
+      <link>/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/</link>
       <pubDate>Mon, 07 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/</guid>
+      <guid>/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/</guid>
       <description>
 
 
@@ -1180,9 +1180,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>La mejor manera de hacer recuento de NAs por columna</title>
-      <link>https://typethepipe.com/es/vizs-and-tips/recuento-nas-por-columna-en-r-comparativa/</link>
+      <link>/es/vizs-and-tips/recuento-nas-por-columna-en-r-comparativa/</link>
       <pubDate>Wed, 02 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/vizs-and-tips/recuento-nas-por-columna-en-r-comparativa/</guid>
+      <guid>/es/vizs-and-tips/recuento-nas-por-columna-en-r-comparativa/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1307,9 +1307,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
     
     <item>
       <title>Convierte tu GGplot en una animación 3D con R y Rayshader</title>
-      <link>https://typethepipe.com/es/post/de-ggplot-a-3d-en-r-con-rayshader/</link>
+      <link>/es/post/de-ggplot-a-3d-en-r-con-rayshader/</link>
       <pubDate>Sat, 27 Jul 2019 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/post/de-ggplot-a-3d-en-r-con-rayshader/</guid>
+      <guid>/es/post/de-ggplot-a-3d-en-r-con-rayshader/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -1381,7 +1381,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;em&gt;Podrás embebernos en HTML/Rmarkdown, o incluso mejor, podras exportarlo como mp4 en una animacion rotatoria para sacarle todo el jugo a tus datos!&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;em&gt;Como caso de uso, vamos a visualizar la edad media de los municipios españoles cruzando datos del padrón con los datos GIS, para posteriormente visualizarlos en 3 dimensiones.&lt;/em&gt;&lt;/p&gt;
 &lt;hr /&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/es/post/de-ggplot-a-3d-en-r-con-rayshader/rayshader_header.png&#34; height=&#34;350px&#34; width=&#34;500px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/es/post/de-ggplot-a-3d-en-r-con-rayshader/rayshader_header.png&#34; height=&#34;350px&#34; width=&#34;500px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;div id=&#34;introducción&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;&lt;strong&gt;1. Introducción&lt;/strong&gt;&lt;/h2&gt;
@@ -1394,7 +1394,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;Bajo mi punto de vista, Tyler Morgan-Wall (el autor del paquete) dio con la tecla cuando incorporó al paquete dos nuevas funciones, plot_gg() y render_movie(). La primera de ellas nos permite convertir con 2 líneas de código nuestra visualización en ggplot a una figura 3D de una manera realmente facil y eficiente. La segunda de ellas renderiza esta figura y la anima, poniendo al alcance del usuario diversos parámetros para controlar el zoom, los fps, ángulo, inclinación…&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/es/post/de-ggplot-a-3d-en-r-con-rayshader/rayshader_repositorio_github.png&#34; height=&#34;770px&#34; width=&#34;770px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/es/post/de-ggplot-a-3d-en-r-con-rayshader/rayshader_repositorio_github.png&#34; height=&#34;770px&#34; width=&#34;770px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;div id=&#34;las-nuevas-funcionalidades-y-planteamiento-del-experimento&#34; class=&#34;section level4&#34;&gt;
 &lt;h4&gt;&lt;strong&gt;Las nuevas funcionalidades y planteamiento del experimento&lt;/strong&gt;&lt;/h4&gt;
@@ -1509,7 +1509,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb10-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;scale_fill_gradientn&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;colours=&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;myPalette&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;                 &lt;/span&gt;&lt;span class=&#34;co&#34;&gt;# Choose palette colours.&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb10-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;labs&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;fill=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Avg age&amp;quot;&lt;/span&gt;)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb10-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;kw&#34;&gt;plot&lt;/span&gt;(plot_cities)&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/es/post/de-ggplot-a-3d-en-r-con-rayshader/ggplot_españa_edad_media_municipio.png&#34; height=&#34;790px&#34; width=&#34;790px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/es/post/de-ggplot-a-3d-en-r-con-rayshader/ggplot_españa_edad_media_municipio.png&#34; height=&#34;790px&#34; width=&#34;790px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;visualización-en-3d-con-rayshader&#34; class=&#34;section level3&#34;&gt;
@@ -1518,7 +1518,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;Veamos como hacerlo y que tal queda&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb11-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;plot_gg&lt;/span&gt;(plot_cities,&lt;span class=&#34;dt&#34;&gt;multicore=&lt;/span&gt;&lt;span class=&#34;ot&#34;&gt;TRUE&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;width=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;height=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;,&lt;span class=&#34;dt&#34;&gt;scale=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;310&lt;/span&gt;)    &lt;span class=&#34;co&#34;&gt;# Plot_gg de rayshader&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb11-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;kw&#34;&gt;render_snapshot&lt;/span&gt;()&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/es/post/de-ggplot-a-3d-en-r-con-rayshader/rayshader_3D_mapa_españa.png&#34; height=&#34;600px&#34; width=&#34;600px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/es/post/de-ggplot-a-3d-en-r-con-rayshader/rayshader_3D_mapa_españa.png&#34; height=&#34;600px&#34; width=&#34;600px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;Hmm dijiste algo sobre render_movie()… Qué tal si lo animamos?&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
