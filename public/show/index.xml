@@ -2,14 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Show | TypeThePipe</title>
-    <link>/show/</link>
-      <atom:link href="/show/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/show/</link>
+      <atom:link href="https://typethepipe.com/show/index.xml" rel="self" type="application/rss+xml" />
     <description>Show</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language>
     <image>
-      <url>/img/icon-192.png</url>
+      <url>https://typethepipe.com/img/icon-192.png</url>
       <title>Show</title>
-      <link>/show/</link>
+      <link>https://typethepipe.com/show/</link>
     </image>
     
   </channel>
