@@ -1,0 +1,6922 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+  <meta name="robots" content="index,follow">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Carlos Vecina">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="You could write the condition over each column, but I would like to see you with 100&#43; features">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/vizs-and-tips/calculating-ratios-with-tidyverse/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#0294A5">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155621946-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-155621946-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu7deb2a6bfe7da9ae71f9387d98d158da_12352_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu7deb2a6bfe7da9ae71f9387d98d158da_12352_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/vizs-and-tips/calculating-ratios-with-tidyverse/">
+
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="TypeThePipe">
+  <meta property="og:url" content="/vizs-and-tips/calculating-ratios-with-tidyverse/">
+  <meta property="og:title" content="Calculating ratios with tidyverse | TypeThePipe">
+  <meta property="og:description" content="You could write the condition over each column, but I would like to see you with 100&#43; features"><meta property="og:image" content="/img/icon-32.png">
+  <meta property="twitter:image" content="/img/icon-32.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2019-10-05T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2019-10-05T00:00:00&#43;00:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  <title>Calculating ratios with tidyverse | TypeThePipe</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+  
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_0x70_resize_lanczos_2.png" alt="TypeThePipe"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_0x70_resize_lanczos_2.png" alt="TypeThePipe"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#vizstips"><span>Vizs & Tips</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#people"><span>About Us</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
+<div id="code-folding-buttons" class="btn-group pull-right">
+  <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" data-_extension-text-contrast="">
+    <span>Show/hide code</span> 
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" style="min-width: 50px;">
+  <li><a id="rmd-show-all-code" href="#">Show all</a>
+  </li><li><a id="rmd-hide-all-code" href="#">Hide all</a></li>
+  </ul>
+</div>
+
+
+
+        <article class="article">
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Calculating ratios with tidyverse</h1>
+
+  
+  <p class="page-subtitle">The magic of filter_at.</p>
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  
+  <span><a href="/authors/pablo-canovas/">Pablo Cánovas</a></span>
+  </div>
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    2019-10-05
+  </span>
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/r/">R</a>, <a href="/categories/tidyverse/">Tidyverse</a>, <a href="/categories/tips/">Tips</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+            <div class="article-container">
+              <div class="article-style">
+                
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p>Calculating percentages is a fairly common operation, right?
+However, doing it <a href="../Conditional-pipes">without leaving the pipeflow</a> always forced me to do some bizarre thing such as a double grouping and summarise.</p>
+<p>I am using <a href="../preserving-zero-length-groups">again the nuclear accidents dataset</a>, and try to calculate the percentage of accidents that happened in Europe per year.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">nuclear_accidents &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="st">&quot;https://query.data.world/s/47s7katrhxxd674ulus425k42l5u4s&quot;</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">kable</span>(nuclear_accidents)</a></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:left;">
+Location
+</th>
+<th style="text-align:right;">
+Cost (millions 2013US$)
+</th>
+<th style="text-align:right;">
+INES
+</th>
+<th style="text-align:right;">
+Smyth Magnitude
+</th>
+<th style="text-align:left;">
+Region
+</th>
+<th style="text-align:left;">
+Description
+</th>
+<th style="text-align:right;">
+Fatalities
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+4/26/1986
+</td>
+<td style="text-align:left;">
+Kiev, Ukraine
+</td>
+<td style="text-align:right;">
+259336.0
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+8.0
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Mishandled reactor safety test at Chernobyl nuclear reactor caused steam explosion and meltdown and required massive evacuation.
+</td>
+<td style="text-align:right;">
+4056
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/11/2011
+</td>
+<td style="text-align:left;">
+Fukushima Prefecture, Japan
+</td>
+<td style="text-align:right;">
+166089.0
+</td>
+<td style="text-align:right;">
+7
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+An earthquake and tsunami caused emergency backup generators to fail at the Fukushima Daiichi nuclear power plant and reactors cracked as a result causing fire and meltdown.
+</td>
+<td style="text-align:right;">
+573
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/8/1995
+</td>
+<td style="text-align:left;">
+Tsuruga, Japan
+</td>
+<td style="text-align:right;">
+15500.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+Japan’s only fast breeder reactor Monju suffers serious accident and fire caused by leaking sodium, reactor shutdown for 6 years while extensive repairs are carried out
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/28/1979
+</td>
+<td style="text-align:left;">
+Middletown, Pennsylvania, United States
+</td>
+<td style="text-align:right;">
+10910.0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+7.9
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Equipment failure and operator error contributed to loss of coolant and partial core meltdown at Three Mile Island nuclear reactor.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/11/1957
+</td>
+<td style="text-align:left;">
+Rocky Flats, USA
+</td>
+<td style="text-align:right;">
+8189.0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+5.2
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Fire starts and destroys plutonium processing facility
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/25/1955
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+4400.0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Fire releases up to up to a few tenths of a terabecquerel of radioactivity into the atmosphere
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1/1/1977
+</td>
+<td style="text-align:left;">
+Beloyarsk, USSR
+</td>
+<td style="text-align:right;">
+3500.0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Unit 2 suffers a half core meltdown, repairs take more than a year
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7/14/1955
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+2900.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+-2.4
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Another radioactive leak and remediation operation
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10/12/1969
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+2500.0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Enhanced discharge from the Building B204 stack of about 1.8 TBq beta radioactivity
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/9/1985
+</td>
+<td style="text-align:left;">
+Athens, Alabama, United States
+</td>
+<td style="text-align:right;">
+2114.3
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Instrumentation systems malfunctioned during startup and the Tennessee Valley Authority suspended operations at all three Browns Ferry Units.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2/22/1977
+</td>
+<td style="text-align:left;">
+Jaslovske Bohunice, Czechoslovakia
+</td>
+<td style="text-align:right;">
+1964.5
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Mechanical failure during fuel loading at the KS 150 reactor caused severe corrosion and released radioactivity into the plant area; requiring total decommission.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5/1/1968
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+1900.0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+A month long discharge of radioactivity occurs from Building B230 stack as a result of a failed filter
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/29/1957
+</td>
+<td style="text-align:left;">
+Kyshtym, Chelyabinsk, Soviet Union
+</td>
+<td style="text-align:right;">
+1733.4
+</td>
+<td style="text-align:right;">
+6
+</td>
+<td style="text-align:right;">
+7.3
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Heat exchangers failed at nitrate storage tank at the Mayak Scientific-Production Association spent fuel rod storage facility and caused a massive chemical explosion.
+</td>
+<td style="text-align:right;">
+103
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11/29/1955
+</td>
+<td style="text-align:left;">
+Idaho Falls, Idaho, United States
+</td>
+<td style="text-align:right;">
+1500.0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Suffered a partial meltdown during a coolant flow test
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/19/1971
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+1330.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Sparks from an electric arc ignited radioactive waste in a basement, leading to 0.48 GBq released
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/8/1955
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+1300.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+-2.7
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+A fire occurred in a radioactive waste silo in Building B247
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4/11/1986
+</td>
+<td style="text-align:left;">
+Plymouth, Massachusetts, United States
+</td>
+<td style="text-align:right;">
+1156.7
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Recurring equipment problems with instrumentation, vacuum breakers, instrument air system, and main transformer forced emergency shutdown of Boston Edison’s Pilgrim nuclear facility.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/2/1949
+</td>
+<td style="text-align:left;">
+Hanford, WA, USA
+</td>
+<td style="text-align:right;">
+1100.0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3.8
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Operators release 8,000 curies of iodine-131 over two days known as the “Green Run”
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5/1/1967
+</td>
+<td style="text-align:left;">
+Chapelcross, UK
+</td>
+<td style="text-align:right;">
+1100.0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Fuel element melt and fire in part of core, 2 years of repairs
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/9/1982
+</td>
+<td style="text-align:left;">
+Chernobyl, Ukraine
+</td>
+<td style="text-align:right;">
+1100.0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Partial core melt – fuel assembly channel 62-44 destroyed, irradiation of staff involved in repairing the core
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+08/01/1983
+</td>
+<td style="text-align:left;">
+Pickering, Canada
+</td>
+<td style="text-align:right;">
+1000.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+On August 1, 1983, Pickering reactor 2 had a loss of coolant accident after a pressure tube
+suffered a metre-long rupture. The station was shut down and the four reactors at Pickering
+A were eventually retubed at a cost of about $1 billion
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/26/1973
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+990.0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+An exothermic reaction occurred involving accumulated zirconium fines and solvent in a vessel in the Head End Treatment, exposing 35 workers
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/19/1989
+</td>
+<td style="text-align:left;">
+Vandellòs, Spain
+</td>
+<td style="text-align:right;">
+930.9
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+A fire at one of its turbines caused the malfunction of safety systems at the Vandellòs Nuclear Power Plant and forced one of its 508 MWe units to permanently shut down.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2/1/2010
+</td>
+<td style="text-align:left;">
+Vernon, Vermont, United States
+</td>
+<td style="text-align:right;">
+808.9
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Underground pipes from the Vermont Yankee nuclear power plant deteriorated and leaked radioactive tritium into groundwater supplies in Vermont and resulted in the shutdown of the plant.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6/19/1961
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+800.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+There was a release of plutonium bearing liquid into process cooling water from a leak in an evaporator
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10/5/1966
+</td>
+<td style="text-align:left;">
+Newport, Michigan, United States
+</td>
+<td style="text-align:right;">
+793.9
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Fermi 1, a prototype fast breeder reactor, suffered a partial fuel meltdown
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/21/1972
+</td>
+<td style="text-align:left;">
+Pawling, NY, USA
+</td>
+<td style="text-align:right;">
+788.4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Tube repairs lead to a loss of coolant accident, causing a year long outage
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/26/1985
+</td>
+<td style="text-align:left;">
+Clay Station, California, United States
+</td>
+<td style="text-align:right;">
+776.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Safety and control systems failed at Rancho Seco nuclear reactor and led to the premature closure of the plant.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4/19/2005
+</td>
+<td style="text-align:left;">
+Seascale, United Kingdom
+</td>
+<td style="text-align:right;">
+599.2
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+20 metric tons of uranium and 160 kilograms of plutonium leaked for more than a year from a cracked pipe at the Thermal Oxide Reprocessing (Thorp) plant in Sellafield.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10/17/1969
+</td>
+<td style="text-align:left;">
+Saint-Laurent, France
+</td>
+<td style="text-align:right;">
+541.4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+More than 50 kilograms of uranium fuel at the Saint-Laurent Nuclear Power Plant began to melt after cooling systems failed and forced shutdown and repairs.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/7/1975
+</td>
+<td style="text-align:left;">
+Greifswald, East Germany
+</td>
+<td style="text-align:right;">
+511.5
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Electrical error caused fire in the main trough that destroyed control lines and 5 main coolant pumps.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5/22/1986
+</td>
+<td style="text-align:left;">
+Delta, Pennsylvania, United States
+</td>
+<td style="text-align:right;">
+462.2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Philadelphia Electric Company shut down Peach Bottom units 2 and 3 due to cooling malfunctions and unexplained equipment problems.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/2/1996
+</td>
+<td style="text-align:left;">
+Crystal River, Florida, United States
+</td>
+<td style="text-align:right;">
+444.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Balance-of-plant equipment malfunction forced Florida Power Corporation to shut down Crystal River Unit 3 and make extensive repairs.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5/11/1969
+</td>
+<td style="text-align:left;">
+Rocky Flats, USA
+</td>
+<td style="text-align:right;">
+425.2
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Plutonium fire broke out in the processing section of Building 776, gave 41 firefighters high radiation doses
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5/4/1987
+</td>
+<td style="text-align:left;">
+Kalpakkam, India
+</td>
+<td style="text-align:right;">
+346.7
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+Fast Breeder Test Reactor at Kalpakkam shut down due to pump failures, faulty instrument signals, and turbine malfunctions that led to rupture of reactor core.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2/2/1995
+</td>
+<td style="text-align:left;">
+Kota, Rajasthan, India
+</td>
+<td style="text-align:right;">
+323.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+The Rajasthan Atomic Power Station leaked radioactive helium and heavy water into the Rana Pratap Sagar River requiring a two year shutdown.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5/4/1986
+</td>
+<td style="text-align:left;">
+Hamm-Uentrop, Germany
+</td>
+<td style="text-align:right;">
+308.2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Operator actions to dislodge damaged fuel rod at Experimental High Temperature Gas Reactor released excessive radiation to 4 square kilometers around facility.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2/20/1996
+</td>
+<td style="text-align:left;">
+Waterford, Connecticut, United States
+</td>
+<td style="text-align:right;">
+293.2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Leaking valve forced Northeast Utilities Company to shut down Millstone Units 1 and 2.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/22/1975
+</td>
+<td style="text-align:left;">
+Browns Ferry, Alabama, United States
+</td>
+<td style="text-align:right;">
+277.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Fire burned for seven hours and damaged more than 1,600 control cables for three nuclear reactors, disabling core cooling systems.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/31/1993
+</td>
+<td style="text-align:left;">
+Bulandshahr, Uttar Pradesh, India
+</td>
+<td style="text-align:right;">
+254.7
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+The Narora Atomic Power Station suffered a fire at two of its steam turbine blades that damaged two heavy water reactors and almost led to a meltdown.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7/4/2009
+</td>
+<td style="text-align:left;">
+Hamburg, Germany
+</td>
+<td style="text-align:right;">
+242.9
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+A short circuit in a transformer caused fuel rod damage and an extended shutdown at Vattenfall’s Krümmel nuclear plant.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/15/1971
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+180.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+An abnormal discharge took place from the Building B203 plutonium recovery plant of about 7.4 GBq Pu
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/19/1987
+</td>
+<td style="text-align:left;">
+Lycoming, New York, United States
+</td>
+<td style="text-align:right;">
+173.3
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Fuel rod, waste storage, and water pumping malfunctions forced Niagara Mohawk Power Corporation to shut down Nine Mile Point Unit 1.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2/16/2002
+</td>
+<td style="text-align:left;">
+Oak Harbor, Ohio, United States
+</td>
+<td style="text-align:right;">
+164.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Severe corrosion of control rod forced 24 month outage of Davis-Besse reactor.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/10/1970
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+150.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2.6
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Abnormal discharge of about 1.8 GBq Pu via the Building B230 stack
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/17/1989
+</td>
+<td style="text-align:left;">
+Lusby, Maryland, United States
+</td>
+<td style="text-align:right;">
+139.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Baltimore Gas &amp; Electric’s Calvert Cliff Units 1 and 2 inspections revealed cracks at pressurized heater sleeves and forced extended shutdown.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/13/1980
+</td>
+<td style="text-align:left;">
+Saint-Laurent, France
+</td>
+<td style="text-align:right;">
+133.4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Partial core meltdown involving 20 kg of uranium, repairs take years
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/15/1984
+</td>
+<td style="text-align:left;">
+Athens, Alabama, United States
+</td>
+<td style="text-align:right;">
+127.3
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Safety violations, operator error, and design problems forced 6 year outage at Browns Ferry Unit 2.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8/27/2009
+</td>
+<td style="text-align:left;">
+St. Petersburg, Russia
+</td>
+<td style="text-align:right;">
+127.3
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+A cracked discharge accumulator and malfunctioning feed pump forced the Leningrad Nuclear Power Plant reactor number 3 to close for extended repairs.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1/21/2002
+</td>
+<td style="text-align:left;">
+Manche, France
+</td>
+<td style="text-align:right;">
+117.7
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Control systems and safety valves failed after improper installation of condensers and forced a two month shutdown.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/6/2006
+</td>
+<td style="text-align:left;">
+Erwin, Tennessee, United States
+</td>
+<td style="text-align:right;">
+113.4
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Nuclear fuel services plant spilled 35 litres of highly enriched uranium that required 7 month shutdown.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1/21/2002
+</td>
+<td style="text-align:left;">
+Flamanville, France
+</td>
+<td style="text-align:right;">
+104.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Control systems and safety valves fail after improper installation of condensers, forcing a two month shutdown
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2/10/1970
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Abnormal discharge of Pu via the Building B230 stack
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11/29/1970
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+100.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+An abnormal discharge of about 1.6 GBq Pu took place via the Building B230 stack
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11/30/1975
+</td>
+<td style="text-align:left;">
+Leningrad, Russia
+</td>
+<td style="text-align:right;">
+99.5
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+A fuel channel in Unit 1 suffered a loss of coolant, resulting in the degradation of a nuclear fuel assembly that led to a significant release of radiation lasting for one month
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/6/1972
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+98.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Inadvertent processing of fuel elements from Chapelcross had a high iodine content and release 2.2 TBq
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10/8/1957
+</td>
+<td style="text-align:left;">
+Windscale, United Kingdom
+</td>
+<td style="text-align:right;">
+89.9
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Fire ignited plutonium piles, created radioactive dust which destroyed surrounding dairy farms.
+</td>
+<td style="text-align:right;">
+33
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/10/1989
+</td>
+<td style="text-align:left;">
+Tarapur, Maharashtra, India
+</td>
+<td style="text-align:right;">
+89.9
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+Operators at the Tarapur nuclear power plant discovered the reactor had been leaking radioactive iodine through its cooling structures and discovered radiation levels of iodine-129 more than 700 times normal levels.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5/2/1967
+</td>
+<td style="text-align:left;">
+Dumfries and Galloway, Scotland
+</td>
+<td style="text-align:right;">
+87.7
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Fuel rod caught fire and caused partial meltdown at the Chaplecross Magnox nuclear power station.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/11/1979
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+87.0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+There was a release of plutonium to atmosphere during transfer of low radioactive liquid effluent to Building B242
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/5/1969
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+84.5
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+A spillage of 370 MBq Pu in Building B229 laboratory, leads to substantial discharge
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/20/1996
+</td>
+<td style="text-align:left;">
+Senaca, Illinois, United States
+</td>
+<td style="text-align:right;">
+82.4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Service water system failed and prompted Commonwealth Edison to close LaSalle Units 1 and 2 for more than 2 years.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5/24/1958
+</td>
+<td style="text-align:left;">
+Chalk River, Ontario, Canada
+</td>
+<td style="text-align:right;">
+77.0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Fuel rod caught fire and contaminated half of facility.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/25/1993
+</td>
+<td style="text-align:left;">
+Newport, Michigan, United States
+</td>
+<td style="text-align:right;">
+77.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Detroit Edison Company forced to shut down Fermi Unit 2 after main turbine experienced catastrophic failure due to improper maintenance.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/23/1983
+</td>
+<td style="text-align:left;">
+Buenos Aires, Argentina
+</td>
+<td style="text-align:right;">
+74.9
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+SA
+</td>
+<td style="text-align:left;">
+Operator error during fuel plate reconfiguration caused meltdown in an experimental test reactor.
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1/14/1995
+</td>
+<td style="text-align:left;">
+Wiscasset, Maine, United States
+</td>
+<td style="text-align:right;">
+71.7
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Steam generator tubes cracked at Maine Yankee nuclear reactor and forced the Maine Yankee Atomic Power Company to shutdown for 1 year.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/25/1982
+</td>
+<td style="text-align:left;">
+Buchanan, New York, United States
+</td>
+<td style="text-align:right;">
+64.2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Water and coolant leaks caused damage to steam generator tubes and main generator and forced the New York Power Authority to shut down Indian Point Unit 3.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/27/1999
+</td>
+<td style="text-align:left;">
+Blayais, France
+</td>
+<td style="text-align:right;">
+63.1
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+A storm flooded the Blayais-2 nuclear reactor and forced emergency shutdown after injection pumps and containment safety systems failed from water damage.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2/26/1983
+</td>
+<td style="text-align:left;">
+Pierce, Florida, United States
+</td>
+<td style="text-align:right;">
+62.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Workers discovered damaged thermal shield and core barrel support at St. Lucie Unit 1 which required a 13 month shutdown.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/30/1999
+</td>
+<td style="text-align:left;">
+Ibaraki Prefecture, Japan
+</td>
+<td style="text-align:right;">
+62.1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+Workers at the Tokaimura uranium processing facility tried to save time by mixing uranium in buckets which killed two and injuring 1,200.
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8/6/1970
+</td>
+<td style="text-align:left;">
+Lawrence Livermore, CA, USA
+</td>
+<td style="text-align:right;">
+60.1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3.6
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Accident released about 650,000 curies of tritium as far as 200 miles away
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4/12/1987
+</td>
+<td style="text-align:left;">
+Triscastin, France
+</td>
+<td style="text-align:right;">
+57.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Areva’s Tricastin fast breeder reactor leaked coolant, sodium, and uranium hexachloride and injured workers and contaminated water supplies.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/22/1980
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+55.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Enhanced corrosion in the Building B38 magnox storage silo caused discharges to atmosphere of 35–70 GBq
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/12/1952
+</td>
+<td style="text-align:left;">
+Chalk River, Ontario, Canada
+</td>
+<td style="text-align:right;">
+52.4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Hydrogen explosion damaged reactor interior and released 30 kilograms of uranium oxide particles.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/20/1982
+</td>
+<td style="text-align:left;">
+Lycoming, New York, United States
+</td>
+<td style="text-align:right;">
+52.4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Recirculation system piping failed at Nine Mile Point Unit 1 and forced a 2 year shutdown.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7/4/2008
+</td>
+<td style="text-align:left;">
+Fukushima Province, Japan
+</td>
+<td style="text-align:right;">
+52.4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+Tokyo Electric Power Company’s No. 2 Kurihara Power Plant damaged by 7.2 magnitude earthquake resulted in cracked reactor cooling towers and spent fuel storage facilities and spilled 19 litres of radioactive wastewater.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4/6/1993
+</td>
+<td style="text-align:left;">
+Tomsk, Russia
+</td>
+<td style="text-align:right;">
+51.4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+4.8
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Ice condenser containment systems failed at Indiana Michigan Power Company’s D.C. Cook Units 1 and 2.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8/23/2011
+</td>
+<td style="text-align:left;">
+Mineral, Virginia, United States
+</td>
+<td style="text-align:right;">
+48.2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+A magnitude 5.8 earthquake damaged Dominion Energy’s North Anna Power Station and cracked spent fuel containers and collapsed administrative buildings.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6/16/2005
+</td>
+<td style="text-align:left;">
+Braidwood, Illinois, United States
+</td>
+<td style="text-align:right;">
+47.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Exelon’s Braidwood nuclear station leaked tritium and contaminated local water supplies.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11/1/1983
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+44.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Inadvertent transfer of 59 TBq activity with solvent and crud took place from Building B205 to a sea tank at Building B242
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/5/1996
+</td>
+<td style="text-align:left;">
+Clinton, Illinois, United States
+</td>
+<td style="text-align:right;">
+43.9
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Reactor recirculation pump failed and required Illinois Power Company to shut down Clinton boiling water reactor.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4/10/2003
+</td>
+<td style="text-align:left;">
+Paks, Hungary
+</td>
+<td style="text-align:right;">
+42.8
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Damaged fuel rods hemorrhaged spent fuel pellets and corroded heavy water reactor.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8/22/1985
+</td>
+<td style="text-align:left;">
+Soddy-Daisy, Tennessee, United States
+</td>
+<td style="text-align:right;">
+40.7
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Tennessee Valley Authority Sequoyah Units 1 and 2 failed and forced 3 year shutdown; workers also exposed to excessive levels of radiation.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/7/1983
+</td>
+<td style="text-align:left;">
+Athens, Alabama, United States
+</td>
+<td style="text-align:right;">
+39.6
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Tennessee Valley Authority discovered extensive damage to recirculation system pipeline.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5/16/1995
+</td>
+<td style="text-align:left;">
+Salem, New Jersey, United States
+</td>
+<td style="text-align:right;">
+39.6
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Ventilation systems failed at Public Service Electric &amp; Gas Company’s Salem Units 1 and 2.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6/18/1999
+</td>
+<td style="text-align:left;">
+Shika, Ishikawa, Japan
+</td>
+<td style="text-align:right;">
+39.6
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+Control rod malfunction set off uncontrolled nuclear reaction at Shika Nuclear Power Station’s Unit-1.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/4/1960
+</td>
+<td style="text-align:left;">
+Waltz Mill, USA
+</td>
+<td style="text-align:right;">
+38.0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Core melt accident
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7/26/1959
+</td>
+<td style="text-align:left;">
+Simi Valley, California, United States
+</td>
+<td style="text-align:right;">
+37.5
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Partial core meltdown at Santa Susana Field Laboratory’s Sodium Reactor Experiment.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2/12/1983
+</td>
+<td style="text-align:left;">
+Fork River, New Jersey, United States
+</td>
+<td style="text-align:right;">
+37.5
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Oyster Creek nuclear plant failed safety inspection and was forced to shut down.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10/22/2002
+</td>
+<td style="text-align:left;">
+Kalpakkam, India
+</td>
+<td style="text-align:right;">
+34.2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+Almost 100 kilograms of radioactive sodium at a fast breeder reactor leaked into a purification cabin and ruined a number of valves and operating systems.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8/4/2005
+</td>
+<td style="text-align:left;">
+Indian Point, New York, United States
+</td>
+<td style="text-align:right;">
+34.2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Entergy’s Indian Point Nuclear Plant, located on the Hudson River, leaked tritium and strontium into underground lakes from 1974 to 2005.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7/17/1984
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+33.4
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+A solvent fire in Building B241 effluent treatment plant sludge tank was caused by hot metal from burning operations
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7/16/1979
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+30.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+A fire of magnox swarf and uranium took place in a remote decanning cave in Building B30
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/24/2006
+</td>
+<td style="text-align:left;">
+Jadugoda, India
+</td>
+<td style="text-align:right;">
+28.9
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+One of the pipes carrying radioactive waste from the Jadugoda uranium mill  ruptured and distributed radioactive materials more than 100 square kilometers.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6/9/1985
+</td>
+<td style="text-align:left;">
+Oak Harbor, Ohio, United States
+</td>
+<td style="text-align:right;">
+26.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Loss of feedwater provoked Toledo Edison Company to inspect Davis-Besse facility, where inspectors discovered corroded reactor coolant pumps and shafts .
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1/3/1961
+</td>
+<td style="text-align:left;">
+Idaho Falls, Idaho, United States
+</td>
+<td style="text-align:right;">
+25.7
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Explosion at National Reactor Testing Station
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1/21/1969
+</td>
+<td style="text-align:left;">
+Lucens, Canton of Vaud, Switzerland
+</td>
+<td style="text-align:right;">
+25.7
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Coolant system malfunctioned at underground experimental reactor.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/28/1979
+</td>
+<td style="text-align:left;">
+Loir-et-Cher, France
+</td>
+<td style="text-align:right;">
+25.7
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+A malfunctioning cooling system fused fuel elements together at the Saint Laurent A2 reactor and ruined the fuel assembly and forced an extended shutdown.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6/13/1984
+</td>
+<td style="text-align:left;">
+Platteville, Colorado, United States
+</td>
+<td style="text-align:right;">
+25.7
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Moisture intrusion caused 6 fuel rods to fail at Fort St. Vrain nuclear plant and required emergency shutdown from Public Service Company of Colorado.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7/15/2013
+</td>
+<td style="text-align:left;">
+Shimen, Taiwan
+</td>
+<td style="text-align:right;">
+23.5
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+Typhoon Soulik damaged the Jinshan Nuclear Power Plant by tripping the generator and destroying transmission lines which lead to shutdown and detection of radiation leaks.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4/18/1984
+</td>
+<td style="text-align:left;">
+Delta, Pennsylvania, United States
+</td>
+<td style="text-align:right;">
+20.3
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Philadelphia Electric Company shut down Peach Bottom Unit 2 to due to extensive recirculation system and equipment damage.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6/10/1977
+</td>
+<td style="text-align:left;">
+Waterford, Connecticut, United States
+</td>
+<td style="text-align:right;">
+17.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Hydrogen gas explosion damaged three buildings and forced shutdown of Millstone-1 Pressurized Water Reactor.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8/11/2014
+</td>
+<td style="text-align:left;">
+Lancashire, United Kingdom
+</td>
+<td style="text-align:right;">
+17.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Corrosion and defects found in the boiler units of Heysham 1 and Hartlepool forced four reactors offline for 8 weeks for repairs.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5/1/1969
+</td>
+<td style="text-align:left;">
+Stockholm, Sweden
+</td>
+<td style="text-align:right;">
+16.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Malfunction of valve caused flooding in Agesta pressurized heavy water nuclear reactor.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/5/1989
+</td>
+<td style="text-align:left;">
+Tonopah, Arizona, United States
+</td>
+<td style="text-align:right;">
+16.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Atmospheric dump valves failed at Arizona Public Service Company’s Palo Verde Unit 1 and led to main transformer fire and emergency shut down.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11/24/1989
+</td>
+<td style="text-align:left;">
+Greifswald, Germany (Lubmin)
+</td>
+<td style="text-align:right;">
+15.5
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Three out of six cooling water pumps were switched off for a test. A fourth pump broke down and control of the reactor was lost; ten fuel elements were damaged
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11/5/1975
+</td>
+<td style="text-align:left;">
+Brownsville, Nebraska, United States
+</td>
+<td style="text-align:right;">
+15.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Hydrogen gas explosion damaged the Cooper Nuclear Facility’s Boiling Water Reactor and an auxiliary building.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/17/1987
+</td>
+<td style="text-align:left;">
+Hesse, Germany
+</td>
+<td style="text-align:right;">
+15.0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Stop valve failed at Biblis Nuclear Power plant and contaminated local area.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2/4/1979
+</td>
+<td style="text-align:left;">
+Surry, Virginia, United States
+</td>
+<td style="text-align:right;">
+13.9
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Virginia Electric Power Company manually shut down Surry Unit 2 in response to failed tube bundles in steam generators.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5/16/2004
+</td>
+<td style="text-align:left;">
+Lorraine, France
+</td>
+<td style="text-align:right;">
+13.9
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Sub-standard electrical cables at the Cattenon-2 nuclear reactor caused a fire in an electricity funnel that damaged safety systems.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10/9/1989
+</td>
+<td style="text-align:left;">
+Hadden Neck, Connecticut, USA
+</td>
+<td style="text-align:right;">
+12.9
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+480 fuel rods were damaged during the operating cycle by metal chips present in the coolant system
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/12/1979
+</td>
+<td style="text-align:left;">
+Mihama, Japan
+</td>
+<td style="text-align:right;">
+12.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+Fuel rods at the Mihama Nuclear Power Plant unexpectedly bowed and damaged the fuel supply system.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/9/1997
+</td>
+<td style="text-align:left;">
+Bridgman, Michigan, United States
+</td>
+<td style="text-align:right;">
+12.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Ice condenser containment systems failed at Indiana Michigan Power Company’s D.C. Cook Units 1 and 2.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/12/2011
+</td>
+<td style="text-align:left;">
+Marcoule, France
+</td>
+<td style="text-align:right;">
+12.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Marcoule Centraco nuclear waste site’s oven used to melt radioactive waste exploded and killed one person and burned four others.
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4/5/2012
+</td>
+<td style="text-align:left;">
+Dieppe, France
+</td>
+<td style="text-align:right;">
+12.8
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Leaking oil from a reactor pump caught fire and forced an emergency shutdown of the number 2 reactor of EDF’s Penly Nuclear Power Plant.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8/11/1973
+</td>
+<td style="text-align:left;">
+Palisades, Michigan, United States
+</td>
+<td style="text-align:right;">
+11.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Steam generator leak caused manual shutdown of pressurized water reactor operated by the Consumers Power Company.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6/18/1982
+</td>
+<td style="text-align:left;">
+Senaca, South Carolina, United States
+</td>
+<td style="text-align:right;">
+11.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Feedwater heat extraction line failed at Oconee 2 Pressurized Water Reactor and damaged the thermal cooling system.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1/15/2003
+</td>
+<td style="text-align:left;">
+Bridgman, Michigan, United States
+</td>
+<td style="text-align:right;">
+11.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+A fault in the main transformer at the Donald C. Cook nuclear power plant caused a fire that damaged the main generator and backup turbines.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6/28/2005
+</td>
+<td style="text-align:left;">
+Forsmark, Sweden
+</td>
+<td style="text-align:right;">
+11.8
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Repair work on electric arc shorted out a circuit and caused the Forsmark-1 reactor to shutdown and disconnected from the grid and forced a three-week outage.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6/4/2008
+</td>
+<td style="text-align:left;">
+Ljubljana, Slovenia
+</td>
+<td style="text-align:right;">
+11.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Regulators shut down the Krsko nuclear power plant after the primary cooling system malfunctioned and coolant spilled into the reactor core.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7/4/2008
+</td>
+<td style="text-align:left;">
+Ayrshire and Suffolk, United Kingdom
+</td>
+<td style="text-align:right;">
+11.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+British Energy nuclear reactors (the Largs and the Sizewell B facilities) shutdown after cooling units malfunctioned and damaged emergency systems and triggered blackouts.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2/6/1975
+</td>
+<td style="text-align:left;">
+Leningrad, Russia
+</td>
+<td style="text-align:right;">
+11.4
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+The secondary cooling circuit of Unit 1 ruptured, releasing contaminated water into the environment
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6/14/1985
+</td>
+<td style="text-align:left;">
+Lima, Buenos Aires, Argentina
+</td>
+<td style="text-align:right;">
+11.2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+SA
+</td>
+<td style="text-align:left;">
+Excessive local power in the core caused 46 fuel rods to fail, releasing fuel pellets into the reactor coolant system
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/10/1988
+</td>
+<td style="text-align:left;">
+Surry, Virginia, United States
+</td>
+<td style="text-align:right;">
+10.7
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Refueling cavity seal failed and destroyed internal pipe system at Virginia Electric Power Company’s Surry Unit 2 and forced a 12 month outage.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8/9/2004
+</td>
+<td style="text-align:left;">
+Fukui Prefecture, Japan
+</td>
+<td style="text-align:right;">
+10.7
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+Steam explosion at Mihama Nuclear Power Plant killed 5 workers and injures dozens.
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10/1/1981
+</td>
+<td style="text-align:left;">
+Sellafield, UK
+</td>
+<td style="text-align:right;">
+9.0
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Inadvertent reprocessing of fuel from Oldbury Power Station had only been cooled for 27 days leads to iodine release
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5/25/1999
+</td>
+<td style="text-align:left;">
+Waterford, Connecticut, United States
+</td>
+<td style="text-align:right;">
+8.6
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Steam leak in feedwater heater caused manual shutdown and damaged control board annunicator at the Millstone Nuclear Power Plant.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7/13/2008
+</td>
+<td style="text-align:left;">
+Tricastin, France
+</td>
+<td style="text-align:right;">
+8.6
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+The nuclear power operator Areva reported that dozens of liters of wastewater contaminated with uranium were accidentally poured on the ground and ran into river.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2/14/2014
+</td>
+<td style="text-align:left;">
+Waste Isolation Pilot Plant, New Mexico
+</td>
+<td style="text-align:right;">
+8.2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Mine fire occured at salt hauling truck and required evacuation of the entire facility, extensive cleanup, and hospitalization of six workers for smoke inhalation and radiation exposure.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11/22/1988
+</td>
+<td style="text-align:left;">
+Pickering, Ontario, Canada
+</td>
+<td style="text-align:right;">
+6.6
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Xenon buildup causes damage to 191 fuel rods
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1/20/1965
+</td>
+<td style="text-align:left;">
+Lawrence Livermore, CA, USA
+</td>
+<td style="text-align:right;">
+6.1
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+3.7
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Roughly 350,000 Ci were released from a stack in building 331
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/25/1988
+</td>
+<td style="text-align:left;">
+Pickering, Ontario, Canada
+</td>
+<td style="text-align:right;">
+5.5
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Fuel rod failures caused reactor power to be limited to 50 percent for the remaining six months of the fuel cycle.On November 22, 1988, an operator error damaged 36 fuel bundles. The cooling system was
+contaminated by radioactive iodine that was vented into the environment over several weeks
+following the accident.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7/25/1979
+</td>
+<td style="text-align:left;">
+Saclay, France
+</td>
+<td style="text-align:right;">
+5.4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Radioactive fluids escaped into drains designed for ordinary wastes, seeping into the local watershed at the Saclay BL3 Reactor.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5/22/1986
+</td>
+<td style="text-align:left;">
+Normandy, France
+</td>
+<td style="text-align:right;">
+5.4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+A reprocessing plant at Le Hague malfunctioned and exposed workers to unsafe levels of radiation.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11/17/1991
+</td>
+<td style="text-align:left;">
+Scriba, New York, United States
+</td>
+<td style="text-align:right;">
+5.4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Safety and fire problems forced New York Power Authority to shut down the FitzPatrick nuclear reactor for 13 months.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10/31/1974
+</td>
+<td style="text-align:left;">
+Morris, Grundy County, Illinois, USA
+</td>
+<td style="text-align:right;">
+4.4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Dresden nuclear power plant suffers a xenon transient and minor release of radioactivity
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/10/1983
+</td>
+<td style="text-align:left;">
+Plymouth, Massachusetts, United States
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Recirculation system piping cracked and forced Pilgrim nuclear reactor to shutdown.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6/21/2013
+</td>
+<td style="text-align:left;">
+Wanli, Taiwan
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+Air dampener at the Kuosheng Nuclear Power Plant fell into the busbar and tripped the reactor and caused a shutdown.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/26/1983
+</td>
+<td style="text-align:left;">
+Russellville, Pope County, Arkansas, USA
+</td>
+<td style="text-align:right;">
+4.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Control rod misalignment results in xenon oscillations, damaging the fuel and increasing gaseous activity
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/1/2009
+</td>
+<td style="text-align:left;">
+Cruas-Meysse 4, France
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Vegetation blocked the intake of the cooling system, forcing shutdown and repairs
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/18/1985
+</td>
+<td style="text-align:left;">
+Lacey and Ocean Townships, Ocean County, New Jersey, USA
+</td>
+<td style="text-align:right;">
+3.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Malfunctioning computer causes fuel rod failures and increased levels of gaseous activity
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/8/1981
+</td>
+<td style="text-align:left;">
+Tsuruga, Japan
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+278 workers were exposed to excessive levels of radiation during repair of Tsuruga nuclear plant.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2/3/1993
+</td>
+<td style="text-align:left;">
+Bay City, Texas, United States
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Auxiliary feedwater pumps failed at South Texas Project Units 1 and 2 and required rapid shutdown of both reactors.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/2/1993
+</td>
+<td style="text-align:left;">
+Soddy-Daisy, Tennessee, United States
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Equipment failures and broken pipes caused Tennessee Valley Authority to shut down Sequoyah Unit 1.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2/24/2006
+</td>
+<td style="text-align:left;">
+Rock River, Illinois
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Small fire spreads at Byron Nuclear Generating Station and destroys Refueling Water Storage Tank
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/12/2012
+</td>
+<td style="text-align:left;">
+Wanli, Taiwan
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+Maintenance workers at the Kuosheng Nuclear Power Plant discovered cracked anchor bolts that forced a 3 day shutdown.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/9/1986
+</td>
+<td style="text-align:left;">
+Surry, Virginia, United States
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Steam explosion in Unit 2 cases deadliest accident (fatalities) in US history
+</td>
+<td style="text-align:right;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/9/1983
+</td>
+<td style="text-align:left;">
+Gravel Neck, Surry County, Virginia, USA
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Fuel rods were discovered damaged due to metal chips that had been left in the reactor coolant system
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2/11/1981
+</td>
+<td style="text-align:left;">
+Florida City, Florida, United States
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Florida Light &amp; Power manually shut down Turkey Point Unit 3 after steam generator tubes degraded and failed.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4/14/1984
+</td>
+<td style="text-align:left;">
+Bugey, France
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Electrical cables failed at the command centre of the Bugey nuclear power plant and forced a complete shutdown of one reactor.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4/21/1992
+</td>
+<td style="text-align:left;">
+Southport, North Carolina, United States
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+NRC forced Carolina Power &amp; Light Company to shut down Brunswick Units 1 and 2 after emergency diesel generators failed.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5/13/1992
+</td>
+<td style="text-align:left;">
+Tarapur, Maharashtra, India
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+A malfunctioning tube caused the Tarapur nuclear reactor to release 12 curies of radioactivity.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2/27/1993
+</td>
+<td style="text-align:left;">
+Buchanan, New York, United States
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+New York Power Authority shut down Indian Point Unit 3 after AMSAC system fails.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/29/1999
+</td>
+<td style="text-align:left;">
+Lower Alloways Creek, New Jersey, United States
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Freon leak at Hope Creek Nuclear Facility caused ventilation train chiller to trip that released toxic gas and damaged the cooling system.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7/18/2007
+</td>
+<td style="text-align:left;">
+Kashiwazaki, Japan
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+The Tokyo Electric Power Company’s Kariwa nuclear plant damaged by a 6.8 magnitude earthquake leaked 1,192 litres of radioactive water into the Sea of Japan.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8/12/2009
+</td>
+<td style="text-align:left;">
+Gravelines, France
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Assembly system failed to properly eject spent fuel rods from the Gravelines Nuclear Power Plant and caused the fuel rods to jam and the reactor to shutdown.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1/30/2012
+</td>
+<td style="text-align:left;">
+Rock River, Illinois
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Switchyard component failure and transformer fire at Exelon’s Byron Generating Station’s Unit 2 caused shutdown and tritium steam release to prevent a meltdown.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7/27/1972
+</td>
+<td style="text-align:left;">
+Surry, Virginia, United States
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Two deaths in steam line rupture and accident
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7/16/1971
+</td>
+<td style="text-align:left;">
+Cordova, Illinois, United States
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+An electrician was electrocuted by a live cable at the Quad Cities Unit 1 reactor on the Mississippi River.
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/20/1981
+</td>
+<td style="text-align:left;">
+Baxley, Appling County, Georgia, USA
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Fuel rod failures caused air ejector activity to rise to 0.3 Ci per second
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2/26/1982
+</td>
+<td style="text-align:left;">
+San Clemente, California, United States
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Southern California Company shut down San Onofre Unit 1 because of earthquake concerns.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5/21/1946
+</td>
+<td style="text-align:left;">
+Los Alamos, New Mexico
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Death due to citicality accident at Los Alamos National Laboratory.
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4/13/1958
+</td>
+<td style="text-align:left;">
+Chelyabinsk, Soviet Union
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Three died and one was injured in a super criticality accident at USSR Mayak Complex.
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10/15/1958
+</td>
+<td style="text-align:left;">
+Vinca, Yugoslavia
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Death due to citicality accident at Boris Kidrich Institute.
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/30/1958
+</td>
+<td style="text-align:left;">
+Los Alamos, New Mexico
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Death due to citicality accident at Los Alamos National Laboratory.
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+7/23/1964
+</td>
+<td style="text-align:left;">
+Rhode Island, United States
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Operator death due to super critical accident at Wood River Junction Chemical Process Plant
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4/5/1968
+</td>
+<td style="text-align:left;">
+Chelyabinsk, Soviet Union
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+5
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Technician died from exposure after initiating test at Russian Federal Nuclear Centre.
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2/11/1971
+</td>
+<td style="text-align:left;">
+Moscow, Russia
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Supervisor died after criticality accident at the Kurchatov Institute
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+1/5/1976
+</td>
+<td style="text-align:left;">
+Jaslovske Bohunice, Czechoslovakia
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Leaked carbon dioxide from a KS 150’s reactor coolant system at the Bohunice Nuclear Power Plant fatally suffocated two workers.
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/1/1980
+</td>
+<td style="text-align:left;">
+Leningrad, Russia
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Operator at gamma irradiation facility died from exposure.
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11/22/1980
+</td>
+<td style="text-align:left;">
+San Onofre, California, United States
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Worker cleaning breaker cubicles at San Onofre Pressurized Water Reactor contacted an energized line and was killed by electrocution.
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+9/23/1983
+</td>
+<td style="text-align:left;">
+Buenos Aires, Argentina
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+SA
+</td>
+<td style="text-align:left;">
+Operator death due to criticality accident at the Constituyentes Atomic Centre
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/29/1988
+</td>
+<td style="text-align:left;">
+Burlington, Kansas, United States
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Safety inspector died from electrocution after contacting a mislabeled wire at the Wolf Creek Nuclear Power Plant.
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6/17/1997
+</td>
+<td style="text-align:left;">
+Nizhny Novgorod, Russia
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Technican died from criticality incident at Arzamas-16 Nuclear Centre
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/15/2009
+</td>
+<td style="text-align:left;">
+Oskarshamn, Sweden
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+A maintenance worker repairing a shutdown reactor at the Oskarshamn died after falling from the top of the turbine hall.
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6/18/1988
+</td>
+<td style="text-align:left;">
+Belgium
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Tihange-1 (Belgium) (see 9.2.2.1)
+On 18 June 1988, while the pressurized water reactor was operating, a sudden leak
+occurred in a short, unisolable section of emergency core cooling system (ECCS) piping. The leak
+rate was in the order of 1,300 liters per hour. The source of leakage was a crack – 9 cm long on the
+inside surface of the pipe and 4.5 cm long on the outside surface – extending through the wall of
+the piping. The risk of a pipe rupture in the emergency core cooling system is considerable if the
+emergency safety injection system is activated as large quantities of cooling water are injected in
+case of a loss of coolant accident in an already degraded safety situation.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2/9/1991
+</td>
+<td style="text-align:left;">
+Japan
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+Mihama-2 (Japan) (see 9.2.2.3)
+A steam generator tube rupture occurred at Mihama-2 pressurized water reactor. This was
+the first such incident in Japan where the emergency core cooling system was actuated. The utility
+investigated the rupture and found that it was a complete circumferential tube failure. The utility
+found that the failure due to high cycle fatigue caused by vibration. By design, all tubes in specific
+locations in the steam generator are supposed to be supported by anti-vibration bars. However, the
+subject tube was found not to be supported appropriately because of a reported “incorrect
+insertion” of the adjacent anti-vibration bars.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+4/3/1991
+</td>
+<td style="text-align:left;">
+USA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+3 April 1991 Shearon Harris (USA) (see 9.2.1.1)
+On 3 April 1991 workers at the Shearon Harris pressurized water reactor in New Hill,
+North Carolina discovered damaged piping and valves within the alternate minimum flow system
+provided for the pumps in the emergency core cooling system. The piping and valve damage was
+serious, had an accident occurred the water needed to cool the reactor core would have instead
+poured out onto the floor through the ends of broken components. The NRC calculated the severe
+core damage risk from this event to be 6 x 10-3 or 0.6% per reactor year. The event was not rated
+on the IAEA INES scale.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6/28/1992
+</td>
+<td style="text-align:left;">
+Sweden
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Barseback-2 (Sweden) (see 9.2.7.1)
+A leaking pilot valve in the boiling water reactor in Barseback initiated automatically
+safety functions like reactor scram, high-pressure safety injection, core spray and containment
+spray systems. The steam jet from an open safety valve was impinging on thermally insulated
+equipment. Insulating material was washed into the suppression pool and affected the emergency
+core cooling system, which is essential for heat removal in case of a leak the reactor coolant.
+Similar incidents occurred in several countries and the problem turned out to apply to many, if not
+most, of the light water reactors in the world
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5/12/1988
+</td>
+<td style="text-align:left;">
+France
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+The Civaux-1 pressurized water reactor was shut down for five days, when, during startup
+tests, a 25 cm diameter pipe of the main residual heat removal system cracked open and a large
+leak (30,000 liters per hour) occurred in the primary cooling circuit. The reactor core needs to be
+cooled permanently, even when it is shut down, in order to evacuate the significant amount of
+residual heat of the fuel. It took nine hours to isolate the leak and reach a stable situation. An
+18 cm long crack on a weld was identified and 300 m3 of primary coolant had leaked into the
+reactor building. The unit had been operating for only six months at 50% power level maximum
+prior to the event. The operator, EDF, suggested rating this event at level 1 on the INES scale, but
+the safety authorities decided on level 2.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+3/18/2001
+</td>
+<td style="text-align:left;">
+Tawian
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+The pressurized water reactor was affected by a total loss of external and internal power
+supply. Power supply is crucial to evacuate residual heat from the reactor core. The plant is
+situated near the sea. Salt deposit on insulators due to foggy weather caused instability of the high
+voltage grid. During a switch to the grid a short circuit in a power switch of the emergency power
+line occurred and caused a cable fire. A breaker and switchgear was totally destroyed by the fire
+and the diesel generators could not be started up manually because of heavy smoke. It took about
+two hours to restore power supply.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+8/12/2001
+</td>
+<td style="text-align:left;">
+Germany
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Philippsburg (Germany) (see 9.2.3.1)
+A deviation from the specified boron concentration – a neutron absorber needed to slow
+down or stop the nuclear reaction – in several flooding storage tanks during the restart of the plant
+was reported to the authorities. In addition, the liquid level had not reached the required value
+fixed in the operational instructions for the start-up and was only implemented with a delay. The
+emergency core cooling system will only work effectively if it is operated according to the design
+basis conditions. Subsequent investigations revealed that significant deviations from start-up
+requirements and violations from related instructions seemed to be common probably for several
+years and took place in other German nuclear plants.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/14/2001
+</td>
+<td style="text-align:left;">
+Germany
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Brunsbüttel (Germany) (see 9.2.5.1)
+A hydrogen explosion caused a high degree of damage to the spray system piping of the
+boiling water reactor. The head spray line is used for cooling the inner surface of the reactor
+pressure vessel head and the flange area upon plant shutdown. Some parts of the 5.6 mm diameter
+pipes were ruptured. An approximately 2.7 m long piping section had burst and was completely
+destroyed. Some sections of the piping were missing. Prior to this event the possibility of severe
+explosions caused by radiolysis gas during normal operation was nearly excluded
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+5/1/2005
+</td>
+<td style="text-align:left;">
+Bulgaria
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Kozloduy-5 (Bulgaria) (see 9.2.3.2)
+In the process of power reduction at the Russian designed pressurized water reactor
+(WWER) the operators identified that three control rod assemblies remained in the upper end
+position. The follow-up movement tests of the remaining control rod assemblies identified that 22
+out of 61 could not be moved with the driving mechanisms. The exact number of control rod
+assemblies unable to scram (to drop due to the gravity only) remains unknown but it is thought to
+be between 22 and 55. The WWER-1000 scram system is designed to put the reactor in safe
+shutdown if one control rod assembly at the most is jammed in the upper position. The operator
+had originally rated the incident INES level 0, but the safety authorities finally admitted to a level
+2 rating.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+6/25/2006
+</td>
+<td style="text-align:left;">
+Sweden
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Forsmark, Sweden (see 9.2.6.2)
+A short circuit in an outdoor switching station of the grid nearby the boiling water reactors
+caused the emergency shutdown (scram) of unit 1 and, in a complex scenario, led to a number of
+subsequent failures at the plant. Due to a design error, the disconnection of the plant from the grid
+and the switch to house load operation – where the power plant uses its own power to operate
+essential auxiliaries – did not function as planned. An inappropriate converter adjustment led to
+the failure of the attempt to connect safety related equipment to the emergency power supply. The
+start up of two of the four emergency diesel generators was aborted, which lead to a partial
+blackout even in the main control room. Due to the lack of information about the important
+parameters for a period of time the exact state of the plant and the consequences of potential
+actions to perform were unclear. The shift team decided nevertheless to try to reconnect the plant
+to the grid, which was performed successfully.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+08/18/2015
+</td>
+<td style="text-align:left;">
+Blayais, France
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Accidental overexposure of a worker to a dose of ionising radiation exceeding regulation limits
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+05/28/2015
+</td>
+<td style="text-align:left;">
+Cattenom, France
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Unexpected opening of a secondary system valve which resulted in a steam release
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11/28/2014
+</td>
+<td style="text-align:left;">
+Zaporizhia, Ukrain
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Disconnection of the unit 3 of the plant from the grid
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+05/17/2014
+</td>
+<td style="text-align:left;">
+Tarapur, Maharashtra, India
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+Overexpossure of a worker during a transfer operation of irradiated neutron detector
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10/08/2013
+</td>
+<td style="text-align:left;">
+Krsko, Slovenia
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Discovery of damaged fuel rods during unloading and fuel inspections
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+02/12/2013
+</td>
+<td style="text-align:left;">
+Puspokszilagy, Hungary
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Three workers were expossed to radiation while handling radioactive waste
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+09/26/2013
+</td>
+<td style="text-align:left;">
+Petten, Netherlands
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Three out of six control rods were found to show deficiences, the plant had to shut down for 5 months
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+05/30/2013
+</td>
+<td style="text-align:left;">
+Forsmark, Sweden
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Emergency generator failed to start after loss of two phases in the incoming supply
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+04/24/2013
+</td>
+<td style="text-align:left;">
+Blayais, France
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Accidental overexposure of a worker beyond regulatory limit
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10/24/2012
+</td>
+<td style="text-align:left;">
+Flamanville, France
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Leak on the auxialliary line of the reactor’s coolant system
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+09/26/2012
+</td>
+<td style="text-align:left;">
+Drôme, France
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Non-complience to regulations applicable to labelling, storage and transfer of wet fissible materials
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+05/09/2012
+</td>
+<td style="text-align:left;">
+Paks, Hungary
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+EE
+</td>
+<td style="text-align:left;">
+Deviation from specifications on a maintenance task due to lack of written instructions
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+06/23/2012
+</td>
+<td style="text-align:left;">
+Rajasthan, India
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+Exposure of workers to tritium
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+05/04/2012
+</td>
+<td style="text-align:left;">
+Penly, France
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+As a concequence of fire radioactive water leaked into the collection tanks inside the reactor buldings
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+09/01/2012
+</td>
+<td style="text-align:left;">
+Busan, South Korea
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+Station blackout occurred when back up generator failed to start while primary generator was out of service for maintenance
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/22/2011
+</td>
+<td style="text-align:left;">
+Bosco Marengo, Italy
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Fire in the decontamination machine of a former plant
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+12/21/2011
+</td>
+<td style="text-align:left;">
+Cattenom, France
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Absence of siphon-breakers in two out of the four reactors of the facility
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+10/19/2011
+</td>
+<td style="text-align:left;">
+Karachi, Pakistan
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+The nuclear power plant imposed a seven-hour emergency after heavy water leaked from a feeder pipe to the reactor
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+09/21/2011
+</td>
+<td style="text-align:left;">
+Codolet, France
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+One worker died and four were injured when an explosion in the nuclear facility triggered a fire
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+03/11/2011
+</td>
+<td style="text-align:left;">
+Onagawa, Japan
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+The cooling system of the reactor failed due to an earthquake, however the reactor had allready been shut down before the earthquake
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+02/16/2011
+</td>
+<td style="text-align:left;">
+Tricastin, France
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Failed back-up diesel generator was discovered during a periodic test
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11/19/2003
+</td>
+<td style="text-align:left;">
+La Hague, France
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Worker was contaminated by plutonium during a dust remova opperation
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+06/10/2009
+</td>
+<td style="text-align:left;">
+Cadarache, France
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Underestimation of plutonium deposits in the facility glove boxes, operations suspended for a month
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+08/27/2008
+</td>
+<td style="text-align:left;">
+Trhange, Belgium
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+Maintenance operations revealed last Thursday that a fan for the management of air between
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11/22/2002
+</td>
+<td style="text-align:left;">
+Trhange, Belgium
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+WE
+</td>
+<td style="text-align:left;">
+On November 22, 2002, an incident occurred in Block 2 (INES 2). The reactor was shut down at this time and no longer critical. However it remained necessary for decay heat to be removed from the reactor by circulating coolant. The November 22 incident involved accidental opening of a pressure relief valve. This caused the high pressure primary coolant circuit to rapidly depressurize, therefore reducing the ability of the circuit to remove heat from the reactor (the high pressure prevents the coolant - water - from boiling), leading to possible reactor overheating and eventual meltdown. The pressure relief valve was closed again after three minutes.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+05/12/1988
+</td>
+<td style="text-align:left;">
+Civaux, France
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+A large leak of coolant into the reactor building occurred when a pipe cracked open
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+11/03/1997
+</td>
+<td style="text-align:left;">
+Ibaraki Prefecture, Japan
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+3
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+A
+</td>
+<td style="text-align:left;">
+At least 37 workers were expossed to elevated levels of radiation after a small explosion in the plant. A week after high levels of Calcium were detected 25 miles south-west of the plant
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+05/15/1996
+</td>
+<td style="text-align:left;">
+Morris, Grundy County, Illinois, USA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Plunging water levels around the nuclear fuel in the reactor’s core prompt shut down at Dresden Generating Station,
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+03/11/1978
+</td>
+<td style="text-align:left;">
+Pinawa, Manitoba, Canada
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+The reactor which was cooled by a type of oil, terphenyl isomer, experienced a major coolant leak as one of the pipes developed a hole and 2,739 litres of oil escaped. It took several weeks for workers to find and repair the leak. Much of the leaked oil was then discharged into the Winnipeg River. According to Dr. Agnes Bishop of the Atomic Energy Control Board, (later the CNSC), the fuel reached “high temperatures”.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+09/25/1990
+</td>
+<td style="text-align:left;">
+Pickering, Canada
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Pickering reactor 2 experienced large power shifts in the reactor
+core. Staff spent two days trying to stabilize it before shutting it down. The AECB later
+criticized the utility for not shutting down immediately.
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+08/02/1992
+</td>
+<td style="text-align:left;">
+Pickering, Canada
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:left;">
+NA
+</td>
+<td style="text-align:left;">
+Pickering reactor 4 had a heavy water leak from a heat exchanger that
+resulted in a release of 50 trillion becquerels of tritium into Lake Ontario
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">nuclear_accidents &lt;-<span class="st"> </span>nuclear_accidents <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Year =</span> Date <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mdy</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">year</span>(),</a>
+<a class="sourceLine" id="cb2-3" title="3">         <span class="dt">InEurope =</span> <span class="kw">if_else</span>(Region <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;EE&quot;</span>, <span class="st">&quot;WE&quot;</span>), T, F) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">as.factor</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="st">  </span><span class="kw">filter</span>(Year <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">between</span>(<span class="dv">1989</span>, <span class="dv">2016</span>))</a></code></pre></div>
+<p>This can be achieved by several ways. One common path would be:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">nuclear_accidents <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Year, InEurope) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Year) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Total_per_year =</span> <span class="kw">sum</span>(N), </a>
+<a class="sourceLine" id="cb3-6" title="6">         <span class="dt">Ratio =</span> N<span class="op">/</span>Total_per_year)</a></code></pre></div>
+<pre><code>## # A tibble: 40 x 5
+## # Groups:   Year [24]
+##     Year InEurope     N Total_per_year Ratio
+##    &lt;dbl&gt; &lt;fct&gt;    &lt;int&gt;          &lt;int&gt; &lt;dbl&gt;
+##  1  1989 FALSE        4              6 0.667
+##  2  1989 TRUE         2              6 0.333
+##  3  1990 FALSE        1              1 1    
+##  4  1991 FALSE        3              3 1    
+##  5  1992 FALSE        3              4 0.75 
+##  6  1992 TRUE         1              4 0.25 
+##  7  1993 FALSE        5              6 0.833
+##  8  1993 TRUE         1              6 0.167
+##  9  1995 FALSE        4              4 1    
+## 10  1996 FALSE        5              5 1    
+## # ... with 30 more rows</code></pre>
+<p>Another one more bizarre would be totalizing first, then grouping including that amount (to avoid being dropped) and then summarise.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">nuclear_accidents <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Year) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Total_per_year =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="st">  </span><span class="kw">group_by</span>(Year, InEurope, Total_per_year) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">N =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Ratio =</span> N<span class="op">/</span>Total_per_year)</a></code></pre></div>
+<pre><code>## # A tibble: 40 x 5
+## # Groups:   Year, InEurope [40]
+##     Year InEurope Total_per_year     N Ratio
+##    &lt;dbl&gt; &lt;fct&gt;             &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
+##  1  1989 FALSE                 6     4 0.667
+##  2  1989 TRUE                  6     2 0.333
+##  3  1990 FALSE                 1     1 1    
+##  4  1991 FALSE                 3     3 1    
+##  5  1992 FALSE                 4     3 0.75 
+##  6  1992 TRUE                  4     1 0.25 
+##  7  1993 FALSE                 6     5 0.833
+##  8  1993 TRUE                  6     1 0.167
+##  9  1995 FALSE                 4     4 1    
+## 10  1996 FALSE                 5     5 1    
+## # ... with 30 more rows</code></pre>
+<p>Kind of weird.
+However, there is a much simpler way:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">nuclear_accidents <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Year, InEurope) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">N =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Percentage =</span> N <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(N) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>) </a></code></pre></div>
+<pre><code>## # A tibble: 40 x 4
+## # Groups:   Year [24]
+##     Year InEurope     N Percentage
+##    &lt;dbl&gt; &lt;fct&gt;    &lt;int&gt;      &lt;dbl&gt;
+##  1  1989 FALSE        4       66.7
+##  2  1989 TRUE         2       33.3
+##  3  1990 FALSE        1      100  
+##  4  1991 FALSE        3      100  
+##  5  1992 FALSE        3       75  
+##  6  1992 TRUE         1       25  
+##  7  1993 FALSE        5       83.3
+##  8  1993 TRUE         1       16.7
+##  9  1995 FALSE        4      100  
+## 10  1996 FALSE        5      100  
+## # ... with 30 more rows</code></pre>
+<p>The first time I saw this result I didn’t understand it because if you have your dataframe grouped by <code>Year</code> and <code>InEurope</code> then <code>sum(N)</code> should be equal to <code>N</code>.
+What is going on?
+This behaviour has to do with a tricky funcionality of <code>summarise</code>.</p>
+<p>Take a closer look of the grouping variables.
+Before the summarise function the dataframe seems grouped normally and the operation will be performed within each group:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">nuclear_accidents <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Year, InEurope) </a></code></pre></div>
+<pre><code>## # A tibble: 103 x 10
+## # Groups:   Year, InEurope [40]
+##    Date  Location `Cost (millions~  INES `Smyth Magnitud~ Region Description
+##    &lt;chr&gt; &lt;chr&gt;               &lt;dbl&gt; &lt;dbl&gt;            &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt;      
+##  1 3/11~ Fukushi~          166089      7              7.5 A      An earthqu~
+##  2 12/8~ Tsuruga~           15500     NA             NA   A      Japan&#39;s on~
+##  3 12/1~ Vandell~             931.     3             NA   WE     A fire at ~
+##  4 2/1/~ Vernon,~             809.    NA             NA   &lt;NA&gt;   Undergroun~
+##  5 4/19~ Seascal~             599.     3             NA   WE     20 metric ~
+##  6 9/2/~ Crystal~             444.    NA             NA   &lt;NA&gt;   Balance-of~
+##  7 2/2/~ Kota, R~             323.    NA             NA   A      The Rajast~
+##  8 2/20~ Waterfo~             293.    NA             NA   &lt;NA&gt;   Leaking va~
+##  9 3/31~ Bulands~             255.    NA             NA   A      The Narora~
+## 10 7/4/~ Hamburg~             243.    NA             NA   WE     A short ci~
+## # ... with 93 more rows, and 3 more variables: Fatalities &lt;dbl&gt;, Year &lt;dbl&gt;,
+## #   InEurope &lt;fct&gt;</code></pre>
+<p>However, once the dataframe is summarized, the resulting dataframe is no longer grouped by the same original variables:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">nuclear_accidents <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Year, InEurope) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">N =</span> <span class="kw">n</span>())</a></code></pre></div>
+<pre><code>## # A tibble: 40 x 3
+## # Groups:   Year [24]
+##     Year InEurope     N
+##    &lt;dbl&gt; &lt;fct&gt;    &lt;int&gt;
+##  1  1989 FALSE        4
+##  2  1989 TRUE         2
+##  3  1990 FALSE        1
+##  4  1991 FALSE        3
+##  5  1992 FALSE        3
+##  6  1992 TRUE         1
+##  7  1993 FALSE        5
+##  8  1993 TRUE         1
+##  9  1995 FALSE        4
+## 10  1996 FALSE        5
+## # ... with 30 more rows</code></pre>
+<p>Actually, <strong>the default behaviour of summarise is to drop the last group</strong>. The reason behind that is that, once the operation is performed you should have only one obervation per group, and it has no sense to grouping by it anymore.
+This is the reason the last example I show above works.
+Now you can take advantage of it too!</p>
+<p>Besides, you can learn more about the <a href="https://www.tidyverse.org/blog/2020/05/dplyr-1-0-0-last-minute-additions/">dplyr 1.0.0 last minute additions</a> which include an explicit message to highlight the behaviour we have talked about here.</p>
+
+              </div>
+              
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/vizs-and-tips/calculating-ratios-with-tidyverse/&amp;text=Calculating%20ratios%20with%20tidyverse" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/vizs-and-tips/calculating-ratios-with-tidyverse/&amp;t=Calculating%20ratios%20with%20tidyverse" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Calculating%20ratios%20with%20tidyverse&amp;body=/vizs-and-tips/calculating-ratios-with-tidyverse/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/vizs-and-tips/calculating-ratios-with-tidyverse/&amp;title=Calculating%20ratios%20with%20tidyverse" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Calculating%20ratios%20with%20tidyverse%20/vizs-and-tips/calculating-ratios-with-tidyverse/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/vizs-and-tips/calculating-ratios-with-tidyverse/&amp;title=Calculating%20ratios%20with%20tidyverse" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+
+
+
+
+
+  
+  
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/authors/pablo-canovas/pablo-avatar_hubb0481beec833bd3372f12c0d11fcb35_605192_270x270_fill_lanczos_center_2.png" alt="Pablo Cánovas">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/authors/pablo-canovas/">Pablo Cánovas</a></h5>
+      <h6 class="card-subtitle">Data Scientist at Repsol Electricidad y Gas</h6>
+      <p class="card-text">Data Scientist, formerly physicist  |  Tidyverse believer, piping life  |  Hanging out at TypeThePipe</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/paul_elotro" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/pablo-c%c3%a1novas-tourn%c3%a9-2507b6b7" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/PabloCanovas" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+            </div>
+        </article>
+  
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.37431be2d92d7fb0160054761ab79602.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
+    
+     
+  <script>
+  $(document).ready(function () {
+    window.initializeCodeFolding("show" === "hide");
+  });
+  </script>
+  <script src="/js/codefolding.js"></script>
+
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+  <p class="powered-by">
+    
+      <a href="/privacy/">Privacy Policy</a>
+    
+    
+       &middot; 
+      <a href="/terms/">Terms</a>
+    
+  </p>
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+	<a href="https://www.r-bloggers.com/">
+	<img border="0" alt="R Bloggers icon" src="/img/r_bloggers.png" width="100" height="100">
+	</a>
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

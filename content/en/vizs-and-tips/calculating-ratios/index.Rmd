@@ -1,0 +1,100 @@
+---
+title: Calculating ratios with tidyverse
+author: Pablo Cánovas Tourné
+date: '2019-10-05'
+slug: calculating-ratios-with-tidyverse
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+  - R
+  - Tidyverse
+  - Tips
+tags: []
+subtitle: 'The magic of filter_at.'
+summary: "You could write the condition over each column, but I would like to see you with 100+ features"
+authors: [pablo-canovas]
+---
+
+Calculating percentages is a fairly common operation, right?
+However, doing it [without leaving the pipeflow](../Conditional-pipes) always forced me to do some bizarre thing such as a double grouping and summarise.
+
+I am using [again the nuclear accidents dataset](../preserving-zero-length-groups), and try to calculate the percentage of accidents that happened in Europe per year.
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(lubridate)
+library(knitr)
+library(kableExtra)
+```
+
+```{r, message=FALSE}
+nuclear_accidents <- read_csv("https://query.data.world/s/47s7katrhxxd674ulus425k42l5u4s")
+kable(nuclear_accidents)
+```
+```{r}
+nuclear_accidents <- nuclear_accidents %>% 
+  mutate(Year = Date %>% mdy() %>% year(),
+         InEurope = if_else(Region %in% c("EE", "WE"), T, F) %>% as.factor()) %>% 
+  filter(Year %>% between(1989, 2016))
+  
+```
+
+This can be achieved by several ways. One common path would be:
+
+```{r}
+nuclear_accidents %>% 
+  group_by(Year, InEurope) %>% 
+  summarise(N = n()) %>% 
+  group_by(Year) %>% 
+  mutate(Total_per_year = sum(N), 
+         Ratio = N/Total_per_year)
+```
+
+Another one more bizarre would be totalizing first, then grouping including that amount (to avoid being dropped) and then summarise. 
+
+```{r}
+nuclear_accidents %>% 
+  group_by(Year) %>% 
+  mutate(Total_per_year = n()) %>% 
+  group_by(Year, InEurope, Total_per_year) %>% 
+  summarise(N = n()) %>% 
+  mutate(Ratio = N/Total_per_year)
+```
+
+
+Kind of weird.
+However, there is a much simpler way:
+
+```{r}
+nuclear_accidents %>% 
+  group_by(Year, InEurope) %>%
+  summarize(N = n()) %>%
+  mutate(Percentage = N / sum(N) * 100) 
+```
+
+The first time I saw this result I didn't understand it because if you have your dataframe grouped by ```Year``` and ```InEurope``` then ```sum(N)``` should be equal to ```N```. 
+What is going on?
+This behaviour has to do with a tricky funcionality of ```summarise```.
+
+Take a closer look of the grouping variables.
+Before the summarise function the dataframe seems grouped normally and the operation will be performed within each group:
+
+```{r}
+nuclear_accidents %>% 
+  group_by(Year, InEurope) 
+```
+
+However, once the dataframe is summarized, the resulting dataframe is no longer grouped by the same original variables:
+```{r}
+nuclear_accidents %>% 
+  group_by(Year, InEurope) %>%
+  summarize(N = n())
+```
+
+Actually, **the default behaviour of summarise is to drop the last group**. The reason behind that is that, once the operation is performed you should have only one obervation per group, and it has no sense to grouping by it anymore.
+This is the reason the last example I show above works.
+Now you can take advantage of it too!
+
+Besides, you can learn more about the [dplyr 1.0.0 last minute additions](https://www.tidyverse.org/blog/2020/05/dplyr-1-0-0-last-minute-additions/) which include an explicit message to highlight the behaviour we have talked about here.
