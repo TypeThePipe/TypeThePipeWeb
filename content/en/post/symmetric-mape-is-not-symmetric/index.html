@@ -1,13 +1,13 @@
 ---
-title: "Symmetric MAPE is not symmetric"
-author: "Pablo Cánovas Tourné"
+title: Symmetric MAPE is not symmetric
+author: Pablo Cánovas Tourné
 date: '2019-08-26'
-slug: "symmetric-mape-is-not-symmetric-data-science"
+slug: symmetric-mape-is-not-symmetric
 categories:
   - Metrics
   - Post
 tags: []
-subtitle: "Symmetric MAPE is not symmetric. Against all odds, it isn't. And TypeThePipe is showing you why."
+subtitle: "Against all odds, it isn't. And TypeThePipe is showing you why."
 summary: "Against all odds, it isn't"
 authors: [pablo-canovas]
 math: TRUE
@@ -17,7 +17,7 @@ math: TRUE
 
 
 <div id="introduction" class="section level2">
-<h2>Introduction</h2>
+<h2><strong>Introduction</strong></h2>
 <p>I recently came across <a href="https://robjhyndman.com/hyndsight/smape">this interesting discussion</a> about percentage errors and I would like to talk about MAPE and its characteristics.</p>
 <p>MAPE is the acronym of Mean Absolute Percentage Error and is defined as</p>
 <p><span class="math display">\[MAPE = \frac{100}{N} \sum_{t=1}^{N} \frac{|A_t - F_t|}{|A_t|}\]</span></p>
@@ -28,7 +28,7 @@ It is easy to calculate and communicate and probably that is why it has been wid
 <p>However, it suffers from some known issues.</p>
 </div>
 <div id="the-problems" class="section level2">
-<h2>The problems</h2>
+<h2><strong>The problems</strong></h2>
 <ul>
 <li><p>MAPE ranges from 0 to <span class="math inline">\(\infty\)</span>: it diverges with <span class="math inline">\(A_t \to 0\)</span> which leads to problems when dealing with data with zero values such as intermittent demand data or energy forecasting.
 This problem is even worse when working with data with arbitrary zero values, e.g, forecasting temperatures near 0<span class="math inline">\(^o\)</span> in Celsius or Fahrenheit scale. To be fair, this would be an issue using any percentage error metric.</p></li>
@@ -153,7 +153,7 @@ MAPE
 </table>
 </div>
 <div id="thesolution" class="section level2">
-<h2>The…solution?</h2>
+<h2><strong>The…solution?</strong></h2>
 <p>Trying to solve the alledgelly asymmetry, some alternative versions have been proposed. The more general one is:</p>
 <p><span class="math display">\[ sMAPE = \frac{200}{N} \sum_{t=1}^{N}\frac{|A_t - F_t|}{|A_t| + |F_t|} \]</span></p>
 <p>First thing to notice is that the range of this symmetric MAPE is <span class="math inline">\(\big[0,200 \big]\)</span> which is somewhat antiintuitive. I can’t see myself explaining model deviations in such metric to anybody with a non-technical background.
@@ -303,7 +303,7 @@ sMAPE
 <p>Taking all this into account, the proposed metric seems to be even worse than the original one. Quite surprising!</p>
 </div>
 <div id="an-alternative" class="section level2">
-<h2>An alternative</h2>
+<h2><strong>An alternative</strong></h2>
 <p>Some others have proposed the log ratio <span class="math inline">\(ln(F_t/A_t)\)</span> as a better alternative to MAPE.
 It shows, indeed, better statistical properties than others metrics:</p>
 <ul>
@@ -314,5 +314,5 @@ It shows, indeed, better statistical properties than others metrics:</p>
 </ul>
 <p>If interested in more information about this less-known metric, check out <a href="https://poseidon01.ssrn.com/delivery.php?ID=912071094074109094069115029093025110000069085067010018086003069122074000022002100121034011107062116011014121092068067002120016015069090069028013066084099122096112019086019005105020067099126068064011082116019102096003091124077118086097090097087121114&amp;EXT=pdf">A better measure of relative prediction accuracy for model selection and model estimation (Chris Tofallis, 2015)</a></p>
 <p>I hope this may have brought some light into this quirky behaviour of MAPE and sMAPE.</p>
-<p>I also wrote a more general discussion about <a href="../Energy-forecasting-error-metrics">forecasting error metrics</a> you might want to take a look at.</p>
+<p>I also wrote a more general discussion about <a href="../energy-forecasting-error-metrics/index.Rmd">forecasting error metrics</a> you might want to take a look at.</p>
 </div>

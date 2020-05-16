@@ -11,7 +11,7 @@ categories:
 - R
 - Tips
 tags: []
-subtitle: '¡Plot your confidence interval easily with R! With ggplot geom_ribbon() you can add shadowed areas to your lines. We show you how to deal with it!'
+subtitle: 'Plot your confidence interval easily with R! With ggplot geom_ribbon() you can add shadowed areas to your lines. We show you how to deal with it!'
 summary: "Plot your confidence intervals easily"
 authors: [carlos-vecina]
 featured: false
@@ -22,17 +22,17 @@ draft: false
 
 <br>
 ```{r, include=FALSE}
-nchar("¡Plot your confidence interval easily with R! With ggplot geom_ribbon() de ggplot you can add shadow areas to your lines. We show you how to deal with it!")
+nchar("Plot your confidence interval easily with R! With ggplot geom_ribbon() de ggplot you can add shadow areas to your lines. We show you how to deal with it!")
 ```
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Yesterday I was asked to easily plot confidence intervals at ggplot2 chart. Then I came up with this shadowing ggplot2 feature called geom_ribbon(). 
+Yesterday I was asked to easily plot confidence intervals at ggplot2 chart. Then I came up with this shadowing ggplot2 feature called ```geom_ribbon()```. 
 
-It's not a trivial issue as long as you need to gather your data in order to achieve a *tidy* format. When you already have this data frame, all you need is **geom:_ribbon()**
+It's not a trivial issue as long as you need to gather your data in order to achieve a *tidy* format. When you already have this data frame, all you need is **geom_ribbon()**.
 
-By using the following commented code you are able to show up not only your point estimated forecast but its confidence or prediction intervals.
+By using the following commented code you are able to show not only your point estimated forecast but also its confidence or prediction intervals.
 
 ```{r, eval=FALSE, warning=FALSE, message=FALSE}
 library(tidyverse)

@@ -1250,9 +1250,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 &lt;p&gt;&lt;img src=&#34;/en/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; alt=&#34;R ggplot2 plot of the forecast(in red) and it&#39;s condidence intervals(in blue) using geom_ribbon function.&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;p&gt;Yesterday I was asked to easily plot confidence intervals at ggplot2 chart. Then I came up with this shadowing ggplot2 feature called geom_ribbon().&lt;/p&gt;
-&lt;p&gt;It’s not a trivial issue as long as you need to gather your data in order to achieve a &lt;em&gt;tidy&lt;/em&gt; format. When you already have this data frame, all you need is **geom:_ribbon()**&lt;/p&gt;
-&lt;p&gt;By using the following commented code you are able to show up not only your point estimated forecast but its confidence or prediction intervals.&lt;/p&gt;
+&lt;p&gt;Yesterday I was asked to easily plot confidence intervals at ggplot2 chart. Then I came up with this shadowing ggplot2 feature called &lt;code&gt;geom_ribbon()&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;It’s not a trivial issue as long as you need to gather your data in order to achieve a &lt;em&gt;tidy&lt;/em&gt; format. When you already have this data frame, all you need is &lt;strong&gt;geom_ribbon()&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;By using the following commented code you are able to show not only your point estimated forecast but also its confidence or prediction intervals.&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;kw&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;huron &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;data.frame&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;year =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1875&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1972&lt;/span&gt;, &lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;                    &lt;span class=&#34;dt&#34;&gt;value =&lt;/span&gt; LakeHuron,&lt;/a&gt;

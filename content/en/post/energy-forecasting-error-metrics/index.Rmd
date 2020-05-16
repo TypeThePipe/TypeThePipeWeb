@@ -2,7 +2,7 @@
 title: "Energy forecasting error metrics"
 author: "Pablo Cánovas Tourné"
 date: '2019-09-21'
-slug: "energy-forecasting-error-metrics-data-science"
+slug: "energy-forecasting-error-metrics"
 output: 
   blogdown::html_page:
     toc: TRUE
@@ -11,7 +11,7 @@ categories:
   - Metrics
   - Post
 tags: []
-subtitle: 'MAE | MSE | RMSE | MAPE | sMAPE | NMAE | MAD | MASE | EMAE.   A discussion about the main error metrics and their properties.'
+subtitle: 'A discussion about the main error metrics and their properties.'
 summary: 'A discussion about the main error metrics and their properties'
 authors: [pablo-canovas]
 math: TRUE
@@ -123,7 +123,7 @@ Trying to solve that assymetry, an alternative to MAPE was proposed. It is calle
 
 $$ sMAPE_\% = \frac{2}{N} \sum_{t=1}^{N}\frac{|A_t - F_t|}{|A_t| + |F_t|} \times 100$$
 
-However, against all odds [Symmetric MAPE is not symmetric](../Symmetric-MAPE-is-not-symmetric): as MAPE, it may present different values for the same absolute deviation: 
+However, against all odds [Symmetric MAPE is not symmetric](../symmetric-mape-is-not-symmetric/index.Rmd): as MAPE, it may present different values for the same absolute deviation: 
 
 ```{r, echo = FALSE}
 sMape <- tibble(Case = c(1,2), Actual = c(100, 100), Forecast = c(150,50), AbsoluteDifference = 50, 
@@ -140,7 +140,7 @@ Therefore, we should evaluate the accuracy based on that criteria.
 
 
 As a final point, simply mention that some others have proposed the **Log Ratio** $ln(F_t/A_t)$ as a better alternative to MAPE. 
-You can read a brief description in the [previously mentioned sMAPE article](../Symmetric-MAPE-is-not-symmetric) or 
+You can read a brief description in the [previously mentioned sMAPE article](../symmetric-mape-is-not-symmetric/index.Rmd) or 
 an extended discussion in the [original paper](https://poseidon01.ssrn.com/delivery.php?ID=912071094074109094069115029093025110000069085067010018086003069122074000022002100121034011107062116011014121092068067002120016015069090069028013066084099122096112019086019005105020067099126068064011082116019102096003091124077118086097090097087121114&EXT=pdf) by Chris Tofallis
 
 
@@ -219,7 +219,7 @@ in our case this metric isn't optimal for several reasons:
 
 ### EMAE 
 
-I found yet another scale-free error metric in a [recent paper](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&ved=2ahUKEwjA3rihoO7jAhWLzoUKHeKJCZUQFjACegQIABAC&url=https%3A%2F%2Fpdfs.semanticscholar.org%2Fcf04%2F65bce25d78ccda6d8c5d12e141099aa606f4.pdf&usg=AOvVaw0FlIvYKTyxgOYX7xCo0PAz) from the Energy Department of the Politecnico di Milano,
+I found yet another scale-free error metric in a [recent paper](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=3&ved=2ahUKEwjA3rihoO7jAhWLzoUKHeKJCZUQFjACegQIABAC&url=https%3A%2F%2Fpdfs.semanticscholar.org%2Fcf04%2F65bce25d78ccda6d8c5d12e141099aa606f4.pdf&usg=AOvVaw0FlIvYKTyxgOYX7xCo0PAz) from the Energy Department of the Politecnico di Milano.
 
 They called it **EMAE** (Envelope-weighted Mean Absolute Error):
 
@@ -237,7 +237,7 @@ This metric is quite similar to the MAD/Sum Ratio above but divides by the sum o
 This formula allows for a cool graphic interpretation of the error: the numerator matchs with the yellow area whereas the denominator corresponds to the sum of the blue and yellow areas:
 
 
-![](/en/post/energy-forecasting-error-metrics-data-science/EMAE_plot.png)
+![](EMAE_plot.png)
 
 
 

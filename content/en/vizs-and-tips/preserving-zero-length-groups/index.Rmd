@@ -1,0 +1,150 @@
+---
+title: Preserving zero-length groups
+author: Pablo Cánovas Tourné
+date: '2020-05-09'
+slug: preserving-zero-length-groups
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+  - R
+  - Tidyverse
+  - Tips
+tags: []
+subtitle: ""
+summary: "Don't drop that"
+authors: [pablo-canovas]
+disable_codefolding: true
+codefolding_show: hide
+codefolding_nobutton: true
+---
+
+```{r, echo =FALSE, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(lubridate)
+library(ggplot2)
+library(ggthemes)
+library(knitr)
+library(kableExtra)
+```
+```{css, echo=FALSE}
+  div.sourceCode {
+      overflow-x: hidden;
+}
+```
+
+This week I learned about another neat trick with tidyverse functions: the argument ```.drop``` from the ```group_by``` function.
+
+To showcase this functionality I made up a simple example with this dataset consisting of nuclear accidents data.
+
+```{r, message=FALSE}
+original_data <- read_csv("https://query.data.world/s/47s7katrhxxd674ulus425k42l5u4s")
+```
+
+Take a sneak peek of the dataset:
+
+```{r, message=FALSE, echo = FALSE}
+original_data %>% select(-Description) %>% head(4) %>% kable()
+```
+
+Let's say we are interested in knowing about how does the percentage of accidents happened in Europe vary compared to the rest of the world, and for that reason we simplify the ```Region``` variable onto the ```In_Europe``` boolean feature:
+
+```{r}
+df <- original_data %>% 
+  mutate(Year = Date %>% mdy() %>% year(),
+         In_Europe = if_else(Region %in% c("EE", "WE"), T, F) %>% as.factor()) %>%
+  filter(Year %>% between(1989, 2011))
+```
+
+We then simply compute the percentage of accidents happened every year and plot it
+```{r}
+df_implicitNAs <- df %>% 
+  group_by(Year, In_Europe) %>%
+  summarize(N = n()) %>%
+  mutate(Percentage = round(N / sum(N) * 100, 1)) 
+```
+If that chunk puzzles you, I explain what is going on under the hood [in this post](../calculating-ratios-tidyverse/index.Rmd).
+
+In the plot below I highlighted the strange result I found: being that there are only two possibilities (the accident happened in Europe or not) the sum of the ratios should add up to 100, right? 
+```{r, echo=FALSE}
+df_implicitNAs %>% 
+  ggplot() + 
+  geom_line(aes(Year, Percentage, color = In_Europe), size = 1) +
+  # geom_point(aes(Year, Percentage, color = In_Europe), size = 3) +
+  geom_hline(yintercept = 0) + 
+  theme_minimal() + 
+  scale_color_tableau() + 
+  scale_y_continuous(breaks = c(0,25,50,75,100)) + 
+  labs(y = "%", title = "Percentage of nuclear accidents happened in Europe by year") + 
+  
+  geom_segment(aes(x = 1992.5, y = 10, xend = 1996.5, yend = 10), col = "black", size = 1.2, linetype = 2) +
+  geom_segment(aes(x = 1992.5, y = 108, xend = 1996.5, yend = 108), col = "black", size = 1.2, linetype = 2) +
+  geom_segment(aes(x = 1992.5, y = 10, xend = 1992.5, yend = 108), col = "black", size = 1.2, linetype = 2) +
+  geom_segment(aes(x = 1996.5, y = 10, xend = 1996.5, yend = 108), col = "black", size = 1.2, linetype = 2) +
+
+  geom_segment(aes(x = 1989.5, y = 40, xend = 1992, yend = 52),
+               size = 1.5, color = "black", arrow = arrow(length = unit(0.15, "inches")), show.legend = F) +
+  NULL
+```
+
+Not a beautiful plot but aesthetic considerations apart, what is going on here? Did we fail with the maths?
+Not exactly. This result is due to a tricky behaviour of the ```summarise``` function related with the missing values.
+
+If we take a look to the first rows, we can see how in 1990 and 1991 there weren't any nuclear accident in Europe, but **that information is implicit** instead of explicit. 
+
+```{r, echo = F}
+df_implicitNAs %>% head() %>% kable()
+```
+
+When plotting with the line graph, ggplot is connecting the data points between 1989 and 1992 and therefore displaying misleading information.
+Obviously this is not ggplot's fault, it's simply how it works.
+
+We could easily solve this problem chossing an more suitable graph as we will see below, but this example is still useful to learn about the ```.drop``` argument:
+**The default behaviour of the ```group_by``` function is to drop zero-length groups**, and therefore it's making implicit that piece of information. We can override the default behaviour simply adding ```.drop = FALSE``` to the call:
+
+```{r}
+df_explicitNAs <- df %>% 
+  group_by(Year, In_Europe, .drop = FALSE) %>%
+  summarize(N = n()) %>%
+  mutate(Percentage = round(N / sum(N) * 100, 1))
+```
+
+Now we can see the years when there were no accidents in Europe:
+
+```{r, echo = F}
+df_explicitNAs %>% head() %>% kable()
+```
+
+And now the graph doesn't deceive us anymore:
+
+```{r, echo=FALSE}
+df_explicitNAs %>% 
+  ggplot() + 
+  geom_line(aes(Year, Percentage, color = In_Europe), size = 1) +
+  geom_hline(yintercept = 0) + 
+  theme_minimal() + 
+  scale_color_tableau() + 
+  scale_y_continuous(breaks = c(0,25,50,75,100)) + 
+  labs(y = "%", title = "Percentage of nuclear accidents happened in Europe by year") + 
+  
+  geom_segment(aes(x = 1990.8, y = 27, xend = 1990.5, yend = 8),
+               size = 1.5, color = "black", arrow = arrow(length = unit(0.15, "inches")), show.legend = F) +
+  
+  geom_segment(aes(x = 1994.8, y = 30, xend = 1995.3, yend = 10),
+               size = 1.5, color = "black", arrow = arrow(length = unit(0.15, "inches")), show.legend = F) +
+  NULL
+
+```
+
+Let's face, however, that we could have tackled this problem choosing a more suitable geom. Whenever you need to display any normalized variable, using ```geom_col()``` is usually a better approach:
+
+```{r, echo=FALSE}
+df_implicitNAs %>% 
+  ggplot(aes(Year, Percentage, fill = In_Europe)) + 
+  geom_col() +
+  theme_minimal() + 
+  scale_fill_tableau()
+```
+
+
+

@@ -1,19 +1,23 @@
 ---
-title: "Tidylog. Logging your pipelines"
-author: "Pablo Cánovas Tourné"
+title: Tidylog
+author: Pablo Cánovas Tourné
 date: "2020-01-21"
-slug: "tidylog-logging-pipelines-r"
+slug: tidylog-logging-pipelines
 translationKey: "tidylog-logging-pipelines-en-r"
 output:
   blogdown::html_page:
     highlight: tango
 categories:
 - R
+- Tidyverse
 - Tips
 tags: []
-subtitle: "Do you find R Tidyverse pipelines useful? But do you need some kind of logging inside the fancy pipes? Here's Tidylog, logging your pipelines"
+subtitle: "Do you find Tidyverse pipelines useful? But do you need some kind of logging inside the fancy pipes? Here's Tidylog, logging your pipelines"
 summary: "Logging your pipelines"
 authors: [pablo-canovas]
+disable_codefolding: true
+codefolding_show: hide
+codefolding_nobutton: true
 ---
 
 <style type="text/css">
@@ -84,9 +88,14 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 This package is built on top of <em>dplyr</em> and <em>tidyr</em> and provides us with feedback on the results of the operations. Actually, this is a feature that already appeared in the Stata software.</p>
 <p>When performing one operation at a time, it is easy to track the changes made on a table.
 However things get increasingly obscure when chaining multiple functions or dealing with big data frames.</p>
-<p><strong>We all love piping</strong> operations. I often ‘play’ to perform the whole transformation <a href="../Conditional-pipes">without leaving the pipeflow</a>. But the counterpart is missing the intermediate states: you can make some big mistakes and be unaware of them until it’s too late and maybe you have to undone some work or rethink your analysis.</p>
+<p><strong>We all love piping</strong> operations. I often ‘play’ to perform the whole transformation <a href="../conditional-pipes-R-tidyverse/index.Rmd">without leaving the pipeflow</a>. But the counterpart is missing the intermediate states: you can make some big mistakes and be unaware of them until it’s too late and maybe you have to undone some work or rethink your analysis.</p>
 <p>In this context, some additional info is always welcome. I think this feature is specially convenient for beginners, but not only! I have myself wasted several hours debugging long pipelines and trying to understand where the problems came from.</p>
 <p>Let’s see a tiny bit of its behaviour with a simple example:</p>
+<style type="text/css">
+  div.sourceCode {
+      overflow-x: hidden;
+}
+</style>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(nycflights13)</a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(tidyverse)</a>
 <a class="sourceLine" id="cb1-3" title="3"><span class="kw">library</span>(tidylog)</a>
@@ -116,5 +125,3 @@ However things get increasingly obscure when chaining multiple functions or deal
 <p>Pretty neat! It is specially useful with joins, as it provides plenty of details and they can be a source of duplicated or missing rows.</p>
 <p>I decided to write this little post now to celebrate that <strong>tidylog v1.0.0</strong> has recently been released! Check the <a href="https://github.com/elbersb/tidylog">official repo</a> out to see more examples or show some love to <a href="https://twitter.com/elbersb">@elbersb</a> on Twitter!</p>
 <p>All in all, I think this package was a missing piece in the Tidyverse ecosystem: It is incredibly useful, whereas making advantage of it is as simple as writing <code>library(tidylog)</code>. Integrating this package into our daily R work is a <em>no-brainer</em>!</p>
-<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
-<script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us4.list-manage.com","uuid":"91551f7ed29389a0de4f47665","lid":"d95c503a48","uniqueMethods":true}) })</script>

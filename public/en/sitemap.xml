@@ -4,7 +4,7 @@
   
   <url>
     <loc>/authors/</loc>
-    <lastmod>2020-04-01T00:00:00+00:00</lastmod>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -15,6 +15,96 @@
                 hreflang="en"
                 href="/authors/"
                 />
+  </url>
+  
+  <url>
+    <loc>/vizs-and-tips/calculating-ratios-with-tidyverse/</loc>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>/authors/pablo-canovas/</loc>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/authors/pablo-canovas/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/authors/pablo-canovas/"
+                />
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/r/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/r/"
+                />
+  </url>
+  
+  <url>
+    <loc>/categories/tidyverse/</loc>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/tips/</loc>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/tips/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/tips/"
+                />
+  </url>
+  
+  <url>
+    <loc>/vizs-and-tips/</loc>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/"
+                />
+  </url>
+  
+  <url>
+    <loc>/vizs-and-tips/preserving-zero-length-groups/</loc>
+    <lastmod>2020-05-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -33,68 +123,8 @@
   </url>
   
   <url>
-    <loc>/categories/</loc>
-    <lastmod>2020-04-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/"
-                />
-  </url>
-  
-  <url>
     <loc>/vizs-and-tips/ggcharts-lollipop-plot-in-r/</loc>
     <lastmod>2020-04-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/r/</loc>
-    <lastmod>2020-04-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/r/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/r/"
-                />
-  </url>
-  
-  <url>
-    <loc>/categories/tips/</loc>
-    <lastmod>2020-04-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/tips/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/tips/"
-                />
-  </url>
-  
-  <url>
-    <loc>/vizs-and-tips/</loc>
-    <lastmod>2020-04-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/vizs-and-tips/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/vizs-and-tips/"
-                />
   </url>
   
   <url>
@@ -173,21 +203,6 @@
   </url>
   
   <url>
-    <loc>/authors/pablo-canovas/</loc>
-    <lastmod>2020-01-21T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/authors/pablo-canovas/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/authors/pablo-canovas/"
-                />
-  </url>
-  
-  <url>
     <loc>/post/pathfinding-algorithms-visualizer-using-r/</loc>
     <lastmod>2020-01-21T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -203,7 +218,7 @@
   </url>
   
   <url>
-    <loc>/vizs-and-tips/tidylog-logging-pipelines-r/</loc>
+    <loc>/vizs-and-tips/tidylog-logging-pipelines/</loc>
     <lastmod>2020-01-21T00:00:00+00:00</lastmod>
   </url>
   
@@ -338,17 +353,7 @@
   </url>
   
   <url>
-    <loc>/vizs-and-tips/calculating-ratios-with-tidyverse/</loc>
-    <lastmod>2019-10-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse/</loc>
-    <lastmod>2019-10-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/tidyverse/</loc>
+    <loc>/vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns/</loc>
     <lastmod>2019-10-05T00:00:00+00:00</lastmod>
   </url>
   
@@ -368,7 +373,7 @@
   </url>
   
   <url>
-    <loc>/post/energy-forecasting-error-metrics-data-science/</loc>
+    <loc>/post/energy-forecasting-error-metrics/</loc>
     <lastmod>2019-09-21T00:00:00+00:00</lastmod>
   </url>
   
@@ -378,7 +383,7 @@
   </url>
   
   <url>
-    <loc>/post/symmetric-mape-is-not-symmetric-data-science/</loc>
+    <loc>/post/symmetric-mape-is-not-symmetric/</loc>
     <lastmod>2019-08-26T00:00:00+00:00</lastmod>
   </url>
   

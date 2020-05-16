@@ -31,7 +31,7 @@ organizations:
 - name:  
   url: ""
 
-role: Data Scientist at Repsol Electricidad y Gas
+role: Data Scientist at Repsol
 social:
 - icon: envelope
   icon_pack: fas

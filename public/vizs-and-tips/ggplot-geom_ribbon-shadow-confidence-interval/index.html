@@ -22,7 +22,7 @@
   
   
 
-  <meta name="author" content="Carlos Vecina">
+  <meta name="author" content="Pablo Cánovas">
 
   
   
@@ -531,7 +531,7 @@
   <h1>Shadowing your ggplot lines. Forecasting confidence interval use case.</h1>
 
   
-  <p class="page-subtitle">¡Plot your confidence interval easily with R! With ggplot geom_ribbon() you can add shadowed areas to your lines. We show you how to deal with it!</p>
+  <p class="page-subtitle">Plot your confidence interval easily with R! With ggplot geom_ribbon() you can add shadowed areas to your lines. We show you how to deal with it!</p>
   
 
   
@@ -669,9 +669,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 <p><img src="/en/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/featured.png" height="250px" width="400px" alt="R ggplot2 plot of the forecast(in red) and it's condidence intervals(in blue) using geom_ribbon function." /></p>
 <p><br></p>
-<p>Yesterday I was asked to easily plot confidence intervals at ggplot2 chart. Then I came up with this shadowing ggplot2 feature called geom_ribbon().</p>
-<p>It’s not a trivial issue as long as you need to gather your data in order to achieve a <em>tidy</em> format. When you already have this data frame, all you need is **geom:_ribbon()**</p>
-<p>By using the following commented code you are able to show up not only your point estimated forecast but its confidence or prediction intervals.</p>
+<p>Yesterday I was asked to easily plot confidence intervals at ggplot2 chart. Then I came up with this shadowing ggplot2 feature called <code>geom_ribbon()</code>.</p>
+<p>It’s not a trivial issue as long as you need to gather your data in order to achieve a <em>tidy</em> format. When you already have this data frame, all you need is <strong>geom_ribbon()</strong>.</p>
+<p>By using the following commented code you are able to show not only your point estimated forecast but also its confidence or prediction intervals.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(tidyverse)</a>
 <a class="sourceLine" id="cb1-2" title="2">huron &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">year =</span> <span class="dv">1875</span><span class="op">:</span><span class="dv">1972</span>, </a>
 <a class="sourceLine" id="cb1-3" title="3">                    <span class="dt">value =</span> LakeHuron,</a>

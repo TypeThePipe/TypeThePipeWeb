@@ -1,0 +1,143 @@
+---
+title: Calculating ratios with Tidyverse
+author: Pablo Cánovas Tourné
+date: '2020-05-13'
+slug: calculating-ratios-with-tidyverse
+output:
+  blogdown::html_page:
+    highlight: tango 
+categories:
+  - R
+  - Tidyverse
+  - Tips
+tags: []
+subtitle: 'Explaining summarise hidden behaviour'
+summary: "Explaining summarise hidden behaviour"
+authors: [pablo-canovas]
+disable_codefolding: true
+codefolding_show: hide
+codefolding_nobutton: true
+---
+
+Calculating percentages is a fairly common operation, right?
+However, doing it [without leaving the pipeflow](../conditional-pipes-R-tidyverse/index.Rmd) always force me to do some bizarre piping such as double grouping and summarise.
+
+I am using [again the nuclear accidents dataset](../preserving-zero-length-groups/index.Rmd), and trying to calculate the percentage of accidents that happened in Europe each year.
+
+
+```{css, echo=FALSE}
+  div.sourceCode {
+      overflow-x: hidden;
+}
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE }
+library(tidyverse)
+library(lubridate)
+library(knitr)
+library(kableExtra)
+```
+
+```{r, message=FALSE}
+nuclear_accidents <- read_csv("https://query.data.world/s/47s7katrhxxd674ulus425k42l5u4s") 
+
+nuclear_accidents <- nuclear_accidents %>% 
+  select(-Description) %>% 
+  mutate(Year = Date %>% mdy() %>% year(),
+         In_Europe = if_else(Region %in% c("EE", "WE"), T, F) %>% as.factor()) %>% 
+  filter(Year %>% between(1989, 2016))
+
+nuclear_accidents %>% head(4) %>% kable()
+```
+
+This can be achieved by several ways. One common path would be:
+
+```{r}
+nuclear_accidents %>% 
+  group_by(Year, In_Europe) %>% 
+  summarise(N = n()) %>% 
+  group_by(Year) %>% 
+  mutate(Total_per_year = sum(N), 
+         Ratio = round(N/Total_per_year, 2)) %>% 
+  head(4) %>% 
+  kable()
+```
+
+Another one more bizarre would be totalizing first, then grouping including that amount (to avoid being dropped) and then summarise. 
+
+```{r}
+nuclear_accidents %>% 
+  group_by(Year) %>% 
+  mutate(Total_per_year = n()) %>% 
+  group_by(Year, In_Europe, Total_per_year) %>% 
+  summarise(N = n()) %>% 
+  mutate(Ratio = round(N/Total_per_year, 2)) %>% 
+  head(4) %>% 
+  kable()
+```
+
+
+Kind of weird.
+However, there is a much simpler way:
+
+```{r}
+nuclear_accidents %>% 
+  group_by(Year, In_Europe) %>%
+  summarize(N = n()) %>%
+  mutate(Ratio = round(N / sum(N), 2)) %>% 
+  head(4) %>% 
+  kable()
+```
+
+The first time I saw this result I didn't understand it because if you have your dataframe grouped by ```Year``` and ```In_Europe``` then ```sum(N)``` should be equal to ```N```. 
+What is going on?
+This behaviour has to do with a tricky funcionality of ```summarise```.
+
+Take a closer look of the grouping variables at the console output.
+Before the summarise function the dataframe seems grouped normally and the operation will be performed within each group:
+
+```{r, eval=FALSE}
+nuclear_accidents %>% 
+  group_by(Year, In_Europe) %>% 
+  head(4)
+
+```
+
+```{r, eval=FALSE}
+# A tibble: 4 x 9
+# Groups:   Year, In_Europe [4]
+#  Date   Location    `Cost (millions ~  INES `Smyth Magnitud~ Region Fatalities  Year In_Europe
+#   <chr>  <chr>                   <dbl> <dbl>            <dbl> <chr>       <dbl> <dbl> <fct>    
+# 1 3/11/~ Fukushima ~           166089      7              7.5 A             573  2011 FALSE    
+# 2 12/8/~ Tsuruga, J~            15500     NA             NA   A               0  1995 FALSE    
+# 3 12/19~ Vandellòs,~              931.     3             NA   WE              0  1989 TRUE     
+# 4 2/1/2~ Vernon, Ve~              809.    NA             NA   NA              0  2010 FALSE  
+```
+
+ 
+
+However, once the dataframe is summarized, the resulting dataframe is no longer grouped by the same original variables:
+
+
+```{r, eval=FALSE}
+nuclear_accidents %>% 
+  group_by(Year, In_Europe) %>%
+  summarize(N = n()) %>% 
+  head(4)
+```
+```{r, eval=FALSE}
+# A tibble: 4 x 3
+# Groups:   Year [3]
+#    Year In_Europe     N
+#   <dbl> <fct>     <int>
+# 1  1989 FALSE         4
+# 2  1989 TRUE          2
+# 3  1990 FALSE         1
+# 4  1991 FALSE         3
+```
+
+Actually, **the default behaviour of summarise is to drop the last group**. The reason behind that is that, once the operation is performed you should have only one obervation per group, and it has no sense to grouping by it anymore.
+That's why the last example I show above works.
+Now you can take advantage of it too!
+
+Furthermore, you can learn more about the [dplyr 1.0.0 last minute additions](https://www.tidyverse.org/blog/2020/05/dplyr-1-0-0-last-minute-additions/) which include an explicit message to highlight the behaviour we have talked about here.
