@@ -83,8 +83,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 
 &lt;p&gt;Calculating percentages is a fairly common operation, right?
-However, doing it &lt;a href=&#34;../conditional-pipes-R-tidyverse/index.Rmd&#34;&gt;without leaving the pipeflow&lt;/a&gt; always force me to do some bizarre piping such as double grouping and summarise.&lt;/p&gt;
-&lt;p&gt;I am using &lt;a href=&#34;../preserving-zero-length-groups/index.Rmd&#34;&gt;again the nuclear accidents dataset&lt;/a&gt;, and trying to calculate the percentage of accidents that happened in Europe each year.&lt;/p&gt;
+However, doing it &lt;a href=&#34;../conditional-pipes-R-tidyverse/&#34;&gt;without leaving the pipeflow&lt;/a&gt; always force me to do some bizarre piping such as double grouping and summarise.&lt;/p&gt;
+&lt;p&gt;I am using &lt;a href=&#34;../preserving-zero-length-groups/&#34;&gt;again the nuclear accidents dataset&lt;/a&gt;, and trying to calculate the percentage of accidents that happened in Europe each year.&lt;/p&gt;
 &lt;style type=&#34;text/css&#34;&gt;
   div.sourceCode {
       overflow-x: hidden;
@@ -780,7 +780,7 @@ NA
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(Year, In_Europe) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;summarize&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;N =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;n&lt;/span&gt;()) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;Percentage =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;round&lt;/span&gt;(N &lt;span class=&#34;op&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(N) &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)) &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;If that chunk puzzles you, I explain what is going on under the hood &lt;a href=&#34;../calculating-ratios-tidyverse/index.Rmd&#34;&gt;in this post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If that chunk puzzles you, I explain what is going on under the hood &lt;a href=&#34;../calculating-ratios-tidyverse/&#34;&gt;in this post&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;In the plot below I highlighted the strange result I found: being that there are only two possibilities (the accident happened in Europe or not) the sum of the ratios should add up to 100, right?
 &lt;img src=&#34;/en/vizs-and-tips/preserving-zero-length-groups/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Not a beautiful plot but aesthetic considerations apart, what is going on here? Did we fail with the maths?
@@ -1898,7 +1898,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 This package is built on top of &lt;em&gt;dplyr&lt;/em&gt; and &lt;em&gt;tidyr&lt;/em&gt; and provides us with feedback on the results of the operations. Actually, this is a feature that already appeared in the Stata software.&lt;/p&gt;
 &lt;p&gt;When performing one operation at a time, it is easy to track the changes made on a table.
 However things get increasingly obscure when chaining multiple functions or dealing with big data frames.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;We all love piping&lt;/strong&gt; operations. I often ‘play’ to perform the whole transformation &lt;a href=&#34;../conditional-pipes-R-tidyverse/index.Rmd&#34;&gt;without leaving the pipeflow&lt;/a&gt;. But the counterpart is missing the intermediate states: you can make some big mistakes and be unaware of them until it’s too late and maybe you have to undone some work or rethink your analysis.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;We all love piping&lt;/strong&gt; operations. I often ‘play’ to perform the whole transformation &lt;a href=&#34;../conditional-pipes-R-tidyverse/&#34;&gt;without leaving the pipeflow&lt;/a&gt;. But the counterpart is missing the intermediate states: you can make some big mistakes and be unaware of them until it’s too late and maybe you have to undone some work or rethink your analysis.&lt;/p&gt;
 &lt;p&gt;In this context, some additional info is always welcome. I think this feature is specially convenient for beginners, but not only! I have myself wasted several hours debugging long pipelines and trying to understand where the problems came from.&lt;/p&gt;
 &lt;p&gt;Let’s see a tiny bit of its behaviour with a simple example:&lt;/p&gt;
 &lt;style type=&#34;text/css&#34;&gt;
@@ -2969,7 +2969,7 @@ That idea of symmetry lead us to sMAPE.&lt;/p&gt;
 &lt;h3&gt;sMAPE&lt;/h3&gt;
 &lt;p&gt;Trying to solve that assymetry, an alternative to MAPE was proposed. It is called &lt;strong&gt;sMAPE&lt;/strong&gt;, which stands for Symmetric Mean Absolute Percentage Error:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ sMAPE_\% = \frac{2}{N} \sum_{t=1}^{N}\frac{|A_t - F_t|}{|A_t| + |F_t|} \times 100\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;However, against all odds &lt;a href=&#34;../symmetric-mape-is-not-symmetric/index.Rmd&#34;&gt;Symmetric MAPE is not symmetric&lt;/a&gt;: as MAPE, it may present different values for the same absolute deviation:&lt;/p&gt;
+&lt;p&gt;However, against all odds &lt;a href=&#34;../symmetric-mape-is-not-symmetric/&#34;&gt;Symmetric MAPE is not symmetric&lt;/a&gt;: as MAPE, it may present different values for the same absolute deviation:&lt;/p&gt;
 &lt;table class=&#34;table&#34; style=&#34;width: auto !important; margin-left: auto; margin-right: auto;&#34;&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -3031,7 +3031,7 @@ sMAPE
 &lt;p&gt;This is a key question: We don’t want to minimize the percentage error but to minimize the economic losses due to forecast deviations, and they are exclusively connected to the sum of the absolute errors.
 Therefore, we should evaluate the accuracy based on that criteria.&lt;/p&gt;
 &lt;p&gt;As a final point, simply mention that some others have proposed the &lt;strong&gt;Log Ratio&lt;/strong&gt; &lt;span class=&#34;math inline&#34;&gt;\(ln(F_t/A_t)\)&lt;/span&gt; as a better alternative to MAPE.
-You can read a brief description in the &lt;a href=&#34;../symmetric-mape-is-not-symmetric/index.Rmd&#34;&gt;previously mentioned sMAPE article&lt;/a&gt; or
+You can read a brief description in the &lt;a href=&#34;../symmetric-mape-is-not-symmetric/&#34;&gt;previously mentioned sMAPE article&lt;/a&gt; or
 an extended discussion in the &lt;a href=&#34;https://poseidon01.ssrn.com/delivery.php?ID=912071094074109094069115029093025110000069085067010018086003069122074000022002100121034011107062116011014121092068067002120016015069090069028013066084099122096112019086019005105020067099126068064011082116019102096003091124077118086097090097087121114&amp;amp;EXT=pdf&#34;&gt;original paper&lt;/a&gt; by Chris Tofallis&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -3445,7 +3445,7 @@ It shows, indeed, better statistical properties than others metrics:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;If interested in more information about this less-known metric, check out &lt;a href=&#34;https://poseidon01.ssrn.com/delivery.php?ID=912071094074109094069115029093025110000069085067010018086003069122074000022002100121034011107062116011014121092068067002120016015069090069028013066084099122096112019086019005105020067099126068064011082116019102096003091124077118086097090097087121114&amp;amp;EXT=pdf&#34;&gt;A better measure of relative prediction accuracy for model selection and model estimation (Chris Tofallis, 2015)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;I hope this may have brought some light into this quirky behaviour of MAPE and sMAPE.&lt;/p&gt;
-&lt;p&gt;I also wrote a more general discussion about &lt;a href=&#34;../energy-forecasting-error-metrics/index.Rmd&#34;&gt;forecasting error metrics&lt;/a&gt; you might want to take a look at.&lt;/p&gt;
+&lt;p&gt;I also wrote a more general discussion about &lt;a href=&#34;../energy-forecasting-error-metrics/&#34;&gt;forecasting error metrics&lt;/a&gt; you might want to take a look at.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

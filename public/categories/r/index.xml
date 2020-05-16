@@ -83,8 +83,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 
 &lt;p&gt;Calculating percentages is a fairly common operation, right?
-However, doing it &lt;a href=&#34;../conditional-pipes-R-tidyverse/index.Rmd&#34;&gt;without leaving the pipeflow&lt;/a&gt; always force me to do some bizarre piping such as double grouping and summarise.&lt;/p&gt;
-&lt;p&gt;I am using &lt;a href=&#34;../preserving-zero-length-groups/index.Rmd&#34;&gt;again the nuclear accidents dataset&lt;/a&gt;, and trying to calculate the percentage of accidents that happened in Europe each year.&lt;/p&gt;
+However, doing it &lt;a href=&#34;../conditional-pipes-R-tidyverse/&#34;&gt;without leaving the pipeflow&lt;/a&gt; always force me to do some bizarre piping such as double grouping and summarise.&lt;/p&gt;
+&lt;p&gt;I am using &lt;a href=&#34;../preserving-zero-length-groups/&#34;&gt;again the nuclear accidents dataset&lt;/a&gt;, and trying to calculate the percentage of accidents that happened in Europe each year.&lt;/p&gt;
 &lt;style type=&#34;text/css&#34;&gt;
   div.sourceCode {
       overflow-x: hidden;
@@ -780,7 +780,7 @@ NA
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(Year, In_Europe) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;summarize&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;N =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;n&lt;/span&gt;()) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;Percentage =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;round&lt;/span&gt;(N &lt;span class=&#34;op&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(N) &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)) &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;If that chunk puzzles you, I explain what is going on under the hood &lt;a href=&#34;../calculating-ratios-tidyverse/index.Rmd&#34;&gt;in this post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If that chunk puzzles you, I explain what is going on under the hood &lt;a href=&#34;../calculating-ratios-tidyverse/&#34;&gt;in this post&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;In the plot below I highlighted the strange result I found: being that there are only two possibilities (the accident happened in Europe or not) the sum of the ratios should add up to 100, right?
 &lt;img src=&#34;/en/vizs-and-tips/preserving-zero-length-groups/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Not a beautiful plot but aesthetic considerations apart, what is going on here? Did we fail with the maths?
@@ -1735,7 +1735,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 This package is built on top of &lt;em&gt;dplyr&lt;/em&gt; and &lt;em&gt;tidyr&lt;/em&gt; and provides us with feedback on the results of the operations. Actually, this is a feature that already appeared in the Stata software.&lt;/p&gt;
 &lt;p&gt;When performing one operation at a time, it is easy to track the changes made on a table.
 However things get increasingly obscure when chaining multiple functions or dealing with big data frames.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;We all love piping&lt;/strong&gt; operations. I often ‘play’ to perform the whole transformation &lt;a href=&#34;../conditional-pipes-R-tidyverse/index.Rmd&#34;&gt;without leaving the pipeflow&lt;/a&gt;. But the counterpart is missing the intermediate states: you can make some big mistakes and be unaware of them until it’s too late and maybe you have to undone some work or rethink your analysis.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;We all love piping&lt;/strong&gt; operations. I often ‘play’ to perform the whole transformation &lt;a href=&#34;../conditional-pipes-R-tidyverse/&#34;&gt;without leaving the pipeflow&lt;/a&gt;. But the counterpart is missing the intermediate states: you can make some big mistakes and be unaware of them until it’s too late and maybe you have to undone some work or rethink your analysis.&lt;/p&gt;
 &lt;p&gt;In this context, some additional info is always welcome. I think this feature is specially convenient for beginners, but not only! I have myself wasted several hours debugging long pipelines and trying to understand where the problems came from.&lt;/p&gt;
 &lt;p&gt;Let’s see a tiny bit of its behaviour with a simple example:&lt;/p&gt;
 &lt;style type=&#34;text/css&#34;&gt;
