@@ -11,7 +11,7 @@ categories:
   - Tidyverse
   - Tips
 tags: []
-subtitle: ""
+subtitle: "Learning the group_by attribute .drop"
 summary: "Don't drop that"
 authors: [pablo-canovas]
 disable_codefolding: true
