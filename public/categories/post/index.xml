@@ -652,7 +652,7 @@ That idea of symmetry lead us to sMAPE.&lt;/p&gt;
 &lt;h3&gt;sMAPE&lt;/h3&gt;
 &lt;p&gt;Trying to solve that assymetry, an alternative to MAPE was proposed. It is called &lt;strong&gt;sMAPE&lt;/strong&gt;, which stands for Symmetric Mean Absolute Percentage Error:&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ sMAPE_\% = \frac{2}{N} \sum_{t=1}^{N}\frac{|A_t - F_t|}{|A_t| + |F_t|} \times 100\]&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;However, against all odds &lt;a href=&#34;../symmetric-mape-is-not-symmetric/index.Rmd&#34;&gt;Symmetric MAPE is not symmetric&lt;/a&gt;: as MAPE, it may present different values for the same absolute deviation:&lt;/p&gt;
+&lt;p&gt;However, against all odds &lt;a href=&#34;../symmetric-mape-is-not-symmetric/&#34;&gt;Symmetric MAPE is not symmetric&lt;/a&gt;: as MAPE, it may present different values for the same absolute deviation:&lt;/p&gt;
 &lt;table class=&#34;table&#34; style=&#34;width: auto !important; margin-left: auto; margin-right: auto;&#34;&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -714,7 +714,7 @@ sMAPE
 &lt;p&gt;This is a key question: We don’t want to minimize the percentage error but to minimize the economic losses due to forecast deviations, and they are exclusively connected to the sum of the absolute errors.
 Therefore, we should evaluate the accuracy based on that criteria.&lt;/p&gt;
 &lt;p&gt;As a final point, simply mention that some others have proposed the &lt;strong&gt;Log Ratio&lt;/strong&gt; &lt;span class=&#34;math inline&#34;&gt;\(ln(F_t/A_t)\)&lt;/span&gt; as a better alternative to MAPE.
-You can read a brief description in the &lt;a href=&#34;../symmetric-mape-is-not-symmetric/index.Rmd&#34;&gt;previously mentioned sMAPE article&lt;/a&gt; or
+You can read a brief description in the &lt;a href=&#34;../symmetric-mape-is-not-symmetric/&#34;&gt;previously mentioned sMAPE article&lt;/a&gt; or
 an extended discussion in the &lt;a href=&#34;https://poseidon01.ssrn.com/delivery.php?ID=912071094074109094069115029093025110000069085067010018086003069122074000022002100121034011107062116011014121092068067002120016015069090069028013066084099122096112019086019005105020067099126068064011082116019102096003091124077118086097090097087121114&amp;amp;EXT=pdf&#34;&gt;original paper&lt;/a&gt; by Chris Tofallis&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1128,7 +1128,7 @@ It shows, indeed, better statistical properties than others metrics:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;If interested in more information about this less-known metric, check out &lt;a href=&#34;https://poseidon01.ssrn.com/delivery.php?ID=912071094074109094069115029093025110000069085067010018086003069122074000022002100121034011107062116011014121092068067002120016015069090069028013066084099122096112019086019005105020067099126068064011082116019102096003091124077118086097090097087121114&amp;amp;EXT=pdf&#34;&gt;A better measure of relative prediction accuracy for model selection and model estimation (Chris Tofallis, 2015)&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;I hope this may have brought some light into this quirky behaviour of MAPE and sMAPE.&lt;/p&gt;
-&lt;p&gt;I also wrote a more general discussion about &lt;a href=&#34;../energy-forecasting-error-metrics/index.Rmd&#34;&gt;forecasting error metrics&lt;/a&gt; you might want to take a look at.&lt;/p&gt;
+&lt;p&gt;I also wrote a more general discussion about &lt;a href=&#34;../energy-forecasting-error-metrics/&#34;&gt;forecasting error metrics&lt;/a&gt; you might want to take a look at.&lt;/p&gt;
 &lt;/div&gt;
 </description>
     </item>

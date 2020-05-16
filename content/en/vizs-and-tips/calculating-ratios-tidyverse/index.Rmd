@@ -20,9 +20,9 @@ codefolding_nobutton: true
 ---
 
 Calculating percentages is a fairly common operation, right?
-However, doing it [without leaving the pipeflow](../conditional-pipes-R-tidyverse/index.Rmd) always force me to do some bizarre piping such as double grouping and summarise.
+However, doing it [without leaving the pipeflow](../conditional-pipes-R-tidyverse/) always force me to do some bizarre piping such as double grouping and summarise.
 
-I am using [again the nuclear accidents dataset](../preserving-zero-length-groups/index.Rmd), and trying to calculate the percentage of accidents that happened in Europe each year.
+I am using [again the nuclear accidents dataset](../preserving-zero-length-groups/), and trying to calculate the percentage of accidents that happened in Europe each year.
 
 
 ```{css, echo=FALSE}

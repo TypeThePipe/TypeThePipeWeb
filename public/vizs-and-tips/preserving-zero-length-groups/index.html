@@ -784,7 +784,7 @@ NA
 <a class="sourceLine" id="cb3-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(Year, In_Europe) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb3-3" title="3"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">N =</span> <span class="kw">n</span>()) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb3-4" title="4"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Percentage =</span> <span class="kw">round</span>(N <span class="op">/</span><span class="st"> </span><span class="kw">sum</span>(N) <span class="op">*</span><span class="st"> </span><span class="dv">100</span>, <span class="dv">1</span>)) </a></code></pre></div>
-<p>If that chunk puzzles you, I explain what is going on under the hood <a href="../calculating-ratios-tidyverse/index.Rmd">in this post</a>.</p>
+<p>If that chunk puzzles you, I explain what is going on under the hood <a href="../calculating-ratios-tidyverse/">in this post</a>.</p>
 <p>In the plot below I highlighted the strange result I found: being that there are only two possibilities (the accident happened in Europe or not) the sum of the ratios should add up to 100, right?
 <img src="/en/vizs-and-tips/preserving-zero-length-groups/index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>Not a beautiful plot but aesthetic considerations apart, what is going on here? Did we fail with the maths?

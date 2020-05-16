@@ -63,7 +63,7 @@ df_implicitNAs <- df %>%
   summarize(N = n()) %>%
   mutate(Percentage = round(N / sum(N) * 100, 1)) 
 ```
-If that chunk puzzles you, I explain what is going on under the hood [in this post](../calculating-ratios-tidyverse/index.Rmd).
+If that chunk puzzles you, I explain what is going on under the hood [in this post](../calculating-ratios-tidyverse/).
 
 In the plot below I highlighted the strange result I found: being that there are only two possibilities (the accident happened in Europe or not) the sum of the ratios should add up to 100, right? 
 ```{r, echo=FALSE}

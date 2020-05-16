@@ -83,8 +83,8 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 
 
 &lt;p&gt;Calculating percentages is a fairly common operation, right?
-However, doing it &lt;a href=&#34;../conditional-pipes-R-tidyverse/index.Rmd&#34;&gt;without leaving the pipeflow&lt;/a&gt; always force me to do some bizarre piping such as double grouping and summarise.&lt;/p&gt;
-&lt;p&gt;I am using &lt;a href=&#34;../preserving-zero-length-groups/index.Rmd&#34;&gt;again the nuclear accidents dataset&lt;/a&gt;, and trying to calculate the percentage of accidents that happened in Europe each year.&lt;/p&gt;
+However, doing it &lt;a href=&#34;../conditional-pipes-R-tidyverse/&#34;&gt;without leaving the pipeflow&lt;/a&gt; always force me to do some bizarre piping such as double grouping and summarise.&lt;/p&gt;
+&lt;p&gt;I am using &lt;a href=&#34;../preserving-zero-length-groups/&#34;&gt;again the nuclear accidents dataset&lt;/a&gt;, and trying to calculate the percentage of accidents that happened in Europe each year.&lt;/p&gt;
 &lt;style type=&#34;text/css&#34;&gt;
   div.sourceCode {
       overflow-x: hidden;
@@ -780,7 +780,7 @@ NA
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;group_by&lt;/span&gt;(Year, In_Europe) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;summarize&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;N =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;n&lt;/span&gt;()) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;Percentage =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;round&lt;/span&gt;(N &lt;span class=&#34;op&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;sum&lt;/span&gt;(N) &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)) &lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;If that chunk puzzles you, I explain what is going on under the hood &lt;a href=&#34;../calculating-ratios-tidyverse/index.Rmd&#34;&gt;in this post&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If that chunk puzzles you, I explain what is going on under the hood &lt;a href=&#34;../calculating-ratios-tidyverse/&#34;&gt;in this post&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;In the plot below I highlighted the strange result I found: being that there are only two possibilities (the accident happened in Europe or not) the sum of the ratios should add up to 100, right?
 &lt;img src=&#34;/en/vizs-and-tips/preserving-zero-length-groups/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Not a beautiful plot but aesthetic considerations apart, what is going on here? Did we fail with the maths?
@@ -1084,7 +1084,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 This package is built on top of &lt;em&gt;dplyr&lt;/em&gt; and &lt;em&gt;tidyr&lt;/em&gt; and provides us with feedback on the results of the operations. Actually, this is a feature that already appeared in the Stata software.&lt;/p&gt;
 &lt;p&gt;When performing one operation at a time, it is easy to track the changes made on a table.
 However things get increasingly obscure when chaining multiple functions or dealing with big data frames.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;We all love piping&lt;/strong&gt; operations. I often ‘play’ to perform the whole transformation &lt;a href=&#34;../conditional-pipes-R-tidyverse/index.Rmd&#34;&gt;without leaving the pipeflow&lt;/a&gt;. But the counterpart is missing the intermediate states: you can make some big mistakes and be unaware of them until it’s too late and maybe you have to undone some work or rethink your analysis.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;We all love piping&lt;/strong&gt; operations. I often ‘play’ to perform the whole transformation &lt;a href=&#34;../conditional-pipes-R-tidyverse/&#34;&gt;without leaving the pipeflow&lt;/a&gt;. But the counterpart is missing the intermediate states: you can make some big mistakes and be unaware of them until it’s too late and maybe you have to undone some work or rethink your analysis.&lt;/p&gt;
 &lt;p&gt;In this context, some additional info is always welcome. I think this feature is specially convenient for beginners, but not only! I have myself wasted several hours debugging long pipelines and trying to understand where the problems came from.&lt;/p&gt;
 &lt;p&gt;Let’s see a tiny bit of its behaviour with a simple example:&lt;/p&gt;
 &lt;style type=&#34;text/css&#34;&gt;
@@ -1300,6 +1300,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;p&gt;Instead, we just have to select the columns we will filter on and apply the condition:&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-1&#34; title=&#34;1&#34;&gt;features &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;names&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;keep&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;str_detect&lt;/span&gt;(.,&lt;span class=&#34;st&#34;&gt;&amp;quot;[.]&amp;quot;&lt;/span&gt;))&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb3-2&#34; title=&#34;2&#34;&gt;iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter_at&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;vars&lt;/span&gt;(features), &lt;span class=&#34;kw&#34;&gt;all_vars&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(.)))&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 5 x 6&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb4-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;co&#34;&gt;#   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb4-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  &lt;/span&gt;&lt;/a&gt;
@@ -1308,9 +1309,20 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb4-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 3     6          5.4         3.9          1.7         0.4 setosa &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb4-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 4     7          4.6         3.4          1.4         0.3 setosa &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb4-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 5     9          4.4         2.9          1.4         0.2 setosa &lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+=======
+&lt;pre&gt;&lt;code&gt;## # A tibble: 5 x 6
+##   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+##   &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  
+## 1     3          4.7         3.2          1.3         0.2 setosa 
+## 2     5          5           3.6          1.4         0.2 setosa 
+## 3     6          5.4         3.9          1.7         0.4 setosa 
+## 4     7          4.6         3.4          1.4         0.3 setosa 
+## 5     9          4.4         2.9          1.4         0.2 setosa&lt;/code&gt;&lt;/pre&gt;
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 34dac4b0f5ceccd4415f1fd0a306de12eefcc93b
 &lt;p&gt;Here we have used the function &lt;code&gt;all_vars&lt;/code&gt; in the predicate to explicit that
 &lt;strong&gt;every feature must satisfy the condition.&lt;/strong&gt;
 To be honest, for that purpose it would have been easier to simply use &lt;code&gt;iris %&amp;gt;% na.omit()&lt;/code&gt;.&lt;/p&gt;
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 &lt;p&gt;But what if we wanted the opposite? &lt;strong&gt;Keeping only the rows with &lt;em&gt;all&lt;/em&gt; the selected features missing&lt;/strong&gt; is as easy as changing the predicate part:&lt;/p&gt;
 &lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-1&#34; title=&#34;1&#34;&gt;iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter_at&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;vars&lt;/span&gt;(features), &lt;span class=&#34;kw&#34;&gt;all_vars&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(.)))&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb5-2&#34; title=&#34;2&#34;&gt;&lt;/a&gt;
@@ -1352,6 +1364,45 @@ To be honest, for that purpose it would have been easier to simply use &lt;code&
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb8-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 4     8         NA           3.4          1.5         0.2 setosa &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb8-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 5     9          4.4         2.9          1.4         0.2 setosa &lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb8-11&#34; title=&#34;11&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 6    10         NA          NA           NA          NA   setosa &lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+=======
+&lt;p&gt;But what if we wanted the opposite? Keeping only the rows with &lt;em&gt;all the selected features missing&lt;/em&gt; is as easy as changing the predicate part:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-1&#34; title=&#34;1&#34;&gt;iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter_at&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;vars&lt;/span&gt;(features), &lt;span class=&#34;kw&#34;&gt;all_vars&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(.)))&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 1 x 6
+##   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+##   &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  
+## 1    10           NA          NA           NA          NA setosa&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Another option is to apply the condition on &lt;strong&gt;any feature&lt;/strong&gt;. That’s where &lt;code&gt;any_vars&lt;/code&gt; comes to rescue. Here we keep only the observations with &lt;em&gt;at least one&lt;/em&gt; missing feature:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-1&#34; title=&#34;1&#34;&gt;iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter_at&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;vars&lt;/span&gt;(features), &lt;span class=&#34;kw&#34;&gt;any_vars&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(.)))&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 5 x 6
+##   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+##   &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  
+## 1     1          5.1        NA            1.4         0.2 setosa 
+## 2     2         NA           3            1.4        NA   setosa 
+## 3     4         NA           3.1          1.5         0.2 setosa 
+## 4     8         NA           3.4          1.5         0.2 setosa 
+## 5    10         NA          NA           NA          NA   setosa&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Also, there are some other fancy ways to manipulate data frames with the filter family. One trick is using &lt;code&gt;contains()&lt;/code&gt; or &lt;code&gt;starts_with()&lt;/code&gt; to select the variables:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb9&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb9-1&#34; title=&#34;1&#34;&gt;iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter_at&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;vars&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;contains&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;Length&amp;quot;&lt;/span&gt;)), &lt;span class=&#34;kw&#34;&gt;all_vars&lt;/span&gt;(. &lt;span class=&#34;op&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;1.4&lt;/span&gt;))&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 5 x 6
+##   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+##   &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  
+## 1     1          5.1        NA            1.4         0.2 setosa 
+## 2     5          5           3.6          1.4         0.2 setosa 
+## 3     6          5.4         3.9          1.7         0.4 setosa 
+## 4     7          4.6         3.4          1.4         0.3 setosa 
+## 5     9          4.4         2.9          1.4         0.2 setosa&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Another example is applying the condition on columns that satisfy certain condition with &lt;code&gt;filter_if&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb11-1&#34; title=&#34;1&#34;&gt;iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter_if&lt;/span&gt;(is.numeric, &lt;span class=&#34;kw&#34;&gt;any_vars&lt;/span&gt;(. &lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;))&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 x 6
+##   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+##   &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  
+## 1     1          5.1        NA            1.4         0.2 setosa 
+## 2     6          5.4         3.9          1.7         0.4 setosa 
+## 3     7          4.6         3.4          1.4         0.3 setosa 
+## 4     8         NA           3.4          1.5         0.2 setosa 
+## 5     9          4.4         2.9          1.4         0.2 setosa 
+## 6    10         NA          NA           NA          NA   setosa&lt;/code&gt;&lt;/pre&gt;
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; 34dac4b0f5ceccd4415f1fd0a306de12eefcc93b
 </description>
     </item>
     
