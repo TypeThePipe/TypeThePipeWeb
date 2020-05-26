@@ -3,8 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/analyzing-data-covid19-r-package/</loc>
+    <lastmod>2020-05-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/authors/</loc>
-    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
+    <lastmod>2020-05-26T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -18,13 +23,8 @@
   </url>
   
   <url>
-    <loc>/vizs-and-tips/calculating-ratios-with-tidyverse/</loc>
-    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/categories/</loc>
-    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
+    <lastmod>2020-05-26T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -39,7 +39,7 @@
   
   <url>
     <loc>/authors/pablo-canovas/</loc>
-    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
+    <lastmod>2020-05-26T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -50,6 +50,41 @@
                 hreflang="en"
                 href="/authors/pablo-canovas/"
                 />
+  </url>
+  
+  <url>
+    <loc>/categories/post/</loc>
+    <lastmod>2020-05-26T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-05-26T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/vizs-and-tips/calculating-ratios-with-tidyverse/</loc>
+    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -169,36 +204,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/post/10-tips-datathon-kaggle-data-science/"
-                />
-  </url>
-  
-  <url>
-    <loc>/categories/post/</loc>
-    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/post/"
-                />
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/post/"
                 />
   </url>
   
