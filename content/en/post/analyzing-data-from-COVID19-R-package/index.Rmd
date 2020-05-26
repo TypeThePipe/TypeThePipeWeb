@@ -276,10 +276,16 @@ ggplotly(
 
 Now we will add to the analysis the track record of deaths from last years for some european countries. I'm trying to calibrate if reported deaths due to COVID match real deaths data.
 
-```{r, message=FALSE}
-df <- readr::read_csv("https://www.mortality.org/Public/STMF/Outputs/stmf.csv", skip=1)
+```{r, eval = FALSE, echo = FALSE, message=FALSE}
+mortality <- read_csv("https://www.mortality.org/Public/STMF/Outputs/stmf.csv", skip=1)
+```
 
-deaths <- df %>% 
+```{r, message=FALSE, echo= FALSE}
+mortality <- read_csv("../../../../static/shared_files/mortality.csv")
+```
+
+```{r}
+deaths <- mortality %>% 
   rename(Deaths = DTotal) %>% 
   filter(Sex == "b") %>% 
   select(CountryCode, Year, Week, Deaths) %>% 
