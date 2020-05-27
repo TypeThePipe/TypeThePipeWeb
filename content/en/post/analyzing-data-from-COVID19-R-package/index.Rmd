@@ -1,12 +1,15 @@
 ---
-title: "Analyzing data from COVID19 R package"
-author: "Pablo Cánovas Tourné"
-date: '2020-05-26'
-slug: "analyzing-data-covid19-r-package"
+title: Analyzing data from COVID19 R package
+author: Pablo Cánovas Tourné
+date: '2020-05-27'
+slug: analyzing-data-covid19-r-package
 output: 
   blogdown::html_page:
     highlight: tango 
 categories:
+  - R
+  - Tidyverse
+  - COVID
   - Post
 tags: []
 subtitle: 'Does reported deaths match actual deaths?'
@@ -56,7 +59,7 @@ covid_deaths <- covid19(verbose = FALSE) %>%
   ungroup() %>% 
   mutate(Week = week(date)) %>% 
   select(Country = id, Date = date, Week, Deaths = deaths, Population = population) %>% 
-  filter(Date < today() %>% add(days(-1))) %>% 
+  filter(Date < today() %>% add(days(-2))) %>% 
   mutate(Deaths_by_1Mpop = round(Deaths/Population*1e6)) 
 ```
 
