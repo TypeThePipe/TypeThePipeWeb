@@ -10,7 +10,7 @@ output:
 categories:
 - R
 - Tips
-tags: []
+tags: [Tidyverse]
 subtitle: 'Survey analysis using R. Mastering Tidyverse summarise_at() function to achieve aggregated metrics and statistics.'
 summary: "Survey analysis using R"
 authors: [carlos-vecina]

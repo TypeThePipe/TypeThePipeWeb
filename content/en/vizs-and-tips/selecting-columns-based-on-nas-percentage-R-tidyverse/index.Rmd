@@ -10,7 +10,7 @@ output:
 categories:
 - R
 - Tips
-tags: []
+tags: [Tidyverse]
 subtitle: "Selecting or discarding columns based on NAs percentage in R. Showing up several ways!"
 summary: "Showing up several ways"
 authors: [carlos-vecina]

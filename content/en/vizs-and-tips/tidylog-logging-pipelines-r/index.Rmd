@@ -9,9 +9,8 @@ output:
     highlight: tango
 categories:
 - R
-- Tidyverse
 - Tips
-tags: []
+tags: [Tidyverse]
 subtitle: "Do you find Tidyverse pipelines useful? But do you need some kind of logging inside the fancy pipes? Here's Tidylog, logging your pipelines"
 summary: "Logging your pipelines"
 authors: [pablo-canovas]

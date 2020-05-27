@@ -8,10 +8,8 @@ output:
     highlight: tango 
 categories:
   - R
-  - Tidyverse
-  - COVID
   - Post
-tags: []
+tags: [Tidyverse, COVID]
 subtitle: 'Does reported deaths match actual deaths?'
 summary: 'Does reported deaths match actual deaths?'
 authors: [pablo-canovas]

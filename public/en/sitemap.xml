@@ -38,7 +38,7 @@
   </url>
   
   <url>
-    <loc>/categories/covid/</loc>
+    <loc>/tags/covid/</loc>
     <lastmod>2020-05-27T00:00:00+00:00</lastmod>
   </url>
   
@@ -103,7 +103,22 @@
   </url>
   
   <url>
-    <loc>/categories/tidyverse/</loc>
+    <loc>/tags/</loc>
+    <lastmod>2020-05-27T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/tidyverse/</loc>
     <lastmod>2020-05-27T00:00:00+00:00</lastmod>
   </url>
   
@@ -348,18 +363,8 @@
   </url>
   
   <url>
-    <loc>/categories/datathon/</loc>
+    <loc>/tags/datathon/</loc>
     <lastmod>2019-10-07T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/datathon/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/datathon/"
-                />
   </url>
   
   <url>
@@ -476,20 +481,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/show/"
-                />
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tags/"
                 />
   </url>
   
