@@ -25,7 +25,7 @@ knitr::opts_chunk$set(echo = TRUE)
 nchar("Setting up the interactive grid with R Shiny and ggplot! Trial with some kind of random-walker algorithm.")
 ```
 
-<img src="/en/post/pathfinding-algorithms-visualizer-using-r/featured.gif" height="250px" width="400px" alt="R Shiny and GGplot2 pathfinding algorithm exploring grid map. It's an interactive ggplot2 plot." />
+<img src="/en/post/pathfinding-algorithms-visualizer-using-r/featured.png" height="250px" width="400px" alt="R Shiny and GGplot2 pathfinding algorithm exploring grid map. It's an interactive ggplot2 plot." />
 
 Here you can find the R code. It's an 'in progress' script. I will develop basic features like:
 
