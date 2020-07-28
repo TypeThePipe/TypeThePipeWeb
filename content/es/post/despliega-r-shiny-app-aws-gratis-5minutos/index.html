@@ -23,8 +23,8 @@ draft: false
 
 <div id="TOC">
 <ul>
-<li><a href="#preparamos-nuestra-shiny-app">1. Preparamos nuestra Shiny APP</a></li>
-<li><a href="#levantemos-la-maquina-ec2-en-aws">2. Levantemos la máquina EC2 en AWS</a><ul>
+<li><a href="#preparar-nuestra-shiny-app">1. Preparar nuestra Shiny APP</a></li>
+<li><a href="#levantar-la-maquina-ec2-en-aws">2. Levantar la máquina EC2 en AWS</a><ul>
 <li><a href="#intro-launch-instance">2.1 Intro &amp; Launch Instance</a></li>
 <li><a href="#configuracion-de-la-instancia">2.2 Configuración de la Instancia</a></li>
 <li><a href="#generar-la-key">2.3 Generar la key</a></li>
@@ -34,14 +34,14 @@ draft: false
 <li><a href="#transformar-la-clave-con-puttygen">3.2 Transformar la clave con PuttyGen</a></li>
 <li><a href="#configurar-la-conexion">3.3 Configurar la conexión</a></li>
 </ul></li>
-<li><a href="#instalar-r-y-r-server-en-la-maquina-ec2-aws">4. Instalar R y R Server en la máquina EC2 AWS</a></li>
+<li><a href="#instalar-r-y-shiny-server-en-la-maquina-ec2-aws">4. Instalar R y Shiny Server en la máquina EC2 AWS</a></li>
 <li><a href="#desplegar-nuestra-shiny-app">5. Desplegar nuestra Shiny App</a></li>
 </ul>
 </div>
 
 <p><img src="featured.jpg" height="250px" width="400px" /></p>
-<div id="preparamos-nuestra-shiny-app" class="section level1">
-<h1>1. Preparamos nuestra Shiny APP</h1>
+<div id="preparar-nuestra-shiny-app" class="section level1">
+<h1>1. Preparar nuestra Shiny APP</h1>
 <p>En primer lugar prepararemos la app de Shiny. Vamos a dejar la aplicación lista y preparada para ser desplegada en AWS.
 Para ello recomendamos:</p>
 <ul>
@@ -51,8 +51,8 @@ Para ello recomendamos:</p>
 </ul>
 <p>Como veremos en breve, no es totalmente necesario tener la app en un repositorio, aunque sí altamente recomendable. Explicaremos una alternativa de transferencia de ficheros a la máquina de AWS.</p>
 </div>
-<div id="levantemos-la-maquina-ec2-en-aws" class="section level1">
-<h1>2. Levantemos la máquina EC2 en AWS</h1>
+<div id="levantar-la-maquina-ec2-en-aws" class="section level1">
+<h1>2. Levantar la máquina EC2 en AWS</h1>
 <div id="intro-launch-instance" class="section level2">
 <h2>2.1 Intro &amp; Launch Instance</h2>
 <p>Como pincelada, comentar qe el servicio de EC2 dentro de la cloud de Amazon nos facilita instanciar máquinas virtuales con imágenes preconfiguradas.</p>
@@ -133,8 +133,8 @@ Seteamos la IP, Save &amp; Open
 <p><em>Got it!</em></p>
 </div>
 </div>
-<div id="instalar-r-y-r-server-en-la-maquina-ec2-aws" class="section level1">
-<h1>4. Instalar R y R Server en la máquina EC2 AWS</h1>
+<div id="instalar-r-y-shiny-server-en-la-maquina-ec2-aws" class="section level1">
+<h1>4. Instalar R y Shiny Server en la máquina EC2 AWS</h1>
 <p>Una vez dentro, ejecutamos los siguientes comandos. Estamos configurando la máquina, descargando R, sus dependencias, Shiny, los paquetes necesarios y Shiny Server.</p>
 <pre><code>sudo add-apt-repository &#39;deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/&#39;
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9

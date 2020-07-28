@@ -95,8 +95,8 @@ Tipos de error, potencia y tamaño del efecto
 
 &lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#preparamos-nuestra-shiny-app&#34;&gt;1. Preparamos nuestra Shiny APP&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#levantemos-la-maquina-ec2-en-aws&#34;&gt;2. Levantemos la máquina EC2 en AWS&lt;/a&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#preparar-nuestra-shiny-app&#34;&gt;1. Preparar nuestra Shiny APP&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#levantar-la-maquina-ec2-en-aws&#34;&gt;2. Levantar la máquina EC2 en AWS&lt;/a&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;#intro-launch-instance&#34;&gt;2.1 Intro &amp;amp; Launch Instance&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#configuracion-de-la-instancia&#34;&gt;2.2 Configuración de la Instancia&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#generar-la-key&#34;&gt;2.3 Generar la key&lt;/a&gt;&lt;/li&gt;
@@ -106,14 +106,14 @@ Tipos de error, potencia y tamaño del efecto
 &lt;li&gt;&lt;a href=&#34;#transformar-la-clave-con-puttygen&#34;&gt;3.2 Transformar la clave con PuttyGen&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#configurar-la-conexion&#34;&gt;3.3 Configurar la conexión&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#instalar-r-y-r-server-en-la-maquina-ec2-aws&#34;&gt;4. Instalar R y R Server en la máquina EC2 AWS&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#instalar-r-y-shiny-server-en-la-maquina-ec2-aws&#34;&gt;4. Instalar R y Shiny Server en la máquina EC2 AWS&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#desplegar-nuestra-shiny-app&#34;&gt;5. Desplegar nuestra Shiny App&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 
 &lt;p&gt;&lt;img src=&#34;featured.jpg&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
-&lt;div id=&#34;preparamos-nuestra-shiny-app&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;1. Preparamos nuestra Shiny APP&lt;/h1&gt;
+&lt;div id=&#34;preparar-nuestra-shiny-app&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;1. Preparar nuestra Shiny APP&lt;/h1&gt;
 &lt;p&gt;En primer lugar prepararemos la app de Shiny. Vamos a dejar la aplicación lista y preparada para ser desplegada en AWS.
 Para ello recomendamos:&lt;/p&gt;
 &lt;ul&gt;
@@ -123,8 +123,8 @@ Para ello recomendamos:&lt;/p&gt;
 &lt;/ul&gt;
 &lt;p&gt;Como veremos en breve, no es totalmente necesario tener la app en un repositorio, aunque sí altamente recomendable. Explicaremos una alternativa de transferencia de ficheros a la máquina de AWS.&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;levantemos-la-maquina-ec2-en-aws&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;2. Levantemos la máquina EC2 en AWS&lt;/h1&gt;
+&lt;div id=&#34;levantar-la-maquina-ec2-en-aws&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;2. Levantar la máquina EC2 en AWS&lt;/h1&gt;
 &lt;div id=&#34;intro-launch-instance&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;2.1 Intro &amp;amp; Launch Instance&lt;/h2&gt;
 &lt;p&gt;Como pincelada, comentar qe el servicio de EC2 dentro de la cloud de Amazon nos facilita instanciar máquinas virtuales con imágenes preconfiguradas.&lt;/p&gt;
@@ -205,8 +205,8 @@ Seteamos la IP, Save &amp;amp; Open
 &lt;p&gt;&lt;em&gt;Got it!&lt;/em&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id=&#34;instalar-r-y-r-server-en-la-maquina-ec2-aws&#34; class=&#34;section level1&#34;&gt;
-&lt;h1&gt;4. Instalar R y R Server en la máquina EC2 AWS&lt;/h1&gt;
+&lt;div id=&#34;instalar-r-y-shiny-server-en-la-maquina-ec2-aws&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;4. Instalar R y Shiny Server en la máquina EC2 AWS&lt;/h1&gt;
 &lt;p&gt;Una vez dentro, ejecutamos los siguientes comandos. Estamos configurando la máquina, descargando R, sus dependencias, Shiny, los paquetes necesarios y Shiny Server.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;sudo add-apt-repository &amp;#39;deb https://cloud.r-project.org/bin/linux/ubuntu bionic-cran35/&amp;#39;
 sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9

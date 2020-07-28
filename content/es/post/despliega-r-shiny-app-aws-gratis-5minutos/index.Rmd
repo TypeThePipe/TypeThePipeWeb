@@ -26,7 +26,7 @@ nchar("¿Quieres compartir tu aplicación Shiny R? ¿Quieres evitar instalacione
 
 <img src="./featured.jpg" height="250px" width="400px" />
 
-# 1. Preparamos nuestra Shiny APP
+# 1. Preparar nuestra Shiny APP
 
 En primer lugar prepararemos la app de Shiny. Vamos a dejar la aplicación lista y preparada para ser desplegada en AWS.
 Para ello recomendamos:
@@ -37,7 +37,7 @@ Para ello recomendamos:
 
 Como veremos en breve, no es totalmente necesario tener la app en un repositorio, aunque sí altamente recomendable. Explicaremos una alternativa de transferencia de ficheros a la máquina de AWS.
 
-# 2. Levantemos la máquina EC2 en AWS
+# 2. Levantar la máquina EC2 en AWS
 
 ## 2.1 Intro & Launch Instance
 
@@ -136,7 +136,7 @@ Con esto, sólo queda darle a *Open* y login como user: `ubuntu`.
 *Got it!*
 
 
-# 4. Instalar R y R Server en la máquina EC2 AWS
+# 4. Instalar R y Shiny Server en la máquina EC2 AWS
 
 Una vez dentro, ejecutamos los siguientes comandos. Estamos configurando la máquina, descargando R, sus dependencias, Shiny, los paquetes necesarios y Shiny Server.
 
