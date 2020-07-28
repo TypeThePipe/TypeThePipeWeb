@@ -2,15 +2,89 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Pablo Canovas | TypeThePipe</title>
-    <link>/es/authors/pablo-canovas/</link>
-      <atom:link href="/es/authors/pablo-canovas/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/es/authors/pablo-canovas/</link>
+      <atom:link href="https://typethepipe.com/es/authors/pablo-canovas/index.xml" rel="self" type="application/rss+xml" />
     <description>Pablo Canovas</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Sun, 28 Jun 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-32.png</url>
+      <url>https://typethepipe.com/img/icon-32.png</url>
       <title>Pablo Canovas</title>
-      <link>/es/authors/pablo-canovas/</link>
+      <link>https://typethepipe.com/es/authors/pablo-canovas/</link>
     </image>
+    
+    <item>
+      <title>A/B Testing</title>
+      <link>https://typethepipe.com/es/post/ab-testing/</link>
+      <pubDate>Sun, 28 Jun 2020 00:00:00 +0000</pubDate>
+      <guid>https://typethepipe.com/es/post/ab-testing/</guid>
+      <description>
+
+
+&lt;div id=&#34;vale-en-qué-consisten-los-test-ab&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Vale, en qué consisten los test A/B?&lt;/h2&gt;
+&lt;p&gt;Un test A/B es una técnica muy utilizada hoy en día en Marketing digital que consiste en llevar a cabo dos acciones diferentes en paralelo y comparar sus resultados. Por ejemplo, estos resultados pueden ser la tasa de conversión de una campaña de marketing (ventas, subscripciones…) o el número de clicks en un enlace respecto a impresiones (&lt;a href=&#34;https://www.wordstream.com/click-through-rate&#34;&gt;Click Through Rate&lt;/a&gt;). También es ampliamente utilizado fuera del ámbito del marketing, típicamente en áreas como la farmacología o la psicología.&lt;/p&gt;
+&lt;p&gt;Supongamos que queremos impulsar las ventas de un producto o servicio y para ello hemos decidido usar un nuevo diseño web.
+Diseñaremos un experimento, llamado test A/B, mediante el cual seremos capaces de medir la influencia de nuestro cambio. Para ello, dividiremos a nuestros usuarios aleatoriamente en un grupo de control que verá la página como hasta ahora y otro sobre el que probaremos la variante llamado grupo experimental. Una vez llevada a cabo la prueba, compararemos los resultados entre los dos grupos de cualquiera que sea la métrica que estemos midiendo para tomar una decisión sobre qué diseño web utilizar.&lt;/p&gt;
+&lt;p&gt;El concepto más importante a recordar aquí es que al realizar el experimento sobre una muestra en lugar de hacerlo sobre toda la población, cualquier medida que tomemos tendrá asociada una incertidumbre que tenemos que tener en cuenta a la hora de interpretar los resultados. En nuestro caso, para cada visita solo podemos obtener dos resultados: el cliente compra o no, el usuario se suscribe o no, el usuario se marcha o no…en resumen, éxito o fracaso. Una variable aleatoria de este tipo se dice que sigue una distribución binomial.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;Plots/success_failure.png&#34; /&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;tipos-de-errores&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Tipos de errores&lt;/h2&gt;
+&lt;p&gt;De cara a diseñar el experimento, necesitamos entender primero la diferencia entre los dos tipos de error en los que podemos incurrir al evaluar los resultados del test. Vamos a suponer que ya hemos realizado el test y hemos obtenido resultados: para cada diseño propuesto hemos medido una tasa de conversión.&lt;/p&gt;
+&lt;p&gt;En primer lugar, una posibilidad es que la diferencia que hemos medido sea producto del azar: Supongamos que en realidad el nuevo diseño no aporta nada nuevo y no supone ningún aumento en el número de ventas, pero hemos tenido “buena suerte” a la hora de distribuir a los potenciales clientes en grupos (recordemos que este proceso lo hemos hecho al azar) y por pura casualidad hemos vendido más entre los clientes que han visto nuestra nueva web. Esto es lo que se conoce como error tipo I (normalmente llamado &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;). Es la probabilidad de &lt;em&gt;alucinar&lt;/em&gt; y creer que nuestra variante funciona mejor cuando en realidad no lo hace.&lt;/p&gt;
+&lt;p&gt;Por otro lado, a la hora de diseñar un test A/B también tenemos que tener en cuenta que podríamos cometer otro tipo de error, esta vez por omisión. Imaginemos que el equipo de marketing propone un diseño que sí funciona (y cuando digo que funciona me refiero a que si tuviera una bola de cristal vería que en realidad sí que funciona. Dicho de manera menos esotérica: si pudiéramos conseguir millones de visitas veríamos sin lugar a dudas que efectivamente conseguimos aumentar las ventas). Sin embargo, como no podemos esperar tanto tiempo para evaluar los resultados tendremos que sacar las conclusiones basándonos únicamente en los resultados de una muestra. &lt;strong&gt;Pero como en toda muestra, los resultados que obtengamos están sujetos de alguna manera al azar&lt;/strong&gt;, a la “suerte” que tengamos al elegir a las personas que conforman los grupos. Esto implica que, cuando damos por terminado el experimento, podríamos llegar a que a través de ambas webs conseguimos convertir exactamente la misma proporción de ventas.
+Entonces, la pregunta del millón: ¿Estos resultados son significativos? ¿Entonces, el nuevo diseño no tiene absolutamente ningún efecto? ¿O, análogamente al caso anterior, podría ser que hubiéramos tenido mala suerte en la elección de los grupos y no estuviéramos viendo los efectos del nuevo diseño? Esto es lo que se conoce como error tipo II (&lt;span class=&#34;math inline&#34;&gt;\(\beta\)&lt;/span&gt;): la probabilidad de no obtener resultados significativos cuando en realidad sí que existe diferencia entre los ratios de conversión de cada grupo.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;Plots/doubt.png&#34; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+Imagen sacada de &lt;a href=&#34;https://www.clearswift.com/blog/2018/12/20/cutting-out-%E2%80%98false-positive%E2%80%99-lexical-expression-qualifiers&#34;&gt;Clearswift&lt;/a&gt;
+&lt;/figcaption&gt;
+&lt;/div&gt;
+&lt;div id=&#34;la-estadística&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;La estadística&lt;/h2&gt;
+&lt;p&gt;Dicho de manera más técnica, en inferencia estadística llamamos contraste de hipótesis al procedimiento seguido para evaluar si una propiedad de una población es compatible con la medida en una muestra.
+Definimos la hipótesis nula &lt;span class=&#34;math inline&#34;&gt;\(H_0\)&lt;/span&gt; como la hipótesis que queremos contrastar, aquella de la que partimos y la que mantendremos si no reunimos evidencia de lo contrario. En contraposición, frecuentemente definimos la hipótesis alternativa de manera implícita como “&lt;span class=&#34;math inline&#34;&gt;\(H_0\)&lt;/span&gt; es falsa”.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;El nivel de &lt;strong&gt;significancia estadística&lt;/strong&gt; o nivel &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt; es la probabilidad de rechazar la hipótesis nula cuando es cierta. Un nivel de confianza del 95% significa que, si repetiéramos el experimento muchas veces, el 95% de las veces que obtengamos resultados significativos será porque efectivamente la propuesta alternativa mejora el ratio de la propuesta de control, y solo un 5% de las veces obtendremos un falso positivo significativo.&lt;/li&gt;
+&lt;li&gt;&lt;span class=&#34;math inline&#34;&gt;\(\beta\)&lt;/span&gt; es la probabilidad de no rechazar la hipótesis nula cuando es falsa, aunque normalmente se suele hablar de &lt;strong&gt;potencia estadística&lt;/strong&gt; (definida como 1 - &lt;span class=&#34;math inline&#34;&gt;\(\beta\)&lt;/span&gt;), que es la probabilidad de rechazar la hipótesis nula cuando es falsa. Por ejemplo, planificar un experimento para que tenga una potencia del 80% implica que, si repetimos muchas veces la comparación del grupo de control con una variante que en realidad sí que mejora el ratio de venta, obtendremos resultados significativos el 80% de las veces. Es la potencia de la lupa, nuestra capacidad para distinguir con precisión las diferentes tasas de conversión de los dos grupos.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Con todo lo explicado arriba, es fácil ver que a la hora de evaluar los resultados del test podemos tener cuatro casos diferentes:
+* a) Verdadero positivo: que los resultados nos indiquen que la variante ha sido un éxito y realmente, si pudiéramos hacer el experimento con toda la población, veríamos que efectivamente el nuevo diseño lleva a una mejor tasa de conversión.
+* b) Verdadero negativo: que los resultados nos indiquen que la variante no produce ningún cambio y efectivamente sea así.
+* c) Falso positivo (error tipo I): que los resultados nos indiquen que la variante ha sido un éxito, pero en realidad este resultado se deba simplemente al azar.
+* d) Falso negativo (error tipo II): que los resultados nos indiquen que la variante no produce ningún cambio, pero en realidad sí que lo produce y lo que ocurre es que no hemos obtenido suficiente muestra.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;Plots/ConfusionMatrix.png&#34; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+Imagen de &lt;a href=&#34;https://en.wikipedia.org/wiki/Confusion_matrix&#34;&gt;Wikipedia&lt;/a&gt;
+&lt;/figcaption&gt;
+&lt;/div&gt;
+&lt;div id=&#34;tamaño-muestral&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Tamaño muestral&lt;/h2&gt;
+&lt;p&gt;¿Qué papel juega el tamaño muestral en un test A/B? &lt;strong&gt;Cuanta más muestra, menos incertidumbre&lt;/strong&gt;.
+La fórmula con la que podemos calcular la incertidumbre asociada a una medición es la siguiente:&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[ \hat{p} \pm z \sqrt{\frac{\hat{p}(1-\hat{p})}{n}} \]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;siendo &lt;span class=&#34;math inline&#34;&gt;\(\hat{p}\)&lt;/span&gt; la proporción observada, z el Z-Score y n el tamaño muestral. El &lt;a href=&#34;http://www.z-table.com/&#34;&gt;Z-score&lt;/a&gt; de una medida nos indica dónde se ubica ésta en la distribución, es decir, cómo de lejos en número de desviaciones estándar está esa medida de la media.&lt;/p&gt;
+&lt;p&gt;Una cuestión habitual a la hora de diseñar un test A/B es: ¿Qué tamaño muestral necesito?
+Para encontrar la muestra necesaria para nuestro experimento podemos usar la función de R &lt;code&gt;power.prop.test&lt;/code&gt; que acepta como argumentos el tamaño muestral, las tasas de éxito de nuestros grupos, la significancia y la potencia estadística. De ellos, dados cuatro nos dará el quinto. De esta manera se convierte en la herramienta perfecta para diseñar un test estadístico de este tipo: Podemos encontrar qué tamaño muestral nos permitiría observar cierto efecto dadas unas tolerancias determinadas al error, o encontrar qué potencia estadística tendrá un test con una diferencia entre ratios y un tamaño muestral dados.
+Con esta herramienta llegamos a otro concepto importante: Definimos el MED (del inglés Minimum Detectable Effect) como el mínimo efecto significativo que podremos detectar dado un tamaño muestral y unas condiciones dadas de significancia. Este concepto deja intuir otra idea quizá implícita pero sencilla de entender: Para poder ser capaces de distinguir mejoras pequeñas de rendimiento deberemos tener una muestra suficientemente grande, pues si no, es fácil que cometamos un error de tipo II (que la mejora exista pero no seamos capaces de verla).&lt;/p&gt;
+&lt;p&gt;Dados los cuatro posibles escenarios anteriores, diseñaremos adecuadamente el test teniendo en cuenta las consecuencias de los distintos errores. ¿Cuáles son las consecuencias de concluir que la nueva campaña de marketing funciona mejor que la anterior? ¿Cuáles son las consecuencias de tomar la decisión de desechar la nueva y efectiva campaña porque no hemos obtenido resultados concluyentes debido al tamaño insuficiente de la muestra?
+Este tipo de preguntas son las que debemos de respondernos a la hora de calibrar la tolerancia que tenemos a los errores &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt; y &lt;span class=&#34;math inline&#34;&gt;\(\beta\)&lt;/span&gt;. Y para esto no hay una única respuesta válida. Normalmente dependerá de los riesgos que estemos dispuestos a correr y las consecuencias de cada tipo de error: No es lo mismo vivir engañado pensando que tu nueva campaña de marketing aumentará las ventas un 10% que concluir y publicar en una revista científica que has encontrado la cura del cáncer cuando lo único que estás viendo en tus datos es ruído estadístico y has sido &lt;a href=&#34;https://en.wikipedia.org/wiki/Fooled_by_Randomness&#34;&gt;engañado por el azar&lt;/a&gt;. Por tanto, estos parámetros son específicos del dominio en el que trabajamos.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;son-mis-resultados-significativos&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Son mis resultados significativos?&lt;/h2&gt;
+&lt;p&gt;Por último, una vez establecida la confianza requerida, dimensionado adecuadamente el experimento y recogidos los datos, la pregunta que intentamos resolver ahora es: ¿Cómo de probable es que hayamos obtenido resultados positivos por pura casualidad, y que realmente los ratios de conversión de ambos grupos sea idéntica, pero hemos tenido malísima suerte en las medidas?&lt;/p&gt;
+&lt;p&gt;Para saber si hemos obtenido un resultado estadísticamente significativo podemos realizar un test de hipótesis con la función de R &lt;code&gt;prop.test&lt;/code&gt;.
+Además, desarrollé una &lt;a href=&#34;https://pabloct.shinyapps.io/StatisticalSignificance/&#34;&gt;shiny app&lt;/a&gt; que nos permite realizar ese cálculo sin usar R.
+El concepto importante aquí es el p-valor. Supongamos que hemos obtenido que nuestra variante lleva el ratio de conversión del 5% al 8%. ¿Es una mejora significativa? Para responder a la pregunta nos apoyamos en un test estadístico llamado Z-test que, dados los ratios y los tamaños muestrales de cada grupo nos dará &lt;strong&gt;la probabilidad de haber obtenido un resultado tan extremo o más por puro azar&lt;/strong&gt;, suponiendo que en realidad no hay ninguna diferencia entre nuestra variante y el grupo de control. &lt;strong&gt;Esa probabilidad es el p-valor&lt;/strong&gt;.
+Únicamente falta comparar el p-valor obtenido con nuestra tolerancia máxima al error de tipo I (&lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;) del que hemos hablado antes: &lt;strong&gt;Si el p-valor es menor que &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt; rechazaremos la hipótesis nula&lt;/strong&gt;, esto es, daremos nuestro resultado por significativo. En el caso contrario (p-value &amp;gt; &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;) no concluiremos que la variante no mejora, únicamente podremos decir que no hemos conseguido encontrar evidencias de que sí lo haga. Análogamente, en los juicios, cuando no se han encontrado pruebas de que el acusado sea culpable se usa el término &lt;em&gt;no culpable&lt;/em&gt; ya que eso no quiere decir que sea inocente. &lt;a href=&#34;https://en.wikipedia.org/wiki/Evidence_of_absence&#34;&gt;Absence of evidence is not evidence of absence&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Dada la incertidumbre asociada a la propia medición, podemos visualizar la distribución de probabilidad de la tasa de conversión de cada grupo con un gráfico como el siguiente: dos distribuciones binomiales centradas en los valores medidos y cómo se relacionan gráficamente los principales conceptos discutidos en este artículo: &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt;, &lt;span class=&#34;math inline&#34;&gt;\(\beta\)&lt;/span&gt; y p-valor.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;Plots/ErrorTypes.png&#34; /&gt;&lt;/p&gt;
+&lt;figcaption&gt;
+Tipos de error, potencia y tamaño del efecto
+&lt;/figcaption&gt;
+&lt;p&gt;Además, he desarrollado una pequeña aplicación para saber si nuestros resultados son significativos o no, y aprender cómo se relacionan estos conceptos (Potencia estadística, errores &lt;span class=&#34;math inline&#34;&gt;\(\alpha\)&lt;/span&gt; y &lt;span class=&#34;math inline&#34;&gt;\(\beta\)&lt;/span&gt;, tamaño muestral y tamaño del efecto). &lt;a href=&#34;https://pabloct.shinyapps.io/StatisticalSignificance/&#34;&gt;Échale un ojo!&lt;/a&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
   </channel>
 </rss>

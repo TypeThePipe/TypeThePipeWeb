@@ -52,7 +52,17 @@ theme_custom <- function() {
 
 Let's start by loading data from COVID19 package with  ```covid19``` function. It contains lots of information, but I will keep things simple and work only with ```Country```, ```Date```, ```Population``` and ```Deaths``` variables. 
 
-```{r}
+```{r, echo = FALSE}
+covid_deaths <- covid19(verbose = FALSE) %>%
+  ungroup() %>% 
+  mutate(Week = week(date)) %>% 
+  select(Country = id, Date = date, Week, Deaths = deaths, Population = population) %>% 
+  filter(Date < today() %>% add(days(-2))) %>% 
+  mutate(Deaths_by_1Mpop = round(Deaths/Population*1e6)) %>% 
+  filter(Date < ymd(20200525))
+```
+
+```{r, eval = FALSE}
 covid_deaths <- covid19(verbose = FALSE) %>%
   ungroup() %>% 
   mutate(Week = week(date)) %>% 

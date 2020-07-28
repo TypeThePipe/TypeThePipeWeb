@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Vizs | TypeThePipe</title>
-    <link>/categories/vizs/</link>
-      <atom:link href="/categories/vizs/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/categories/vizs/</link>
+      <atom:link href="https://typethepipe.com/categories/vizs/index.xml" rel="self" type="application/rss+xml" />
     <description>Vizs</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 07 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-32.png</url>
+      <url>https://typethepipe.com/img/icon-32.png</url>
       <title>Vizs</title>
-      <link>/categories/vizs/</link>
+      <link>https://typethepipe.com/categories/vizs/</link>
     </image>
     
     <item>
       <title>Skills chart using Gplot2 with R</title>
-      <link>/vizs-and-tips/skills-plot-curriculum-r-ggplot/</link>
+      <link>https://typethepipe.com/vizs-and-tips/skills-plot-curriculum-r-ggplot/</link>
       <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/skills-plot-curriculum-r-ggplot/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/skills-plot-curriculum-r-ggplot/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
 a.sourceLine { display: inline-block; line-height: 1.25; }
@@ -82,7 +82,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;/style&gt;
 
 
-&lt;p&gt;&lt;img src=&#34;/en/vizs-and-tips/skills-plot-curriculum-r-ggplot/featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; alt=&#34;R ggplot2 plot showing our skills info in and orange palette. X axis for hours spent and y-axis for skills&#39; name.&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://typethepipe.com/en/vizs-and-tips/skills-plot-curriculum-r-ggplot/featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; alt=&#34;R ggplot2 plot showing our skills info in and orange palette. X axis for hours spent and y-axis for skills&#39; name.&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;p&gt;In this TypeThePipe tip we are bringing you a skills plot template using R and ggplot2. Maybe its a good idea to evolve this plot and add an unique skill plot to your CV. And it’s only a few lines of R code!&lt;/p&gt;
 &lt;p&gt;You can see the code below :)&lt;/p&gt;

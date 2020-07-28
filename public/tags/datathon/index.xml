@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Datathon | TypeThePipe</title>
-    <link>/tags/datathon/</link>
-      <atom:link href="/tags/datathon/index.xml" rel="self" type="application/rss+xml" />
+    <link>https://typethepipe.com/tags/datathon/</link>
+      <atom:link href="https://typethepipe.com/tags/datathon/index.xml" rel="self" type="application/rss+xml" />
     <description>Datathon</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 07 Oct 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>/img/icon-32.png</url>
+      <url>https://typethepipe.com/img/icon-32.png</url>
       <title>Datathon</title>
-      <link>/tags/datathon/</link>
+      <link>https://typethepipe.com/tags/datathon/</link>
     </image>
     
     <item>
       <title>Data competition platforms</title>
-      <link>/vizs-and-tips/data-competition-platforms-beyond-kaggle/</link>
+      <link>https://typethepipe.com/vizs-and-tips/data-competition-platforms-beyond-kaggle/</link>
       <pubDate>Mon, 07 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/data-competition-platforms-beyond-kaggle/</guid>
+      <guid>https://typethepipe.com/vizs-and-tips/data-competition-platforms-beyond-kaggle/</guid>
       <description>
 
 
