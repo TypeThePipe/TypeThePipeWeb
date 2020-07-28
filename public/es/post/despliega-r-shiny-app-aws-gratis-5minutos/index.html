@@ -269,8 +269,8 @@
   <meta property="og:site_name" content="TypeThePipe">
   <meta property="og:url" content="/es/post/despliega-r-shiny-app-aws-gratis-5minutos/">
   <meta property="og:title" content="¡Despliega tu R Shiny App en AWS gratis y en 5 minutos! | TypeThePipe">
-  <meta property="og:description" content="¿Quieres compartir tu aplicación Shiny R? ¿Quieres evitar instalaciones en local o subirla a servidores gestionados por 3ros? Levanta tu máquina EC2 en AWS y despliga tu App gratis. Te enseñamos como hacerlo en 5 minutos."><meta property="og:image" content="/img/icon-32.png">
-  <meta property="twitter:image" content="/img/icon-32.png"><meta property="og:locale" content="es">
+  <meta property="og:description" content="¿Quieres compartir tu aplicación Shiny R? ¿Quieres evitar instalaciones en local o subirla a servidores gestionados por 3ros? Levanta tu máquina EC2 en AWS y despliga tu App gratis. Te enseñamos como hacerlo en 5 minutos."><meta property="og:image" content="/es/post/despliega-r-shiny-app-aws-gratis-5minutos/featured.jpg">
+  <meta property="twitter:image" content="/es/post/despliega-r-shiny-app-aws-gratis-5minutos/featured.jpg"><meta property="og:locale" content="es">
   
     
       <meta property="article:published_time" content="2020-06-12T00:00:00&#43;00:00">
@@ -302,6 +302,10 @@
     "@id": "/es/post/despliega-r-shiny-app-aws-gratis-5minutos/"
   },
   "headline": "¡Despliega tu R Shiny App en AWS gratis y en 5 minutos!",
+  
+  "image": [
+    "/es/post/despliega-r-shiny-app-aws-gratis-5minutos/featured.jpg"
+  ],
   
   "datePublished": "2020-06-12T00:00:00Z",
   "dateModified": "2020-06-12T00:00:00Z",
@@ -545,11 +549,20 @@
 
 
 
-  
+
+
+
+
+
+
+
 
   
   
+    
   
+
+
 <div class="article-container pt-3">
   <h1>¡Despliega tu R Shiny App en AWS gratis y en 5 minutos!</h1>
 
@@ -558,7 +571,6 @@
   
 
   
-    
 
 
 <div class="article-metadata">
@@ -608,23 +620,25 @@
 
 </div>
 
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
+
+
+
 
 
             <div class="article-container">
@@ -649,7 +663,7 @@
 </ul>
 </div>
 
-<p><img src="./featured.jpg" height="250px" width="400px" /></p>
+<p><img src="featured.jpg" height="250px" width="400px" /></p>
 <div id="preparamos-nuestra-shiny-app" class="section level1">
 <h1>1. Preparamos nuestra Shiny APP</h1>
 <p>En primer lugar prepararemos la app de Shiny. Vamos a dejar la aplicación lista y preparada para ser desplegada en AWS.
@@ -763,15 +777,15 @@ $ sudo apt-get install gdebi-core
 $ wget https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-1.5.13.944-amd64.deb
 $ sudo gdebi shiny-server-1.5.13.944-amd64.deb</code></pre>
 <p>En caso de que tu aplicación no comience checkeando los paquetes que se va a usar, en este paso utilizaremos</p>
-<p><code>sudo su -c "R -e \"install.packages('shiny', repos='https://cran.rstudio.com/')\""</code></p>
+<pre><code>sudo su -c &quot;R -e \&quot;install.packages(&#39;shiny&#39;, repos=&#39;https://cran.rstudio.com/&#39;)\&quot;&quot;</code></pre>
 <p>Con esto, ya tenemos el Shiny Server escuchando en el puerto 3838. Pero aun no podremos acceder a <a href="http://ip_de_la_maquina_de_ec2:3838" class="uri">http://ip_de_la_maquina_de_ec2:3838</a> ya que como último paso debemos de abrir este puerto en el <em>firewall</em>.</p>
 <p>Para ello iremos nuestras instancias:</p>
-<img src="./security_groups.jpg" height="500px" width="400px" />
+<img src="./security_groups.jpg" height="700px" width="500px" />
 <figcaption>
 Dentro del panel de instancias, scroll lateral a la derecha
 </figcaption>
 <p>Instanctias -&gt; Security Group -&gt; Actions -&gt; Edit inbound rules</p>
-<img src="./custom_tcp.jpg" height="500px" width="400px" />
+<img src="./custom_tcp.jpg" height="700px" width="500px" />
 <figcaption>
 Añadimos nueva regla TCP, al puerto 3838 y para todas las IPs de origen
 </figcaption>

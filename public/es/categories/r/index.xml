@@ -37,7 +37,7 @@
 &lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&#34;./featured.jpg&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;featured.jpg&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;div id=&#34;preparamos-nuestra-shiny-app&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;1. Preparamos nuestra Shiny APP&lt;/h1&gt;
 &lt;p&gt;En primer lugar prepararemos la app de Shiny. Vamos a dejar la aplicación lista y preparada para ser desplegada en AWS.
@@ -151,15 +151,15 @@ $ sudo apt-get install gdebi-core
 $ wget https://download3.rstudio.org/ubuntu-14.04/x86_64/shiny-server-1.5.13.944-amd64.deb
 $ sudo gdebi shiny-server-1.5.13.944-amd64.deb&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;En caso de que tu aplicación no comience checkeando los paquetes que se va a usar, en este paso utilizaremos&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;sudo su -c &#34;R -e \&#34;install.packages(&#39;shiny&#39;, repos=&#39;https://cran.rstudio.com/&#39;)\&#34;&#34;&lt;/code&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sudo su -c &amp;quot;R -e \&amp;quot;install.packages(&amp;#39;shiny&amp;#39;, repos=&amp;#39;https://cran.rstudio.com/&amp;#39;)\&amp;quot;&amp;quot;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Con esto, ya tenemos el Shiny Server escuchando en el puerto 3838. Pero aun no podremos acceder a &lt;a href=&#34;http://ip_de_la_maquina_de_ec2:3838&#34; class=&#34;uri&#34;&gt;http://ip_de_la_maquina_de_ec2:3838&lt;/a&gt; ya que como último paso debemos de abrir este puerto en el &lt;em&gt;firewall&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;Para ello iremos nuestras instancias:&lt;/p&gt;
-&lt;img src=&#34;./security_groups.jpg&#34; height=&#34;500px&#34; width=&#34;400px&#34; /&gt;
+&lt;img src=&#34;./security_groups.jpg&#34; height=&#34;700px&#34; width=&#34;500px&#34; /&gt;
 &lt;figcaption&gt;
 Dentro del panel de instancias, scroll lateral a la derecha
 &lt;/figcaption&gt;
 &lt;p&gt;Instanctias -&amp;gt; Security Group -&amp;gt; Actions -&amp;gt; Edit inbound rules&lt;/p&gt;
-&lt;img src=&#34;./custom_tcp.jpg&#34; height=&#34;500px&#34; width=&#34;400px&#34; /&gt;
+&lt;img src=&#34;./custom_tcp.jpg&#34; height=&#34;700px&#34; width=&#34;500px&#34; /&gt;
 &lt;figcaption&gt;
 Añadimos nueva regla TCP, al puerto 3838 y para todas las IPs de origen
 &lt;/figcaption&gt;

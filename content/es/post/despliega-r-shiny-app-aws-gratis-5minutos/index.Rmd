@@ -161,19 +161,21 @@ $ sudo gdebi shiny-server-1.5.13.944-amd64.deb
 
 En caso de que tu aplicación no comience checkeando los paquetes que se va a usar, en este paso utilizaremos 
 
-```sudo su -c "R -e \"install.packages('shiny', repos='https://cran.rstudio.com/')\""```
+```
+sudo su -c "R -e \"install.packages('shiny', repos='https://cran.rstudio.com/')\""
+```
 
 Con esto, ya tenemos el Shiny Server escuchando en el puerto 3838. Pero aun no podremos acceder a http://ip_de_la_maquina_de_ec2:3838 ya  que como último paso debemos de abrir este puerto en el *firewall*. 
 
 Para ello iremos nuestras instancias:
 
-<img src="./security_groups.jpg" height="500px" width="400px" />
+<img src="./security_groups.jpg" height="700px" width="500px" />
 <figcaption>Dentro del panel de instancias, scroll lateral a la derecha</figcaption>
 
 
 Instanctias -> Security Group -> Actions -> Edit inbound rules
 
-<img src="./custom_tcp.jpg" height="500px" width="400px" />
+<img src="./custom_tcp.jpg" height="700px" width="500px" />
 <figcaption>Añadimos nueva regla TCP, al puerto 3838 y para todas las IPs de origen</figcaption>
 
 
