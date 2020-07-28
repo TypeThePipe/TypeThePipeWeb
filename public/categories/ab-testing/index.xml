@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AB Testing | TypeThePipe</title>
-    <link>https://typethepipe.com/categories/ab-testing/</link>
-      <atom:link href="https://typethepipe.com/categories/ab-testing/index.xml" rel="self" type="application/rss+xml" />
+    <link>/categories/ab-testing/</link>
+      <atom:link href="/categories/ab-testing/index.xml" rel="self" type="application/rss+xml" />
     <description>AB Testing</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 28 Jun 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://typethepipe.com/img/icon-32.png</url>
+      <url>/img/icon-32.png</url>
       <title>AB Testing</title>
-      <link>https://typethepipe.com/categories/ab-testing/</link>
+      <link>/categories/ab-testing/</link>
     </image>
     
     <item>
       <title>A/B Testing</title>
-      <link>https://typethepipe.com/post/ab-testing/</link>
+      <link>/post/ab-testing/</link>
       <pubDate>Sun, 28 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/post/ab-testing/</guid>
+      <guid>/post/ab-testing/</guid>
       <description>
 
 

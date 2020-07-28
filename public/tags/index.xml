@@ -2,15 +2,39 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags | TypeThePipe</title>
-    <link>https://typethepipe.com/tags/</link>
-      <atom:link href="https://typethepipe.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <link>/tags/</link>
+      <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 27 May 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://typethepipe.com/img/icon-32.png</url>
+      <url>/img/icon-32.png</url>
       <title>Tags</title>
-      <link>https://typethepipe.com/tags/</link>
+      <link>/tags/</link>
     </image>
+    
+    <item>
+      <title>COVID</title>
+      <link>/tags/covid/</link>
+      <pubDate>Wed, 27 May 2020 00:00:00 +0000</pubDate>
+      <guid>/tags/covid/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tidyverse</title>
+      <link>/tags/tidyverse/</link>
+      <pubDate>Wed, 27 May 2020 00:00:00 +0000</pubDate>
+      <guid>/tags/tidyverse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Datathon</title>
+      <link>/tags/datathon/</link>
+      <pubDate>Mon, 07 Oct 2019 00:00:00 +0000</pubDate>
+      <guid>/tags/datathon/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

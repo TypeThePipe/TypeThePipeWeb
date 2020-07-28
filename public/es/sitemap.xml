@@ -1,460 +1,465 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://typethepipe.com/es/post/ab-testing/</loc>
+    <loc>/es/post/ab-testing/</loc>
     <lastmod>2020-06-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/post/ab-testing/"
+                href="/post/ab-testing/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/post/ab-testing/"
+                href="/es/post/ab-testing/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/categories/ab-testing/</loc>
+    <loc>/es/categories/ab-testing/</loc>
     <lastmod>2020-06-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/categories/ab-testing/"
+                href="/categories/ab-testing/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/categories/ab-testing/"
+                href="/es/categories/ab-testing/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/authors/</loc>
+    <loc>/es/authors/</loc>
     <lastmod>2020-06-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/authors/"
+                href="/authors/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/authors/"
+                href="/es/authors/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/categories/</loc>
+    <loc>/es/categories/</loc>
     <lastmod>2020-06-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/categories/"
+                href="/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/categories/"
+                href="/es/categories/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/authors/pablo-canovas/</loc>
+    <loc>/es/authors/pablo-canovas/</loc>
     <lastmod>2020-06-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/authors/pablo-canovas/"
+                href="/authors/pablo-canovas/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/authors/pablo-canovas/"
+                href="/es/authors/pablo-canovas/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/post/</loc>
+    <loc>/es/post/</loc>
     <lastmod>2020-06-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/post/"
+                href="/post/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/post/"
+                href="/es/post/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/categories/statistics/</loc>
+    <loc>/es/categories/statistics/</loc>
     <lastmod>2020-06-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/categories/statistics/"
+                href="/categories/statistics/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/categories/statistics/"
+                href="/es/categories/statistics/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/</loc>
+    <loc>/es/</loc>
     <lastmod>2020-06-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/"
+                href="/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/"
+                href="/es/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/authors/carlos-vecina/</loc>
+    <loc>/es/authors/carlos-vecina/</loc>
+    <lastmod>2020-06-12T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/authors/carlos-vecina/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/authors/carlos-vecina/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/categories/post/</loc>
+    <lastmod>2020-06-12T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/categories/r/</loc>
+    <lastmod>2020-06-12T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/r/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/r/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/post/despliega-r-shiny-app-aws-gratis-5minutos/</loc>
+    <lastmod>2020-06-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/es/categories/tips/</loc>
     <lastmod>2020-03-30T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/authors/carlos-vecina/"
+                href="/categories/tips/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/authors/carlos-vecina/"
+                href="/es/categories/tips/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/categories/r/</loc>
+    <loc>/es/vizs-and-tips/</loc>
     <lastmod>2020-03-30T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/categories/r/"
+                href="/vizs-and-tips/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/categories/r/"
+                href="/es/vizs-and-tips/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/categories/tips/</loc>
+    <loc>/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/</loc>
     <lastmod>2020-03-30T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/categories/tips/"
+                href="/vizs-and-tips/speed-up-load-write-files-fst-package-r/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/categories/tips/"
+                href="/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/vizs-and-tips/</loc>
-    <lastmod>2020-03-30T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://typethepipe.com/vizs-and-tips/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://typethepipe.com/es/vizs-and-tips/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://typethepipe.com/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/</loc>
-    <lastmod>2020-03-30T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://typethepipe.com/vizs-and-tips/speed-up-load-write-files-fst-package-r/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://typethepipe.com/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://typethepipe.com/es/vizs-and-tips/descartando-columnas-porcentaje-nas-r-tidyverse/</loc>
+    <loc>/es/vizs-and-tips/descartando-columnas-porcentaje-nas-r-tidyverse/</loc>
     <lastmod>2020-03-23T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/vizs-and-tips/selecting-columns-based-on-nas-percentage-r-tidyverse/"
+                href="/vizs-and-tips/selecting-columns-based-on-nas-percentage-r-tidyverse/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/vizs-and-tips/descartando-columnas-porcentaje-nas-r-tidyverse/"
+                href="/es/vizs-and-tips/descartando-columnas-porcentaje-nas-r-tidyverse/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/categories/post/</loc>
+    <loc>/es/post/10-consejos-datathon-kaggle-data-science/</loc>
     <lastmod>2020-03-11T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/categories/post/"
+                href="/post/10-tips-datathon-kaggle-data-science/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/categories/post/"
+                href="/es/post/10-consejos-datathon-kaggle-data-science/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/post/10-consejos-datathon-kaggle-data-science/</loc>
-    <lastmod>2020-03-11T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://typethepipe.com/post/10-tips-datathon-kaggle-data-science/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="https://typethepipe.com/es/post/10-consejos-datathon-kaggle-data-science/"
-                />
-  </url>
-  
-  <url>
-    <loc>https://typethepipe.com/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/</loc>
+    <loc>/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/</loc>
     <lastmod>2020-01-21T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/post/pathfinding-algorithms-visualizer-using-r/"
+                href="/post/pathfinding-algorithms-visualizer-using-r/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/"
+                href="/es/post/visualizador-interactivo-algoritmos-busqueda-caminos-en-r-shiny/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse-r/</loc>
+    <loc>/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse-r/</loc>
     <lastmod>2020-01-16T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/vizs-and-tips/summarise_at-weighted-mean-tidyverse-r/"
+                href="/vizs-and-tips/summarise_at-weighted-mean-tidyverse-r/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse-r/"
+                href="/es/vizs-and-tips/summarise_at-media-ponderada-tidyverse-r/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/vizs-and-tips/magic-whos-metodo-jupyter-notebook/</loc>
+    <loc>/es/vizs-and-tips/magic-whos-metodo-jupyter-notebook/</loc>
     <lastmod>2020-01-14T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/vizs-and-tips/magic-whos-method-jupyter-notebook/"
+                href="/vizs-and-tips/magic-whos-method-jupyter-notebook/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/vizs-and-tips/magic-whos-metodo-jupyter-notebook/"
+                href="/es/vizs-and-tips/magic-whos-metodo-jupyter-notebook/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/categories/python/</loc>
+    <loc>/es/categories/python/</loc>
     <lastmod>2020-01-14T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/categories/python/"
+                href="/categories/python/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/categories/python/"
+                href="/es/categories/python/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/vizs-and-tips/skills-chart-curriculum-r-ggplot/</loc>
+    <loc>/es/vizs-and-tips/skills-chart-curriculum-r-ggplot/</loc>
     <lastmod>2020-01-07T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/vizs-and-tips/skills-plot-curriculum-r-ggplot/"
+                href="/vizs-and-tips/skills-plot-curriculum-r-ggplot/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/vizs-and-tips/skills-chart-curriculum-r-ggplot/"
+                href="/es/vizs-and-tips/skills-chart-curriculum-r-ggplot/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/categories/vizs/</loc>
+    <loc>/es/categories/vizs/</loc>
     <lastmod>2020-01-07T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/categories/vizs/"
+                href="/categories/vizs/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/categories/vizs/"
+                href="/es/categories/vizs/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/</loc>
+    <loc>/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/</loc>
     <lastmod>2019-12-16T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/vizs-and-tips/reorder-bars-r-ggplot-gganimate/"
+                href="/vizs-and-tips/reorder-bars-r-ggplot-gganimate/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/"
+                href="/es/vizs-and-tips/reordenar-grafico-barras-r-ggplot-gganimate/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</loc>
+    <loc>/es/vizs-and-tips/ggplot_geom_ribbon_shadow/</loc>
     <lastmod>2019-11-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/categories/datathon/</loc>
+    <loc>/es/categories/datathon/</loc>
     <lastmod>2019-10-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/</loc>
+    <loc>/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/</loc>
     <lastmod>2019-10-07T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/vizs-and-tips/data-competition-platforms-beyond-kaggle/"
+                href="/vizs-and-tips/data-competition-platforms-beyond-kaggle/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/"
+                href="/es/vizs-and-tips/plataformas-competiciones-de-datos-kaggle-datathon/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/vizs-and-tips/recuento-nas-por-columna-en-r-comparativa/</loc>
+    <loc>/es/vizs-and-tips/recuento-nas-por-columna-en-r-comparativa/</loc>
     <lastmod>2019-10-02T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/vizs-and-tips/counting-nas-by-column-r-benchmark/"
+                href="/vizs-and-tips/counting-nas-by-column-r-benchmark/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/vizs-and-tips/recuento-nas-por-columna-en-r-comparativa/"
+                href="/es/vizs-and-tips/recuento-nas-por-columna-en-r-comparativa/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/post/de-ggplot-a-3d-en-r-con-rayshader/</loc>
+    <loc>/es/post/de-ggplot-a-3d-en-r-con-rayshader/</loc>
     <lastmod>2019-07-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/post/ggplot-to-3d-in-r-with-rayshader/"
+                href="/post/ggplot-to-3d-in-r-with-rayshader/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/post/de-ggplot-a-3d-en-r-con-rayshader/"
+                href="/es/post/de-ggplot-a-3d-en-r-con-rayshader/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/false/</loc>
+    <loc>/es/false/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/false/"
+                href="/false/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/false/"
+                href="/es/false/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/publication_types/</loc>
+    <loc>/es/publication_types/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/publication_types/"
+                href="/publication_types/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/publication_types/"
+                href="/es/publication_types/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/show/</loc>
+    <loc>/es/show/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/show/"
+                href="/show/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/show/"
+                href="/es/show/"
                 />
   </url>
   
   <url>
-    <loc>https://typethepipe.com/es/tags/</loc>
+    <loc>/es/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="https://typethepipe.com/tags/"
+                href="/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
-                href="https://typethepipe.com/es/tags/"
+                href="/es/tags/"
                 />
   </url>
   

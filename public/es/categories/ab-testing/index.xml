@@ -2,25 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AB Testing | TypeThePipe</title>
-    <link>https://typethepipe.com/es/categories/ab-testing/</link>
-      <atom:link href="https://typethepipe.com/es/categories/ab-testing/index.xml" rel="self" type="application/rss+xml" />
+    <link>/es/categories/ab-testing/</link>
+      <atom:link href="/es/categories/ab-testing/index.xml" rel="self" type="application/rss+xml" />
     <description>AB Testing</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Sun, 28 Jun 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://typethepipe.com/img/icon-32.png</url>
+      <url>/img/icon-32.png</url>
       <title>AB Testing</title>
-      <link>https://typethepipe.com/es/categories/ab-testing/</link>
+      <link>/es/categories/ab-testing/</link>
     </image>
     
     <item>
       <title>A/B Testing</title>
-      <link>https://typethepipe.com/es/post/ab-testing/</link>
+      <link>/es/post/ab-testing/</link>
       <pubDate>Sun, 28 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/es/post/ab-testing/</guid>
+      <guid>/es/post/ab-testing/</guid>
       <description>
 
 
-&lt;div id=&#34;vale-en-qué-consisten-los-test-ab&#34; class=&#34;section level2&#34;&gt;
+&lt;div id=&#34;vale-en-que-consisten-los-test-ab&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Vale, en qué consisten los test A/B?&lt;/h2&gt;
 &lt;p&gt;Un test A/B es una técnica muy utilizada hoy en día en Marketing digital que consiste en llevar a cabo dos acciones diferentes en paralelo y comparar sus resultados. Por ejemplo, estos resultados pueden ser la tasa de conversión de una campaña de marketing (ventas, subscripciones…) o el número de clicks en un enlace respecto a impresiones (&lt;a href=&#34;https://www.wordstream.com/click-through-rate&#34;&gt;Click Through Rate&lt;/a&gt;). También es ampliamente utilizado fuera del ámbito del marketing, típicamente en áreas como la farmacología o la psicología.&lt;/p&gt;
 &lt;p&gt;Supongamos que queremos impulsar las ventas de un producto o servicio y para ello hemos decidido usar un nuevo diseño web.
@@ -39,7 +39,7 @@ Entonces, la pregunta del millón: ¿Estos resultados son significativos? ¿Ento
 Imagen sacada de &lt;a href=&#34;https://www.clearswift.com/blog/2018/12/20/cutting-out-%E2%80%98false-positive%E2%80%99-lexical-expression-qualifiers&#34;&gt;Clearswift&lt;/a&gt;
 &lt;/figcaption&gt;
 &lt;/div&gt;
-&lt;div id=&#34;la-estadística&#34; class=&#34;section level2&#34;&gt;
+&lt;div id=&#34;la-estadistica&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;La estadística&lt;/h2&gt;
 &lt;p&gt;Dicho de manera más técnica, en inferencia estadística llamamos contraste de hipótesis al procedimiento seguido para evaluar si una propiedad de una población es compatible con la medida en una muestra.
 Definimos la hipótesis nula &lt;span class=&#34;math inline&#34;&gt;\(H_0\)&lt;/span&gt; como la hipótesis que queremos contrastar, aquella de la que partimos y la que mantendremos si no reunimos evidencia de lo contrario. En contraposición, frecuentemente definimos la hipótesis alternativa de manera implícita como “&lt;span class=&#34;math inline&#34;&gt;\(H_0\)&lt;/span&gt; es falsa”.&lt;/p&gt;
@@ -57,7 +57,7 @@ Definimos la hipótesis nula &lt;span class=&#34;math inline&#34;&gt;\(H_0\)&lt;
 Imagen de &lt;a href=&#34;https://en.wikipedia.org/wiki/Confusion_matrix&#34;&gt;Wikipedia&lt;/a&gt;
 &lt;/figcaption&gt;
 &lt;/div&gt;
-&lt;div id=&#34;tamaño-muestral&#34; class=&#34;section level2&#34;&gt;
+&lt;div id=&#34;tamano-muestral&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Tamaño muestral&lt;/h2&gt;
 &lt;p&gt;¿Qué papel juega el tamaño muestral en un test A/B? &lt;strong&gt;Cuanta más muestra, menos incertidumbre&lt;/strong&gt;.
 La fórmula con la que podemos calcular la incertidumbre asociada a una medición es la siguiente:&lt;/p&gt;

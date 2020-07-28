@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Statistics | TypeThePipe</title>
-    <link>https://typethepipe.com/categories/statistics/</link>
-      <atom:link href="https://typethepipe.com/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
+    <link>/categories/statistics/</link>
+      <atom:link href="/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
     <description>Statistics</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 28 Jun 2020 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://typethepipe.com/img/icon-32.png</url>
+      <url>/img/icon-32.png</url>
       <title>Statistics</title>
-      <link>https://typethepipe.com/categories/statistics/</link>
+      <link>/categories/statistics/</link>
     </image>
     
     <item>
       <title>A/B Testing</title>
-      <link>https://typethepipe.com/post/ab-testing/</link>
+      <link>/post/ab-testing/</link>
       <pubDate>Sun, 28 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>https://typethepipe.com/post/ab-testing/</guid>
+      <guid>/post/ab-testing/</guid>
       <description>
 
 
