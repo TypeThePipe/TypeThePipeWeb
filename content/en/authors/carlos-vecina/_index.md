@@ -2,7 +2,7 @@
 title: Carlos Vecina
 authors:
 - carlos-vecina
-bio: Data Scientist & TechLead at Bankinter  |  AI & Data Science for Business
+bio: Lead Data & Analytics at Aplazame  |  AI & Data Science for Business
 education:
   courses:
   - course: Pre PhD Research in Artificial Intelligence. Computer Vision and pose estimation.
@@ -24,7 +24,7 @@ organizations:
 - name: 
   url: ""
 
-role: Data Scientist & TechLead at Bankinter
+role: Lead Data & Analytics at Aplazame
 social:
 - icon: envelope
   icon_pack: fas
@@ -38,6 +38,9 @@ social:
 - icon: github
   icon_pack: fab
   link: https://github.com/CarlosVecina
+- icon: home
+  icon_pack: fa
+  link: https://ubiwork.co
 superuser: true
 user_groups:
 - ---
