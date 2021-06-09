@@ -1,0 +1,639 @@
+---
+title: Predicting Social Outcomes
+author: Marcelo Orenes Vera
+date: '2021-06-10'
+slug: predicting-social-outcomes
+categories:
+  - Post
+tags: []
+subtitle: "Predicting social outcomes is hard, and TypeThePipe is showing you why."
+summary: "Predicting social outcomes is hard, and TypeThePipe is showing you why."
+math: TRUE
+authors: marcelo-orenes]
+---
+
+
+
+<p><br></p>
+<div id="introduction" class="section level2">
+<h2><strong>Introduction</strong></h2>
+<p>Outcome prediction is one of the main uses of machine learning and can be used to perform predictive models for real world events, such as diagnosing illnesses or predicting stock market trends. In this post, we develop predictive models for estimating six key life outcomes of children from <a href="https://www.fragilefamilieschallenge.org">the Fragile Families and Child Wellbeing Study</a>, using both regression models for predicting continuous outcomes and classification models for predicting binary outcomes. We applied several feature imputation and selection techniques to improve our models’ predictive abilities and runtimes and additionally used techniques such as cross-validation to tune the hyperparamters used by the models.</p>
+<p>We present our empirical results found from both predicting outcomes on the test data set, as well as from estimating outcomes from the training data set during cross-validation.</p>
+<p><br></p>
+</div>
+<div id="the-problem" class="section level2">
+<h2><strong>The problem</strong></h2>
+<p><a href="https://fragilefamilies.princeton.edu/about">The Fragile Families and Child Wellbeing Study</a> collected information for a mass inference and predictive study with the ultimate goal of gaining insights into improving these children’s lives~. The study gathered a large database of information from 4242 ``fragile’’ families with unmarried parents over the first 15 years of each child’s life in six waves of collection: at birth, age 1, age 3, age 5, age 9, and age 15. The Fragile Families Challenge then brought together 160 teams who built models to predict six key outcomes of the study found in the final wave at age 15: GPA, grit, material hardship, eviction, layoff, and job training. As it was concluded in <a href="https://www.pnas.org/content/117/15/8398">Measuring the predictability of life outcomes with a scientific mass collaboration paper</a> and <a href="https://www.cs.princeton.edu/~arvindn/talks/MIT-STS-AI-snakeoil.pdf">remarked later</a> predicting social outcomes based on collected features leads to a very high prediction error, with little, if any, improvement over a 4 variable model cherrypicked by a domain expert.</p>
+<p><br></p>
+</div>
+<div id="the-approach" class="section level2">
+<h2><strong>The approach</strong></h2>
+<p>In this work, we undertake this challenge to train regression and classification models to effectively predict these six outcomes using 2121 of the families’ data as the training data set and the remaining half as the test data set. We use AdaBoost, random forest, gaussian process, and support vector machine models for predicting all outcomes, as well as elastic net regression for the continuous outcomes and logistic regression for the binary outcomes. We performed clever feature selection using techniques such as principal component analysis after filtering and imputing the data set. We tuned the hyperparameters of each model with five-fold cross-validation using the available training data set. Unfortunately this dataset is not public and I had access to it as PhD candidate at Princeton University. <strong>All the methods described here have corresponding Python code in our <a href="https://colab.research.google.com/drive/19tlDT1QmlSsY1V2b4b41M8ALISLepNU4">Colab Notebook</a> that you can read and reuse for your problems.</strong> The methods are quite generic and can be reused for other datasets.</p>
+<p><br></p>
+</div>
+<div id="imputation-and-feature-selection" class="section level2">
+<h2><strong>Imputation and Feature Selection</strong></h2>
+<p>In this work, we use the Fragile Families data set consisting of 12,942
+variables for 4242 families. There are binary, categorical and
+continuous values among these variables. The training data labels
+consist of <strong>six</strong> key outcomes from the 15th year of the child’s life
+for 2121 of these families: GPA, grit, material hardship, eviction,
+layoff, and job training. Testing is performed by predicting the six key
+outcome values for the remaining 2121 unlabeled families.</p>
+<p>Several values in the data set are missing so to make full use of the
+data, we first needed to fill in these missing values. We chose to
+reduce the variable set by <strong>filtering out all variables with identical
+values for all the families, as well as all variables missing more than
+50% of families’ data.</strong> Additionally, we chose to treat negative
+data values indicating specific reasoning for missing data as the same
+as the other missing data values. However, we hypothesize that these
+negative values could be used with clever techniques to further improve
+outcome prediction. Due to time constraints, we leave this exploration
+for future work. Next, to fill in the remaining missing values in the
+remaining data set, we used <strong>two imputation methods</strong>. For variables
+with <strong>continuous data values</strong>, we used the <strong>mean</strong> of the values to
+fill in the missing entries. For variables with <strong>categorical data
+values</strong>, we used the <strong>mode</strong> of the values to impute the missing
+entries.</p>
+<p><br></p>
+</div>
+<div id="feature-selection" class="section level2">
+<h2><strong>Feature Selection</strong></h2>
+<p>We additionally experimented with different ways of defining these two
+types of data values. In particular, we experimented with different
+thresholds for defining categorical variables, (e.g., 5 or 10 different
+data values). We used one-hot encoding to represent the categorical
+variables and assigned the remaining as continuous variables. For
+continuous variables, we used standard scaling to normalize the values
+by subtracting the mean and dividing by the standard deviation.</p>
+<p>Due to the large set of variables for a relatively small number of
+families, feature selection is particularly important for using machine
+learning techniques effectively and efficiently in this setting. Based
+on prior works on the Fragile Families data set, we chose to try
+extracting the most relevant features for each outcome using principal
+component analysis (PCA). We attempted to use recursive feature
+elimination (RFE) as well, but found runtimes to be intractable so we
+instead experimented with selecting the K-Best features using the Python
+scikit-learn library’s <span class="math inline">\(\\tt{f\\\_classif}\)</span> metric, which analyzes the
+variance of the features. Additionally, we performed prediction of each
+outcome with the full data set to compare results with and without
+feature selection. To exhaustively test feature selection, we support
+this on a per-outcome basis, allowing different schemes for different
+outcome features, e.g. PCA for eviction and the full feature set for
+grit.</p>
+<p><br></p>
+</div>
+<div id="regression-and-classification-methods" class="section level2">
+<h2><strong>Regression and Classification Methods</strong></h2>
+<p>Of the six outcomes we predict from the Fragile Families study, three
+consist of continuous data values (GPA, grit, material hardship) while
+the other three are binary (eviction, layoff, job training). Thus, we
+use regression techniques for predicting the continuous outcomes and
+classification techniques for predicting the binary outcomes. In most
+cases, we use the regression and classification variants of the same
+technique. For all methods, we use the implementations available in the
+Python scikit-learn library.</p>
+<p><strong>AdaBoost:</strong> Prior work on the Fragile Families project and another
+work on predicting the mortality of ICU patients as a function of time
+found AdaBoost to perform well for outcome prediction, motivating our
+use of this algorithm in our study. AdaBoost is an ensemble machine
+learning method that uses an ensemble of decision trees referred to as
+<em>decision stumps</em>. Each decision stump splits decisions for a single
+feature based on a threshold value. The best-fitting stumps for each
+feature is chosen by sorting the samples according to the feature and
+trying thresholds between each adjacent sample pairing. This algorithm
+is useful for both regression and classification as it can effectively
+capture non-linear relationships in real world data.</p>
+<p><strong>Random Forest:</strong> Random forest is another ensemble learning method
+that was explored in prior Fragile Families studies. This algorithm is
+composed of <span class="math inline">\(\\tt{n}\)</span> decision trees with nodes that split decisions and
+leaves with prediction values. Each decision tree is fitted to a subset
+of training data and features. This resolves the overfitting problem
+that standalone decision trees face. In regression settings, the leaves
+average the values of training samples that land on them. The estimated
+values provided by each decision tree are then averaged by the random
+forest to predict a value. We use this method for classification and
+regression as both have been shown to be effective.</p>
+<p><strong>Elastic Net:</strong> One of the best performing prediction methods found by
+prior Fragile Families work was the elastic net algorithm. Elastic net
+is a regression algorithm that builds upon ridge and lasso
+regression. Ridge regression seeks to prevent overfitting of training
+data by introducing a penalty to decrease variance in predictions. This
+is effective when most features are useful. Lasso regression assigns a
+similar penalty but goes an extra step by removing useless features and
+thus reducing variance further. Elastic net combines the penalties used
+in ridge and lasso regression resulting in better handling of the
+correlation between features.</p>
+<p><strong>Gaussian Process:</strong> Caywood et al. found Gaussian Process regression
+to be useful and easy to analyze for predicting mental workload based on
+EEG data. This work suggests complex data set inputs can be effectively
+processed for predictive purposes, motivating our experimental use of
+this process. Roberts et al. additionally found Gaussian Processes to be
+useful in the domain of time-series analysis, suggesting this technique
+may work well for analyzing the Fragile Families data set which was
+collected over time. Gaussian Processes offer non-parametric regression
+and classification. They generalize the Gaussian probability
+distribution, defined by a choice of covariance function which states
+how target values may change with changing inputs. As few assumptions
+are made about the estimator function shape beyond this choice of
+covariance function, this process works well for high-dimensional
+feature inputs such as the Fragile Families data set. We experiment with
+both regression and classification using Gaussian Processes.</p>
+<p><strong>Support Vector Machine:</strong> Support vector machines (SVMs) expand on
+linear regression by estimating a regression hyperplane in a
+high-dimensional feature space. While ideally the hyperplane would
+split data perfectly, this is often not feasible with real world data.
+Instead, risk minimization can be used to find an appropriate estimate
+for the regression hyperplane. SVMs natively perform binary
+classification but they also work well for regression problems, such as
+for predicting stock trends. We thus test SVM for both continuous and
+binary outcome prediction.</p>
+<p><strong>Logistic Regression:</strong> Logistic regression is a well-known binary
+classification model. This is a simple technique that maps
+probabilities to a sigmoid function. Depending on a set threshold value,
+a sample is labeled as one of two classes. As this is such a common
+binary classification method, we expect it may perform well for
+predicting the three binary outcomes in the Fragile Families study.</p>
+<p><br></p>
+</div>
+<div id="evaluation" class="section level2">
+<h2><strong>Evaluation</strong></h2>
+<p>We performed five-fold cross-validation with the training data set to
+determine the best performing hyperparameters for each of the regression
+and classification methods we use for prediction.</p>
+<table>
+<caption>
+Table 1: Best prediction accuracy, model, and runtime for each outcome.
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">
+<strong>Regression Method</strong>
+</th>
+<th style="text-align: center;">
+<strong>GPA</strong>
+</th>
+<th style="text-align: center;">
+<strong>Grit</strong>
+</th>
+<th style="text-align: center;">
+<strong>Mat. Hard.</strong>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">
+AdaBoost
+</td>
+<td style="text-align: center;">
+0.5966
+</td>
+<td style="text-align: center;">
+0.7631
+</td>
+<td style="text-align: center;">
+0.9732
+</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">
+Random Forest
+</td>
+<td style="text-align: center;">
+0.6035
+</td>
+<td style="text-align: center;">
+0.7631
+</td>
+<td style="text-align: center;">
+0.9775
+</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">
+Elastic Net
+</td>
+<td style="text-align: center;">
+0.6208
+</td>
+<td style="text-align: center;">
+0.7698
+</td>
+<td style="text-align: center;">
+0.9798
+</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">
+Gaussian Process
+</td>
+<td style="text-align: center;">
+0.5575
+</td>
+<td style="text-align: center;">
+0.7647
+</td>
+<td style="text-align: center;">
+0.9758
+</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">
+Support Vector Machine
+</td>
+<td style="text-align: center;">
+0.6245
+</td>
+<td style="text-align: center;">
+0.7736
+</td>
+<td style="text-align: center;">
+0.9793
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>
+Table 2: Best prediction accuracy, model, and runtime for each outcome.
+</caption>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">
+</td>
+<td style="text-align: center;">
+<strong>Acc</strong>
+</td>
+<td style="text-align: center;">
+<strong>Prec</strong>
+</td>
+<td style="text-align: center;">
+<strong>Rec</strong>
+</td>
+<td style="text-align: center;">
+<strong>Acc</strong>
+</td>
+<td style="text-align: center;">
+<strong>Prec</strong>
+</td>
+<td style="text-align: center;">
+<strong>Rec</strong>
+</td>
+<td style="text-align: center;">
+<strong>Acc</strong>
+</td>
+<td style="text-align: center;">
+<strong>Prec</strong>
+</td>
+<td style="text-align: center;">
+<strong>Rec</strong>
+</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">
+AdaBoost
+</td>
+<td style="text-align: center;">
+0.9363
+</td>
+<td style="text-align: center;">
+0.1071
+</td>
+<td style="text-align: center;">
+0.0490
+</td>
+<td style="text-align: center;">
+0.7454
+</td>
+<td style="text-align: center;">
+0.2774
+</td>
+<td style="text-align: center;">
+0.1481
+</td>
+<td style="text-align: center;">
+0.6646
+</td>
+<td style="text-align: center;">
+0.1686
+</td>
+<td style="text-align: center;">
+0.1093
+</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">
+Random Forest
+</td>
+<td style="text-align: center;">
+0.9404
+</td>
+<td style="text-align: center;">
+0
+</td>
+<td style="text-align: center;">
+0
+</td>
+<td style="text-align: center;">
+0.7909
+</td>
+<td style="text-align: center;">
+0
+</td>
+<td style="text-align: center;">
+0
+</td>
+<td style="text-align: center;">
+0.7652
+</td>
+<td style="text-align: center;">
+0
+</td>
+<td style="text-align: center;">
+0
+</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">
+Logistic Regression
+</td>
+<td style="text-align: center;">
+0.9404
+</td>
+<td style="text-align: center;">
+0
+</td>
+<td style="text-align: center;">
+0
+</td>
+<td style="text-align: center;">
+0.7909
+</td>
+<td style="text-align: center;">
+0
+</td>
+<td style="text-align: center;">
+0
+</td>
+<td style="text-align: center;">
+0.7652
+</td>
+<td style="text-align: center;">
+0
+</td>
+<td style="text-align: center;">
+0
+</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">
+Gaussian Process
+</td>
+<td style="text-align: center;">
+0.9404
+</td>
+<td style="text-align: center;">
+0
+</td>
+<td style="text-align: center;">
+0
+</td>
+<td style="text-align: center;">
+0.7901
+</td>
+<td style="text-align: center;">
+0.5167
+</td>
+<td style="text-align: center;">
+0.0147
+</td>
+<td style="text-align: center;">
+0.7543
+</td>
+<td style="text-align: center;">
+0.3278
+</td>
+<td style="text-align: center;">
+0.0462
+</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">
+Support Vector Machine
+</td>
+<td style="text-align: center;">
+0.9232
+</td>
+<td style="text-align: center;">
+0.1863
+</td>
+<td style="text-align: center;">
+0.0794
+</td>
+<td style="text-align: center;">
+0.6899
+</td>
+<td style="text-align: center;">
+0.2556
+</td>
+<td style="text-align: center;">
+0.2598
+</td>
+<td style="text-align: center;">
+0.6427
+</td>
+<td style="text-align: center;">
+0.2753
+</td>
+<td style="text-align: center;">
+0.3219
+</td>
+</tr>
+</tbody>
+</table>
+<table>
+<caption>
+Table 3: Best prediction accuracy, model, and runtime for each outcome.
+</caption>
+<thead>
+<tr class="header">
+<th style="text-align: center;">
+<strong>Outcome</strong>
+</th>
+<th style="text-align: center;">
+<strong>Loss</strong>
+</th>
+<th style="text-align: center;">
+<strong>Model</strong>
+</th>
+<th style="text-align: center;">
+<strong>Train+Pred. Time (s)</strong>
+</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">
+GPA
+</td>
+<td style="text-align: center;">
+0.37504
+</td>
+<td style="text-align: center;">
+Elastic Net
+</td>
+<td style="text-align: center;">
+5.596
+</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">
+Grit
+</td>
+<td style="text-align: center;">
+0.21421
+</td>
+<td style="text-align: center;">
+Elastic Net
+</td>
+<td style="text-align: center;">
+9.238
+</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">
+Material Hardship
+</td>
+<td style="text-align: center;">
+0.02565
+</td>
+<td style="text-align: center;">
+Elastic Net
+</td>
+<td style="text-align: center;">
+6.555
+</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">
+Eviction
+</td>
+<td style="text-align: center;">
+0.05660
+</td>
+<td style="text-align: center;">
+Logistic Reg.
+</td>
+<td style="text-align: center;">
+3.504
+</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">
+Layoff
+</td>
+<td style="text-align: center;">
+0.22453
+</td>
+<td style="text-align: center;">
+Logistic Reg.
+</td>
+<td style="text-align: center;">
+4.181
+</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">
+Job Training
+</td>
+<td style="text-align: center;">
+0.27736
+</td>
+<td style="text-align: center;">
+Logistic Reg.
+</td>
+<td style="text-align: center;">
+5.957
+</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+</div>
+<div id="results" class="section level2">
+<h2><strong>Results</strong></h2>
+<p><strong>Table 1</strong>
+presents the average accuracy (as the opposite of the Mean Squared Loss)
+for the studied regressors across five-fold cross-validation, performed
+strategically by splitting the training data into train and test subsets
+for estimating prediction results. We used Gridsearch to study a range
+of hyperparameters and obtain the best performing ones, for each of the
+variations of the datasets (across imputation parameters). Similarly,
+<strong>Table 2</strong>
+presents the average accuracy for the studied classifiers, as well as
+the precision and recall for class 1. Note that due to data set
+imbalance on class 0 and 1 for binary outcomes, classifiers like
+logistic regression classify all samples as 0, obtaining a null recall
+for class 1. These results are from our final imputation scheme, where
+we pruned 9503 features with more than half the data missing and 2433
+features with constant values in all samples. Across the remaining 3523
+features, 250 were considered categorical with less than 10 different
+values, and one-hot encoded. This encoding increased the feature count
+to 11355, and we empirically found (as expected) that reducing to 1000
+features with PCA performs better.</p>
+<p><strong>Table 3</strong>
+presents the best accuracy values in the leaderboard, their model, and
+the runtime of training and prediction together. Besides each outcome
+type using the same model, we allow each outcome to have a different
+model. During cross-validation with the training set, we obtained the
+best performing models for each outcome and used them for prediction.
+All continuous outcomes happened to perform best with the same model.
+The binary outcomes performed the same with random forest and logistic
+regression, but we selected logistic regression due to its faster
+runtime.</p>
+<p><br></p>
+</div>
+<div id="discussion-and-conclusion" class="section level2">
+<h2><strong>Discussion and Conclusion</strong></h2>
+<p>This work compared 5 classifiers and 5 regressors to predict the
+six outcomes of interest in the study. The best performing classifier
+and regressor achieved a higher accuracy than the baseline model used in
+the study and did so with competitive runtimes (&lt;10s for training and
+prediction). Nevertheless, most outcomes are predicted with high loss
+(GPA, grit, layoff, job training) and binary prediction achieves higher
+accuracy by always predicting zero, similar to the best results found in
+the study. <strong>We thus come to the same conclusion that life outcome
+prediction is difficult and standard machine learning is insufficient
+for outcome prediction of everyone’s lives, even in the face of a large
+data base of variables.</strong>
+I hope this may have brought some light into predicting social outcomes.
+<strong>Remember that the code for all the methods contained in this post you can find it <a href="https://colab.research.google.com/drive/19tlDT1QmlSsY1V2b4b41M8ALISLepNU4">at Colab here</a></strong></p>
+<p><br></p>
+</div>
+<div id="acknowledgements" class="section level2">
+<h2><strong>Acknowledgements</strong></h2>
+<p>This work was done as part of the Graduate-level course COS524 at Princeton University in collaboration with Naorin Hossain. We had access to the dataset thanks to <a href="https://fragilefamilies.princeton.edu/about">Princeton Fragile Families</a> but it is not publicly available. The conclusions exposed are are only ours and do not necessarily represent Princeton views or thoughts.</p>
+</div>
