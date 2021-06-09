@@ -5,7 +5,7 @@
     <link>/es/authors/</link>
       <atom:link href="/es/authors/index.xml" rel="self" type="application/rss+xml" />
     <description>Authors</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Sun, 28 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Wed, 02 Jun 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-32.png</url>
       <title>Authors</title>
@@ -13,20 +13,20 @@
     </image>
     
     <item>
+      <title>Carlos Vecina</title>
+      <link>/es/authors/carlos-vecina/</link>
+      <pubDate>Wed, 02 Jun 2021 00:00:00 +0000</pubDate>
+      <guid>/es/authors/carlos-vecina/</guid>
+      <description>&lt;p&gt;Carlos Vecina es un científico de datos con experienca en la aplicación del Machine Learning y de la Inteligencia Artificial con el objetivo de aportar gran valor a negocio en áreas como el CRM, el Marketing y en la compra-venta dentro del mercado eléctrico.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Pablo Canovas</title>
       <link>/es/authors/pablo-canovas/</link>
       <pubDate>Sun, 28 Jun 2020 00:00:00 +0000</pubDate>
       <guid>/es/authors/pablo-canovas/</guid>
       <description>&lt;p&gt;Pablo Cánovas es un científico de datos con experiencia desarrollando y productivizando modelos de Machine Learning aplicados al mercado energético europeo.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Carlos Vecina</title>
-      <link>/es/authors/carlos-vecina/</link>
-      <pubDate>Fri, 12 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>/es/authors/carlos-vecina/</guid>
-      <description>&lt;p&gt;Carlos Vecina es un científico de datos con experienca en la aplicación del Machine Learning y de la Inteligencia Artificial con el objetivo de aportar gran valor a negocio en áreas como el CRM, el Marketing y en la compra-venta dentro del mercado eléctrico.&lt;/p&gt;
 </description>
     </item>
     

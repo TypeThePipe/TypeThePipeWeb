@@ -1,0 +1,72 @@
+---
+title: "Estudio sobre el trabajo remoto en Europa"
+author: "Carlos Vecina"
+date: '2021-06-02'
+slug: "data-visualization-remote-workers-across-europe"
+translationKey: "estudio-datos-trabajo-remoto-europa"
+output:
+  blogdown::html_page:
+    toc: TRUE
+    toc_depth: 2
+    highlight: tango
+categories:
+- R
+- Post
+tags: []
+subtitle: "¿Quieres compartir tu aplicación Shiny R? ¿Quieres evitar instalaciones en local o subirla a servidores gestionados por 3ros? Levanta tu máquina EC2 en AWS y despliga tu App gratis y en 5 minutos."
+summary: '¿Quieres compartir tu aplicación Shiny R? ¿Quieres evitar instalaciones en local o subirla a servidores gestionados por 3ros? Levanta tu máquina EC2 en AWS y despliga tu App gratis. Te enseñamos como hacerlo en 5 minutos.'
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+
+```{r, include=FALSE}
+nchar("¿Quieres compartir tu aplicación Shiny R? ¿Quieres evitar instalaciones en local o subirla a servidores gestionados por 3ros? Levanta tu máquina EC2 en AWS y despliga tu App gratis")
+```
+
+<img src="./featured.jpg" height="250px" width="400px" />
+
+# 1. Descarga de datos
+
+```{r}
+library(tidyverse)
+download.file("https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/LFSA_EHOMP/?format=SDMX-CSV&compressed=false", "data.csv")
+df_european_data <- read_csv(file = 'data.csv')
+list_age_ranges <- c("Y_GE25","Y_GE50")
+
+df_european_data %>% 
+    select(-DATAFLOW) %>% 
+    filter(TIME_PERIOD > "2010") %>% 
+    filter(freq == "A" & unit == "PC" & frequenc == "USU", wstatus == "EMP", sex == T) %>% 
+    filter(age %in% list_age_ranges) %>% 
+    ggplot(aes(TIME_PERIOD, OBS_VALUE, color = age, group = age)) +
+    geom_line()+
+    facet_wrap(~geo)
+    
+```
+
+```{r}
+data_plot <- df_european_data %>% 
+    select(-DATAFLOW) %>% 
+    filter(TIME_PERIOD == "2020") %>% 
+    filter(freq == "A" & unit == "PC" & frequenc == "NVR", wstatus == "EMP", sex == T) %>% 
+    filter(age == "Y20-64") %>% 
+    mutate(highlight = if_else(geo=="EU27_2020","t","f"),
+           OBS_VALUE = if_else( frequenc == "NVR",round(1-OBS_VALUE/100,3),round(OBS_VALUE/100,3))) %>% 
+    arrange(OBS_VALUE) 
+data_plot %>% 
+    ggplot(aes(geo,OBS_VALUE, fill = highlight)) +
+    geom_bar(stat="identity", position="dodge")  +
+  geom_text(aes(label = paste0(OBS_VALUE*100,"%")),size=2.5)+
+  coord_flip() + scale_x_discrete(limits = data_plot$geo)+
+    scale_fill_manual( values = c( "t"="tomato", "f"="paleturquoise3" ), guide = FALSE )+ 
+    scale_y_continuous(labels = scales::percent)
+    
+```
+
+
+
+
+
+
