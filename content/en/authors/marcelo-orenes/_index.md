@@ -2,7 +2,7 @@
 title: Marcelo Orenes
 authors:
 - marcelo-orenes
-bio: CEO at UbiWork.co
+bio: Marcelo Orenes is a graduate student in Computer Science at Princeton University and CEO at UbiWork
 education:
 
 email: ""
@@ -16,7 +16,7 @@ organizations:
 - name: 
   url: ""
 
-role: Marcelo Orenes is a graduate student in Computer Science at Princeton University and CEO at UbiWork
+role: CEO at UbiWork.co
 social:
 - icon: linkedin
   icon_pack: fab
