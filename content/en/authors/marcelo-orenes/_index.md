@@ -16,7 +16,7 @@ organizations:
 - name: 
   url: ""
 
-role: Lead Data & Analytics at Aplazame
+role: Marcelo Orenes is a graduate student in Computer Science at Princeton University and CEO at UbiWork
 social:
 - icon: linkedin
   icon_pack: fab

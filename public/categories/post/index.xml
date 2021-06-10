@@ -642,6 +642,21 @@ I hope this may have brought some light into predicting social outcomes.
 &lt;div id=&#34;acknowledgements&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;&lt;strong&gt;Acknowledgements&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;This work was done as part of the Graduate-level course COS524 at Princeton University in collaboration with Naorin Hossain. We had access to the dataset thanks to &lt;a href=&#34;https://fragilefamilies.princeton.edu/about&#34;&gt;Princeton Fragile Families&lt;/a&gt; but it is not publicly available. The conclusions exposed are are only ours and do not necessarily represent Princeton views or thoughts.&lt;/p&gt;
+&lt;style&gt;
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+&lt;/style&gt;
 &lt;/div&gt;
 </description>
     </item>
