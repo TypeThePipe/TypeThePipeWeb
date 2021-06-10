@@ -12,29 +12,5 @@
       <link>/tags/</link>
     </image>
     
-    <item>
-      <title>COVID</title>
-      <link>/tags/covid/</link>
-      <pubDate>Wed, 27 May 2020 00:00:00 +0000</pubDate>
-      <guid>/tags/covid/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tidyverse</title>
-      <link>/tags/tidyverse/</link>
-      <pubDate>Wed, 27 May 2020 00:00:00 +0000</pubDate>
-      <guid>/tags/tidyverse/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Datathon</title>
-      <link>/tags/datathon/</link>
-      <pubDate>Mon, 07 Oct 2019 00:00:00 +0000</pubDate>
-      <guid>/tags/datathon/</guid>
-      <description></description>
-    </item>
-    
   </channel>
 </rss>

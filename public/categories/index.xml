@@ -5,76 +5,12 @@
     <link>/categories/</link>
       <atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     <description>Categories</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 28 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 09 Jun 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-32.png</url>
       <title>Categories</title>
       <link>/categories/</link>
     </image>
-    
-    <item>
-      <title>AB Testing</title>
-      <link>/categories/ab-testing/</link>
-      <pubDate>Sun, 28 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/ab-testing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Statistics</title>
-      <link>/categories/statistics/</link>
-      <pubDate>Sun, 28 Jun 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/statistics/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Post</title>
-      <link>/categories/post/</link>
-      <pubDate>Wed, 27 May 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/post/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>R</title>
-      <link>/categories/r/</link>
-      <pubDate>Wed, 27 May 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/r/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tips</title>
-      <link>/categories/tips/</link>
-      <pubDate>Wed, 13 May 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/tips/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Python</title>
-      <link>/categories/python/</link>
-      <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Vizs</title>
-      <link>/categories/vizs/</link>
-      <pubDate>Tue, 07 Jan 2020 00:00:00 +0000</pubDate>
-      <guid>/categories/vizs/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Metrics</title>
-      <link>/categories/metrics/</link>
-      <pubDate>Sat, 21 Sep 2019 00:00:00 +0000</pubDate>
-      <guid>/categories/metrics/</guid>
-      <description></description>
-    </item>
     
   </channel>
 </rss>

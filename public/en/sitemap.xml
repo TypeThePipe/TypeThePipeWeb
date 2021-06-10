@@ -1,6 +1,91 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/authors/</loc>
+    <lastmod>2021-06-09T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/authors/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/authors/"
+                />
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <lastmod>2021-06-09T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/"
+                />
+  </url>
+  
+  <url>
+    <loc>/authors/marcelo-orenes/</loc>
+    <lastmod>2021-06-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/post/</loc>
+    <lastmod>2021-06-09T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2021-06-09T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/post/predicting-social-outcomes/</loc>
+    <lastmod>2021-06-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2021-06-09T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/"
+                />
+  </url>
   
   <url>
     <loc>/post/ab-testing/</loc>
@@ -33,36 +118,6 @@
   </url>
   
   <url>
-    <loc>/authors/</loc>
-    <lastmod>2020-06-28T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/authors/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/authors/"
-                />
-  </url>
-  
-  <url>
-    <loc>/categories/</loc>
-    <lastmod>2020-06-28T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/"
-                />
-  </url>
-  
-  <url>
     <loc>/authors/pablo-canovas/</loc>
     <lastmod>2020-06-28T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -74,21 +129,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/authors/pablo-canovas/"
-                />
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2020-06-28T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/post/"
                 />
   </url>
   
@@ -108,21 +148,6 @@
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2020-06-28T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/"
-                />
-  </url>
-  
-  <url>
     <loc>/post/analyzing-data-covid19-r-package/</loc>
     <lastmod>2020-05-27T00:00:00+00:00</lastmod>
   </url>
@@ -130,21 +155,6 @@
   <url>
     <loc>/tags/covid/</loc>
     <lastmod>2020-05-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/post/</loc>
-    <lastmod>2020-05-27T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/post/"
-                />
   </url>
   
   <url>
@@ -489,10 +499,6 @@
                 hreflang="en"
                 href="/false/"
                 />
-  </url>
-  
-  <url>
-    <loc>/authors/marcelo-orenes/</loc>
   </url>
   
   <url>
