@@ -3,8 +3,23 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/remote-work-in-europe/</loc>
+    <lastmod>2021-06-14T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/post/data-visualization-remote-workers-across-europe/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/remote-work-in-europe/"
+                />
+  </url>
+  
+  <url>
     <loc>/authors/</loc>
-    <lastmod>2021-06-09T00:00:00+00:00</lastmod>
+    <lastmod>2021-06-14T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -18,8 +33,23 @@
   </url>
   
   <url>
+    <loc>/authors/carlos-vecina/</loc>
+    <lastmod>2021-06-14T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/authors/carlos-vecina/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/authors/carlos-vecina/"
+                />
+  </url>
+  
+  <url>
     <loc>/categories/</loc>
-    <lastmod>2021-06-09T00:00:00+00:00</lastmod>
+    <lastmod>2021-06-14T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -33,13 +63,8 @@
   </url>
   
   <url>
-    <loc>/authors/marcelo-orenes/</loc>
-    <lastmod>2021-06-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/categories/post/</loc>
-    <lastmod>2021-06-09T00:00:00+00:00</lastmod>
+    <lastmod>2021-06-14T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -54,7 +79,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2021-06-09T00:00:00+00:00</lastmod>
+    <lastmod>2021-06-14T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -68,13 +93,23 @@
   </url>
   
   <url>
-    <loc>/post/predicting-social-outcomes/</loc>
-    <lastmod>2021-06-09T00:00:00+00:00</lastmod>
+    <loc>/categories/r/</loc>
+    <lastmod>2021-06-14T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/r/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/r/"
+                />
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2021-06-09T00:00:00+00:00</lastmod>
+    <lastmod>2021-06-14T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -85,6 +120,16 @@
                 hreflang="en"
                 href="/"
                 />
+  </url>
+  
+  <url>
+    <loc>/authors/marcelo-orenes/</loc>
+    <lastmod>2021-06-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/predicting-social-outcomes/</loc>
+    <lastmod>2021-06-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -158,21 +203,6 @@
   </url>
   
   <url>
-    <loc>/categories/r/</loc>
-    <lastmod>2020-05-27T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/r/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/r/"
-                />
-  </url>
-  
-  <url>
     <loc>/tags/</loc>
     <lastmod>2020-05-27T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -230,21 +260,6 @@
   <url>
     <loc>/vizs-and-tips/preserving-zero-length-groups/</loc>
     <lastmod>2020-05-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/authors/carlos-vecina/</loc>
-    <lastmod>2020-04-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/authors/carlos-vecina/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/authors/carlos-vecina/"
-                />
   </url>
   
   <url>

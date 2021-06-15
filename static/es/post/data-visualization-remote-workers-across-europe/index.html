@@ -1,0 +1,193 @@
+---
+title: "¿Cómo de extendido está el teletrabajo en los paises de Europeos?"
+author: "Carlos Vecina"
+date: '2021-06-14'
+slug: "data-visualization-remote-workers-across-europe"
+translationKey: "estudio-datos-trabajo-remoto-europa"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- R
+- Post
+tags: []
+subtitle: "Analizamos el los datos de eurostat sobre la expansión del teletrabajo en los diferentes paises europeos. Finlandia, Luxemburgo, Paises Bajos y Alemania tienen alrededor de 25% del total de los trabajadores del pais en alguna modalidad remota. ¡Sorprende Noruega!"
+summary: 'Analizamos el los datos de eurostat sobre la expansión del teletrabajo en los diferentes paises europeos. Finlandia, Luxemburgo, Paises Bajos y Alemania tienen alrededor de 25% del total de los trabajadores del pais en alguna modalidad remota. ¡Sorprende Noruega!.'
+authors: [carlos-vecina]
+featured: false
+draft: false
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+---
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="featured.jpg" height="250px" width="400px" /></p>
+<div id="descarga-de-datos" class="section level1">
+<h1>1. Descarga de datos</h1>
+<p>Como siempre, comenzamos accediendo a los datos. En este caso, accedemos a la base de datos de Eurostat y nos descargamos el fichero.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">download.file</span>(<span class="st">&quot;https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/LFSA_EHOMP/?format=SDMX-CSV&amp;compressed=false&quot;</span>, <span class="st">&quot;data.csv&quot;</span>)</a></code></pre></div>
+<p>Vamos a ver cual es el TOP 5 de paises en los que los empleados tienen algún tipo de modalidad remota.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">df_european_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="dt">file =</span> <span class="st">&#39;data.csv&#39;</span>,</a>
+<a class="sourceLine" id="cb2-2" title="2">                             <span class="dt">col_types =</span> <span class="kw">cols</span>(<span class="dt">sex =</span> <span class="kw">col_character</span>()))  <span class="co">#Especificamos el tipo de la columna sexo</span></a>
+<a class="sourceLine" id="cb2-3" title="3"></a>
+<a class="sourceLine" id="cb2-4" title="4">df_european_data_filtered &lt;-df_european_data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="st">  </span><span class="kw">filter</span>(freq <span class="op">==</span><span class="st"> &quot;A&quot;</span> <span class="op">&amp;</span><span class="st"> </span>unit <span class="op">==</span><span class="st"> &quot;PC&quot;</span> <span class="op">&amp;</span><span class="st"> </span>wstatus <span class="op">==</span><span class="st"> &quot;EMP&quot;</span> <span class="op">&amp;</span><span class="st"> </span>sex <span class="op">==</span><span class="st"> &quot;T&quot;</span>  <span class="op">&amp;</span><span class="st"> </span>age <span class="op">==</span><span class="st"> &quot;Y20-64&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="st">  </span><span class="kw">select</span>(geo, TIME_PERIOD, OBS_VALUE, frequenc)</a>
+<a class="sourceLine" id="cb2-7" title="7"></a>
+<a class="sourceLine" id="cb2-8" title="8">df_european_data_filtered <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="st">  </span><span class="kw">filter</span>(frequenc <span class="op">==</span><span class="st"> &quot;NVR&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">OBS_VALUE=</span><span class="kw">if_else</span>(frequenc <span class="op">==</span><span class="st"> &quot;NVR&quot;</span>, <span class="kw">round</span>(<span class="dv">1</span><span class="op">-</span>OBS_VALUE<span class="op">/</span><span class="dv">100</span>, <span class="dv">3</span>)<span class="op">*</span><span class="dv">100</span>, <span class="kw">round</span>(OBS_VALUE<span class="op">/</span><span class="dv">100</span>, <span class="dv">3</span>)<span class="op">*</span><span class="dv">100</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>frequenc) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="st">  </span><span class="kw">arrange</span>(geo, TIME_PERIOD) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-13" title="13"><span class="st">  </span><span class="kw">filter</span>(TIME_PERIOD <span class="op">==</span><span class="st"> &quot;2020&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="st">  </span><span class="kw">slice_max</span>(<span class="dt">n=</span><span class="dv">6</span>, <span class="dt">order_by=</span>OBS_VALUE)</a></code></pre></div>
+<pre><code>## # A tibble: 6 x 3
+##   geo   TIME_PERIOD OBS_VALUE
+##   &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt;
+## 1 LU           2020      47.8
+## 2 NL           2020      42.7
+## 3 CH           2020      41.5
+## 4 FI           2020      40.4
+## 5 IS           2020      39.8
+## 6 DK           2020      36.9</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">df_european_data_filtered_bar_plot &lt;-<span class="st"> </span>df_european_data_filtered <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="st">  </span><span class="kw">filter</span>(frequenc <span class="op">==</span><span class="st"> &quot;NVR&quot;</span> <span class="op">&amp;</span><span class="st"> </span>TIME_PERIOD <span class="op">==</span><span class="st">&quot;2020&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">highlight =</span> <span class="kw">if_else</span>(geo <span class="op">==</span><span class="st"> &quot;EU27_2020&quot;</span>,<span class="st">&quot;t&quot;</span>,<span class="st">&quot;f&quot;</span>),</a>
+<a class="sourceLine" id="cb4-4" title="4">         <span class="dt">OBS_VALUE =</span> <span class="kw">if_else</span>(frequenc <span class="op">==</span><span class="st"> &quot;NVR&quot;</span>, <span class="kw">round</span>(<span class="dv">1</span><span class="op">-</span>OBS_VALUE<span class="op">/</span><span class="dv">100</span>,<span class="dv">3</span>), <span class="kw">round</span>(OBS_VALUE<span class="op">/</span><span class="dv">100</span>,<span class="dv">3</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="st">  </span><span class="kw">arrange</span>(OBS_VALUE) </a>
+<a class="sourceLine" id="cb4-6" title="6">df_european_data_filtered_bar_plot <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(geo, OBS_VALUE, <span class="dt">fill=</span>highlight)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span><span class="kw">paste0</span>(OBS_VALUE<span class="op">*</span><span class="dv">100</span>,<span class="st">&quot;%&quot;</span>)), <span class="dt">size=</span><span class="fl">2.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">limits=</span>df_european_data_filtered_bar_plot<span class="op">$</span>geo) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="st">  </span><span class="kw">scale_fill_manual</span>( <span class="dt">values=</span><span class="kw">c</span>( <span class="st">&quot;t&quot;</span>=<span class="st">&quot;tomato&quot;</span>, <span class="st">&quot;f&quot;</span>=<span class="st">&quot;paleturquoise3&quot;</span> ), <span class="dt">guide=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>scales<span class="op">::</span>percent)</a></code></pre></div>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>¿Y los 10 que mayor incremento han tenido?</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">df_european_data_filtered <span class="op">%&gt;%</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="st">  </span><span class="kw">filter</span>(frequenc <span class="op">==</span><span class="st"> &quot;NVR&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="st">  </span><span class="kw">mutate</span>( <span class="dt">OBS_VALUE =</span> <span class="kw">if_else</span>( frequenc <span class="op">==</span><span class="st"> &quot;NVR&quot;</span>,<span class="kw">round</span>(<span class="dv">1</span><span class="op">-</span>OBS_VALUE<span class="op">/</span><span class="dv">100</span>,<span class="dv">3</span>)<span class="op">*</span><span class="dv">100</span>,<span class="kw">round</span>(OBS_VALUE<span class="op">/</span><span class="dv">100</span>,<span class="dv">3</span>)<span class="op">*</span><span class="dv">100</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>frequenc) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="st">  </span><span class="kw">arrange</span>(geo, TIME_PERIOD) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="st">  </span><span class="kw">group_by</span>(geo) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">delta =</span> (OBS_VALUE <span class="op">-</span><span class="st"> </span><span class="kw">lag</span>(OBS_VALUE))<span class="op">/</span><span class="kw">lag</span>(OBS_VALUE)<span class="op">*</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="st">  </span><span class="kw">filter</span>(TIME_PERIOD<span class="op">==</span><span class="st">&quot;2020&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="st">  </span><span class="kw">slice_max</span>( <span class="dt">n=</span><span class="dv">10</span>,<span class="dt">order_by=</span>delta)</a></code></pre></div>
+<pre><code>## # A tibble: 10 x 4
+##    geo   TIME_PERIOD OBS_VALUE delta
+##    &lt;chr&gt;       &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;
+##  1 CY           2020       7.4 196  
+##  2 IT           2020      13.7 191. 
+##  3 BG           2020       3   173. 
+##  4 HU           2020      11   139. 
+##  5 RO           2020       3.2 129. 
+##  6 MT           2020      26   122. 
+##  7 EL           2020      10.4 100  
+##  8 LT           2020       8.4  86.7
+##  9 ES           2020      15.2  81.0
+## 10 DE           2020      21.1  63.6</code></pre>
+</div>
+<div id="perfil-del-teletrabajo-alrededor-de-europa-normalmente-vs-en-ocasiones-vs-nunca" class="section level1">
+<h1>2. Perfil del Teletrabajo alrededor de Europa (Normalmente vs En ocasiones vs Nunca)</h1>
+<p>Una forma visual de hacernos una idea de la adopción de las diferentes modalidades de teletrabajo en cada uno de los mercados europeos de un solo vistazo puede ser esta <em>donut plot</em>. Si bien el cerebro humano y la visión no está preparado con una elevada facilidad de comparar áreas, sí que nos permitirá ver muchos perfiles de paises y poder comprender la estructura de su mercado laboral en cuanto a la adopción del <em>remote working</em>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">list_countries &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AT&quot;</span>,<span class="st">&quot;BE&quot;</span>,<span class="st">&quot;CH&quot;</span>,<span class="st">&quot;CY&quot;</span>,<span class="st">&quot;CZ&quot;</span>,</a>
+<a class="sourceLine" id="cb7-2" title="2">                    <span class="st">&quot;DE&quot;</span>,<span class="st">&quot;DK&quot;</span>,<span class="st">&quot;ES&quot;</span>,<span class="st">&quot;EU15&quot;</span>,<span class="st">&quot;EU27_2020&quot;</span>,<span class="st">&quot;FI&quot;</span>,</a>
+<a class="sourceLine" id="cb7-3" title="3">                    <span class="st">&quot;FR&quot;</span>,<span class="st">&quot;IS&quot;</span>,<span class="st">&quot;IT&quot;</span>,<span class="st">&quot;LU&quot;</span>,<span class="st">&quot;MK&quot;</span>,</a>
+<a class="sourceLine" id="cb7-4" title="4">                    <span class="st">&quot;NL&quot;</span>,<span class="st">&quot;NO&quot;</span>,<span class="st">&quot;PL&quot;</span>,<span class="st">&quot;PT&quot;</span>,<span class="st">&quot;SK&quot;</span>)</a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="kw">ggplot</span>(df_european_data_filtered <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="st">         </span><span class="kw">filter</span>(TIME_PERIOD<span class="op">==</span><span class="st">&quot;2020&quot;</span> <span class="op">&amp;</span><span class="st"> </span>(geo <span class="op">%in%</span><span class="st"> </span>list_countries )) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="st">         </span><span class="kw">group_by</span>(geo) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="st">         </span><span class="kw">mutate</span>(<span class="dt">ymax=</span><span class="kw">cumsum</span>(OBS_VALUE),</a>
+<a class="sourceLine" id="cb7-9" title="9">                <span class="dt">ymin=</span><span class="kw">if_else</span>(<span class="kw">row_number</span>()<span class="op">==</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="kw">lag</span>(ymax)),</a>
+<a class="sourceLine" id="cb7-10" title="10">                <span class="dt">labelPosition=</span>(ymax<span class="op">+</span>ymin)<span class="op">/</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb7-11" title="11">                <span class="dt">label=</span><span class="kw">paste0</span>(frequenc, <span class="st">&quot;</span><span class="ch">\n</span><span class="st"> value: &quot;</span>, OBS_VALUE)),</a>
+<a class="sourceLine" id="cb7-12" title="12">       <span class="kw">aes</span>(<span class="dt">ymax=</span>ymax, <span class="dt">ymin=</span>ymin, <span class="dt">xmax=</span><span class="dv">4</span>, <span class="dt">xmin=</span><span class="dv">3</span>, <span class="dt">fill=</span>frequenc)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-13" title="13"><span class="st">  </span><span class="kw">geom_rect</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-14" title="14"><span class="st">  </span><span class="kw">geom_text</span>( <span class="dt">x=</span><span class="dv">2</span>, <span class="kw">aes</span>(<span class="dt">y=</span>labelPosition, <span class="dt">label=</span>label, <span class="dt">color=</span>frequenc), <span class="dt">size=</span><span class="dv">1</span>)<span class="op">+</span></a>
+<a class="sourceLine" id="cb7-15" title="15"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="dv">3</span>) <span class="op">+</span><span class="st">  </span><span class="co"># color del rosco</span></a>
+<a class="sourceLine" id="cb7-16" title="16"><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette=</span><span class="dv">3</span>) <span class="op">+</span><span class="st"> </span><span class="co"># color de las etiquetas</span></a>
+<a class="sourceLine" id="cb7-17" title="17"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>geo) <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-18" title="18"><span class="st">  </span><span class="kw">coord_polar</span>(<span class="dt">theta=</span><span class="st">&quot;y&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-19" title="19"><span class="st">  </span><span class="kw">theme_void</span>()  <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-20" title="20"><span class="st">  </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">4</span>))<span class="op">+</span></a>
+<a class="sourceLine" id="cb7-21" title="21"><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</a></code></pre></div>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">list_age_ranges &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Y_GE25&quot;</span>,<span class="st">&quot;Y_GE50&quot;</span>)</a>
+<a class="sourceLine" id="cb8-2" title="2"></a>
+<a class="sourceLine" id="cb8-3" title="3">df_european_data_filtered <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="st">  </span><span class="kw">filter</span>(frequenc <span class="op">==</span><span class="st"> &quot;NVR&quot;</span> <span class="op">&amp;</span><span class="st"> </span>(geo <span class="op">%in%</span><span class="st"> </span>list_countries[list_countries <span class="op">!=</span><span class="st"> &quot;CY&quot;</span>])) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="st">  </span><span class="kw">mutate</span>( <span class="dt">OBS_VALUE =</span> <span class="kw">if_else</span>( frequenc <span class="op">==</span><span class="st"> &quot;NVR&quot;</span>,<span class="kw">round</span>(<span class="dv">1</span><span class="op">-</span>OBS_VALUE<span class="op">/</span><span class="dv">100</span>,<span class="dv">3</span>)<span class="op">*</span><span class="dv">100</span>,<span class="kw">round</span>(OBS_VALUE<span class="op">/</span><span class="dv">100</span>,<span class="dv">3</span>)<span class="op">*</span><span class="dv">100</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(TIME_PERIOD, OBS_VALUE, <span class="dt">colour=</span>OBS_VALUE, <span class="dt">group=</span>geo)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-7" title="7"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-8" title="8"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>geo) <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="st">  </span><span class="kw">scale_colour_gradient</span>(<span class="dt">low =</span> <span class="st">&quot;yellow&quot;</span>, <span class="dt">high =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">na.value =</span> <span class="ot">NA</span>)</a></code></pre></div>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>

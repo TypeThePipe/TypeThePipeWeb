@@ -1,0 +1,470 @@
+---
+title: "¿Cómo de extendido está el Teletrabajo en los paises de Europeos?"
+author: "Carlos Vecina"
+date: '2021-06-14'
+slug: "data-visualization-remote-workers-across-europe"
+translationKey: "estudio-datos-trabajo-remoto-europa"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- R
+- Post
+tags: []
+subtitle: "Analizamos datos de Eurostat sobre la expansión del teletrabajo en los diferentes paises europeos. Finlandia, Luxemburgo, Paises Bajos y Alemania tienen más del 30% del total de los trabajadores del pais en alguna modalidad remota. ¡Sorprende Noruega!"
+summary: 'Analizamos datos de Eurostat sobre la expansión del teletrabajo en los diferentes paises europeos. Finlandia, Luxemburgo, Paises Bajos y Alemania tienen más del 30% del total de los trabajadores del pais en alguna modalidad remota. ¡Sorprende Noruega!'
+authors: [carlos-vecina]
+featured: false
+draft: false
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+---
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="featured.jpg" height="250px" width="400px" /></p>
+<p><br></p>
+<div id="descarga-de-datos" class="section level1">
+<h1><strong>1. Descarga de datos</strong></h1>
+<p>Como siempre, comenzamos accediendo a los datos. En este caso, accedemos a la base de datos de Eurostat y nos descargamos el fichero.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">download.file</span>(<span class="st">&quot;https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/LFSA_EHOMP/?format=SDMX-CSV&amp;compressed=false&quot;</span>, <span class="st">&quot;data.csv&quot;</span>)</a></code></pre></div>
+<p>En un primer análisis, vamos a ver cual es el TOP 5 de paises en los que los empleados tienen algún tipo de modalidad remota.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">df_european_data &lt;-<span class="st"> </span><span class="kw">read_csv</span>(<span class="dt">file =</span> <span class="st">&#39;data.csv&#39;</span>,</a>
+<a class="sourceLine" id="cb2-2" title="2">                             <span class="dt">col_types =</span> <span class="kw">cols</span>(<span class="dt">sex =</span> <span class="kw">col_character</span>()))  <span class="co">#Especificamos el tipo de la columna sexo</span></a>
+<a class="sourceLine" id="cb2-3" title="3"></a>
+<a class="sourceLine" id="cb2-4" title="4">df_european_data_filtered &lt;-df_european_data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="st">  </span><span class="kw">filter</span>(freq <span class="op">==</span><span class="st"> &quot;A&quot;</span> <span class="op">&amp;</span><span class="st"> </span>unit <span class="op">==</span><span class="st"> &quot;PC&quot;</span> <span class="op">&amp;</span><span class="st"> </span>wstatus <span class="op">==</span><span class="st"> &quot;EMP&quot;</span> <span class="op">&amp;</span><span class="st"> </span>sex <span class="op">==</span><span class="st"> &quot;T&quot;</span>  <span class="op">&amp;</span><span class="st"> </span>age <span class="op">==</span><span class="st"> &quot;Y20-64&quot;</span> <span class="op">&amp;</span><span class="st"> </span>geo <span class="op">!=</span><span class="st"> &quot;SE&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="st">  </span><span class="kw">select</span>(geo, TIME_PERIOD, OBS_VALUE, frequenc) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="st">  </span><span class="kw">rename</span>(<span class="dt">remote_perc=</span>OBS_VALUE,</a>
+<a class="sourceLine" id="cb2-8" title="8">         <span class="dt">country=</span>geo)</a>
+<a class="sourceLine" id="cb2-9" title="9"></a>
+<a class="sourceLine" id="cb2-10" title="10">df_european_data_filtered <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="st">  </span><span class="kw">filter</span>(frequenc <span class="op">==</span><span class="st"> &quot;NVR&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">remote_perc=</span><span class="kw">if_else</span>(frequenc <span class="op">==</span><span class="st"> &quot;NVR&quot;</span>,</a>
+<a class="sourceLine" id="cb2-13" title="13">                             <span class="kw">round</span>(<span class="dv">1</span><span class="op">-</span>remote_perc<span class="op">/</span><span class="dv">100</span>, <span class="dv">3</span>)<span class="op">*</span><span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb2-14" title="14">                             <span class="kw">round</span>(remote_perc<span class="op">/</span><span class="dv">100</span>, <span class="dv">3</span>)<span class="op">*</span><span class="dv">100</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-15" title="15"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>frequenc) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="st">  </span><span class="kw">arrange</span>(country, TIME_PERIOD) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-17" title="17"><span class="st">  </span><span class="kw">filter</span>(TIME_PERIOD <span class="op">==</span><span class="st"> &quot;2020&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-18" title="18"><span class="st">  </span><span class="kw">slice_max</span>(<span class="dt">n=</span><span class="dv">6</span>, <span class="dt">order_by=</span>remote_perc) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="st">  </span><span class="kw">kable</span>()</a></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+country
+</th>
+<th style="text-align:right;">
+TIME_PERIOD
+</th>
+<th style="text-align:right;">
+remote_perc
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+LU
+</td>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:right;">
+47.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+NL
+</td>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:right;">
+42.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+CH
+</td>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:right;">
+41.5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+FI
+</td>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:right;">
+40.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IS
+</td>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:right;">
+39.8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DK
+</td>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:right;">
+36.9
+</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">df_european_data_filtered_bar_plot &lt;-<span class="st"> </span>df_european_data_filtered <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="st">  </span><span class="kw">filter</span>(frequenc <span class="op">==</span><span class="st"> &quot;NVR&quot;</span> <span class="op">&amp;</span><span class="st"> </span>TIME_PERIOD <span class="op">==</span><span class="st">&quot;2020&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">highlight =</span> <span class="kw">if_else</span>(country <span class="op">==</span><span class="st"> &quot;EU27_2020&quot;</span>,<span class="st">&quot;t&quot;</span>,<span class="st">&quot;f&quot;</span>),</a>
+<a class="sourceLine" id="cb3-4" title="4">         <span class="dt">remote_perc =</span> <span class="kw">if_else</span>(frequenc <span class="op">==</span><span class="st"> &quot;NVR&quot;</span>,</a>
+<a class="sourceLine" id="cb3-5" title="5">                               <span class="kw">round</span>(<span class="dv">1</span><span class="op">-</span>remote_perc<span class="op">/</span><span class="dv">100</span>,<span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb3-6" title="6">                               <span class="kw">round</span>(remote_perc<span class="op">/</span><span class="dv">100</span>,<span class="dv">3</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="st">  </span><span class="kw">arrange</span>(remote_perc) </a>
+<a class="sourceLine" id="cb3-8" title="8">df_european_data_filtered_bar_plot <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(country, remote_perc, <span class="dt">fill=</span>highlight)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="st">  </span><span class="kw">geom_bar</span>(<span class="dt">stat=</span><span class="st">&quot;identity&quot;</span>, <span class="dt">position=</span><span class="st">&quot;dodge&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-11" title="11"><span class="st">  </span><span class="kw">geom_text</span>(<span class="kw">aes</span>(<span class="dt">label=</span><span class="kw">paste0</span>(remote_perc<span class="op">*</span><span class="dv">100</span>,<span class="st">&quot;%&quot;</span>)), <span class="dt">size=</span><span class="dv">2</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-12" title="12"><span class="st">  </span><span class="kw">coord_flip</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-13" title="13"><span class="st">  </span><span class="kw">scale_x_discrete</span>(<span class="dt">limits=</span>df_european_data_filtered_bar_plot<span class="op">$</span>country) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-14" title="14"><span class="st">  </span><span class="kw">scale_fill_manual</span>(<span class="dt">values=</span><span class="kw">c</span>( <span class="st">&quot;t&quot;</span>=<span class="st">&quot;tomato&quot;</span>, <span class="st">&quot;f&quot;</span>=<span class="st">&quot;paleturquoise3&quot;</span> ),</a>
+<a class="sourceLine" id="cb3-15" title="15">                    <span class="dt">guide=</span><span class="ot">FALSE</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb3-16" title="16"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>scales<span class="op">::</span>percent) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-17" title="17"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Porcentaje de empleados con alguna modalidad de teletrabajo por País&quot;</span>,</a>
+<a class="sourceLine" id="cb3-18" title="18">       <span class="dt">caption =</span> <span class="st">&quot;Fuente: Eurostat&quot;</span>)</a></code></pre></div>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>¿Y los 10 que mayor incremento han tenido?</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">df_european_data_filtered <span class="op">%&gt;%</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="st">  </span><span class="kw">filter</span>(frequenc <span class="op">==</span><span class="st"> &quot;NVR&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="st">  </span><span class="kw">mutate</span>( <span class="dt">remote_perc =</span> <span class="kw">if_else</span>(frequenc <span class="op">==</span><span class="st"> &quot;NVR&quot;</span>,</a>
+<a class="sourceLine" id="cb4-4" title="4">                                <span class="kw">round</span>(<span class="dv">1</span><span class="op">-</span>remote_perc<span class="op">/</span><span class="dv">100</span>,<span class="dv">3</span>)<span class="op">*</span><span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb4-5" title="5">                                <span class="kw">round</span>(remote_perc<span class="op">/</span><span class="dv">100</span>,<span class="dv">3</span>)<span class="op">*</span><span class="dv">100</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>frequenc) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="st">  </span><span class="kw">arrange</span>(country, TIME_PERIOD) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="st">  </span><span class="kw">group_by</span>(country) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">delta =</span> (remote_perc <span class="op">-</span><span class="st"> </span><span class="kw">lag</span>(remote_perc))<span class="op">/</span><span class="kw">lag</span>(remote_perc)<span class="op">*</span><span class="dv">100</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="st">  </span><span class="kw">filter</span>(TIME_PERIOD<span class="op">==</span><span class="st">&quot;2020&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="st">  </span><span class="kw">slice_max</span>( <span class="dt">n=</span><span class="dv">10</span>,<span class="dt">order_by=</span>delta) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="st">  </span><span class="kw">kable</span>()</a></code></pre></div>
+<table>
+<thead>
+<tr>
+<th style="text-align:left;">
+country
+</th>
+<th style="text-align:right;">
+TIME_PERIOD
+</th>
+<th style="text-align:right;">
+remote_perc
+</th>
+<th style="text-align:right;">
+delta
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+CY
+</td>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:right;">
+7.4
+</td>
+<td style="text-align:right;">
+196.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+IT
+</td>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:right;">
+13.7
+</td>
+<td style="text-align:right;">
+191.48936
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+BG
+</td>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+172.72727
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+HU
+</td>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:right;">
+11.0
+</td>
+<td style="text-align:right;">
+139.13043
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RO
+</td>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+128.57143
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+MT
+</td>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:right;">
+26.0
+</td>
+<td style="text-align:right;">
+122.22222
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+EL
+</td>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:right;">
+10.4
+</td>
+<td style="text-align:right;">
+100.00000
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+LT
+</td>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:right;">
+8.4
+</td>
+<td style="text-align:right;">
+86.66667
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+ES
+</td>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:right;">
+15.2
+</td>
+<td style="text-align:right;">
+80.95238
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+DE
+</td>
+<td style="text-align:right;">
+2020
+</td>
+<td style="text-align:right;">
+21.1
+</td>
+<td style="text-align:right;">
+63.56589
+</td>
+</tr>
+</tbody>
+</table>
+<p><br></p>
+</div>
+<div id="perfil-del-teletrabajo-alrededor-de-europa" class="section level1">
+<h1><strong>2. Perfil del Teletrabajo alrededor de Europa</strong></h1>
+<div id="normalmente-vs-en-ocasiones-vs-nunca" class="section level2">
+<h2><strong>(Normalmente vs En ocasiones vs Nunca)</strong></h2>
+<p>Una forma visual de hacernos una idea de la adopción de las diferentes modalidades de teletrabajo en cada uno de los mercados europeos de un solo vistazo puede ser esta <em>donut plot</em>. Si bien el cerebro humano y la visión no está preparado con una elevada facilidad de comparar áreas, sí que nos permitirá ver muchos perfiles de paises y poder comprender la estructura de su mercado laboral en cuanto a la adopción del <em>remote working</em>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">list_countries &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;AT&quot;</span>,<span class="st">&quot;BE&quot;</span>,<span class="st">&quot;CH&quot;</span>,<span class="st">&quot;CY&quot;</span>,<span class="st">&quot;CZ&quot;</span>,</a>
+<a class="sourceLine" id="cb5-2" title="2">                    <span class="st">&quot;DE&quot;</span>,<span class="st">&quot;DK&quot;</span>,<span class="st">&quot;ES&quot;</span>,<span class="st">&quot;EU15&quot;</span>,<span class="st">&quot;EU27_2020&quot;</span>,<span class="st">&quot;FI&quot;</span>,</a>
+<a class="sourceLine" id="cb5-3" title="3">                    <span class="st">&quot;FR&quot;</span>,<span class="st">&quot;IS&quot;</span>,<span class="st">&quot;IT&quot;</span>,<span class="st">&quot;LU&quot;</span>,<span class="st">&quot;MK&quot;</span>,</a>
+<a class="sourceLine" id="cb5-4" title="4">                    <span class="st">&quot;NL&quot;</span>,<span class="st">&quot;NO&quot;</span>,<span class="st">&quot;PL&quot;</span>,<span class="st">&quot;PT&quot;</span>,<span class="st">&quot;SK&quot;</span>)</a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="kw">ggplot</span>(df_european_data_filtered <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="st">         </span><span class="kw">filter</span>(TIME_PERIOD<span class="op">==</span><span class="st">&quot;2020&quot;</span> <span class="op">&amp;</span><span class="st"> </span>(country <span class="op">%in%</span><span class="st"> </span>list_countries )) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="st">         </span><span class="kw">group_by</span>(country) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="st">         </span><span class="kw">mutate</span>(<span class="dt">ymax=</span><span class="kw">cumsum</span>(remote_perc),</a>
+<a class="sourceLine" id="cb5-9" title="9">                <span class="dt">ymin=</span><span class="kw">if_else</span>(<span class="kw">row_number</span>()<span class="op">==</span><span class="dv">1</span>,<span class="dv">0</span>,<span class="kw">lag</span>(ymax)),</a>
+<a class="sourceLine" id="cb5-10" title="10">                <span class="dt">labelPosition=</span>(ymax<span class="op">+</span>ymin)<span class="op">/</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb5-11" title="11">                <span class="dt">label=</span><span class="kw">paste0</span>(remote_perc, <span class="st">&quot; %&quot;</span>),</a>
+<a class="sourceLine" id="cb5-12" title="12">                <span class="dt">frequenc=</span><span class="kw">if_else</span>(frequenc<span class="op">==</span><span class="st">&quot;NVR&quot;</span>,<span class="st">&quot;NUNCA&quot;</span>,</a>
+<a class="sourceLine" id="cb5-13" title="13">                                 <span class="kw">if_else</span>(frequenc<span class="op">==</span><span class="st">&quot;SMT&quot;</span>, <span class="st">&quot;OCASIONAL&quot;</span>, <span class="st">&quot;SIEMPRE&quot;</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-14" title="14"><span class="st">         </span><span class="kw">rename</span>(<span class="dt">freq=</span>frequenc),</a>
+<a class="sourceLine" id="cb5-15" title="15">       <span class="kw">aes</span>(<span class="dt">ymax=</span>ymax, <span class="dt">ymin=</span>ymin, <span class="dt">xmax=</span><span class="dv">4</span>, <span class="dt">xmin=</span><span class="dv">3</span>, <span class="dt">fill=</span>freq)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-16" title="16"><span class="st">  </span><span class="kw">geom_rect</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-17" title="17"><span class="st">  </span><span class="kw">geom_text</span>(<span class="dt">x=</span><span class="fl">1.5</span>,</a>
+<a class="sourceLine" id="cb5-18" title="18">            <span class="kw">aes</span>(<span class="dt">y=</span>labelPosition, <span class="dt">label=</span>label, <span class="dt">color=</span>freq),</a>
+<a class="sourceLine" id="cb5-19" title="19">            <span class="dt">size=</span><span class="fl">2.2</span>,</a>
+<a class="sourceLine" id="cb5-20" title="20">            <span class="dt">check_overlap =</span> T)<span class="op">+</span></a>
+<a class="sourceLine" id="cb5-21" title="21"><span class="st">  </span><span class="kw">scale_fill_brewer</span>(<span class="dt">palette=</span><span class="dv">3</span>) <span class="op">+</span><span class="st">  </span><span class="co"># color del rosco</span></a>
+<a class="sourceLine" id="cb5-22" title="22"><span class="st">  </span><span class="kw">scale_color_brewer</span>(<span class="dt">palette=</span><span class="dv">3</span>) <span class="op">+</span><span class="st"> </span><span class="co"># color de las etiquetas</span></a>
+<a class="sourceLine" id="cb5-23" title="23"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>country) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-24" title="24"><span class="st">  </span><span class="kw">coord_polar</span>(<span class="dt">theta=</span><span class="st">&quot;y&quot;</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-25" title="25"><span class="st">  </span><span class="kw">theme_void</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-26" title="26"><span class="st">  </span><span class="kw">xlim</span>(<span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">4</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-27" title="27"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Composición teletrabajo por país&quot;</span>,</a>
+<a class="sourceLine" id="cb5-28" title="28">       <span class="dt">subtitle=</span><span class="st">&quot; &quot;</span>,</a>
+<a class="sourceLine" id="cb5-29" title="29">       <span class="dt">caption =</span> <span class="st">&quot;Fuente: Eurostat&quot;</span>)</a></code></pre></div>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="evolución-temporal-del-trabajo-remoto" class="section level2">
+<h2><strong>Evolución temporal del trabajo remoto</strong></h2>
+<p>Para dar contexto, podemos ver la evolución temporal del porcentaje de trabajadores que en algún grado disfrutan de trabajo en remoto. Vemos que aquí también hay grupos de paises. En algunos de estos paises se aprecia una pendiente muy pronunciada, mientras que en otro grupo de ellos no han registrado una subida tan acelerada el último año.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">df_european_data_filtered <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="st">  </span><span class="kw">filter</span>(frequenc <span class="op">==</span><span class="st"> &quot;NVR&quot;</span> <span class="op">&amp;</span><span class="st"> </span>(country <span class="op">%in%</span><span class="st"> </span>list_countries[list_countries <span class="op">!=</span><span class="st"> &quot;CY&quot;</span>])) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="st">  </span><span class="kw">mutate</span>( <span class="dt">remote_perc =</span> <span class="kw">if_else</span>( frequenc <span class="op">==</span><span class="st"> &quot;NVR&quot;</span>,<span class="kw">round</span>(<span class="dv">1</span><span class="op">-</span>remote_perc<span class="op">/</span><span class="dv">100</span>,<span class="dv">3</span>),<span class="kw">round</span>(remote_perc<span class="op">/</span><span class="dv">100</span>,<span class="dv">3</span>))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(TIME_PERIOD, remote_perc, <span class="dt">colour=</span>remote_perc, <span class="dt">group=</span>country)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="st">  </span><span class="kw">geom_line</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>country) <span class="op">+</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="st">  </span><span class="kw">scale_colour_gradient</span>(<span class="dt">low =</span> <span class="st">&quot;yellow&quot;</span>, <span class="dt">high =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">na.value =</span> <span class="ot">NA</span>)<span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-8" title="8"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">labels=</span>scales<span class="op">::</span>percent)</a></code></pre></div>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><br></p>
+</div>
+<div id="correlación-trabajo-remoto-pib-país" class="section level2">
+<h2><strong>3. Correlación Trabajo Remoto ~ PIB país</strong></h2>
+<p>Como reflexión final, parece evidente que atendiendo al PIB país, el porcentaje de teletrabajadores que al menos trabajan de manera ocasional en remoto en base al grueso de los empleados del mercado laboral tiene una correlación positiva grande.</p>
+<p>La composición del tejido industrial y del tipo de empresas de cada uno de los paises, unido a las diferentes políticas y gobierno que hay en ellos, parecen los factores que determinan la gran heterogeneidad entre Estados.</p>
+<p>En el siguiente artículo profundizaremos sobre esta relación entre el PIB y el modelo de trabajo remoto, disertando sobre casusas y efectos.</p>
+<p>Versión en inglés del artículo en <a href="https://www.ubiwork.co/blog?fromttp">UbiWork. Work remotely from Spain &amp; Portugal</a></p>
+<p>¡Comparte el post! Aquí:</p>
+<style>
+p {
+word-spacing: 3px;
+text-indent: 20px;
+text-align: justify;
+}
+.page-subtitle {
+text-align: left  !important;
+text-indent: 0px !important;
+}
+.card-text {
+text-align: left  !important;
+text-indent: 0px !important;
+}
+</style>
+<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script>
+<script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us4.list-manage.com","uuid":"91551f7ed29389a0de4f47665","lid":"d95c503a48","uniqueMethods":true}) })</script>
+</div>
+</div>

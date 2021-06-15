@@ -1,0 +1,210 @@
+---
+title: "¿Cómo de extendido está el Teletrabajo en los paises de Europeos?"
+author: "Carlos Vecina"
+date: '2021-06-14'
+slug: "data-visualization-remote-workers-across-europe"
+translationKey: "estudio-datos-trabajo-remoto-europa"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- R
+- Post
+tags: []
+subtitle: "Analizamos datos de Eurostat sobre la expansión del teletrabajo en los diferentes paises europeos. Finlandia, Luxemburgo, Paises Bajos y Alemania tienen más del 30% del total de los trabajadores del pais en alguna modalidad remota. ¡Sorprende Noruega!"
+summary: 'Analizamos datos de Eurostat sobre la expansión del teletrabajo en los diferentes paises europeos. Finlandia, Luxemburgo, Paises Bajos y Alemania tienen más del 30% del total de los trabajadores del pais en alguna modalidad remota. ¡Sorprende Noruega!'
+authors: [carlos-vecina]
+featured: false
+draft: false
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+```
+
+```{r, include=FALSE}
+nchar("Analizamos el los datos de eurostat sobre la expansión del Teletrabajo en los diferentes paises europeos. Finlandia, Luxemburgo, Paises Bajos y Alemania tienen alrededor de 25% del total de los trabajadores del pais en alguna modalidad de trabajo remoto ¡Sorprende Noruega!")
+```
+
+<img src="./featured.jpg" height="250px" width="400px" />
+
+<br>
+
+# **1. Descarga de datos**
+
+Como siempre, comenzamos accediendo a los datos. En este caso, accedemos a la base de datos de Eurostat y nos descargamos el fichero.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, error=FALSE}
+library(tidyverse)
+library(kableExtra)
+```
+
+
+```{r, eval=FALSE}
+library(tidyverse)
+download.file("https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/LFSA_EHOMP/?format=SDMX-CSV&compressed=false", "data.csv")
+```
+
+En un primer análisis, vamos a ver cual es el TOP 5 de paises en los que los empleados tienen algún tipo de modalidad remota.
+
+
+```{r}
+df_european_data <- read_csv(file = 'data.csv',
+                             col_types = cols(sex = col_character()))  #Especificamos el tipo de la columna sexo
+
+df_european_data_filtered <-df_european_data %>% 
+  filter(freq == "A" & unit == "PC" & wstatus == "EMP" & sex == "T"  & age == "Y20-64" & geo != "SE") %>% 
+  select(geo, TIME_PERIOD, OBS_VALUE, frequenc) %>% 
+  rename(remote_perc=OBS_VALUE,
+         country=geo)
+
+df_european_data_filtered %>% 
+  filter(frequenc == "NVR") %>% 
+  mutate(remote_perc=if_else(frequenc == "NVR",
+                             round(1-remote_perc/100, 3)*100,
+                             round(remote_perc/100, 3)*100)) %>% 
+  select(-frequenc) %>% 
+  arrange(country, TIME_PERIOD) %>% 
+  filter(TIME_PERIOD == "2020") %>% 
+  slice_max(n=6, order_by=remote_perc) %>% 
+  kable()
+```
+
+<br> 
+
+```{r}
+df_european_data_filtered_bar_plot <- df_european_data_filtered %>% 
+  filter(frequenc == "NVR" & TIME_PERIOD =="2020") %>% 
+  mutate(highlight = if_else(country == "EU27_2020","t","f"),
+         remote_perc = if_else(frequenc == "NVR",
+                               round(1-remote_perc/100,3),
+                               round(remote_perc/100,3))) %>% 
+  arrange(remote_perc) 
+df_european_data_filtered_bar_plot %>% 
+  ggplot(aes(country, remote_perc, fill=highlight)) +
+  geom_bar(stat="identity", position="dodge") +
+  geom_text(aes(label=paste0(remote_perc*100,"%")), size=2) +
+  coord_flip() +
+  scale_x_discrete(limits=df_european_data_filtered_bar_plot$country) +
+  scale_fill_manual(values=c( "t"="tomato", "f"="paleturquoise3" ),
+                    guide=FALSE) + 
+  scale_y_continuous(labels=scales::percent) +
+  labs(title="Porcentaje de empleados con alguna modalidad de teletrabajo por País",
+       caption = "Fuente: Eurostat")
+
+```
+
+¿Y los 10 que mayor incremento han tenido?
+
+```{r}
+df_european_data_filtered %>%  
+  filter(frequenc == "NVR") %>% 
+  mutate( remote_perc = if_else(frequenc == "NVR",
+                                round(1-remote_perc/100,3)*100,
+                                round(remote_perc/100,3)*100)) %>% 
+  select(-frequenc) %>% 
+  arrange(country, TIME_PERIOD) %>% 
+  group_by(country) %>% 
+  mutate(delta = (remote_perc - lag(remote_perc))/lag(remote_perc)*100) %>% 
+  ungroup() %>% 
+  filter(TIME_PERIOD=="2020") %>% 
+  slice_max( n=10,order_by=delta) %>% 
+  kable()
+```
+
+<br>
+
+# **2. Perfil del Teletrabajo alrededor de Europa**
+## **(Normalmente vs En ocasiones vs Nunca)**
+
+Una forma visual de hacernos una idea de la adopción de las diferentes modalidades de teletrabajo en cada uno de los mercados europeos de un solo vistazo puede ser esta *donut plot*. Si bien el cerebro humano y la visión no está preparado con una elevada facilidad de comparar áreas, sí que nos permitirá ver muchos perfiles de paises y poder comprender la estructura de su mercado laboral en cuanto a la adopción del *remote working*.
+
+```{r}
+list_countries <- c("AT","BE","CH","CY","CZ",
+                    "DE","DK","ES","EU15","EU27_2020","FI",
+                    "FR","IS","IT","LU","MK",
+                    "NL","NO","PL","PT","SK")
+ggplot(df_european_data_filtered %>%
+         filter(TIME_PERIOD=="2020" & (country %in% list_countries )) %>% 
+         group_by(country) %>% 
+         mutate(ymax=cumsum(remote_perc),
+                ymin=if_else(row_number()==1,0,lag(ymax)),
+                labelPosition=(ymax+ymin)/2,
+                label=paste0(remote_perc, " %"),
+                frequenc=if_else(frequenc=="NVR","NUNCA",
+                                 if_else(frequenc=="SMT", "OCASIONAL", "SIEMPRE"))) %>% 
+         rename(freq=frequenc),
+       aes(ymax=ymax, ymin=ymin, xmax=4, xmin=3, fill=freq)) +
+  geom_rect() +
+  geom_text(x=1.5,
+            aes(y=labelPosition, label=label, color=freq),
+            size=2.2,
+            check_overlap = T)+
+  scale_fill_brewer(palette=3) +  # color del rosco
+  scale_color_brewer(palette=3) + # color de las etiquetas
+  facet_wrap(~country) +
+  coord_polar(theta="y") +
+  theme_void() +
+  xlim(c(-1, 4)) +
+  labs(title="Composición teletrabajo por país",
+       subtitle=" ",
+       caption = "Fuente: Eurostat")
+
+
+
+```
+
+## **Evolución temporal del trabajo remoto**
+
+Para dar contexto, podemos ver la evolución temporal del porcentaje de trabajadores que en algún grado disfrutan de trabajo en remoto. Vemos que aquí también hay grupos de paises. En algunos de estos paises se aprecia una pendiente muy pronunciada, mientras que en otro grupo de ellos no han registrado una subida tan acelerada el último año.
+
+```{r}
+df_european_data_filtered %>%
+  filter(frequenc == "NVR" & (country %in% list_countries[list_countries != "CY"])) %>% 
+  mutate( remote_perc = if_else( frequenc == "NVR",round(1-remote_perc/100,3),round(remote_perc/100,3))) %>% 
+  ggplot(aes(TIME_PERIOD, remote_perc, colour=remote_perc, group=country)) +
+  geom_line() +
+  facet_wrap(~country) +
+  scale_colour_gradient(low = "yellow", high = "red", na.value = NA)+ 
+  scale_y_continuous(labels=scales::percent)
+
+```
+
+<br>
+
+## **3. Correlación Trabajo Remoto ~ PIB país**
+
+Como reflexión final, parece evidente que atendiendo al PIB país, el porcentaje de teletrabajadores que al menos trabajan de manera ocasional en remoto en base al grueso de los empleados del mercado laboral tiene una correlación positiva grande.
+
+
+La composición del tejido industrial y del tipo de empresas de cada uno de los paises, unido a las diferentes políticas y gobierno que hay en ellos, parecen los factores que determinan la gran heterogeneidad entre Estados.
+
+En el siguiente artículo profundizaremos sobre esta relación entre el PIB y el modelo de trabajo remoto, disertando sobre casusas y efectos.
+
+
+Versión en inglés del artículo en [UbiWork. Work remotely from Spain & Portugal](https://www.ubiwork.co/blog?fromttp)
+
+¡Comparte el post! Aquí:
+
+<style>
+p {
+word-spacing: 3px;
+text-indent: 20px;
+text-align: justify;
+}
+.page-subtitle {
+text-align: left  !important;
+text-indent: 0px !important;
+}
+.card-text {
+text-align: left  !important;
+text-indent: 0px !important;
+}
+</style>
+
+<script type="text/javascript" src="//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js" data-dojo-config="usePlainJson: true, isDebug: false"></script><script type="text/javascript">window.dojoRequire(["mojo/signup-forms/Loader"], function(L) { L.start({"baseUrl":"mc.us4.list-manage.com","uuid":"91551f7ed29389a0de4f47665","lid":"d95c503a48","uniqueMethods":true}) })</script>
+
