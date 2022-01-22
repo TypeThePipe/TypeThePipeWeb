@@ -12,7 +12,7 @@ categories:
 tags: []
 subtitle: 'Understanding the statistics behind A/B tests'
 summary: "Understanding pvalue, error types, and statistical power"
-authors: [carlos-vecina]
+authors: [pablo-canovas]
 math: TRUE
 ---
   
