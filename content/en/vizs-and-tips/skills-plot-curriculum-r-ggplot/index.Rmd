@@ -42,20 +42,20 @@ library(dplyr)
 
 skills <- tribble(
     ~ Skill, ~ Hours, ~ Class,
-    "AWS", 500, "BigData",
-    "Python", 8000, "Language",
+    "AWS", 1500, "BigData",
+    "Python", 10400, "Language",
     "Spark", 4000, "BigData",
-    "R", 9000, "Language",
-    "Git", 2000, "Tools",
+    "R", 10000, "Language",
+    "Git", 4000, "Tools",
     "Jira", 2000, "Tools",
-    "Forecasting", 5000, "Objetive",
-    "Segmentation", 2000, "Objetive",
-    "Computer Vision", 600, "Objetive",
-    "SQL", 4500, "Language",
-    "IBM Data Stage & SPSS", 1200, "Tools",
-    "Shiny R", 1500, "Visualization",
-    "Tableau", 1000, "Visualization",
-    "Spotfire", 500, "Visualization"
+    "Forecasting", 6000, "Objetive",
+    "Segmentation", 4500, "Objetive",
+    "Computer Vision", 700, "Objetive",
+    "SQL", 7000, "Language",
+    "Shiny R", 4000, "Visualization",
+    "Tableau/Spotfire", 3500, "Visualization",
+    "Credit & Fraud Risk", 3700, "Objetive",
+
 ) 
 ```
 
@@ -68,7 +68,7 @@ ggplot(data=skills,aes(x=reorder(Skill,-desc(Hours)), y= Hours, fill=Class, labe
     labs(x=" ", y="Hours", fill=" ")  +
     theme_minimal() +
     scale_fill_brewer(palette = "YlOrBr",direction = -1) +
-    geom_label(show_guide  = F, aes(y=400))                  # Use show_guide despite the warning
+    geom_label(show_guide  = F, aes(y=850), size=3)                  # Use show_guide despite the warning
 
 ```
 

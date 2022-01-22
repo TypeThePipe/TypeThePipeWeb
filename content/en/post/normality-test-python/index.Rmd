@@ -1,0 +1,201 @@
+---
+title: Revisiting normality tests in Python
+author: Marcelo Orenes Vera
+date: '2021-02-12'
+slug: normality-test-python
+categories:
+  - Post
+  - Statistics
+tags: []
+subtitle: "How could we easily check the normality of a given variable? "
+summary: "How could we easily check the normality of a given variable? ."
+math: TRUE
+authors: [carlos-vecina]
+---
+
+<br>
+
+## **1. Variable Distribution and Normality**
+
+The "distribution function" of a random variable is a function that specifies the probability that the variable's observed value will lie in any given region of possible values. The "normal distribution" is the most commonly used distribution in statistics. A variable that is normally distributed has a histogram (or "density function") that is bell-shaped, with only one peak, unimodal,  asymptotic and is symmetric around the mean. The terms kurtosis ("peakedness" or "heaviness of tails") and skewness (asymmetry around the mean) are often used to describe departures from normality. In a normal distribution, the mean, median, and mode are equal.
+
+The normal family of distributions all have the same general shape and are parameterized by mean and standard deviation.
+
+<br>
+
+
+## **2. Parametric statistics**
+
+Parametric statistics assume that the sample data follows a probability distribution that is based on a set of parameters. The most common assumption is that data is distributed normally. Most of the common statistical methods are parametric. Although parametric statistics are considered more powerful than nonparametric statistics, they are not always applicable for the analysis of the significance of differences. The reason is that the assumptions on which they are based are not always met.
+
+-- Parametric statistics are more powerful for the same sample size than nonparametric statistics.
+-- Parametric statistics use continuous variables, whereas nonparametric statistics often use discrete variables.
+-- If you use parametric statistics when the data strongly diverts from the assumptions on which the parametric statistics are based, the result might lead to incorrect conclusions.
+-- Nonparametric statistics usually can be done fast and in an easy way. They are designed for smaller numbers of data, and also easier to understand and to explain.
+
+<br>
+
+
+## **3. Normality checks in Python**
+
+
+```{python}
+import pandas as pd
+url = ('https://raw.githubusercontent.com/plotly/datasets/master/monthly-milk-production-pounds.csv')
+data = pd.read_csv(url, sep=',')
+data.columns = ['month', 'monthly_milk_production']
+```
+### Jarque-Bera test
+
+The Jarque-Bera test tests whether the sample data has the skewness and kurtosis matching a normal distribution.
+
+```{python}
+from scipy.stats import jarque_bera
+
+result = (jarque_bera(data['monthly_milk_production']))
+
+print(f"JB statistic: {result[0]}")
+print(f"p-value: {result[1]}")
+```
+
+If the p-value ≤ 0.05, then we reject the null hypothesis i.e. we assume the distribution of our variable is not normal/gaussian.
+If the p-value > 0.05, then we fail to reject the null hypothesis i.e. we assume the distribution of our variable is normal/gaussian.
+
+Looking at these results, we fail to reject the null hypothesis and conclude that the sample data follows normal distribution.
+
+However, Jarque-Bera test works properly in large samples (usually larger than 2000 observations) at its statistic has a Chi-squared distribution with 2 degrees of freedom). As long as our dataset is not that big, we need now other way to test it.
+
+### Shapiro-Wilk Test
+
+The Shapiro-Wilk test, proposed in 1965, calculates a W statistic that tests whether a random sample, x1,x2,…,xn comes from (specifically) a normal distribution . Small values of W are evidence of departure from normality and percentage points for the W statistic, obtained via Monte Carlo simulations, were reproduced by Pearson and Hartley (1972, Table 16). This test has done very well in comparison studies with other goodness of fit tests.
+
+The W statistic is calculated as follows:
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mi>W</mi>
+  <mo>=</mo>
+  <mfrac>
+    <msup>
+      <mrow>
+        <mo>(</mo>
+        <mrow>
+          <munderover>
+            <mo>&#x2211;<!-- ∑ --></mo>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mi>i</mi>
+              <mo>=</mo>
+              <mn>1</mn>
+            </mrow>
+            <mi>n</mi>
+          </munderover>
+          <msub>
+            <mi>a</mi>
+            <mi>i</mi>
+          </msub>
+          <msub>
+            <mi>x</mi>
+            <mrow class="MJX-TeXAtom-ORD">
+              <mo stretchy="false">(</mo>
+              <mi>i</mi>
+              <mo stretchy="false">)</mo>
+            </mrow>
+          </msub>
+        </mrow>
+        <mo>)</mo>
+      </mrow>
+      <mn>2</mn>
+    </msup>
+    <mrow>
+      <munderover>
+        <mo>&#x2211;<!-- ∑ --></mo>
+        <mrow class="MJX-TeXAtom-ORD">
+          <mi>i</mi>
+          <mo>=</mo>
+          <mn>1</mn>
+        </mrow>
+        <mi>n</mi>
+      </munderover>
+      <mo stretchy="false">(</mo>
+      <msub>
+        <mi>x</mi>
+        <mi>i</mi>
+      </msub>
+      <mo>&#x2212;<!-- − --></mo>
+      <mrow class="MJX-TeXAtom-ORD">
+        <mover>
+          <mi>x</mi>
+          <mo stretchy="false">&#x00AF;<!-- ¯ --></mo>
+        </mover>
+      </mrow>
+      <msup>
+        <mo stretchy="false">)</mo>
+        <mn>2</mn>
+      </msup>
+    </mrow>
+  </mfrac>
+  <mspace width="thinmathspace" />
+  <mo>,</mo>
+</math>
+
+where the x(i) are the ordered sample values (x(1) is the smallest) and the ai are constants generated from the means, variances and covariances of the order statistics of a sample of size n from a normal distribution [link](https://www.itl.nist.gov/div898/handbook/prc/section2/prc213.htm)
+
+```{python}
+from scipy.stats import shapiro
+
+stat, p = (shapiro(data['monthly_milk_production']))
+
+if p> 0.05:
+  print('It is probabily a Gaussian distribution')
+else:
+  print('It is probably NOT a Gaussian')
+print(p)
+```
+
+If the p-value ≤ 0.05, then we reject the null hypothesis i.e. we assume the distribution of our variable is not normal/gaussian.
+If the p-value > 0.05, then we fail to reject the null hypothesis i.e. we assume the distribution of our variable is normal/gaussian.
+
+As we see, we have now contradictory results in boths tests. We shoudn't stick to one test p-value, but evaluate the big picture, number of samples...  Shapiro-Wilk test is not recommendable with an elevate number of (>70) or with outliers.
+
+### D'Agostino's K-squared test
+
+As last attempt, we are trying D'Agostino K-squared test and the QQ plot.
+```{python}
+from scipy.stats import normaltest
+
+stat, p = (normaltest(data['monthly_milk_production']))
+
+if p> 0.05:
+  print('It is probabily a Gaussian distribution')
+else:
+  print('It is probably NOT a Gaussian')
+print(p)
+```
+
+```{python}
+#https://machinelearningmastery.com/a-gentle-introduction-to-normality-tests-in-python/
+# QQ Plot
+from numpy.random import seed
+from numpy.random import randn
+from statsmodels.graphics.gofplots import qqplot
+import pylab
+
+# q-q plot
+qqplot(data['monthly_milk_production'], line='s').show()
+pylab.show()
+```
+
+<style>
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+</style>

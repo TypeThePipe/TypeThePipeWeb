@@ -5,7 +5,7 @@
     <link>/categories/statistics/</link>
       <atom:link href="/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
     <description>Statistics</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 28 Jun 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 12 Feb 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-32.png</url>
       <title>Statistics</title>
@@ -13,11 +13,187 @@
     </image>
     
     <item>
+      <title>Revisiting normality tests in Python</title>
+      <link>/post/normality-test-python/</link>
+      <pubDate>Fri, 12 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>/post/normality-test-python/</guid>
+      <description>
+&lt;script src=&#34;/post/normality-test-python/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;variable-distribution-and-normality&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;1. Variable Distribution and Normality&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;The “distribution function” of a random variable is a function that specifies the probability that the variable’s observed value will lie in any given region of possible values. The “normal distribution” is the most commonly used distribution in statistics. A variable that is normally distributed has a histogram (or “density function”) that is bell-shaped, with only one peak, unimodal, asymptotic and is symmetric around the mean. The terms kurtosis (“peakedness” or “heaviness of tails”) and skewness (asymmetry around the mean) are often used to describe departures from normality. In a normal distribution, the mean, median, and mode are equal.&lt;/p&gt;
+&lt;p&gt;The normal family of distributions all have the same general shape and are parameterized by mean and standard deviation.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;parametric-statistics&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;2. Parametric statistics&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Parametric statistics assume that the sample data follows a probability distribution that is based on a set of parameters. The most common assumption is that data is distributed normally. Most of the common statistical methods are parametric. Although parametric statistics are considered more powerful than nonparametric statistics, they are not always applicable for the analysis of the significance of differences. The reason is that the assumptions on which they are based are not always met.&lt;/p&gt;
+&lt;p&gt;– Parametric statistics are more powerful for the same sample size than nonparametric statistics.
+– Parametric statistics use continuous variables, whereas nonparametric statistics often use discrete variables.
+– If you use parametric statistics when the data strongly diverts from the assumptions on which the parametric statistics are based, the result might lead to incorrect conclusions.
+– Nonparametric statistics usually can be done fast and in an easy way. They are designed for smaller numbers of data, and also easier to understand and to explain.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;normality-checks-in-python&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;3. Normality checks in Python&lt;/strong&gt;&lt;/h2&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import pandas as pd
+url = (&amp;#39;https://raw.githubusercontent.com/plotly/datasets/master/monthly-milk-production-pounds.csv&amp;#39;)
+data = pd.read_csv(url, sep=&amp;#39;,&amp;#39;)
+data.columns = [&amp;#39;month&amp;#39;, &amp;#39;monthly_milk_production&amp;#39;]&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;jarque-bera-test&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Jarque-Bera test&lt;/h3&gt;
+&lt;p&gt;The Jarque-Bera test tests whether the sample data has the skewness and kurtosis matching a normal distribution.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;from scipy.stats import jarque_bera
+
+result = (jarque_bera(data[&amp;#39;monthly_milk_production&amp;#39;]))
+
+print(f&amp;quot;JB statistic: {result[0]}&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## JB statistic: 4.278200965074682&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;print(f&amp;quot;p-value: {result[1]}&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## p-value: 0.11776072322104847&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If the p-value ≤ 0.05, then we reject the null hypothesis i.e. we assume the distribution of our variable is not normal/gaussian.
+If the p-value &amp;gt; 0.05, then we fail to reject the null hypothesis i.e. we assume the distribution of our variable is normal/gaussian.&lt;/p&gt;
+&lt;p&gt;Looking at these results, we fail to reject the null hypothesis and conclude that the sample data follows normal distribution.&lt;/p&gt;
+&lt;p&gt;However, Jarque-Bera test works properly in large samples (usually larger than 2000 observations) at its statistic has a Chi-squared distribution with 2 degrees of freedom). As long as our dataset is not that big, we need now other way to test it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;shapiro-wilk-test&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Shapiro-Wilk Test&lt;/h3&gt;
+&lt;p&gt;The Shapiro-Wilk test, proposed in 1965, calculates a W statistic that tests whether a random sample, x1,x2,…,xn comes from (specifically) a normal distribution . Small values of W are evidence of departure from normality and percentage points for the W statistic, obtained via Monte Carlo simulations, were reproduced by Pearson and Hartley (1972, Table 16). This test has done very well in comparison studies with other goodness of fit tests.&lt;/p&gt;
+&lt;p&gt;The W statistic is calculated as follows:&lt;/p&gt;
+&lt;p&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34; display=&#34;block&#34;&gt;
+&lt;mi&gt;W&lt;/mi&gt;
+&lt;mo&gt;=&lt;/mo&gt;
+&lt;mfrac&gt;
+&lt;msup&gt;
+&lt;mrow&gt;
+&lt;mo&gt;(&lt;/mo&gt;
+&lt;mrow&gt;
+&lt;munderover&gt;
+&lt;mo&gt;∑&lt;!-- ∑ --&gt;&lt;/mo&gt;
+&lt;mrow class=&#34;MJX-TeXAtom-ORD&#34;&gt;
+&lt;mi&gt;i&lt;/mi&gt;
+&lt;mo&gt;=&lt;/mo&gt;
+&lt;mn&gt;1&lt;/mn&gt;
+&lt;/mrow&gt;
+&lt;mi&gt;n&lt;/mi&gt;
+&lt;/munderover&gt;
+&lt;msub&gt;
+&lt;mi&gt;a&lt;/mi&gt;
+&lt;mi&gt;i&lt;/mi&gt;
+&lt;/msub&gt;
+&lt;msub&gt;
+&lt;mi&gt;x&lt;/mi&gt;
+&lt;mrow class=&#34;MJX-TeXAtom-ORD&#34;&gt;
+&lt;mo stretchy=&#34;false&#34;&gt;(&lt;/mo&gt;
+&lt;mi&gt;i&lt;/mi&gt;
+&lt;mo stretchy=&#34;false&#34;&gt;)&lt;/mo&gt;
+&lt;/mrow&gt;
+&lt;/msub&gt;
+&lt;/mrow&gt;
+&lt;mo&gt;)&lt;/mo&gt;
+&lt;/mrow&gt;
+&lt;mn&gt;2&lt;/mn&gt;
+&lt;/msup&gt;
+&lt;mrow&gt;
+&lt;munderover&gt;
+&lt;mo&gt;∑&lt;!-- ∑ --&gt;&lt;/mo&gt;
+&lt;mrow class=&#34;MJX-TeXAtom-ORD&#34;&gt;
+&lt;mi&gt;i&lt;/mi&gt;
+&lt;mo&gt;=&lt;/mo&gt;
+&lt;mn&gt;1&lt;/mn&gt;
+&lt;/mrow&gt;
+&lt;mi&gt;n&lt;/mi&gt;
+&lt;/munderover&gt;
+&lt;mo stretchy=&#34;false&#34;&gt;(&lt;/mo&gt;
+&lt;msub&gt;
+&lt;mi&gt;x&lt;/mi&gt;
+&lt;mi&gt;i&lt;/mi&gt;
+&lt;/msub&gt;
+&lt;mo&gt;−&lt;!-- − --&gt;&lt;/mo&gt;
+&lt;mrow class=&#34;MJX-TeXAtom-ORD&#34;&gt;
+&lt;mover&gt;
+&lt;mi&gt;x&lt;/mi&gt;
+&lt;mo stretchy=&#34;false&#34;&gt;¯&lt;!-- ¯ --&gt;&lt;/mo&gt;
+&lt;/mover&gt;
+&lt;/mrow&gt;
+&lt;msup&gt;
+&lt;mo stretchy=&#34;false&#34;&gt;)&lt;/mo&gt;
+&lt;mn&gt;2&lt;/mn&gt;
+&lt;/msup&gt;
+&lt;/mrow&gt;
+&lt;/mfrac&gt;
+&lt;mspace width=&#34;thinmathspace&#34; /&gt;
+&lt;mo&gt;,&lt;/mo&gt;
+&lt;/math&gt;&lt;/p&gt;
+&lt;p&gt;where the x(i) are the ordered sample values (x(1) is the smallest) and the ai are constants generated from the means, variances and covariances of the order statistics of a sample of size n from a normal distribution &lt;a href=&#34;https://www.itl.nist.gov/div898/handbook/prc/section2/prc213.htm&#34;&gt;link&lt;/a&gt;&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;from scipy.stats import shapiro
+
+stat, p = (shapiro(data[&amp;#39;monthly_milk_production&amp;#39;]))
+
+if p&amp;gt; 0.05:
+  print(&amp;#39;It is probabily a Gaussian distribution&amp;#39;)
+else:
+  print(&amp;#39;It is probably NOT a Gaussian&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## It is probably NOT a Gaussian&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;print(p)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 0.0353936105966568&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If the p-value ≤ 0.05, then we reject the null hypothesis i.e. we assume the distribution of our variable is not normal/gaussian.
+If the p-value &amp;gt; 0.05, then we fail to reject the null hypothesis i.e. we assume the distribution of our variable is normal/gaussian.&lt;/p&gt;
+&lt;p&gt;As we see, we have now contradictory results in boths tests. We shoudn’t stick to one test p-value, but evaluate the big picture, number of samples… Shapiro-Wilk test is not recommendable with an elevate number of (&amp;gt;70) or with outliers.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;dagostinos-k-squared-test&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;D’Agostino’s K-squared test&lt;/h3&gt;
+&lt;p&gt;As last attempt, we are trying D’Agostino K-squared test and the QQ plot.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;from scipy.stats import normaltest
+
+stat, p = (normaltest(data[&amp;#39;monthly_milk_production&amp;#39;]))
+
+if p&amp;gt; 0.05:
+  print(&amp;#39;It is probabily a Gaussian distribution&amp;#39;)
+else:
+  print(&amp;#39;It is probably NOT a Gaussian&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## It is probably NOT a Gaussian&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;print(p)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 0.005832826491323857&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;#https://machinelearningmastery.com/a-gentle-introduction-to-normality-tests-in-python/
+# QQ Plot
+from numpy.random import seed
+from numpy.random import randn
+from statsmodels.graphics.gofplots import qqplot
+from matplotlib import pyplot
+
+# q-q plot
+qqplot(data[&amp;#39;monthly_milk_production&amp;#39;], line=&amp;#39;s&amp;#39;).show()&lt;/code&gt;&lt;/pre&gt;
+&lt;style&gt;
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>A/B Testing</title>
       <link>/post/ab-testing/</link>
       <pubDate>Sun, 28 Jun 2020 00:00:00 +0000</pubDate>
       <guid>/post/ab-testing/</guid>
       <description>
+&lt;script src=&#34;/post/ab-testing/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;ok-what-on-earth-is-ab-testing&#34; class=&#34;section level2&#34;&gt;

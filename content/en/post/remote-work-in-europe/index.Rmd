@@ -58,7 +58,8 @@ df_european_data <- read_csv(file = 'data.csv',
                              col_types = cols(sex = col_character()))  # Sex columns type
 
 df_european_data_filtered <-df_european_data %>% 
-  filter(freq == "A" & unit == "PC" & wstatus == "EMP" & sex == "T"  & age == "Y20-64" & geo != "SE") %>% 
+  filter(freq == "A" & unit == "PC" & wstatus == "EMP" &
+        sex == "T"  & age == "Y20-64" & geo != "SE") %>% 
   select(geo, TIME_PERIOD, OBS_VALUE, frequenc) %>% 
   rename(remote_perc=OBS_VALUE,
          country=geo)

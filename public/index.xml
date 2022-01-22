@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>TypeThePipe</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 14 Jun 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jan 2022 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-32.png</url>
       <title>TypeThePipe</title>
@@ -13,9 +13,80 @@
     </image>
     
     <item>
+      <title>@staticmethod in Python</title>
+      <link>/vizs-and-tips/static-method-python-decorator/</link>
+      <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>/vizs-and-tips/static-method-python-decorator/</guid>
+      <description>
+&lt;script src=&#34;/vizs-and-tips/static-method-python-decorator/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;One of the basic ideas using static methods is that they don’t use any state from any object. They cannot access either class attributes or instance attributes. Then, they are easy to locate.&lt;/p&gt;
+&lt;p&gt;However, they are limited because they have no inherance. They can be called using the ClassName.MethodName() (from the Class) or object.MethodName() (from the instanced object).&lt;/p&gt;
+&lt;p&gt;Above we can find an awesome SO thread and explanation:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Maybe a bit of example code will help: Notice the difference in the call signatures of foo, class_foo and static_foo:
+
+class A(object):
+    def foo(self, x):
+        print(f&amp;quot;executing foo({self}, {x})&amp;quot;)
+
+    @classmethod
+    def class_foo(cls, x):
+        print(f&amp;quot;executing class_foo({cls}, {x})&amp;quot;)
+
+    @staticmethod
+    def static_foo(x):
+        print(f&amp;quot;executing static_foo({x})&amp;quot;)
+
+a = A()
+Below is the usual way an object instance calls a method. The object instance, a, is implicitly passed as the first argument.
+
+a.foo(1)
+# executing foo(&amp;lt;__main__.A object at 0xb7dbef0c&amp;gt;, 1)
+With classmethods, the class of the object instance is implicitly passed as the first argument instead of self.
+
+a.class_foo(1)
+# executing class_foo(&amp;lt;class &amp;#39;__main__.A&amp;#39;&amp;gt;, 1)
+You can also call class_foo using the class. In fact, if you define something to be a classmethod, it is probably because you intend to call it from the class rather than from a class instance. A.foo(1) would have raised a TypeError, but A.class_foo(1) works just fine:
+
+A.class_foo(1)
+# executing class_foo(&amp;lt;class &amp;#39;__main__.A&amp;#39;&amp;gt;, 1)
+One use people have found for class methods is to create inheritable alternative constructors.
+
+With staticmethods, neither self (the object instance) nor cls (the class) is implicitly passed as the first argument. They behave like plain functions except that you can call them from an instance or the class:
+
+a.static_foo(1)
+# executing static_foo(1)
+
+A.static_foo(&amp;#39;hi&amp;#39;)
+# executing static_foo(hi)
+Staticmethods are used to group functions which have some logical connection with a class to the class.
+
+foo is just a function, but when you call a.foo you do not just get the function, you get a &amp;quot;partially applied&amp;quot; version of the function with the object instance a bound as the first argument to the function. foo expects 2 arguments, while a.foo only expects 1 argument.
+
+a is bound to foo. That is what is meant by the term &amp;quot;bound&amp;quot; below:
+
+print(a.foo)
+# &amp;lt;bound method A.foo of &amp;lt;__main__.A object at 0xb7d52f0c&amp;gt;&amp;gt;
+With a.class_foo, a is not bound to class_foo, rather the class A is bound to class_foo.
+
+print(a.class_foo)
+# &amp;lt;bound method type.class_foo of &amp;lt;class &amp;#39;__main__.A&amp;#39;&amp;gt;&amp;gt;
+Here, with a staticmethod, even though it is a method, a.static_foo just returns a good ole function with no arguments bound. static_foo expects 1 argument, and a.static_foo expects 1 argument too.
+
+print(a.static_foo)
+# &amp;lt;function static_foo at 0xb7d479cc&amp;gt;
+And of course the same thing happens when you call static_foo with the class A instead.
+
+print(A.static_foo)
+# &amp;lt;function static_foo at 0xb7d479cc&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Analyzing Remote Work in European Countries</title>
       <link>/post/remote-work-in-europe/</link>
-      <pubDate>Mon, 14 Jun 2021 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 16 Jun 2021 00:00:00 +0000</pubDate>
       <guid>/post/remote-work-in-europe/</guid>
       <description>
 &lt;style type=&#34;text/css&#34;&gt;
@@ -94,21 +165,22 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-2&#34; title=&#34;2&#34;&gt;                             &lt;span class=&#34;dt&#34;&gt;col_types =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;cols&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;sex =&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;col_character&lt;/span&gt;()))  &lt;span class=&#34;co&#34;&gt;# Sex columns type&lt;/span&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-3&#34; title=&#34;3&#34;&gt;&lt;/a&gt;
 &lt;a class=&#34;sourceLine&#34; id=&#34;cb2-4&#34; title=&#34;4&#34;&gt;df_european_data_filtered &amp;lt;-df_european_data &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(freq &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;A&amp;quot;&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;unit &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;PC&amp;quot;&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;wstatus &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;EMP&amp;quot;&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;sex &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;T&amp;quot;&lt;/span&gt;  &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;age &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;Y20-64&amp;quot;&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;geo &lt;span class=&#34;op&#34;&gt;!=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;SE&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(geo, TIME_PERIOD, OBS_VALUE, frequenc) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;rename&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;remote_perc=&lt;/span&gt;OBS_VALUE,&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;         &lt;span class=&#34;dt&#34;&gt;country=&lt;/span&gt;geo)&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-9&#34; title=&#34;9&#34;&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-10&#34; title=&#34;10&#34;&gt;df_european_data_filtered &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-11&#34; title=&#34;11&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(frequenc &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;NVR&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-12&#34; title=&#34;12&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;remote_perc=&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;if_else&lt;/span&gt;(frequenc &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;NVR&amp;quot;&lt;/span&gt;,&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-13&#34; title=&#34;13&#34;&gt;                             &lt;span class=&#34;kw&#34;&gt;round&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;remote_perc&lt;span class=&#34;op&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;,&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-14&#34; title=&#34;14&#34;&gt;                             &lt;span class=&#34;kw&#34;&gt;round&lt;/span&gt;(remote_perc&lt;span class=&#34;op&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-15&#34; title=&#34;15&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;frequenc) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-16&#34; title=&#34;16&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;arrange&lt;/span&gt;(country, TIME_PERIOD) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-17&#34; title=&#34;17&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(TIME_PERIOD &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;2020&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-18&#34; title=&#34;18&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;slice_max&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;n=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;6&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;order_by=&lt;/span&gt;remote_perc) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-19&#34; title=&#34;19&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;kable&lt;/span&gt;()&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(freq &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;A&amp;quot;&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;unit &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;PC&amp;quot;&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;wstatus &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;EMP&amp;quot;&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;st&#34;&gt;        &lt;/span&gt;sex &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;T&amp;quot;&lt;/span&gt;  &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;age &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;Y20-64&amp;quot;&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;geo &lt;span class=&#34;op&#34;&gt;!=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;SE&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(geo, TIME_PERIOD, OBS_VALUE, frequenc) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;rename&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;remote_perc=&lt;/span&gt;OBS_VALUE,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-9&#34; title=&#34;9&#34;&gt;         &lt;span class=&#34;dt&#34;&gt;country=&lt;/span&gt;geo)&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-10&#34; title=&#34;10&#34;&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-11&#34; title=&#34;11&#34;&gt;df_european_data_filtered &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-12&#34; title=&#34;12&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(frequenc &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;NVR&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-13&#34; title=&#34;13&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;remote_perc=&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;if_else&lt;/span&gt;(frequenc &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;NVR&amp;quot;&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-14&#34; title=&#34;14&#34;&gt;                             &lt;span class=&#34;kw&#34;&gt;round&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;remote_perc&lt;span class=&#34;op&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;,&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-15&#34; title=&#34;15&#34;&gt;                             &lt;span class=&#34;kw&#34;&gt;round&lt;/span&gt;(remote_perc&lt;span class=&#34;op&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;)&lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;)) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-16&#34; title=&#34;16&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;select&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;frequenc) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-17&#34; title=&#34;17&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;arrange&lt;/span&gt;(country, TIME_PERIOD) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-18&#34; title=&#34;18&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(TIME_PERIOD &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &amp;quot;2020&amp;quot;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-19&#34; title=&#34;19&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;slice_max&lt;/span&gt;(&lt;span class=&#34;dt&#34;&gt;n=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;6&lt;/span&gt;, &lt;span class=&#34;dt&#34;&gt;order_by=&lt;/span&gt;remote_perc) &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
+&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-20&#34; title=&#34;20&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;kable&lt;/span&gt;()&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;table&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -441,7 +513,7 @@ DE
 &lt;p&gt;As a final thought, the data is pointing out to us that Northern Europe countries are doing more Remote Work. We are expecting that higher GDP countries are more prone to define a Work From Home model or hybrid ones, while the lower GDP ones have more difficulties or are not willing to enhance and embrace change.&lt;/p&gt;
 &lt;p&gt;The industrial sector composition, kind and size of national companies, politic ideology and government seem such a high impact reasons and probably act as a causality of the heterogenity across the European States.&lt;/p&gt;
 &lt;p&gt;In the next blog post, we are going to talk and go deeper analyzing the relation between the GDP and the WFH ratios, and discourse about it’s causes and effects.&lt;/p&gt;
-&lt;p&gt;You can find valuable Remote Work information and community at &lt;a href=&#34;https://www.ubiwork.co/blog?fromttp&#34;&gt;UbiWork. Work remotely from Spain &amp;amp; Portugal&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;You can find valuable Remote Work information and community at &lt;a href=&#34;https://www.ubiwork.co/?fromttp&#34;&gt;UbiWork. Work remotely from Spain &amp;amp; Portugal&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Share this post using…&lt;/p&gt;
 &lt;style&gt;
 p {
@@ -458,8 +530,6 @@ text-align: left  !important;
 text-indent: 0px !important;
 }
 &lt;/style&gt;
-&lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
-&lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&#34;mojo/signup-forms/Loader&#34;], function(L) { L.start({&#34;baseUrl&#34;:&#34;mc.us4.list-manage.com&#34;,&#34;uuid&#34;:&#34;91551f7ed29389a0de4f47665&#34;,&#34;lid&#34;:&#34;d95c503a48&#34;,&#34;uniqueMethods&#34;:true}) })&lt;/script&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 </description>
@@ -1115,11 +1185,187 @@ p {
     </item>
     
     <item>
+      <title>Revisiting normality tests in Python</title>
+      <link>/post/normality-test-python/</link>
+      <pubDate>Fri, 12 Feb 2021 00:00:00 +0000</pubDate>
+      <guid>/post/normality-test-python/</guid>
+      <description>
+&lt;script src=&#34;/post/normality-test-python/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;variable-distribution-and-normality&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;1. Variable Distribution and Normality&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;The “distribution function” of a random variable is a function that specifies the probability that the variable’s observed value will lie in any given region of possible values. The “normal distribution” is the most commonly used distribution in statistics. A variable that is normally distributed has a histogram (or “density function”) that is bell-shaped, with only one peak, unimodal, asymptotic and is symmetric around the mean. The terms kurtosis (“peakedness” or “heaviness of tails”) and skewness (asymmetry around the mean) are often used to describe departures from normality. In a normal distribution, the mean, median, and mode are equal.&lt;/p&gt;
+&lt;p&gt;The normal family of distributions all have the same general shape and are parameterized by mean and standard deviation.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;parametric-statistics&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;2. Parametric statistics&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Parametric statistics assume that the sample data follows a probability distribution that is based on a set of parameters. The most common assumption is that data is distributed normally. Most of the common statistical methods are parametric. Although parametric statistics are considered more powerful than nonparametric statistics, they are not always applicable for the analysis of the significance of differences. The reason is that the assumptions on which they are based are not always met.&lt;/p&gt;
+&lt;p&gt;– Parametric statistics are more powerful for the same sample size than nonparametric statistics.
+– Parametric statistics use continuous variables, whereas nonparametric statistics often use discrete variables.
+– If you use parametric statistics when the data strongly diverts from the assumptions on which the parametric statistics are based, the result might lead to incorrect conclusions.
+– Nonparametric statistics usually can be done fast and in an easy way. They are designed for smaller numbers of data, and also easier to understand and to explain.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;normality-checks-in-python&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;3. Normality checks in Python&lt;/strong&gt;&lt;/h2&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;import pandas as pd
+url = (&amp;#39;https://raw.githubusercontent.com/plotly/datasets/master/monthly-milk-production-pounds.csv&amp;#39;)
+data = pd.read_csv(url, sep=&amp;#39;,&amp;#39;)
+data.columns = [&amp;#39;month&amp;#39;, &amp;#39;monthly_milk_production&amp;#39;]&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;jarque-bera-test&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Jarque-Bera test&lt;/h3&gt;
+&lt;p&gt;The Jarque-Bera test tests whether the sample data has the skewness and kurtosis matching a normal distribution.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;from scipy.stats import jarque_bera
+
+result = (jarque_bera(data[&amp;#39;monthly_milk_production&amp;#39;]))
+
+print(f&amp;quot;JB statistic: {result[0]}&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## JB statistic: 4.278200965074682&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;print(f&amp;quot;p-value: {result[1]}&amp;quot;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## p-value: 0.11776072322104847&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If the p-value ≤ 0.05, then we reject the null hypothesis i.e. we assume the distribution of our variable is not normal/gaussian.
+If the p-value &amp;gt; 0.05, then we fail to reject the null hypothesis i.e. we assume the distribution of our variable is normal/gaussian.&lt;/p&gt;
+&lt;p&gt;Looking at these results, we fail to reject the null hypothesis and conclude that the sample data follows normal distribution.&lt;/p&gt;
+&lt;p&gt;However, Jarque-Bera test works properly in large samples (usually larger than 2000 observations) at its statistic has a Chi-squared distribution with 2 degrees of freedom). As long as our dataset is not that big, we need now other way to test it.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;shapiro-wilk-test&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Shapiro-Wilk Test&lt;/h3&gt;
+&lt;p&gt;The Shapiro-Wilk test, proposed in 1965, calculates a W statistic that tests whether a random sample, x1,x2,…,xn comes from (specifically) a normal distribution . Small values of W are evidence of departure from normality and percentage points for the W statistic, obtained via Monte Carlo simulations, were reproduced by Pearson and Hartley (1972, Table 16). This test has done very well in comparison studies with other goodness of fit tests.&lt;/p&gt;
+&lt;p&gt;The W statistic is calculated as follows:&lt;/p&gt;
+&lt;p&gt;&lt;math xmlns=&#34;http://www.w3.org/1998/Math/MathML&#34; display=&#34;block&#34;&gt;
+&lt;mi&gt;W&lt;/mi&gt;
+&lt;mo&gt;=&lt;/mo&gt;
+&lt;mfrac&gt;
+&lt;msup&gt;
+&lt;mrow&gt;
+&lt;mo&gt;(&lt;/mo&gt;
+&lt;mrow&gt;
+&lt;munderover&gt;
+&lt;mo&gt;∑&lt;!-- ∑ --&gt;&lt;/mo&gt;
+&lt;mrow class=&#34;MJX-TeXAtom-ORD&#34;&gt;
+&lt;mi&gt;i&lt;/mi&gt;
+&lt;mo&gt;=&lt;/mo&gt;
+&lt;mn&gt;1&lt;/mn&gt;
+&lt;/mrow&gt;
+&lt;mi&gt;n&lt;/mi&gt;
+&lt;/munderover&gt;
+&lt;msub&gt;
+&lt;mi&gt;a&lt;/mi&gt;
+&lt;mi&gt;i&lt;/mi&gt;
+&lt;/msub&gt;
+&lt;msub&gt;
+&lt;mi&gt;x&lt;/mi&gt;
+&lt;mrow class=&#34;MJX-TeXAtom-ORD&#34;&gt;
+&lt;mo stretchy=&#34;false&#34;&gt;(&lt;/mo&gt;
+&lt;mi&gt;i&lt;/mi&gt;
+&lt;mo stretchy=&#34;false&#34;&gt;)&lt;/mo&gt;
+&lt;/mrow&gt;
+&lt;/msub&gt;
+&lt;/mrow&gt;
+&lt;mo&gt;)&lt;/mo&gt;
+&lt;/mrow&gt;
+&lt;mn&gt;2&lt;/mn&gt;
+&lt;/msup&gt;
+&lt;mrow&gt;
+&lt;munderover&gt;
+&lt;mo&gt;∑&lt;!-- ∑ --&gt;&lt;/mo&gt;
+&lt;mrow class=&#34;MJX-TeXAtom-ORD&#34;&gt;
+&lt;mi&gt;i&lt;/mi&gt;
+&lt;mo&gt;=&lt;/mo&gt;
+&lt;mn&gt;1&lt;/mn&gt;
+&lt;/mrow&gt;
+&lt;mi&gt;n&lt;/mi&gt;
+&lt;/munderover&gt;
+&lt;mo stretchy=&#34;false&#34;&gt;(&lt;/mo&gt;
+&lt;msub&gt;
+&lt;mi&gt;x&lt;/mi&gt;
+&lt;mi&gt;i&lt;/mi&gt;
+&lt;/msub&gt;
+&lt;mo&gt;−&lt;!-- − --&gt;&lt;/mo&gt;
+&lt;mrow class=&#34;MJX-TeXAtom-ORD&#34;&gt;
+&lt;mover&gt;
+&lt;mi&gt;x&lt;/mi&gt;
+&lt;mo stretchy=&#34;false&#34;&gt;¯&lt;!-- ¯ --&gt;&lt;/mo&gt;
+&lt;/mover&gt;
+&lt;/mrow&gt;
+&lt;msup&gt;
+&lt;mo stretchy=&#34;false&#34;&gt;)&lt;/mo&gt;
+&lt;mn&gt;2&lt;/mn&gt;
+&lt;/msup&gt;
+&lt;/mrow&gt;
+&lt;/mfrac&gt;
+&lt;mspace width=&#34;thinmathspace&#34; /&gt;
+&lt;mo&gt;,&lt;/mo&gt;
+&lt;/math&gt;&lt;/p&gt;
+&lt;p&gt;where the x(i) are the ordered sample values (x(1) is the smallest) and the ai are constants generated from the means, variances and covariances of the order statistics of a sample of size n from a normal distribution &lt;a href=&#34;https://www.itl.nist.gov/div898/handbook/prc/section2/prc213.htm&#34;&gt;link&lt;/a&gt;&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;from scipy.stats import shapiro
+
+stat, p = (shapiro(data[&amp;#39;monthly_milk_production&amp;#39;]))
+
+if p&amp;gt; 0.05:
+  print(&amp;#39;It is probabily a Gaussian distribution&amp;#39;)
+else:
+  print(&amp;#39;It is probably NOT a Gaussian&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## It is probably NOT a Gaussian&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;print(p)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 0.0353936105966568&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If the p-value ≤ 0.05, then we reject the null hypothesis i.e. we assume the distribution of our variable is not normal/gaussian.
+If the p-value &amp;gt; 0.05, then we fail to reject the null hypothesis i.e. we assume the distribution of our variable is normal/gaussian.&lt;/p&gt;
+&lt;p&gt;As we see, we have now contradictory results in boths tests. We shoudn’t stick to one test p-value, but evaluate the big picture, number of samples… Shapiro-Wilk test is not recommendable with an elevate number of (&amp;gt;70) or with outliers.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;dagostinos-k-squared-test&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;D’Agostino’s K-squared test&lt;/h3&gt;
+&lt;p&gt;As last attempt, we are trying D’Agostino K-squared test and the QQ plot.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;from scipy.stats import normaltest
+
+stat, p = (normaltest(data[&amp;#39;monthly_milk_production&amp;#39;]))
+
+if p&amp;gt; 0.05:
+  print(&amp;#39;It is probabily a Gaussian distribution&amp;#39;)
+else:
+  print(&amp;#39;It is probably NOT a Gaussian&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## It is probably NOT a Gaussian&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;print(p)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 0.005832826491323857&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;#https://machinelearningmastery.com/a-gentle-introduction-to-normality-tests-in-python/
+# QQ Plot
+from numpy.random import seed
+from numpy.random import randn
+from statsmodels.graphics.gofplots import qqplot
+from matplotlib import pyplot
+
+# q-q plot
+qqplot(data[&amp;#39;monthly_milk_production&amp;#39;], line=&amp;#39;s&amp;#39;).show()&lt;/code&gt;&lt;/pre&gt;
+&lt;style&gt;
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
       <title>A/B Testing</title>
       <link>/post/ab-testing/</link>
       <pubDate>Sun, 28 Jun 2020 00:00:00 +0000</pubDate>
       <guid>/post/ab-testing/</guid>
       <description>
+&lt;script src=&#34;/post/ab-testing/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;div id=&#34;ok-what-on-earth-is-ab-testing&#34; class=&#34;section level2&#34;&gt;

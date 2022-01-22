@@ -5,12 +5,83 @@
     <link>/vizs-and-tips/</link>
       <atom:link href="/vizs-and-tips/index.xml" rel="self" type="application/rss+xml" />
     <description>Vizs &amp; Tips</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 13 May 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jan 2022 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-32.png</url>
       <title>Vizs &amp; Tips</title>
       <link>/vizs-and-tips/</link>
     </image>
+    
+    <item>
+      <title>@staticmethod in Python</title>
+      <link>/vizs-and-tips/static-method-python-decorator/</link>
+      <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>/vizs-and-tips/static-method-python-decorator/</guid>
+      <description>
+&lt;script src=&#34;/vizs-and-tips/static-method-python-decorator/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;One of the basic ideas using static methods is that they don’t use any state from any object. They cannot access either class attributes or instance attributes. Then, they are easy to locate.&lt;/p&gt;
+&lt;p&gt;However, they are limited because they have no inherance. They can be called using the ClassName.MethodName() (from the Class) or object.MethodName() (from the instanced object).&lt;/p&gt;
+&lt;p&gt;Above we can find an awesome SO thread and explanation:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Maybe a bit of example code will help: Notice the difference in the call signatures of foo, class_foo and static_foo:
+
+class A(object):
+    def foo(self, x):
+        print(f&amp;quot;executing foo({self}, {x})&amp;quot;)
+
+    @classmethod
+    def class_foo(cls, x):
+        print(f&amp;quot;executing class_foo({cls}, {x})&amp;quot;)
+
+    @staticmethod
+    def static_foo(x):
+        print(f&amp;quot;executing static_foo({x})&amp;quot;)
+
+a = A()
+Below is the usual way an object instance calls a method. The object instance, a, is implicitly passed as the first argument.
+
+a.foo(1)
+# executing foo(&amp;lt;__main__.A object at 0xb7dbef0c&amp;gt;, 1)
+With classmethods, the class of the object instance is implicitly passed as the first argument instead of self.
+
+a.class_foo(1)
+# executing class_foo(&amp;lt;class &amp;#39;__main__.A&amp;#39;&amp;gt;, 1)
+You can also call class_foo using the class. In fact, if you define something to be a classmethod, it is probably because you intend to call it from the class rather than from a class instance. A.foo(1) would have raised a TypeError, but A.class_foo(1) works just fine:
+
+A.class_foo(1)
+# executing class_foo(&amp;lt;class &amp;#39;__main__.A&amp;#39;&amp;gt;, 1)
+One use people have found for class methods is to create inheritable alternative constructors.
+
+With staticmethods, neither self (the object instance) nor cls (the class) is implicitly passed as the first argument. They behave like plain functions except that you can call them from an instance or the class:
+
+a.static_foo(1)
+# executing static_foo(1)
+
+A.static_foo(&amp;#39;hi&amp;#39;)
+# executing static_foo(hi)
+Staticmethods are used to group functions which have some logical connection with a class to the class.
+
+foo is just a function, but when you call a.foo you do not just get the function, you get a &amp;quot;partially applied&amp;quot; version of the function with the object instance a bound as the first argument to the function. foo expects 2 arguments, while a.foo only expects 1 argument.
+
+a is bound to foo. That is what is meant by the term &amp;quot;bound&amp;quot; below:
+
+print(a.foo)
+# &amp;lt;bound method A.foo of &amp;lt;__main__.A object at 0xb7d52f0c&amp;gt;&amp;gt;
+With a.class_foo, a is not bound to class_foo, rather the class A is bound to class_foo.
+
+print(a.class_foo)
+# &amp;lt;bound method type.class_foo of &amp;lt;class &amp;#39;__main__.A&amp;#39;&amp;gt;&amp;gt;
+Here, with a staticmethod, even though it is a method, a.static_foo just returns a good ole function with no arguments bound. static_foo expects 1 argument, and a.static_foo expects 1 argument too.
+
+print(a.static_foo)
+# &amp;lt;function static_foo at 0xb7d479cc&amp;gt;
+And of course the same thing happens when you call static_foo with the class A instead.
+
+print(A.static_foo)
+# &amp;lt;function static_foo at 0xb7d479cc&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
     
     <item>
       <title>Calculating ratios with Tidyverse</title>

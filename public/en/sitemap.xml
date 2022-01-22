@@ -3,23 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/post/remote-work-in-europe/</loc>
-    <lastmod>2021-06-14T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/post/data-visualization-remote-workers-across-europe/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/post/remote-work-in-europe/"
-                />
+    <loc>/vizs-and-tips/static-method-python-decorator/</loc>
+    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/authors/</loc>
-    <lastmod>2021-06-14T00:00:00+00:00</lastmod>
+    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -34,7 +24,7 @@
   
   <url>
     <loc>/authors/carlos-vecina/</loc>
-    <lastmod>2021-06-14T00:00:00+00:00</lastmod>
+    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -49,7 +39,7 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2021-06-14T00:00:00+00:00</lastmod>
+    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -63,8 +53,83 @@
   </url>
   
   <url>
+    <loc>/categories/python/</loc>
+    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/python/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/python/"
+                />
+  </url>
+  
+  <url>
+    <loc>/categories/tips/</loc>
+    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/tips/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/tips/"
+                />
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/"
+                />
+  </url>
+  
+  <url>
+    <loc>/vizs-and-tips/</loc>
+    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/"
+                />
+  </url>
+  
+  <url>
+    <loc>/post/remote-work-in-europe/</loc>
+    <lastmod>2021-06-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/post/data-visualization-remote-workers-across-europe/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/remote-work-in-europe/"
+                />
+  </url>
+  
+  <url>
     <loc>/categories/post/</loc>
-    <lastmod>2021-06-14T00:00:00+00:00</lastmod>
+    <lastmod>2021-06-16T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -79,7 +144,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2021-06-14T00:00:00+00:00</lastmod>
+    <lastmod>2021-06-16T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -94,7 +159,7 @@
   
   <url>
     <loc>/categories/r/</loc>
-    <lastmod>2021-06-14T00:00:00+00:00</lastmod>
+    <lastmod>2021-06-16T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -108,21 +173,6 @@
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2021-06-14T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/"
-                />
-  </url>
-  
-  <url>
     <loc>/authors/marcelo-orenes/</loc>
     <lastmod>2021-06-09T00:00:00+00:00</lastmod>
   </url>
@@ -130,6 +180,26 @@
   <url>
     <loc>/post/predicting-social-outcomes/</loc>
     <lastmod>2021-06-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/normality-test-python/</loc>
+    <lastmod>2021-02-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/statistics/</loc>
+    <lastmod>2021-02-12T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/statistics/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/statistics/"
+                />
   </url>
   
   <url>
@@ -163,8 +233,18 @@
   </url>
   
   <url>
+    <loc>/post/analyzing-data-covid19-r-package/</loc>
+    <lastmod>2020-05-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/covid/</loc>
+    <lastmod>2020-05-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/authors/pablo-canovas/</loc>
-    <lastmod>2020-06-28T00:00:00+00:00</lastmod>
+    <lastmod>2020-05-27T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -175,31 +255,6 @@
                 hreflang="en"
                 href="/authors/pablo-canovas/"
                 />
-  </url>
-  
-  <url>
-    <loc>/categories/statistics/</loc>
-    <lastmod>2020-06-28T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/statistics/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/statistics/"
-                />
-  </url>
-  
-  <url>
-    <loc>/post/analyzing-data-covid19-r-package/</loc>
-    <lastmod>2020-05-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/covid/</loc>
-    <lastmod>2020-05-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -225,36 +280,6 @@
   <url>
     <loc>/vizs-and-tips/calculating-ratios-with-tidyverse/</loc>
     <lastmod>2020-05-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/tips/</loc>
-    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/tips/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/tips/"
-                />
-  </url>
-  
-  <url>
-    <loc>/vizs-and-tips/</loc>
-    <lastmod>2020-05-13T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/vizs-and-tips/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/vizs-and-tips/"
-                />
   </url>
   
   <url>
@@ -359,21 +384,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/vizs-and-tips/magic-whos-method-jupyter-notebook/"
-                />
-  </url>
-  
-  <url>
-    <loc>/categories/python/</loc>
-    <lastmod>2020-01-14T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/python/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/python/"
                 />
   </url>
   

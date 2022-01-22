@@ -1,0 +1,181 @@
+---
+title: Revisiting normality tests in Python
+author: Marcelo Orenes Vera
+date: '2021-02-12'
+slug: normality-test-python
+categories:
+  - Post
+  - Statistics
+tags: []
+subtitle: "How could we easily check the normality of a given variable? "
+summary: "How could we easily check the normality of a given variable? ."
+math: TRUE
+authors: [carlos-vecina]
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+
+
+<p><br></p>
+<div id="variable-distribution-and-normality" class="section level2">
+<h2><strong>1. Variable Distribution and Normality</strong></h2>
+<p>The “distribution function” of a random variable is a function that specifies the probability that the variable’s observed value will lie in any given region of possible values. The “normal distribution” is the most commonly used distribution in statistics. A variable that is normally distributed has a histogram (or “density function”) that is bell-shaped, with only one peak, unimodal, asymptotic and is symmetric around the mean. The terms kurtosis (“peakedness” or “heaviness of tails”) and skewness (asymmetry around the mean) are often used to describe departures from normality. In a normal distribution, the mean, median, and mode are equal.</p>
+<p>The normal family of distributions all have the same general shape and are parameterized by mean and standard deviation.</p>
+<p><br></p>
+</div>
+<div id="parametric-statistics" class="section level2">
+<h2><strong>2. Parametric statistics</strong></h2>
+<p>Parametric statistics assume that the sample data follows a probability distribution that is based on a set of parameters. The most common assumption is that data is distributed normally. Most of the common statistical methods are parametric. Although parametric statistics are considered more powerful than nonparametric statistics, they are not always applicable for the analysis of the significance of differences. The reason is that the assumptions on which they are based are not always met.</p>
+<p>– Parametric statistics are more powerful for the same sample size than nonparametric statistics.
+– Parametric statistics use continuous variables, whereas nonparametric statistics often use discrete variables.
+– If you use parametric statistics when the data strongly diverts from the assumptions on which the parametric statistics are based, the result might lead to incorrect conclusions.
+– Nonparametric statistics usually can be done fast and in an easy way. They are designed for smaller numbers of data, and also easier to understand and to explain.</p>
+<p><br></p>
+</div>
+<div id="normality-checks-in-python" class="section level2">
+<h2><strong>3. Normality checks in Python</strong></h2>
+<pre class="python"><code>import pandas as pd
+url = (&#39;https://raw.githubusercontent.com/plotly/datasets/master/monthly-milk-production-pounds.csv&#39;)
+data = pd.read_csv(url, sep=&#39;,&#39;)
+data.columns = [&#39;month&#39;, &#39;monthly_milk_production&#39;]</code></pre>
+<div id="jarque-bera-test" class="section level3">
+<h3>Jarque-Bera test</h3>
+<p>The Jarque-Bera test tests whether the sample data has the skewness and kurtosis matching a normal distribution.</p>
+<pre class="python"><code>from scipy.stats import jarque_bera
+
+result = (jarque_bera(data[&#39;monthly_milk_production&#39;]))
+
+print(f&quot;JB statistic: {result[0]}&quot;)</code></pre>
+<pre><code>## JB statistic: 4.278200965074682</code></pre>
+<pre class="python"><code>print(f&quot;p-value: {result[1]}&quot;)</code></pre>
+<pre><code>## p-value: 0.11776072322104847</code></pre>
+<p>If the p-value ≤ 0.05, then we reject the null hypothesis i.e. we assume the distribution of our variable is not normal/gaussian.
+If the p-value &gt; 0.05, then we fail to reject the null hypothesis i.e. we assume the distribution of our variable is normal/gaussian.</p>
+<p>Looking at these results, we fail to reject the null hypothesis and conclude that the sample data follows normal distribution.</p>
+<p>However, Jarque-Bera test works properly in large samples (usually larger than 2000 observations) at its statistic has a Chi-squared distribution with 2 degrees of freedom). As long as our dataset is not that big, we need now other way to test it.</p>
+</div>
+<div id="shapiro-wilk-test" class="section level3">
+<h3>Shapiro-Wilk Test</h3>
+<p>The Shapiro-Wilk test, proposed in 1965, calculates a W statistic that tests whether a random sample, x1,x2,…,xn comes from (specifically) a normal distribution . Small values of W are evidence of departure from normality and percentage points for the W statistic, obtained via Monte Carlo simulations, were reproduced by Pearson and Hartley (1972, Table 16). This test has done very well in comparison studies with other goodness of fit tests.</p>
+<p>The W statistic is calculated as follows:</p>
+<p><math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+<mi>W</mi>
+<mo>=</mo>
+<mfrac>
+<msup>
+<mrow>
+<mo>(</mo>
+<mrow>
+<munderover>
+<mo>∑<!-- ∑ --></mo>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>n</mi>
+</munderover>
+<msub>
+<mi>a</mi>
+<mi>i</mi>
+</msub>
+<msub>
+<mi>x</mi>
+<mrow class="MJX-TeXAtom-ORD">
+<mo stretchy="false">(</mo>
+<mi>i</mi>
+<mo stretchy="false">)</mo>
+</mrow>
+</msub>
+</mrow>
+<mo>)</mo>
+</mrow>
+<mn>2</mn>
+</msup>
+<mrow>
+<munderover>
+<mo>∑<!-- ∑ --></mo>
+<mrow class="MJX-TeXAtom-ORD">
+<mi>i</mi>
+<mo>=</mo>
+<mn>1</mn>
+</mrow>
+<mi>n</mi>
+</munderover>
+<mo stretchy="false">(</mo>
+<msub>
+<mi>x</mi>
+<mi>i</mi>
+</msub>
+<mo>−<!-- − --></mo>
+<mrow class="MJX-TeXAtom-ORD">
+<mover>
+<mi>x</mi>
+<mo stretchy="false">¯<!-- ¯ --></mo>
+</mover>
+</mrow>
+<msup>
+<mo stretchy="false">)</mo>
+<mn>2</mn>
+</msup>
+</mrow>
+</mfrac>
+<mspace width="thinmathspace" />
+<mo>,</mo>
+</math></p>
+<p>where the x(i) are the ordered sample values (x(1) is the smallest) and the ai are constants generated from the means, variances and covariances of the order statistics of a sample of size n from a normal distribution <a href="https://www.itl.nist.gov/div898/handbook/prc/section2/prc213.htm">link</a></p>
+<pre class="python"><code>from scipy.stats import shapiro
+
+stat, p = (shapiro(data[&#39;monthly_milk_production&#39;]))
+
+if p&gt; 0.05:
+  print(&#39;It is probabily a Gaussian distribution&#39;)
+else:
+  print(&#39;It is probably NOT a Gaussian&#39;)</code></pre>
+<pre><code>## It is probably NOT a Gaussian</code></pre>
+<pre class="python"><code>print(p)</code></pre>
+<pre><code>## 0.0353936105966568</code></pre>
+<p>If the p-value ≤ 0.05, then we reject the null hypothesis i.e. we assume the distribution of our variable is not normal/gaussian.
+If the p-value &gt; 0.05, then we fail to reject the null hypothesis i.e. we assume the distribution of our variable is normal/gaussian.</p>
+<p>As we see, we have now contradictory results in boths tests. We shoudn’t stick to one test p-value, but evaluate the big picture, number of samples… Shapiro-Wilk test is not recommendable with an elevate number of (&gt;70) or with outliers.</p>
+</div>
+<div id="dagostinos-k-squared-test" class="section level3">
+<h3>D’Agostino’s K-squared test</h3>
+<p>As last attempt, we are trying D’Agostino K-squared test and the QQ plot.</p>
+<pre class="python"><code>from scipy.stats import normaltest
+
+stat, p = (normaltest(data[&#39;monthly_milk_production&#39;]))
+
+if p&gt; 0.05:
+  print(&#39;It is probabily a Gaussian distribution&#39;)
+else:
+  print(&#39;It is probably NOT a Gaussian&#39;)</code></pre>
+<pre><code>## It is probably NOT a Gaussian</code></pre>
+<pre class="python"><code>print(p)</code></pre>
+<pre><code>## 0.005832826491323857</code></pre>
+<pre class="python"><code>#https://machinelearningmastery.com/a-gentle-introduction-to-normality-tests-in-python/
+# QQ Plot
+from numpy.random import seed
+from numpy.random import randn
+from statsmodels.graphics.gofplots import qqplot
+from matplotlib import pyplot
+
+# q-q plot
+qqplot(data[&#39;monthly_milk_production&#39;], line=&#39;s&#39;).show()</code></pre>
+<style>
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+</style>
+</div>
+</div>
