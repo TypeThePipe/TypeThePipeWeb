@@ -1,9 +1,9 @@
 ---
-title: "@staticmethod in Python"
+title: "Customize your Label and Independent transformer inside a Scikit Learn Pipeline"
 author: "Carlos Vecina Tebar"
-date: "2022-01-01"
-slug: "static-method-python-decorator"
-translationKey: "static-method-python-decorator"
+date: "2021-01-05"
+slug: "custom-transformer-sklearn"
+translationKey: "custom-transformer-sklearn"
 output:
   blogdown::html_page:
     highlight: tango
@@ -11,78 +11,122 @@ categories:
 - Python
 - Tips
 tags: []
-subtitle: "How and when to use the staticmethod decorator in Python"
-summary: "Going over the basics"
+subtitle: "Label transformer in SKlearn"
+summary: "Label transformer in SKlearn"
 authors: [carlos-vecina]
 featured: true
 draft: false
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE) 
 ```
 
-One of the basic ideas using static methods is that they don't use any state from any object. They cannot access either class attributes or instance attributes. Then, they are easy to locate. 
+```{python}
+import numpy as np
+import pandas as pd
+import warnings
+warnings.filterwarnings('ignore')
+from sklearn.metrics import mean_squared_error
 
-However, they are limited because they have no inherance. They can be called using the ClassName.MethodName() (from the Class) or object.MethodName() (from the instanced object).
+from sklearn.preprocessing import StandardScaler, PowerTransformer
+from sklearn.compose import TransformedTargetRegressor
+from sklearn.pipeline import FeatureUnion, Pipeline, make_pipeline
+from sklearn.base import BaseEstimator, TransformerMixin
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+url = ('https://raw.githubusercontent.com/CarlosVecina/nft_market_arbitrage_regression/master/df_axie_full.csv')
+data = pd.read_csv(url, sep=',')
 
-Above we can find an awesome SO thread and explanation:
+## Check NAs
+null_count_ser = pd.isnull(data).sum()
+is_null_ser = null_count_ser > 0
+null_count_ser[is_null_ser]
+data.dropna(inplace=True)
+```
+
+
+```{python}
+## Train/Test
+TEST_PCT = 0.2
+X = data.loc[:,['axie_breed','hp','speed','skill','morale']]
+y = data.price_eth_parsed.tolist()
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=TEST_PCT)
 
 ```
-Maybe a bit of example code will help: Notice the difference in the call signatures of foo, class_foo and static_foo:
 
-class A(object):
-    def foo(self, x):
-        print(f"executing foo({self}, {x})")
+```{python}
+class LogTransformerX(BaseEstimator, TransformerMixin):
+  # add another additional parameter, just for fun, while we are at it
+  def __init__(self, feature_name, additional_param = ""):
+    print('\n>>>>>>>init() called.\n')
+    self.feature_name = feature_name
+    self.additional_param = additional_param
 
-    @classmethod
-    def class_foo(cls, x):
-        print(f"executing class_foo({cls}, {x})")
+  def fit(self, X, y = None):
+    print('\n>>>>>>>fit() called.\n')
+    print(f'\nadditional param ~~~~~ {self.additional_param}\n')
+    return self
 
-    @staticmethod
-    def static_foo(x):
-        print(f"executing static_foo({x})")
+  def transform(self, X, y = None):
+    print('\n>>>>>>>transform() called.\n')
+    X_ = X.copy() # creating a copy to avoid changes to original dataset
+    X_[self.feature_name] = 2 * np.sqrt(X_[self.feature_name])
+    return X_
 
-a = A()
-Below is the usual way an object instance calls a method. The object instance, a, is implicitly passed as the first argument.
-
-a.foo(1)
-# executing foo(<__main__.A object at 0xb7dbef0c>, 1)
-With classmethods, the class of the object instance is implicitly passed as the first argument instead of self.
-
-a.class_foo(1)
-# executing class_foo(<class '__main__.A'>, 1)
-You can also call class_foo using the class. In fact, if you define something to be a classmethod, it is probably because you intend to call it from the class rather than from a class instance. A.foo(1) would have raised a TypeError, but A.class_foo(1) works just fine:
-
-A.class_foo(1)
-# executing class_foo(<class '__main__.A'>, 1)
-One use people have found for class methods is to create inheritable alternative constructors.
-
-With staticmethods, neither self (the object instance) nor cls (the class) is implicitly passed as the first argument. They behave like plain functions except that you can call them from an instance or the class:
-
-a.static_foo(1)
-# executing static_foo(1)
-
-A.static_foo('hi')
-# executing static_foo(hi)
-Staticmethods are used to group functions which have some logical connection with a class to the class.
-
-foo is just a function, but when you call a.foo you do not just get the function, you get a "partially applied" version of the function with the object instance a bound as the first argument to the function. foo expects 2 arguments, while a.foo only expects 1 argument.
-
-a is bound to foo. That is what is meant by the term "bound" below:
-
-print(a.foo)
-# <bound method A.foo of <__main__.A object at 0xb7d52f0c>>
-With a.class_foo, a is not bound to class_foo, rather the class A is bound to class_foo.
-
-print(a.class_foo)
-# <bound method type.class_foo of <class '__main__.A'>>
-Here, with a staticmethod, even though it is a method, a.static_foo just returns a good ole function with no arguments bound. static_foo expects 1 argument, and a.static_foo expects 1 argument too.
-
-print(a.static_foo)
-# <function static_foo at 0xb7d479cc>
-And of course the same thing happens when you call static_foo with the class A instead.
-
-print(A.static_foo)
-# <function static_foo at 0xb7d479cc
 ```
+
+```{python}
+class LogTransformerY(BaseEstimator, TransformerMixin):
+    # no need to implement __init__ in this particular case
+
+    def fit(self, target):
+        return self
+
+    def transform(self, target):
+        print('\n%%%%%%%%%%%%%%%custom_target_transform() called.\n')
+        target_ = target.copy()
+        target_ = np.log(target_)
+        return target_
+
+    # need to implement this too
+    def inverse_transform(self, target):
+        print('\n%%%%%%%%%%%%%%%custom_inverse_target_transform() called.\n')
+        target_ = target.copy()
+        target_ = np.exp(target)
+        return target_
+
+```
+
+
+```{python}
+
+## Create de model
+print("create pipeline 3.1")
+# no change in input pipeline
+pipe = Pipeline(steps=[
+                       ('experimental_trans', LogTransformerX('skill')),
+                       ('linear_model', LinearRegression())
+])
+
+# create a TargetTransformer
+# By default, the provided functions are checked at each fit to be the inverse of each other. However, it is
+# possible to bypass this checking by setting check_inverse to False.
+model = TransformedTargetRegressor(regressor=pipe,
+                                   transformer=LogTransformerY(),
+                                   check_inverse=False) # avoid repeated calls
+
+## Train the model
+
+print("fit pipeline 3.1 [fit Model]")
+model.fit(X_train.iloc[1:6,], y_train[1:6])
+print("predict via pipeline 3.1 [Model]")
+preds3_1 = model.predict(X_test)
+print(f"\n{preds3_1}")  # should be [196. 289.]
+print(f"RMSE: {np.sqrt(mean_squared_error(y_test, preds3_1))}\n")
+
+```
+
+
+
+[link](https://towardsdatascience.com/pipelines-custom-transformers-in-scikit-learn-the-step-by-step-guide-with-python-code-4a7d9b068156)
