@@ -2,7 +2,7 @@
 title: Carlos Vecina
 authors:
 - carlos-vecina
-bio: Lead Data & Analytics en Aplazame  |  AI & Data Science para aportar valor en la empresa
+bio: Senior Data Scientist at Jobandtalent  |  AI & Data Science para aportar valor en la empresa
 education:
   courses:
   - course: Pre PhD Research in Artificial Intelligence. Computer Vision and pose estimation.
@@ -24,7 +24,7 @@ organizations:
 - name: 
   url: ""
 
-role: Lead Data & Analytics en Aplazame
+role: Senior Data Scientist at Jobandtalent
 social:
 - icon: envelope
   icon_pack: fas
@@ -40,7 +40,7 @@ social:
   link: https://github.com/CarlosVecina
 - icon: home
   icon_pack: fa
-  link: https://ubiwork.co
+  link: https://autarponics.com
 superuser: 
 
 # Organizational groups that you belong to (for People widget)

@@ -3,8 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/vizs-and-tips/static-method-python-decorator/</loc>
+    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/authors/</loc>
-    <lastmod>2022-01-05T00:00:00+00:00</lastmod>
+    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -19,7 +24,7 @@
   
   <url>
     <loc>/authors/carlos-vecina/</loc>
-    <lastmod>2022-01-05T00:00:00+00:00</lastmod>
+    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -34,7 +39,7 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2022-01-05T00:00:00+00:00</lastmod>
+    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -48,13 +53,8 @@
   </url>
   
   <url>
-    <loc>/vizs-and-tips/custom-transformer-sklearn/</loc>
-    <lastmod>2022-01-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/categories/python/</loc>
-    <lastmod>2022-01-05T00:00:00+00:00</lastmod>
+    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -69,7 +69,7 @@
   
   <url>
     <loc>/categories/tips/</loc>
-    <lastmod>2022-01-05T00:00:00+00:00</lastmod>
+    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -84,7 +84,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2022-01-05T00:00:00+00:00</lastmod>
+    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -99,7 +99,7 @@
   
   <url>
     <loc>/vizs-and-tips/</loc>
-    <lastmod>2022-01-05T00:00:00+00:00</lastmod>
+    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -110,11 +110,6 @@
                 hreflang="en"
                 href="/vizs-and-tips/"
                 />
-  </url>
-  
-  <url>
-    <loc>/vizs-and-tips/static-method-python-decorator/</loc>
-    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -208,6 +203,11 @@
   </url>
   
   <url>
+    <loc>/vizs-and-tips/custom-transformer-sklearn/</loc>
+    <lastmod>2021-01-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/ab-testing/</loc>
     <lastmod>2020-06-28T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -238,18 +238,8 @@
   </url>
   
   <url>
-    <loc>/post/analyzing-data-covid19-r-package/</loc>
-    <lastmod>2020-05-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/covid/</loc>
-    <lastmod>2020-05-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/authors/pablo-canovas/</loc>
-    <lastmod>2020-05-27T00:00:00+00:00</lastmod>
+    <lastmod>2020-06-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -260,6 +250,16 @@
                 hreflang="en"
                 href="/authors/pablo-canovas/"
                 />
+  </url>
+  
+  <url>
+    <loc>/post/analyzing-data-covid19-r-package/</loc>
+    <lastmod>2020-05-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/covid/</loc>
+    <lastmod>2020-05-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>

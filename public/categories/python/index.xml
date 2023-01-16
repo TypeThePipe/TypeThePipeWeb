@@ -5,7 +5,7 @@
     <link>/categories/python/</link>
       <atom:link href="/categories/python/index.xml" rel="self" type="application/rss+xml" />
     <description>Python</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 05 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jan 2022 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-32.png</url>
       <title>Python</title>
@@ -13,9 +13,80 @@
     </image>
     
     <item>
-      <title>Customize your label transformer inside a Scikit Learn Pipeline</title>
+      <title>@staticmethod in Python</title>
+      <link>/vizs-and-tips/static-method-python-decorator/</link>
+      <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
+      <guid>/vizs-and-tips/static-method-python-decorator/</guid>
+      <description>
+&lt;script src=&#34;/vizs-and-tips/static-method-python-decorator/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;One of the basic ideas using static methods is that they don’t use any state from any object. They cannot access either class attributes or instance attributes. Then, they are easy to locate.&lt;/p&gt;
+&lt;p&gt;However, they are limited because they have no inherance. They can be called using the ClassName.MethodName() (from the Class) or object.MethodName() (from the instanced object).&lt;/p&gt;
+&lt;p&gt;Above we can find an awesome SO thread and explanation:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;Maybe a bit of example code will help: Notice the difference in the call signatures of foo, class_foo and static_foo:
+
+class A(object):
+    def foo(self, x):
+        print(f&amp;quot;executing foo({self}, {x})&amp;quot;)
+
+    @classmethod
+    def class_foo(cls, x):
+        print(f&amp;quot;executing class_foo({cls}, {x})&amp;quot;)
+
+    @staticmethod
+    def static_foo(x):
+        print(f&amp;quot;executing static_foo({x})&amp;quot;)
+
+a = A()
+Below is the usual way an object instance calls a method. The object instance, a, is implicitly passed as the first argument.
+
+a.foo(1)
+# executing foo(&amp;lt;__main__.A object at 0xb7dbef0c&amp;gt;, 1)
+With classmethods, the class of the object instance is implicitly passed as the first argument instead of self.
+
+a.class_foo(1)
+# executing class_foo(&amp;lt;class &amp;#39;__main__.A&amp;#39;&amp;gt;, 1)
+You can also call class_foo using the class. In fact, if you define something to be a classmethod, it is probably because you intend to call it from the class rather than from a class instance. A.foo(1) would have raised a TypeError, but A.class_foo(1) works just fine:
+
+A.class_foo(1)
+# executing class_foo(&amp;lt;class &amp;#39;__main__.A&amp;#39;&amp;gt;, 1)
+One use people have found for class methods is to create inheritable alternative constructors.
+
+With staticmethods, neither self (the object instance) nor cls (the class) is implicitly passed as the first argument. They behave like plain functions except that you can call them from an instance or the class:
+
+a.static_foo(1)
+# executing static_foo(1)
+
+A.static_foo(&amp;#39;hi&amp;#39;)
+# executing static_foo(hi)
+Staticmethods are used to group functions which have some logical connection with a class to the class.
+
+foo is just a function, but when you call a.foo you do not just get the function, you get a &amp;quot;partially applied&amp;quot; version of the function with the object instance a bound as the first argument to the function. foo expects 2 arguments, while a.foo only expects 1 argument.
+
+a is bound to foo. That is what is meant by the term &amp;quot;bound&amp;quot; below:
+
+print(a.foo)
+# &amp;lt;bound method A.foo of &amp;lt;__main__.A object at 0xb7d52f0c&amp;gt;&amp;gt;
+With a.class_foo, a is not bound to class_foo, rather the class A is bound to class_foo.
+
+print(a.class_foo)
+# &amp;lt;bound method type.class_foo of &amp;lt;class &amp;#39;__main__.A&amp;#39;&amp;gt;&amp;gt;
+Here, with a staticmethod, even though it is a method, a.static_foo just returns a good ole function with no arguments bound. static_foo expects 1 argument, and a.static_foo expects 1 argument too.
+
+print(a.static_foo)
+# &amp;lt;function static_foo at 0xb7d479cc&amp;gt;
+And of course the same thing happens when you call static_foo with the class A instead.
+
+print(A.static_foo)
+# &amp;lt;function static_foo at 0xb7d479cc&lt;/code&gt;&lt;/pre&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Customize your Label and Independent transformer inside a Scikit Learn Pipeline</title>
       <link>/vizs-and-tips/custom-transformer-sklearn/</link>
-      <pubDate>Wed, 05 Jan 2022 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 05 Jan 2021 00:00:00 +0000</pubDate>
       <guid>/vizs-and-tips/custom-transformer-sklearn/</guid>
       <description>
 &lt;script src=&#34;/vizs-and-tips/custom-transformer-sklearn/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
@@ -95,80 +166,137 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 &lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; sklearn.compose &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; TransformedTargetRegressor&lt;/span&gt;
 &lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; sklearn.pipeline &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; FeatureUnion, Pipeline, make_pipeline&lt;/span&gt;
 &lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; sklearn.base &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; BaseEstimator, TransformerMixin&lt;/span&gt;
-&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-12&#34;&gt;&lt;a href=&#34;#cb1-12&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; sklearn.linear_model &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; LinearRegression&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; sklearn.model_selection &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; train_test_split&lt;/span&gt;
+&lt;span id=&#34;cb1-12&#34;&gt;&lt;a href=&#34;#cb1-12&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; sklearn.linear_model &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; LinearRegression&lt;/span&gt;
+&lt;span id=&#34;cb1-13&#34;&gt;&lt;a href=&#34;#cb1-13&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;url &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; (&lt;span class=&#34;st&#34;&gt;&amp;#39;https://raw.githubusercontent.com/CarlosVecina/nft_market_arbitrage_regression/master/df_axie_full.csv&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-14&#34;&gt;&lt;a href=&#34;#cb1-14&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;data &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; pd.read_csv(url, sep&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;,&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-15&#34;&gt;&lt;a href=&#34;#cb1-15&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-16&#34;&gt;&lt;a href=&#34;#cb1-16&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## Check NAs&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-17&#34;&gt;&lt;a href=&#34;#cb1-17&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;null_count_ser &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; pd.isnull(data).&lt;span class=&#34;bu&#34;&gt;sum&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb1-18&#34;&gt;&lt;a href=&#34;#cb1-18&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;is_null_ser &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; null_count_ser &lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-19&#34;&gt;&lt;a href=&#34;#cb1-19&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;null_count_ser[is_null_ser]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## timestamp          1
+## axie_type        214
+## genes           1176
+## hp              1176
+## speed           1176
+## skill           1176
+## morale          1176
+## eyes            1176
+## ears            1176
+## back            1176
+## back_attack     1176
+## back_def        1176
+## mouth           1176
+## mouth_attack    1176
+## mouth_def       1176
+## head            1176
+## head_attack     1176
+## head_def        1176
+## tail            1176
+## tail_attack     1176
+## tail_def        1176
+## dtype: int64&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;data.dropna(inplace&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb4-1&#34;&gt;&lt;a href=&#34;#cb4-1&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## Train/Test&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-2&#34;&gt;&lt;a href=&#34;#cb4-2&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;TEST_PCT &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.2&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-3&#34;&gt;&lt;a href=&#34;#cb4-3&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;X &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; data.loc[:,[&lt;span class=&#34;st&#34;&gt;&amp;#39;axie_breed&amp;#39;&lt;/span&gt;,&lt;span class=&#34;st&#34;&gt;&amp;#39;hp&amp;#39;&lt;/span&gt;,&lt;span class=&#34;st&#34;&gt;&amp;#39;speed&amp;#39;&lt;/span&gt;,&lt;span class=&#34;st&#34;&gt;&amp;#39;skill&amp;#39;&lt;/span&gt;,&lt;span class=&#34;st&#34;&gt;&amp;#39;morale&amp;#39;&lt;/span&gt;]]&lt;/span&gt;
+&lt;span id=&#34;cb4-4&#34;&gt;&lt;a href=&#34;#cb4-4&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;y &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; data.price_eth_parsed.tolist()&lt;/span&gt;
+&lt;span id=&#34;cb4-5&#34;&gt;&lt;a href=&#34;#cb4-5&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;X_train, X_test, y_train, y_test &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; train_test_split(X, y, test_size&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;TEST_PCT)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; LogTransformerX(BaseEstimator, TransformerMixin):&lt;/span&gt;
+&lt;span id=&#34;cb5-2&#34;&gt;&lt;a href=&#34;#cb5-2&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;co&#34;&gt;# add another additional parameter, just for fun, while we are at it&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-3&#34;&gt;&lt;a href=&#34;#cb5-3&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;__init__&lt;/span&gt;(&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;, feature_name, additional_param &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb5-4&#34;&gt;&lt;a href=&#34;#cb5-4&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;init() called.&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb5-5&#34;&gt;&lt;a href=&#34;#cb5-5&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;.feature_name &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; feature_name&lt;/span&gt;
+&lt;span id=&#34;cb5-6&#34;&gt;&lt;a href=&#34;#cb5-6&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;.additional_param &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; additional_param&lt;/span&gt;
+&lt;span id=&#34;cb5-7&#34;&gt;&lt;a href=&#34;#cb5-7&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-8&#34;&gt;&lt;a href=&#34;#cb5-8&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; fit(&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;, X, y &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb5-9&#34;&gt;&lt;a href=&#34;#cb5-9&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;fit() called.&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb5-10&#34;&gt;&lt;a href=&#34;#cb5-10&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;ss&#34;&gt;f&amp;#39;&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;additional param ~~~~~ &lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;.&lt;/span&gt;additional_param&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb5-11&#34;&gt;&lt;a href=&#34;#cb5-11&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-12&#34;&gt;&lt;a href=&#34;#cb5-12&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-13&#34;&gt;&lt;a href=&#34;#cb5-13&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; transform(&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;, X, y &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb5-14&#34;&gt;&lt;a href=&#34;#cb5-14&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;transform() called.&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb5-15&#34;&gt;&lt;a href=&#34;#cb5-15&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    X_ &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; X.copy() &lt;span class=&#34;co&#34;&gt;# creating a copy to avoid changes to original dataset&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-16&#34;&gt;&lt;a href=&#34;#cb5-16&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    X_[&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;.feature_name] &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt; np.sqrt(X_[&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;.feature_name])&lt;/span&gt;
+&lt;span id=&#34;cb5-17&#34;&gt;&lt;a href=&#34;#cb5-17&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; X_&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb6-1&#34;&gt;&lt;a href=&#34;#cb6-1&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; LogTransformerY(BaseEstimator, TransformerMixin):&lt;/span&gt;
+&lt;span id=&#34;cb6-2&#34;&gt;&lt;a href=&#34;#cb6-2&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;co&#34;&gt;# no need to implement __init__ in this particular case&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-3&#34;&gt;&lt;a href=&#34;#cb6-3&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-4&#34;&gt;&lt;a href=&#34;#cb6-4&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; fit(&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;, target):&lt;/span&gt;
+&lt;span id=&#34;cb6-5&#34;&gt;&lt;a href=&#34;#cb6-5&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-6&#34;&gt;&lt;a href=&#34;#cb6-6&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-7&#34;&gt;&lt;a href=&#34;#cb6-7&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; transform(&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;, target):&lt;/span&gt;
+&lt;span id=&#34;cb6-8&#34;&gt;&lt;a href=&#34;#cb6-8&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;%%%%%%%%%%%%%%%c&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;ustom_target_transform() called.&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb6-9&#34;&gt;&lt;a href=&#34;#cb6-9&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        target_ &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; target.copy()&lt;/span&gt;
+&lt;span id=&#34;cb6-10&#34;&gt;&lt;a href=&#34;#cb6-10&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        target_ &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; np.log(target_)&lt;/span&gt;
+&lt;span id=&#34;cb6-11&#34;&gt;&lt;a href=&#34;#cb6-11&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; target_&lt;/span&gt;
+&lt;span id=&#34;cb6-12&#34;&gt;&lt;a href=&#34;#cb6-12&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-13&#34;&gt;&lt;a href=&#34;#cb6-13&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;co&#34;&gt;# need to implement this too&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-14&#34;&gt;&lt;a href=&#34;#cb6-14&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; inverse_transform(&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;, target):&lt;/span&gt;
+&lt;span id=&#34;cb6-15&#34;&gt;&lt;a href=&#34;#cb6-15&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;%%%%%%%%%%%%%%%c&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;ustom_inverse_target_transform() called.&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb6-16&#34;&gt;&lt;a href=&#34;#cb6-16&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        target_ &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; target.copy()&lt;/span&gt;
+&lt;span id=&#34;cb6-17&#34;&gt;&lt;a href=&#34;#cb6-17&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        target_ &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; np.exp(target)&lt;/span&gt;
+&lt;span id=&#34;cb6-18&#34;&gt;&lt;a href=&#34;#cb6-18&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; target_&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-2&#34;&gt;&lt;a href=&#34;#cb7-2&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## Create de model&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-3&#34;&gt;&lt;a href=&#34;#cb7-3&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;create pipeline 3.1&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb7-4&#34;&gt;&lt;a href=&#34;#cb7-4&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# no change in input pipeline&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## create pipeline 3.1&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb9&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb9-1&#34;&gt;&lt;a href=&#34;#cb9-1&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;pipe &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Pipeline(steps&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;[&lt;/span&gt;
+&lt;span id=&#34;cb9-2&#34;&gt;&lt;a href=&#34;#cb9-2&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                       (&lt;span class=&#34;st&#34;&gt;&amp;#39;experimental_trans&amp;#39;&lt;/span&gt;, LogTransformerX(&lt;span class=&#34;st&#34;&gt;&amp;#39;skill&amp;#39;&lt;/span&gt;)),&lt;/span&gt;
+&lt;span id=&#34;cb9-3&#34;&gt;&lt;a href=&#34;#cb9-3&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                       (&lt;span class=&#34;st&#34;&gt;&amp;#39;linear_model&amp;#39;&lt;/span&gt;, LinearRegression())&lt;/span&gt;
+&lt;span id=&#34;cb9-4&#34;&gt;&lt;a href=&#34;#cb9-4&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;])&lt;/span&gt;
+&lt;span id=&#34;cb9-5&#34;&gt;&lt;a href=&#34;#cb9-5&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-6&#34;&gt;&lt;a href=&#34;#cb9-6&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# create a TargetTransformer&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-7&#34;&gt;&lt;a href=&#34;#cb9-7&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# By default, the provided functions are checked at each fit to be the inverse of each other. However, it is&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-8&#34;&gt;&lt;a href=&#34;#cb9-8&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# possible to bypass this checking by setting check_inverse to False.&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;init() called.&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb11-1&#34;&gt;&lt;a href=&#34;#cb11-1&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;model &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; TransformedTargetRegressor(regressor&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;pipe,&lt;/span&gt;
+&lt;span id=&#34;cb11-2&#34;&gt;&lt;a href=&#34;#cb11-2&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                                   transformer&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;LogTransformerY(),&lt;/span&gt;
+&lt;span id=&#34;cb11-3&#34;&gt;&lt;a href=&#34;#cb11-3&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                                   check_inverse&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;False&lt;/span&gt;) &lt;span class=&#34;co&#34;&gt;# avoid repeated calls&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-4&#34;&gt;&lt;a href=&#34;#cb11-4&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-5&#34;&gt;&lt;a href=&#34;#cb11-5&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;## Train the model&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-6&#34;&gt;&lt;a href=&#34;#cb11-6&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-7&#34;&gt;&lt;a href=&#34;#cb11-7&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;fit pipeline 3.1 [fit Model]&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## fit pipeline 3.1 [fit Model]&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb13&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb13-1&#34;&gt;&lt;a href=&#34;#cb13-1&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;model.fit(X_train.iloc[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;:&lt;span class=&#34;dv&#34;&gt;6&lt;/span&gt;,], y_train[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;:&lt;span class=&#34;dv&#34;&gt;6&lt;/span&gt;])&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## %%%%%%%%%%%%%%%custom_target_transform() called.
+## 
+## 
+## &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;init() called.
+## 
+## 
+## &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;fit() called.
+## 
+## 
+## additional param ~~~~~ 
+## 
+## 
+## &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;transform() called.
+## 
+## TransformedTargetRegressor(check_inverse=False,
+##                            regressor=Pipeline(steps=[(&amp;#39;experimental_trans&amp;#39;,
+##                                                       LogTransformerX(feature_name=&amp;#39;skill&amp;#39;)),
+##                                                      (&amp;#39;linear_model&amp;#39;,
+##                                                       LinearRegression())]),
+##                            transformer=LogTransformerY())&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb15&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb15-1&#34;&gt;&lt;a href=&#34;#cb15-1&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;predict via pipeline 3.1 [Model]&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## predict via pipeline 3.1 [Model]&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb17&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb17-1&#34;&gt;&lt;a href=&#34;#cb17-1&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;preds3_1 &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; model.predict(X_test)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## &amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;&amp;gt;transform() called.
+## 
+## 
+## %%%%%%%%%%%%%%%custom_inverse_target_transform() called.&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb19&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb19-1&#34;&gt;&lt;a href=&#34;#cb19-1&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;ss&#34;&gt;f&amp;quot;&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;preds3_1&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;quot;&lt;/span&gt;)  &lt;span class=&#34;co&#34;&gt;# should be [196. 289.]&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## 
+## [0.11535258 0.13718012 0.08965178 ... 0.09259419 0.07218038 0.086     ]&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb21&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb21-1&#34;&gt;&lt;a href=&#34;#cb21-1&#34; aria-hidden=&#34;true&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;ss&#34;&gt;f&amp;quot;RMSE: &lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{np.&lt;/span&gt;sqrt(mean_squared_error(y_test, preds3_1))&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## RMSE: 0.04759534278499385&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;&lt;a href=&#34;https://towardsdatascience.com/pipelines-custom-transformers-in-scikit-learn-the-step-by-step-guide-with-python-code-4a7d9b068156&#34;&gt;link&lt;/a&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>@staticmethod in Python</title>
-      <link>/vizs-and-tips/static-method-python-decorator/</link>
-      <pubDate>Sat, 01 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>/vizs-and-tips/static-method-python-decorator/</guid>
-      <description>
-&lt;script src=&#34;/vizs-and-tips/static-method-python-decorator/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
-
-
-&lt;p&gt;One of the basic ideas using static methods is that they don’t use any state from any object. They cannot access either class attributes or instance attributes. Then, they are easy to locate.&lt;/p&gt;
-&lt;p&gt;However, they are limited because they have no inherance. They can be called using the ClassName.MethodName() (from the Class) or object.MethodName() (from the instanced object).&lt;/p&gt;
-&lt;p&gt;Above we can find an awesome SO thread and explanation:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;Maybe a bit of example code will help: Notice the difference in the call signatures of foo, class_foo and static_foo:
-
-class A(object):
-    def foo(self, x):
-        print(f&amp;quot;executing foo({self}, {x})&amp;quot;)
-
-    @classmethod
-    def class_foo(cls, x):
-        print(f&amp;quot;executing class_foo({cls}, {x})&amp;quot;)
-
-    @staticmethod
-    def static_foo(x):
-        print(f&amp;quot;executing static_foo({x})&amp;quot;)
-
-a = A()
-Below is the usual way an object instance calls a method. The object instance, a, is implicitly passed as the first argument.
-
-a.foo(1)
-# executing foo(&amp;lt;__main__.A object at 0xb7dbef0c&amp;gt;, 1)
-With classmethods, the class of the object instance is implicitly passed as the first argument instead of self.
-
-a.class_foo(1)
-# executing class_foo(&amp;lt;class &amp;#39;__main__.A&amp;#39;&amp;gt;, 1)
-You can also call class_foo using the class. In fact, if you define something to be a classmethod, it is probably because you intend to call it from the class rather than from a class instance. A.foo(1) would have raised a TypeError, but A.class_foo(1) works just fine:
-
-A.class_foo(1)
-# executing class_foo(&amp;lt;class &amp;#39;__main__.A&amp;#39;&amp;gt;, 1)
-One use people have found for class methods is to create inheritable alternative constructors.
-
-With staticmethods, neither self (the object instance) nor cls (the class) is implicitly passed as the first argument. They behave like plain functions except that you can call them from an instance or the class:
-
-a.static_foo(1)
-# executing static_foo(1)
-
-A.static_foo(&amp;#39;hi&amp;#39;)
-# executing static_foo(hi)
-Staticmethods are used to group functions which have some logical connection with a class to the class.
-
-foo is just a function, but when you call a.foo you do not just get the function, you get a &amp;quot;partially applied&amp;quot; version of the function with the object instance a bound as the first argument to the function. foo expects 2 arguments, while a.foo only expects 1 argument.
-
-a is bound to foo. That is what is meant by the term &amp;quot;bound&amp;quot; below:
-
-print(a.foo)
-# &amp;lt;bound method A.foo of &amp;lt;__main__.A object at 0xb7d52f0c&amp;gt;&amp;gt;
-With a.class_foo, a is not bound to class_foo, rather the class A is bound to class_foo.
-
-print(a.class_foo)
-# &amp;lt;bound method type.class_foo of &amp;lt;class &amp;#39;__main__.A&amp;#39;&amp;gt;&amp;gt;
-Here, with a staticmethod, even though it is a method, a.static_foo just returns a good ole function with no arguments bound. static_foo expects 1 argument, and a.static_foo expects 1 argument too.
-
-print(a.static_foo)
-# &amp;lt;function static_foo at 0xb7d479cc&amp;gt;
-And of course the same thing happens when you call static_foo with the class A instead.
-
-print(A.static_foo)
-# &amp;lt;function static_foo at 0xb7d479cc&lt;/code&gt;&lt;/pre&gt;
 </description>
     </item>
     
