@@ -1,0 +1,139 @@
+---
+title: Programming with ggplot
+author: Pablo Cánovas Tourné
+date: '2022-12-29'
+slug: programming-with-ggplot
+output: 
+  blogdown::html_page:
+    highlight: tango 
+categories:
+  - R
+  - Post
+tags: [Tidyverse, ggplot]
+subtitle: 'How to write clean and modular code with the curly-curly operator'
+summary: ''
+authors: [pablo-canovas]
+---
+
+```{r, echo = FALSE, message=FALSE}
+library(dplyr)
+library(readr)
+library(ggplot2)
+
+tsla <- read_csv("tsla.csv")
+```
+
+# Introduction
+
+As a data scientist, having the right tools in your toolbox is a must, and this is one of them.
+Tidyverse and dplyr verbs allow us to write clean code with the use of tidy evaluation. 
+
+## Tidy evaluation?
+[Tidy evaluation](https://dplyr.tidyverse.org/articles/programming.html) is a programming paradigm in the R programming language that allows for a more intuitive and efficient way of working with data. The basic idea behind tidy evaluation is to treat variables as expressions rather than symbols. This means that when you write R code, you can easily use variables that reference columns in a dataframe as if they were actual variables in your environment. This can make your code cleaner, more concise and more readable.
+
+Another huge benefit is that we can leverage on the incredible *dplyr* package to create reusable functions, or helpers, that will make our life easier.
+One way to accomplish this is by using the bang bang operator (```{{}}```) from the *rlang* package.
+Let's show a couple examples of this neat trick:
+
+```{r}
+# Create a function that takes a data frame and two column names and returns a filtered data frame
+my_filter <- function(df, var1, var2){
+  result <- df %>%
+    filter({{var1}} > {{var2}})
+  return(result)
+}
+```
+
+It also works with the rest of dplyr verbs:
+
+```{r}
+# Create a function that calculate the grouped mean of a variable, passing both as argument
+calculate_mean_by_group_var <- function(df, group_var, target_var){
+  result <- df %>%
+    group_by({{group_var}}) %>% 
+    summarise(mean = mean({{target_var}}))
+  return(result)
+}
+```
+
+It's easy to see the wonders that can be achieved with this operator. By creating functions that wrap calls to dplyr functions while following tidy evaluation principles, we can create reusable code that is flexible, efficient, and easy to read.
+
+# What about ggplot?
+
+It just works!! If you are going to create several plots tt's super useful to create wrappers around some of them to avoid repetitive typing. 
+
+Let's plot the closing stock price of TSLA to showcase its use:
+
+
+```{r}
+# Daily prices from TSLA stock:
+head(tsla)
+```
+
+```{r}
+my_plot <- function(df, var){
+  df %>%
+    ggplot(aes(x=date)) +
+    geom_line(aes(y={{var}})) 
+}
+
+my_plot(tsla, close)
+```
+
+Easy peasy! Probably you are good to go with that example 90% of the times.
+
+However, another use cases do exist. The main one I can think of is having the column you want to plot stored in another variable. Applying the same solution doesn't work here. 
+
+```{r}
+my_var <- "close"
+my_plot(tsla, my_var)
+```
+
+This doesn't raise an error but it doesn't produce the desired plot.
+
+Some time ago, we would have solved this with ```aes_string``` instead of ```aes``` to map the variables, like this:
+
+```{r}
+my_deprecated_plot <- function(df, var){
+  df %>%
+    ggplot(aes(x=date)) +
+    geom_line(aes_string(y=my_var)) 
+}
+
+my_var <- "close"
+my_deprecated_plot(tsla, my_var)
+```
+Whereas it does still work, ```aes_string``` has been deprecated so use it at your own risk.
+
+The way we are suppose to overcome this is by using the helper ```.data``` inside the mapping call, which I must say it's pretty neat:
+
+```{r}
+my_plot2 <- function(df, var){
+  df %>%
+    ggplot(aes(x=date)) +
+    geom_line(aes(y=.data[[var]]))
+}
+my_var <- "close"
+my_plot2(tsla, my_var)
+```
+
+There is another corner case that maybe we can face: Having to pass the variable as a character itself, instead of having it in a variable. It's a silly example as we could simply store it in a variable before calling the plotter but it's good to know different possibilities. 
+
+For this case, again we could simply use the ```.data``` helper shown in the previous example, but life would be boring if it was that easy.
+
+Another (weird) way to solve this one is using more advanced and unusual dplyr functions like ```ensym``` and the unquote operator from rlang, also known as the [bang-bang operator](https://adv-r.hadley.nz/quasiquotation.html) (!!):
+
+```{r}
+my_plot3 <- function(df, var){
+  df %>%
+    ggplot(aes(x=date)) +
+    geom_line(aes(y=!!ensym(var)))
+}
+my_plot3(tsla, "close")
+```
+
+
+Definitely the curly-curly operator is really handy when programming with R.
+I hope you learned something today!
+
+
