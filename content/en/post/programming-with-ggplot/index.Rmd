@@ -1,5 +1,5 @@
 ---
-title: Programming with ggplot
+title: "Ggplot2: Tidy evaluation and reference columns from variables"
 author: Pablo Cánovas Tourné
 date: '2022-12-29'
 slug: programming-with-ggplot
@@ -10,12 +10,21 @@ categories:
   - R
   - Post
 tags: [Tidyverse, ggplot]
-subtitle: 'How to write clean and modular code with the curly-curly operator'
-summary: ''
+subtitle: 'How to write clean and modular code with the curly-curly operator. Easily plotting columns dynamically from string variables by using tidy evaluation.'
+summary: 'How to write clean and modular code with the curly-curly operator. Easily plotting columns dynamically from string variables by using tidy evaluation.'
 authors: [pablo-canovas]
 ---
 
-```{r, echo = FALSE, message=FALSE}
+```{r, include=FALSE}
+nchar("Programming with ggplot - Reference columns from variables") # max 60-70
+nchar("How to write clean and modular code with the curly-curly operator. Easily plotting columns dynamically from string variables by using tidy evaluation.") # at least 120 to 160
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
+```
+
+```{r, echo = FALSE, message=FALSE, warning=FALSE}
 library(dplyr)
 library(readr)
 library(ggplot2)
@@ -23,7 +32,9 @@ library(ggplot2)
 tsla <- read_csv("tsla.csv")
 ```
 
-# Introduction
+<br>
+
+# The tidy Data Scientist
 
 As a data scientist, having the right tools in your toolbox is a must, and this is one of them.
 Tidyverse and dplyr verbs allow us to write clean code with the use of tidy evaluation. 
@@ -58,7 +69,9 @@ calculate_mean_by_group_var <- function(df, group_var, target_var){
 
 It's easy to see the wonders that can be achieved with this operator. By creating functions that wrap calls to dplyr functions while following tidy evaluation principles, we can create reusable code that is flexible, efficient, and easy to read.
 
-# What about ggplot?
+<br>
+
+# Is it possible to use tidy evaluation with Ggplot? Say yes!
 
 It just works!! If you are going to create several plots tt's super useful to create wrappers around some of them to avoid repetitive typing. 
 

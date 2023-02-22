@@ -1,5 +1,5 @@
 ---
-title: Programming with ggplot
+title: "Ggplot2: Tidy evaluation and reference columns from variables"
 author: Pablo Cánovas Tourné
 date: '2022-12-29'
 slug: programming-with-ggplot
@@ -10,11 +10,12 @@ categories:
   - R
   - Post
 tags: [Tidyverse, ggplot]
-subtitle: 'How to write clean and modular code with the curly-curly operator'
-summary: ''
+subtitle: 'How to write clean and modular code with the curly-curly operator. Easily plotting columns dynamically from string variables by using tidy evaluation.'
+summary: 'How to write clean and modular code with the curly-curly operator. Easily plotting columns dynamically from string variables by using tidy evaluation.'
 authors: [pablo-canovas]
 ---
 
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
@@ -81,8 +82,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<div id="introduction" class="section level1">
-<h1>Introduction</h1>
+<p><br></p>
+<div id="the-tidy-data-scientist" class="section level1">
+<h1>The tidy Data Scientist</h1>
 <p>As a data scientist, having the right tools in your toolbox is a must, and this is one of them.
 Tidyverse and dplyr verbs allow us to write clean code with the use of tidy evaluation.</p>
 <div id="tidy-evaluation" class="section level2">
@@ -106,15 +108,16 @@ Let’s show a couple examples of this neat trick:</p>
 <span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(result)</span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 <p>It’s easy to see the wonders that can be achieved with this operator. By creating functions that wrap calls to dplyr functions while following tidy evaluation principles, we can create reusable code that is flexible, efficient, and easy to read.</p>
+<p><br></p>
 </div>
 </div>
-<div id="what-about-ggplot" class="section level1">
-<h1>What about ggplot?</h1>
+<div id="is-it-possible-to-use-tidy-evaluation-with-ggplot-say-yes" class="section level1">
+<h1>Is it possible to use tidy evaluation with Ggplot? Say yes!</h1>
 <p>It just works!! If you are going to create several plots tt’s super useful to create wrappers around some of them to avoid repetitive typing.</p>
 <p>Let’s plot the closing stock price of TSLA to showcase its use:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Daily prices from TSLA stock:</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tsla)</span></code></pre></div>
-<pre><code>## # A tibble: 6 × 6
+<pre><code>## # A tibble: 6 x 6
 ##   date        open  high   low close    volume
 ##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
 ## 1 2022-01-03  383.  400.  379.  400. 104686047
@@ -130,12 +133,12 @@ Let’s show a couple examples of this neat trick:</p>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">my_plot</span>(tsla, close)</span></code></pre></div>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Easy peasy! Probably you are good to go with that example 90% of the times.</p>
 <p>However, another use cases do exist. The main one I can think of is having the column you want to plot stored in another variable. Applying the same solution doesn’t work here.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>my_var <span class="ot">&lt;-</span> <span class="st">&quot;close&quot;</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">my_plot</span>(tsla, my_var)</span></code></pre></div>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>This doesn’t raise an error but it doesn’t produce the desired plot.</p>
 <p>Some time ago, we would have solved this with <code>aes_string</code> instead of <code>aes</code> to map the variables, like this:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>my_deprecated_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(df, var){</span>
@@ -146,29 +149,27 @@ Let’s show a couple examples of this neat trick:</p>
 <span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>my_var <span class="ot">&lt;-</span> <span class="st">&quot;close&quot;</span></span>
 <span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">my_deprecated_plot</span>(tsla, my_var)</span></code></pre></div>
-<pre><code>## Warning: `aes_string()` was deprecated in ggplot2 3.0.0.
-## ℹ Please use tidy evaluation ideoms with `aes()`</code></pre>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-7-1.png" width="672" />
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 Whereas it does still work, <code>aes_string</code> has been deprecated so use it at your own risk.</p>
 <p>The way we are suppose to overcome this is by using the helper <code>.data</code> inside the mapping call, which I must say it’s pretty neat:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>my_plot2 <span class="ot">&lt;-</span> <span class="cf">function</span>(df, var){</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>date)) <span class="sc">+</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>.data[[var]]))</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>my_var <span class="ot">&lt;-</span> <span class="st">&quot;close&quot;</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">my_plot2</span>(tsla, my_var)</span></code></pre></div>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>my_plot2 <span class="ot">&lt;-</span> <span class="cf">function</span>(df, var){</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>date)) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>.data[[var]]))</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>my_var <span class="ot">&lt;-</span> <span class="st">&quot;close&quot;</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="fu">my_plot2</span>(tsla, my_var)</span></code></pre></div>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>There is another corner case that maybe we can face: Having to pass the variable as a character itself, instead of having it in a variable. It’s a silly example as we could simply store it in a variable before calling the plotter but it’s good to know different possibilities.</p>
 <p>For this case, again we could simply use the <code>.data</code> helper shown in the previous example, but life would be boring if it was that easy.</p>
 <p>Another (weird) way to solve this one is using more advanced and unusual dplyr functions like <code>ensym</code> and the unquote operator from rlang, also known as the <a href="https://adv-r.hadley.nz/quasiquotation.html">bang-bang operator</a> (!!):</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>my_plot3 <span class="ot">&lt;-</span> <span class="cf">function</span>(df, var){</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>date)) <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="sc">!!</span><span class="fu">ensym</span>(var)))</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">my_plot3</span>(tsla, <span class="st">&quot;close&quot;</span>)</span></code></pre></div>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>my_plot3 <span class="ot">&lt;-</span> <span class="cf">function</span>(df, var){</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>date)) <span class="sc">+</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="sc">!!</span><span class="fu">ensym</span>(var)))</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">my_plot3</span>(tsla, <span class="st">&quot;close&quot;</span>)</span></code></pre></div>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>Definitely the curly-curly operator is really handy when programming with R.
 I hope you learned something today!</p>
 </div>
