@@ -2,7 +2,7 @@
 title: "How to write functions with ggplot"
 author: Pablo Cánovas Tourné
 date: '2022-12-29'
-slug: access-dataframe-variables-with-tidyeval-and-ggplot
+slug: dynamically-access-dataframe-variables-tidyeval-ggplot
 output: 
   blogdown::html_page:
     highlight: tango 
@@ -16,8 +16,8 @@ authors: [pablo-canovas]
 ---
 
 ```{r, include=FALSE}
-nchar("Programming with ggplot - Reference columns from variables") # max 60-70
-nchar("How to write clean and modular code with the curly-curly operator. Easily plotting columns dynamically from string variables by using tidy evaluation.") # at least 120 to 160
+nchar("How to write functions with ggplot") # max 60-70
+nchar("Write plotting functions and dynamically access variables from a dataframe with tidy evaluation and ggplot") # at least 120 to 160
 ```
 
 ```{r setup, include=FALSE}
