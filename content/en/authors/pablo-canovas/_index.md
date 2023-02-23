@@ -21,8 +21,8 @@ education:
 
 email: "pablo.canovastourne@gmail.com"
 interests:
+- Algorithmic Trading
 - Machine Learning
-- Time Series Forecasting
 - Game Theory
 - Uncertainty
 
@@ -31,7 +31,7 @@ organizations:
 - name:  
   url: ""
 
-role: Data Scientist at Repsol
+role: Senior Data Scientist at Spotahome
 social:
 - icon: envelope
   icon_pack: fas
@@ -50,5 +50,5 @@ user_groups:
 - ---
 ---
 
-Pablo Cánovas is a data scientist with experience developing machine learning models applied to electricity markets.
+Pablo Cánovas is a senior data scientist with experience in time series models in the financial, energy and real state sectors.
  
