@@ -1,8 +1,8 @@
 ---
-title: "Ggplot2: Tidy evaluation and reference columns from variables"
+title: "How to write functions with ggplot"
 author: Pablo Cánovas Tourné
 date: '2022-12-29'
-slug: programming-with-ggplot
+slug: access-dataframe-variables-with-tidyeval-and-ggplot
 output: 
   blogdown::html_page:
     highlight: tango 
@@ -10,8 +10,8 @@ categories:
   - R
   - Post
 tags: [Tidyverse, ggplot]
-subtitle: 'How to write clean and modular code with the curly-curly operator. Easily plotting columns dynamically from string variables by using tidy evaluation.'
-summary: 'How to write clean and modular code with the curly-curly operator. Easily plotting columns dynamically from string variables by using tidy evaluation.'
+subtitle: 'Dynamically plot variables within a datafame passed as a string argument'
+summary: 'Write plotting functions and dynamically access variables from a dataframe with tidy evaluation and ggplot'
 authors: [pablo-canovas]
 ---
 
@@ -47,7 +47,7 @@ One way to accomplish this is by using the bang bang operator (```{{}}```) from 
 Let's show a couple examples of this neat trick:
 
 ```{r}
-# Create a function that takes a data frame and two column names and returns a filtered data frame
+# Create a function that takes as arguments a data frame and two column names and returns a filtered data frame
 my_filter <- function(df, var1, var2){
   result <- df %>%
     filter({{var1}} > {{var2}})
@@ -71,9 +71,9 @@ It's easy to see the wonders that can be achieved with this operator. By creatin
 
 <br>
 
-# Is it possible to use tidy evaluation with Ggplot? Say yes!
+# Is it possible to use tidy evaluation with ggplot? Say yes!
 
-It just works!! If you are going to create several plots tt's super useful to create wrappers around some of them to avoid repetitive typing. 
+It just works!! If you are going to create several plots it's super useful to create wrappers around some of them to avoid repetitive typing. 
 
 Let's plot the closing stock price of TSLA to showcase its use:
 
@@ -149,4 +149,9 @@ my_plot3(tsla, "close")
 Definitely the curly-curly operator is really handy when programming with R.
 I hope you learned something today!
 
+Check out other tidyverse tricks:
 
+* [Confidence intervals with ggplot](../../vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval)
+* [Logging pipelines](../../vizs-and-tips/tidylog-logging-pipelines-r)
+* [Filtering dataframes on multiple conditions](../../vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse)
+* [Conditional pipes](../../vizs-and-tips/conditional-pipes-R-tidyverse)

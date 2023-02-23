@@ -1,8 +1,8 @@
 ---
-title: "Ggplot2: Tidy evaluation and reference columns from variables"
+title: "How to write functions with ggplot"
 author: Pablo Cánovas Tourné
 date: '2022-12-29'
-slug: programming-with-ggplot
+slug: access-dataframe-variables-with-tidyeval-and-ggplot
 output: 
   blogdown::html_page:
     highlight: tango 
@@ -10,12 +10,11 @@ categories:
   - R
   - Post
 tags: [Tidyverse, ggplot]
-subtitle: 'How to write clean and modular code with the curly-curly operator. Easily plotting columns dynamically from string variables by using tidy evaluation.'
-summary: 'How to write clean and modular code with the curly-curly operator. Easily plotting columns dynamically from string variables by using tidy evaluation.'
+subtitle: 'Dynamically plot variables within a datafame passed as a string argument'
+summary: 'Write plotting functions and dynamically access variables from a dataframe with tidy evaluation and ggplot'
 authors: [pablo-canovas]
 ---
 
-<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
@@ -93,7 +92,7 @@ Tidyverse and dplyr verbs allow us to write clean code with the use of tidy eval
 <p>Another huge benefit is that we can leverage on the incredible <em>dplyr</em> package to create reusable functions, or helpers, that will make our life easier.
 One way to accomplish this is by using the bang bang operator (<code>{{}}</code>) from the <em>rlang</em> package.
 Let’s show a couple examples of this neat trick:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a function that takes a data frame and two column names and returns a filtered data frame</span></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Create a function that takes as arguments a data frame and two column names and returns a filtered data frame</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>my_filter <span class="ot">&lt;-</span> <span class="cf">function</span>(df, var1, var2){</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  result <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">filter</span>({{var1}} <span class="sc">&gt;</span> {{var2}})</span>
@@ -112,12 +111,12 @@ Let’s show a couple examples of this neat trick:</p>
 </div>
 </div>
 <div id="is-it-possible-to-use-tidy-evaluation-with-ggplot-say-yes" class="section level1">
-<h1>Is it possible to use tidy evaluation with Ggplot? Say yes!</h1>
-<p>It just works!! If you are going to create several plots tt’s super useful to create wrappers around some of them to avoid repetitive typing.</p>
+<h1>Is it possible to use tidy evaluation with ggplot? Say yes!</h1>
+<p>It just works!! If you are going to create several plots it’s super useful to create wrappers around some of them to avoid repetitive typing.</p>
 <p>Let’s plot the closing stock price of TSLA to showcase its use:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Daily prices from TSLA stock:</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(tsla)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 6
+<pre><code>## # A tibble: 6 × 6
 ##   date        open  high   low close    volume
 ##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
 ## 1 2022-01-03  383.  400.  379.  400. 104686047
@@ -172,4 +171,11 @@ Whereas it does still work, <code>aes_string</code> has been deprecated so use i
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>Definitely the curly-curly operator is really handy when programming with R.
 I hope you learned something today!</p>
+<p>Check out other tidyverse tricks:</p>
+<ul>
+<li><a href="../../vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval">Confidence intervals with ggplot</a></li>
+<li><a href="../../vizs-and-tips/tidylog-logging-pipelines-r">Logging pipelines</a></li>
+<li><a href="../../vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse">Filtering dataframes on multiple conditions</a></li>
+<li><a href="../../vizs-and-tips/conditional-pipes-R-tidyverse">Conditional pipes</a></li>
+</ul>
 </div>
