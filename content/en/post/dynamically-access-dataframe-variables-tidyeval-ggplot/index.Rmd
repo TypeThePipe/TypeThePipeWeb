@@ -1,7 +1,7 @@
 ---
 title: "How to write functions with ggplot"
 author: Pablo Cánovas Tourné
-date: '2022-12-29'
+date: '2022-02-23'
 slug: dynamically-access-dataframe-variables-tidyeval-ggplot
 output: 
   blogdown::html_page:
