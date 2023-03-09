@@ -71,7 +71,7 @@ subtitle = ""
 	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your email" required>
     <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
     <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
-    <div class="clear"><div class="shake-chunk shake-constant shake-constant--hover"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
     </div>
 </form>
 </div>
