@@ -18,7 +18,7 @@ featured: false
 draft: false
 ---
 
-<img src="./featured.png" height="400px" width="500px" alt="Financial Times Theme in Ggplot2 R 4.0" />
+<img src="./featured.png" height="500px" width="600px" alt="Financial Times Theme in Ggplot2 R 4.0" />
 
 <br>
 
@@ -75,6 +75,11 @@ fmpc_set_token('your_token') # example fmpc_set_token('09431214923a63117b0p00ff1
 
 ```{r, include=FALSE}
 fmpc_set_token(Sys.getenv('FMP_KEY'))#'17434614923c63597a0b12df4cabbacb')
+```
+
+
+```{r}
+fmpcloudr::fmpc_get_url('')
 ```
 
 
@@ -289,10 +294,10 @@ data_value %>%
                guide = guide_axis(angle = 90)) +
   scale_y_continuous(labels=function(x)  sprintf("%d Billion", x / 10^9)) + 
   labs(title="Market Cap evolution - Value Stocks",
-       subtitle="<span style='color: #A9A9A9;'><b>Berkshire Hathaway</b></span>,
-       <span style='color: #E7B800;'><b>Procter & Gamble</b></span>, 
-       <span style='color: #FC4E07;'><b>Coca-Cola</b></span> and 
-       <span style='color: #0D7680;'><b>Mcdonald's</b></span>",
+       subtitle="<span style='color: #554178;'><b>Berkshire Hathaway</b></span>,
+       <span style='color: #003CAE;'><b>Procter & Gamble</b></span>, 
+       <span style='color: #df2b24;'><b>Coca-Cola</b></span> and 
+       <span style='color: #E7B800;'><b>Mcdonald's</b></span>",
        x=" ")+ 
   scale_color_manual(values = c("#554178", "#df2b24", "#E7B800", "#003CAE")) +
   ft_theme
@@ -327,7 +332,7 @@ data_value_basic_stats <- data_value %>%
 
 Since we are only examining the dataset and it only has two dimensions, we opt to use the straightforward elbow method to select 3 clusters. However, we could also try with 2 and 4 clusters to compare the outcomes.
 
-```{r}
+```{r elbow}
 data_stats <- data_basic_stats %>% bind_rows(data_value_basic_stats)
 
 tot_withinss <- map_dbl(2:5, function(k) {
@@ -356,7 +361,7 @@ In the field of economics, there is a tendency to apply discrete categories, oft
 Throughout this series, we will strive to analyze and categorize data in a way that reflects richer and higher-dimensional information.
 
 
-```{r}
+```{r cluster}
 ggplot(data_stats, aes(mean, sd, colour=factor(cluster))) +
   geom_point() +
   geom_label(aes(label = symbol), size=3, label.r = unit(5, 'points')) + 

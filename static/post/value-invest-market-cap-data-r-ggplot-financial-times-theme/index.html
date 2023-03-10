@@ -11,8 +11,8 @@ categories:
 - R
 - Tips
 tags: []
-subtitle: "Starting the 'Value Invetsing with R' series. Brush up your Ggplot2 skills: Using the Financial Market Prep API data to create stunning plots with a Financial Times inspired ggplot theme"
-summary: "Starting the 'Value Invetsing with R' series. Brush up your Ggplot2 skills: Using the Financial Market Prep API data to create stunning plots with a Financial Times inspired ggplot theme."
+subtitle: "Starting the 'Value Invetsing with R' series. Brush up your Ggplot skills: Using the Financial Market Prep API data to create stunning plots with a Financial Times inspired ggplot theme"
+summary: "Starting the 'Value Invetsing with R' series. Brush up your Ggplot skills: Using the Financial Market Prep API data to create stunning plots with a Financial Times inspired ggplot theme."
 authors: [carlos-vecina]
 featured: false
 draft: false
@@ -85,7 +85,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<p><img src="featured.png" height="400px" width="500px" alt="Financial Times Theme in Ggplot2 R 4.0" /></p>
+<p><img src="featured.png" height="500px" width="600px" alt="Financial Times Theme in Ggplot2 R 4.0" /></p>
 <p><br></p>
 <p>Over the past months, heavy market drifts have occurred, and no one could have imagined the frenzy of free money being stopped. <strong>The idea that the end of history had arrived has been shattered</strong>.</p>
 <p>As we entered <strong>2023, we witnessed certain stocks soaring in the markets</strong>, attempting to recover from their previous losses, while other <strong>macroeconomic indicators continued to deteriorate.</strong> However, uncertainty still weighs heavily on the minds of investors, perhaps even more so than ever before, given the threats of inflation, labor market instability, dollarization pitfalls, trust decay in central banks and financial institutions, interest rates, potential real estate crash in specific local areas…</p>
@@ -112,6 +112,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">library</span>(factoextra)</span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="fu">library</span>(fmpcloudr)</span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">fmpc_set_token</span>(<span class="st">&#39;your_token&#39;</span>) <span class="co"># example fmpc_set_token(&#39;09431214923a63117b0p00ff1cart2alp&#39;) </span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_get_url</span>(<span class="st">&#39;&#39;</span>)</span></code></pre></div>
+<pre><code>## $`Error Message`
+## [1] &quot;Invalid API KEY. Please retry or visit our documentation to create one FREE https://fmpcloud.io&quot;</code></pre>
 <p>Now the token is already set up, so we can start downloading data. As in March 2023, you can do 250 call to the free API.</p>
 <p>In this post we are exploring the API and doing the first plots</p>
 <p><br></p>
@@ -122,31 +125,31 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Daily market capitalization, OHLC (open, high, low, close) prices, and volume data.</li>
 </ul>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_price_current</span>()</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_price_intraday</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_price_current</span>()</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_price_intraday</span>()</span></code></pre></div>
 <ul>
 <li>Historical price data with up to 1-minute resolution and historical dividents</li>
 </ul>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_price_history</span>()</span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_security_dividends</span>(symbols, <span class="at">startDate =</span> <span class="st">&#39;2020-01-01&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_price_history</span>()</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_security_dividends</span>(symbols, <span class="at">startDate =</span> <span class="st">&#39;2020-01-01&#39;</span>)</span></code></pre></div>
 <ul>
 <li>Financial ratios and stock fundamentals, including liquidity, profitability, debt, operating performance, cash flow, investment valuation ratios, and other key metrics, updated quarterly and annually.</li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_financial_metrics</span>()</span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_financial_metrics</span>()</span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a></span>
-<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_earning_call_transcript</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_financial_metrics</span>()</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_financial_metrics</span>()</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_earning_call_transcript</span>()</span></code></pre></div>
 <ul>
 <li>Analysts’ price targets to provide insight into market expectations.</li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_analyst_outlook</span>()</span>
-<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_economic_results</span>()</span>
-<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_security_ratings</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_analyst_outlook</span>()</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_economic_results</span>()</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_security_ratings</span>()</span></code></pre></div>
 <ul>
 <li>Sentiment analysis to gauge overall market sentiment towards a stock.</li>
 </ul>
@@ -154,29 +157,29 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Technical indicators</li>
 </ul>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Simple moving average</span></span>
-<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_security_tech_indic</span>(symbols, <span class="at">indicator =</span> <span class="st">&#39;SMA&#39;</span>, <span class="at">freq =</span> <span class="st">&#39;daily&#39;</span>, <span class="at">period =</span> <span class="dv">10</span>)</span>
-<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a> </span>
-<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="co"># Exponential moving average</span></span>
-<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_security_tech_indic</span>(symbols, <span class="at">indicator =</span> <span class="st">&#39;EMA&#39;</span>,  <span class="at">freq =</span> <span class="st">&#39;1min&#39;</span>, <span class="at">period =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># Simple moving average</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_security_tech_indic</span>(symbols, <span class="at">indicator =</span> <span class="st">&#39;SMA&#39;</span>, <span class="at">freq =</span> <span class="st">&#39;daily&#39;</span>, <span class="at">period =</span> <span class="dv">10</span>)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a> </span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a><span class="co"># Exponential moving average</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_security_tech_indic</span>(symbols, <span class="at">indicator =</span> <span class="st">&#39;EMA&#39;</span>,  <span class="at">freq =</span> <span class="st">&#39;1min&#39;</span>, <span class="at">period =</span> <span class="dv">10</span>)</span></code></pre></div>
 <ul>
 <li>Insiders trade and institutional ownership data to keep you informed about significant stockholders.</li>
 </ul>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_13f_data</span>() <span class="co"># holders</span></span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_cots_data</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_13f_data</span>() <span class="co"># holders</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_cots_data</span>()</span></code></pre></div>
 <ul>
 <li>Real-time stock price data, SEC filings, institutional holders, price target, and other essential information.</li>
 </ul>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_rss_sec</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_rss_sec</span>()</span></code></pre></div>
 <ul>
 <li>Macroeconomic data and Calendar events tracking upcoming dividends, stock splits.. ant its historical data.</li>
 </ul>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_economic_results</span>()</span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_economic_results</span>(<span class="at">event =</span> <span class="st">&#39;adpEmploymentChange&#39;</span>, <span class="at">country =</span> <span class="st">&#39;US&#39;</span>) </span>
-<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_calendar_events</span>(<span class="st">&#39;earning&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_economic_results</span>()</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_economic_results</span>(<span class="at">event =</span> <span class="st">&#39;adpEmploymentChange&#39;</span>, <span class="at">country =</span> <span class="st">&#39;US&#39;</span>) </span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>fmpcloudr<span class="sc">::</span><span class="fu">fmpc_calendar_events</span>(<span class="st">&#39;earning&#39;</span>)</span></code></pre></div>
 <ul>
 <li>Information on funds, European markets, forex, crypto, and commodities.</li>
 </ul>
@@ -187,141 +190,142 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <h2>Market Capitalization in R</h2>
 <p>As promised, we are just introducing the package and brushing up our ggplot skills. Therefore, we are focusing in this post on the evolution of market cap, allowing us to compare trends between different stocks. <strong>It is well known that growth stocks have experienced a massive surge in recent years, ranging from technology growth companies to pump-and-dump penny stocks, ‘meme-stocks’ defying the establishment (gl CreditSuisse) and SPACs frenzy.</strong> The market has been flooded with free money for almost a decade, with tech players lowering the entry barriers for retail investors, and benefiting from lockdown savings and subsidies.</p>
 <p>Let’s examine the impact of this phenomenon on a set of stocks categorized as ‘growth’ and ‘value’. Since life is a continuum, we will first categorize them by hand according to the consensus. We will then conduct an initial analysis, which will be elaborated further in subsequent posts, attempting to cluster them based on their actual performance. In this chapter, we will use the market cap fluctuation to achieve this, although other features could also be utilized and macroeconomic factors taken into account. Stay tuned for upcoming TypeThePipe posts!</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>symbols <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;AAPL&#39;</span>, <span class="st">&#39;META&#39;</span>, <span class="st">&#39;AMZN&#39;</span>, <span class="st">&#39;GOOG&#39;</span>,<span class="st">&#39;MSFT&#39;</span>)</span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> fmpcloudr<span class="sc">::</span><span class="fu">fmpc_security_mrktcap</span>(symbols, <span class="at">limit =</span> <span class="dv">30</span><span class="sc">*</span><span class="dv">12</span><span class="sc">*</span><span class="dv">12</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">date =</span> <span class="fu">ymd</span>(date))</span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(date, marketCap, <span class="at">colour =</span> symbol)) <span class="sc">+</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>  <span class="fu">geom_line</span>() </span></code></pre></div>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>symbols <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;AAPL&#39;</span>, <span class="st">&#39;META&#39;</span>, <span class="st">&#39;AMZN&#39;</span>, <span class="st">&#39;GOOG&#39;</span>,<span class="st">&#39;MSFT&#39;</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>data <span class="ot">&lt;-</span> fmpcloudr<span class="sc">::</span><span class="fu">fmpc_security_mrktcap</span>(symbols, <span class="at">limit =</span> <span class="dv">30</span><span class="sc">*</span><span class="dv">12</span><span class="sc">*</span><span class="dv">12</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>data <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">date =</span> <span class="fu">ymd</span>(date))</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(date, marketCap, <span class="at">colour =</span> symbol)) <span class="sc">+</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>  <span class="fu">geom_line</span>() </span></code></pre></div>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <p><br></p>
 </div>
 <div id="financial-times-theme-in-ggplot" class="section level2">
 <h2>Financial Times Theme in Ggplot</h2>
 <p>Not bad for a 2 lines plot, but lets add some Financial Times kind of flavor:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># old chunk in my codebase seen in Reddit but and can&#39;t find the source. If anyone has the original link, very glad to add it here! :)</span></span>
-<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>ft_theme <span class="ot">&lt;-</span> </span>
-<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.x =</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;wheat4&quot;</span>),</span>
-<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;wheat4&quot;</span>),</span>
-<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>        <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>        <span class="at">panel.grid.minor.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="dv">8</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="dv">8</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">vjust =</span> <span class="fl">0.8</span>),</span>
-<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">8</span>, <span class="at">colour =</span> <span class="st">&quot;blue4&quot;</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>        <span class="at">plot.title =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
-<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="dv">8</span>),</span>
-<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>        <span class="at">plot.tag =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">face =</span> <span class="st">&quot;italic&quot;</span>, <span class="at">size =</span> <span class="dv">182</span>, <span class="at">lineheight =</span> <span class="fl">0.9</span>),</span>
-<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a>        <span class="at">plot.tag.position =</span> <span class="fu">c</span>(<span class="fl">0.15</span>,<span class="fl">0.02</span>),</span>
-<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a>        <span class="at">plot.caption =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(),</span>
-<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;seashell2&quot;</span>),</span>
-<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;seashell2&quot;</span>), </span>
-<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a>        <span class="at">panel.spacing.y =</span> <span class="fu">unit</span>(<span class="dv">3</span>, <span class="st">&quot;lines&quot;</span>)</span>
-<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a>        ) </span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(date, marketCap, <span class="at">group=</span>symbol, <span class="at">colour=</span>symbol)) <span class="sc">+</span></span>
-<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour=</span><span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="at">data =</span> data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date<span class="sc">==</span><span class="fu">max</span>(date)),</span>
-<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">label =</span> symbol),</span>
-<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>              <span class="at">label.size =</span> <span class="fl">0.1</span>,  <span class="at">size=</span><span class="fl">2.2</span>,</span>
-<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>              <span class="at">label.padding =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">&quot;lines&quot;</span>),</span>
-<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>              <span class="at">nudge_x=</span><span class="dv">200</span>) <span class="sc">+</span></span>
-<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">clip =</span> <span class="st">&#39;off&#39;</span>) <span class="sc">+</span>        <span class="co"># Allow labels to bleed past the canvas boundaries</span></span>
-<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_breaks =</span> <span class="st">&quot;6 month&quot;</span>,  <span class="co"># Date labels for each month.</span></span>
-<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a>               <span class="at">date_labels =</span> <span class="st">&quot;%b%y&quot;</span>,</span>
-<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a>               <span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span></span>
-<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels=</span><span class="cf">function</span>(x)  <span class="fu">sprintf</span>(<span class="st">&quot;%d Billion&quot;</span>, x <span class="sc">/</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">9</span>)) <span class="sc">+</span> </span>
-<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Market Cap evolution - FAAMG&quot;</span>,</span>
-<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a>       <span class="at">subtitle=</span><span class="st">&quot;&lt;span style=&#39;color: #A9A9A9;&#39;&gt;&lt;b&gt;Apple&lt;/b&gt;&lt;/span&gt;,</span></span>
-<span id="cb15-17"><a href="#cb15-17" tabindex="-1"></a><span class="st">       &lt;span style=&#39;color: #E7B800;&#39;&gt;&lt;b&gt;Amazon&lt;/b&gt;&lt;/span&gt;, </span></span>
-<span id="cb15-18"><a href="#cb15-18" tabindex="-1"></a><span class="st">       &lt;span style=&#39;color: #FC4E07;&#39;&gt;&lt;b&gt;Microsoft&lt;/b&gt;&lt;/span&gt; and </span></span>
-<span id="cb15-19"><a href="#cb15-19" tabindex="-1"></a><span class="st">       &lt;span style=&#39;color: #0D7680;&#39;&gt;&lt;b&gt;Meta&lt;/b&gt;&lt;/span&gt;&quot;</span>,</span>
-<span id="cb15-20"><a href="#cb15-20" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot; &quot;</span>)<span class="sc">+</span> </span>
-<span id="cb15-21"><a href="#cb15-21" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#A9A9A9&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#34AB53&quot;</span>, <span class="st">&quot;#0D7680&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb15-22"><a href="#cb15-22" tabindex="-1"></a>  ft_theme</span></code></pre></div>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># old chunk in my codebase seen in Reddit but and can&#39;t find the source. If anyone has the original link, very glad to add it here! :)</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>ft_theme <span class="ot">&lt;-</span> </span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">panel.grid.major.x =</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;wheat4&quot;</span>),</span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>        <span class="at">panel.grid.major.y =</span><span class="fu">element_line</span>(<span class="at">colour =</span> <span class="st">&quot;wheat4&quot;</span>),</span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a>        <span class="at">panel.grid.minor.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a>        <span class="at">panel.grid.minor.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a>        <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="dv">8</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a>        <span class="at">axis.title.x =</span> <span class="fu">element_text</span>(<span class="at">colour =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="dv">8</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>, <span class="at">vjust =</span> <span class="fl">0.8</span>),</span>
+<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a>        <span class="at">axis.title.y =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a>        <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">size=</span><span class="dv">8</span>, <span class="at">colour =</span> <span class="st">&quot;blue4&quot;</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a>        <span class="at">plot.title =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="dv">14</span>, <span class="at">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a>        <span class="at">plot.subtitle =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a>        <span class="at">plot.tag =</span> <span class="fu">element_text</span>(<span class="at">color =</span> <span class="st">&quot;black&quot;</span>, <span class="at">face =</span> <span class="st">&quot;italic&quot;</span>, <span class="at">size =</span> <span class="dv">182</span>, <span class="at">lineheight =</span> <span class="fl">0.9</span>),</span>
+<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a>        <span class="at">plot.tag.position =</span> <span class="fu">c</span>(<span class="fl">0.15</span>,<span class="fl">0.02</span>),</span>
+<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a>        <span class="at">plot.caption =</span> ggtext<span class="sc">::</span><span class="fu">element_markdown</span>(),</span>
+<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a>        <span class="at">panel.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;seashell2&quot;</span>),</span>
+<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a>        <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">&quot;seashell2&quot;</span>), </span>
+<span id="cb16-18"><a href="#cb16-18" tabindex="-1"></a>        <span class="at">panel.border =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb16-19"><a href="#cb16-19" tabindex="-1"></a>        <span class="at">panel.spacing.y =</span> <span class="fu">unit</span>(<span class="dv">3</span>, <span class="st">&quot;lines&quot;</span>)</span>
+<span id="cb16-20"><a href="#cb16-20" tabindex="-1"></a>        ) </span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>data <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(date, marketCap, <span class="at">group=</span>symbol, <span class="at">colour=</span>symbol)) <span class="sc">+</span></span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour=</span><span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb17-5"><a href="#cb17-5" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="at">data =</span> data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date<span class="sc">==</span><span class="fu">max</span>(date)),</span>
+<span id="cb17-6"><a href="#cb17-6" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">label =</span> symbol),</span>
+<span id="cb17-7"><a href="#cb17-7" tabindex="-1"></a>              <span class="at">label.size =</span> <span class="fl">0.1</span>,  <span class="at">size=</span><span class="fl">2.2</span>,</span>
+<span id="cb17-8"><a href="#cb17-8" tabindex="-1"></a>              <span class="at">label.padding =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">&quot;lines&quot;</span>),</span>
+<span id="cb17-9"><a href="#cb17-9" tabindex="-1"></a>              <span class="at">nudge_x=</span><span class="dv">200</span>) <span class="sc">+</span></span>
+<span id="cb17-10"><a href="#cb17-10" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">clip =</span> <span class="st">&#39;off&#39;</span>) <span class="sc">+</span>        <span class="co"># Allow labels to bleed past the canvas boundaries</span></span>
+<span id="cb17-11"><a href="#cb17-11" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_breaks =</span> <span class="st">&quot;6 month&quot;</span>,  <span class="co"># Date labels for each month.</span></span>
+<span id="cb17-12"><a href="#cb17-12" tabindex="-1"></a>               <span class="at">date_labels =</span> <span class="st">&quot;%b%y&quot;</span>,</span>
+<span id="cb17-13"><a href="#cb17-13" tabindex="-1"></a>               <span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span></span>
+<span id="cb17-14"><a href="#cb17-14" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels=</span><span class="cf">function</span>(x)  <span class="fu">sprintf</span>(<span class="st">&quot;%d Billion&quot;</span>, x <span class="sc">/</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">9</span>)) <span class="sc">+</span> </span>
+<span id="cb17-15"><a href="#cb17-15" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Market Cap evolution - FAAMG&quot;</span>,</span>
+<span id="cb17-16"><a href="#cb17-16" tabindex="-1"></a>       <span class="at">subtitle=</span><span class="st">&quot;&lt;span style=&#39;color: #A9A9A9;&#39;&gt;&lt;b&gt;Apple&lt;/b&gt;&lt;/span&gt;,</span></span>
+<span id="cb17-17"><a href="#cb17-17" tabindex="-1"></a><span class="st">       &lt;span style=&#39;color: #E7B800;&#39;&gt;&lt;b&gt;Amazon&lt;/b&gt;&lt;/span&gt;, </span></span>
+<span id="cb17-18"><a href="#cb17-18" tabindex="-1"></a><span class="st">       &lt;span style=&#39;color: #FC4E07;&#39;&gt;&lt;b&gt;Microsoft&lt;/b&gt;&lt;/span&gt; and </span></span>
+<span id="cb17-19"><a href="#cb17-19" tabindex="-1"></a><span class="st">       &lt;span style=&#39;color: #0D7680;&#39;&gt;&lt;b&gt;Meta&lt;/b&gt;&lt;/span&gt;&quot;</span>,</span>
+<span id="cb17-20"><a href="#cb17-20" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot; &quot;</span>)<span class="sc">+</span> </span>
+<span id="cb17-21"><a href="#cb17-21" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#A9A9A9&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#34AB53&quot;</span>, <span class="st">&quot;#0D7680&quot;</span>, <span class="st">&quot;#FC4E07&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb17-22"><a href="#cb17-22" tabindex="-1"></a>  ft_theme</span></code></pre></div>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>Let’s do the same reusing our Financial Times inspired theme to some considered <em>value stocks</em>.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>symbols_value <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;MCD&#39;</span>, <span class="st">&#39;BRK-A&#39;</span>, <span class="st">&#39;PG&#39;</span>, <span class="st">&#39;KO&#39;</span>)</span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a>data_value <span class="ot">&lt;-</span> fmpcloudr<span class="sc">::</span><span class="fu">fmpc_security_mrktcap</span>(symbols_value, <span class="at">limit =</span> <span class="dv">30</span><span class="sc">*</span><span class="dv">12</span><span class="sc">*</span><span class="dv">12</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>data_value <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">date =</span> <span class="fu">ymd</span>(date),</span>
-<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>                       <span class="at">symbol =</span> <span class="fu">str_replace</span>(symbol, <span class="st">&quot;BRK-A&quot;</span>, <span class="st">&quot;BRK&quot;</span>))</span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>data_value <span class="sc">%&gt;%</span> </span>
-<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(date, marketCap, <span class="at">group=</span>symbol, <span class="at">colour=</span>symbol)) <span class="sc">+</span></span>
-<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour=</span><span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
-<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="at">data =</span> data_value <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date<span class="sc">==</span><span class="fu">max</span>(date)),</span>
-<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">label =</span> symbol),</span>
-<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a>              <span class="at">label.size =</span> <span class="fl">0.1</span>,  <span class="at">size=</span><span class="dv">3</span>,</span>
-<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a>              <span class="at">label.padding =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">&quot;lines&quot;</span>),</span>
-<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a>              <span class="at">nudge_x=</span><span class="dv">200</span>) <span class="sc">+</span></span>
-<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">clip =</span> <span class="st">&#39;off&#39;</span>) <span class="sc">+</span>        <span class="co"># Allow labels to bleed past the canvas boundaries</span></span>
-<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_breaks =</span> <span class="st">&quot;6 month&quot;</span>,  <span class="co"># Date labels for each month.</span></span>
-<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a>               <span class="at">date_labels =</span> <span class="st">&quot;%b%y&quot;</span>,</span>
-<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a>               <span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span></span>
-<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels=</span><span class="cf">function</span>(x)  <span class="fu">sprintf</span>(<span class="st">&quot;%d Billion&quot;</span>, x <span class="sc">/</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">9</span>)) <span class="sc">+</span> </span>
-<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Market Cap evolution - Value Stocks&quot;</span>,</span>
-<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a>       <span class="at">subtitle=</span><span class="st">&quot;&lt;span style=&#39;color: #A9A9A9;&#39;&gt;&lt;b&gt;Berkshire Hathaway&lt;/b&gt;&lt;/span&gt;,</span></span>
-<span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a><span class="st">       &lt;span style=&#39;color: #E7B800;&#39;&gt;&lt;b&gt;Procter &amp; Gamble&lt;/b&gt;&lt;/span&gt;, </span></span>
-<span id="cb18-18"><a href="#cb18-18" tabindex="-1"></a><span class="st">       &lt;span style=&#39;color: #FC4E07;&#39;&gt;&lt;b&gt;Coca-Cola&lt;/b&gt;&lt;/span&gt; and </span></span>
-<span id="cb18-19"><a href="#cb18-19" tabindex="-1"></a><span class="st">       &lt;span style=&#39;color: #0D7680;&#39;&gt;&lt;b&gt;Mcdonald&#39;s&lt;/b&gt;&lt;/span&gt;&quot;</span>,</span>
-<span id="cb18-20"><a href="#cb18-20" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot; &quot;</span>)<span class="sc">+</span> </span>
-<span id="cb18-21"><a href="#cb18-21" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#554178&quot;</span>, <span class="st">&quot;#df2b24&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#003CAE&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb18-22"><a href="#cb18-22" tabindex="-1"></a>  ft_theme</span></code></pre></div>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a>symbols_value <span class="ot">=</span> <span class="fu">c</span>(<span class="st">&#39;MCD&#39;</span>, <span class="st">&#39;BRK-A&#39;</span>, <span class="st">&#39;PG&#39;</span>, <span class="st">&#39;KO&#39;</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>data_value <span class="ot">&lt;-</span> fmpcloudr<span class="sc">::</span><span class="fu">fmpc_security_mrktcap</span>(symbols_value, <span class="at">limit =</span> <span class="dv">30</span><span class="sc">*</span><span class="dv">12</span><span class="sc">*</span><span class="dv">12</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>data_value <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">date =</span> <span class="fu">ymd</span>(date),</span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>                       <span class="at">symbol =</span> <span class="fu">str_replace</span>(symbol, <span class="st">&quot;BRK-A&quot;</span>, <span class="st">&quot;BRK&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>data_value <span class="sc">%&gt;%</span> </span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(date, marketCap, <span class="at">group=</span>symbol, <span class="at">colour=</span>symbol)) <span class="sc">+</span></span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">size =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour=</span><span class="st">&quot;none&quot;</span>) <span class="sc">+</span> </span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="at">data =</span> data_value <span class="sc">%&gt;%</span> <span class="fu">filter</span>(date<span class="sc">==</span><span class="fu">max</span>(date)),</span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>              <span class="fu">aes</span>(<span class="at">label =</span> symbol),</span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>              <span class="at">label.size =</span> <span class="fl">0.1</span>,  <span class="at">size=</span><span class="dv">3</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>              <span class="at">label.padding =</span> <span class="fu">unit</span>(<span class="fl">0.2</span>, <span class="st">&quot;lines&quot;</span>),</span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a>              <span class="at">nudge_x=</span><span class="dv">200</span>) <span class="sc">+</span></span>
+<span id="cb20-10"><a href="#cb20-10" tabindex="-1"></a>  <span class="fu">coord_cartesian</span>(<span class="at">clip =</span> <span class="st">&#39;off&#39;</span>) <span class="sc">+</span>        <span class="co"># Allow labels to bleed past the canvas boundaries</span></span>
+<span id="cb20-11"><a href="#cb20-11" tabindex="-1"></a>  <span class="fu">scale_x_date</span>(<span class="at">date_breaks =</span> <span class="st">&quot;6 month&quot;</span>,  <span class="co"># Date labels for each month.</span></span>
+<span id="cb20-12"><a href="#cb20-12" tabindex="-1"></a>               <span class="at">date_labels =</span> <span class="st">&quot;%b%y&quot;</span>,</span>
+<span id="cb20-13"><a href="#cb20-13" tabindex="-1"></a>               <span class="at">guide =</span> <span class="fu">guide_axis</span>(<span class="at">angle =</span> <span class="dv">90</span>)) <span class="sc">+</span></span>
+<span id="cb20-14"><a href="#cb20-14" tabindex="-1"></a>  <span class="fu">scale_y_continuous</span>(<span class="at">labels=</span><span class="cf">function</span>(x)  <span class="fu">sprintf</span>(<span class="st">&quot;%d Billion&quot;</span>, x <span class="sc">/</span> <span class="dv">10</span><span class="sc">^</span><span class="dv">9</span>)) <span class="sc">+</span> </span>
+<span id="cb20-15"><a href="#cb20-15" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Market Cap evolution - Value Stocks&quot;</span>,</span>
+<span id="cb20-16"><a href="#cb20-16" tabindex="-1"></a>       <span class="at">subtitle=</span><span class="st">&quot;&lt;span style=&#39;color: #554178;&#39;&gt;&lt;b&gt;Berkshire Hathaway&lt;/b&gt;&lt;/span&gt;,</span></span>
+<span id="cb20-17"><a href="#cb20-17" tabindex="-1"></a><span class="st">       &lt;span style=&#39;color: #003CAE;&#39;&gt;&lt;b&gt;Procter &amp; Gamble&lt;/b&gt;&lt;/span&gt;, </span></span>
+<span id="cb20-18"><a href="#cb20-18" tabindex="-1"></a><span class="st">       &lt;span style=&#39;color: #df2b24;&#39;&gt;&lt;b&gt;Coca-Cola&lt;/b&gt;&lt;/span&gt; and </span></span>
+<span id="cb20-19"><a href="#cb20-19" tabindex="-1"></a><span class="st">       &lt;span style=&#39;color: #E7B800;&#39;&gt;&lt;b&gt;Mcdonald&#39;s&lt;/b&gt;&lt;/span&gt;&quot;</span>,</span>
+<span id="cb20-20"><a href="#cb20-20" tabindex="-1"></a>       <span class="at">x=</span><span class="st">&quot; &quot;</span>)<span class="sc">+</span> </span>
+<span id="cb20-21"><a href="#cb20-21" tabindex="-1"></a>  <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;#554178&quot;</span>, <span class="st">&quot;#df2b24&quot;</span>, <span class="st">&quot;#E7B800&quot;</span>, <span class="st">&quot;#003CAE&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb20-22"><a href="#cb20-22" tabindex="-1"></a>  ft_theme</span></code></pre></div>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p><br></p>
 </div>
 <div id="could-we-cluster-stocks-based-in-their-recent-2023-performance" class="section level2">
 <h2>Could we cluster stocks based in their recent 2023 performance?</h2>
 <p>Time series clustering is a very controversial topic. Therefore we are skipping it during this first introductory post, and we are using a simple clustering based on simple stats: daily return (approximated using the already downloaded market cap delta) and volatility.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>data_basic_stats <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
-<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>  <span class="fu">filter</span>(date<span class="sc">&gt;=</span><span class="st">&#39;2023-01-01&#39;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>  <span class="fu">group_by</span>(symbol) <span class="sc">%&gt;%</span> </span>
-<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">lag_mktcap =</span> <span class="fu">lag</span>(marketCap,<span class="at">order_by =</span> date),</span>
-<span id="cb19-5"><a href="#cb19-5" tabindex="-1"></a>         <span class="at">diff =</span> (marketCap <span class="sc">-</span> lag_mktcap) <span class="sc">/</span>lag_mktcap <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb19-6"><a href="#cb19-6" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="at">.vars =</span> <span class="st">&#39;diff&#39;</span>, <span class="fu">c</span>(<span class="fu">funs</span>(<span class="fu">mean</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>)), <span class="fu">funs</span>(<span class="fu">sd</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>))))</span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>data_value_basic_stats <span class="ot">&lt;-</span> data_value <span class="sc">%&gt;%</span> </span>
-<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>  <span class="fu">filter</span>(date<span class="sc">&gt;=</span><span class="st">&#39;2023-01-01&#39;</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>  <span class="fu">group_by</span>(symbol) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">lag_mktcap =</span> <span class="fu">lag</span>(marketCap,<span class="at">order_by =</span> date),</span>
-<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>         <span class="at">diff =</span> (marketCap <span class="sc">-</span> lag_mktcap) <span class="sc">/</span>lag_mktcap <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="at">.vars =</span> <span class="st">&#39;diff&#39;</span>, <span class="fu">c</span>(<span class="fu">funs</span>(<span class="fu">mean</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>)), <span class="fu">funs</span>(<span class="fu">sd</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>))))</span></code></pre></div>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>data_stats <span class="ot">&lt;-</span> data_basic_stats <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>(data_value_basic_stats)</span>
-<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a></span>
-<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>tot_withinss <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>, <span class="cf">function</span>(k) {</span>
-<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>  model <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data_stats <span class="sc">%&gt;%</span> <span class="fu">select</span>(mean, sd), <span class="at">centers =</span> k)</span>
-<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>  model<span class="sc">$</span>tot.withinss</span>
-<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>})</span>
-<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a></span>
-<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">k =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>,</span>
-<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a>           <span class="at">tot_withinss =</span> tot_withinss) <span class="sc">%&gt;%</span></span>
-<span id="cb21-10"><a href="#cb21-10" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> k, <span class="at">y =</span> tot_withinss)) <span class="sc">+</span></span>
-<span id="cb21-11"><a href="#cb21-11" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
-<span id="cb21-12"><a href="#cb21-12" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">kmeans</span>(data_stats <span class="sc">%&gt;%</span> <span class="fu">select</span>(mean, sd), <span class="dv">3</span>)</span>
-<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>data_stats <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">cluster =</span> fit<span class="sc">$</span>cluster,</span>
-<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>                      <span class="at">cluster_mean =</span> fit<span class="sc">$</span>centers[cluster,<span class="dv">1</span>],</span>
-<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>                      <span class="at">cluster_sd =</span> fit<span class="sc">$</span>centers[cluster,<span class="dv">2</span>],</span>
-<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>                      )</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>data_basic_stats <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>  <span class="fu">filter</span>(date<span class="sc">&gt;=</span><span class="st">&#39;2023-01-01&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>  <span class="fu">group_by</span>(symbol) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">lag_mktcap =</span> <span class="fu">lag</span>(marketCap,<span class="at">order_by =</span> date),</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>         <span class="at">diff =</span> (marketCap <span class="sc">-</span> lag_mktcap) <span class="sc">/</span>lag_mktcap <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="at">.vars =</span> <span class="st">&#39;diff&#39;</span>, <span class="fu">c</span>(<span class="fu">funs</span>(<span class="fu">mean</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>)), <span class="fu">funs</span>(<span class="fu">sd</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>))))</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a>data_value_basic_stats <span class="ot">&lt;-</span> data_value <span class="sc">%&gt;%</span> </span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>  <span class="fu">filter</span>(date<span class="sc">&gt;=</span><span class="st">&#39;2023-01-01&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a>  <span class="fu">group_by</span>(symbol) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">lag_mktcap =</span> <span class="fu">lag</span>(marketCap,<span class="at">order_by =</span> date),</span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a>         <span class="at">diff =</span> (marketCap <span class="sc">-</span> lag_mktcap) <span class="sc">/</span>lag_mktcap <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a>  <span class="fu">summarise_at</span>(<span class="at">.vars =</span> <span class="st">&#39;diff&#39;</span>, <span class="fu">c</span>(<span class="fu">funs</span>(<span class="fu">mean</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>)), <span class="fu">funs</span>(<span class="fu">sd</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>))))</span></code></pre></div>
+<p>Since we are only examining the dataset and it only has two dimensions, we opt to use the straightforward elbow method to select 3 clusters. However, we could also try with 2 and 4 clusters to compare the outcomes.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a>data_stats <span class="ot">&lt;-</span> data_basic_stats <span class="sc">%&gt;%</span> <span class="fu">bind_rows</span>(data_value_basic_stats)</span>
+<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a></span>
+<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>tot_withinss <span class="ot">&lt;-</span> <span class="fu">map_dbl</span>(<span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>, <span class="cf">function</span>(k) {</span>
+<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>  model <span class="ot">&lt;-</span> <span class="fu">kmeans</span>(data_stats <span class="sc">%&gt;%</span> <span class="fu">select</span>(mean, sd), <span class="at">centers =</span> k)</span>
+<span id="cb23-5"><a href="#cb23-5" tabindex="-1"></a>  model<span class="sc">$</span>tot.withinss</span>
+<span id="cb23-6"><a href="#cb23-6" tabindex="-1"></a>})</span>
+<span id="cb23-7"><a href="#cb23-7" tabindex="-1"></a></span>
+<span id="cb23-8"><a href="#cb23-8" tabindex="-1"></a><span class="fu">data.frame</span>(<span class="at">k =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>,</span>
+<span id="cb23-9"><a href="#cb23-9" tabindex="-1"></a>           <span class="at">tot_withinss =</span> tot_withinss) <span class="sc">%&gt;%</span></span>
+<span id="cb23-10"><a href="#cb23-10" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> k, <span class="at">y =</span> tot_withinss)) <span class="sc">+</span></span>
+<span id="cb23-11"><a href="#cb23-11" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb23-12"><a href="#cb23-12" tabindex="-1"></a>  <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="dv">2</span><span class="sc">:</span><span class="dv">5</span>)</span></code></pre></div>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/elbow-1.png" width="672" /></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>fit <span class="ot">=</span> <span class="fu">kmeans</span>(data_stats <span class="sc">%&gt;%</span> <span class="fu">select</span>(mean, sd), <span class="dv">3</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a>data_stats <span class="sc">%&lt;&gt;%</span> <span class="fu">mutate</span>(<span class="at">cluster =</span> fit<span class="sc">$</span>cluster,</span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>                      <span class="at">cluster_mean =</span> fit<span class="sc">$</span>centers[cluster,<span class="dv">1</span>],</span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a>                      <span class="at">cluster_sd =</span> fit<span class="sc">$</span>centers[cluster,<span class="dv">2</span>],</span>
+<span id="cb24-6"><a href="#cb24-6" tabindex="-1"></a>                      )</span></code></pre></div>
 <p>In the field of economics, there is a tendency to apply discrete categories, often based on historical but arbitrary thresholds, such as recession / not recession, stagflation, growth stocks versus value stocks… We should go beyond basic KPIs and try to approximate underlaying factors driving the markets.</p>
 <p>Throughout this series, we will strive to analyze and categorize data in a way that reflects richer and higher-dimensional information.</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">ggplot</span>(data_stats, <span class="fu">aes</span>(mean, sd, <span class="at">colour=</span><span class="fu">factor</span>(cluster))) <span class="sc">+</span></span>
-<span id="cb23-2"><a href="#cb23-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb23-3"><a href="#cb23-3" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> symbol), <span class="at">size=</span><span class="dv">3</span>, <span class="at">label.r =</span> <span class="fu">unit</span>(<span class="dv">5</span>, <span class="st">&#39;points&#39;</span>)) <span class="sc">+</span> </span>
-<span id="cb23-4"><a href="#cb23-4" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour=</span><span class="cn">FALSE</span>)</span></code></pre></div>
-<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="fu">ggplot</span>(data_stats, <span class="fu">aes</span>(mean, sd, <span class="at">colour=</span><span class="fu">factor</span>(cluster))) <span class="sc">+</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a>  <span class="fu">geom_label</span>(<span class="fu">aes</span>(<span class="at">label =</span> symbol), <span class="at">size=</span><span class="dv">3</span>, <span class="at">label.r =</span> <span class="fu">unit</span>(<span class="dv">5</span>, <span class="st">&#39;points&#39;</span>)) <span class="sc">+</span> </span>
+<span id="cb25-4"><a href="#cb25-4" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">colour=</span><span class="cn">FALSE</span>)</span></code></pre></div>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/cluster-1.png" width="672" /></p>
 <p>We can easily expand our analysis to other stocks. Let’s discover how to do so in using the Financial Market Prep API and R package, and in next post we’ll elaborate on those ts clusterization methods, common patterns, turning points…</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a>total_tickers <span class="ot">&lt;-</span> <span class="fu">fmpc_symbols_available</span>()</span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a>total_tickers<span class="sc">$</span>exchangeShortName <span class="sc">%&gt;%</span> <span class="fu">unique</span>() <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">20</span>)</span></code></pre></div>
-<pre><code>##  [1] &quot;MCX&quot;      &quot;NYSE&quot;     &quot;NASDAQ&quot;   &quot;TSX&quot;      &quot;AMEX&quot;     &quot;ETF&quot;     
-##  [7] &quot;CNQ&quot;      &quot;NEO&quot;      &quot;ASE&quot;      &quot;PNK&quot;      &quot;YHD&quot;      &quot;CBT&quot;     
-## [13] &quot;EURONEXT&quot; &quot;OTC&quot;      &quot;SAO&quot;      &quot;LSE&quot;      &quot;XETRA&quot;    &quot;STU&quot;     
-## [19] &quot;MEX&quot;      &quot;BUE&quot;</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>list_symbols <span class="ot">&lt;-</span> total_tickers <span class="sc">%&gt;%</span> <span class="fu">filter</span>(exchangeShortName<span class="sc">==</span><span class="st">&#39;NYSE&#39;</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(symbol)</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a>total_tickers <span class="ot">&lt;-</span> <span class="fu">fmpc_symbols_available</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>total_tickers<span class="sc">$</span>exchangeShortName <span class="sc">%&gt;%</span> <span class="fu">unique</span>() <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">20</span>)</span></code></pre></div>
+<pre><code>##  [1] &quot;MCX&quot;      &quot;NSE&quot;      &quot;STO&quot;      &quot;CPH&quot;      &quot;HEL&quot;      &quot;NASDAQ&quot;  
+##  [7] &quot;TAL&quot;      &quot;CBT&quot;      &quot;EURONEXT&quot; &quot;OSE&quot;      &quot;IST&quot;      &quot;MIL&quot;     
+## [13] &quot;LSE&quot;      &quot;JNB&quot;      &quot;AMS&quot;      &quot;KLS&quot;      &quot;XETRA&quot;    &quot;BSE&quot;     
+## [19] &quot;WSE&quot;      &quot;STU&quot;</code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a>list_symbols <span class="ot">&lt;-</span> total_tickers <span class="sc">%&gt;%</span> <span class="fu">filter</span>(exchangeShortName<span class="sc">==</span><span class="st">&#39;NYSE&#39;</span>) <span class="sc">%&gt;%</span> <span class="fu">pull</span>(symbol)</span></code></pre></div>
 <p>This APi call provides quite a lot (all) of them!</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> fmpcloudr<span class="sc">::</span><span class="fu">fmpc_security_mrktcap</span>(list_symbols, <span class="at">limit =</span> <span class="dv">30</span><span class="sc">*</span><span class="dv">3</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a>data <span class="ot">&lt;-</span> fmpcloudr<span class="sc">::</span><span class="fu">fmpc_security_mrktcap</span>(list_symbols, <span class="at">limit =</span> <span class="dv">30</span><span class="sc">*</span><span class="dv">3</span>)</span></code></pre></div>
 <p>We now have the capability to conduct the analysis on the entire NYSE, or at least the most highly capitalized stocks. But that will be another day ;)</p>
 <p>For now, we can see <strong>again a decay in the value stocks in these two first months of 2023</strong> vs the growth ones. The market has once again received a dose of optimism. Could it be a good option to start/continue a DCA strategy? Perhaps its suitability varies based on industry and current valuation? Most likely, it does.</p>
 <p>We are extending this analysis and talking about valuation metrics in our second post of the series! So…</p>
