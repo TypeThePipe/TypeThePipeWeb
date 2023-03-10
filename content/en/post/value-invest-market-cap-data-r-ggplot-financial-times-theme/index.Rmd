@@ -35,7 +35,7 @@ Over the past months, heavy market drifts have occurred, and no one could have i
 
 As we entered **2023, we witnessed certain stocks soaring in the markets**, attempting to recover from their previous losses, while other **macroeconomic indicators continued to deteriorate.** However, uncertainty still weighs heavily on the minds of investors, perhaps even more so than ever before, given the threats of inflation, labor market instability, dollarization pitfalls, trust decay in central banks and financial institutions, interest rates, potential real estate crash in specific local areas...
 
-A significant question raises: **how to protect ourselves against such circumstances** and what we can expect in each possible scenario?
+A significant question raises: **how to protect ourselves against such circumstances** and what can we expect in each possible scenario?
 
 Therefore, it presents a fantastic opportunity to **brush up our R, tidy & ggplot, skills and delve further into the market structure**. Through this series of posts, we are primarily examining the stock market, its dynamics, cycles, valuation metrics, as well as the pre-IPO and startup ecosystem, the bond market, real estate, and even a touch of crypto. However, as you'll see, we are mainly deepening our understanding of value/fundamentals-focused investing strategies.
 
@@ -45,9 +45,9 @@ Therefore, it presents a fantastic opportunity to **brush up our R, tidy & ggplo
 
 Value investing is an investment strategy that involves buying stocks or other financial assets that are believed to be undervalued by the market, **focusing in their intrinsic value**. The ultimate goal of value investing then, is to identify **companies that are temporarily undervalued by the market due to factors such as short-term negative news, volatility, or even investor sentiment**. By buying these assets at a discounted price, value investors hope to profit from the market's eventual recognition of the company's true value, resulting in a higher stock price.
 
-So we are far in this series from the high frequency, short-term or daily trades. Although, it's a quite prolific ad profitable field, also an interesting intersection between Data Science and Finance ;)
+So we are far in this series from the high frequency, short-term or daily trades. Although, it's a quite prolific and profitable field, also an interesting intersection between Data Science and Finance ;)
 
-The approach, skills and even the involved risks are way different from one way to trade to other. The *value investing approach* could also be seen or performed as a defensive strategy, not as greedy as other ones. But it also involves long-term and macroeconomic risks that are not present (or have less impact) in short-to-medium term strategies.
+The approach, skills and even the involved risks are quite different from one way to trade to other. The *value investing approach* could also be seen or performed as a defensive strategy, not as greedy as other ones. But it also involves long-term and macroeconomic risks that are not present (or have less impact) in short-to-medium term strategies.
 
 <br>
 
@@ -75,11 +75,6 @@ fmpc_set_token('your_token') # example fmpc_set_token('09431214923a63117b0p00ff1
 
 ```{r, include=FALSE}
 fmpc_set_token(Sys.getenv('FMP_KEY'))#'17434614923c63597a0b12df4cabbacb')
-```
-
-
-```{r}
-fmpcloudr::fmpc_get_url('')
 ```
 
 
@@ -179,7 +174,7 @@ More information in their [documentation](https://site.financialmodelingprep.com
 
 ## Market Capitalization in R
 
-As promised, we are just introducing the package and brushing up our ggplot skills. Therefore, we are focusing in this post on the evolution of market cap, allowing us to compare trends between different stocks. **It is well known that growth stocks have experienced a massive surge in recent years, ranging from technology growth companies to pump-and-dump penny stocks, 'meme-stocks' defying the establishment (gl CreditSuisse) and SPACs frenzy.** The market has been flooded with free money for almost a decade, with tech players lowering the entry barriers for retail investors, and benefiting from lockdown savings and subsidies.
+As promised, we are just introducing the package and brushing up our ggplot skills. Therefore, we are focusing in this post on the evolution of market cap, allowing us to compare trends between different stocks. **It is well known that growth stocks have experienced a massive surge in recent years, ranging from technology growth companies to pump-and-dump penny stocks, 'meme-stocks' defying the establishment (good luck Credit Suisse, SVB..) and SPACs frenzy.** The market has been flooded with free money for almost a decade, with tech players lowering the entry barriers for retail investors, and benefiting from lockdown savings and subsidies.
 
 Let's examine the impact of this phenomenon on a set of stocks categorized as 'growth' and 'value'. Since life is a continuum, we will first categorize them by hand according to the consensus. We will then conduct an initial analysis, which will be elaborated further in subsequent posts, attempting to cluster them based on their actual performance. In this chapter, we will use the market cap fluctuation to achieve this, although other features could also be utilized and macroeconomic factors taken into account. Stay tuned for upcoming TypeThePipe posts!
 
@@ -209,7 +204,7 @@ ggplot(data, aes(date, marketCap, colour = symbol)) +
 
 ## Financial Times Theme in Ggplot
 
-Not bad for a 2 lines plot, but lets add some Financial Times kind of flavor:
+Not bad for a 2 lines plot, but lets add some Financial Times theme kind of flavor:
 
 ```{r}
 # old chunk in my codebase seen in Reddit but and can't find the source. If anyone has the original link, very glad to add it here! :)
