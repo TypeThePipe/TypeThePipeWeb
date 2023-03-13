@@ -33,6 +33,11 @@
   url = "#people"
   weight = 60
 
+[[main]]
+  name = "Mentorship Program"
+  url = "#mentorship"
+  weight = 60
+  
 #[[main]]
 #  name = "Contact"
 #  url = "#contact"
