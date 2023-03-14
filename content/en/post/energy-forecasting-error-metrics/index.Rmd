@@ -1,5 +1,5 @@
 ---
-title: "Energy forecasting error metrics"
+title: "Forecasting error metrics for Time Series models"
 author: "Pablo Cánovas Tourné"
 date: '2019-09-21'
 slug: "energy-forecasting-error-metrics"
@@ -8,17 +8,17 @@ output:
     toc: TRUE
     toc_depth: 2
 categories:
-  - Metrics
+  - TimeSeries
   - Post
 tags: []
-subtitle: 'A discussion about the main error metrics and their properties.'
-summary: 'A discussion about the main error metrics and their properties'
+subtitle: '8 Forecast error metrics you should know to evaluate the accuracy of your time series models. Find metrics that are aligned with your business goals.'
+summary: '8 Forecast error metrics you should know to evaluate the accuracy of your time series models. Find metrics that are aligned with your business goals.'
 authors: [pablo-canovas]
 math: TRUE
 ---
 
 ```{r, include=FALSE}
-nchar("MAE | MSE | RMSE | MAPE | sMAPE | NMAE | MAD | MASE | EMAE. A discussion about the main error metrics and their properties.")
+nchar("8 Forecast error metrics you should know to evaluate the accuracy of your timeseries models. Find metrics that are aligned with your business goals.")
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
