@@ -17,6 +17,8 @@ authors: [pablo-canovas]
 math: TRUE
 ---
 
+<br>
+
 ```{r, include=FALSE}
 nchar("8 Forecast error metrics you should know to evaluate the accuracy of your timeseries models. Find metrics that are aligned with your business goals.")
 ```
@@ -26,6 +28,7 @@ library(tidyverse)
 library(knitr)
 library(kableExtra)
 ```
+
 
 
 # Introduction

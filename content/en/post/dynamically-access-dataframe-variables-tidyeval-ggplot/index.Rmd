@@ -1,5 +1,5 @@
 ---
-title: "How to write functions with ggplot"
+title: "How to dynamically plot variables with ggplot using plotter functions"
 author: Pablo Cánovas Tourné
 date: '2022-02-23'
 slug: dynamically-access-dataframe-variables-tidyeval-ggplot
@@ -10,8 +10,8 @@ categories:
   - R
   - Post
 tags: [Tidyverse, ggplot]
-subtitle: 'Dynamically plot variables within a datafame passed as a string argument'
-summary: 'Write plotting functions and dynamically access variables from a dataframe with tidy evaluation and ggplot'
+subtitle: 'Write plotting functions and dynamically access variables from a dataframe passed as a string argument with tidy evaluation and ggplot'
+summary: 'Write plotting functions and dynamically access variables from a dataframe passed as a string argument with tidy evaluation and ggplot'
 authors: [pablo-canovas]
 ---
 

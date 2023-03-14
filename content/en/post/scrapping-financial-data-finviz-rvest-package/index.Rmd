@@ -16,6 +16,8 @@ summary: 'Learn how to use rvest R package to scrape finviz financial data in le
 authors: [pablo-canovas]
 ---
 
+<br>
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 ```
@@ -168,6 +170,7 @@ Get_finviz_data <- function(symbol){
 
 And there you have it! A functional scraper in less than 30 lines of code where we showed how to use the convenient library ```rvest``` to download financial data from any public company.
 
+<br>
 
 ```{=html}
 <!-- Begin Mailchimp Signup Form -->
