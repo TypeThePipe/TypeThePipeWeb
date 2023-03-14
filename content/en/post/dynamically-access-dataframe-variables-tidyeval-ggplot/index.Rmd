@@ -43,7 +43,7 @@ Tidyverse and dplyr verbs allow us to write clean code with the use of tidy eval
 [Tidy evaluation](https://dplyr.tidyverse.org/articles/programming.html) is a programming paradigm in the R programming language that allows for a more intuitive and efficient way of working with data. The basic idea behind tidy evaluation is to treat variables as expressions rather than symbols. This means that when you write R code, you can easily use variables that reference columns in a dataframe as if they were actual variables in your environment. This can make your code cleaner, more concise and more readable.
 
 Another huge benefit is that we can leverage on the incredible *dplyr* package to create reusable functions, or helpers, that will make our life easier.
-One way to accomplish this is by using the bang bang operator (```{{}}```) from the *rlang* package.
+One way to accomplish this is by using the curly curly operator (```{{}}```) from the *rlang* package.
 Let's show a couple examples of this neat trick:
 
 ```{r}
@@ -120,7 +120,7 @@ Whereas it does still work, ```aes_string``` has been deprecated so use it at yo
 
 The way we are suppose to overcome this is by using the helper ```.data``` inside the mapping call, which I must say it's pretty neat:
 
-```{r}
+```{r, echo=FALSE}
 my_plot2 <- function(df, var){
   df %>%
     ggplot(aes(x=date)) +
@@ -134,7 +134,7 @@ There is another corner case that maybe we can face: Having to pass the variable
 
 For this case, again we could simply use the ```.data``` helper shown in the previous example, but life would be boring if it was that easy.
 
-Another (weird) way to solve this one is using more advanced and unusual dplyr functions like ```ensym``` and the unquote operator from rlang, also known as the [bang-bang operator](https://adv-r.hadley.nz/quasiquotation.html) (!!):
+Another (weird) way to solve this one is using more advanced and unusual dplyr functions like ```ensym``` and the unquote operator from rlang, also known as the [curly-curly operator](https://adv-r.hadley.nz/quasiquotation.html) (!!):
 
 ```{r}
 my_plot3 <- function(df, var){

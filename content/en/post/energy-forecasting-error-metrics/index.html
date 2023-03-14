@@ -1,5 +1,5 @@
 ---
-title: "Energy forecasting error metrics"
+title: "Forecasting error metrics for Time Series models"
 author: "Pablo Cánovas Tourné"
 date: '2019-09-21'
 slug: "energy-forecasting-error-metrics"
@@ -8,28 +8,30 @@ output:
     toc: TRUE
     toc_depth: 2
 categories:
-  - Metrics
+  - TimeSeries
   - Post
 tags: []
-subtitle: 'A discussion about the main error metrics and their properties.'
-summary: 'A discussion about the main error metrics and their properties'
+subtitle: '8 Forecast error metrics you should know to evaluate the accuracy of your time series models. Find metrics that are aligned with your business goals.'
+summary: '8 Forecast error metrics you should know to evaluate the accuracy of your time series models. Find metrics that are aligned with your business goals.'
 authors: [pablo-canovas]
 math: TRUE
 ---
 
-<script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+<script src="{{< blogdown/postref >}}index_files/kePrint/kePrint.js"></script>
+<link href="{{< blogdown/postref >}}index_files/lightable/lightable.css" rel="stylesheet" />
 
 <div id="TOC">
 <ul>
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#scale-dependent-error-metrics">Scale dependent error metrics</a></li>
-<li><a href="#percentage-error-metrics">Percentage-error metrics</a></li>
-<li><a href="#scale-free-error-metrics">Scale-free error metrics</a></li>
-<li><a href="#conclusions">Conclusions</a></li>
-<li><a href="#references">References</a></li>
+<li><a href="#introduction" id="toc-introduction">Introduction</a></li>
+<li><a href="#scale-dependent-error-metrics" id="toc-scale-dependent-error-metrics">Scale dependent error metrics</a></li>
+<li><a href="#percentage-error-metrics" id="toc-percentage-error-metrics">Percentage-error metrics</a></li>
+<li><a href="#scale-free-error-metrics" id="toc-scale-free-error-metrics">Scale-free error metrics</a></li>
+<li><a href="#conclusions" id="toc-conclusions">Conclusions</a></li>
+<li><a href="#references" id="toc-references">References</a></li>
 </ul>
 </div>
 
+<p><br></p>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
 <p>The idea of this post comes from the different error metrics I have dealt with working with time series data and forecasting models.</p>

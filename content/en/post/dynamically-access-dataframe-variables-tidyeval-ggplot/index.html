@@ -1,5 +1,5 @@
 ---
-title: "How to write functions with ggplot"
+title: "How to dynamically plot variables with ggplot using plotter functions"
 author: Pablo Cánovas Tourné
 date: '2022-02-23'
 slug: dynamically-access-dataframe-variables-tidyeval-ggplot
@@ -10,12 +10,11 @@ categories:
   - R
   - Post
 tags: [Tidyverse, ggplot]
-subtitle: 'Dynamically plot variables within a datafame passed as a string argument'
-summary: 'Write plotting functions and dynamically access variables from a dataframe with tidy evaluation and ggplot'
+subtitle: 'Write plotting functions and dynamically access variables from a dataframe passed as a string argument with tidy evaluation and ggplot'
+summary: 'Write plotting functions and dynamically access variables from a dataframe passed as a string argument with tidy evaluation and ggplot'
 authors: [pablo-canovas]
 ---
 
-<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
@@ -91,7 +90,7 @@ Tidyverse and dplyr verbs allow us to write clean code with the use of tidy eval
 <h2>Tidy evaluation?</h2>
 <p><a href="https://dplyr.tidyverse.org/articles/programming.html">Tidy evaluation</a> is a programming paradigm in the R programming language that allows for a more intuitive and efficient way of working with data. The basic idea behind tidy evaluation is to treat variables as expressions rather than symbols. This means that when you write R code, you can easily use variables that reference columns in a dataframe as if they were actual variables in your environment. This can make your code cleaner, more concise and more readable.</p>
 <p>Another huge benefit is that we can leverage on the incredible <em>dplyr</em> package to create reusable functions, or helpers, that will make our life easier.
-One way to accomplish this is by using the bang bang operator (<code>{{}}</code>) from the <em>rlang</em> package.
+One way to accomplish this is by using the curly curly operator (<code>{{}}</code>) from the <em>rlang</em> package.
 Let’s show a couple examples of this neat trick:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Create a function that takes as arguments a data frame and two column names and returns a filtered data frame</span></span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>my_filter <span class="ot">&lt;-</span> <span class="cf">function</span>(df, var1, var2){</span>
@@ -117,7 +116,7 @@ Let’s show a couple examples of this neat trick:</p>
 <p>Let’s plot the closing stock price of TSLA to showcase its use:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Daily prices from TSLA stock:</span></span>
 <span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">head</span>(tsla)</span></code></pre></div>
-<pre><code>## # A tibble: 6 x 6
+<pre><code>## # A tibble: 6 × 6
 ##   date        open  high   low close    volume
 ##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
 ## 1 2022-01-03  383.  400.  379.  400. 104686047
@@ -152,23 +151,16 @@ Let’s show a couple examples of this neat trick:</p>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-8-1.png" width="672" />
 Whereas it does still work, <code>aes_string</code> has been deprecated so use it at your own risk.</p>
 <p>The way we are suppose to overcome this is by using the helper <code>.data</code> inside the mapping call, which I must say it’s pretty neat:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>my_plot2 <span class="ot">&lt;-</span> <span class="cf">function</span>(df, var){</span>
-<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
-<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>date)) <span class="sc">+</span></span>
-<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span>.data[[var]]))</span>
-<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>}</span>
-<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>my_var <span class="ot">&lt;-</span> <span class="st">&quot;close&quot;</span></span>
-<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="fu">my_plot2</span>(tsla, my_var)</span></code></pre></div>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>There is another corner case that maybe we can face: Having to pass the variable as a character itself, instead of having it in a variable. It’s a silly example as we could simply store it in a variable before calling the plotter but it’s good to know different possibilities.</p>
 <p>For this case, again we could simply use the <code>.data</code> helper shown in the previous example, but life would be boring if it was that easy.</p>
-<p>Another (weird) way to solve this one is using more advanced and unusual dplyr functions like <code>ensym</code> and the unquote operator from rlang, also known as the <a href="https://adv-r.hadley.nz/quasiquotation.html">bang-bang operator</a> (!!):</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>my_plot3 <span class="ot">&lt;-</span> <span class="cf">function</span>(df, var){</span>
-<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
-<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>date)) <span class="sc">+</span></span>
-<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="sc">!!</span><span class="fu">ensym</span>(var)))</span>
-<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>}</span>
-<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="fu">my_plot3</span>(tsla, <span class="st">&quot;close&quot;</span>)</span></code></pre></div>
+<p>Another (weird) way to solve this one is using more advanced and unusual dplyr functions like <code>ensym</code> and the unquote operator from rlang, also known as the <a href="https://adv-r.hadley.nz/quasiquotation.html">curly-curly operator</a> (!!):</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>my_plot3 <span class="ot">&lt;-</span> <span class="cf">function</span>(df, var){</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>  df <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>    <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>date)) <span class="sc">+</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>    <span class="fu">geom_line</span>(<span class="fu">aes</span>(<span class="at">y=</span><span class="sc">!!</span><span class="fu">ensym</span>(var)))</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>}</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="fu">my_plot3</span>(tsla, <span class="st">&quot;close&quot;</span>)</span></code></pre></div>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>Definitely the curly-curly operator is really handy when programming with R.
 I hope you learned something today!</p>
