@@ -17,7 +17,8 @@ authors: [pablo-canovas]
 featured: false
 ---
 
-<br>
+<img src="./featured.png" height="300px" width="500px" alt="Financial data scraper with rvest" />
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
@@ -39,8 +40,6 @@ While Finviz is a valuable resource for traders, manually collecting and analyzi
 ## Disclaimer
 
 Before diving into the topic, it's important to note that web scraping can potentially violate website terms of service and can even be illegal in some cases. Let's be [polite](https://dmi3kno.github.io/polite/) and don't use this code to resell any information, as this is not permitted by their terms of use. For educational and personal purposes only.
-
-<img src="./featured.png" height="350px" width="500px" alt="Financial data scraper with rvest" />
 
 # Into the water
 
