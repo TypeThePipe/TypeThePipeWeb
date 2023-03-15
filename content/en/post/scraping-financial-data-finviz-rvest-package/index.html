@@ -1,8 +1,8 @@
 ---
-title: 'Scrapping financial data from finviz with R and rvest package'
+title: 'Scraping financial data from finviz with R and rvest package'
 author: Pablo Cánovas Tourné
 date: '2023-03-14'
-slug: scrapping-financial-data-finviz-rvest-package
+slug: scraping-financial-data-finviz-rvest-package
 output: 
   blogdown::html_page:
     highlight: tango 
@@ -14,6 +14,7 @@ tags: [AlgoTrading]
 subtitle: 'Learn how to use rvest R package to scrape finviz financial data in less than 30 lines of code. Quick rvest tutorial to start your path in financial analysis with R'
 summary: 'Learn how to use rvest R package to scrape finviz financial data in less than 30 lines of code. Quick rvest tutorial to start your path in financial analysis with R'
 authors: [pablo-canovas]
+featured: false
 ---
 
 <style type="text/css">
@@ -90,6 +91,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="disclaimer" class="section level2">
 <h2>Disclaimer</h2>
 <p>Before diving into the topic, it’s important to note that web scraping can potentially violate website terms of service and can even be illegal in some cases. Let’s be <a href="https://dmi3kno.github.io/polite/">polite</a> and don’t use this code to resell any information, as this is not permitted by their terms of use. For educational and personal purposes only.</p>
+<p><img src="featured.png" height="350px" width="500px" alt="Financial data scraper with rvest" /></p>
 </div>
 </div>
 <div id="into-the-water" class="section level1">
@@ -142,18 +144,18 @@ Let’s get this small piece of information first, which sits right below the ch
 <pre><code>## # A tibble: 12 × 12
 ##    X1         X2     X3    X4    X5    X6    X7    X8    X9    X10   X11   X12  
 ##    &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
-##  1 Index      DJIA,… P/E   28.23 EPS … 8.99  Insi… 0.06% Shs … 7.45B Perf… 2.33%
-##  2 Market Cap 1918.… Forw… 23.63 EPS … 10.75 Insi… -0.7… Shs … 7.44B Perf… -1.1…
-##  3 Income     67.45B PEG   2.35  EPS … 2.23  Inst… 72.4… Shor… 0.46… Perf… 5.97%
-##  4 Sales      204.0… P/S   9.40  EPS … 19.8… Inst… 0.46% Shor… 34.3… Perf… -2.4…
-##  5 Book/sh    24.58  P/B   10.33 EPS … 14.8… ROA   18.8… Targ… 285.… Perf… -7.1…
-##  6 Cash/sh    13.17  P/C   19.28 EPS … 12.0… ROE   39.3… 52W … 213.… Perf… 8.44%
-##  7 Dividend   2.72   P/FCF 47.19 EPS … 24.3… ROI   31.3… 52W … -17.… Beta  0.91 
-##  8 Dividend % 1.07%  Quic… 1.90  Sale… 15.5… Gros… 68.2… 52W … 21.8… ATR   6.35 
-##  9 Employees  221000 Curr… 1.90  Sale… 2.00% Oper… 40.5… RSI … 56.94 Vola… 2.68…
-## 10 Optionable Yes    Debt… 0.35  EPS … -11.… Prof… 33.0… Rel … 0.90  Prev… 253.…
+##  1 Index      DJIA,… P/E   28.99 EPS … 8.99  Insi… 0.06% Shs … 7.45B Perf… 2.61%
+##  2 Market Cap 1970.… Forw… 24.27 EPS … 10.75 Insi… -0.7… Shs … 7.44B Perf… -0.8…
+##  3 Income     67.45B PEG   2.42  EPS … 2.23  Inst… 72.4… Shor… 0.46… Perf… 6.26%
+##  4 Sales      204.0… P/S   9.65  EPS … 19.8… Inst… 0.46% Shor… 34.3… Perf… -2.2…
+##  5 Book/sh    24.58  P/B   10.61 EPS … 14.8… ROA   18.8… Targ… 285.… Perf… -6.8…
+##  6 Cash/sh    13.17  P/C   19.80 EPS … 12.0… ROE   39.3… 52W … 213.… Perf… 8.74%
+##  7 Dividend   2.72   P/FCF 48.47 EPS … 24.3… ROI   31.3… 52W … -17.… Beta  0.91 
+##  8 Dividend % 1.04%  Quic… 1.90  Sale… 15.5… Gros… 68.2… 52W … 22.1… ATR   6.40 
+##  9 Employees  221000 Curr… 1.90  Sale… 2.00% Oper… 40.5… RSI … 57.55 Vola… 2.75…
+## 10 Optionable Yes    Debt… 0.35  EPS … -11.… Prof… 33.0… Rel … 1.07  Prev… 253.…
 ## 11 Shortable  Yes    LT D… 0.32  Earn… Jan … Payo… 28.1… Avg … 31.2… Price 260.…
-## 12 Recom      1.90   SMA20 1.73% SMA50 4.59% SMA2… 3.01% Volu… 11,4… Chan… 2.42%</code></pre>
+## 12 Recom      1.90   SMA20 2.01% SMA50 4.88% SMA2… 3.30% Volu… 33,6… Chan… 2.71%</code></pre>
 <p>We can extract headers and values with the following chunk of code:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># flatten_chr will collapse all columns into one vector</span></span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
@@ -199,7 +201,7 @@ Let’s get this small piece of information first, which sits right below the ch
 ##  3 industry   Software - Infrastructure
 ##  4 country    USA                      
 ##  5 Index      DJIA, NDX, S&amp;P 500       
-##  6 Market Cap 1918.49B                 
+##  6 Market Cap 1970.40B                 
 ##  7 Income     67.45B                   
 ##  8 Sales      204.09B                  
 ##  9 Book/sh    24.58                    
