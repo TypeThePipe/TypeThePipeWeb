@@ -15,10 +15,10 @@ authors: [pablo-canovas]
 featured: false
 ---
 
-<img src="./featured.png" height="300px" width="400px" alt="Quick Guide to Text-to-Speech with Python" />
+<img src="./featured.png" height="300px" width="400px" alt="Two robots talking as an image for a quick Guide to Text-to-Speech with Python" />
 
 
-## **Introduction**
+## **About the rise of GPT-4. Text-to-speech Python libraries**
 
 With the rise of the new AI models like GPT-4, being able to communicate with machines in a natural and intuitive way is becoming more and more important. Text-to-speech is a powerful technology that can help bridge the gap between humans and machines by enabling machines to speak and understand human language.
 In this blog post, we'll explore some of the possibilities and libraries available for text-to-speech.
