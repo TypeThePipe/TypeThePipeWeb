@@ -1,0 +1,207 @@
+---
+title: 'Making Your Python Programs Speak: A Practical Guide to Text-to-Speech'
+author: Pablo Cánovas Tourné
+date: '2023-03-18'
+slug: python-text-to-speech-practical-guide
+output: 
+  blogdown::html_page:
+    highlight: tango 
+categories:
+  - Python
+  - Post
+subtitle: 'Learn how to use Python to add text-to-speech capabilities to your projects and create applications that can speak for themselves'
+summary: "In this tutorial, we'll show you how to integrate text-to-speech into your Python projects, using libraries like pyttsx3, gTTS, and playsound. Whether you're building a chatbot, a voice assistant, or just want to add some personality to your applications, this tutorial will help you get started with text-to-speech in Python"
+authors: [pablo-canovas]
+featured: false
+---
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="featured.png" height="300px" width="400px" alt="Quick Guide to Text-to-Speech with Python" /></p>
+<div id="introduction" class="section level2">
+<h2><strong>Introduction</strong></h2>
+<p>With the rise of the new AI models like GPT-4, being able to communicate with machines in a natural and intuitive way is becoming more and more important. Text-to-speech is a powerful technology that can help bridge the gap between humans and machines by enabling machines to speak and understand human language.
+In this blog post, we’ll explore some of the possibilities and libraries available for text-to-speech.</p>
+<p>In Python, there are several modules available to easily convert text into speech. Today we are going to explore two of the most popular ones: <code>pyttsx3</code> and <code>gTTS</code>.</p>
+<p><code>pyttsx3</code> is a comprehensive library that provides support for multiple languages and custom voices, while <code>gTTS</code> is a simpler and easy to use option that uses Google Translate’s services to generate online speech.</p>
+<div id="tldr---i-simply-want-to-play-out-loud-some-text" class="section level3">
+<h3><strong>TL;DR</strong> - I simply want to play out loud some text</h3>
+<p>The simplest way I could came up with was using the <code>pyttsx3</code> library.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> pyttsx3</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>pyttsx3.speak(<span class="st">&quot;Oh wow! It&#39;s amazing I got this to work in just one line of code&quot;</span>)</span></code></pre></div>
+<p>Initializing the engine and use the commands <code>say</code> and <code>runAndWait</code> would be the standard way to work with the API.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>engine <span class="op">=</span> pyttsx3.init()</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>engine.say(<span class="st">&quot;Oh wow! I can&#39;t believe I did this in less than 5 minutes&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>engine.runAndWait()</span></code></pre></div>
+<p>Once we have the engine, we can tune some parameters.</p>
+</div>
+<div id="i-dont-like-the-voice-how-can-i-change-it" class="section level3">
+<h3>I don’t like the voice, how can I change it?</h3>
+<p>We can go through all the voices installed in our system with the following:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>engine <span class="op">=</span> pyttsx3.init()</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>voices <span class="op">=</span> engine.getProperty(<span class="st">&#39;voices&#39;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="cf">for</span> voice <span class="kw">in</span> voices:</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>   engine.setProperty(<span class="st">&#39;voice&#39;</span>, voice.<span class="bu">id</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>   engine.say(<span class="st">&#39;This is a test to know how each voice sounds like&#39;</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>engine.runAndWait()</span></code></pre></div>
+<p>And then we can set the desired voice like this:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>voices <span class="op">=</span> engine.getProperty(<span class="st">&#39;voices&#39;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>engine.setProperty(<span class="st">&#39;voice&#39;</span>, voices[<span class="dv">1</span>].<span class="bu">id</span>)      <span class="co"># Change index to change voice. 0 for male and 1 for female</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>engine.say(<span class="st">&quot;Oh wow! I can&#39;t believe changing the voice was that easy&quot;</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>engine.runAndWait()</span></code></pre></div>
+</div>
+<div id="how-to-save-the-speech-as-an-audio-file" class="section level3">
+<h3>How to save the speech as an audio file?</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>engine <span class="op">=</span> pyttsx3.init()</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>filename <span class="op">=</span> <span class="st">&quot;audio_file.wav&quot;</span>                <span class="co"># It handles both .mp3 and .wav                          </span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>engine.save_to_file(<span class="st">&#39;I am saving this text as a wav file&#39;</span>, filename)</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>engine.runAndWait()</span></code></pre></div>
+</div>
+<div id="tuning-parameters" class="section level3">
+<h3>Tuning parameters</h3>
+<p>We can easily change parameters such as <em>rate</em>, <em>volume</em> or <em>voice</em> like this:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>rate <span class="op">=</span> engine.getProperty(<span class="st">&#39;rate&#39;</span>)                 <span class="co"># get current rate</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="bu">print</span>(rate)                      </span></code></pre></div>
+<pre><code>## 200</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>engine.setProperty(<span class="st">&#39;rate&#39;</span>, <span class="dv">250</span>)                   <span class="co"># set a new rate</span></span></code></pre></div>
+<p><br></p>
+</div>
+</div>
+<div id="how-can-i-stop-the-audio-playback" class="section level2">
+<h2><strong>How can I stop the audio playback?</strong></h2>
+<p>When working with text-to-speech in Python, one potential issue you may encounter is the main program becoming stuck or unresponsive while the audio is being played. This can be a frustrating and limiting problem, especially if you’re working on a real-time application where responsiveness is crucial such as an AI voice assistant bot.</p>
+<p>This is because the code that generates and plays the audio is typically executed in a sequential manner, meaning that the program has to wait for the audio to finish before moving on to the next task.</p>
+<p>To overcome this problem, one solution is to use multiprocessing, which involves creating multiple processes to execute different parts of the program in parallel. That way, the audio generation and playback are handled by a separate process, allowing the main program to continue executing without being blocked.</p>
+<p>To make this happen, we need to run the <code>say</code> or <code>speak</code> function in another thread and use <code>is_pressed</code> from the <code>keyboard</code> module as a callback.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="im">import</span> multiprocessing</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="im">import</span> pyttsx3</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="im">import</span> keyboard</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="kw">def</span> _say(text):</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>    pyttsx3.speak(text)</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="kw">def</span> say(phrase):</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>	<span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>		p <span class="op">=</span> multiprocessing.Process(target<span class="op">=</span>_say, args<span class="op">=</span>(text,))</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>		p.start()</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>		<span class="cf">while</span> p.is_alive():</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>			<span class="cf">if</span> keyboard.is_pressed(<span class="st">&#39;esc&#39;</span>):</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>				p.terminate()</span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a>			<span class="cf">else</span>:</span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>				<span class="cf">continue</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>		p.join()</span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a>text <span class="op">=</span> <span class="st">&quot;this text is being read right now, and I can terminate it whenever I want&quot;</span></span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>	say(text)</span></code></pre></div>
+<p><br></p>
+</div>
+<div id="alternative-gtts" class="section level2">
+<h2><strong>Alternative: gTTS</strong></h2>
+<p>If you’re looking for an alternative to <code>pyttsx3</code>, you might want to consider using the <code>gTTS</code> (Google Text-to-Speech) module along with the <code>playsound</code> library. Combining these two libraries is a quick way to add text-to-speech capabilities to your project.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="im">from</span> gtts <span class="im">import</span> gTTS</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="im">from</span> playsound <span class="im">import</span> playsound</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>filename <span class="op">=</span> <span class="st">&#39;my_gtts_file.mp3&#39;</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>tts <span class="op">=</span> gTTS(<span class="st">&quot;Oh wow! I can&#39;t believe this whas that easy&quot;</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>tts.save(filename)</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>playsound(filename)</span></code></pre></div>
+<p>Hopefully, this article has given you a brief overview of a couple text-to-speech options available in Python and how you can use them to improve the accessibility and user experience of your projects with just a few lines of code.</p>
+<p><br></p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more Python tips!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+</div>
