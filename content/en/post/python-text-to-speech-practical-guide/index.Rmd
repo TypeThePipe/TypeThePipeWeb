@@ -1,0 +1,180 @@
+---
+title: 'Making Your Python Programs Speak: A Practical Guide to Text-to-Speech'
+author: Pablo Cánovas Tourné
+date: '2023-03-18'
+slug: python-text-to-speech-practical-guide
+output: 
+  blogdown::html_page:
+    highlight: tango 
+categories:
+  - Python
+  - Post
+subtitle: 'Learn how to use Python to add text-to-speech capabilities to your projects and create applications that can speak for themselves'
+summary: "In this tutorial, we'll show you how to integrate text-to-speech into your Python projects, using libraries like pyttsx3, gTTS, and playsound. Whether you're building a chatbot, a voice assistant, or just want to add some personality to your applications, this tutorial will help you get started with text-to-speech in Python"
+authors: [pablo-canovas]
+featured: false
+---
+
+<img src="./featured.png" height="300px" width="400px" alt="Two robots talking as an image for a quick Guide to Text-to-Speech with Python" />
+
+
+# **Text-to-speech Python libraries**
+
+With the rise of the new AI models like GPT-4, being able to communicate with machines in a natural and intuitive way is becoming more and more important. Text-to-speech is a powerful technology that can help bridge the gap between humans and machines by enabling machines to speak and understand human language.
+In this blog post, we'll explore some of the possibilities and libraries available for text-to-speech.
+
+In Python, there are several modules available to easily convert text into speech. Today we are going to explore two of the most popular ones: `pyttsx3` and `gTTS`.
+
+`pyttsx3` is a comprehensive library that provides support for multiple languages and custom voices, while `gTTS` is a simpler and easy to use option that uses Google Translate's services to generate online speech.
+
+### **TL;DR** - I simply want to play out loud some text
+
+The simplest way I could came up with was using the `pyttsx3` library.
+```{python}
+import pyttsx3
+pyttsx3.speak("Oh wow! It's amazing I got this to work in just one line of code")
+```
+
+Initializing the engine and use the commands `say` and `runAndWait` would be the standard way to work with the API.
+
+```{python}
+engine = pyttsx3.init()
+engine.say("Oh wow! I can't believe I did this in less than 5 minutes")
+engine.runAndWait()
+```
+
+Once we have the engine, we can tune some parameters.
+
+### I don't like the voice, how can I change it?
+
+We can go through all the voices installed in our system with the following:
+
+```{python}
+engine = pyttsx3.init()
+voices = engine.getProperty('voices')
+for voice in voices:
+   engine.setProperty('voice', voice.id)
+   engine.say('This is a test to know how each voice sounds like')
+
+engine.runAndWait()
+```
+
+And then we can set the desired voice like this:
+
+```{python}
+voices = engine.getProperty('voices')
+engine.setProperty('voice', voices[1].id)      # Change index to change voice. 0 for male and 1 for female
+engine.say("Oh wow! I can't believe changing the voice was that easy")
+engine.runAndWait()
+```
+
+### How to save the speech as an audio file?
+
+```{python}
+engine = pyttsx3.init()
+
+filename = "audio_file.wav"                # It handles both .mp3 and .wav                          
+engine.save_to_file('I am saving this text as a wav file', filename)
+engine.runAndWait()
+```
+
+### Tuning parameters
+
+We can easily change parameters such as *rate*, *volume* or *voice* like this:
+```{python}
+rate = engine.getProperty('rate')                 # get current rate
+print(rate)                      
+engine.setProperty('rate', 250)                   # set a new rate
+```
+
+<br>
+
+## **How can I stop the audio playback?**
+
+When working with text-to-speech in Python, one potential issue you may encounter is the main program becoming stuck or unresponsive while the audio is being played. This can be a frustrating and limiting problem, especially if you're working on a real-time application where responsiveness is crucial such as an AI voice assistant bot.
+
+This is because the code that generates and plays the audio is typically executed in a sequential manner, meaning that the program has to wait for the audio to finish before moving on to the next task.
+
+To overcome this problem, one solution is to use multiprocessing, which involves creating multiple processes to execute different parts of the program in parallel. That way, the audio generation and playback are handled by a separate process, allowing the main program to continue executing without being blocked.
+
+To make this happen, we need to run the `say` or `speak` function in another thread and use `is_pressed` from the `keyboard` module as a callback.
+
+```{python}
+import multiprocessing
+import pyttsx3
+import keyboard
+
+def _say(text):
+    pyttsx3.speak(text)
+
+def say(phrase):
+	if __name__ == "__main__":
+		p = multiprocessing.Process(target=_say, args=(text,))
+		p.start()
+		while p.is_alive():
+			if keyboard.is_pressed('esc'):
+				p.terminate()
+			else:
+				continue
+		p.join()
+
+text = "this text is being read right now, and I can terminate it whenever I want"
+
+for i in range(3):
+	say(text)
+```
+
+<br>
+
+## **Alternative: gTTS**
+
+If you're looking for an alternative to `pyttsx3`, you might want to consider using the `gTTS` (Google Text-to-Speech) module along with the `playsound` library. Combining these two libraries is a quick way to add text-to-speech capabilities to your project.
+
+
+```{python}
+from gtts import gTTS
+from playsound import playsound
+
+filename = 'my_gtts_file.mp3'
+
+tts = gTTS("Oh wow! I can't believe this whas that easy")
+tts.save(filename)
+playsound(filename)
+```
+
+Hopefully, this article has given you a brief overview of a couple text-to-speech options available in Python and how you can use them to improve the accessibility and user experience of your projects with just a few lines of code.
+
+<br>
+
+```{=html}
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more Python tips!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+```
+
+
