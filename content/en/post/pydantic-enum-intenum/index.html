@@ -7,9 +7,9 @@ output:
   blogdown::html_page:
     highlight: pygments 
 categories:
-  - Post
   - Python
-tags: []
+  - Post
+tags: [Python, Pydantic]
 subtitle: "Taming Data Validation: Mastering Pydantic Enums and IntEnums for Robust Python Applications."
 summary: "Mastering Pydantic Enums and IntEnums for robust Python applications. Merge the power of Pydantic data validations and the concept of Enum, IntEnum and StrEnum."
 authors: [carlos-vecina]
@@ -136,7 +136,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## 1 validation error for Pet
 ## animal_type
 ##   value is not a valid enumeration member; permitted: &#39;cat&#39;, &#39;dog&#39;, &#39;fish&#39;, &#39;bird&#39; (type=type_error.enum; enum_values=[&lt;Animals.CAT: &#39;cat&#39;&gt;, &lt;Animals.DOG: &#39;dog&#39;&gt;, &lt;Animals.FISH: &#39;fish&#39;&gt;, &lt;Animals.BIRD: &#39;bird&#39;&gt;])</code></pre>
-<p>(*Note the UPPER_CASE_NOTATION)</p>
+<p>(*Note the <code>UPPER_CASE_NOTATION</code>)</p>
 <p><br></p>
 </div>
 <div id="what-about-intenum-which-is-the-difference-between-enum-and-intenum" class="section level2">

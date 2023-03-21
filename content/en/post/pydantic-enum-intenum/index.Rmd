@@ -7,9 +7,9 @@ output:
   blogdown::html_page:
     highlight: pygments 
 categories:
-  - Post
   - Python
-tags: []
+  - Post
+tags: [Python, Pydantic]
 subtitle: "Taming Data Validation: Mastering Pydantic Enums and IntEnums for Robust Python Applications."
 summary: "Mastering Pydantic Enums and IntEnums for robust Python applications. Merge the power of Pydantic data validations and the concept of Enum, IntEnum and StrEnum."
 authors: [carlos-vecina]
@@ -79,7 +79,7 @@ with pytest.raises(ValidationError, match=' value is not a valid enumeration mem
 print(e_info.value)
 ```
 
-(*Note the UPPER_CASE_NOTATION)
+(*Note the `UPPER_CASE_NOTATION`)
 
 <br>
 
