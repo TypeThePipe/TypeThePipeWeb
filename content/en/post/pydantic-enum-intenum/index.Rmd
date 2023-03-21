@@ -16,7 +16,7 @@ authors: [carlos-vecina]
 featured: false
 ---
 
-<img src="./featured.png" height="300px" width="400px" alt="Two robots talking as an image for a quick Guide to Text-to-Speech with Python" />
+<img src="./featured.png" width="400px" alt="Pydantic Python library logo." />
 
 # What is a Pydantic Enum?
 
