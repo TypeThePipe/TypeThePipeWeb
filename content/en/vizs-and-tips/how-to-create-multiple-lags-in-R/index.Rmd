@@ -1,0 +1,91 @@
+---
+title: 'Unlocking the Power of purrr: How to Create Multiple Lags Like a Pro in R'
+author: Pablo Cánovas Tourné
+date: '2023-03-22'
+slug: how-to-create-multiple-lags-in-R
+output: 
+  blogdown::html_page:
+    highlight: tango 
+categories:
+  - R
+  - Tips
+tags: [Tidyverse]
+subtitle: 'A quick guide to creating multiple lags in R for Time Series Analysis with purrr'
+summary: 'While R provides functions like lag, creating multiple lags can be challenging. In this blog post, we will explore how to use the unknown partial function to create multiple lags in R for Time Series Analysis'
+authors: [pablo-canovas]
+featured: false
+---
+
+<img src="./featured.png" style="width:800px; height:450px" alt="An ethereal representation of multiple Time Series" />
+
+```{r, echo = FALSE, message=FALSE}
+library(tidyverse)
+tsla <- read_csv("tsla.csv")
+```
+
+Are you tired of creating lag variables one by one? Are you ready to level up your time series analysis game? Forget everything you know about creating lag variables. There's a better way, and it's been right in front of you all along.
+
+This is a good one. We'll make use of the semi-unknown [`partial`](https://purrr.tidyverse.org/reference/partial.html) function to create a useful wrapper around the `lag` function. Let's go straight to the point. 
+
+First, we create a new function called `map_lag`. This function is essentially a mapped version of the `lag` function from `dplyr`, where we pre-fill the `n` argument to create different lag functions. Then, we can apply this list of functions, each one representing a different lag length, to the desired variable. 
+
+And just like that, voila! We have multiple lag variables without breaking a sweat. To make things even better, we can change the names of our newly created lag variables on the fly to make them more meaningful.
+
+
+```{r}
+calculate_lags <- function(df, var, lags){
+  map_lag <- lags %>% map(~partial(lag, n = .x))
+  return(df %>% mutate(across(.cols = {{var}}, .fns = map_lag, .names = "{.col}_lag{lags}")))
+}
+```
+
+Let's see a quick example. We'll be using the closing prices of the TSLA stock to showcase its use. We have a data frame like this:
+
+```{r}
+tsla %>% head(4)
+```
+
+We simply pass the desired lags to the function, as well as the column we will apply the lags on. Note that we are also using [tidyevaluation](../../post/dynamically-access-dataframe-variables-tidyeval-ggplot/) to reference the column without quotes. This way we keep the tidyverse vibe intact. 
+
+```{r}
+tsla %>% calculate_lags(close, 1:3) %>% head()
+```
+
+It's time to create your own lags like a pro. Embrace the power of `purrr` and `partial` and take your time series analysis to the next level. You will impress your colleagues with your advanced R skills and will have more time to focus on the real analysis.
+
+Short and sweet!
+
+<br>
+
+```{=html}
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more R tips!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+```
+
+
