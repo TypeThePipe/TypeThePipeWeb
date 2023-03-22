@@ -1,0 +1,293 @@
+---
+title: 'Use GPT and Whisper to Build Your Own Voice Assistant'
+author: Pablo Cánovas Tourné
+date: '2023-03-23'
+slug: gpt-whisper-build-your-own-voice-assistant
+output: 
+  blogdown::html_page:
+    highlight: tango 
+categories:
+  - Python
+  - Post
+subtitle: 'A step-by-step guide to building your own personal AI-powered voice assistant in python, with two tasty flavors: console and Streamlit!'
+summary: "With the power of GPT and Whisper models, you can create a virtual assistant that is tailored to your needs. Reading this article, you'll learn how to record and transcribe audio, translate text, generate responses with GPT, and play responses out loud using text-to-speech synthesis."
+authors: [pablo-canovas]
+featured: false
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="featured.png" style="width:800px; height:700px" alt="Man talking to a machine. Build a chat bot with GPT" /></p>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>What a time to be alive, huh? The rise of AI is happening at a faster pace than ever and virtual assistants are quickly becoming a ubiquitous part of our digital lives. Remember Siri and Alexa? They were the jewel in the crown not that long ago and now they are biting the dust against the power of GPT models.</p>
+<p>In this blog post, we’ll show you how to build a virtual assistant using GPT and Whisper APIs. These powerful tools allow you to record user voice, transcribe or translate on-the-fly if necessary, and generate a response using OpenAI’s advanced natural language processing capabilities. We’ll take you through the steps of building the bot in two different flavors - an interactive console-based app and a browser-based version powered by Streamlit.</p>
+</div>
+<div id="setting-up-the-environment" class="section level1">
+<h1>Setting up the environment</h1>
+<p>Before you can start, you need to make sure you have the right tools and environment set up. I recommend to set up a virtual environment with <code>pipenv</code> so all dependencies are managed automatically from the Pipefile included in the <a href="https://github.com/PabloCanovas/chatgpt-whisper-streamlit-voice-assistant">Github repository</a>. Below are the steps you can follow to set up your environment:</p>
+<div id="install-dependencies" class="section level3">
+<h3>Install dependencies</h3>
+<ul>
+<li>Start by cloning the repository with <code>git clone https://github.com/PabloCanovas/chatgpt-whisper-streamlit-voice-assistant gpt_voice_assistant</code></li>
+<li>If you don’t have <code>pipenv</code> installed to manage dependencies, then go ahead: <code>pip install pipenv --user</code></li>
+<li>Install the required libraries. You can install them just by going to the cloned directory: <code>cd gpt_voice_assistant</code> and by running: <code>pipenv install</code> which will install dependencies based on <code>Pipfile.lock</code> file.</li>
+</ul>
+</div>
+<div id="set-up-your-openai-api-key" class="section level3">
+<h3>Set up your OpenAI API key</h3>
+<p>Manually manage the OpenAI api key is necessary. You will need to create a new file called <code>myapikeys.py</code> with this line inside: <code>OPENAI_KEY = "my-apikey-goes-here"</code>, and obviously use your key for that.</p>
+</div>
+<div id="define-your-helper-functions" class="section level3">
+<h3>Define your helper functions</h3>
+<p>You’ll need to define several helper functions that will be used throughout your program, including functions for recording, playing, and transcribing audio among others. Now, we are going to overview them all before showing the main program.</p>
+</div>
+</div>
+<div id="recording-user-voice" class="section level1">
+<h1>Recording user voice</h1>
+<p>The first step in building your virtual assistant is to record the user’s voice. You can do this using the <code>record_audio_manual</code> function:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="kw">def</span> record_audio_manual(filename, sr<span class="op">=</span><span class="dv">44100</span>):</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>    <span class="bu">input</span>(<span class="st">&quot;  ** Press enter to start recording **&quot;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>    audio <span class="op">=</span> sd.rec(<span class="bu">int</span>(<span class="dv">10</span> <span class="op">*</span> sr), samplerate<span class="op">=</span>sr, channels<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>    <span class="bu">input</span>(<span class="st">&quot;  ** Press enter to stop recording **&quot;</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    sd.stop()</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>    write(filename, sr, audio)</span></code></pre></div>
+<p>When you call the function, it will prompt the user to press enter to start and stop recording. Once the user stops recording, the audio is saved to the specified file using the <code>write</code> function from <code>scipy</code>. It records audio for a fixed maximum duration of 10 seconds by default. Change as needed.</p>
+<p>Once you have the user’s voice recorded, you can move on to transcribing it using the Whisper API.</p>
+</div>
+<div id="transcribing-user-voice" class="section level1">
+<h1>Transcribing user voice</h1>
+<p>The next step is to transcribe the user’s voice into text. You can do this using the <code>transcribe_audio</code> function provided, which uses the Whisper API to transcribe the audio. It’s surprisingly easy:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="kw">def</span> transcribe_audio(filename):</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>    audio_file <span class="op">=</span> <span class="bu">open</span>(filename, <span class="st">&quot;rb&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>    transcript <span class="op">=</span> openai.Audio.transcribe(<span class="st">&quot;whisper-1&quot;</span>, audio_file)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>    audio_file.close()</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>    <span class="cf">return</span> transcript</span></code></pre></div>
+<p>When you call the function, it reads the audio file into memory, calls the <code>openai.Audio.transcribe</code> function to transcribe the audio using the Whisper API, and returns the resulting transcript.</p>
+<p>Also, if you wish to speak to your assistant in a language other than English, you can easily do so by calling the <code>translate_audio</code> function instead.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="kw">def</span> translate_audio(filename):</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>    audio_file <span class="op">=</span> <span class="bu">open</span>(filename, <span class="st">&quot;rb&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>    translation <span class="op">=</span> openai.Audio.translate(<span class="st">&quot;whisper-1&quot;</span>, audio_file)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>    audio_file.close()</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>    <span class="cf">return</span> translation</span></code></pre></div>
+<p>Once you have the user’s voice transcribed let’s send it to GPT.</p>
+</div>
+<div id="generating-a-response-with-gpt" class="section level1">
+<h1>Generating a response with GPT</h1>
+<p>The next step in building this cool assistant is to generate a response to the user’s input using GPT. You can do this using the OpenAI GPT API, which, as everybody already know, allows you to generate human-like text based on a given prompt. It really couldn’t be much easier. Here’s how:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>bot <span class="op">=</span> openai.ChatCompletion.create(model<span class="op">=</span><span class="st">&quot;gpt-3.5-turbo&quot;</span>, messages<span class="op">=</span>messages)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>response <span class="op">=</span> bot.choices[<span class="dv">0</span>].text</span></code></pre></div>
+<p>The <code>openai.ChatCompletion.create</code> function takes two arguments: the name of the GPT model to use (in this case, “gpt-3.5-turbo”), and a list of messages exchanged between the user and the virtual assistant so far. This is important because GPT retains all the conversation context to answer the questions, being this a key aspect of why it works so well. When you call the function, it generates a response to the most recent message from the user, which you can access using the <code>bot.choices[0].text</code> attribute.</p>
+</div>
+<div id="playing-the-response-out-loud" class="section level1">
+<h1>Playing the response out loud</h1>
+<p>Once you have the response generated by GPT, you can play it out loud on the speakers using the <code>say</code> function provided in the code. Here’s what it looks like:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="kw">def</span> say(text):</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>    p <span class="op">=</span> multiprocessing.Process(target<span class="op">=</span>pyttsx3.speak, args<span class="op">=</span>(text,))</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>    p.start()</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>    <span class="cf">while</span> p.is_alive():</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>        <span class="cf">if</span> keyboard.is_pressed(<span class="st">&#39;enter&#39;</span>):</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>            p.terminate()</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>    p.join()</span></code></pre></div>
+<p>This function uses the <code>pyttsx3</code> library I talked about in <a href="../post/python-text-to-speech-practical-guide">this other article</a> to generate a speech audio file from the text, and plays it out loud on the speakers using <code>multiprocessing</code>. The function also listens for the “enter” key, and terminates the speech if it is pressed.</p>
+<div id="the-importance-of-using-multiprocessing-for-efficient-audio-playback" class="section level2">
+<h2>The importance of using multiprocessing for efficient audio playback</h2>
+<p>If GPT’s response is particularly long, you might want a way to stop the playback mid-way through. This is where the multithreading capabilities of Python come in.</p>
+<p>In Python, <code>multiprocessing</code> allows you to run multiple threads simultaneously, making it possible to perform several actions at the same time. In the <code>say</code> function, we use it to play the speech audio file and listen for user input at the same time.</p>
+<p>By working this way, we can ensure that the speech doesn’t block the main thread of the program. This means that even if the speech is too verbose or the user is no longer interested in the answer, he can still interact with the program and interrupt it if needed.</p>
+</div>
+</div>
+<div id="building-a-console-based-program" class="section level1">
+<h1>Building a console-based program</h1>
+<p>Before going for a browser-based app, you may want to start by building an interactive console-based program that you can run on your local machine. This will allow you to quickly test and iterate on your virtual assistant without the need for a web server or browser.</p>
+<p>Using the building blocks described above, here’s how my assistant looks like:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="im">import</span> openai</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="im">import</span> myapikeys</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="im">from</span> text_speech_utils <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>openai.api_key <span class="op">=</span> myapikeys.OPENAI_KEY</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>input_audio_filename <span class="op">=</span> <span class="st">&#39;input.wav&#39;</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>messages <span class="op">=</span> [{<span class="st">&quot;role&quot;</span>: <span class="st">&quot;system&quot;</span>, <span class="st">&quot;content&quot;</span>: <span class="st">&quot;You are a helpful assistant.&quot;</span>}]</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>    <span class="cf">while</span> <span class="va">True</span>:</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>        record_audio_manual(input_audio_filename)</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>        transcription <span class="op">=</span> transcribe_audio(input_audio_filename)             <span class="co"># if we want to speak in another language we would use &#39;translate_audio&#39; function</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>        messages.append({<span class="st">&quot;role&quot;</span>: <span class="st">&quot;user&quot;</span>, <span class="st">&quot;content&quot;</span>: transcription[<span class="st">&#39;text&#39;</span>]})</span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="ch">\n</span><span class="ss">- Me: </span><span class="sc">{</span>transcription[<span class="st">&#39;text&#39;</span>]<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a>        bot <span class="op">=</span> openai.ChatCompletion.create(model<span class="op">=</span><span class="st">&quot;gpt-3.5-turbo&quot;</span>, messages<span class="op">=</span>messages)</span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a>        </span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>        response <span class="op">=</span> bot.choices[<span class="dv">0</span>].message.content</span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f&quot;- ChatGPT: </span><span class="sc">{</span>response<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">***   Press enter to interrupt assistant and ask a new question   ***</span><span class="ch">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a>        say(response)</span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a></span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&#39;__main__&#39;</span>:</span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a>    main()</span></code></pre></div>
+<p>In this example, we define the main loop of our program using a while loop that listens for user input. Inside the loop, we simply record, transcribe (or translate), send the text to openAI and playback the response.</p>
+<p>And there you have it! In barely 50 lines of code we have built a fully functional voice assistant which can be used to learn about new topics, inspire yourself with new cooking recipes or plan detailed workouts that fit your own objectives.</p>
+</div>
+<div id="building-a-browser-based-app-with-streamlit" class="section level1">
+<h1>Building a browser-based app with Streamlit</h1>
+<p>In addition to the console-based program, you can also create an small web app with Streamlit. Streamlit is a Python library that allows you to build interactive web apps with just a few lines of code.</p>
+<p>Here’s a snapshot of what my small app looks like:</p>
+<p><img src="streamlit_app.PNG" /></p>
+<p>And this is the code that generates it:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="im">import</span> streamlit <span class="im">as</span> st</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="im">import</span> openai</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="im">import</span> myapikeys</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="im">from</span> text_speech_utils <span class="im">import</span> <span class="op">*</span></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>openai.api_key <span class="op">=</span> myapikeys.OPENAI_KEY</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>input_audio_filename <span class="op">=</span> <span class="st">&#39;input.wav&#39;</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>output_audio_filename <span class="op">=</span> <span class="st">&#39;chatgpt_response.wav&#39;</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>output_conversation_filename <span class="op">=</span> <span class="st">&#39;ChatGPT_conversation.txt&#39;</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a><span class="co"># Initialize app</span></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a><span class="cf">if</span> <span class="st">&#39;messages&#39;</span> <span class="kw">not</span> <span class="kw">in</span> st.session_state:</span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>    st.session_state[<span class="st">&#39;messages&#39;</span>] <span class="op">=</span> [{<span class="st">&quot;role&quot;</span>: <span class="st">&quot;system&quot;</span>, <span class="st">&quot;content&quot;</span>: <span class="st">&quot;You are a helpful assistant.&quot;</span>}]</span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>st.title(<span class="st">&quot;My awesome personal assistant&quot;</span>)</span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>sec <span class="op">=</span> st.slider(<span class="st">&quot;Select number of seconds of recording&quot;</span>, min_value<span class="op">=</span><span class="dv">2</span>, max_value<span class="op">=</span><span class="dv">8</span>, value<span class="op">=</span><span class="dv">5</span>)</span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a></span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a><span class="co"># Record audio + transcribe with Whisper + get GPT3 response</span></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="cf">if</span> st.button(<span class="st">&#39;Record audio&#39;</span>):</span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a>    st.write(<span class="st">&quot;Recording...&quot;</span>)</span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>    record_audio(input_audio_filename, sec)</span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a>    transcription <span class="op">=</span> transcribe_audio(input_audio_filename)</span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a>    st.write(<span class="ss">f&quot;Me: </span><span class="sc">{</span>transcription[<span class="st">&#39;text&#39;</span>]<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a>    st.session_state[<span class="st">&#39;messages&#39;</span>].append({<span class="st">&quot;role&quot;</span>: <span class="st">&quot;user&quot;</span>, <span class="st">&quot;content&quot;</span>: transcription[<span class="st">&#39;text&#39;</span>]})</span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a></span>
+<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a>    bot <span class="op">=</span> openai.ChatCompletion.create(model<span class="op">=</span><span class="st">&quot;gpt-3.5-turbo&quot;</span>, messages<span class="op">=</span>st.session_state[<span class="st">&#39;messages&#39;</span>])</span>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a>    response <span class="op">=</span> bot.choices[<span class="dv">0</span>].message.content</span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a>    st.write(<span class="ss">f&quot;GPT: </span><span class="sc">{</span>response<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a></span>
+<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a>    save_text_as_audio(response, output_audio_filename)</span>
+<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a>    play_audio(output_audio_filename)</span>
+<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a></span>
+<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a>    st.session_state[<span class="st">&#39;messages&#39;</span>].append({<span class="st">&quot;role&quot;</span>: <span class="st">&quot;assistant&quot;</span>, <span class="st">&quot;content&quot;</span>: response})</span>
+<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a></span>
+<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a></span>
+<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a>st.download_button(label<span class="op">=</span><span class="st">&quot;Download conversation&quot;</span>, </span>
+<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a>                   data <span class="op">=</span> pd.DataFrame(st.session_state[<span class="st">&#39;messages&#39;</span>]).to_csv(index<span class="op">=</span><span class="va">False</span>).encode(<span class="st">&#39;utf-8&#39;</span>), </span>
+<span id="cb7-40"><a href="#cb7-40" tabindex="-1"></a>                   file_name<span class="op">=</span>output_conversation_filename)</span></code></pre></div>
+<p>Where I added a slider to define the numbers of seconds you want to record, and the possibility of downloading the full conversation at the end.
+Also, I’ve used a couple of different functions than in the example above: <code>save_text_as_audio</code> and <code>play_audio</code>. The reason is simply because I couldn’t make the <code>say</code> function work on the Streamlit app, probably because of something related to the multiprocessing thing.</p>
+<p>You can find all the code <a href="https://github.com/PabloCanovas/chatgpt-whisper-streamlit-voice-assistant">here</a>.</p>
+</div>
+<div id="conclusion" class="section level1">
+<h1>Conclusion</h1>
+<p>In this blog post, I’ve shown you how to build a virtual assistant using OpenAI GPT and Whisper APIs. I have taken you through the steps of building an interactive console-based program and a browser-based app using Streamlit.</p>
+<p>A possible next step could be deploying the app to the web, maybe on Heroku, AWS or GCP. In case you are going for it, keep me in the loop! I’d be happy to know this could be useful to anyone.</p>
+<p>Happy building!</p>
+<p><br></p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more Python content!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
+</div>
