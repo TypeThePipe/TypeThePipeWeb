@@ -1,0 +1,145 @@
+---
+title: 'Unlocking the Power of purrr: How to Create Multiple Lags Like a Pro in R'
+author: Pablo Cánovas Tourné
+date: '2023-03-22'
+slug: how-to-create-multiple-lags-in-R
+output: 
+  blogdown::html_page:
+    highlight: tango 
+categories:
+  - R
+  - Tips
+tags: [Tidyverse]
+subtitle: 'A quick guide to creating multiple lags in R for Time Series Analysis with purrr'
+summary: 'While R provides functions like lag, creating multiple lags can be challenging. In this blog post, we will explore how to use the unknown partial function to create multiple lags in R for Time Series Analysis'
+authors: [pablo-canovas]
+featured: false
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="featured.png" style="width:800px; height:450px" alt="An ethereal representation of multiple Time Series" /></p>
+<p>Are you tired of creating lag variables one by one? Are you ready to level up your time series analysis game? Forget everything you know about creating lag variables. There’s a better way, and it’s been right in front of you all along.</p>
+<p>This is a good one. We’ll make use of the semi-unknown <a href="https://purrr.tidyverse.org/reference/partial.html"><code>partial</code></a> function to create a useful wrapper around the <code>lag</code> function. Let’s go straight to the point.</p>
+<p>First, we create a new function called <code>map_lag</code>. This function is essentially a mapped version of the <code>lag</code> function from <code>dplyr</code>, where we pre-fill the <code>n</code> argument to create different lag functions. Then, we can apply this list of functions, each one representing a different lag length, to the desired variable.</p>
+<p>And just like that, voila! We have multiple lag variables without breaking a sweat. To make things even better, we can change the names of our newly created lag variables on the fly to make them more meaningful.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>calculate_lags <span class="ot">&lt;-</span> <span class="cf">function</span>(df, var, lags){</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>  map_lag <span class="ot">&lt;-</span> lags <span class="sc">%&gt;%</span> <span class="fu">map</span>(<span class="sc">~</span><span class="fu">partial</span>(lag, <span class="at">n =</span> .x))</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="fu">return</span>(df <span class="sc">%&gt;%</span> <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="at">.cols =</span> {{var}}, <span class="at">.fns =</span> map_lag, <span class="at">.names =</span> <span class="st">&quot;{.col}_lag{lags}&quot;</span>)))</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>}</span></code></pre></div>
+<p>Let’s see a quick example. We’ll be using the closing prices of the TSLA stock to showcase its use. We have a data frame like this:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>tsla <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 6
+##   date        open  high   low close    volume
+##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
+## 1 2022-01-03  383.  400.  379.  400. 104686047
+## 2 2022-01-04  397.  403.  374.  383. 100248258
+## 3 2022-01-05  382.  390.  360.  363.  80119797
+## 4 2022-01-06  359   363.  340.  355.  90336474</code></pre>
+<p>We simply pass the desired lags to the function, as well as the column we will apply the lags on. Note that we are also using <a href="../../post/dynamically-access-dataframe-variables-tidyeval-ggplot/">tidyevaluation</a> to reference the column without quotes. This way we keep the tidyverse vibe intact.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>tsla <span class="sc">%&gt;%</span> <span class="fu">calculate_lags</span>(close, <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>) <span class="sc">%&gt;%</span> <span class="fu">head</span>()</span></code></pre></div>
+<pre><code>## # A tibble: 6 × 9
+##   date        open  high   low close    volume close_lag1 close_lag2 close_lag3
+##   &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;      &lt;dbl&gt;
+## 1 2022-01-03  383.  400.  379.  400. 104686047        NA         NA         NA 
+## 2 2022-01-04  397.  403.  374.  383. 100248258       400.        NA         NA 
+## 3 2022-01-05  382.  390.  360.  363.  80119797       383.       400.        NA 
+## 4 2022-01-06  359   363.  340.  355.  90336474       363.       383.       400.
+## 5 2022-01-07  360.  360.  337.  342.  84164748       355.       363.       383.
+## 6 2022-01-10  333.  353.  327.  353.  91814877       342.       355.       363.</code></pre>
+<p>It’s time to create your own lags like a pro. Embrace the power of <code>purrr</code> and <code>partial</code> and take your time series analysis to the next level. You will impress your colleagues with your advanced R skills and will have more time to focus on the real analysis.</p>
+<p>Short and sweet!</p>
+<p><br></p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more R tips!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
