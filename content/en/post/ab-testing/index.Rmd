@@ -1,5 +1,5 @@
 ---
-title: A/B Testing
+title: 'A/B Testing Made Simple: Beginner’s Guide to Understanding the Statistics'
 author: Pablo Cánovas Tourné
 date: "2020-06-28"
 slug: AB-Testing
@@ -10,7 +10,7 @@ categories:
 - AB Testing
 - Statistics
 tags: []
-subtitle: 'Understanding the statistics behind A/B tests'
+subtitle: 'Understand the statistics behind A/B tests'
 summary: "Understanding pvalue, error types, and statistical power"
 authors: [pablo-canovas]
 math: TRUE
