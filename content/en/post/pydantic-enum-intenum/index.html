@@ -108,7 +108,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>  MALE <span class="op">=</span> <span class="st">&#39;male&#39;</span></span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>  FEMALE <span class="op">=</span> <span class="st">&#39;female&#39;</span></span>
 <span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>  </span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="kw">class</span> Animals(Enum):</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="kw">class</span> DomesticAnimals(Enum):</span>
 <span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>  CAT <span class="op">=</span> <span class="st">&#39;cat&#39;</span></span>
 <span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>  DOG <span class="op">=</span> <span class="st">&#39;dog&#39;</span></span>
 <span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>  FISH <span class="op">=</span> <span class="st">&#39;fish&#39;</span></span>
@@ -118,12 +118,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a></span>
 <span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="kw">class</span> Pet(BaseModel):</span>
 <span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>  name: <span class="bu">str</span></span>
-<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>  animal_type: Animals</span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>  animal_type: DomesticAnimals</span>
 <span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>  sex: Sex</span>
 <span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>  </span>
 <span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>Pet(name<span class="op">=</span><span class="st">&#39;Timmy&#39;</span>, animal_type<span class="op">=</span><span class="st">&#39;bird&#39;</span>, sex<span class="op">=</span><span class="st">&#39;male&#39;</span>)</span></code></pre></div>
-<pre><code>## Pet(name=&#39;Timmy&#39;, animal_type=&lt;Animals.BIRD: &#39;bird&#39;&gt;, sex=&lt;Sex.MALE: &#39;male&#39;&gt;)</code></pre>
-<p>This will fail due to not existent enum value (Tiger not in allowed animals):</p>
+<pre><code>## Pet(name=&#39;Timmy&#39;, animal_type=&lt;DomesticAnimals.BIRD: &#39;bird&#39;&gt;, sex=&lt;Sex.MALE: &#39;male&#39;&gt;)</code></pre>
+<p>Adding a non existent value (Tiger not in allowed in domestic animals) to an existent Enum will raise a <code>value is not a valid enumeration member;</code> error. This is one of the main use cases for them:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="im">import</span> pytest</span>
 <span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
 <span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="cf">with</span> pytest.raises(ValidationError, match<span class="op">=</span><span class="st">&#39; value is not a valid enumeration member&#39;</span>) <span class="im">as</span> e_info:</span>
@@ -135,7 +135,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="bu">print</span>(e_info.value)</span></code></pre></div>
 <pre><code>## 1 validation error for Pet
 ## animal_type
-##   value is not a valid enumeration member; permitted: &#39;cat&#39;, &#39;dog&#39;, &#39;fish&#39;, &#39;bird&#39; (type=type_error.enum; enum_values=[&lt;Animals.CAT: &#39;cat&#39;&gt;, &lt;Animals.DOG: &#39;dog&#39;&gt;, &lt;Animals.FISH: &#39;fish&#39;&gt;, &lt;Animals.BIRD: &#39;bird&#39;&gt;])</code></pre>
+##   value is not a valid enumeration member; permitted: &#39;cat&#39;, &#39;dog&#39;, &#39;fish&#39;, &#39;bird&#39; (type=type_error.enum; enum_values=[&lt;DomesticAnimals.CAT: &#39;cat&#39;&gt;, &lt;DomesticAnimals.DOG: &#39;dog&#39;&gt;, &lt;DomesticAnimals.FISH: &#39;fish&#39;&gt;, &lt;DomesticAnimals.BIRD: &#39;bird&#39;&gt;])</code></pre>
 <p>(*Note the <code>UPPER_CASE_NOTATION</code>)</p>
 <p><br></p>
 </div>
