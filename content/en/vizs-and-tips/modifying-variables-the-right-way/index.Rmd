@@ -1,0 +1,274 @@
+---
+title: 'How to Modify Variables the Right Way in R'
+author: Pablo Cánovas Tourné
+date: '2023-04-04'
+slug: modifying-variables-the-right-way
+output: 
+  blogdown::html_page:
+    highlight: tango 
+categories:
+  - R
+  - Tips
+tags: [Tidyverse]
+subtitle: 'A quick guide to modifying many columns at once with R'
+summary: 'Learn to create or modify many variables at the same time applying any function with modern R tools like across and tidyselectors'
+authors: [pablo-canovas]
+---
+
+<br>
+
+## Introduction
+In data analysis and data science, it's common to work with large datasets that require some form of manipulation to be useful. In this small article, we'll explore how to create and modify columns in a dataframe using modern R tools from the tidyverse package. We can do that on several ways, so we are going from basic to advanced level.
+
+Let's use the `starwars` dataset for that purpose:
+
+```{r, echo = F, message=F}
+library(tidyverse)
+```
+
+
+```{r, eval = F}
+data("starwars")
+head(starwars, 4)
+```
+
+```{r}
+# # A tibble: 4 × 8
+#   name           height  mass hair_color  skin_color  eye_color birth_year sex    
+#   <chr>           <int> <dbl> <chr>       <chr>       <chr>          <dbl> <chr>  
+# 1 Luke Skywalker    172    77 blond       fair        blue            19   male   
+# 2 C-3PO             167    75 NA          gold        yellow         112   none   
+# 3 R2-D2              96    32 NA          white, blue red             33   none   
+# 4 Darth Vader       202   136 none        white       yellow          41.9 male   
+```
+
+# Basic examples
+The most basic example is using `mutate` to create and modify variables. 
+```{r, eval = F}
+starwars %>% 
+  mutate(
+    height = height * 2,
+    new_numeric_column = row_number(),
+    new_char_column = "This variable is new"
+  ) %>% 
+  select(name, height, new_numeric_column, new_char_column) %>% 
+  head(4)
+```
+```{r}
+# # A tibble: 4 × 4
+#   name           height new_numeric_column new_char_column     
+#   <chr>           <dbl>              <dbl> <chr>               
+# 1 Luke Skywalker    344                  1 This variable is new
+# 2 C-3PO             334                  2 This variable is new
+# 3 R2-D2             192                  3 This variable is new
+# 4 Darth Vader       404                  4 This variable is new
+```
+
+Note how the second variable we created is recycled to match the length of the dataset.
+But you already knew that, right?
+
+## Common tricks
+
+A common trick is making use of `if_else` to **conditionally modify some variables**. I use this structure on a daily basis.
+
+```{r, eval = F}
+starwars %>% 
+  mutate(height = if_else(hair_color == "blond", height * 10, height)) %>% 
+  select(name, height, mass, hair_color) %>% 
+  head(4)
+```
+```{r}
+# # A tibble: 4 × 8
+#   name           height  mass hair_color   
+#   <chr>           <int> <dbl> <chr>        
+# 1 Luke Skywalker    344    77 blond        
+# 2 C-3PO             167    75 NA           
+# 3 R2-D2              96    32 NA           
+# 4 Darth Vader       202   136 none         
+```
+
+
+Another common use case is to rely on the `case_when` function to modify the variable based on several conditions:
+
+```{r, eval = F}
+starwars %>% 
+  mutate(mod_height = case_when(eye_color == "blue" ~ height/2,
+                                eye_color == "red" ~ height*2,
+                                eye_color == "yellow" ~ height*10,
+                                TRUE ~ height)) %>% 
+  select(name, height, eye_color, mod_height) %>% 
+  head(4)
+```
+```{r}
+#   name           height eye_color mod_height
+#   <chr>           <int> <chr>          <dbl>
+# 1 Luke Skywalker    172 blue              86
+# 2 C-3PO             167 yellow          1670
+# 3 R2-D2              96 red              192
+# 4 Darth Vader       202 yellow          2020 
+```
+Note that we should end the `case_when` with an option that always yields TRUE because the conditions are evaluated in order. If our data doesn't meet any condition we are leaving the column as is.
+
+All these are fairly basic examples. Let's go with the `dplyr` advanced way of creating and modifying variables. 
+
+# The Advanced Way: Using across()
+
+In modern R, we can simultaneously modify several columns at once using the verb `across`. We need to pass the transformation we will be performing on those variables as well. For that, we are using a lambda function which basically means that we are creating the function on-the-fly but we are not storing it.
+
+```{r, eval = FALSE}
+starwars %>% 
+  mutate(across(c(height, mass, birth_year), ~ .x*10)) %>% 
+  select(name, height, mass, birth_year) %>% 
+  head(4)
+```
+```{r}
+# # A tibble: 4 × 4
+#   name           height  mass birth_year
+#   <chr>           <dbl> <dbl>      <dbl>
+# 1 Luke Skywalker   1720   770        190
+# 2 C-3PO            1670   750       1120
+# 3 R2-D2             960   320        330
+# 4 Darth Vader      2020  1360        419
+```
+
+That's quite nice but sometimes you don't want to modify the existing columns but creating new ones.
+This is an important use case: **batch-creating several columns at once based on the existing ones**. I already discussed how to do it in [How to create multiple lags like a Pro](https://typethepipe.com/vizs-and-tips/how-to-create-multiple-lags-in-r/). We can use the `.names` argument to dynamically specify the new column names, like this:
+
+
+```{r, eval = F}
+starwars %>% 
+  mutate(across(c(height, mass, birth_year), ~ .x * 100, .names = "{.col}_x100")) %>% 
+  select(name, height, mass, birth_year, height_x100, mass_x100, birth_year_x100) %>% 
+  head(4)
+```
+```{r}
+# # A tibble: 4 × 7
+#   name           height  mass birth_year height_x100 mass_x100 birth_year_x100
+#   <chr>           <int> <dbl>      <dbl>       <dbl>     <dbl>           <dbl>
+# 1 Luke Skywalker    172    77       19         17200      7700            1900
+# 2 C-3PO             167    75      112         16700      7500           11200
+# 3 R2-D2              96    32       33          9600      3200            3300
+# 4 Darth Vader       202   136       41.9       20200     13600            4190
+```
+
+Awesome, right? However I still had to type them all manually. There is a better way.
+
+# The Pro Way: Using across() + tidyselectors
+
+What if we want to modify a lot of columns? There must be a better way to avoid having to type them all...
+Sure there is! [`tidyselector`](https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html) functions to the rescue! Those are a family of functions that allow us to dynamically select several columns based on a condition. Let's see that with an example.
+
+Let's say we want to modify only the numerical variables. We can do that easily with the help of ```where``` function and the neat part is this family of functions works with several verbs of the Tidyverse. For instance, they work with `select`:
+
+```{r, eval = F}
+starwars %>% 
+  select(name, where(is.numeric)) %>% 
+  head(4)
+```
+```{r}
+# # A tibble: 4 × 4
+#   name           height  mass birth_year
+#   <chr>           <int> <dbl>      <dbl>
+# 1 Luke Skywalker    172    77       19  
+# 2 C-3PO             167    75      112  
+# 3 R2-D2              96    32       33  
+# 4 Darth Vader       202   136       41.9
+```
+
+But also with `mutate`! So combining the function `across` with `where` we can apply the function only over the desired columns (without having to type them!)
+
+```{r, eval = F}
+starwars %>% 
+  mutate(across(where(is.numeric), ~ .x * 100)) %>% 
+  select(name, where(is.numeric)) %>% 
+  head(4)
+```
+```{r}
+# # A tibble: 4 × 4
+#   name           height  mass birth_year
+#   <chr>           <dbl> <dbl>      <dbl>
+# 1 Luke Skywalker  17200  7700       1900
+# 2 C-3PO           16700  7500      11200
+# 3 R2-D2            9600  3200       3300
+# 4 Darth Vader     20200 13600       4190
+```
+
+
+Note how the `name` feature hasn't been modified, as it is not a numeric variable. This is a really handy trick specially when you are working with big datasets and need to perform an operation on many columns at once.
+
+Also, it is worth noting that we can pass **any** function to `across` to modify the selected columns. We don't necessarily have to define the operation with a lambda function, but any existing function can be used.
+
+Here is another powerful example working with character columns. We can apply an existing function to make all of them uppercase:
+
+```{r, eval = F}
+starwars %>% 
+  mutate(across(where(is.character), toupper)) %>% 
+  select(where(is.character)) %>% 
+  head(4)
+```
+```{r}
+# # A tibble: 4 × 8
+#   name           hair_color skin_color  eye_color sex   gender    homeworld species
+#   <chr>          <chr>      <chr>       <chr>     <chr> <chr>     <chr>     <chr>  
+# 1 LUKE SKYWALKER BLOND      FAIR        BLUE      MALE  MASCULINE TATOOINE  HUMAN  
+# 2 C-3PO          NA         GOLD        YELLOW    NONE  MASCULINE TATOOINE  DROID  
+# 3 R2-D2          NA         WHITE, BLUE RED       NONE  MASCULINE NABOO     DROID  
+# 4 DARTH VADER    NONE       WHITE       YELLOW    MALE  MASCULINE TATOOINE  HUMAN 
+```
+
+
+Also, you don't have to rely only on the `where` tidyselector, you can use many others like `contains`, `matches`, `starts_with` or `ends_with`.
+
+Here's another example example using `ends_with`:
+```{r, eval = F}
+starwars %>% 
+  mutate(across(ends_with("_color"), ~ paste0("the color is ", .x))) %>% 
+  select(where(is.character)) %>% 
+  head(4)
+```
+```{r}
+# # A tibble: 4 × 8
+#   name           hair_color         skin_color               eye_color           sex   gender    homeworld species
+#   <chr>          <chr>              <chr>                    <chr>               <chr> <chr>     <chr>     <chr>  
+# 1 Luke Skywalker the color is blond the color is fair        the color is blue   male  masculine Tatooine  Human  
+# 2 C-3PO          the color is NA    the color is gold        the color is yellow none  masculine Tatooine  Droid  
+# 3 R2-D2          the color is NA    the color is white, blue the color is red    none  masculine Naboo     Droid  
+# 4 Darth Vader    the color is none  the color is white       the color is yellow male  masculine Tatooine  Human  
+```
+
+
+Handy stuff, right? There is so much more possibilities to discover. You can read more about it on the [across reference](https://dplyr.tidyverse.org/reference/across.html).
+
+
+<br>
+
+```{=html}
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more R tips!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+```
