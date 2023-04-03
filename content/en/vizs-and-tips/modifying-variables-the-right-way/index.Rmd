@@ -24,7 +24,7 @@ In data analysis and data science, it's common to work with large datasets that 
 
 Let's use the `starwars` dataset for that purpose:
 
-```{r, echo = F, message=F}
+```{r, echo = F, message=F, warning=FALSE}
 library(tidyverse)
 ```
 
