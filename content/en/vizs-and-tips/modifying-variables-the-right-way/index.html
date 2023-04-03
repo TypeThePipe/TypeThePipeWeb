@@ -1,0 +1,269 @@
+---
+title: 'How to Modify Variables the Right Way in R'
+author: Pablo Cánovas Tourné
+date: '2023-04-04'
+slug: modifying-variables-the-right-way
+output: 
+  blogdown::html_page:
+    highlight: tango 
+categories:
+  - R
+  - Tips
+tags: [Tidyverse]
+subtitle: 'A quick guide to modifying many columns at once with R'
+summary: 'Learn to create or modify many variables at the same time applying any function with modern R tools like across and tidyselectors'
+authors: [pablo-canovas]
+featured: false
+draft: false
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="featured.png" style="width:800px; height:450px" alt="Modify variables in R" /></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>In data analysis and data science, it’s common to work with large datasets that require some form of manipulation to be useful. In this small article, we’ll explore how to create and modify columns in a dataframe using modern R tools from the tidyverse package. We can do that on several ways, so we are going from basic to advanced level.</p>
+<p>Let’s use the <code>starwars</code> dataset for that purpose:</p>
+<pre><code>## Warning: package &#39;readr&#39; was built under R version 4.0.5</code></pre>
+<pre><code>## Warning: package &#39;forcats&#39; was built under R version 4.0.5</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;starwars&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="fu">head</span>(starwars, <span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># # A tibble: 4 × 8</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="co">#   name           height  mass hair_color  skin_color  eye_color birth_year sex    </span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="co">#   &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;       &lt;chr&gt;       &lt;chr&gt;          &lt;dbl&gt; &lt;chr&gt;  </span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="co"># 1 Luke Skywalker    172    77 blond       fair        blue            19   male   </span></span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="co"># 2 C-3PO             167    75 NA          gold        yellow         112   none   </span></span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="co"># 3 R2-D2              96    32 NA          white, blue red             33   none   </span></span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="co"># 4 Darth Vader       202   136 none        white       yellow          41.9 male   </span></span></code></pre></div>
+</div>
+<div id="basic-examples" class="section level1">
+<h1>Basic examples</h1>
+<p>The most basic example is using <code>mutate</code> to create and modify variables.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>    <span class="at">height =</span> height <span class="sc">*</span> <span class="dv">2</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>    <span class="at">new_numeric_column =</span> <span class="fu">row_number</span>(),</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>    <span class="at">new_char_column =</span> <span class="st">&quot;This variable is new&quot;</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  ) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  <span class="fu">select</span>(name, height, new_numeric_column, new_char_column) <span class="sc">%&gt;%</span> </span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># # A tibble: 4 × 4</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="co">#   name           height new_numeric_column new_char_column     </span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="co">#   &lt;chr&gt;           &lt;dbl&gt;              &lt;dbl&gt; &lt;chr&gt;               </span></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="co"># 1 Luke Skywalker    344                  1 This variable is new</span></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="co"># 2 C-3PO             334                  2 This variable is new</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="co"># 3 R2-D2             192                  3 This variable is new</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="co"># 4 Darth Vader       404                  4 This variable is new</span></span></code></pre></div>
+<p>Note how the second variable we created is recycled to match the length of the dataset.
+But you already knew that, right?</p>
+<div id="common-tricks" class="section level2">
+<h2>Common tricks</h2>
+<p>A common trick is making use of <code>if_else</code> to <strong>conditionally modify some variables</strong>. I use this structure on a daily basis.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">height =</span> <span class="fu">if_else</span>(hair_color <span class="sc">==</span> <span class="st">&quot;blond&quot;</span>, height <span class="sc">*</span> <span class="dv">10</span>, height)) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>  <span class="fu">select</span>(name, height, mass, hair_color) <span class="sc">%&gt;%</span> </span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># # A tibble: 4 × 8</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co">#   name           height  mass hair_color   </span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="co">#   &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt; &lt;chr&gt;        </span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># 1 Luke Skywalker    344    77 blond        </span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a><span class="co"># 2 C-3PO             167    75 NA           </span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a><span class="co"># 3 R2-D2              96    32 NA           </span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a><span class="co"># 4 Darth Vader       202   136 none         </span></span></code></pre></div>
+<p>Another common use case is to rely on the <code>case_when</code> function to modify the variable based on several conditions:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mod_height =</span> <span class="fu">case_when</span>(eye_color <span class="sc">==</span> <span class="st">&quot;blue&quot;</span> <span class="sc">~</span> height<span class="sc">/</span><span class="dv">2</span>,</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>                                eye_color <span class="sc">==</span> <span class="st">&quot;red&quot;</span> <span class="sc">~</span> height<span class="sc">*</span><span class="dv">2</span>,</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>                                eye_color <span class="sc">==</span> <span class="st">&quot;yellow&quot;</span> <span class="sc">~</span> height<span class="sc">*</span><span class="dv">10</span>,</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>                                <span class="cn">TRUE</span> <span class="sc">~</span> height)) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>  <span class="fu">select</span>(name, height, eye_color, mod_height) <span class="sc">%&gt;%</span> </span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="co">#   name           height eye_color mod_height</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="co">#   &lt;chr&gt;           &lt;int&gt; &lt;chr&gt;          &lt;dbl&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a><span class="co"># 1 Luke Skywalker    172 blue              86</span></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="co"># 2 C-3PO             167 yellow          1670</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a><span class="co"># 3 R2-D2              96 red              192</span></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a><span class="co"># 4 Darth Vader       202 yellow          2020 </span></span></code></pre></div>
+<p>Note that we should end the <code>case_when</code> with an option that always yields TRUE because the conditions are evaluated in order. If our data doesn’t meet any condition we are leaving the column as is.</p>
+<p>All these are fairly basic examples. Let’s go with the <code>dplyr</code> advanced way of creating and modifying variables.</p>
+</div>
+</div>
+<div id="the-advanced-way-using-across" class="section level1">
+<h1>The Advanced Way: Using across()</h1>
+<p>In modern R, we can simultaneously modify several columns at once using the verb <code>across</code>. We need to pass the transformation we will be performing on those variables as well. For that, we are using a lambda function which basically means that we are creating the function on-the-fly but we are not storing it.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(height, mass, birth_year), <span class="sc">~</span> .x<span class="sc">*</span><span class="dv">10</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>  <span class="fu">select</span>(name, height, mass, birth_year) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="co"># # A tibble: 4 × 4</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="co">#   name           height  mass birth_year</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="co">#   &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;</span></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="co"># 1 Luke Skywalker   1720   770        190</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="co"># 2 C-3PO            1670   750       1120</span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="co"># 3 R2-D2             960   320        330</span></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="co"># 4 Darth Vader      2020  1360        419</span></span></code></pre></div>
+<p>That’s quite nice but sometimes you don’t want to modify the existing columns but creating new ones.
+This is an important use case: <strong>batch-creating several columns at once based on the existing ones</strong>. I already discussed how to do it in <a href="https://typethepipe.com/vizs-and-tips/how-to-create-multiple-lags-in-r/">How to create multiple lags like a Pro</a>. We can use the <code>.names</code> argument to dynamically specify the new column names, like this:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">c</span>(height, mass, birth_year), <span class="sc">~</span> .x <span class="sc">*</span> <span class="dv">100</span>, <span class="at">.names =</span> <span class="st">&quot;{.col}_x100&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>  <span class="fu">select</span>(name, height, mass, birth_year, height_x100, mass_x100, birth_year_x100) <span class="sc">%&gt;%</span> </span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="co"># # A tibble: 4 × 7</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="co">#   name           height  mass birth_year height_x100 mass_x100 birth_year_x100</span></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a><span class="co">#   &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;       &lt;dbl&gt;     &lt;dbl&gt;           &lt;dbl&gt;</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="co"># 1 Luke Skywalker    172    77       19         17200      7700            1900</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="co"># 2 C-3PO             167    75      112         16700      7500           11200</span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="co"># 3 R2-D2              96    32       33          9600      3200            3300</span></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="co"># 4 Darth Vader       202   136       41.9       20200     13600            4190</span></span></code></pre></div>
+<p>Awesome, right? However I still had to type them all manually. There is a better way.</p>
+</div>
+<div id="the-pro-way-using-across-tidyselectors" class="section level1">
+<h1>The Pro Way: Using across() + tidyselectors</h1>
+<p>What if we want to modify a lot of columns? There must be a better way to avoid having to type them all…
+Sure there is! <a href="https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html"><code>tidyselector</code></a> functions to the rescue! Those are a family of functions that allow us to dynamically select several columns based on a condition. Let’s see that with an example.</p>
+<p>Let’s say we want to modify only the numerical variables. We can do that easily with the help of <code>where</code> function and the neat part is this family of functions works with several verbs of the Tidyverse. For instance, they work with <code>select</code>:</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>  <span class="fu">select</span>(name, <span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span> </span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># # A tibble: 4 × 4</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="co">#   name           height  mass birth_year</span></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="co">#   &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;      &lt;dbl&gt;</span></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="co"># 1 Luke Skywalker    172    77       19  </span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="co"># 2 C-3PO             167    75      112  </span></span>
+<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="co"># 3 R2-D2              96    32       33  </span></span>
+<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="co"># 4 Darth Vader       202   136       41.9</span></span></code></pre></div>
+<p>But also with <code>mutate</code>! So combining the function <code>across</code> with <code>where</code> we can apply the function only over the desired columns (without having to type them!)</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span> .x <span class="sc">*</span> <span class="dv">100</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a>  <span class="fu">select</span>(name, <span class="fu">where</span>(is.numeric)) <span class="sc">%&gt;%</span> </span>
+<span id="cb17-4"><a href="#cb17-4" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># # A tibble: 4 × 4</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="co">#   name           height  mass birth_year</span></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="co">#   &lt;chr&gt;           &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt;</span></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="co"># 1 Luke Skywalker  17200  7700       1900</span></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="co"># 2 C-3PO           16700  7500      11200</span></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="co"># 3 R2-D2            9600  3200       3300</span></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="co"># 4 Darth Vader     20200 13600       4190</span></span></code></pre></div>
+<p>Note how the <code>name</code> feature hasn’t been modified, as it is not a numeric variable. This is a really handy trick specially when you are working with big datasets and need to perform an operation on many columns at once.</p>
+<p>Also, it is worth noting that we can pass <strong>any</strong> function to <code>across</code> to modify the selected columns. We don’t necessarily have to define the operation with a lambda function, but any existing function can be used.</p>
+<p>Here is another powerful example working with character columns. We can apply an existing function to make all of them uppercase:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.character), toupper)) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-3"><a href="#cb19-3" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.character)) <span class="sc">%&gt;%</span> </span>
+<span id="cb19-4"><a href="#cb19-4" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># # A tibble: 4 × 8</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a><span class="co">#   name           hair_color skin_color  eye_color sex   gender    homeworld species</span></span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="co">#   &lt;chr&gt;          &lt;chr&gt;      &lt;chr&gt;       &lt;chr&gt;     &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;  </span></span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="co"># 1 LUKE SKYWALKER BLOND      FAIR        BLUE      MALE  MASCULINE TATOOINE  HUMAN  </span></span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a><span class="co"># 2 C-3PO          NA         GOLD        YELLOW    NONE  MASCULINE TATOOINE  DROID  </span></span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="co"># 3 R2-D2          NA         WHITE, BLUE RED       NONE  MASCULINE NABOO     DROID  </span></span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a><span class="co"># 4 DARTH VADER    NONE       WHITE       YELLOW    MALE  MASCULINE TATOOINE  HUMAN </span></span></code></pre></div>
+<p>Also, you don’t have to rely only on the <code>where</code> tidyselector, you can use many others like <code>contains</code>, <code>matches</code>, <code>starts_with</code> or <code>ends_with</code>.</p>
+<p>Here’s another example example using <code>ends_with</code>:</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a>starwars <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">ends_with</span>(<span class="st">&quot;_color&quot;</span>), <span class="sc">~</span> <span class="fu">paste0</span>(<span class="st">&quot;the color is &quot;</span>, .x))) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">where</span>(is.character)) <span class="sc">%&gt;%</span> </span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># # A tibble: 4 × 8</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a><span class="co">#   name           hair_color         skin_color               eye_color           sex   gender    homeworld species</span></span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="co">#   &lt;chr&gt;          &lt;chr&gt;              &lt;chr&gt;                    &lt;chr&gt;               &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;     &lt;chr&gt;  </span></span>
+<span id="cb22-4"><a href="#cb22-4" tabindex="-1"></a><span class="co"># 1 Luke Skywalker the color is blond the color is fair        the color is blue   male  masculine Tatooine  Human  </span></span>
+<span id="cb22-5"><a href="#cb22-5" tabindex="-1"></a><span class="co"># 2 C-3PO          the color is NA    the color is gold        the color is yellow none  masculine Tatooine  Droid  </span></span>
+<span id="cb22-6"><a href="#cb22-6" tabindex="-1"></a><span class="co"># 3 R2-D2          the color is NA    the color is white, blue the color is red    none  masculine Naboo     Droid  </span></span>
+<span id="cb22-7"><a href="#cb22-7" tabindex="-1"></a><span class="co"># 4 Darth Vader    the color is none  the color is white       the color is yellow male  masculine Tatooine  Human  </span></span></code></pre></div>
+<p>Handy stuff, right? There is so much more possibilities to discover. You can read more about it on the <a href="https://dplyr.tidyverse.org/reference/across.html">across reference</a>.</p>
+<p><br></p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more R tips!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+</div>

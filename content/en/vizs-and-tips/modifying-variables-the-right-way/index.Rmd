@@ -13,6 +13,8 @@ tags: [Tidyverse]
 subtitle: 'A quick guide to modifying many columns at once with R'
 summary: 'Learn to create or modify many variables at the same time applying any function with modern R tools like across and tidyselectors'
 authors: [pablo-canovas]
+featured: false
+draft: false
 ---
 
 <img src="./featured.png" style="width:800px; height:450px" alt="Modify variables in R" />
