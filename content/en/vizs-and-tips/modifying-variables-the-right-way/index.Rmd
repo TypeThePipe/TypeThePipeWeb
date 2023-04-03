@@ -17,7 +17,7 @@ featured: false
 draft: false
 ---
 
-<img src="./featured.png" style="width:800px; height:450px" alt="Modify variables in R" />
+<img src="./featured.png" style="width:250px; height:250px" alt="Modify variables in R" />
 
 ## Introduction
 In data analysis and data science, it's common to work with large datasets that require some form of manipulation to be useful. In this small article, we'll explore how to create and modify columns in a dataframe using modern R tools from the tidyverse package. We can do that on several ways, so we are going from basic to advanced level.
