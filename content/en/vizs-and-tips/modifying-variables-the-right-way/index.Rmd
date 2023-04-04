@@ -10,7 +10,7 @@ categories:
   - R
   - Tips
 tags: [Tidyverse]
-subtitle: 'A quick guide to modifying many columns at once with R'
+subtitle: 'A quick guide to modifying many columns at once like a pro.'
 summary: 'Learn to create or modify many variables at the same time applying any function with modern R tools like across and tidyselectors'
 authors: [pablo-canovas]
 featured: false
@@ -19,7 +19,7 @@ draft: false
 
 <img src="./featured.png" style="width:250px; height:250px" alt="Modify variables in R" />
 
-## Introduction
+# Introduction
 In data analysis and data science, it's common to work with large datasets that require some form of manipulation to be useful. In this small article, we'll explore how to create and modify columns in a dataframe using modern R tools from the tidyverse package. We can do that on several ways, so we are going from basic to advanced level.
 
 Let's use the `starwars` dataset for that purpose:
@@ -44,7 +44,6 @@ head(starwars, 4)
 # 4 Darth Vader       202   136 none        white       yellow          41.9 male   
 ```
 
-# Basic examples
 The most basic example is using `mutate` to create and modify variables. 
 ```{r, eval = F}
 starwars %>% 
@@ -69,7 +68,7 @@ starwars %>%
 Note how the second variable we created is recycled to match the length of the dataset.
 But you already knew that, right?
 
-## Common tricks
+# Common tricks
 
 A common trick is making use of `if_else` to **conditionally modify some variables**. I use this structure on a daily basis.
 
@@ -109,7 +108,7 @@ starwars %>%
 # 3 R2-D2              96 red              192
 # 4 Darth Vader       202 yellow          2020 
 ```
-Note that we should end the `case_when` with an option that always yields TRUE because the conditions are evaluated in order. If our data doesn't meet any condition we are leaving the column as is.
+Note that we should end the `case_when` with an option that always yields `TRUE` because the conditions are evaluated in order. If our data doesn't meet any condition we are leaving the column as is.
 
 All these are fairly basic examples. Let's go with the `dplyr` advanced way of creating and modifying variables. 
 
@@ -153,14 +152,14 @@ starwars %>%
 # 4 Darth Vader       202   136       41.9       20200     13600            4190
 ```
 
-Awesome, right? However I still had to type them all manually. There is a better way.
+Awesome, right? However, I still had to type them all manually. There is a better way.
 
 # The Pro Way: Using across() + tidyselectors
 
 What if we want to modify a lot of columns? There must be a better way to avoid having to type them all...
-Sure there is! [`tidyselector`](https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html) functions to the rescue! Those are a family of functions that allow us to dynamically select several columns based on a condition. Let's see that with an example.
+Sure there is! [`tidyselectors`](https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html) to the rescue! Those are a family of functions that allow us to dynamically select several columns based on a condition. Let's see that with an example.
 
-Let's say we want to modify only the numerical variables. We can do that easily with the help of ```where``` function and the neat part is this family of functions works with several verbs of the Tidyverse. For instance, they work with `select`:
+Let's say we want to modify only the numerical variables. We can do that easily with the help of `where` function and the neat part is this family of functions works with several verbs of the Tidyverse. For instance, they work with `select`:
 
 ```{r, eval = F}
 starwars %>% 
@@ -177,7 +176,7 @@ starwars %>%
 # 4 Darth Vader       202   136       41.9
 ```
 
-But also with `mutate`! So combining the function `across` with `where` we can apply the function only over the desired columns (without having to type them!)
+But also with `mutate`! So combining `across` with `where` we can apply the function only over the desired columns (without having to type them!)
 
 ```{r, eval = F}
 starwars %>% 
@@ -225,17 +224,17 @@ Here's another example example using `ends_with`:
 ```{r, eval = F}
 starwars %>% 
   mutate(across(ends_with("_color"), ~ paste0("the color is ", .x))) %>% 
-  select(where(is.character)) %>% 
+  select(name, ends_with("_color")) %>% 
   head(4)
 ```
 ```{r}
-# # A tibble: 4 × 8
-#   name           hair_color         skin_color               eye_color           sex   gender    homeworld species
-#   <chr>          <chr>              <chr>                    <chr>               <chr> <chr>     <chr>     <chr>  
-# 1 Luke Skywalker the color is blond the color is fair        the color is blue   male  masculine Tatooine  Human  
-# 2 C-3PO          the color is NA    the color is gold        the color is yellow none  masculine Tatooine  Droid  
-# 3 R2-D2          the color is NA    the color is white, blue the color is red    none  masculine Naboo     Droid  
-# 4 Darth Vader    the color is none  the color is white       the color is yellow male  masculine Tatooine  Human  
+# # A tibble: 4 × 4
+#   name           hair_color         skin_color               eye_color           
+#   <chr>          <chr>              <chr>                    <chr>                
+# 1 Luke Skywalker the color is blond the color is fair        the color is blue     
+# 2 C-3PO          the color is NA    the color is gold        the color is yellow  
+# 3 R2-D2          the color is NA    the color is white, blue the color is red      
+# 4 Darth Vader    the color is none  the color is white       the color is yellow   
 ```
 
 
