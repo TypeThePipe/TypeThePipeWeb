@@ -1,5 +1,5 @@
 ---
-title: "Forecasting error metrics for Time Series models"
+title: "Time Series Forecasting: Error Metrics to Evaluate Model Performance"
 author: "Pablo Cánovas Tourné"
 date: '2019-09-21'
 slug: "energy-forecasting-error-metrics"

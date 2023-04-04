@@ -1,5 +1,5 @@
 ---
-title: Pydantic Enums and IntEnums. A Story of Validation
+title: Pydantic, Enums and IntEnums. A Story of Validation
 author: Carlos Vecina Tebar
 date: '2022-10-05'
 slug: pydantic-enum-intenum
@@ -10,23 +10,23 @@ categories:
   - Python
   - Post
 tags: [Python, Pydantic]
-subtitle: "Taming Data Validation: Mastering Pydantic Enums and IntEnums for Robust Python Applications."
-summary: "Mastering Pydantic Enums and IntEnums for robust Python applications. Merge the power of Pydantic data validations and the concept of Enum, IntEnum and StrEnum."
+subtitle: "Taming Data Validation: Mastering Pydantic, Enums and IntEnums for Robust Python Applications."
+summary: "Mastering Pydantic, Enums and IntEnums for robust Python applications. Merge the power of Pydantic data validations and the concept of Enum, IntEnum and StrEnum."
 authors: [carlos-vecina]
 featured: false
 ---
 
 <img src="./featured.png" width="400px" alt="Pydantic Python library logo." />
 
-# What is a Pydantic Enum?
+# What is a Enum and its integration with Pydantic?
 
-Oh, this is great question! Never heard that one before. A Pydantic Enum, for the uninitiated, is a nifty little feature from the Pydantic library that helps you control the chaos of the data jungle. **It's a combination of Python's Enum (short for enumeration) and Pydantic's validation powers. Enums let you define a set of named values that your data must adhere to.** Pydantic then checks if your data is part of this exclusive club, and if it isn't, kindly shows it the door.
+Oh, this is great question! Never heard that one before. An Enum, for the uninitiated, is a nifty little feature that united with the Pydantic library that helps you control the chaos of the data jungle. **It's a combination of Python's Enum (short for enumeration) and Pydantic's validation powers. Enums let you define a set of named values that your data must adhere to.** Pydantic then checks if your data is part of this exclusive club, and if it isn't, kindly shows it the door.
 
 <br>
 
-## **How does Pydantic Enum help me?**
+## **How does Pydantic and Enum help me?**
 
-If you've ever dealt with data, you know that it has a mind of its own. Sometimes, it's pristine and perfect. Other times, it's a dumpster fire. Pydantic Enum is here to save you from those days when your data decides to go rogue.
+If you've ever dealt with data, you know that it has a mind of its own. Sometimes, it's pristine and perfect. Other times, it's a dumpster fire. Enums are here to save you from those days when your data decides to go rogue.
 
 By defining enums and using them in your Pydantic models, you create a set of rules that your data must follow, like a stern yet fair teacher. This way, you can ensure that only valid data enters your system, and any outliers are dealt with accordingly.
 
@@ -50,7 +50,7 @@ class Sex(Enum):
   MALE = 'male'
   FEMALE = 'female'
   
-class Animals(Enum):
+class DomesticAnimals(Enum):
   CAT = 'cat'
   DOG = 'dog'
   FISH = 'fish'
@@ -60,13 +60,14 @@ class Animals(Enum):
 
 class Pet(BaseModel):
   name: str
-  animal_type: Animals
+  animal_type: DomesticAnimals
   sex: Sex
   
 Pet(name='Timmy', animal_type='bird', sex='male')
 
 ```
-This will fail due to not existent enum value (Tiger not in allowed animals):
+
+Adding a non existent value (Tiger not in allowed in domestic animals) to an existent Enum will raise a `value is not a valid enumeration member;` error. This is one of the main use cases for them:
 ```{python}
 import pytest
 
