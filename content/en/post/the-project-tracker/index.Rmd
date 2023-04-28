@@ -1,0 +1,84 @@
+---
+title: "Launching The Project Tracker. Open Source project monitoring and release explainer with Streamlilt and LLMs"
+author: Carlos Vecina Tebar
+date: "2023-04-29"
+slug: "the-project-tracker-chatgpt3-streamlit-open-source"
+translationKey: "the-project-tracker-chatgpt3-streamlit-open-source"
+output: html_document
+categories:
+- R
+- Posts
+tags: []
+subtitle: "Are you feeling stressed tracking the new releases of your favorite project? Are you moving to a management role and struggling to stay updated about your favorite projects and languages? With this Project Tracker and Explainer Streamlit app, you'll stay tuned."
+summary: "Are you feeling stressed tracking the new releases of your favorite project? Are you moving to a management role and struggling to stay updated about your favorite projects and languages? With this Project Tracker and Explainer Streamlit app, you'll stay tuned."
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+<br>
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+With this app you can track your R & Python most used modules and packages, getting easy explanations on what's going on in each release and version to version.
+
+
+<iframe height="1800" width="100%" frameborder="no" src="https://carlosvecina-the-project-tracker-st-appproyectos-mv7k8w.streamlit.app/?embedded=true"> </iframe>
+
+<br>
+
+# 🚀✨ Unleash Your Inner Coding Genius with Our New Streamlit App! ✨🚀
+
+Hey there, coding enthusiasts and open source fanatics! We're beyond excited to introduce our latest and greatest creation: a state-of-the-art Streamlit app designed to track open source projects and GitHub repositories like never before! 🌟
+
+Are you tired of missing out on the hottest open source trends and getting lost in the maze of repositories? Fret not! Our powerful Streamlit app is here to revolutionize your coding journey by keeping you informed and organized. 🔥🔥
+
+#💡 Key Features:
+
+Tailored tracking: Customize your tracking preferences to stay on top of the projects and repos that matter most to you.
+Real-time notifications: Never miss a beat with instant updates on the latest commits, pull requests, and issues.
+Interactive dashboard: Visualize your data through stunning charts and graphs for a comprehensive, bird's-eye view.
+Trending projects: Discover popular repositories and trending projects within the open source community.
+Why blend in when you can stand out? Our Streamlit app empowers you to unleash your full coding potential and become a true open source rockstar! 🎸
+
+Ready to transform your coding experience? Click the link below to access our groundbreaking Streamlit app and ride the wave of open source innovation! 🌊
+
+➡️ Try it now: https://carlosvecina-the-project-tracker-st-appproyectos-mv7k8w.streamlit.app ⬅️
+
+Happy coding, everyone! 🎉💻
+
+```{=html}
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Don't miss the next chapters of the Financial Value Investing in R series!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+```
+
+<br>
