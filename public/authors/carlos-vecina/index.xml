@@ -5,12 +5,1065 @@
     <link>/authors/carlos-vecina/</link>
       <atom:link href="/authors/carlos-vecina/index.xml" rel="self" type="application/rss+xml" />
     <description>Carlos Vecina</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 01 May 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-32.png</url>
       <title>Carlos Vecina</title>
       <link>/authors/carlos-vecina/</link>
     </image>
+    
+    <item>
+      <title>Launching The Project Tracker. Open Source project monitoring and release explainer with Streamlilt and LLMs</title>
+      <link>/post/the-project-tracker-chatgpt3-streamlit-open-source/</link>
+      <pubDate>Mon, 01 May 2023 00:00:00 +0000</pubDate>
+      <guid>/post/the-project-tracker-chatgpt3-streamlit-open-source/</guid>
+      <description>
+&lt;script src=&#34;/post/the-project-tracker-chatgpt3-streamlit-open-source/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;With this app you can &lt;strong&gt;track your R &amp;amp; Python most used modules&lt;/strong&gt; and packages, &lt;strong&gt;getting easy explanations&lt;/strong&gt; on what’s going on in each release and version to version.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Don&#39;t miss new features in the R &amp; Python Project Tracker!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;iframe height=&#34;1800&#34; width=&#34;100%&#34; frameborder=&#34;no&#34; src=&#34;https://carlosvecina-the-project-tracker-st-appproyectos-mv7k8w.streamlit.app/?embedded=true&#34;&gt;
+&lt;/iframe&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;unleash-your-inner-coding-genius-with-our-new-streamlit-app&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;🚀✨ Unleash Your Inner Coding Genius with Our New Streamlit App! ✨🚀&lt;/h1&gt;
+&lt;p&gt;Hey there, coding enthusiasts and open source fanatics! We’re beyond excited to introduce our latest and greatest creation: a state-of-the-art Streamlit app designed to track open source projects and GitHub repositories like never before! 🌟&lt;/p&gt;
+&lt;p&gt;Are you tired of missing out on the hottest open source trends and getting lost in the maze of repositories? Fret not! Our powerful Streamlit app is here to revolutionize your coding journey by keeping you informed and organized. 🔥🔥&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;key-features&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;💡 Key Features:&lt;/h1&gt;
+&lt;p&gt;Tailored tracking: Customize your tracking preferences to stay on top of the projects and repos that matter most to you.
+Real-time notifications: Never miss a beat with instant updates on the latest commits, pull requests, and issues.
+Interactive dashboard: Visualize your data through stunning charts and graphs for a comprehensive, bird’s-eye view.
+Trending projects: Discover popular repositories and trending projects within the open source community.
+Why blend in when you can stand out? Our Streamlit app empowers you to unleash your full coding potential and become a true open source rockstar! 🎸&lt;/p&gt;
+&lt;p&gt;Ready to transform your coding experience? Click the link below to access our groundbreaking Streamlit app and ride the wave of open source innovation! 🌊&lt;/p&gt;
+&lt;p&gt;➡️ Try it now: &lt;a href=&#34;https://carlosvecina-the-project-tracker-st-appproyectos-mv7k8w.streamlit.app&#34; class=&#34;uri&#34;&gt;https://carlosvecina-the-project-tracker-st-appproyectos-mv7k8w.streamlit.app&lt;/a&gt; ⬅️&lt;/p&gt;
+&lt;p&gt;Happy coding, everyone! 🎉💻&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pipe function in Python Polars. Don&#39;t leave the pipe flow!</title>
+      <link>/vizs-and-tips/python-polars-pipe-function-to-one-more-columns/</link>
+      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>/vizs-and-tips/python-polars-pipe-function-to-one-more-columns/</guid>
+      <description>
+&lt;script src=&#34;/vizs-and-tips/python-polars-pipe-function-to-one-more-columns/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;Well, well, hanging out in Python, missing the &lt;code&gt;pipe feeling&lt;/code&gt;?? There are some good news! The pipe function in the Polars Python module allows you to chain operations together by passing the result of one operation as the input to the next operation. For sure, this is not one of the greatest advantages that Polars offers over Pandas…. But it does feel so nice!&lt;/p&gt;
+&lt;p&gt;Here you can find and example of &lt;strong&gt;how to keep the pipe flow even in Python!&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; polars &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; pl&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; random &lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Create a Polars DataFrame with base columns&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;df &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; pl.DataFrame({&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;: [&lt;span class=&#34;st&#34;&gt;&amp;#39;Alice&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;Bob&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;Charlie&amp;#39;&lt;/span&gt;], &lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;#39;offensive_skill&amp;#39;&lt;/span&gt;: [&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;30&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;85&lt;/span&gt;], &lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;#39;defensive_skill&amp;#39;&lt;/span&gt;: [&lt;span class=&#34;dv&#34;&gt;92&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;30&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt;]&lt;/span&gt;
+&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    })&lt;/span&gt;
+&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Define polars custom functions to apply&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-12&#34;&gt;&lt;a href=&#34;#cb1-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; add_position_column(df):&lt;/span&gt;
+&lt;span id=&#34;cb1-13&#34;&gt;&lt;a href=&#34;#cb1-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    df &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; df.with_columns( &lt;/span&gt;
+&lt;span id=&#34;cb1-14&#34;&gt;&lt;a href=&#34;#cb1-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        pl.when(pl.col(&lt;span class=&#34;st&#34;&gt;&amp;#39;defensive_skill&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;50&lt;/span&gt;).then(&lt;span class=&#34;st&#34;&gt;&amp;#39;CB&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-15&#34;&gt;&lt;a href=&#34;#cb1-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        .when(pl.col(&lt;span class=&#34;st&#34;&gt;&amp;#39;offensive_skill&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;50&lt;/span&gt;).then(&lt;span class=&#34;st&#34;&gt;&amp;#39;FW&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-16&#34;&gt;&lt;a href=&#34;#cb1-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        .otherwise(&lt;span class=&#34;st&#34;&gt;&amp;#39;bench&amp;#39;&lt;/span&gt;).alias(&lt;span class=&#34;st&#34;&gt;&amp;quot;position&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-17&#34;&gt;&lt;a href=&#34;#cb1-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    )&lt;/span&gt;
+&lt;span id=&#34;cb1-18&#34;&gt;&lt;a href=&#34;#cb1-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; df&lt;/span&gt;
+&lt;span id=&#34;cb1-19&#34;&gt;&lt;a href=&#34;#cb1-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-20&#34;&gt;&lt;a href=&#34;#cb1-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; add_squad_number_column(df):&lt;/span&gt;
+&lt;span id=&#34;cb1-21&#34;&gt;&lt;a href=&#34;#cb1-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    df &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; df.with_columns( &lt;/span&gt;
+&lt;span id=&#34;cb1-22&#34;&gt;&lt;a href=&#34;#cb1-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        pl.when(pl.col(&lt;span class=&#34;st&#34;&gt;&amp;#39;position&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;CD&amp;#39;&lt;/span&gt;).then(pl.lit(random.sample(&lt;span class=&#34;bu&#34;&gt;range&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;6&lt;/span&gt;), &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;], dtype&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;pl.Int8))&lt;/span&gt;
+&lt;span id=&#34;cb1-23&#34;&gt;&lt;a href=&#34;#cb1-23&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        .when(pl.col(&lt;span class=&#34;st&#34;&gt;&amp;#39;position&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;FW&amp;#39;&lt;/span&gt;).then(pl.lit(random.sample(&lt;span class=&#34;bu&#34;&gt;range&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;7&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;19&lt;/span&gt;), &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;], dtype&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;pl.Int8))&lt;/span&gt;
+&lt;span id=&#34;cb1-24&#34;&gt;&lt;a href=&#34;#cb1-24&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        .otherwise(&lt;span class=&#34;st&#34;&gt;&amp;#39;-&amp;#39;&lt;/span&gt;).alias(&lt;span class=&#34;st&#34;&gt;&amp;quot;squad_number&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-25&#34;&gt;&lt;a href=&#34;#cb1-25&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    )&lt;/span&gt;
+&lt;span id=&#34;cb1-26&#34;&gt;&lt;a href=&#34;#cb1-26&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; df&lt;/span&gt;
+&lt;span id=&#34;cb1-27&#34;&gt;&lt;a href=&#34;#cb1-27&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-28&#34;&gt;&lt;a href=&#34;#cb1-28&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Chain operations together using the pipe function&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-29&#34;&gt;&lt;a href=&#34;#cb1-29&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-30&#34;&gt;&lt;a href=&#34;#cb1-30&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb1-31&#34;&gt;&lt;a href=&#34;#cb1-31&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    df&lt;/span&gt;
+&lt;span id=&#34;cb1-32&#34;&gt;&lt;a href=&#34;#cb1-32&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .pipe(add_position_column)&lt;/span&gt;
+&lt;span id=&#34;cb1-33&#34;&gt;&lt;a href=&#34;#cb1-33&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .pipe(add_squad_number_column)&lt;/span&gt;
+&lt;span id=&#34;cb1-34&#34;&gt;&lt;a href=&#34;#cb1-34&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div&gt;&lt;style&gt;
+.dataframe &gt; thead &gt; tr &gt; th,
+.dataframe &gt; tbody &gt; tr &gt; td {
+  text-align: right;
+}
+&lt;/style&gt;
+&lt;small&gt;shape: (3, 5)&lt;/small&gt;&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;offensive_skill&lt;/th&gt;&lt;th&gt;defensive_skill&lt;/th&gt;&lt;th&gt;position&lt;/th&gt;&lt;th&gt;squad_number&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;i64&lt;/td&gt;&lt;td&gt;i64&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Alice&amp;quot;&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;92&lt;/td&gt;&lt;td&gt;&amp;quot;CB&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;-&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Bob&amp;quot;&lt;/td&gt;&lt;td&gt;30&lt;/td&gt;&lt;td&gt;30&lt;/td&gt;&lt;td&gt;&amp;quot;bench&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;-&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Charlie&amp;quot;&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;td&gt;&amp;quot;FW&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;15&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;polars-pipe-and-lazy-evaluation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Polars pipe and lazy evaluation&lt;/h1&gt;
+&lt;p&gt;An extra trick is to use the &lt;a href=&#34;https://pola-rs.github.io/polars/py-polars/html/reference/dataframe/api/polars.DataFrame.pipe.html#:~:text=to%20the%20UDF.-,Notes,-It%20is%20recommended&#34;&gt;lazy evaluation&lt;/a&gt; in order to maximize the advantages of query optimization and parallelization. We need a big enough df and complex operations to make it worth.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;result &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; (&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    df.lazy()&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .pipe(add_position_column)&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .pipe(add_squad_number_column)&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .collect()&lt;/span&gt;
+&lt;span id=&#34;cb2-6&#34;&gt;&lt;a href=&#34;#cb2-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb2-7&#34;&gt;&lt;a href=&#34;#cb2-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-8&#34;&gt;&lt;a href=&#34;#cb2-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;result&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div&gt;&lt;style&gt;
+.dataframe &gt; thead &gt; tr &gt; th,
+.dataframe &gt; tbody &gt; tr &gt; td {
+  text-align: right;
+}
+&lt;/style&gt;
+&lt;small&gt;shape: (3, 5)&lt;/small&gt;&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;offensive_skill&lt;/th&gt;&lt;th&gt;defensive_skill&lt;/th&gt;&lt;th&gt;position&lt;/th&gt;&lt;th&gt;squad_number&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;i64&lt;/td&gt;&lt;td&gt;i64&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Alice&amp;quot;&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;92&lt;/td&gt;&lt;td&gt;&amp;quot;CB&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;-&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Bob&amp;quot;&lt;/td&gt;&lt;td&gt;30&lt;/td&gt;&lt;td&gt;30&lt;/td&gt;&lt;td&gt;&amp;quot;bench&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;-&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Charlie&amp;quot;&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;td&gt;&amp;quot;FW&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;12&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python content!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Financial Markets &amp; Value Invest in R (I) - Analyzing Market Cap data with fmpcloudr and ggplot</title>
+      <link>/post/value-invest-market-cap-data-r-ggplot-financial-times-theme/</link>
+      <pubDate>Fri, 10 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>/post/value-invest-market-cap-data-r-ggplot-financial-times-theme/</guid>
+      <description>
+&lt;script src=&#34;/post/value-invest-market-cap-data-r-ggplot-financial-times-theme/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;500px&#34; width=&#34;600px&#34; alt=&#34;Financial Times Theme in Ggplot2 R 4.0&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Over the past months, heavy market drifts have occurred, and no one could have imagined the frenzy of free money being stopped. &lt;strong&gt;The idea that the end of history had arrived has been shattered&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;As we entered &lt;strong&gt;2023, we witnessed certain stocks soaring in the markets&lt;/strong&gt;, attempting to recover from their previous losses, while other &lt;strong&gt;macroeconomic indicators continued to deteriorate.&lt;/strong&gt; However, uncertainty still weighs heavily on the minds of investors, perhaps even more so than ever before, given the threats of inflation, labor market instability, dollarization pitfalls, trust decay in central banks and financial institutions, interest rates, potential real estate crash in specific local areas…&lt;/p&gt;
+&lt;p&gt;A significant question raises: &lt;strong&gt;how to protect ourselves against such circumstances&lt;/strong&gt; and what can we expect in each possible scenario?&lt;/p&gt;
+&lt;p&gt;Therefore, it presents a fantastic opportunity to &lt;strong&gt;brush up our R, tidy &amp;amp; ggplot, skills and delve further into the market structure&lt;/strong&gt;. Through this series of posts, we are primarily examining the stock market, its dynamics, cycles, valuation metrics, as well as the pre-IPO and startup ecosystem, the bond market, real estate, and even a touch of crypto. However, as you’ll see, we are mainly deepening our understanding of value/fundamentals-focused investing strategies.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;what-is-value-investing&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;What is value investing?&lt;/h1&gt;
+&lt;p&gt;Value investing is an investment strategy that involves buying stocks or other financial assets that are believed to be undervalued by the market, &lt;strong&gt;focusing in their intrinsic value&lt;/strong&gt;. The ultimate goal of value investing then, is to identify &lt;strong&gt;companies that are temporarily undervalued by the market due to factors such as short-term negative news, volatility, or even investor sentiment&lt;/strong&gt;. By buying these assets at a discounted price, value investors hope to profit from the market’s eventual recognition of the company’s true value, resulting in a higher stock price.&lt;/p&gt;
+&lt;p&gt;So we are far in this series from the high frequency, short-term or daily trades. Although, it’s a quite prolific and profitable field, also an interesting intersection between Data Science and Finance ;)&lt;/p&gt;
+&lt;p&gt;The approach, skills and even the involved risks are quite different from one way to trade to other. The &lt;em&gt;value investing approach&lt;/em&gt; could also be seen or performed as a defensive strategy, not as greedy as other ones. But it also involves long-term and macroeconomic risks that are not present (or have less impact) in short-to-medium term strategies.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;generating-financial-market-prep-free-api-key&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Generating Financial Market Prep free API key&lt;/h1&gt;
+&lt;p&gt;To start, we need to access the data. There are many options for doing so, one of which is to create an API token in the Financial Market Prep page.&lt;/p&gt;
+&lt;p&gt;The available data on this API continues to grow month after month. Truth be told, some functionalities could be improved, such as allowing for more parameterization in data retrieval. Nevertheless, &lt;strong&gt;the sheer amount and quality of the data available is just stunning&lt;/strong&gt;, which is why we are using it throughout this series.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://site.financialmodelingprep.com/login&#34;&gt;Select the free plan.&lt;/a&gt; Then we’ll come back and set up the API key in your R environment.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;library&lt;/span&gt;(tidyverse)&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;library&lt;/span&gt;(ggplot2)&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;library&lt;/span&gt;(ggthemes)&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;library&lt;/span&gt;(magrittr)&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;library&lt;/span&gt;(lubridate)&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;library&lt;/span&gt;(factoextra)&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;library&lt;/span&gt;(fmpcloudr)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_set_token&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;your_token&amp;#39;&lt;/span&gt;) &lt;span class=&#34;co&#34;&gt;# example fmpc_set_token(&amp;#39;09431214923a63117b0p00ff1cart2alp&amp;#39;) &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Now the token is already set up, so we can start downloading data. As in March 2023, you can do 250 call to the free API.&lt;/p&gt;
+&lt;p&gt;In this post we are exploring the API and doing the first plots&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;financial-market-prep-api-in-fmpcloudr-package&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Financial Market Prep API in fmpcloudr package&lt;/h1&gt;
+&lt;p&gt;As you have seen, they also have a very handy R package, &lt;code&gt;fmpcloudr&lt;/code&gt;. In this paragraph we are briefly exploring the kind of data available.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Daily market capitalization, OHLC (open, high, low, close) prices, and volume data.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_price_current&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb3-2&#34;&gt;&lt;a href=&#34;#cb3-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-3&#34;&gt;&lt;a href=&#34;#cb3-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_price_intraday&lt;/span&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;Historical price data with up to 1-minute resolution and historical dividents&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb4-1&#34;&gt;&lt;a href=&#34;#cb4-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_price_history&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb4-2&#34;&gt;&lt;a href=&#34;#cb4-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-3&#34;&gt;&lt;a href=&#34;#cb4-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_security_dividends&lt;/span&gt;(symbols, &lt;span class=&#34;at&#34;&gt;startDate =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;2020-01-01&amp;#39;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;Financial ratios and stock fundamentals, including liquidity, profitability, debt, operating performance, cash flow, investment valuation ratios, and other key metrics, updated quarterly and annually.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_financial_metrics&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb5-2&#34;&gt;&lt;a href=&#34;#cb5-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-3&#34;&gt;&lt;a href=&#34;#cb5-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_financial_metrics&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb5-4&#34;&gt;&lt;a href=&#34;#cb5-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-5&#34;&gt;&lt;a href=&#34;#cb5-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_earning_call_transcript&lt;/span&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;Analysts’ price targets to provide insight into market expectations.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb6-1&#34;&gt;&lt;a href=&#34;#cb6-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_analyst_outlook&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb6-2&#34;&gt;&lt;a href=&#34;#cb6-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-3&#34;&gt;&lt;a href=&#34;#cb6-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_economic_results&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb6-4&#34;&gt;&lt;a href=&#34;#cb6-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-5&#34;&gt;&lt;a href=&#34;#cb6-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_security_ratings&lt;/span&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;Sentiment analysis to gauge overall market sentiment towards a stock.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Sentiment data not available in the R package. So we have to construct the GET call. We are showing how in next posts and opening a PR to their package.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Technical indicators&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Simple moving average&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-2&#34;&gt;&lt;a href=&#34;#cb7-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_security_tech_indic&lt;/span&gt;(symbols, &lt;span class=&#34;at&#34;&gt;indicator =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;SMA&amp;#39;&lt;/span&gt;, &lt;span class=&#34;at&#34;&gt;freq =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;daily&amp;#39;&lt;/span&gt;, &lt;span class=&#34;at&#34;&gt;period =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb7-3&#34;&gt;&lt;a href=&#34;#cb7-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt; &lt;/span&gt;
+&lt;span id=&#34;cb7-4&#34;&gt;&lt;a href=&#34;#cb7-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Exponential moving average&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-5&#34;&gt;&lt;a href=&#34;#cb7-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_security_tech_indic&lt;/span&gt;(symbols, &lt;span class=&#34;at&#34;&gt;indicator =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;EMA&amp;#39;&lt;/span&gt;,  &lt;span class=&#34;at&#34;&gt;freq =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;1min&amp;#39;&lt;/span&gt;, &lt;span class=&#34;at&#34;&gt;period =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;Insiders trade and institutional ownership data to keep you informed about significant stockholders.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb8-1&#34;&gt;&lt;a href=&#34;#cb8-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_13f_data&lt;/span&gt;() &lt;span class=&#34;co&#34;&gt;# holders&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-2&#34;&gt;&lt;a href=&#34;#cb8-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-3&#34;&gt;&lt;a href=&#34;#cb8-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_cots_data&lt;/span&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;Real-time stock price data, SEC filings, institutional holders, price target, and other essential information.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb9&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb9-1&#34;&gt;&lt;a href=&#34;#cb9-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_rss_sec&lt;/span&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;Macroeconomic data and Calendar events tracking upcoming dividends, stock splits.. ant its historical data.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb10&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb10-1&#34;&gt;&lt;a href=&#34;#cb10-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_economic_results&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb10-2&#34;&gt;&lt;a href=&#34;#cb10-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-3&#34;&gt;&lt;a href=&#34;#cb10-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_economic_results&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;event =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;adpEmploymentChange&amp;#39;&lt;/span&gt;, &lt;span class=&#34;at&#34;&gt;country =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;US&amp;#39;&lt;/span&gt;) &lt;/span&gt;
+&lt;span id=&#34;cb10-4&#34;&gt;&lt;a href=&#34;#cb10-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-5&#34;&gt;&lt;a href=&#34;#cb10-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_calendar_events&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;earning&amp;#39;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;Information on funds, European markets, forex, crypto, and commodities.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Such and awesome collection of data! :D And it’s probably enough (with the free tier) to start to analyze and even slow trade in a more &lt;em&gt;value investing&lt;/em&gt; way.&lt;/p&gt;
+&lt;p&gt;More information in their &lt;a href=&#34;https://site.financialmodelingprep.com/developer/docs&#34;&gt;documentation&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;market-capitalization-in-r&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Market Capitalization in R&lt;/h2&gt;
+&lt;p&gt;As promised, we are just introducing the package and brushing up our ggplot skills. Therefore, we are focusing in this post on the evolution of market cap, allowing us to compare trends between different stocks. &lt;strong&gt;It is well known that growth stocks have experienced a massive surge in recent years, ranging from technology growth companies to pump-and-dump penny stocks, ‘meme-stocks’ defying the establishment (good luck Credit Suisse, SVB..) and SPACs frenzy.&lt;/strong&gt; The market has been flooded with free money for almost a decade, with tech players lowering the entry barriers for retail investors, and benefiting from lockdown savings and subsidies.&lt;/p&gt;
+&lt;p&gt;Let’s examine the impact of this phenomenon on a set of stocks categorized as ‘growth’ and ‘value’. Since life is a continuum, we will first categorize them by hand according to the consensus. We will then conduct an initial analysis, which will be elaborated further in subsequent posts, attempting to cluster them based on their actual performance. In this chapter, we will use the market cap fluctuation to achieve this, although other features could also be utilized and macroeconomic factors taken into account. Stay tuned for upcoming TypeThePipe posts!&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb11-1&#34;&gt;&lt;a href=&#34;#cb11-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;symbols &lt;span class=&#34;ot&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;AAPL&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;META&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;AMZN&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;GOOG&amp;#39;&lt;/span&gt;,&lt;span class=&#34;st&#34;&gt;&amp;#39;MSFT&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb11-2&#34;&gt;&lt;a href=&#34;#cb11-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;data &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_security_mrktcap&lt;/span&gt;(symbols, &lt;span class=&#34;at&#34;&gt;limit =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;30&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;12&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb12&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb12-1&#34;&gt;&lt;a href=&#34;#cb12-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;data &lt;span class=&#34;sc&#34;&gt;%&amp;lt;&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;date =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;ymd&lt;/span&gt;(date))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb13&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb13-1&#34;&gt;&lt;a href=&#34;#cb13-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;ggplot&lt;/span&gt;(data, &lt;span class=&#34;fu&#34;&gt;aes&lt;/span&gt;(date, marketCap, &lt;span class=&#34;at&#34;&gt;colour =&lt;/span&gt; symbol)) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-2&#34;&gt;&lt;a href=&#34;#cb13-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;geom_line&lt;/span&gt;() &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/post/value-invest-market-cap-data-r-ggplot-financial-times-theme/index_files/figure-html/unnamed-chunk-16-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;financial-times-theme-in-ggplot&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Financial Times Theme in Ggplot&lt;/h2&gt;
+&lt;p&gt;Not bad for a 2 lines plot, but lets add some Financial Times theme kind of flavor:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb14&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb14-1&#34;&gt;&lt;a href=&#34;#cb14-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# old chunk in my codebase seen in Reddit but and can&amp;#39;t find the source. If anyone has the original link, very glad to add it here! :)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb14-2&#34;&gt;&lt;a href=&#34;#cb14-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;ft_theme &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb14-3&#34;&gt;&lt;a href=&#34;#cb14-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;theme&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;panel.grid.major.x =&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;element_line&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;colour =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;wheat4&amp;quot;&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb14-4&#34;&gt;&lt;a href=&#34;#cb14-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;at&#34;&gt;panel.grid.major.y =&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;element_line&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;colour =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;wheat4&amp;quot;&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb14-5&#34;&gt;&lt;a href=&#34;#cb14-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;at&#34;&gt;panel.grid.minor.x =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;element_blank&lt;/span&gt;(),&lt;/span&gt;
+&lt;span id=&#34;cb14-6&#34;&gt;&lt;a href=&#34;#cb14-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;at&#34;&gt;panel.grid.minor.y =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;element_blank&lt;/span&gt;(),&lt;/span&gt;
+&lt;span id=&#34;cb14-7&#34;&gt;&lt;a href=&#34;#cb14-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;at&#34;&gt;axis.text =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;element_text&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;colour =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;, &lt;span class=&#34;at&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;8&lt;/span&gt;, &lt;span class=&#34;at&#34;&gt;face =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;bold&amp;quot;&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb14-8&#34;&gt;&lt;a href=&#34;#cb14-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;at&#34;&gt;axis.title.x =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;element_text&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;colour =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;, &lt;span class=&#34;at&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;8&lt;/span&gt;, &lt;span class=&#34;at&#34;&gt;face =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;bold&amp;quot;&lt;/span&gt;, &lt;span class=&#34;at&#34;&gt;vjust =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.8&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb14-9&#34;&gt;&lt;a href=&#34;#cb14-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;at&#34;&gt;axis.title.y =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;element_blank&lt;/span&gt;(),&lt;/span&gt;
+&lt;span id=&#34;cb14-10&#34;&gt;&lt;a href=&#34;#cb14-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;at&#34;&gt;strip.text =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;element_text&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;size=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;8&lt;/span&gt;, &lt;span class=&#34;at&#34;&gt;colour =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;blue4&amp;quot;&lt;/span&gt;, &lt;span class=&#34;at&#34;&gt;face =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;bold&amp;quot;&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb14-11&#34;&gt;&lt;a href=&#34;#cb14-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;at&#34;&gt;plot.title =&lt;/span&gt; ggtext&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;element_markdown&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;color =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;, &lt;span class=&#34;at&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;14&lt;/span&gt;, &lt;span class=&#34;at&#34;&gt;face =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;bold&amp;quot;&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb14-12&#34;&gt;&lt;a href=&#34;#cb14-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;at&#34;&gt;plot.subtitle =&lt;/span&gt; ggtext&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;element_markdown&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;color =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;, &lt;span class=&#34;at&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;8&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb14-13&#34;&gt;&lt;a href=&#34;#cb14-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;at&#34;&gt;plot.tag =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;element_text&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;color =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;, &lt;span class=&#34;at&#34;&gt;face =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;italic&amp;quot;&lt;/span&gt;, &lt;span class=&#34;at&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;182&lt;/span&gt;, &lt;span class=&#34;at&#34;&gt;lineheight =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.9&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb14-14&#34;&gt;&lt;a href=&#34;#cb14-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;at&#34;&gt;plot.tag.position =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;fl&#34;&gt;0.15&lt;/span&gt;,&lt;span class=&#34;fl&#34;&gt;0.02&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb14-15&#34;&gt;&lt;a href=&#34;#cb14-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;at&#34;&gt;plot.caption =&lt;/span&gt; ggtext&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;element_markdown&lt;/span&gt;(),&lt;/span&gt;
+&lt;span id=&#34;cb14-16&#34;&gt;&lt;a href=&#34;#cb14-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;at&#34;&gt;panel.background =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;element_rect&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;fill =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;seashell2&amp;quot;&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb14-17&#34;&gt;&lt;a href=&#34;#cb14-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;at&#34;&gt;plot.background =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;element_rect&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;fill =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;seashell2&amp;quot;&lt;/span&gt;), &lt;/span&gt;
+&lt;span id=&#34;cb14-18&#34;&gt;&lt;a href=&#34;#cb14-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;at&#34;&gt;panel.border =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;element_blank&lt;/span&gt;(),&lt;/span&gt;
+&lt;span id=&#34;cb14-19&#34;&gt;&lt;a href=&#34;#cb14-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;at&#34;&gt;panel.spacing.y =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;unit&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;lines&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb14-20&#34;&gt;&lt;a href=&#34;#cb14-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        ) &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb15&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb15-1&#34;&gt;&lt;a href=&#34;#cb15-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;data &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb15-2&#34;&gt;&lt;a href=&#34;#cb15-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;aes&lt;/span&gt;(date, marketCap, &lt;span class=&#34;at&#34;&gt;group=&lt;/span&gt;symbol, &lt;span class=&#34;at&#34;&gt;colour=&lt;/span&gt;symbol)) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-3&#34;&gt;&lt;a href=&#34;#cb15-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;geom_line&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.5&lt;/span&gt;) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb15-4&#34;&gt;&lt;a href=&#34;#cb15-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;guides&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;colour=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;none&amp;quot;&lt;/span&gt;) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb15-5&#34;&gt;&lt;a href=&#34;#cb15-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;geom_label&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;data =&lt;/span&gt; data &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;filter&lt;/span&gt;(date&lt;span class=&#34;sc&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;max&lt;/span&gt;(date)),&lt;/span&gt;
+&lt;span id=&#34;cb15-6&#34;&gt;&lt;a href=&#34;#cb15-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;              &lt;span class=&#34;fu&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;label =&lt;/span&gt; symbol),&lt;/span&gt;
+&lt;span id=&#34;cb15-7&#34;&gt;&lt;a href=&#34;#cb15-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;              &lt;span class=&#34;at&#34;&gt;label.size =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.1&lt;/span&gt;,  &lt;span class=&#34;at&#34;&gt;size=&lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;2.2&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb15-8&#34;&gt;&lt;a href=&#34;#cb15-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;              &lt;span class=&#34;at&#34;&gt;label.padding =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;unit&lt;/span&gt;(&lt;span class=&#34;fl&#34;&gt;0.2&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;lines&amp;quot;&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb15-9&#34;&gt;&lt;a href=&#34;#cb15-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;              &lt;span class=&#34;at&#34;&gt;nudge_x=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;200&lt;/span&gt;) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-10&#34;&gt;&lt;a href=&#34;#cb15-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;coord_cartesian&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;clip =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;off&amp;#39;&lt;/span&gt;) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt;        &lt;span class=&#34;co&#34;&gt;# Allow labels to bleed past the canvas boundaries&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-11&#34;&gt;&lt;a href=&#34;#cb15-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;scale_x_date&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;date_breaks =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;6 month&amp;quot;&lt;/span&gt;,  &lt;span class=&#34;co&#34;&gt;# Date labels for each month.&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-12&#34;&gt;&lt;a href=&#34;#cb15-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;               &lt;span class=&#34;at&#34;&gt;date_labels =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;%b%y&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb15-13&#34;&gt;&lt;a href=&#34;#cb15-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;               &lt;span class=&#34;at&#34;&gt;guide =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;guide_axis&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;angle =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;90&lt;/span&gt;)) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-14&#34;&gt;&lt;a href=&#34;#cb15-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;scale_y_continuous&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;labels=&lt;/span&gt;&lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(x)  &lt;span class=&#34;fu&#34;&gt;sprintf&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;%d Billion&amp;quot;&lt;/span&gt;, x &lt;span class=&#34;sc&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;^&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;9&lt;/span&gt;)) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb15-15&#34;&gt;&lt;a href=&#34;#cb15-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;labs&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;title=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Market Cap evolution - FAAMG&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb15-16&#34;&gt;&lt;a href=&#34;#cb15-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;       &lt;span class=&#34;at&#34;&gt;subtitle=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;&amp;lt;span style=&amp;#39;color: #A9A9A9;&amp;#39;&amp;gt;&amp;lt;b&amp;gt;Apple&amp;lt;/b&amp;gt;&amp;lt;/span&amp;gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-17&#34;&gt;&lt;a href=&#34;#cb15-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;       &amp;lt;span style=&amp;#39;color: #E7B800;&amp;#39;&amp;gt;&amp;lt;b&amp;gt;Amazon&amp;lt;/b&amp;gt;&amp;lt;/span&amp;gt;, &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-18&#34;&gt;&lt;a href=&#34;#cb15-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;       &amp;lt;span style=&amp;#39;color: #FC4E07;&amp;#39;&amp;gt;&amp;lt;b&amp;gt;Microsoft&amp;lt;/b&amp;gt;&amp;lt;/span&amp;gt; and &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-19&#34;&gt;&lt;a href=&#34;#cb15-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;       &amp;lt;span style=&amp;#39;color: #0D7680;&amp;#39;&amp;gt;&amp;lt;b&amp;gt;Meta&amp;lt;/b&amp;gt;&amp;lt;/span&amp;gt;&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb15-20&#34;&gt;&lt;a href=&#34;#cb15-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;       &lt;span class=&#34;at&#34;&gt;x=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot; &amp;quot;&lt;/span&gt;)&lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb15-21&#34;&gt;&lt;a href=&#34;#cb15-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;scale_color_manual&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;values =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;#A9A9A9&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;#E7B800&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;#34AB53&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;#0D7680&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;#FC4E07&amp;quot;&lt;/span&gt;)) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-22&#34;&gt;&lt;a href=&#34;#cb15-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  ft_theme&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/post/value-invest-market-cap-data-r-ggplot-financial-times-theme/index_files/figure-html/unnamed-chunk-18-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Let’s do the same reusing our Financial Times inspired theme to some considered &lt;em&gt;value stocks&lt;/em&gt;.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb16&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb16-1&#34;&gt;&lt;a href=&#34;#cb16-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;symbols_value &lt;span class=&#34;ot&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;MCD&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;BRK-A&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;PG&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;KO&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb16-2&#34;&gt;&lt;a href=&#34;#cb16-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;data_value &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_security_mrktcap&lt;/span&gt;(symbols_value, &lt;span class=&#34;at&#34;&gt;limit =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;30&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;12&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb17&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb17-1&#34;&gt;&lt;a href=&#34;#cb17-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;data_value &lt;span class=&#34;sc&#34;&gt;%&amp;lt;&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;date =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;ymd&lt;/span&gt;(date),&lt;/span&gt;
+&lt;span id=&#34;cb17-2&#34;&gt;&lt;a href=&#34;#cb17-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                       &lt;span class=&#34;at&#34;&gt;symbol =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;str_replace&lt;/span&gt;(symbol, &lt;span class=&#34;st&#34;&gt;&amp;quot;BRK-A&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;BRK&amp;quot;&lt;/span&gt;))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb18&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb18-1&#34;&gt;&lt;a href=&#34;#cb18-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;data_value &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb18-2&#34;&gt;&lt;a href=&#34;#cb18-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;aes&lt;/span&gt;(date, marketCap, &lt;span class=&#34;at&#34;&gt;group=&lt;/span&gt;symbol, &lt;span class=&#34;at&#34;&gt;colour=&lt;/span&gt;symbol)) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb18-3&#34;&gt;&lt;a href=&#34;#cb18-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;geom_line&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;size =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.5&lt;/span&gt;) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb18-4&#34;&gt;&lt;a href=&#34;#cb18-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;guides&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;colour=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;none&amp;quot;&lt;/span&gt;) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb18-5&#34;&gt;&lt;a href=&#34;#cb18-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;geom_label&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;data =&lt;/span&gt; data_value &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;filter&lt;/span&gt;(date&lt;span class=&#34;sc&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;max&lt;/span&gt;(date)),&lt;/span&gt;
+&lt;span id=&#34;cb18-6&#34;&gt;&lt;a href=&#34;#cb18-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;              &lt;span class=&#34;fu&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;label =&lt;/span&gt; symbol),&lt;/span&gt;
+&lt;span id=&#34;cb18-7&#34;&gt;&lt;a href=&#34;#cb18-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;              &lt;span class=&#34;at&#34;&gt;label.size =&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;0.1&lt;/span&gt;,  &lt;span class=&#34;at&#34;&gt;size=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb18-8&#34;&gt;&lt;a href=&#34;#cb18-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;              &lt;span class=&#34;at&#34;&gt;label.padding =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;unit&lt;/span&gt;(&lt;span class=&#34;fl&#34;&gt;0.2&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;lines&amp;quot;&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb18-9&#34;&gt;&lt;a href=&#34;#cb18-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;              &lt;span class=&#34;at&#34;&gt;nudge_x=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;200&lt;/span&gt;) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb18-10&#34;&gt;&lt;a href=&#34;#cb18-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;coord_cartesian&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;clip =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;off&amp;#39;&lt;/span&gt;) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt;        &lt;span class=&#34;co&#34;&gt;# Allow labels to bleed past the canvas boundaries&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb18-11&#34;&gt;&lt;a href=&#34;#cb18-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;scale_x_date&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;date_breaks =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;6 month&amp;quot;&lt;/span&gt;,  &lt;span class=&#34;co&#34;&gt;# Date labels for each month.&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb18-12&#34;&gt;&lt;a href=&#34;#cb18-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;               &lt;span class=&#34;at&#34;&gt;date_labels =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;%b%y&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb18-13&#34;&gt;&lt;a href=&#34;#cb18-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;               &lt;span class=&#34;at&#34;&gt;guide =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;guide_axis&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;angle =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;90&lt;/span&gt;)) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb18-14&#34;&gt;&lt;a href=&#34;#cb18-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;scale_y_continuous&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;labels=&lt;/span&gt;&lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(x)  &lt;span class=&#34;fu&#34;&gt;sprintf&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;%d Billion&amp;quot;&lt;/span&gt;, x &lt;span class=&#34;sc&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;^&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;9&lt;/span&gt;)) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb18-15&#34;&gt;&lt;a href=&#34;#cb18-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;labs&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;title=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Market Cap evolution - Value Stocks&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb18-16&#34;&gt;&lt;a href=&#34;#cb18-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;       &lt;span class=&#34;at&#34;&gt;subtitle=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;&amp;lt;span style=&amp;#39;color: #554178;&amp;#39;&amp;gt;&amp;lt;b&amp;gt;Berkshire Hathaway&amp;lt;/b&amp;gt;&amp;lt;/span&amp;gt;,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb18-17&#34;&gt;&lt;a href=&#34;#cb18-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;       &amp;lt;span style=&amp;#39;color: #003CAE;&amp;#39;&amp;gt;&amp;lt;b&amp;gt;Procter &amp;amp; Gamble&amp;lt;/b&amp;gt;&amp;lt;/span&amp;gt;, &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb18-18&#34;&gt;&lt;a href=&#34;#cb18-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;       &amp;lt;span style=&amp;#39;color: #df2b24;&amp;#39;&amp;gt;&amp;lt;b&amp;gt;Coca-Cola&amp;lt;/b&amp;gt;&amp;lt;/span&amp;gt; and &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb18-19&#34;&gt;&lt;a href=&#34;#cb18-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;       &amp;lt;span style=&amp;#39;color: #E7B800;&amp;#39;&amp;gt;&amp;lt;b&amp;gt;Mcdonald&amp;#39;s&amp;lt;/b&amp;gt;&amp;lt;/span&amp;gt;&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb18-20&#34;&gt;&lt;a href=&#34;#cb18-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;       &lt;span class=&#34;at&#34;&gt;x=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot; &amp;quot;&lt;/span&gt;)&lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb18-21&#34;&gt;&lt;a href=&#34;#cb18-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;scale_color_manual&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;values =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;#554178&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;#df2b24&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;#E7B800&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;#003CAE&amp;quot;&lt;/span&gt;)) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb18-22&#34;&gt;&lt;a href=&#34;#cb18-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  ft_theme&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/post/value-invest-market-cap-data-r-ggplot-financial-times-theme/index_files/figure-html/unnamed-chunk-22-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;could-we-cluster-stocks-based-in-their-recent-2023-performance&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Could we cluster stocks based in their recent 2023 performance?&lt;/h2&gt;
+&lt;p&gt;Time series clustering is a very controversial topic. Therefore we are skipping it during this first introductory post, and we are using a simple clustering based on simple stats: daily return (approximated using the already downloaded market cap delta) and volatility.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb19&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb19-1&#34;&gt;&lt;a href=&#34;#cb19-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;data_basic_stats &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; data &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb19-2&#34;&gt;&lt;a href=&#34;#cb19-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;filter&lt;/span&gt;(date&lt;span class=&#34;sc&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;2023-01-01&amp;#39;&lt;/span&gt;) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb19-3&#34;&gt;&lt;a href=&#34;#cb19-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;group_by&lt;/span&gt;(symbol) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb19-4&#34;&gt;&lt;a href=&#34;#cb19-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;lag_mktcap =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;lag&lt;/span&gt;(marketCap,&lt;span class=&#34;at&#34;&gt;order_by =&lt;/span&gt; date),&lt;/span&gt;
+&lt;span id=&#34;cb19-5&#34;&gt;&lt;a href=&#34;#cb19-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;         &lt;span class=&#34;at&#34;&gt;diff =&lt;/span&gt; (marketCap &lt;span class=&#34;sc&#34;&gt;-&lt;/span&gt; lag_mktcap) &lt;span class=&#34;sc&#34;&gt;/&lt;/span&gt;lag_mktcap &lt;span class=&#34;sc&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb19-6&#34;&gt;&lt;a href=&#34;#cb19-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;summarise_at&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;.vars =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;diff&amp;#39;&lt;/span&gt;, &lt;span class=&#34;fu&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;funs&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;mean&lt;/span&gt;(., &lt;span class=&#34;at&#34;&gt;na.rm =&lt;/span&gt; &lt;span class=&#34;cn&#34;&gt;TRUE&lt;/span&gt;)), &lt;span class=&#34;fu&#34;&gt;funs&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;sd&lt;/span&gt;(., &lt;span class=&#34;at&#34;&gt;na.rm =&lt;/span&gt; &lt;span class=&#34;cn&#34;&gt;TRUE&lt;/span&gt;))))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb20&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb20-1&#34;&gt;&lt;a href=&#34;#cb20-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;data_value_basic_stats &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; data_value &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb20-2&#34;&gt;&lt;a href=&#34;#cb20-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;filter&lt;/span&gt;(date&lt;span class=&#34;sc&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;2023-01-01&amp;#39;&lt;/span&gt;) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb20-3&#34;&gt;&lt;a href=&#34;#cb20-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;group_by&lt;/span&gt;(symbol) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb20-4&#34;&gt;&lt;a href=&#34;#cb20-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;lag_mktcap =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;lag&lt;/span&gt;(marketCap,&lt;span class=&#34;at&#34;&gt;order_by =&lt;/span&gt; date),&lt;/span&gt;
+&lt;span id=&#34;cb20-5&#34;&gt;&lt;a href=&#34;#cb20-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;         &lt;span class=&#34;at&#34;&gt;diff =&lt;/span&gt; (marketCap &lt;span class=&#34;sc&#34;&gt;-&lt;/span&gt; lag_mktcap) &lt;span class=&#34;sc&#34;&gt;/&lt;/span&gt;lag_mktcap &lt;span class=&#34;sc&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb20-6&#34;&gt;&lt;a href=&#34;#cb20-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;summarise_at&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;.vars =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;diff&amp;#39;&lt;/span&gt;, &lt;span class=&#34;fu&#34;&gt;c&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;funs&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;mean&lt;/span&gt;(., &lt;span class=&#34;at&#34;&gt;na.rm =&lt;/span&gt; &lt;span class=&#34;cn&#34;&gt;TRUE&lt;/span&gt;)), &lt;span class=&#34;fu&#34;&gt;funs&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;sd&lt;/span&gt;(., &lt;span class=&#34;at&#34;&gt;na.rm =&lt;/span&gt; &lt;span class=&#34;cn&#34;&gt;TRUE&lt;/span&gt;))))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Since we are only examining the dataset and it only has two dimensions, we opt to use the straightforward elbow method to select 3 clusters. However, we could also try with 2 and 4 clusters to compare the outcomes.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb21&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb21-1&#34;&gt;&lt;a href=&#34;#cb21-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;data_stats &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; data_basic_stats &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;bind_rows&lt;/span&gt;(data_value_basic_stats)&lt;/span&gt;
+&lt;span id=&#34;cb21-2&#34;&gt;&lt;a href=&#34;#cb21-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb21-3&#34;&gt;&lt;a href=&#34;#cb21-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;tot_withinss &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;map_dbl&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;, &lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(k) {&lt;/span&gt;
+&lt;span id=&#34;cb21-4&#34;&gt;&lt;a href=&#34;#cb21-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  model &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;kmeans&lt;/span&gt;(data_stats &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;select&lt;/span&gt;(mean, sd), &lt;span class=&#34;at&#34;&gt;centers =&lt;/span&gt; k)&lt;/span&gt;
+&lt;span id=&#34;cb21-5&#34;&gt;&lt;a href=&#34;#cb21-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  model&lt;span class=&#34;sc&#34;&gt;$&lt;/span&gt;tot.withinss&lt;/span&gt;
+&lt;span id=&#34;cb21-6&#34;&gt;&lt;a href=&#34;#cb21-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;})&lt;/span&gt;
+&lt;span id=&#34;cb21-7&#34;&gt;&lt;a href=&#34;#cb21-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb21-8&#34;&gt;&lt;a href=&#34;#cb21-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;data.frame&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;k =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb21-9&#34;&gt;&lt;a href=&#34;#cb21-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;           &lt;span class=&#34;at&#34;&gt;tot_withinss =&lt;/span&gt; tot_withinss) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb21-10&#34;&gt;&lt;a href=&#34;#cb21-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;x =&lt;/span&gt; k, &lt;span class=&#34;at&#34;&gt;y =&lt;/span&gt; tot_withinss)) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb21-11&#34;&gt;&lt;a href=&#34;#cb21-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;geom_line&lt;/span&gt;() &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb21-12&#34;&gt;&lt;a href=&#34;#cb21-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;scale_x_continuous&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;breaks =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/post/value-invest-market-cap-data-r-ggplot-financial-times-theme/index_files/figure-html/elbow-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb22&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb22-1&#34;&gt;&lt;a href=&#34;#cb22-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fit &lt;span class=&#34;ot&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;kmeans&lt;/span&gt;(data_stats &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;select&lt;/span&gt;(mean, sd), &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb22-2&#34;&gt;&lt;a href=&#34;#cb22-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb22-3&#34;&gt;&lt;a href=&#34;#cb22-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;data_stats &lt;span class=&#34;sc&#34;&gt;%&amp;lt;&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;cluster =&lt;/span&gt; fit&lt;span class=&#34;sc&#34;&gt;$&lt;/span&gt;cluster,&lt;/span&gt;
+&lt;span id=&#34;cb22-4&#34;&gt;&lt;a href=&#34;#cb22-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                      &lt;span class=&#34;at&#34;&gt;cluster_mean =&lt;/span&gt; fit&lt;span class=&#34;sc&#34;&gt;$&lt;/span&gt;centers[cluster,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;],&lt;/span&gt;
+&lt;span id=&#34;cb22-5&#34;&gt;&lt;a href=&#34;#cb22-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                      &lt;span class=&#34;at&#34;&gt;cluster_sd =&lt;/span&gt; fit&lt;span class=&#34;sc&#34;&gt;$&lt;/span&gt;centers[cluster,&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;],&lt;/span&gt;
+&lt;span id=&#34;cb22-6&#34;&gt;&lt;a href=&#34;#cb22-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                      )&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In the field of economics, there is a tendency to apply discrete categories, often based on historical but arbitrary thresholds, such as recession / not recession, stagflation, growth stocks versus value stocks… We should go beyond basic KPIs and try to approximate underlaying factors driving the markets.&lt;/p&gt;
+&lt;p&gt;Throughout this series, we will strive to analyze and categorize data in a way that reflects richer and higher-dimensional information.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb23&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb23-1&#34;&gt;&lt;a href=&#34;#cb23-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;ggplot&lt;/span&gt;(data_stats, &lt;span class=&#34;fu&#34;&gt;aes&lt;/span&gt;(mean, sd, &lt;span class=&#34;at&#34;&gt;colour=&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;factor&lt;/span&gt;(cluster))) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb23-2&#34;&gt;&lt;a href=&#34;#cb23-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;geom_point&lt;/span&gt;() &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb23-3&#34;&gt;&lt;a href=&#34;#cb23-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;geom_label&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;label =&lt;/span&gt; symbol), &lt;span class=&#34;at&#34;&gt;size=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;, &lt;span class=&#34;at&#34;&gt;label.r =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;unit&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;points&amp;#39;&lt;/span&gt;)) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb23-4&#34;&gt;&lt;a href=&#34;#cb23-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;guides&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;colour=&lt;/span&gt;&lt;span class=&#34;cn&#34;&gt;FALSE&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/post/value-invest-market-cap-data-r-ggplot-financial-times-theme/index_files/figure-html/cluster-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;We can easily expand our analysis to other stocks. Let’s discover how to do so in using the Financial Market Prep API and R package, and in next post we’ll elaborate on those ts clusterization methods, common patterns, turning points…&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb24&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb24-1&#34;&gt;&lt;a href=&#34;#cb24-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;total_tickers &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;fmpc_symbols_available&lt;/span&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb25&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb25-1&#34;&gt;&lt;a href=&#34;#cb25-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;total_tickers&lt;span class=&#34;sc&#34;&gt;$&lt;/span&gt;exchangeShortName &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;unique&lt;/span&gt;() &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;head&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;20&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;##  [1] &amp;quot;MCX&amp;quot;      &amp;quot;NYSE&amp;quot;     &amp;quot;AMEX&amp;quot;     &amp;quot;NASDAQ&amp;quot;   &amp;quot;TSX&amp;quot;      &amp;quot;ETF&amp;quot;     
+##  [7] &amp;quot;NEO&amp;quot;      &amp;quot;CNQ&amp;quot;      &amp;quot;PNK&amp;quot;      &amp;quot;ASE&amp;quot;      &amp;quot;CBT&amp;quot;      &amp;quot;YHD&amp;quot;     
+## [13] &amp;quot;EURONEXT&amp;quot; &amp;quot;OTC&amp;quot;      &amp;quot;LSE&amp;quot;      &amp;quot;SAO&amp;quot;      &amp;quot;IOB&amp;quot;      &amp;quot;XETRA&amp;quot;   
+## [19] &amp;quot;STU&amp;quot;      &amp;quot;BER&amp;quot;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb27&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb27-1&#34;&gt;&lt;a href=&#34;#cb27-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;list_symbols &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; total_tickers &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;filter&lt;/span&gt;(exchangeShortName&lt;span class=&#34;sc&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;NYSE&amp;#39;&lt;/span&gt;) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;pull&lt;/span&gt;(symbol)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This APi call provides quite a lot (all) of them!&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb28&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb28-1&#34;&gt;&lt;a href=&#34;#cb28-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;data &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; fmpcloudr&lt;span class=&#34;sc&#34;&gt;::&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;fmpc_security_mrktcap&lt;/span&gt;(list_symbols, &lt;span class=&#34;at&#34;&gt;limit =&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;30&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We now have the capability to conduct the analysis on the entire NYSE, or at least the most highly capitalized stocks. But that will be another day ;)&lt;/p&gt;
+&lt;p&gt;For now, we can see &lt;strong&gt;again a decay in the value stocks in these two first months of 2023&lt;/strong&gt; vs the growth ones. The market has once again received a dose of optimism. Could it be a good option to start/continue a DCA strategy? Perhaps its suitability varies based on industry and current valuation? Most likely, it does.&lt;/p&gt;
+&lt;p&gt;We are extending this analysis and talking about valuation metrics in our second post of the series! So…&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Don&#39;t miss the next chapters of the Financial Value Investing in R series!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Mock Celery task in Pytest</title>
+      <link>/vizs-and-tips/mock-celery-task-pytest/</link>
+      <pubDate>Sun, 05 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>/vizs-and-tips/mock-celery-task-pytest/</guid>
+      <description>
+&lt;script src=&#34;/vizs-and-tips/mock-celery-task-pytest/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; width=&#34;400px&#34; alt=&#34;Python logo and Celery logo&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;mock-celery-task-in-pytest&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Mock Celery task in Pytest&lt;/h1&gt;
+&lt;p&gt;Let’s get straight to the point. Although there are several ways to do it, and depending on the characteristics of each project, one may be more interesting than another, let’s look at one that generally can be useful for us.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;pytest-celery-fixture&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Pytest Celery Fixture&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;This could be an example of celery config:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; pytest&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;at&#34;&gt;@pytest.fixture&lt;/span&gt;(scope&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;session&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; celery_config(celery_envvars: &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; {&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;task_serializer&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;pickle&amp;quot;&lt;/span&gt;, &lt;span class=&#34;co&#34;&gt;# default json&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;result_serializer&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;pickle&amp;quot;&lt;/span&gt;, &lt;span class=&#34;co&#34;&gt;# default json&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;broker_url&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;memory://&amp;quot;&lt;/span&gt;, &lt;span class=&#34;co&#34;&gt;# default &amp;quot;amqp://&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;result_backend&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;rpc&amp;quot;&lt;/span&gt;, &lt;span class=&#34;co&#34;&gt;# no dafault&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;imports&amp;quot;&lt;/span&gt;: [&lt;span class=&#34;st&#34;&gt;&amp;quot;&amp;lt;your_module&amp;gt;&amp;quot;&lt;/span&gt;],&lt;/span&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    }&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It shouldn’t be mandatory/recommendable to set task_always_eager or CELERY_ALWAYS_EAGER to True, per Celery docs advice. This executed locally instead of being sent to the queue.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;creating-a-celery-task-test&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Creating a Celery task test&lt;/strong&gt;&lt;/h2&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; celery&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;at&#34;&gt;@celery.shared_task&lt;/span&gt;(bind&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; add_task(&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;, a, b):&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; a&lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;b&lt;span class=&#34;op&#34;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; test_one_pending_iterations(&lt;/span&gt;
+&lt;span id=&#34;cb3-2&#34;&gt;&lt;a href=&#34;#cb3-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    celery_app: celery.Celery,&lt;/span&gt;
+&lt;span id=&#34;cb3-3&#34;&gt;&lt;a href=&#34;#cb3-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    celery_worker: celery.Celery.WorkController,&lt;/span&gt;
+&lt;span id=&#34;cb3-4&#34;&gt;&lt;a href=&#34;#cb3-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;) &lt;span class=&#34;op&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb3-5&#34;&gt;&lt;a href=&#34;#cb3-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;assert&lt;/span&gt; add.delay(&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;stay-updated-on-python-tips&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Stay updated on Python tips&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Happy testing and may your bugs tremble in fear at the sight of your PyTest prowess!&lt;/p&gt;
+&lt;p&gt;If you want to stay updated…&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+&lt;/style&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pydantic, Enums and IntEnums. A Story of Validation</title>
+      <link>/post/pydantic-enum-intenum/</link>
+      <pubDate>Wed, 05 Oct 2022 00:00:00 +0000</pubDate>
+      <guid>/post/pydantic-enum-intenum/</guid>
+      <description>
+&lt;script src=&#34;/post/pydantic-enum-intenum/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; width=&#34;400px&#34; alt=&#34;Pydantic Python library logo.&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;what-is-a-enum-and-its-integration-with-pydantic&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;What is a Enum and its integration with Pydantic?&lt;/h1&gt;
+&lt;p&gt;Oh, this is great question! Never heard that one before. An Enum, for the uninitiated, is a nifty little feature that united with the Pydantic library that helps you control the chaos of the data jungle. &lt;strong&gt;It’s a combination of Python’s Enum (short for enumeration) and Pydantic’s validation powers. Enums let you define a set of named values that your data must adhere to.&lt;/strong&gt; Pydantic then checks if your data is part of this exclusive club, and if it isn’t, kindly shows it the door.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;how-does-pydantic-and-enum-help-me&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;How does Pydantic and Enum help me?&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;If you’ve ever dealt with data, you know that it has a mind of its own. Sometimes, it’s pristine and perfect. Other times, it’s a dumpster fire. Enums are here to save you from those days when your data decides to go rogue.&lt;/p&gt;
+&lt;p&gt;By defining enums and using them in your Pydantic models, you create a set of rules that your data must follow, like a stern yet fair teacher. This way, you can ensure that only valid data enters your system, and any outliers are dealt with accordingly.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; enum &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Enum&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; pydantic &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; BaseModel, ValidationError&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Pet(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  name: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  animal_type: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  sex: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;You can be more specific defining your Pydantic models by using Enums:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; pydantic &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; ValidationError&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Sex(Enum):&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  MALE &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;male&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  FEMALE &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;female&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-6&#34;&gt;&lt;a href=&#34;#cb2-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;
+&lt;span id=&#34;cb2-7&#34;&gt;&lt;a href=&#34;#cb2-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; DomesticAnimals(Enum):&lt;/span&gt;
+&lt;span id=&#34;cb2-8&#34;&gt;&lt;a href=&#34;#cb2-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  CAT &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;cat&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-9&#34;&gt;&lt;a href=&#34;#cb2-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  DOG &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;dog&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-10&#34;&gt;&lt;a href=&#34;#cb2-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  FISH &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;fish&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-11&#34;&gt;&lt;a href=&#34;#cb2-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  BIRD &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;bird&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-12&#34;&gt;&lt;a href=&#34;#cb2-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-13&#34;&gt;&lt;a href=&#34;#cb2-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# And then&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-14&#34;&gt;&lt;a href=&#34;#cb2-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-15&#34;&gt;&lt;a href=&#34;#cb2-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Pet(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb2-16&#34;&gt;&lt;a href=&#34;#cb2-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  name: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-17&#34;&gt;&lt;a href=&#34;#cb2-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  animal_type: DomesticAnimals&lt;/span&gt;
+&lt;span id=&#34;cb2-18&#34;&gt;&lt;a href=&#34;#cb2-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  sex: Sex&lt;/span&gt;
+&lt;span id=&#34;cb2-19&#34;&gt;&lt;a href=&#34;#cb2-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;
+&lt;span id=&#34;cb2-20&#34;&gt;&lt;a href=&#34;#cb2-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;Pet(name&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;Timmy&amp;#39;&lt;/span&gt;, animal_type&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;bird&amp;#39;&lt;/span&gt;, sex&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;male&amp;#39;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## Pet(name=&amp;#39;Timmy&amp;#39;, animal_type=&amp;lt;DomesticAnimals.BIRD: &amp;#39;bird&amp;#39;&amp;gt;, sex=&amp;lt;Sex.MALE: &amp;#39;male&amp;#39;&amp;gt;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Adding a non existent value (Tiger not in allowed in domestic animals) to an existent Enum will raise a &lt;code&gt;value is not a valid enumeration member;&lt;/code&gt; error. This is one of the main use cases for them:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb4-1&#34;&gt;&lt;a href=&#34;#cb4-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; pytest&lt;/span&gt;
+&lt;span id=&#34;cb4-2&#34;&gt;&lt;a href=&#34;#cb4-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-3&#34;&gt;&lt;a href=&#34;#cb4-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;with&lt;/span&gt; pytest.raises(ValidationError, match&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39; value is not a valid enumeration member&amp;#39;&lt;/span&gt;) &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; e_info:&lt;/span&gt;
+&lt;span id=&#34;cb4-4&#34;&gt;&lt;a href=&#34;#cb4-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  Pet(&lt;/span&gt;
+&lt;span id=&#34;cb4-5&#34;&gt;&lt;a href=&#34;#cb4-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    name&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;Timmy&amp;#39;&lt;/span&gt;, &lt;/span&gt;
+&lt;span id=&#34;cb4-6&#34;&gt;&lt;a href=&#34;#cb4-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    animal_type&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;tiger&amp;#39;&lt;/span&gt;, &lt;/span&gt;
+&lt;span id=&#34;cb4-7&#34;&gt;&lt;a href=&#34;#cb4-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    sex&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;male&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-8&#34;&gt;&lt;a href=&#34;#cb4-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  )&lt;/span&gt;
+&lt;span id=&#34;cb4-9&#34;&gt;&lt;a href=&#34;#cb4-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(e_info.value)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## 1 validation error for Pet
+## animal_type
+##   value is not a valid enumeration member; permitted: &amp;#39;cat&amp;#39;, &amp;#39;dog&amp;#39;, &amp;#39;fish&amp;#39;, &amp;#39;bird&amp;#39; (type=type_error.enum; enum_values=[&amp;lt;DomesticAnimals.CAT: &amp;#39;cat&amp;#39;&amp;gt;, &amp;lt;DomesticAnimals.DOG: &amp;#39;dog&amp;#39;&amp;gt;, &amp;lt;DomesticAnimals.FISH: &amp;#39;fish&amp;#39;&amp;gt;, &amp;lt;DomesticAnimals.BIRD: &amp;#39;bird&amp;#39;&amp;gt;])&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(*Note the &lt;code&gt;UPPER_CASE_NOTATION&lt;/code&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;what-about-intenum-which-is-the-difference-between-enum-and-intenum&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;What about IntENum? Which is the difference between Enum and IntEnum?&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;In a nutshell, the main difference between Enum and IntEnum is the type of values they represent. Enum is a generic enumeration class for any data type, while IntEnum is specifically designed for integer values and allows for direct comparison with integers.&lt;/p&gt;
+&lt;p&gt;Two are the main benefits that bring using IntEnums in the correct use cases:
+- As IntEnum ensures that all the enumeration members have an integer value, it’s also possible to order them.
+- IntEnum members can be compared to integers directly, while Enum members can’t be used in integer comparison operators.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb6-1&#34;&gt;&lt;a href=&#34;#cb6-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; enum &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; IntEnum&lt;/span&gt;
+&lt;span id=&#34;cb6-2&#34;&gt;&lt;a href=&#34;#cb6-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; pytest&lt;/span&gt;
+&lt;span id=&#34;cb6-3&#34;&gt;&lt;a href=&#34;#cb6-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-4&#34;&gt;&lt;a href=&#34;#cb6-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; ResponseCode(IntEnum):&lt;/span&gt;
+&lt;span id=&#34;cb6-5&#34;&gt;&lt;a href=&#34;#cb6-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    OK &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;200&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-6&#34;&gt;&lt;a href=&#34;#cb6-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    NOT_FOUND &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;404&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-7&#34;&gt;&lt;a href=&#34;#cb6-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    ERROR &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;500&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-8&#34;&gt;&lt;a href=&#34;#cb6-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb6-9&#34;&gt;&lt;a href=&#34;#cb6-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;assert&lt;/span&gt; ResponseCode.OK &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;200&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-10&#34;&gt;&lt;a href=&#34;#cb6-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;assert&lt;/span&gt; ResponseCode.OK &lt;span class=&#34;op&#34;&gt;&amp;lt;=&lt;/span&gt; ResponseCode.NOT_FOUND&lt;/span&gt;
+&lt;span id=&#34;cb6-11&#34;&gt;&lt;a href=&#34;#cb6-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-12&#34;&gt;&lt;a href=&#34;#cb6-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;with&lt;/span&gt; pytest.raises(&lt;span class=&#34;pp&#34;&gt;TypeError&lt;/span&gt;, match&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;cannot extend enumeration&amp;#39;&lt;/span&gt;) &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; e_info: &lt;span class=&#34;co&#34;&gt;# Check that a TypeError is raised&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-13&#34;&gt;&lt;a href=&#34;#cb6-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; ExtendedResponseCode(ResponseCode):&lt;/span&gt;
+&lt;span id=&#34;cb6-14&#34;&gt;&lt;a href=&#34;#cb6-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;      CUSTOM &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;300&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-15&#34;&gt;&lt;a href=&#34;#cb6-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(e_info.value)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## ExtendedResponseCode: cannot extend enumeration &amp;#39;ResponseCode&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;is-it-possible-to-subclass-an-enum-or-an-strenum-intenum&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Is it possible to subclass an Enum (or an StrEnum / IntEnum)?&lt;/h1&gt;
+&lt;p&gt;It is not supposed to be possible. If you do so by direct inheritance a TypeError may be raised. To explain that, the documentation says: “Allowing subclassing of enums that define members would lead to a violation of some important invariants of types and instances.”&lt;/p&gt;
+&lt;p&gt;Which are those violations? Let’s check the &lt;a href=&#34;https://mail.python.org/pipermail/python-dev/2013-April/125716.html&#34;&gt;Guido comment in (2013)&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb8-1&#34;&gt;&lt;a href=&#34;#cb8-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; enum &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Enum&lt;/span&gt;
+&lt;span id=&#34;cb8-2&#34;&gt;&lt;a href=&#34;#cb8-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-3&#34;&gt;&lt;a href=&#34;#cb8-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Color(Enum):&lt;/span&gt;
+&lt;span id=&#34;cb8-4&#34;&gt;&lt;a href=&#34;#cb8-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  red &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-5&#34;&gt;&lt;a href=&#34;#cb8-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  green &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-6&#34;&gt;&lt;a href=&#34;#cb8-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  blue &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-7&#34;&gt;&lt;a href=&#34;#cb8-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-8&#34;&gt;&lt;a href=&#34;#cb8-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; MoreColor(Color): &lt;span class=&#34;co&#34;&gt;# this is not possible as we&amp;#39;ve seen&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-9&#34;&gt;&lt;a href=&#34;#cb8-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  cyan &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-10&#34;&gt;&lt;a href=&#34;#cb8-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  magenta &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-11&#34;&gt;&lt;a href=&#34;#cb8-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  yellow &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;6&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-12&#34;&gt;&lt;a href=&#34;#cb8-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-13&#34;&gt;&lt;a href=&#34;#cb8-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;(MoreColor.red) &lt;span class=&#34;kw&#34;&gt;is&lt;/span&gt; Color&lt;/span&gt;
+&lt;span id=&#34;cb8-14&#34;&gt;&lt;a href=&#34;#cb8-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-15&#34;&gt;&lt;a href=&#34;#cb8-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;(MoreColor.red) &lt;span class=&#34;kw&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;not&lt;/span&gt; MoreColor&lt;/span&gt;
+&lt;span id=&#34;cb8-16&#34;&gt;&lt;a href=&#34;#cb8-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-17&#34;&gt;&lt;a href=&#34;#cb8-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#In other words, while `red` is accessible in MoreColor, it&amp;#39;s actually a&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-18&#34;&gt;&lt;a href=&#34;#cb8-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#Color instance?&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-19&#34;&gt;&lt;a href=&#34;#cb8-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-20&#34;&gt;&lt;a href=&#34;#cb8-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#Oh dear, this is actually a mess. I don&amp;#39;t want MoreColor.red and&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-21&#34;&gt;&lt;a href=&#34;#cb8-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#Color.red to be distinct objects, but then the isinstance() checks&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-22&#34;&gt;&lt;a href=&#34;#cb8-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#will become confusing. If we don&amp;#39;t override isinstance(), we&amp;#39;ll get&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-23&#34;&gt;&lt;a href=&#34;#cb8-23&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-24&#34;&gt;&lt;a href=&#34;#cb8-24&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#not isinstance(Color.red, MoreColor)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-25&#34;&gt;&lt;a href=&#34;#cb8-25&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#isinstance(MoreColor.yellow, Color)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In some Python versions, this is working without an error message, but it is a unwanted behaviour.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb9&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb9-1&#34;&gt;&lt;a href=&#34;#cb9-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Color(Enum):&lt;/span&gt;
+&lt;span id=&#34;cb9-2&#34;&gt;&lt;a href=&#34;#cb9-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  red &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-3&#34;&gt;&lt;a href=&#34;#cb9-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  green &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-4&#34;&gt;&lt;a href=&#34;#cb9-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  blue &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-5&#34;&gt;&lt;a href=&#34;#cb9-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-6&#34;&gt;&lt;a href=&#34;#cb9-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; MoreColor(Enum, Color):&lt;/span&gt;
+&lt;span id=&#34;cb9-7&#34;&gt;&lt;a href=&#34;#cb9-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  cyan &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-8&#34;&gt;&lt;a href=&#34;#cb9-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  magenta &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-9&#34;&gt;&lt;a href=&#34;#cb9-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  yellow &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;6&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;One could argue that enumerations exist to guarantee mutual exclusion over a finite not ordered set. Appending additional members onto an existing enumeration don’t violates this guarantee. So being sure about your use case and what you’re doing, it’s possible to create a workaround. &lt;strong&gt;A clean solution using a decorator is&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb10&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb10-1&#34;&gt;&lt;a href=&#34;#cb10-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; enum &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Enum&lt;/span&gt;
+&lt;span id=&#34;cb10-2&#34;&gt;&lt;a href=&#34;#cb10-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; typing &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Any, Callable&lt;/span&gt;
+&lt;span id=&#34;cb10-3&#34;&gt;&lt;a href=&#34;#cb10-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-4&#34;&gt;&lt;a href=&#34;#cb10-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; EnumBase(Enum):&lt;/span&gt;
+&lt;span id=&#34;cb10-5&#34;&gt;&lt;a href=&#34;#cb10-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;__eq__&lt;/span&gt;(&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;, other: Any) &lt;span class=&#34;op&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;bool&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb10-6&#34;&gt;&lt;a href=&#34;#cb10-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;isinstance&lt;/span&gt;(other, Enum):&lt;/span&gt;
+&lt;span id=&#34;cb10-7&#34;&gt;&lt;a href=&#34;#cb10-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;.value &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; other.value&lt;/span&gt;
+&lt;span id=&#34;cb10-8&#34;&gt;&lt;a href=&#34;#cb10-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;False&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-9&#34;&gt;&lt;a href=&#34;#cb10-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;      &lt;/span&gt;
+&lt;span id=&#34;cb10-10&#34;&gt;&lt;a href=&#34;#cb10-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; extend_enum(parent_enum: EnumBase) &lt;span class=&#34;op&#34;&gt;-&amp;gt;&lt;/span&gt; Callable[[EnumBase], EnumBase]:&lt;/span&gt;
+&lt;span id=&#34;cb10-11&#34;&gt;&lt;a href=&#34;#cb10-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;co&#34;&gt;&amp;quot;&amp;quot;&amp;quot;Decorator function that extends an enum class with values from another enum class.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-12&#34;&gt;&lt;a href=&#34;#cb10-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; wrapper(extended_enum: EnumBase) &lt;span class=&#34;op&#34;&gt;-&amp;gt;&lt;/span&gt; EnumBase:&lt;/span&gt;
+&lt;span id=&#34;cb10-13&#34;&gt;&lt;a href=&#34;#cb10-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        joined &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; {}&lt;/span&gt;
+&lt;span id=&#34;cb10-14&#34;&gt;&lt;a href=&#34;#cb10-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;for&lt;/span&gt; item &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; parent_enum:&lt;/span&gt;
+&lt;span id=&#34;cb10-15&#34;&gt;&lt;a href=&#34;#cb10-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            joined[item.name] &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; item.value&lt;/span&gt;
+&lt;span id=&#34;cb10-16&#34;&gt;&lt;a href=&#34;#cb10-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;for&lt;/span&gt; item &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; extended_enum:&lt;/span&gt;
+&lt;span id=&#34;cb10-17&#34;&gt;&lt;a href=&#34;#cb10-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            joined[item.name] &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; item.value&lt;/span&gt;
+&lt;span id=&#34;cb10-18&#34;&gt;&lt;a href=&#34;#cb10-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; EnumBase(extended_enum.&lt;span class=&#34;va&#34;&gt;__name__&lt;/span&gt;, joined)&lt;/span&gt;
+&lt;span id=&#34;cb10-19&#34;&gt;&lt;a href=&#34;#cb10-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; wrapper&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb11-1&#34;&gt;&lt;a href=&#34;#cb11-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Parent(EnumBase):&lt;/span&gt;
+&lt;span id=&#34;cb11-2&#34;&gt;&lt;a href=&#34;#cb11-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  A &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-3&#34;&gt;&lt;a href=&#34;#cb11-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  B &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-4&#34;&gt;&lt;a href=&#34;#cb11-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;
+&lt;span id=&#34;cb11-5&#34;&gt;&lt;a href=&#34;#cb11-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;at&#34;&gt;@extend_enum&lt;/span&gt;(Parent)&lt;/span&gt;
+&lt;span id=&#34;cb11-6&#34;&gt;&lt;a href=&#34;#cb11-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; ExtendedParent(EnumBase):&lt;/span&gt;
+&lt;span id=&#34;cb11-7&#34;&gt;&lt;a href=&#34;#cb11-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  C &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-8&#34;&gt;&lt;a href=&#34;#cb11-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;
+&lt;span id=&#34;cb11-9&#34;&gt;&lt;a href=&#34;#cb11-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb11-10&#34;&gt;&lt;a href=&#34;#cb11-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;(Parent.A) &lt;span class=&#34;kw&#34;&gt;is&lt;/span&gt; Parent,&lt;/span&gt;
+&lt;span id=&#34;cb11-11&#34;&gt;&lt;a href=&#34;#cb11-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;(Parent.A) &lt;span class=&#34;kw&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;not&lt;/span&gt; ExtendedParent,&lt;/span&gt;
+&lt;span id=&#34;cb11-12&#34;&gt;&lt;a href=&#34;#cb11-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;Parent.A &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; ExtendedParent.A&lt;/span&gt;
+&lt;span id=&#34;cb11-13&#34;&gt;&lt;a href=&#34;#cb11-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## True True True&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But this is not a perfect solution, as it has some drawbacks or limitations you should be aware of. In this case, a nor related Enum (called &lt;code&gt;RandomEnum&lt;/code&gt;) that implements the same enum value, is equal in the comparison to our &lt;code&gt;Parent&lt;/code&gt; and &lt;code&gt;ExtendedParent&lt;/code&gt; classes :&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb13&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb13-1&#34;&gt;&lt;a href=&#34;#cb13-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-2&#34;&gt;&lt;a href=&#34;#cb13-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; RandomEnum(EnumBase):&lt;/span&gt;
+&lt;span id=&#34;cb13-3&#34;&gt;&lt;a href=&#34;#cb13-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  A &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-4&#34;&gt;&lt;a href=&#34;#cb13-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;
+&lt;span id=&#34;cb13-5&#34;&gt;&lt;a href=&#34;#cb13-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;Parent.A &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; RandomEnum.A &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; ExtendedParent.A&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## True&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;stay-updated-on-pydantic-and-python-tips&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Stay updated on Pydantic and Python tips&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Hopefully, this post has helped you become familiar with Enum usage in Pydantic and allowed you to enjoy a showcase of some of its functionalities.&lt;/p&gt;
+&lt;p&gt;If you want to stay updated…&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python and Pydantic tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+&lt;/style&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>@staticmethod in Python</title>
@@ -1859,13 +2912,42 @@ q2_weighted_mean
       <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
       <guid>/vizs-and-tips/magic-whos-method-jupyter-notebook/</guid>
       <description>
+&lt;script src=&#34;/vizs-and-tips/magic-whos-method-jupyter-notebook/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;A recurrent complaint beginner users have about Jupyter Notebooks is the lack of information about the self-created environment variables. If you have this question, probably first of all you should be sure about the Jupyter Notebooks main purpose (totally different from IDEs like Spyder or Pycharm).&lt;/p&gt;
 &lt;p&gt;But in case a notebook is all what you need, you have few ways to display this information. The first and easiest one is to use the magic method &lt;strong&gt;%whos&lt;/strong&gt;
-&lt;img src=&#34;/vizs-and-tips/magic-whos-metodo-jupyter-notebook/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;jupyter_magic_who.PNG&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Two alternative ways are nbextension and Jupyter Lab variable inspector. You can find more information &lt;a href=&#34;https://stackoverflow.com/questions/37718907/variable-explorer-in-jupyter-notebook&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
 </description>
     </item>
     

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts | TypeThePipe</title>
+    <link>/categories/posts/</link>
+      <atom:link href="/categories/posts/index.xml" rel="self" type="application/rss+xml" />
+    <description>Posts</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 01 May 2023 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-32.png</url>
+      <title>Posts</title>
+      <link>/categories/posts/</link>
+    </image>
+    
+    <item>
+      <title>Launching The Project Tracker. Open Source project monitoring and release explainer with Streamlilt and LLMs</title>
+      <link>/post/the-project-tracker-chatgpt3-streamlit-open-source/</link>
+      <pubDate>Mon, 01 May 2023 00:00:00 +0000</pubDate>
+      <guid>/post/the-project-tracker-chatgpt3-streamlit-open-source/</guid>
+      <description>
+&lt;script src=&#34;/post/the-project-tracker-chatgpt3-streamlit-open-source/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;With this app you can &lt;strong&gt;track your R &amp;amp; Python most used modules&lt;/strong&gt; and packages, &lt;strong&gt;getting easy explanations&lt;/strong&gt; on what’s going on in each release and version to version.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Don&#39;t miss new features in the R &amp; Python Project Tracker!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;iframe height=&#34;1800&#34; width=&#34;100%&#34; frameborder=&#34;no&#34; src=&#34;https://carlosvecina-the-project-tracker-st-appproyectos-mv7k8w.streamlit.app/?embedded=true&#34;&gt;
+&lt;/iframe&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;unleash-your-inner-coding-genius-with-our-new-streamlit-app&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;🚀✨ Unleash Your Inner Coding Genius with Our New Streamlit App! ✨🚀&lt;/h1&gt;
+&lt;p&gt;Hey there, coding enthusiasts and open source fanatics! We’re beyond excited to introduce our latest and greatest creation: a state-of-the-art Streamlit app designed to track open source projects and GitHub repositories like never before! 🌟&lt;/p&gt;
+&lt;p&gt;Are you tired of missing out on the hottest open source trends and getting lost in the maze of repositories? Fret not! Our powerful Streamlit app is here to revolutionize your coding journey by keeping you informed and organized. 🔥🔥&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;key-features&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;💡 Key Features:&lt;/h1&gt;
+&lt;p&gt;Tailored tracking: Customize your tracking preferences to stay on top of the projects and repos that matter most to you.
+Real-time notifications: Never miss a beat with instant updates on the latest commits, pull requests, and issues.
+Interactive dashboard: Visualize your data through stunning charts and graphs for a comprehensive, bird’s-eye view.
+Trending projects: Discover popular repositories and trending projects within the open source community.
+Why blend in when you can stand out? Our Streamlit app empowers you to unleash your full coding potential and become a true open source rockstar! 🎸&lt;/p&gt;
+&lt;p&gt;Ready to transform your coding experience? Click the link below to access our groundbreaking Streamlit app and ride the wave of open source innovation! 🌊&lt;/p&gt;
+&lt;p&gt;➡️ Try it now: &lt;a href=&#34;https://carlosvecina-the-project-tracker-st-appproyectos-mv7k8w.streamlit.app&#34; class=&#34;uri&#34;&gt;https://carlosvecina-the-project-tracker-st-appproyectos-mv7k8w.streamlit.app&lt;/a&gt; ⬅️&lt;/p&gt;
+&lt;p&gt;Happy coding, everyone! 🎉💻&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

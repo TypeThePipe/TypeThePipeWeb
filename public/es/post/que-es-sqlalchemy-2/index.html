@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+  <meta name="robots" content="index,follow">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Pablo Cánovas">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="¿Has escuchado sobre SQLAlchemy y su nueva versión 2.0, pero no sabes bien qué es? SQLAlchemy es una de las librerías más usadas de Python a la hora de tratar con bases de datos.">
+
+  
+  <link rel="alternate" hreflang="es" href="/es/post/que-es-sqlalchemy-2/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#0294A5">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155621946-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-155621946-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/es/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu7deb2a6bfe7da9ae71f9387d98d158da_12352_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu7deb2a6bfe7da9ae71f9387d98d158da_12352_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/es/post/que-es-sqlalchemy-2/">
+
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="TypeThePipe">
+  <meta property="og:url" content="/es/post/que-es-sqlalchemy-2/">
+  <meta property="og:title" content="¿Qué es SqlAlchemy? Prueba la v2.0 para acceder a bases de datos desde Python | TypeThePipe">
+  <meta property="og:description" content="¿Has escuchado sobre SQLAlchemy y su nueva versión 2.0, pero no sabes bien qué es? SQLAlchemy es una de las librerías más usadas de Python a la hora de tratar con bases de datos."><meta property="og:image" content="/es/post/que-es-sqlalchemy-2/featured.jpg">
+  <meta property="twitter:image" content="/es/post/que-es-sqlalchemy-2/featured.jpg"><meta property="og:locale" content="es">
+  
+    
+      <meta property="article:published_time" content="2023-03-07T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2023-03-07T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/es/post/que-es-sqlalchemy-2/"
+  },
+  "headline": "¿Qué es SqlAlchemy? Prueba la v2.0 para acceder a bases de datos desde Python",
+  
+  "image": [
+    "/es/post/que-es-sqlalchemy-2/featured.jpg"
+  ],
+  
+  "datePublished": "2023-03-07T00:00:00Z",
+  "dateModified": "2023-03-07T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Carlos Vecina"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "TypeThePipe",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_192x192_fit_lanczos_2.png"
+    }
+  },
+  "description": "¿Has escuchado sobre SQLAlchemy y su nueva versión 2.0, pero no sabes bien qué es? SQLAlchemy es una de las librerías más usadas de Python a la hora de tratar con bases de datos."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  <title>¿Qué es SqlAlchemy? Prueba la v2.0 para acceder a bases de datos desde Python | TypeThePipe</title>
+  <script async defer src="https://tools.luckyorange.com/core/lo.js?site-id=10579286"></script>
+  
+  
+<script>var ezoicId = 473828; </script>
+<script type="text/javascript" src="//go.ezoic.net/ezoic/ezoic.js"></script>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Buscar</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Buscar..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+  
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/es"><img src="/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_0x70_resize_lanczos_2.png" alt="TypeThePipe"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Barra de navegación">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/es"><img src="/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_0x70_resize_lanczos_2.png" alt="TypeThePipe"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/es/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/es/#vizstips"><span>Vizs & Tips</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/es/#people"><span>Nosotros</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+
+        <article class="article">
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>¿Qué es SqlAlchemy? Prueba la v2.0 para acceder a bases de datos desde Python</h1>
+
+  
+  <p class="page-subtitle">¿Has escuchado sobre SQLAlchemy y su nueva versión 2.0, pero no sabes bien qué es? SQLAlchemy es una de las librerías más usadas de Python a la hora de tratar con bases de datos.</p>
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  
+  <span><a href="/es/authors/carlos-vecina/">Carlos Vecina</a></span>
+  </div>
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/es/categories/python/">Python</a>, <a href="/es/categories/post/">Post</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+            <div class="article-container">
+              <div class="article-style">
+                
+<script src="/es/post/que-es-sqlalchemy-2/index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="featured.jpg" height="250px" width="400px" alt="SQL Alchemy estructura 2.0"/></p>
+<p><br></p>
+<div id="qué-es-sqlalchemy" class="section level1">
+<h1><strong>¿Qué es SQLAlchemy?</strong></h1>
+<p>SQLAlchemy es un SQL toolkit de código abierto para interaccionar con bases de datos desde Python. SQLAlchemy proporciona una interfaz de alto nivel para realizar operaciones comunes a bases de datos de diferente naturaleza, de una manera sencilla, abstracta y generalizada, sin tener que atender demasiado a las especifidades de cada una de ellas.</p>
+<p>A este tipo de librerías se las conoce como ORM (en inglés <em>Object-Relational Mapping</em>). Conozcamos un poco más sobre este concepto.</p>
+<p><br></p>
+</div>
+<div id="qué-es-un-orm" class="section level1">
+<h1><strong>¿Qué es un ORM?</strong></h1>
+<p>La finalidad de un ORM es mapear (relacionar) entidades de una base de datos y objetos (p.e clases de Python) de un determinado lenguaje de programación con tablas de una base de datos. Son muy comunes en los paradigmas de programación orientada a objetos, ya que hace uso de ellos para ofrecer una abstracción y una manera de interactuar con las bases de datos en un manera <em>Pytonica</em> sin necesidad de utilizar directamente queries de SQL para ello. Se encargará de realizar las operaciones en el motor de sql de manera transparente para el usuario.</p>
+<p><br></p>
+<div id="ventajas-de-usar-un-orm-en-python" class="section level2">
+<h2>Ventajas de usar un ORM en Python</h2>
+<p>Tener nuestras entidades como objetos en Python puede ser muy interesante a la hora de gestionar aplicaciones e interactuar(consulatar, hacer <em>updates</em>…) de manera sencilla con ellos.</p>
+<p>Uno de las ventajas más destacables es que nos podemos abstraer y ser agnósticos a la base de datos con la que trabajemos. SQLALchemy tiene disponible una serie de dialectos, que se pueden extender y se han extendido (ElasticSearch…)</p>
+<p>Otras cosas de las que SQLAlchemy se ocupa por nosotros es la posibilidad de gestionar un pool de conexiones, proveer un <em>context manager</em>, prevención de inyección SQL…</p>
+<p><br></p>
+</div>
+<div id="contras-de-usar-un-orm-en-python" class="section level2">
+<h2>Contras de usar un ORM en Python</h2>
+<p>Las cosas se pueden complicar con operaciones complejas. Mientras que nos ofrece una optimización de queries, cuando empezamos a hacer joins, agrupaciones y queries <em>nesteadas</em> a lo mejor nos queda una sintaxis bastante confusa, a lo peor sufriremos llevándolas a cabo. Muchos ORMs deja ejecutar SQL en crudo, pero perdiendo gran parte de su propósito.</p>
+<p>Como siempre, al añadir un nivel extra de abstracción, la complejidad general podrá amentar, al mismo tiempo que debuggear se puede hacer más complejo al abstraernos de los detalles de la capa de bases de datos.</p>
+<p>Ahora que ya sabemos más sobre qué es SQLAlchemy y qué nos permite hacer, veamos con más detalle sus elementos claves.</p>
+<p><br></p>
+</div>
+</div>
+<div id="elementos-clave-de-sqlalchemy" class="section level1">
+<h1><strong>Elementos clave de SQLAlchemy</strong></h1>
+<p>En cualquier momento puedes bucear en la documentación de SQLAlchemy. Sin embargo, me gustaría comentar brevemente los conceptos clave con los que podrás empezar a trabajar con esta herramienta, teniendo una idea de lo que tenemos entre manos.</p>
+<p>Por ejemplo, ¿cuál es la diferencia entre <em>Engine</em> y <em>Session</em> dentro de SQLALchemy?</p>
+<p><strong>Engine</strong>: Es parte del core de SQLAlchemy, gestionando y proveyendo las conexiones a la base de datos como API de bajo nivel. Es capaz de manejar una <em>pool</em> de conexiones, transacciones y ejecución de comandos SQL. Normalmente, se crea al inicio de la aplicación y se utiliza y comparte a lo largo de la ejecución.
+En última instancia podríamos usar esta entidad para trabajar con la base de datos ejectando SQL sin necesidad de usar las capacidades como ORM en toda su extensión, con sus modelos etc..</p>
+<p><strong>Session</strong>: Es un nivel superior de abstración que se situa por encima del <em>Engine</em>. Permite realizar transacciones con la base de datos de una manera orientada a objetos. Se crearán y destruirán durante la ejección de la aplcación según sea necesario. Se encarga de hacer los commits rollbacks.</p>
+<p><a href="https://stackoverflow.com/questions/34322471/sqlalchemy-engine-connection-and-session-difference#:~:text=When%20to%20use%20Engine%2C%20Connection%2C%20Session%20generally">Respuesta en SO interesante a este respecto</a></p>
+<p>Otros conceptos interesantes:</p>
+<p><strong>Dialect</strong>: Los dialectos son los responsables de ‘traducir’ la sintaxis SQL genérica generada por SQLAlcemy a la sintaxis específica de la base de datos correspondiente. Por ejemplo, gestionar los tipos de datos es uno de los puntos más importantes en este proceso. Tenemos los siguientes disponibles de base:</p>
+<div class="float">
+<img src="images/dialectos_sqlalchemy.JPG" alt="tabla de los dialectos disponibles de base en sqlalchemy" />
+<div class="figcaption">tabla de los dialectos disponibles de base en sqlalchemy</div>
+</div>
+<p>y estos son extensibles. Es decir, que si queremos algo extra como interacción con ElasticSearch u OpenSearch (AWS), debemos instalar(o implementar) sus dialectos específicos.</p>
+<p>Como ejemplo, el módulo <a href="https://github.com/preset-io/elasticsearch-dbapi">ElasticSearch dbapi</a>.</p>
+<p><strong>Metadata</strong>: Se trata de un objeto que representa y contiene información sobre el esquema de base de datos. Por ejemplo las tablas, <em>constraints</em>, columnas, relaciones… Se usa internamente para generar las instrucciones SQL y para gestionar las migraciones.</p>
+<p><strong>Model</strong>: Un modelo en SQLALchemy es un objeto de Python que represena una tabla en base de datos. Heredan de <em>DeclarativeBase</em>.</p>
+<p>Aquí tenemos un ejemplo sobre Postgres:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">from</span> sqlalchemy <span class="im">import</span> Column, Integer, Float</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">from</span> sqlalchemy.dialects.postgresql <span class="im">import</span> UUID</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">from</span> sqlalchemy.orm <span class="im">import</span> DeclarativeBase</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="im">import</span> uuid</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="kw">class</span> Base(DeclarativeBase):</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>  </span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="kw">class</span> Product(Base):</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>    __tablename__ <span class="op">=</span> <span class="st">&quot;products&quot;</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    <span class="bu">id</span>: uuid <span class="op">=</span> Column(UUID(as_uuid<span class="op">=</span><span class="va">True</span>), primary_key<span class="op">=</span><span class="va">True</span>, default<span class="op">=</span>uuid.uuid4)</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>    price <span class="op">=</span> Column(Float)</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>    amount <span class="op">=</span> Column(Integer)</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>    </span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>):</span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f&quot;&quot;&quot;&lt;Product(price=&#39;</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>price<span class="sc">}</span><span class="ss">&#39;, amount=&#39;</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>amount<span class="sc">}</span><span class="ss">&#39;, product_id=&#39;</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>product_id<span class="sc">}</span><span class="ss">&#39;)&gt;&quot;&quot;&quot;</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div id="se-pude-tipar-con-mypy-en-sqlalchemy-v2.0" class="section level1">
+<h1>¿Se pude tipar con mypy en SQLAlchemy v2.0?</h1>
+<p>Sí, a partir de esta versión no será necesario instalar <strong>stubs</strong> o módulos específicos para que el mapeo que realiza SQLAlchemy sea compatible con Mypy y con el reconocimiento de la sintaxis por los IDEs. Bastará con <strong>pip install sqlalchemy[mypy]</strong>.</p>
+<p>Siguientdo con el ejemplo anterior, el tipado estático quedaría:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">from</span> sqlalchemy <span class="im">import</span> Column, Integer, Float</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="im">from</span> sqlalchemy.dialects.postgresql <span class="im">import</span> UUID</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="im">from</span> sqlalchemy.orm <span class="im">import</span> DeclarativeBase</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="im">import</span> uuid</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="kw">class</span> Base(DeclarativeBase):</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>  </span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a><span class="kw">class</span> OrderNew(Base):</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>    __tablename__ <span class="op">=</span> <span class="st">&quot;orders_new&quot;</span></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>    <span class="bu">id</span>: uuid <span class="op">=</span> Column(UUID(as_uuid<span class="op">=</span><span class="va">True</span>), primary_key<span class="op">=</span><span class="va">True</span>, default<span class="op">=</span>uuid.uuid4)</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>    price: <span class="bu">float</span> <span class="op">=</span> Column(Float)</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>    amount: <span class="bu">int</span> <span class="op">=</span> Column(Integer)</span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>    description: <span class="bu">str</span> <span class="op">|</span> <span class="va">None</span> <span class="op">=</span> Column(Integer)</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>    </span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__repr__</span>(<span class="va">self</span>):</span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f&quot;&quot;&quot;&lt;Order(price=&#39;</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>price<span class="sc">}</span><span class="ss">&#39;, amount=&#39;</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>amount<span class="sc">}</span><span class="ss">&#39;, product_id=&#39;</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>product_id<span class="sc">}</span><span class="ss">&#39;)&gt;&quot;&quot;&quot;</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div id="cuándo-usar-sessionmaker" class="section level1">
+<h1>¿Cuándo usar <em>sessionmaker()</em>?</h1>
+<p>Nos permite crear una factoría de sesiones, configurando el comportamiento de las sesiones desde un solo lugar. Podemos con ello además separar la configuración de las sesiones de su creación, reduciendo duplicidades de código.</p>
+<p><br></p>
+</div>
+<div id="qué-son-los-eventos-orm" class="section level1">
+<h1>¿Qué son los Eventos ORM?</h1>
+<p>Mediante la API de eventos de SQLAlchemy, podemos configurar <em>listeners</em> que desencadenen la ejecución de determinadas funciones definidas por el usuario. Se usa o bien la función <em>listen()</em> o el decorador <em><span class="citation">@listen_for</span>()</em>. Por ejemplo, esto puede ser útil en el caso de necesitar refrescar credenciales, loggear…</p>
+<p>Aquí tenemos un ejemplo:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">from</span> sqlalchemy <span class="im">import</span> create_engine</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="im">from</span> sqlalchemy.event <span class="im">import</span> listens_for</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>engine <span class="op">=</span> create_engine(<span class="st">&#39;sqlite:///typethepipe.db&#39;</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a><span class="at">@listens_for</span>(engine, <span class="st">&quot;do_connect&quot;</span>, named<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="kw">def</span> aws_token(cparams, <span class="op">**</span>kw):</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>    cparams[<span class="st">&#39;password&#39;</span>] <span class="op">=</span> get_temp_token() </span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;AWS token provisioned&quot;</span>)</span></code></pre></div>
+<p>Si quieres profundizar en los eventos de SQLA, os dejamos link a la <a href="https://stackoverflow.com/questions/37718907/variable-explorer-in-jupyter-notebook">docu</a> como siguiente paso.</p>
+<p>¡Sigue leyendo nuestros <a href="https://typethepipe.com/en/categories/python/">Python Posts</a>!</p>
+<style>
+p {
+word-spacing: 3px;
+text-indent: 20px;
+text-align: justify;
+}
+.page-subtitle {
+text-align: left  !important;
+text-indent: 0px !important;
+}
+.card-text {
+text-align: left  !important;
+text-indent: 0px !important;
+}
+</style>
+</div>
+
+              </div>
+              
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/es/post/que-es-sqlalchemy-2/&amp;text=%c2%bfQu%c3%a9%20es%20SqlAlchemy?%20Prueba%20la%20v2.0%20para%20acceder%20a%20bases%20de%20datos%20desde%20Python" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/es/post/que-es-sqlalchemy-2/&amp;t=%c2%bfQu%c3%a9%20es%20SqlAlchemy?%20Prueba%20la%20v2.0%20para%20acceder%20a%20bases%20de%20datos%20desde%20Python" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=%c2%bfQu%c3%a9%20es%20SqlAlchemy?%20Prueba%20la%20v2.0%20para%20acceder%20a%20bases%20de%20datos%20desde%20Python&amp;body=/es/post/que-es-sqlalchemy-2/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/es/post/que-es-sqlalchemy-2/&amp;title=%c2%bfQu%c3%a9%20es%20SqlAlchemy?%20Prueba%20la%20v2.0%20para%20acceder%20a%20bases%20de%20datos%20desde%20Python" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=%c2%bfQu%c3%a9%20es%20SqlAlchemy?%20Prueba%20la%20v2.0%20para%20acceder%20a%20bases%20de%20datos%20desde%20Python%20/es/post/que-es-sqlalchemy-2/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/es/post/que-es-sqlalchemy-2/&amp;title=%c2%bfQu%c3%a9%20es%20SqlAlchemy?%20Prueba%20la%20v2.0%20para%20acceder%20a%20bases%20de%20datos%20desde%20Python" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+
+
+
+
+
+  
+  
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/es/authors/carlos-vecina/carlos-vecina-avatar_hudcecee8c8ed4dd07fd2b73e656fad71c_149347_270x270_fill_lanczos_center_2.png" alt="Carlos Vecina">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/es/authors/carlos-vecina/">Carlos Vecina</a></h5>
+      <h6 class="card-subtitle">Senior Data Scientist at Jobandtalent</h6>
+      <p class="card-text">Senior Data Scientist at Jobandtalent  |  AI &amp; Data Science para aportar valor en la empresa</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/es/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/deepchals" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/carlos-vecina/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/CarlosVecina" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://autarponics.com" target="_blank" rel="noopener">
+        <i class="fa fa-home"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+            </div>
+        </article>
+  
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/python.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/es/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No se encontraron resultados","placeholder":"Buscar...","results":"resultados encontrados"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Proyectos",
+        'publication' : "Publicaciones",
+        'talk' : "Charlas"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.37431be2d92d7fb0160054761ab79602.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
+    
+    
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+	<a href="https://www.r-bloggers.com/">
+	<img border="0" alt="R Bloggers icon" src="/img/r_bloggers.png" width="100" height="100">
+	</a>
+	<br>
+	<a href="https://www.python-bloggers.com/">
+	<img border="0" alt="Python Bloggers icon" src="/img/python_logo.png" width="100" height="100">
+	</a>
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Citar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copiar
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Descargar
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

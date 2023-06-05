@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+  <meta name="robots" content="index,follow">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Carlos Vecina">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Learn how to use rvest R package to scrape finviz financial data in less than 30 lines of code. Quick rvest tutorial to start your path in financial analysis with R">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/scraping-financial-data-finviz-rvest-package/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#0294A5">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155621946-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-155621946-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu7deb2a6bfe7da9ae71f9387d98d158da_12352_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu7deb2a6bfe7da9ae71f9387d98d158da_12352_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/post/scraping-financial-data-finviz-rvest-package/">
+
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="TypeThePipe">
+  <meta property="og:url" content="/post/scraping-financial-data-finviz-rvest-package/">
+  <meta property="og:title" content="Scraping financial data from finviz with R and rvest package | TypeThePipe">
+  <meta property="og:description" content="Learn how to use rvest R package to scrape finviz financial data in less than 30 lines of code. Quick rvest tutorial to start your path in financial analysis with R"><meta property="og:image" content="/post/scraping-financial-data-finviz-rvest-package/featured.png">
+  <meta property="twitter:image" content="/post/scraping-financial-data-finviz-rvest-package/featured.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2023-03-14T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2023-03-14T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/scraping-financial-data-finviz-rvest-package/"
+  },
+  "headline": "Scraping financial data from finviz with R and rvest package",
+  
+  "image": [
+    "/post/scraping-financial-data-finviz-rvest-package/featured.png"
+  ],
+  
+  "datePublished": "2023-03-14T00:00:00Z",
+  "dateModified": "2023-03-14T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Pablo Cánovas"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "TypeThePipe",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_192x192_fit_lanczos_2.png"
+    }
+  },
+  "description": "Learn how to use rvest R package to scrape finviz financial data in less than 30 lines of code. Quick rvest tutorial to start your path in financial analysis with R"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  <title>Scraping financial data from finviz with R and rvest package | TypeThePipe</title>
+  <script async defer src="https://tools.luckyorange.com/core/lo.js?site-id=10579286"></script>
+  
+  
+<script>var ezoicId = 473828; </script>
+<script type="text/javascript" src="//go.ezoic.net/ezoic/ezoic.js"></script>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+  
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_0x70_resize_lanczos_2.png" alt="TypeThePipe"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_0x70_resize_lanczos_2.png" alt="TypeThePipe"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#vizstips"><span>Vizs & Tips</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#people"><span>About Us</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#mentorship"><span>Mentorship Program</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+
+        <article class="article">
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Scraping financial data from finviz with R and rvest package</h1>
+
+  
+  <p class="page-subtitle">Learn how to use rvest R package to scrape finviz financial data in less than 30 lines of code. Quick rvest tutorial to start your path in financial analysis with R</p>
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  
+  <span><a href="/authors/pablo-canovas/">Pablo Cánovas</a></span>
+  </div>
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/algotrading/">AlgoTrading</a>, <a href="/categories/r/">R</a>, <a href="/categories/post/">Post</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+            <div class="article-container">
+              <div class="article-style">
+                
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="featured.png" height="300px" width="500px" alt="Financial data scraper with rvest" /></p>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>If you’re an active trader or investor, you’re probably aware of the importance of keeping up with the latest stock market news and trends. One tool that many traders use to stay on top of market movements is <a href="https://finviz.com">Finviz</a>, a popular financial visualization website that offers a range of powerful tools and data visualizations to help traders make informed investment decisions.</p>
+<p>While Finviz is a valuable resource for traders, manually collecting and analyzing data from the website can be time-consuming and inefficient. But this is a data science blog, right? Let’s build a scraper to make our life easier! With this simple function I’m about to show, you will be able to extract the data from the website and analyze it in a streamlined way.</p>
+<div id="disclaimer" class="section level2">
+<h2>Disclaimer</h2>
+<p>Before diving into the topic, it’s important to note that web scraping can potentially violate website terms of service and can even be illegal in some cases. Let’s be <a href="https://dmi3kno.github.io/polite/">polite</a> and don’t use this code to resell any information, as this is not permitted by their terms of use. For educational and personal purposes only.</p>
+</div>
+</div>
+<div id="into-the-water" class="section level1">
+<h1>Into the water</h1>
+<p>To build this simple scraper we are going to use the <code>rvest</code> package. R developers are quite funny, aren’t they?</p>
+<p>First thing is to get the full html we will parse later.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>symbol <span class="ot">&lt;-</span> <span class="st">&quot;MSFT&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>finviz_url <span class="ot">&lt;-</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&quot;https://finviz.com/quote.ashx?t={symbol}&quot;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>finviz_html <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(rvest<span class="sc">::</span><span class="fu">read_html</span>(finviz_url), <span class="at">error=</span><span class="cf">function</span>(e) <span class="cn">NULL</span>)</span></code></pre></div>
+<p>This is what the website look like after searching for a ticker.</p>
+<p><img src="finviz_home.png" /></p>
+<p>We want to focus mainly on the table at the bottom which contains a ton of information for the company, including relevant data such as market capitalization, P/E, insider and institutional ownership or short interest.
+Also, it’s nice to have our companies organized by sector and industry, as this information is also relevant for potential analysis.
+Let’s get this small piece of information first, which sits right below the chart, in the middle of the page:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>sector_str <span class="ot">&lt;-</span> finviz_html <span class="sc">%&gt;%</span> </span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>  rvest<span class="sc">::</span><span class="fu">html_element</span>(<span class="at">xpath =</span> <span class="st">&#39;/html/body/div[4]/div/table[1]&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  rvest<span class="sc">::</span><span class="fu">html_table</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>  <span class="fu">head</span>(<span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>  <span class="fu">pull</span>(X4) </span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>sector_str</span></code></pre></div>
+<pre><code>## [1] &quot;Technology | Software - Infrastructure | USA&quot;</code></pre>
+<p>Finding the path to the specific element we are looking for is as easy as stepping into developing mode in the web browser (F12) and find your way to the element within the html code. Right-click and copy XPath as shown in the image below:</p>
+<p><img src="finviz_xpath.png" /></p>
+<p>It’s easy to notice that the information we got above it’s all stored as a character of length one. This is typically undesirable as they represent different variables.</p>
+<p>We can clean it easily with some text engineering. Tidyverse saves the day again:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>sector_df <span class="ot">&lt;-</span> sector_str <span class="sc">%&gt;%</span> </span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>  <span class="fu">str_split</span>(<span class="st">&quot;[|]&quot;</span>, <span class="at">simplify =</span> T) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  <span class="fu">str_squish</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">variable =</span> <span class="fu">c</span>(<span class="st">&quot;sector&quot;</span>, <span class="st">&quot;industry&quot;</span>, <span class="st">&quot;country&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>  <span class="fu">relocate</span>(variable) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>  <span class="fu">add_row</span>(<span class="at">variable =</span> <span class="st">&quot;ticker&quot;</span>, <span class="at">value =</span> symbol, <span class="at">.before =</span> <span class="dv">1</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>sector_df</span></code></pre></div>
+<pre><code>## # A tibble: 4 × 2
+##   variable value                    
+##   &lt;chr&gt;    &lt;chr&gt;                    
+## 1 ticker   MSFT                     
+## 2 sector   Technology               
+## 3 industry Software - Infrastructure
+## 4 country  USA</code></pre>
+<p>Much better.</p>
+<p>We will scrape now the main table:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>raw_tbl <span class="ot">&lt;-</span> finviz_html <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  rvest<span class="sc">::</span><span class="fu">html_element</span>(<span class="at">xpath =</span> <span class="st">&#39;/html/body/div[4]/div/table[2]&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>  rvest<span class="sc">::</span><span class="fu">html_table</span>() </span></code></pre></div>
+<p>However, in this case variables and values are totally mixed up in the table:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>raw_tbl</span></code></pre></div>
+<pre><code>## # A tibble: 12 × 12
+##    X1         X2     X3    X4    X5    X6    X7    X8    X9    X10   X11   X12  
+##    &lt;chr&gt;      &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;
+##  1 Index      DJIA,… P/E   28.99 EPS … 8.99  Insi… 0.06% Shs … 7.45B Perf… 2.61%
+##  2 Market Cap 1970.… Forw… 24.27 EPS … 10.75 Insi… -0.7… Shs … 7.44B Perf… -0.8…
+##  3 Income     67.45B PEG   2.42  EPS … 2.23  Inst… 72.4… Shor… 0.46… Perf… 6.26%
+##  4 Sales      204.0… P/S   9.65  EPS … 19.8… Inst… 0.46% Shor… 34.3… Perf… -2.2…
+##  5 Book/sh    24.58  P/B   10.61 EPS … 14.8… ROA   18.8… Targ… 285.… Perf… -6.8…
+##  6 Cash/sh    13.17  P/C   19.80 EPS … 12.0… ROE   39.3… 52W … 213.… Perf… 8.74%
+##  7 Dividend   2.72   P/FCF 48.47 EPS … 24.3… ROI   31.3… 52W … -17.… Beta  0.91 
+##  8 Dividend % 1.04%  Quic… 1.90  Sale… 15.5… Gros… 68.2… 52W … 22.1… ATR   6.40 
+##  9 Employees  221000 Curr… 1.90  Sale… 2.00% Oper… 40.5… RSI … 57.55 Vola… 2.75…
+## 10 Optionable Yes    Debt… 0.35  EPS … -11.… Prof… 33.0… Rel … 1.07  Prev… 253.…
+## 11 Shortable  Yes    LT D… 0.32  Earn… Jan … Payo… 28.1… Avg … 31.2… Price 260.…
+## 12 Recom      1.90   SMA20 2.01% SMA50 4.88% SMA2… 3.30% Volu… 33,6… Chan… 2.71%</code></pre>
+<p>We can extract headers and values with the following chunk of code:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># flatten_chr will collapse all columns into one vector</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>headers <span class="ot">&lt;-</span> raw_tbl <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">11</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span> <span class="fu">flatten_chr</span>() </span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>values <span class="ot">&lt;-</span> raw_tbl <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">seq</span>(<span class="dv">2</span>,<span class="dv">12</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span> <span class="fu">flatten_chr</span>()</span></code></pre></div>
+<p>This is what the header vector looks like now:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>headers</span></code></pre></div>
+<pre><code>##  [1] &quot;Index&quot;               &quot;Market Cap&quot;          &quot;Income&quot;             
+##  [4] &quot;Sales&quot;               &quot;Book/sh&quot;             &quot;Cash/sh&quot;            
+##  [7] &quot;Dividend&quot;            &quot;Dividend %&quot;          &quot;Employees&quot;          
+## [10] &quot;Optionable&quot;          &quot;Shortable&quot;           &quot;Recom&quot;              
+## [13] &quot;P/E&quot;                 &quot;Forward P/E&quot;         &quot;PEG&quot;                
+## [16] &quot;P/S&quot;                 &quot;P/B&quot;                 &quot;P/C&quot;                
+## [19] &quot;P/FCF&quot;               &quot;Quick Ratio&quot;         &quot;Current Ratio&quot;      
+## [22] &quot;Debt/Eq&quot;             &quot;LT Debt/Eq&quot;          &quot;SMA20&quot;              
+## [25] &quot;EPS (ttm)&quot;           &quot;EPS next Y&quot;          &quot;EPS next Q&quot;         
+## [28] &quot;EPS this Y&quot;          &quot;EPS next Y&quot;          &quot;EPS next 5Y&quot;        
+## [31] &quot;EPS past 5Y&quot;         &quot;Sales past 5Y&quot;       &quot;Sales Q/Q&quot;          
+## [34] &quot;EPS Q/Q&quot;             &quot;Earnings&quot;            &quot;SMA50&quot;              
+## [37] &quot;Insider Own&quot;         &quot;Insider Trans&quot;       &quot;Inst Own&quot;           
+## [40] &quot;Inst Trans&quot;          &quot;ROA&quot;                 &quot;ROE&quot;                
+## [43] &quot;ROI&quot;                 &quot;Gross Margin&quot;        &quot;Oper. Margin&quot;       
+## [46] &quot;Profit Margin&quot;       &quot;Payout&quot;              &quot;SMA200&quot;             
+## [49] &quot;Shs Outstand&quot;        &quot;Shs Float&quot;           &quot;Short Float / Ratio&quot;
+## [52] &quot;Short Interest&quot;      &quot;Target Price&quot;        &quot;52W Range&quot;          
+## [55] &quot;52W High&quot;            &quot;52W Low&quot;             &quot;RSI (14)&quot;           
+## [58] &quot;Rel Volume&quot;          &quot;Avg Volume&quot;          &quot;Volume&quot;             
+## [61] &quot;Perf Week&quot;           &quot;Perf Month&quot;          &quot;Perf Quarter&quot;       
+## [64] &quot;Perf Half Y&quot;         &quot;Perf Year&quot;           &quot;Perf YTD&quot;           
+## [67] &quot;Beta&quot;                &quot;ATR&quot;                 &quot;Volatility&quot;         
+## [70] &quot;Prev Close&quot;          &quot;Price&quot;               &quot;Change&quot;</code></pre>
+<p>Perfect! Finally pasting all the info together, we get this fine data frame containing all the information:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>finviz_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">value =</span> values) <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>  <span class="fu">bind_cols</span>(<span class="at">variable =</span> headers, .) <span class="sc">%&gt;%</span> </span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>  <span class="fu">bind_rows</span>(sector_df, .)</span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a>finviz_df</span></code></pre></div>
+<pre><code>## # A tibble: 76 × 2
+##    variable   value                    
+##    &lt;chr&gt;      &lt;chr&gt;                    
+##  1 ticker     MSFT                     
+##  2 sector     Technology               
+##  3 industry   Software - Infrastructure
+##  4 country    USA                      
+##  5 Index      DJIA, NDX, S&amp;P 500       
+##  6 Market Cap 1970.40B                 
+##  7 Income     67.45B                   
+##  8 Sales      204.09B                  
+##  9 Book/sh    24.58                    
+## 10 Cash/sh    13.17                    
+## # … with 66 more rows</code></pre>
+</div>
+<div id="function-to-take-away" class="section level1">
+<h1>Function to take away</h1>
+<p>We can easily assemble a function joining all these pieces together. <a href="https://www.youtube.com/watch?v=nendMLrpI-s">Ready to rumble</a>:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>Get_finviz_data <span class="ot">&lt;-</span> <span class="cf">function</span>(symbol){</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>  </span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>  <span class="fu">Sys.sleep</span>(<span class="dv">1</span>)          <span class="co"># It&#39;s a good practice to use a sleep to make repeated calls to the server</span></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a>  </span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a>  finviz_url <span class="ot">&lt;-</span> glue<span class="sc">::</span><span class="fu">glue</span>(<span class="st">&quot;https://finviz.com/quote.ashx?t={symbol}&quot;</span>)</span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a>  finviz_html <span class="ot">&lt;-</span> <span class="fu">tryCatch</span>(rvest<span class="sc">::</span><span class="fu">read_html</span>(finviz_url), <span class="at">error=</span><span class="cf">function</span>(e) <span class="cn">NULL</span>)</span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a>  </span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.null</span>(finviz_html)) <span class="fu">return</span>(<span class="cn">NULL</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a>  </span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a>  sector_str <span class="ot">&lt;-</span> finviz_html <span class="sc">%&gt;%</span> </span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a>    rvest<span class="sc">::</span><span class="fu">html_element</span>(<span class="at">xpath =</span> <span class="st">&#39;/html/body/div[4]/div/table[1]&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a>    rvest<span class="sc">::</span><span class="fu">html_table</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a>    <span class="fu">head</span>(<span class="dv">1</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a>    <span class="fu">pull</span>(X4) </span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a>  </span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a>  sector_df <span class="ot">&lt;-</span> sector_str <span class="sc">%&gt;%</span> </span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a>    <span class="fu">str_split</span>(<span class="st">&quot;[|]&quot;</span>, <span class="at">simplify =</span> T) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-18"><a href="#cb14-18" tabindex="-1"></a>    <span class="fu">str_squish</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb14-19"><a href="#cb14-19" tabindex="-1"></a>    <span class="fu">as_tibble</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb14-20"><a href="#cb14-20" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">variable =</span> <span class="fu">c</span>(<span class="st">&quot;sector&quot;</span>, <span class="st">&quot;industry&quot;</span>, <span class="st">&quot;country&quot;</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-21"><a href="#cb14-21" tabindex="-1"></a>    <span class="fu">relocate</span>(variable) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-22"><a href="#cb14-22" tabindex="-1"></a>    <span class="fu">add_row</span>(<span class="at">variable =</span> <span class="st">&quot;ticker&quot;</span>, <span class="at">value =</span> symbol, <span class="at">.before =</span> <span class="dv">1</span>)</span>
+<span id="cb14-23"><a href="#cb14-23" tabindex="-1"></a>  </span>
+<span id="cb14-24"><a href="#cb14-24" tabindex="-1"></a>  raw_tbl <span class="ot">&lt;-</span> finviz_html <span class="sc">%&gt;%</span> </span>
+<span id="cb14-25"><a href="#cb14-25" tabindex="-1"></a>    rvest<span class="sc">::</span><span class="fu">html_element</span>(<span class="at">xpath =</span> <span class="st">&#39;/html/body/div[4]/div/table[2]&#39;</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-26"><a href="#cb14-26" tabindex="-1"></a>    rvest<span class="sc">::</span><span class="fu">html_table</span>() </span>
+<span id="cb14-27"><a href="#cb14-27" tabindex="-1"></a>  </span>
+<span id="cb14-28"><a href="#cb14-28" tabindex="-1"></a>  headers <span class="ot">&lt;-</span> raw_tbl <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">seq</span>(<span class="dv">1</span>,<span class="dv">11</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span> <span class="fu">flatten_chr</span>() </span>
+<span id="cb14-29"><a href="#cb14-29" tabindex="-1"></a>  values <span class="ot">&lt;-</span> raw_tbl <span class="sc">%&gt;%</span> <span class="fu">select</span>(<span class="fu">seq</span>(<span class="dv">2</span>,<span class="dv">12</span>,<span class="dv">2</span>)) <span class="sc">%&gt;%</span> <span class="fu">flatten_chr</span>()</span>
+<span id="cb14-30"><a href="#cb14-30" tabindex="-1"></a>  </span>
+<span id="cb14-31"><a href="#cb14-31" tabindex="-1"></a>  finviz_df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">value =</span> values) <span class="sc">%&gt;%</span></span>
+<span id="cb14-32"><a href="#cb14-32" tabindex="-1"></a>    <span class="fu">bind_cols</span>(<span class="at">variable =</span> headers, .) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-33"><a href="#cb14-33" tabindex="-1"></a>    <span class="fu">bind_rows</span>(sector_df, .)</span>
+<span id="cb14-34"><a href="#cb14-34" tabindex="-1"></a>  </span>
+<span id="cb14-35"><a href="#cb14-35" tabindex="-1"></a>  <span class="fu">return</span>(finviz_df)</span>
+<span id="cb14-36"><a href="#cb14-36" tabindex="-1"></a>}</span></code></pre></div>
+<p>And there you have it! A functional scraper in less than 30 lines of code where we showed how to use the convenient library <code>rvest</code> to download financial data from any public company. If you are interested in using R to work with financial data, check out <a href="../value-invest-market-cap-data-r-ggplot-financial-times-theme/">this series</a> we are working on.</p>
+<p><br></p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Don't miss the next chapters on our Financial journey in R series!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+</div>
+
+              </div>
+              
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tags/algotrading/">AlgoTrading</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/scraping-financial-data-finviz-rvest-package/&amp;text=Scraping%20financial%20data%20from%20finviz%20with%20R%20and%20rvest%20package" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/scraping-financial-data-finviz-rvest-package/&amp;t=Scraping%20financial%20data%20from%20finviz%20with%20R%20and%20rvest%20package" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Scraping%20financial%20data%20from%20finviz%20with%20R%20and%20rvest%20package&amp;body=/post/scraping-financial-data-finviz-rvest-package/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/scraping-financial-data-finviz-rvest-package/&amp;title=Scraping%20financial%20data%20from%20finviz%20with%20R%20and%20rvest%20package" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Scraping%20financial%20data%20from%20finviz%20with%20R%20and%20rvest%20package%20/post/scraping-financial-data-finviz-rvest-package/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/scraping-financial-data-finviz-rvest-package/&amp;title=Scraping%20financial%20data%20from%20finviz%20with%20R%20and%20rvest%20package" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+
+
+
+
+
+  
+  
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/authors/pablo-canovas/pablo-avatar_hu3618d2e81510010302fb07a57440ef4d_624691_270x270_fill_q90_lanczos_center.jpg" alt="Pablo Cánovas">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/authors/pablo-canovas/">Pablo Cánovas</a></h5>
+      <h6 class="card-subtitle">Senior Data Scientist at Spotahome</h6>
+      <p class="card-text">Data Scientist, formerly physicist  |  Tidyverse believer, piping life  |  Hanging out at TypeThePipe</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/paul_elotro" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/pablo-c%c3%a1novas-tourn%c3%a9-2507b6b7" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/PabloCanovas" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+            </div>
+        </article>
+  
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/python.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.37431be2d92d7fb0160054761ab79602.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
+    
+    
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+	<a href="https://www.r-bloggers.com/">
+	<img border="0" alt="R Bloggers icon" src="/img/r_bloggers.png" width="100" height="100">
+	</a>
+	<br>
+	<a href="https://www.python-bloggers.com/">
+	<img border="0" alt="Python Bloggers icon" src="/img/python_logo.png" width="100" height="100">
+	</a>
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

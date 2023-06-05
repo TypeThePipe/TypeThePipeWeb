@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+  <meta name="robots" content="index,follow">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Carlos Vecina">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="In this tutorial, we&#39;ll show you how to integrate text-to-speech into your Python projects, using libraries like pyttsx3, gTTS, and playsound. Whether you&#39;re building a chatbot, a voice assistant, or just want to add some personality to your applications, this tutorial will help you get started with text-to-speech in Python">
+
+  
+  <link rel="alternate" hreflang="en-us" href="/post/python-text-to-speech-practical-guide/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#0294A5">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-155621946-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'UA-155621946-1', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu7deb2a6bfe7da9ae71f9387d98d158da_12352_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu7deb2a6bfe7da9ae71f9387d98d158da_12352_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/post/python-text-to-speech-practical-guide/">
+
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="TypeThePipe">
+  <meta property="og:url" content="/post/python-text-to-speech-practical-guide/">
+  <meta property="og:title" content="Making Your Python Programs Speak: A Practical Guide to Text-to-Speech | TypeThePipe">
+  <meta property="og:description" content="In this tutorial, we&#39;ll show you how to integrate text-to-speech into your Python projects, using libraries like pyttsx3, gTTS, and playsound. Whether you&#39;re building a chatbot, a voice assistant, or just want to add some personality to your applications, this tutorial will help you get started with text-to-speech in Python"><meta property="og:image" content="/post/python-text-to-speech-practical-guide/featured.png">
+  <meta property="twitter:image" content="/post/python-text-to-speech-practical-guide/featured.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2023-03-18T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2023-03-18T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/post/python-text-to-speech-practical-guide/"
+  },
+  "headline": "Making Your Python Programs Speak: A Practical Guide to Text-to-Speech",
+  
+  "image": [
+    "/post/python-text-to-speech-practical-guide/featured.png"
+  ],
+  
+  "datePublished": "2023-03-18T00:00:00Z",
+  "dateModified": "2023-03-18T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Pablo Cánovas"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "TypeThePipe",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_192x192_fit_lanczos_2.png"
+    }
+  },
+  "description": "In this tutorial, we'll show you how to integrate text-to-speech into your Python projects, using libraries like pyttsx3, gTTS, and playsound. Whether you're building a chatbot, a voice assistant, or just want to add some personality to your applications, this tutorial will help you get started with text-to-speech in Python"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  <title>Making Your Python Programs Speak: A Practical Guide to Text-to-Speech | TypeThePipe</title>
+  <script async defer src="https://tools.luckyorange.com/core/lo.js?site-id=10579286"></script>
+  
+  
+<script>var ezoicId = 473828; </script>
+<script type="text/javascript" src="//go.ezoic.net/ezoic/ezoic.js"></script>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+  
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_0x70_resize_lanczos_2.png" alt="TypeThePipe"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/"><img src="/images/logo_hu404f0ea59597fa66f625b1ea06c896ea_259550_0x70_resize_lanczos_2.png" alt="TypeThePipe"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#vizstips"><span>Vizs & Tips</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#people"><span>About Us</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#mentorship"><span>Mentorship Program</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+
+        <article class="article">
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Making Your Python Programs Speak: A Practical Guide to Text-to-Speech</h1>
+
+  
+  <p class="page-subtitle">Learn how to use Python to add text-to-speech capabilities to your projects and create applications that can speak for themselves</p>
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  
+  <span><a href="/authors/pablo-canovas/">Pablo Cánovas</a></span>
+  </div>
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/categories/python/">Python</a>, <a href="/categories/post/">Post</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+            <div class="article-container">
+              <div class="article-style">
+                
+<script src="/post/python-text-to-speech-practical-guide/index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="featured.png" height="300px" width="400px" alt="Two robots talking as an image for a quick Guide to Text-to-Speech with Python" /></p>
+<div id="text-to-speech-python-libraries" class="section level1">
+<h1><strong>Text-to-speech Python libraries</strong></h1>
+<p>With the rise of the new AI models like GPT-4, being able to communicate with machines in a natural and intuitive way is becoming more and more important. Text-to-speech is a powerful technology that can help bridge the gap between humans and machines by enabling machines to speak and understand human language.
+In this blog post, we’ll explore some of the possibilities and libraries available for text-to-speech.</p>
+<p>In Python, there are several modules available to easily convert text into speech. Today we are going to explore two of the most popular ones: <code>pyttsx3</code> and <code>gTTS</code>.</p>
+<p><code>pyttsx3</code> is a comprehensive library that provides support for multiple languages and custom voices, while <code>gTTS</code> is a simpler and easy to use option that uses Google Translate’s services to generate online speech.</p>
+<div id="tldr---i-simply-want-to-play-out-loud-some-text" class="section level3">
+<h3><strong>TL;DR</strong> - I simply want to play out loud some text</h3>
+<p>The simplest way I could came up with was using the <code>pyttsx3</code> library.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> pyttsx3</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>pyttsx3.speak(<span class="st">&quot;Oh wow! It&#39;s amazing I got this to work in just one line of code&quot;</span>)</span></code></pre></div>
+<p>Initializing the engine and use the commands <code>say</code> and <code>runAndWait</code> would be the standard way to work with the API.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>engine <span class="op">=</span> pyttsx3.init()</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>engine.say(<span class="st">&quot;Oh wow! I can&#39;t believe I did this in less than 5 minutes&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>engine.runAndWait()</span></code></pre></div>
+<p>Once we have the engine, we can tune some parameters.</p>
+</div>
+<div id="i-dont-like-the-voice-how-can-i-change-it" class="section level3">
+<h3>I don’t like the voice, how can I change it?</h3>
+<p>We can go through all the voices installed in our system with the following:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>engine <span class="op">=</span> pyttsx3.init()</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>voices <span class="op">=</span> engine.getProperty(<span class="st">&#39;voices&#39;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="cf">for</span> voice <span class="kw">in</span> voices:</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>   engine.setProperty(<span class="st">&#39;voice&#39;</span>, voice.<span class="bu">id</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>   engine.say(<span class="st">&#39;This is a test to know how each voice sounds like&#39;</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>engine.runAndWait()</span></code></pre></div>
+<p>And then we can set the desired voice like this:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>voices <span class="op">=</span> engine.getProperty(<span class="st">&#39;voices&#39;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>engine.setProperty(<span class="st">&#39;voice&#39;</span>, voices[<span class="dv">1</span>].<span class="bu">id</span>)      <span class="co"># Change index to change voice. 0 for male and 1 for female</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>engine.say(<span class="st">&quot;Oh wow! I can&#39;t believe changing the voice was that easy&quot;</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>engine.runAndWait()</span></code></pre></div>
+</div>
+<div id="how-to-save-the-speech-as-an-audio-file" class="section level3">
+<h3>How to save the speech as an audio file?</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>engine <span class="op">=</span> pyttsx3.init()</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>filename <span class="op">=</span> <span class="st">&quot;audio_file.wav&quot;</span>                <span class="co"># It handles both .mp3 and .wav                          </span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>engine.save_to_file(<span class="st">&#39;I am saving this text as a wav file&#39;</span>, filename)</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>engine.runAndWait()</span></code></pre></div>
+</div>
+<div id="tuning-parameters" class="section level3">
+<h3>Tuning parameters</h3>
+<p>We can easily change parameters such as <em>rate</em>, <em>volume</em> or <em>voice</em> like this:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>rate <span class="op">=</span> engine.getProperty(<span class="st">&#39;rate&#39;</span>)                 <span class="co"># get current rate</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="bu">print</span>(rate)                      </span></code></pre></div>
+<pre><code>## 200</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>engine.setProperty(<span class="st">&#39;rate&#39;</span>, <span class="dv">250</span>)                   <span class="co"># set a new rate</span></span></code></pre></div>
+<p><br></p>
+</div>
+<div id="how-can-i-stop-the-audio-playback" class="section level2">
+<h2><strong>How can I stop the audio playback?</strong></h2>
+<p>When working with text-to-speech in Python, one potential issue you may encounter is the main program becoming stuck or unresponsive while the audio is being played. This can be a frustrating and limiting problem, especially if you’re working on a real-time application where responsiveness is crucial such as an AI voice assistant bot.</p>
+<p>This is because the code that generates and plays the audio is typically executed in a sequential manner, meaning that the program has to wait for the audio to finish before moving on to the next task.</p>
+<p>To overcome this problem, one solution is to use multiprocessing, which involves creating multiple processes to execute different parts of the program in parallel. That way, the audio generation and playback are handled by a separate process, allowing the main program to continue executing without being blocked.</p>
+<p>To make this happen, we need to run the <code>say</code> or <code>speak</code> function in another thread and use <code>is_pressed</code> from the <code>keyboard</code> module as a callback.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="im">import</span> multiprocessing</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="im">import</span> pyttsx3</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="im">import</span> keyboard</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="kw">def</span> _say(text):</span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a>    pyttsx3.speak(text)</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a><span class="kw">def</span> say(phrase):</span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>	<span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:</span>
+<span id="cb9-10"><a href="#cb9-10" tabindex="-1"></a>		p <span class="op">=</span> multiprocessing.Process(target<span class="op">=</span>_say, args<span class="op">=</span>(text,))</span>
+<span id="cb9-11"><a href="#cb9-11" tabindex="-1"></a>		p.start()</span>
+<span id="cb9-12"><a href="#cb9-12" tabindex="-1"></a>		<span class="cf">while</span> p.is_alive():</span>
+<span id="cb9-13"><a href="#cb9-13" tabindex="-1"></a>			<span class="cf">if</span> keyboard.is_pressed(<span class="st">&#39;esc&#39;</span>):</span>
+<span id="cb9-14"><a href="#cb9-14" tabindex="-1"></a>				p.terminate()</span>
+<span id="cb9-15"><a href="#cb9-15" tabindex="-1"></a>			<span class="cf">else</span>:</span>
+<span id="cb9-16"><a href="#cb9-16" tabindex="-1"></a>				<span class="cf">continue</span></span>
+<span id="cb9-17"><a href="#cb9-17" tabindex="-1"></a>		p.join()</span>
+<span id="cb9-18"><a href="#cb9-18" tabindex="-1"></a></span>
+<span id="cb9-19"><a href="#cb9-19" tabindex="-1"></a>text <span class="op">=</span> <span class="st">&quot;this text is being read right now, and I can terminate it whenever I want&quot;</span></span>
+<span id="cb9-20"><a href="#cb9-20" tabindex="-1"></a></span>
+<span id="cb9-21"><a href="#cb9-21" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb9-22"><a href="#cb9-22" tabindex="-1"></a>	say(text)</span></code></pre></div>
+<p><br></p>
+</div>
+<div id="alternative-gtts" class="section level2">
+<h2><strong>Alternative: gTTS</strong></h2>
+<p>If you’re looking for an alternative to <code>pyttsx3</code>, you might want to consider using the <code>gTTS</code> (Google Text-to-Speech) module along with the <code>playsound</code> library. Combining these two libraries is a quick way to add text-to-speech capabilities to your project.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="im">from</span> gtts <span class="im">import</span> gTTS</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="im">from</span> playsound <span class="im">import</span> playsound</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a>filename <span class="op">=</span> <span class="st">&#39;my_gtts_file.mp3&#39;</span></span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>tts <span class="op">=</span> gTTS(<span class="st">&quot;Oh wow! I can&#39;t believe this whas that easy&quot;</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>tts.save(filename)</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>playsound(filename)</span></code></pre></div>
+<p>Hopefully, this article has given you a brief overview of a couple text-to-speech options available in Python and how you can use them to improve the accessibility and user experience of your projects with just a few lines of code.</p>
+<p><br></p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more Python tips!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
+</div>
+</div>
+
+              </div>
+              
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/post/python-text-to-speech-practical-guide/&amp;text=Making%20Your%20Python%20Programs%20Speak:%20A%20Practical%20Guide%20to%20Text-to-Speech" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/post/python-text-to-speech-practical-guide/&amp;t=Making%20Your%20Python%20Programs%20Speak:%20A%20Practical%20Guide%20to%20Text-to-Speech" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Making%20Your%20Python%20Programs%20Speak:%20A%20Practical%20Guide%20to%20Text-to-Speech&amp;body=/post/python-text-to-speech-practical-guide/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/post/python-text-to-speech-practical-guide/&amp;title=Making%20Your%20Python%20Programs%20Speak:%20A%20Practical%20Guide%20to%20Text-to-Speech" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Making%20Your%20Python%20Programs%20Speak:%20A%20Practical%20Guide%20to%20Text-to-Speech%20/post/python-text-to-speech-practical-guide/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/post/python-text-to-speech-practical-guide/&amp;title=Making%20Your%20Python%20Programs%20Speak:%20A%20Practical%20Guide%20to%20Text-to-Speech" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+
+
+
+
+
+  
+  
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/authors/pablo-canovas/pablo-avatar_hu3618d2e81510010302fb07a57440ef4d_624691_270x270_fill_q90_lanczos_center.jpg" alt="Pablo Cánovas">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/authors/pablo-canovas/">Pablo Cánovas</a></h5>
+      <h6 class="card-subtitle">Senior Data Scientist at Spotahome</h6>
+      <p class="card-text">Data Scientist, formerly physicist  |  Tidyverse believer, piping life  |  Hanging out at TypeThePipe</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/paul_elotro" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/pablo-c%c3%a1novas-tourn%c3%a9-2507b6b7" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/PabloCanovas" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+            </div>
+        </article>
+  
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/python.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No results found","placeholder":"Search...","results":"results found"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Projects",
+        'publication' : "Publications",
+        'talk' : "Talks"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.37431be2d92d7fb0160054761ab79602.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
+    
+    
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+	<a href="https://www.r-bloggers.com/">
+	<img border="0" alt="R Bloggers icon" src="/img/r_bloggers.png" width="100" height="100">
+	</a>
+	<br>
+	<a href="https://www.python-bloggers.com/">
+	<img border="0" alt="Python Bloggers icon" src="/img/python_logo.png" width="100" height="100">
+	</a>
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

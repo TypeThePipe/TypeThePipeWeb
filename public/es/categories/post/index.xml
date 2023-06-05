@@ -5,12 +5,218 @@
     <link>/es/categories/post/</link>
       <atom:link href="/es/categories/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Post</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Mon, 14 Jun 2021 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Tue, 07 Mar 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-32.png</url>
       <title>Post</title>
       <link>/es/categories/post/</link>
     </image>
+    
+    <item>
+      <title>¿Qué es SqlAlchemy? Prueba la v2.0 para acceder a bases de datos desde Python</title>
+      <link>/es/post/que-es-sqlalchemy-2/</link>
+      <pubDate>Tue, 07 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>/es/post/que-es-sqlalchemy-2/</guid>
+      <description>
+&lt;script src=&#34;/es/post/que-es-sqlalchemy-2/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.jpg&#34; height=&#34;250px&#34; width=&#34;400px&#34; alt=&#34;SQL Alchemy estructura 2.0&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;qué-es-sqlalchemy&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;¿Qué es SQLAlchemy?&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;SQLAlchemy es un SQL toolkit de código abierto para interaccionar con bases de datos desde Python. SQLAlchemy proporciona una interfaz de alto nivel para realizar operaciones comunes a bases de datos de diferente naturaleza, de una manera sencilla, abstracta y generalizada, sin tener que atender demasiado a las especifidades de cada una de ellas.&lt;/p&gt;
+&lt;p&gt;A este tipo de librerías se las conoce como ORM (en inglés &lt;em&gt;Object-Relational Mapping&lt;/em&gt;). Conozcamos un poco más sobre este concepto.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;qué-es-un-orm&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;¿Qué es un ORM?&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;La finalidad de un ORM es mapear (relacionar) entidades de una base de datos y objetos (p.e clases de Python) de un determinado lenguaje de programación con tablas de una base de datos. Son muy comunes en los paradigmas de programación orientada a objetos, ya que hace uso de ellos para ofrecer una abstracción y una manera de interactuar con las bases de datos en un manera &lt;em&gt;Pytonica&lt;/em&gt; sin necesidad de utilizar directamente queries de SQL para ello. Se encargará de realizar las operaciones en el motor de sql de manera transparente para el usuario.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;ventajas-de-usar-un-orm-en-python&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Ventajas de usar un ORM en Python&lt;/h2&gt;
+&lt;p&gt;Tener nuestras entidades como objetos en Python puede ser muy interesante a la hora de gestionar aplicaciones e interactuar(consulatar, hacer &lt;em&gt;updates&lt;/em&gt;…) de manera sencilla con ellos.&lt;/p&gt;
+&lt;p&gt;Uno de las ventajas más destacables es que nos podemos abstraer y ser agnósticos a la base de datos con la que trabajemos. SQLALchemy tiene disponible una serie de dialectos, que se pueden extender y se han extendido (ElasticSearch…)&lt;/p&gt;
+&lt;p&gt;Otras cosas de las que SQLAlchemy se ocupa por nosotros es la posibilidad de gestionar un pool de conexiones, proveer un &lt;em&gt;context manager&lt;/em&gt;, prevención de inyección SQL…&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;contras-de-usar-un-orm-en-python&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Contras de usar un ORM en Python&lt;/h2&gt;
+&lt;p&gt;Las cosas se pueden complicar con operaciones complejas. Mientras que nos ofrece una optimización de queries, cuando empezamos a hacer joins, agrupaciones y queries &lt;em&gt;nesteadas&lt;/em&gt; a lo mejor nos queda una sintaxis bastante confusa, a lo peor sufriremos llevándolas a cabo. Muchos ORMs deja ejecutar SQL en crudo, pero perdiendo gran parte de su propósito.&lt;/p&gt;
+&lt;p&gt;Como siempre, al añadir un nivel extra de abstracción, la complejidad general podrá amentar, al mismo tiempo que debuggear se puede hacer más complejo al abstraernos de los detalles de la capa de bases de datos.&lt;/p&gt;
+&lt;p&gt;Ahora que ya sabemos más sobre qué es SQLAlchemy y qué nos permite hacer, veamos con más detalle sus elementos claves.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;elementos-clave-de-sqlalchemy&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;Elementos clave de SQLAlchemy&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;En cualquier momento puedes bucear en la documentación de SQLAlchemy. Sin embargo, me gustaría comentar brevemente los conceptos clave con los que podrás empezar a trabajar con esta herramienta, teniendo una idea de lo que tenemos entre manos.&lt;/p&gt;
+&lt;p&gt;Por ejemplo, ¿cuál es la diferencia entre &lt;em&gt;Engine&lt;/em&gt; y &lt;em&gt;Session&lt;/em&gt; dentro de SQLALchemy?&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Engine&lt;/strong&gt;: Es parte del core de SQLAlchemy, gestionando y proveyendo las conexiones a la base de datos como API de bajo nivel. Es capaz de manejar una &lt;em&gt;pool&lt;/em&gt; de conexiones, transacciones y ejecución de comandos SQL. Normalmente, se crea al inicio de la aplicación y se utiliza y comparte a lo largo de la ejecución.
+En última instancia podríamos usar esta entidad para trabajar con la base de datos ejectando SQL sin necesidad de usar las capacidades como ORM en toda su extensión, con sus modelos etc..&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Session&lt;/strong&gt;: Es un nivel superior de abstración que se situa por encima del &lt;em&gt;Engine&lt;/em&gt;. Permite realizar transacciones con la base de datos de una manera orientada a objetos. Se crearán y destruirán durante la ejección de la aplcación según sea necesario. Se encarga de hacer los commits rollbacks.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://stackoverflow.com/questions/34322471/sqlalchemy-engine-connection-and-session-difference#:~:text=When%20to%20use%20Engine%2C%20Connection%2C%20Session%20generally&#34;&gt;Respuesta en SO interesante a este respecto&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Otros conceptos interesantes:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Dialect&lt;/strong&gt;: Los dialectos son los responsables de ‘traducir’ la sintaxis SQL genérica generada por SQLAlcemy a la sintaxis específica de la base de datos correspondiente. Por ejemplo, gestionar los tipos de datos es uno de los puntos más importantes en este proceso. Tenemos los siguientes disponibles de base:&lt;/p&gt;
+&lt;div class=&#34;float&#34;&gt;
+&lt;img src=&#34;images/dialectos_sqlalchemy.JPG&#34; alt=&#34;tabla de los dialectos disponibles de base en sqlalchemy&#34; /&gt;
+&lt;div class=&#34;figcaption&#34;&gt;tabla de los dialectos disponibles de base en sqlalchemy&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;y estos son extensibles. Es decir, que si queremos algo extra como interacción con ElasticSearch u OpenSearch (AWS), debemos instalar(o implementar) sus dialectos específicos.&lt;/p&gt;
+&lt;p&gt;Como ejemplo, el módulo &lt;a href=&#34;https://github.com/preset-io/elasticsearch-dbapi&#34;&gt;ElasticSearch dbapi&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Metadata&lt;/strong&gt;: Se trata de un objeto que representa y contiene información sobre el esquema de base de datos. Por ejemplo las tablas, &lt;em&gt;constraints&lt;/em&gt;, columnas, relaciones… Se usa internamente para generar las instrucciones SQL y para gestionar las migraciones.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Model&lt;/strong&gt;: Un modelo en SQLALchemy es un objeto de Python que represena una tabla en base de datos. Heredan de &lt;em&gt;DeclarativeBase&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;Aquí tenemos un ejemplo sobre Postgres:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; sqlalchemy &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Column, Integer, Float&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; sqlalchemy.dialects.postgresql &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; UUID&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; sqlalchemy.orm &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; DeclarativeBase&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; uuid&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Base(DeclarativeBase):&lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;pass&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;
+&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Product(Base):&lt;/span&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-12&#34;&gt;&lt;a href=&#34;#cb1-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    __tablename__ &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;products&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-13&#34;&gt;&lt;a href=&#34;#cb1-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-14&#34;&gt;&lt;a href=&#34;#cb1-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;bu&#34;&gt;id&lt;/span&gt;: uuid &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Column(UUID(as_uuid&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;), primary_key&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;, default&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;uuid.uuid4)&lt;/span&gt;
+&lt;span id=&#34;cb1-15&#34;&gt;&lt;a href=&#34;#cb1-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    price &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Column(Float)&lt;/span&gt;
+&lt;span id=&#34;cb1-16&#34;&gt;&lt;a href=&#34;#cb1-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    amount &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Column(Integer)&lt;/span&gt;
+&lt;span id=&#34;cb1-17&#34;&gt;&lt;a href=&#34;#cb1-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb1-18&#34;&gt;&lt;a href=&#34;#cb1-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;__repr__&lt;/span&gt;(&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb1-19&#34;&gt;&lt;a href=&#34;#cb1-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;f&amp;quot;&amp;quot;&amp;quot;&amp;lt;Product(price=&amp;#39;&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;.&lt;/span&gt;price&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;#39;, amount=&amp;#39;&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;.&lt;/span&gt;amount&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;#39;, product_id=&amp;#39;&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;.&lt;/span&gt;product_id&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;#39;)&amp;gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;se-pude-tipar-con-mypy-en-sqlalchemy-v2.0&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;¿Se pude tipar con mypy en SQLAlchemy v2.0?&lt;/h1&gt;
+&lt;p&gt;Sí, a partir de esta versión no será necesario instalar &lt;strong&gt;stubs&lt;/strong&gt; o módulos específicos para que el mapeo que realiza SQLAlchemy sea compatible con Mypy y con el reconocimiento de la sintaxis por los IDEs. Bastará con &lt;strong&gt;pip install sqlalchemy[mypy]&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;Siguientdo con el ejemplo anterior, el tipado estático quedaría:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; sqlalchemy &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Column, Integer, Float&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; sqlalchemy.dialects.postgresql &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; UUID&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; sqlalchemy.orm &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; DeclarativeBase&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; uuid&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-6&#34;&gt;&lt;a href=&#34;#cb2-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-7&#34;&gt;&lt;a href=&#34;#cb2-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Base(DeclarativeBase):&lt;/span&gt;
+&lt;span id=&#34;cb2-8&#34;&gt;&lt;a href=&#34;#cb2-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;pass&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-9&#34;&gt;&lt;a href=&#34;#cb2-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;
+&lt;span id=&#34;cb2-10&#34;&gt;&lt;a href=&#34;#cb2-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; OrderNew(Base):&lt;/span&gt;
+&lt;span id=&#34;cb2-11&#34;&gt;&lt;a href=&#34;#cb2-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-12&#34;&gt;&lt;a href=&#34;#cb2-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    __tablename__ &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;orders_new&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-13&#34;&gt;&lt;a href=&#34;#cb2-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-14&#34;&gt;&lt;a href=&#34;#cb2-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;bu&#34;&gt;id&lt;/span&gt;: uuid &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Column(UUID(as_uuid&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;), primary_key&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;, default&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;uuid.uuid4)&lt;/span&gt;
+&lt;span id=&#34;cb2-15&#34;&gt;&lt;a href=&#34;#cb2-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    price: &lt;span class=&#34;bu&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Column(Float)&lt;/span&gt;
+&lt;span id=&#34;cb2-16&#34;&gt;&lt;a href=&#34;#cb2-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    amount: &lt;span class=&#34;bu&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Column(Integer)&lt;/span&gt;
+&lt;span id=&#34;cb2-17&#34;&gt;&lt;a href=&#34;#cb2-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    description: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Column(Integer)&lt;/span&gt;
+&lt;span id=&#34;cb2-18&#34;&gt;&lt;a href=&#34;#cb2-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-19&#34;&gt;&lt;a href=&#34;#cb2-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb2-20&#34;&gt;&lt;a href=&#34;#cb2-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;__repr__&lt;/span&gt;(&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb2-21&#34;&gt;&lt;a href=&#34;#cb2-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;ss&#34;&gt;f&amp;quot;&amp;quot;&amp;quot;&amp;lt;Order(price=&amp;#39;&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;.&lt;/span&gt;price&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;#39;, amount=&amp;#39;&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;.&lt;/span&gt;amount&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;#39;, product_id=&amp;#39;&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;.&lt;/span&gt;product_id&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;#39;)&amp;gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;cuándo-usar-sessionmaker&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;¿Cuándo usar &lt;em&gt;sessionmaker()&lt;/em&gt;?&lt;/h1&gt;
+&lt;p&gt;Nos permite crear una factoría de sesiones, configurando el comportamiento de las sesiones desde un solo lugar. Podemos con ello además separar la configuración de las sesiones de su creación, reduciendo duplicidades de código.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;qué-son-los-eventos-orm&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;¿Qué son los Eventos ORM?&lt;/h1&gt;
+&lt;p&gt;Mediante la API de eventos de SQLAlchemy, podemos configurar &lt;em&gt;listeners&lt;/em&gt; que desencadenen la ejecución de determinadas funciones definidas por el usuario. Se usa o bien la función &lt;em&gt;listen()&lt;/em&gt; o el decorador &lt;em&gt;&lt;span class=&#34;citation&#34;&gt;@listen_for&lt;/span&gt;()&lt;/em&gt;. Por ejemplo, esto puede ser útil en el caso de necesitar refrescar credenciales, loggear…&lt;/p&gt;
+&lt;p&gt;Aquí tenemos un ejemplo:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; sqlalchemy &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; create_engine&lt;/span&gt;
+&lt;span id=&#34;cb3-2&#34;&gt;&lt;a href=&#34;#cb3-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; sqlalchemy.event &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; listens_for&lt;/span&gt;
+&lt;span id=&#34;cb3-3&#34;&gt;&lt;a href=&#34;#cb3-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-4&#34;&gt;&lt;a href=&#34;#cb3-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;engine &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; create_engine(&lt;span class=&#34;st&#34;&gt;&amp;#39;sqlite:///typethepipe.db&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb3-5&#34;&gt;&lt;a href=&#34;#cb3-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-6&#34;&gt;&lt;a href=&#34;#cb3-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;at&#34;&gt;@listens_for&lt;/span&gt;(engine, &lt;span class=&#34;st&#34;&gt;&amp;quot;do_connect&amp;quot;&lt;/span&gt;, named&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb3-7&#34;&gt;&lt;a href=&#34;#cb3-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; aws_token(cparams, &lt;span class=&#34;op&#34;&gt;**&lt;/span&gt;kw):&lt;/span&gt;
+&lt;span id=&#34;cb3-8&#34;&gt;&lt;a href=&#34;#cb3-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    cparams[&lt;span class=&#34;st&#34;&gt;&amp;#39;password&amp;#39;&lt;/span&gt;] &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; get_temp_token() &lt;/span&gt;
+&lt;span id=&#34;cb3-9&#34;&gt;&lt;a href=&#34;#cb3-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;AWS token provisioned&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Si quieres profundizar en los eventos de SQLA, os dejamos link a la &lt;a href=&#34;https://stackoverflow.com/questions/37718907/variable-explorer-in-jupyter-notebook&#34;&gt;docu&lt;/a&gt; como siguiente paso.&lt;/p&gt;
+&lt;p&gt;¡Sigue leyendo nuestros &lt;a href=&#34;https://typethepipe.com/en/categories/python/&#34;&gt;Python Posts&lt;/a&gt;!&lt;/p&gt;
+&lt;style&gt;
+p {
+word-spacing: 3px;
+text-indent: 20px;
+text-align: justify;
+}
+.page-subtitle {
+text-align: left  !important;
+text-indent: 0px !important;
+}
+.card-text {
+text-align: left  !important;
+text-indent: 0px !important;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>¿Cómo de extendido está el Teletrabajo en los paises de Europeos?</title>
@@ -660,39 +866,52 @@ p {
       <pubDate>Wed, 11 Mar 2020 00:00:00 +0000</pubDate>
       <guid>/es/post/10-consejos-datathon-kaggle-data-science/</guid>
       <description>
+&lt;script src=&#34;/es/post/10-consejos-datathon-kaggle-data-science/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 &lt;div id=&#34;TOC&#34;&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;#establece-tu-objetivo-y-revisa-los-recursos-habilidades-tiempo-acceso-a-maquinas-con-los-que-cuentas.&#34;&gt;&lt;strong&gt;1. Establece tu objetivo y revisa los recursos (habilidades, tiempo, acceso a máquinas…) con los que cuentas.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#eleccion-del-tema-o-cduso.&#34;&gt;&lt;strong&gt;2. Elección del tema o CdUso.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#construye-tu-equipo-de-manera-consciente.-usa-herramientas-para-compartir-codigoarchivos.&#34;&gt;&lt;strong&gt;3. Construye tu equipo de manera consciente. Usa herramientas para compartir código/archivos.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#investigacion-previa-y-profunda-sobre-el-caso-de-uso-en-concreto.&#34;&gt;&lt;strong&gt;4. Investigación previa y profunda sobre el caso de uso en concreto.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#analisis-exploratorio-de-los-datos.-recuerda-que-normalmente-no-son-los-unicos-que-puedes-usar.&#34;&gt;&lt;strong&gt;5. Análisis exploratorio de los datos. Recuerda que (normalmente) no son los únicos que puedes usar.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#establecer-la-estructura-del-proyecto-y-del-codigo.&#34;&gt;&lt;strong&gt;6. Establecer la estructura del proyecto y del código.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#lanzar-los-primeros-modelos.&#34;&gt;&lt;strong&gt;7. Lanzar los primeros modelos.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#validacion-cruzada-oos-y-backtesting.&#34;&gt;&lt;strong&gt;8. Validación cruzada, OOS y backtesting.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#interpretabilidad-de-modelos.-evaluacion-de-resultados-desde-el-punto-de-vista-practico-yo-negocio.&#34;&gt;&lt;strong&gt;9. Interpretabilidad de modelos. Evaluación de resultados desde el punto de vista práctico y/o negocio.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#escribir-una-memoria-con-puntos-fuertes-y-puntos-a-mejorar-detectados-que-te-sirvan-de-partida-en-el-proximo-reto.&#34;&gt;&lt;strong&gt;10. Escribir una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#qué-es-un-datathon&#34; id=&#34;toc-qué-es-un-datathon&#34;&gt;¿Qué es un Datathon?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#qúe-es-kaggle&#34; id=&#34;toc-qúe-es-kaggle&#34;&gt;¿Qúe es Kaggle?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#establece-tu-objetivo-y-revisa-los-recursos-habilidades-tiempo-acceso-a-máquinas-con-los-que-cuentas.&#34; id=&#34;toc-establece-tu-objetivo-y-revisa-los-recursos-habilidades-tiempo-acceso-a-máquinas-con-los-que-cuentas.&#34;&gt;&lt;strong&gt;1. Establece tu objetivo y revisa los recursos (habilidades, tiempo, acceso a máquinas…) con los que cuentas.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#elección-del-tema-o-cduso.&#34; id=&#34;toc-elección-del-tema-o-cduso.&#34;&gt;&lt;strong&gt;2. Elección del tema o CdUso.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#construye-tu-equipo-de-manera-consciente.-usa-herramientas-para-compartir-códigoarchivos.&#34; id=&#34;toc-construye-tu-equipo-de-manera-consciente.-usa-herramientas-para-compartir-códigoarchivos.&#34;&gt;&lt;strong&gt;3. Construye tu equipo de manera consciente. Usa herramientas para compartir código/archivos.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#investigación-previa-y-profunda-sobre-el-caso-de-uso-en-concreto.&#34; id=&#34;toc-investigación-previa-y-profunda-sobre-el-caso-de-uso-en-concreto.&#34;&gt;&lt;strong&gt;4. Investigación previa y profunda sobre el caso de uso en concreto.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#análisis-exploratorio-de-los-datos.-recuerda-que-normalmente-no-son-los-únicos-que-puedes-usar.&#34; id=&#34;toc-análisis-exploratorio-de-los-datos.-recuerda-que-normalmente-no-son-los-únicos-que-puedes-usar.&#34;&gt;&lt;strong&gt;5. Análisis exploratorio de los datos. Recuerda que (normalmente) no son los únicos que puedes usar.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#establecer-la-estructura-del-proyecto-y-del-código.&#34; id=&#34;toc-establecer-la-estructura-del-proyecto-y-del-código.&#34;&gt;&lt;strong&gt;6. Establecer la estructura del proyecto y del código.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#lanzar-los-primeros-modelos.&#34; id=&#34;toc-lanzar-los-primeros-modelos.&#34;&gt;&lt;strong&gt;7. Lanzar los primeros modelos.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#validación-cruzada-oos-y-backtesting.&#34; id=&#34;toc-validación-cruzada-oos-y-backtesting.&#34;&gt;&lt;strong&gt;8. Validación cruzada, OOS y backtesting.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#interpretabilidad-de-modelos.-evaluación-de-resultados-desde-el-punto-de-vista-práctico-yo-negocio.&#34; id=&#34;toc-interpretabilidad-de-modelos.-evaluación-de-resultados-desde-el-punto-de-vista-práctico-yo-negocio.&#34;&gt;&lt;strong&gt;9. Interpretabilidad de modelos. Evaluación de resultados desde el punto de vista práctico y/o negocio.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#escribir-una-memoria-con-puntos-fuertes-y-puntos-a-mejorar-detectados-que-te-sirvan-de-partida-en-el-próximo-reto.&#34; id=&#34;toc-escribir-una-memoria-con-puntos-fuertes-y-puntos-a-mejorar-detectados-que-te-sirvan-de-partida-en-el-próximo-reto.&#34;&gt;&lt;strong&gt;10. Escribir una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.&lt;/strong&gt;&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 
 &lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;¿Pensando en inscribirte en un Datathon o competición de datos? ¡En este post os traemos 10 consejos sobre los puntos clave para conseguir grandes resultados!&lt;/p&gt;
+&lt;div id=&#34;qué-es-un-datathon&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;¿Qué es un Datathon?&lt;/h1&gt;
+&lt;p&gt;Empecemos por el principio, ¿sabes que es exactamente un Datahon? Un Datathon es una competición donde varias personas o equipos compiten para conseguir el mejor resultado a un reto propuesto. Suele ser basada en manejos de datos y algoritmia, y se suele tratar de minimizar una métrica de error&lt;/p&gt;
+&lt;p&gt;¿Sabes cuál es la mayor plataforma para este tipo de competiciones de datos? Pues seguramente sea Kaggle.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;qúe-es-kaggle&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;¿Qúe es Kaggle?&lt;/h1&gt;
+&lt;p&gt;Kaggle es una plataforma en línea súper emocionante para entusiastas de la Ciencia de datos y el &lt;em&gt;machine learning&lt;/em&gt;. En Kaggle, puedes participar en competiciones en las que se proponen desafíos interesantes. Para ello deberás usar tus habilidades de manejo de datos y algoritmia, colaborar con otros expertos en el campo y compartir tus propios proyectos con la comunidad. También puedes encontrar conjuntos de datos públicos con los que comenzar a explorar y practicar tus habilidades de análisis de datos. ¡Es como un parque de diversiones del &lt;em&gt;Data Science&lt;/em&gt;!&lt;/p&gt;
+&lt;p&gt;¡Vayamos a los consejos!&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
-&lt;div id=&#34;establece-tu-objetivo-y-revisa-los-recursos-habilidades-tiempo-acceso-a-maquinas-con-los-que-cuentas.&#34; class=&#34;section level1&#34;&gt;
+&lt;/div&gt;
+&lt;div id=&#34;establece-tu-objetivo-y-revisa-los-recursos-habilidades-tiempo-acceso-a-máquinas-con-los-que-cuentas.&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;&lt;strong&gt;1. Establece tu objetivo y revisa los recursos (habilidades, tiempo, acceso a máquinas…) con los que cuentas.&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;Comenzamos por un punto esencial. Dependiendo de tu perfil y de la competición, deberás plantearte a priori qué pretendes conseguir participando en el reto. Puede ser aprender y mejorar en un determinado campo o tecnología, conseguir el premio, quedar entre los 3 primeros para incluirlo en tu CV o simplemente por diversión. Cualquiera que sea está bien.&lt;/p&gt;
 &lt;p&gt;Lo que recomendamos es evaluarlo de manera sincera, ya que será bastante el tiempo invertido y &lt;strong&gt;tener tu objetivo presente te ayudará en los momentos de menor motivación.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Por ejemplo, si tu objetivo no es ganar la competición (el caso de participar en tu primer Kaggle) seguramente prefieras no entrar en una espiral de ‘hiperoptimización’ de hiperparámetros para rascar mínimas mejoras en la métrica de error, sino que quizá prefieras estudiar y aplicar nuevas técnicas o algoritmos, aprender sobre desarrollo y estructuración de un proyecto de Data Science o integrar fuentes complementarias de datos.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;eleccion-del-tema-o-cduso.&#34; class=&#34;section level1&#34;&gt;
+&lt;div id=&#34;elección-del-tema-o-cduso.&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;&lt;strong&gt;2. Elección del tema o CdUso.&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;&lt;img src=&#34;choosing_simpson.gif&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Ligado con el anterior punto, dado que vamos a dedicar muchos esfuerzos en este proyecto, ¿cómo no elegir un tema, campo o caso de uso que nos motive? Afortunadamente, desde muchas organizaciones y plataformas se están lanzando diferentes e interesantes competiciones. Kaggle es uno de los máximos exponentes de estas plataformas, pero también existen otras, las cuales presentamos &lt;a href=&#34;../../vizs-and-tips/plataformas-donde-participar-competiciones-de-datos&#34;&gt;aquí&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;construye-tu-equipo-de-manera-consciente.-usa-herramientas-para-compartir-codigoarchivos.&#34; class=&#34;section level1&#34;&gt;
+&lt;div id=&#34;construye-tu-equipo-de-manera-consciente.-usa-herramientas-para-compartir-códigoarchivos.&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;&lt;strong&gt;3. Construye tu equipo de manera consciente. Usa herramientas para compartir código/archivos.&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;Dependiendo de los dos puntos anteriores, especialmente del primero, según tu objetivo deberás elegir a tu equipo de manera consecuente. Este es un tema que no se suele comentar, pero consideramos importante prestarle la debida atención.&lt;/p&gt;
 &lt;p&gt;Elige un compañero o amigo con el que te lleves realmente bien y os motivéis mutuamente si tu objetivo es aprender sobre un tema o tecnología nueva. Prioriza a alguien que comparta tus intereses en el caso que desees dedicarle tiempo a profundizar y masterizar un tema, tecnología o algoritmo muy concreto.&lt;/p&gt;
@@ -700,7 +919,7 @@ p {
 &lt;p&gt;&lt;strong&gt;Eligiendo tu equipo de manera consciente&lt;/strong&gt; lograrás minimizar tiranteces y conflictos de objetivos, maximizando el retorno del tiempo invertido.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;investigacion-previa-y-profunda-sobre-el-caso-de-uso-en-concreto.&#34; class=&#34;section level1&#34;&gt;
+&lt;div id=&#34;investigación-previa-y-profunda-sobre-el-caso-de-uso-en-concreto.&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;&lt;strong&gt;4. Investigación previa y profunda sobre el caso de uso en concreto.&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;&lt;img src=&#34;pez_tecleando.gif&#34; height=&#34;100px&#34; width=&#34;200px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Una vez formado el equipo, os recomendamos comenzar a &lt;strong&gt;investigar el negocio o el contexto en el que se enmarca vuestro proyecto.&lt;/strong&gt; Esto permitirá plantear mejor el trabajo, extraer un valor muy superior a los datos y os evitará iteraciones en el proceso diseñar-implementar-evaluar al partir de premisas más claras. De esta manera dejareis al lado una mala interpretación de conceptos básicos, lo cual puede ser letal.&lt;/p&gt;
@@ -708,7 +927,7 @@ p {
 &lt;p&gt;Sin esta serie de conocimientos será difícil &lt;strong&gt;&lt;em&gt;craftear&lt;/em&gt; variables para conseguir un buen &lt;em&gt;performance&lt;/em&gt; de los modelos&lt;/strong&gt;, o lo que es más importante, cualquier resultado que obtengáis es posible que sea malinterpretado. Por lo tanto, todo este &lt;em&gt;background&lt;/em&gt; no es imprescindible para llegar a algún resultado, pero sí lo será para llegar a resultados potentes y realizar una participación de la que acabes orgullosos.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;analisis-exploratorio-de-los-datos.-recuerda-que-normalmente-no-son-los-unicos-que-puedes-usar.&#34; class=&#34;section level1&#34;&gt;
+&lt;div id=&#34;análisis-exploratorio-de-los-datos.-recuerda-que-normalmente-no-son-los-únicos-que-puedes-usar.&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;&lt;strong&gt;5. Análisis exploratorio de los datos. Recuerda que (normalmente) no son los únicos que puedes usar.&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;Como todo proyecto de datos, consta de una serie de &lt;strong&gt;etapas iterativas&lt;/strong&gt;. Después de investigar sobre el contexto, echareis un primer vistazo a los datos. Si surgen dudas, de nuevo tendréis que investigar para resolverlas.&lt;/p&gt;
 &lt;p&gt;Al margen de este recordatorio, la fase exploratoria se centra en conocer cada una de las variables. Como consejo personal, entre otras cosas, nosotros comenzamos midiendo el porcentaje de NAs y la distribución y varianza de las variables. Aquellas que tengan un elevado porcentaje de NAs o una varianza muy pequeña, o bien las apartamos (podría replantearse su entrada en siguientes iteraciones) o bien las &lt;em&gt;encodeamos&lt;/em&gt; de manera dicotómica Si_NA/No_NA o Mayoritaria/No_mayoritaria. Para otro tipo de &lt;em&gt;encodings&lt;/em&gt; &lt;a href=&#34;https://www.kaggle.com/waydeherman/tutorial-categorical-encoding&#34;&gt;ver&lt;/a&gt;.&lt;/p&gt;
@@ -718,7 +937,7 @@ p {
 &lt;p&gt;Datos demográficos que ayuden a poner en contexto las variables geográficas como código postal o provincia, recoger eventos para aportar explicabilidad a &lt;em&gt;spikes&lt;/em&gt; o comportamientos pasados… son sólo algunos de los ejemplos de datos que se pueden incorporar al &lt;em&gt;dataset&lt;/em&gt; original del reto. Obviamente tendréis que tener en cuenta cuales de estos datos vais a tener y cuales no a la hora de predecir.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;establecer-la-estructura-del-proyecto-y-del-codigo.&#34; class=&#34;section level1&#34;&gt;
+&lt;div id=&#34;establecer-la-estructura-del-proyecto-y-del-código.&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;&lt;strong&gt;6. Establecer la estructura del proyecto y del código.&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;A continuación os mostramos la estructura que suelen tener nuestros proyectos. La &lt;strong&gt;estructuración de los directorios&lt;/strong&gt; dentro de un proyecto de Data Science dependerá de las características del entorno tanto de desarrollo como la posterior productivización, siguiendo principios generales como la modularización del código.
 Una estructura bastante generalizada sería la siguiente:&lt;/p&gt;
@@ -787,7 +1006,7 @@ Una estructura bastante generalizada sería la siguiente:&lt;/p&gt;
 &lt;p&gt;Comentar que la participación en el foro y &lt;strong&gt;kernels de Kaggle, hilos de Reddit y videos en Youtube&lt;/strong&gt; será un buen complemento a la lectura de &lt;em&gt;papers&lt;/em&gt;.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;validacion-cruzada-oos-y-backtesting.&#34; class=&#34;section level1&#34;&gt;
+&lt;div id=&#34;validación-cruzada-oos-y-backtesting.&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;&lt;strong&gt;8. Validación cruzada, OOS y backtesting.&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;Especial mención a las métricas de error. Uno de los puntos a los que de manera personal más importancia le damos, es el &lt;strong&gt;conocer con la mayor precisión posible los intervalos de error (confianza o predicción) de nuestros modelos antes de enviar sus predicciones.&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;Conocer las precisión de nuestro modelo bajo diferentes escenarios, partes del dataset e incluso datos sintéticos nos hace sentir un especial orgullo. Quizá sea simplemente un objetivo que nos marcamos(tal y como comentamos en el punto 1), pero el hecho de tener la certeza de cuando se baja la métrica de error no se debe a algo espúreo, o lo peor de todo a un &lt;em&gt;bug&lt;/em&gt; o &lt;em&gt;leakage&lt;/em&gt; de información, nos permite desarrollar con tranquilidad. Además en el caso de existir un ranking público y otro privado, controlar tu métrica de evaluación te permite saber con mayor certeza en que percentil te encuentras.&lt;/p&gt;
@@ -795,11 +1014,11 @@ Una estructura bastante generalizada sería la siguiente:&lt;/p&gt;
 &lt;p&gt;Casos especiales serán aquellos en los cuales nuestros datos tienen un &lt;strong&gt;fuerte componente temporal&lt;/strong&gt;, o directamente están estructurados en forma de serie temporal. Aquí en contramos discusiones específicas: variaciones de método de cross validation para evitar el &lt;em&gt;leakage&lt;/em&gt; de información entre sets, la validación walk forward o utilización de datos del futuro para entrenar, el estudio del &lt;em&gt;decay&lt;/em&gt; de la precisión, clustering de series temporales. Temas no triviales a los que dedicaremos otro post.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;interpretabilidad-de-modelos.-evaluacion-de-resultados-desde-el-punto-de-vista-practico-yo-negocio.&#34; class=&#34;section level1&#34;&gt;
+&lt;div id=&#34;interpretabilidad-de-modelos.-evaluación-de-resultados-desde-el-punto-de-vista-práctico-yo-negocio.&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;&lt;strong&gt;9. Interpretabilidad de modelos. Evaluación de resultados desde el punto de vista práctico y/o negocio.&lt;/strong&gt;&lt;/h1&gt;
-&lt;div class=&#34;figure&#34;&gt;
+&lt;div class=&#34;float&#34;&gt;
 &lt;img src=&#34;shap_vs_gain.png&#34; alt=&#34;interpretabilidad shap xgboost&#34; /&gt;
-&lt;p class=&#34;caption&#34;&gt;interpretabilidad shap xgboost&lt;/p&gt;
+&lt;div class=&#34;figcaption&#34;&gt;interpretabilidad shap xgboost&lt;/div&gt;
 &lt;/div&gt;
 &lt;p&gt;En el caso de que se trate de un Datathon organizado por alguna empresa de vuestra zona, seguramente los mejores proyectos serán llamados a un evento final en el que se expondrán vuestros trabajos. En otros, os pedirán una memoria presentando los resultados. Si bien es cierto, en el caso de Kaggle no suelen hacerlo.&lt;/p&gt;
 &lt;p&gt;Por lo tanto, si la competición a la que te/os presentáis requiere de este tipo de resultado, será importante tenerlo presente no sólo al final, sino durante todo el proceso. Además, una vez que se ha “re-optimizado” los hiperparámetros con la última librería bayesiana y &lt;em&gt;stackeado&lt;/em&gt; nuestros mejores modelos, quizá sea hora de trabajar en la interpretabilidad de los resultados e incorporación de nuevos datos. En definitiva, conclusiones que sean valiosas a la hora de poner en marcha el modelo y que no quede en una simple estructura de pesos optimizados o de reglas.&lt;/p&gt;
@@ -807,7 +1026,7 @@ Una estructura bastante generalizada sería la siguiente:&lt;/p&gt;
 &lt;p&gt;Por ejemplo, en nuestra última competición a la que asistimos se nos pedía esta presentación final a los tres mejores proyectos. Una vez que modelamos la información estructurada y llevamos a cabo ciertas iteraciones sobre estos datos, &lt;strong&gt;pensamos que sería más enriquecedor tanto para nosotros como para las personas que proponían el concurso, la investigación sobre la extracción de información de las imágenes&lt;/strong&gt; (información que en el caso de uso que nos ocupaba, a priori, iba a tener un impacto claro sobre la variable a predecir). Por lo tanto optamos por adentrarnos en el modelado de unas imágenes que se nos aportaban, haciendo uso del &lt;em&gt;transfer learning&lt;/em&gt;, cosa que no se nos pedía explícitamente. Llegamos a bastantes &lt;em&gt;insights&lt;/em&gt; interpretando los que las convoluciones de estos modelos preentrenados detectaban en nuestras imágenes, y lo que esmás importante, aprendimos mucho durante el proceso.&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
-&lt;div id=&#34;escribir-una-memoria-con-puntos-fuertes-y-puntos-a-mejorar-detectados-que-te-sirvan-de-partida-en-el-proximo-reto.&#34; class=&#34;section level1&#34;&gt;
+&lt;div id=&#34;escribir-una-memoria-con-puntos-fuertes-y-puntos-a-mejorar-detectados-que-te-sirvan-de-partida-en-el-próximo-reto.&#34; class=&#34;section level1&#34;&gt;
 &lt;h1&gt;&lt;strong&gt;10. Escribir una memoria con puntos fuertes y puntos a mejorar detectados, que te sirvan de partida en el próximo reto.&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;Una vez finalizado el proyecto, un práctica que nos ha enriquecido y ha supuesto un antes y un después ha sido escribir algún tipo de memoria o documento para nosotros mismos. En él reflexionamos sobre la reciente participación. Analizamos los puntos fuertes y lo que debemos mejorar, tanto a nivel técnico como a nivel de equipo y por qué no a nivel emocional y de actitud. A ser posible nada más entregar y antes de saber el resultado. Sería genial si al tiempo de conocer el mismo se añadiera algún punto o reflexión más.&lt;/p&gt;
 &lt;p&gt;Todas estas anotaciones os ayudarán, cada vez que os enfrentéis a un nuevo proyecto, a encararlo más preparados y no depender del ‘instinto’ ni de lo que la memoria selectiva os quiera recordar en momentos puntuales.&lt;/p&gt;
@@ -828,8 +1047,34 @@ p {
     text-indent: 0px !important;
 }
 &lt;/style&gt;
-&lt;script type=&#34;text/javascript&#34; src=&#34;//downloads.mailchimp.com/js/signup-forms/popup/unique-methods/embed.js&#34; data-dojo-config=&#34;usePlainJson: true, isDebug: false&#34;&gt;&lt;/script&gt;
-&lt;script type=&#34;text/javascript&#34;&gt;window.dojoRequire([&#34;mojo/signup-forms/Loader&#34;], function(L) { L.start({&#34;baseUrl&#34;:&#34;mc.us4.list-manage.com&#34;,&#34;uuid&#34;:&#34;91551f7ed29389a0de4f47665&#34;,&#34;lid&#34;:&#34;d95c503a48&#34;,&#34;uniqueMethods&#34;:true}) })&lt;/script&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
 &lt;/div&gt;
 </description>
     </item>

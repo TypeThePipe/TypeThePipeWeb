@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ggplot | TypeThePipe</title>
+    <link>/tags/ggplot/</link>
+      <atom:link href="/tags/ggplot/index.xml" rel="self" type="application/rss+xml" />
+    <description>ggplot</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 23 Feb 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-32.png</url>
+      <title>ggplot</title>
+      <link>/tags/ggplot/</link>
+    </image>
+    
+    <item>
+      <title>How to dynamically plot variables with ggplot using plotter functions</title>
+      <link>/post/dynamically-access-dataframe-variables-tidyeval-ggplot/</link>
+      <pubDate>Wed, 23 Feb 2022 00:00:00 +0000</pubDate>
+      <guid>/post/dynamically-access-dataframe-variables-tidyeval-ggplot/</guid>
+      <description>
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;the-tidy-data-scientist&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;The tidy Data Scientist&lt;/h1&gt;
+&lt;p&gt;As a data scientist, having the right tools in your toolbox is a must, and this is one of them.
+Tidyverse and dplyr verbs allow us to write clean code with the use of tidy evaluation.&lt;/p&gt;
+&lt;div id=&#34;tidy-evaluation&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Tidy evaluation?&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://dplyr.tidyverse.org/articles/programming.html&#34;&gt;Tidy evaluation&lt;/a&gt; is a programming paradigm in the R programming language that allows for a more intuitive and efficient way of working with data. The basic idea behind tidy evaluation is to treat variables as expressions rather than symbols. This means that when you write R code, you can easily use variables that reference columns in a dataframe as if they were actual variables in your environment. This can make your code cleaner, more concise and more readable.&lt;/p&gt;
+&lt;p&gt;Another huge benefit is that we can leverage on the incredible &lt;em&gt;dplyr&lt;/em&gt; package to create reusable functions, or helpers, that will make our life easier.
+One way to accomplish this is by using the curly curly operator (&lt;code&gt;{{}}&lt;/code&gt;) from the &lt;em&gt;rlang&lt;/em&gt; package.
+Let’s show a couple examples of this neat trick:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Create a function that takes as arguments a data frame and two column names and returns a filtered data frame&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;my_filter &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(df, var1, var2){&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  result &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; df &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;fu&#34;&gt;filter&lt;/span&gt;({{var1}} &lt;span class=&#34;sc&#34;&gt;&amp;gt;&lt;/span&gt; {{var2}})&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;return&lt;/span&gt;(result)&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It also works with the rest of dplyr verbs:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Create a function that calculate the grouped mean of a variable, passing both as argument&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;calculate_mean_by_group_var &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(df, group_var, target_var){&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  result &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; df &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;fu&#34;&gt;group_by&lt;/span&gt;({{group_var}}) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;fu&#34;&gt;summarise&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;mean =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;mean&lt;/span&gt;({{target_var}}))&lt;/span&gt;
+&lt;span id=&#34;cb2-6&#34;&gt;&lt;a href=&#34;#cb2-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;return&lt;/span&gt;(result)&lt;/span&gt;
+&lt;span id=&#34;cb2-7&#34;&gt;&lt;a href=&#34;#cb2-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It’s easy to see the wonders that can be achieved with this operator. By creating functions that wrap calls to dplyr functions while following tidy evaluation principles, we can create reusable code that is flexible, efficient, and easy to read.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;is-it-possible-to-use-tidy-evaluation-with-ggplot-say-yes&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Is it possible to use tidy evaluation with ggplot? Say yes!&lt;/h1&gt;
+&lt;p&gt;It just works!! If you are going to create several plots it’s super useful to create wrappers around some of them to avoid repetitive typing.&lt;/p&gt;
+&lt;p&gt;Let’s plot the closing stock price of TSLA to showcase its use:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Daily prices from TSLA stock:&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-2&#34;&gt;&lt;a href=&#34;#cb3-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;head&lt;/span&gt;(tsla)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 × 6
+##   date        open  high   low close    volume
+##   &amp;lt;date&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;
+## 1 2022-01-03  383.  400.  379.  400. 104686047
+## 2 2022-01-04  397.  403.  374.  383. 100248258
+## 3 2022-01-05  382.  390.  360.  363.  80119797
+## 4 2022-01-06  359   363.  340.  355.  90336474
+## 5 2022-01-07  360.  360.  337.  342.  84164748
+## 6 2022-01-10  333.  353.  327.  353.  91814877&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;my_plot &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(df, var){&lt;/span&gt;
+&lt;span id=&#34;cb5-2&#34;&gt;&lt;a href=&#34;#cb5-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  df &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-3&#34;&gt;&lt;a href=&#34;#cb5-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;fu&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;x=&lt;/span&gt;date)) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-4&#34;&gt;&lt;a href=&#34;#cb5-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;fu&#34;&gt;geom_line&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;y=&lt;/span&gt;{{var}})) &lt;/span&gt;
+&lt;span id=&#34;cb5-5&#34;&gt;&lt;a href=&#34;#cb5-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;}&lt;/span&gt;
+&lt;span id=&#34;cb5-6&#34;&gt;&lt;a href=&#34;#cb5-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-7&#34;&gt;&lt;a href=&#34;#cb5-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;my_plot&lt;/span&gt;(tsla, close)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/post/dynamically-access-dataframe-variables-tidyeval-ggplot/index_files/figure-html/unnamed-chunk-6-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Easy peasy! Probably you are good to go with that example 90% of the times.&lt;/p&gt;
+&lt;p&gt;However, another use cases do exist. The main one I can think of is having the column you want to plot stored in another variable. Applying the same solution doesn’t work here.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb6-1&#34;&gt;&lt;a href=&#34;#cb6-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;my_var &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;close&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-2&#34;&gt;&lt;a href=&#34;#cb6-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;my_plot&lt;/span&gt;(tsla, my_var)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/post/dynamically-access-dataframe-variables-tidyeval-ggplot/index_files/figure-html/unnamed-chunk-7-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;This doesn’t raise an error but it doesn’t produce the desired plot.&lt;/p&gt;
+&lt;p&gt;Some time ago, we would have solved this with &lt;code&gt;aes_string&lt;/code&gt; instead of &lt;code&gt;aes&lt;/code&gt; to map the variables, like this:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;my_deprecated_plot &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(df, var){&lt;/span&gt;
+&lt;span id=&#34;cb7-2&#34;&gt;&lt;a href=&#34;#cb7-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  df &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-3&#34;&gt;&lt;a href=&#34;#cb7-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;fu&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;x=&lt;/span&gt;date)) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-4&#34;&gt;&lt;a href=&#34;#cb7-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;fu&#34;&gt;geom_line&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;aes_string&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;y=&lt;/span&gt;my_var)) &lt;/span&gt;
+&lt;span id=&#34;cb7-5&#34;&gt;&lt;a href=&#34;#cb7-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;}&lt;/span&gt;
+&lt;span id=&#34;cb7-6&#34;&gt;&lt;a href=&#34;#cb7-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-7&#34;&gt;&lt;a href=&#34;#cb7-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;my_var &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;close&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-8&#34;&gt;&lt;a href=&#34;#cb7-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;my_deprecated_plot&lt;/span&gt;(tsla, my_var)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/post/dynamically-access-dataframe-variables-tidyeval-ggplot/index_files/figure-html/unnamed-chunk-8-1.png&#34; width=&#34;672&#34; /&gt;
+Whereas it does still work, &lt;code&gt;aes_string&lt;/code&gt; has been deprecated so use it at your own risk.&lt;/p&gt;
+&lt;p&gt;The way we are suppose to overcome this is by using the helper &lt;code&gt;.data&lt;/code&gt; inside the mapping call, which I must say it’s pretty neat:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/post/dynamically-access-dataframe-variables-tidyeval-ggplot/index_files/figure-html/unnamed-chunk-9-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;There is another corner case that maybe we can face: Having to pass the variable as a character itself, instead of having it in a variable. It’s a silly example as we could simply store it in a variable before calling the plotter but it’s good to know different possibilities.&lt;/p&gt;
+&lt;p&gt;For this case, again we could simply use the &lt;code&gt;.data&lt;/code&gt; helper shown in the previous example, but life would be boring if it was that easy.&lt;/p&gt;
+&lt;p&gt;Another (weird) way to solve this one is using more advanced and unusual dplyr functions like &lt;code&gt;ensym&lt;/code&gt; and the unquote operator from rlang, also known as the &lt;a href=&#34;https://adv-r.hadley.nz/quasiquotation.html&#34;&gt;curly-curly operator&lt;/a&gt; (!!):&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb8-1&#34;&gt;&lt;a href=&#34;#cb8-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;my_plot3 &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(df, var){&lt;/span&gt;
+&lt;span id=&#34;cb8-2&#34;&gt;&lt;a href=&#34;#cb8-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  df &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-3&#34;&gt;&lt;a href=&#34;#cb8-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;fu&#34;&gt;ggplot&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;x=&lt;/span&gt;date)) &lt;span class=&#34;sc&#34;&gt;+&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-4&#34;&gt;&lt;a href=&#34;#cb8-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;fu&#34;&gt;geom_line&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;aes&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;y=&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;!!&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;ensym&lt;/span&gt;(var)))&lt;/span&gt;
+&lt;span id=&#34;cb8-5&#34;&gt;&lt;a href=&#34;#cb8-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;}&lt;/span&gt;
+&lt;span id=&#34;cb8-6&#34;&gt;&lt;a href=&#34;#cb8-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;my_plot3&lt;/span&gt;(tsla, &lt;span class=&#34;st&#34;&gt;&amp;quot;close&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;/post/dynamically-access-dataframe-variables-tidyeval-ggplot/index_files/figure-html/unnamed-chunk-10-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Definitely the curly-curly operator is really handy when programming with R.
+I hope you learned something today!&lt;/p&gt;
+&lt;p&gt;Check out other tidyverse tricks:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;../../vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval&#34;&gt;Confidence intervals with ggplot&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../vizs-and-tips/tidylog-logging-pipelines-r&#34;&gt;Logging pipelines&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns-r-tidyverse&#34;&gt;Filtering dataframes on multiple conditions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;../../vizs-and-tips/conditional-pipes-R-tidyverse&#34;&gt;Conditional pipes&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

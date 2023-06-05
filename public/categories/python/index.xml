@@ -5,12 +5,1145 @@
     <link>/categories/python/</link>
       <atom:link href="/categories/python/index.xml" rel="self" type="application/rss+xml" />
     <description>Python</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 28 Mar 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-32.png</url>
       <title>Python</title>
       <link>/categories/python/</link>
     </image>
+    
+    <item>
+      <title>Pipe function in Python Polars. Don&#39;t leave the pipe flow!</title>
+      <link>/vizs-and-tips/python-polars-pipe-function-to-one-more-columns/</link>
+      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>/vizs-and-tips/python-polars-pipe-function-to-one-more-columns/</guid>
+      <description>
+&lt;script src=&#34;/vizs-and-tips/python-polars-pipe-function-to-one-more-columns/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;Well, well, hanging out in Python, missing the &lt;code&gt;pipe feeling&lt;/code&gt;?? There are some good news! The pipe function in the Polars Python module allows you to chain operations together by passing the result of one operation as the input to the next operation. For sure, this is not one of the greatest advantages that Polars offers over Pandas…. But it does feel so nice!&lt;/p&gt;
+&lt;p&gt;Here you can find and example of &lt;strong&gt;how to keep the pipe flow even in Python!&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; polars &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; pl&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; random &lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Create a Polars DataFrame with base columns&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;df &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; pl.DataFrame({&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;: [&lt;span class=&#34;st&#34;&gt;&amp;#39;Alice&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;Bob&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;Charlie&amp;#39;&lt;/span&gt;], &lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;#39;offensive_skill&amp;#39;&lt;/span&gt;: [&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;30&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;85&lt;/span&gt;], &lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;#39;defensive_skill&amp;#39;&lt;/span&gt;: [&lt;span class=&#34;dv&#34;&gt;92&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;30&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt;]&lt;/span&gt;
+&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    })&lt;/span&gt;
+&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Define polars custom functions to apply&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-12&#34;&gt;&lt;a href=&#34;#cb1-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; add_position_column(df):&lt;/span&gt;
+&lt;span id=&#34;cb1-13&#34;&gt;&lt;a href=&#34;#cb1-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    df &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; df.with_columns( &lt;/span&gt;
+&lt;span id=&#34;cb1-14&#34;&gt;&lt;a href=&#34;#cb1-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        pl.when(pl.col(&lt;span class=&#34;st&#34;&gt;&amp;#39;defensive_skill&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;50&lt;/span&gt;).then(&lt;span class=&#34;st&#34;&gt;&amp;#39;CB&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-15&#34;&gt;&lt;a href=&#34;#cb1-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        .when(pl.col(&lt;span class=&#34;st&#34;&gt;&amp;#39;offensive_skill&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;50&lt;/span&gt;).then(&lt;span class=&#34;st&#34;&gt;&amp;#39;FW&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-16&#34;&gt;&lt;a href=&#34;#cb1-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        .otherwise(&lt;span class=&#34;st&#34;&gt;&amp;#39;bench&amp;#39;&lt;/span&gt;).alias(&lt;span class=&#34;st&#34;&gt;&amp;quot;position&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-17&#34;&gt;&lt;a href=&#34;#cb1-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    )&lt;/span&gt;
+&lt;span id=&#34;cb1-18&#34;&gt;&lt;a href=&#34;#cb1-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; df&lt;/span&gt;
+&lt;span id=&#34;cb1-19&#34;&gt;&lt;a href=&#34;#cb1-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-20&#34;&gt;&lt;a href=&#34;#cb1-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; add_squad_number_column(df):&lt;/span&gt;
+&lt;span id=&#34;cb1-21&#34;&gt;&lt;a href=&#34;#cb1-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    df &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; df.with_columns( &lt;/span&gt;
+&lt;span id=&#34;cb1-22&#34;&gt;&lt;a href=&#34;#cb1-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        pl.when(pl.col(&lt;span class=&#34;st&#34;&gt;&amp;#39;position&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;CD&amp;#39;&lt;/span&gt;).then(pl.lit(random.sample(&lt;span class=&#34;bu&#34;&gt;range&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;6&lt;/span&gt;), &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;], dtype&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;pl.Int8))&lt;/span&gt;
+&lt;span id=&#34;cb1-23&#34;&gt;&lt;a href=&#34;#cb1-23&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        .when(pl.col(&lt;span class=&#34;st&#34;&gt;&amp;#39;position&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;FW&amp;#39;&lt;/span&gt;).then(pl.lit(random.sample(&lt;span class=&#34;bu&#34;&gt;range&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;7&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;19&lt;/span&gt;), &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;], dtype&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;pl.Int8))&lt;/span&gt;
+&lt;span id=&#34;cb1-24&#34;&gt;&lt;a href=&#34;#cb1-24&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        .otherwise(&lt;span class=&#34;st&#34;&gt;&amp;#39;-&amp;#39;&lt;/span&gt;).alias(&lt;span class=&#34;st&#34;&gt;&amp;quot;squad_number&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-25&#34;&gt;&lt;a href=&#34;#cb1-25&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    )&lt;/span&gt;
+&lt;span id=&#34;cb1-26&#34;&gt;&lt;a href=&#34;#cb1-26&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; df&lt;/span&gt;
+&lt;span id=&#34;cb1-27&#34;&gt;&lt;a href=&#34;#cb1-27&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-28&#34;&gt;&lt;a href=&#34;#cb1-28&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Chain operations together using the pipe function&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-29&#34;&gt;&lt;a href=&#34;#cb1-29&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-30&#34;&gt;&lt;a href=&#34;#cb1-30&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb1-31&#34;&gt;&lt;a href=&#34;#cb1-31&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    df&lt;/span&gt;
+&lt;span id=&#34;cb1-32&#34;&gt;&lt;a href=&#34;#cb1-32&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .pipe(add_position_column)&lt;/span&gt;
+&lt;span id=&#34;cb1-33&#34;&gt;&lt;a href=&#34;#cb1-33&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .pipe(add_squad_number_column)&lt;/span&gt;
+&lt;span id=&#34;cb1-34&#34;&gt;&lt;a href=&#34;#cb1-34&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div&gt;&lt;style&gt;
+.dataframe &gt; thead &gt; tr &gt; th,
+.dataframe &gt; tbody &gt; tr &gt; td {
+  text-align: right;
+}
+&lt;/style&gt;
+&lt;small&gt;shape: (3, 5)&lt;/small&gt;&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;offensive_skill&lt;/th&gt;&lt;th&gt;defensive_skill&lt;/th&gt;&lt;th&gt;position&lt;/th&gt;&lt;th&gt;squad_number&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;i64&lt;/td&gt;&lt;td&gt;i64&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Alice&amp;quot;&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;92&lt;/td&gt;&lt;td&gt;&amp;quot;CB&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;-&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Bob&amp;quot;&lt;/td&gt;&lt;td&gt;30&lt;/td&gt;&lt;td&gt;30&lt;/td&gt;&lt;td&gt;&amp;quot;bench&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;-&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Charlie&amp;quot;&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;td&gt;&amp;quot;FW&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;15&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;polars-pipe-and-lazy-evaluation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Polars pipe and lazy evaluation&lt;/h1&gt;
+&lt;p&gt;An extra trick is to use the &lt;a href=&#34;https://pola-rs.github.io/polars/py-polars/html/reference/dataframe/api/polars.DataFrame.pipe.html#:~:text=to%20the%20UDF.-,Notes,-It%20is%20recommended&#34;&gt;lazy evaluation&lt;/a&gt; in order to maximize the advantages of query optimization and parallelization. We need a big enough df and complex operations to make it worth.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;result &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; (&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    df.lazy()&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .pipe(add_position_column)&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .pipe(add_squad_number_column)&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .collect()&lt;/span&gt;
+&lt;span id=&#34;cb2-6&#34;&gt;&lt;a href=&#34;#cb2-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb2-7&#34;&gt;&lt;a href=&#34;#cb2-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-8&#34;&gt;&lt;a href=&#34;#cb2-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;result&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div&gt;&lt;style&gt;
+.dataframe &gt; thead &gt; tr &gt; th,
+.dataframe &gt; tbody &gt; tr &gt; td {
+  text-align: right;
+}
+&lt;/style&gt;
+&lt;small&gt;shape: (3, 5)&lt;/small&gt;&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;offensive_skill&lt;/th&gt;&lt;th&gt;defensive_skill&lt;/th&gt;&lt;th&gt;position&lt;/th&gt;&lt;th&gt;squad_number&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;i64&lt;/td&gt;&lt;td&gt;i64&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Alice&amp;quot;&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;92&lt;/td&gt;&lt;td&gt;&amp;quot;CB&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;-&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Bob&amp;quot;&lt;/td&gt;&lt;td&gt;30&lt;/td&gt;&lt;td&gt;30&lt;/td&gt;&lt;td&gt;&amp;quot;bench&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;-&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Charlie&amp;quot;&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;td&gt;&amp;quot;FW&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;12&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python content!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Use GPT and Whisper to Build Your Own Voice Assistant</title>
+      <link>/post/gpt-whisper-build-your-own-voice-assistant/</link>
+      <pubDate>Thu, 23 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>/post/gpt-whisper-build-your-own-voice-assistant/</guid>
+      <description>
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; style=&#34;width:800px; height:700px&#34; alt=&#34;Man talking to a machine. Build a chat bot with GPT&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;introduction&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;What a time to be alive, huh? The rise of AI is happening at a faster pace than ever and virtual assistants are quickly becoming a ubiquitous part of our digital lives. Remember Siri and Alexa? They were the jewel in the crown not that long ago and now they are biting the dust against the power of GPT models.&lt;/p&gt;
+&lt;p&gt;In this blog post, we’ll show you how to build a virtual assistant using GPT and Whisper APIs. These powerful tools allow you to record user voice, transcribe or translate on-the-fly if necessary, and generate a response using OpenAI’s advanced natural language processing capabilities. We’ll take you through the steps of building the bot in two different flavors - an interactive console-based app and a browser-based version powered by Streamlit.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;setting-up-the-environment&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Setting up the environment&lt;/h1&gt;
+&lt;p&gt;Before you can start, you need to make sure you have the right tools and environment set up. I recommend to set up a virtual environment with &lt;code&gt;pipenv&lt;/code&gt; so all dependencies are managed automatically from the Pipefile included in the &lt;a href=&#34;https://github.com/PabloCanovas/chatgpt-whisper-streamlit-voice-assistant&#34;&gt;Github repository&lt;/a&gt;. Below are the steps you can follow to set up your environment:&lt;/p&gt;
+&lt;div id=&#34;install-dependencies&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Install dependencies&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Start by cloning the repository with &lt;code&gt;git clone https://github.com/PabloCanovas/chatgpt-whisper-streamlit-voice-assistant gpt_voice_assistant&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;If you don’t have &lt;code&gt;pipenv&lt;/code&gt; installed to manage dependencies, then go ahead: &lt;code&gt;pip install pipenv --user&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Install the required libraries. You can install them just by going to the cloned directory: &lt;code&gt;cd gpt_voice_assistant&lt;/code&gt; and by running: &lt;code&gt;pipenv install&lt;/code&gt; which will install dependencies based on &lt;code&gt;Pipfile.lock&lt;/code&gt; file.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;set-up-your-openai-api-key&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Set up your OpenAI API key&lt;/h3&gt;
+&lt;p&gt;Manually manage the OpenAI api key is necessary. You will need to create a new file called &lt;code&gt;myapikeys.py&lt;/code&gt; with this line inside: &lt;code&gt;OPENAI_KEY = &#34;my-apikey-goes-here&#34;&lt;/code&gt;, and obviously use your key for that.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;define-your-helper-functions&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Define your helper functions&lt;/h3&gt;
+&lt;p&gt;You’ll need to define several helper functions that will be used throughout your program, including functions for recording, playing, and transcribing audio among others. Now, we are going to overview them all before showing the main program.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;recording-user-voice&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Recording user voice&lt;/h1&gt;
+&lt;p&gt;The first step in building your virtual assistant is to record the user’s voice. You can do this using the &lt;code&gt;record_audio_manual&lt;/code&gt; function:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; record_audio_manual(filename, sr&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;44100&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;bu&#34;&gt;input&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;  ** Press enter to start recording **&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    audio &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; sd.rec(&lt;span class=&#34;bu&#34;&gt;int&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt; sr), samplerate&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;sr, channels&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;bu&#34;&gt;input&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;  ** Press enter to stop recording **&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    sd.stop()&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    write(filename, sr, audio)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When you call the function, it will prompt the user to press enter to start and stop recording. Once the user stops recording, the audio is saved to the specified file using the &lt;code&gt;write&lt;/code&gt; function from &lt;code&gt;scipy&lt;/code&gt;. It records audio for a fixed maximum duration of 10 seconds by default. Change as needed.&lt;/p&gt;
+&lt;p&gt;Once you have the user’s voice recorded, you can move on to transcribing it using the Whisper API.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;transcribing-user-voice&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Transcribing user voice&lt;/h1&gt;
+&lt;p&gt;The next step is to transcribe the user’s voice into text. You can do this using the &lt;code&gt;transcribe_audio&lt;/code&gt; function provided, which uses the Whisper API to transcribe the audio. It’s surprisingly easy:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; transcribe_audio(filename):&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    audio_file &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;open&lt;/span&gt;(filename, &lt;span class=&#34;st&#34;&gt;&amp;quot;rb&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    transcript &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; openai.Audio.transcribe(&lt;span class=&#34;st&#34;&gt;&amp;quot;whisper-1&amp;quot;&lt;/span&gt;, audio_file)&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    audio_file.close()&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; transcript&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;When you call the function, it reads the audio file into memory, calls the &lt;code&gt;openai.Audio.transcribe&lt;/code&gt; function to transcribe the audio using the Whisper API, and returns the resulting transcript.&lt;/p&gt;
+&lt;p&gt;Also, if you wish to speak to your assistant in a language other than English, you can easily do so by calling the &lt;code&gt;translate_audio&lt;/code&gt; function instead.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; translate_audio(filename):&lt;/span&gt;
+&lt;span id=&#34;cb3-2&#34;&gt;&lt;a href=&#34;#cb3-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    audio_file &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;open&lt;/span&gt;(filename, &lt;span class=&#34;st&#34;&gt;&amp;quot;rb&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb3-3&#34;&gt;&lt;a href=&#34;#cb3-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    translation &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; openai.Audio.translate(&lt;span class=&#34;st&#34;&gt;&amp;quot;whisper-1&amp;quot;&lt;/span&gt;, audio_file)&lt;/span&gt;
+&lt;span id=&#34;cb3-4&#34;&gt;&lt;a href=&#34;#cb3-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    audio_file.close()&lt;/span&gt;
+&lt;span id=&#34;cb3-5&#34;&gt;&lt;a href=&#34;#cb3-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; translation&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Once you have the user’s voice transcribed let’s send it to GPT.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;generating-a-response-with-gpt&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Generating a response with GPT&lt;/h1&gt;
+&lt;p&gt;The next step in building this cool assistant is to generate a response to the user’s input using GPT. You can do this using the OpenAI GPT API, which, as everybody already know, allows you to generate human-like text based on a given prompt. It really couldn’t be much easier. Here’s how:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb4-1&#34;&gt;&lt;a href=&#34;#cb4-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;bot &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; openai.ChatCompletion.create(model&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;gpt-3.5-turbo&amp;quot;&lt;/span&gt;, messages&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;messages)&lt;/span&gt;
+&lt;span id=&#34;cb4-2&#34;&gt;&lt;a href=&#34;#cb4-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;response &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; bot.choices[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;].text&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The &lt;code&gt;openai.ChatCompletion.create&lt;/code&gt; function takes two arguments: the name of the GPT model to use (in this case, “gpt-3.5-turbo”), and a list of messages exchanged between the user and the virtual assistant so far. This is important because GPT retains all the conversation context to answer the questions, being this a key aspect of why it works so well. When you call the function, it generates a response to the most recent message from the user, which you can access using the &lt;code&gt;bot.choices[0].text&lt;/code&gt; attribute.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;playing-the-response-out-loud&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Playing the response out loud&lt;/h1&gt;
+&lt;p&gt;Once you have the response generated by GPT, you can play it out loud on the speakers using the &lt;code&gt;say&lt;/code&gt; function provided in the code. Here’s what it looks like:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; say(text):&lt;/span&gt;
+&lt;span id=&#34;cb5-2&#34;&gt;&lt;a href=&#34;#cb5-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    p &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; multiprocessing.Process(target&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;pyttsx3.speak, args&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;(text,))&lt;/span&gt;
+&lt;span id=&#34;cb5-3&#34;&gt;&lt;a href=&#34;#cb5-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    p.start()&lt;/span&gt;
+&lt;span id=&#34;cb5-4&#34;&gt;&lt;a href=&#34;#cb5-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;while&lt;/span&gt; p.is_alive():&lt;/span&gt;
+&lt;span id=&#34;cb5-5&#34;&gt;&lt;a href=&#34;#cb5-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; keyboard.is_pressed(&lt;span class=&#34;st&#34;&gt;&amp;#39;enter&amp;#39;&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb5-6&#34;&gt;&lt;a href=&#34;#cb5-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            p.terminate()&lt;/span&gt;
+&lt;span id=&#34;cb5-7&#34;&gt;&lt;a href=&#34;#cb5-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;else&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb5-8&#34;&gt;&lt;a href=&#34;#cb5-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            &lt;span class=&#34;cf&#34;&gt;continue&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-9&#34;&gt;&lt;a href=&#34;#cb5-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    p.join()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;This function uses the &lt;code&gt;pyttsx3&lt;/code&gt; library I talked about in &lt;a href=&#34;../post/python-text-to-speech-practical-guide&#34;&gt;this other article&lt;/a&gt; to generate a speech audio file from the text, and plays it out loud on the speakers using &lt;code&gt;multiprocessing&lt;/code&gt;. The function also listens for the “enter” key, and terminates the speech if it is pressed.&lt;/p&gt;
+&lt;div id=&#34;the-importance-of-using-multiprocessing-for-efficient-audio-playback&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;The importance of using multiprocessing for efficient audio playback&lt;/h2&gt;
+&lt;p&gt;If GPT’s response is particularly long, you might want a way to stop the playback mid-way through. This is where the multithreading capabilities of Python come in.&lt;/p&gt;
+&lt;p&gt;In Python, &lt;code&gt;multiprocessing&lt;/code&gt; allows you to run multiple threads simultaneously, making it possible to perform several actions at the same time. In the &lt;code&gt;say&lt;/code&gt; function, we use it to play the speech audio file and listen for user input at the same time.&lt;/p&gt;
+&lt;p&gt;By working this way, we can ensure that the speech doesn’t block the main thread of the program. This means that even if the speech is too verbose or the user is no longer interested in the answer, he can still interact with the program and interrupt it if needed.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;building-a-console-based-program&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Building a console-based program&lt;/h1&gt;
+&lt;p&gt;Before going for a browser-based app, you may want to start by building an interactive console-based program that you can run on your local machine. This will allow you to quickly test and iterate on your virtual assistant without the need for a web server or browser.&lt;/p&gt;
+&lt;p&gt;Using the building blocks described above, here’s how my assistant looks like:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb6-1&#34;&gt;&lt;a href=&#34;#cb6-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; openai&lt;/span&gt;
+&lt;span id=&#34;cb6-2&#34;&gt;&lt;a href=&#34;#cb6-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; myapikeys&lt;/span&gt;
+&lt;span id=&#34;cb6-3&#34;&gt;&lt;a href=&#34;#cb6-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; text_speech_utils &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-4&#34;&gt;&lt;a href=&#34;#cb6-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-5&#34;&gt;&lt;a href=&#34;#cb6-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;openai.api_key &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; myapikeys.OPENAI_KEY&lt;/span&gt;
+&lt;span id=&#34;cb6-6&#34;&gt;&lt;a href=&#34;#cb6-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;input_audio_filename &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;input.wav&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-7&#34;&gt;&lt;a href=&#34;#cb6-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-8&#34;&gt;&lt;a href=&#34;#cb6-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;messages &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; [{&lt;span class=&#34;st&#34;&gt;&amp;quot;role&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;system&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;content&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;You are a helpful assistant.&amp;quot;&lt;/span&gt;}]&lt;/span&gt;
+&lt;span id=&#34;cb6-9&#34;&gt;&lt;a href=&#34;#cb6-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-10&#34;&gt;&lt;a href=&#34;#cb6-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; main():&lt;/span&gt;
+&lt;span id=&#34;cb6-11&#34;&gt;&lt;a href=&#34;#cb6-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb6-12&#34;&gt;&lt;a href=&#34;#cb6-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        record_audio_manual(input_audio_filename)&lt;/span&gt;
+&lt;span id=&#34;cb6-13&#34;&gt;&lt;a href=&#34;#cb6-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        transcription &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; transcribe_audio(input_audio_filename)             &lt;span class=&#34;co&#34;&gt;# if we want to speak in another language we would use &amp;#39;translate_audio&amp;#39; function&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-14&#34;&gt;&lt;a href=&#34;#cb6-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-15&#34;&gt;&lt;a href=&#34;#cb6-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        messages.append({&lt;span class=&#34;st&#34;&gt;&amp;quot;role&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;user&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;content&amp;quot;&lt;/span&gt;: transcription[&lt;span class=&#34;st&#34;&gt;&amp;#39;text&amp;#39;&lt;/span&gt;]})&lt;/span&gt;
+&lt;span id=&#34;cb6-16&#34;&gt;&lt;a href=&#34;#cb6-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;ss&#34;&gt;f&amp;quot;&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;- Me: &lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;transcription[&lt;span class=&#34;st&#34;&gt;&amp;#39;text&amp;#39;&lt;/span&gt;]&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb6-17&#34;&gt;&lt;a href=&#34;#cb6-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-18&#34;&gt;&lt;a href=&#34;#cb6-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        bot &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; openai.ChatCompletion.create(model&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;gpt-3.5-turbo&amp;quot;&lt;/span&gt;, messages&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;messages)&lt;/span&gt;
+&lt;span id=&#34;cb6-19&#34;&gt;&lt;a href=&#34;#cb6-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;/span&gt;
+&lt;span id=&#34;cb6-20&#34;&gt;&lt;a href=&#34;#cb6-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        response &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; bot.choices[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;].message.content&lt;/span&gt;
+&lt;span id=&#34;cb6-21&#34;&gt;&lt;a href=&#34;#cb6-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;ss&#34;&gt;f&amp;quot;- ChatGPT: &lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;response&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb6-22&#34;&gt;&lt;a href=&#34;#cb6-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;***   Press enter to interrupt assistant and ask a new question   ***&lt;/span&gt;&lt;span class=&#34;ch&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb6-23&#34;&gt;&lt;a href=&#34;#cb6-23&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        say(response)&lt;/span&gt;
+&lt;span id=&#34;cb6-24&#34;&gt;&lt;a href=&#34;#cb6-24&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-25&#34;&gt;&lt;a href=&#34;#cb6-25&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-26&#34;&gt;&lt;a href=&#34;#cb6-26&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;__name__&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;__main__&amp;#39;&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb6-27&#34;&gt;&lt;a href=&#34;#cb6-27&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    main()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In this example, we define the main loop of our program using a while loop that listens for user input. Inside the loop, we simply record, transcribe (or translate), send the text to openAI and playback the response.&lt;/p&gt;
+&lt;p&gt;And there you have it! In barely 50 lines of code we have built a fully functional voice assistant which can be used to learn about new topics, inspire yourself with new cooking recipes or plan detailed workouts that fit your own objectives.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;building-a-browser-based-app-with-streamlit&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Building a browser-based app with Streamlit&lt;/h1&gt;
+&lt;p&gt;In addition to the console-based program, you can also create an small web app with Streamlit. Streamlit is a Python library that allows you to build interactive web apps with just a few lines of code.&lt;/p&gt;
+&lt;p&gt;Here’s a snapshot of what my small app looks like:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;streamlit_app.PNG&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;And this is the code that generates it:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; streamlit &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; st&lt;/span&gt;
+&lt;span id=&#34;cb7-2&#34;&gt;&lt;a href=&#34;#cb7-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; pandas &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; pd&lt;/span&gt;
+&lt;span id=&#34;cb7-3&#34;&gt;&lt;a href=&#34;#cb7-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; openai&lt;/span&gt;
+&lt;span id=&#34;cb7-4&#34;&gt;&lt;a href=&#34;#cb7-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; myapikeys&lt;/span&gt;
+&lt;span id=&#34;cb7-5&#34;&gt;&lt;a href=&#34;#cb7-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; text_speech_utils &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-6&#34;&gt;&lt;a href=&#34;#cb7-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-7&#34;&gt;&lt;a href=&#34;#cb7-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;openai.api_key &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; myapikeys.OPENAI_KEY&lt;/span&gt;
+&lt;span id=&#34;cb7-8&#34;&gt;&lt;a href=&#34;#cb7-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;input_audio_filename &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;input.wav&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-9&#34;&gt;&lt;a href=&#34;#cb7-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;output_audio_filename &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;chatgpt_response.wav&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-10&#34;&gt;&lt;a href=&#34;#cb7-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;output_conversation_filename &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;ChatGPT_conversation.txt&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-11&#34;&gt;&lt;a href=&#34;#cb7-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-12&#34;&gt;&lt;a href=&#34;#cb7-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Initialize app&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-13&#34;&gt;&lt;a href=&#34;#cb7-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;messages&amp;#39;&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; st.session_state:&lt;/span&gt;
+&lt;span id=&#34;cb7-14&#34;&gt;&lt;a href=&#34;#cb7-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    st.session_state[&lt;span class=&#34;st&#34;&gt;&amp;#39;messages&amp;#39;&lt;/span&gt;] &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; [{&lt;span class=&#34;st&#34;&gt;&amp;quot;role&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;system&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;content&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;You are a helpful assistant.&amp;quot;&lt;/span&gt;}]&lt;/span&gt;
+&lt;span id=&#34;cb7-15&#34;&gt;&lt;a href=&#34;#cb7-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-16&#34;&gt;&lt;a href=&#34;#cb7-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;st.title(&lt;span class=&#34;st&#34;&gt;&amp;quot;My awesome personal assistant&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb7-17&#34;&gt;&lt;a href=&#34;#cb7-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;sec &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; st.slider(&lt;span class=&#34;st&#34;&gt;&amp;quot;Select number of seconds of recording&amp;quot;&lt;/span&gt;, min_value&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;, max_value&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;8&lt;/span&gt;, value&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb7-18&#34;&gt;&lt;a href=&#34;#cb7-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-19&#34;&gt;&lt;a href=&#34;#cb7-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Record audio + transcribe with Whisper + get GPT3 response&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-20&#34;&gt;&lt;a href=&#34;#cb7-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; st.button(&lt;span class=&#34;st&#34;&gt;&amp;#39;Record audio&amp;#39;&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb7-21&#34;&gt;&lt;a href=&#34;#cb7-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    st.write(&lt;span class=&#34;st&#34;&gt;&amp;quot;Recording...&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb7-22&#34;&gt;&lt;a href=&#34;#cb7-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    record_audio(input_audio_filename, sec)&lt;/span&gt;
+&lt;span id=&#34;cb7-23&#34;&gt;&lt;a href=&#34;#cb7-23&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-24&#34;&gt;&lt;a href=&#34;#cb7-24&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    transcription &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; transcribe_audio(input_audio_filename)&lt;/span&gt;
+&lt;span id=&#34;cb7-25&#34;&gt;&lt;a href=&#34;#cb7-25&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    st.write(&lt;span class=&#34;ss&#34;&gt;f&amp;quot;Me: &lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;transcription[&lt;span class=&#34;st&#34;&gt;&amp;#39;text&amp;#39;&lt;/span&gt;]&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb7-26&#34;&gt;&lt;a href=&#34;#cb7-26&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    st.session_state[&lt;span class=&#34;st&#34;&gt;&amp;#39;messages&amp;#39;&lt;/span&gt;].append({&lt;span class=&#34;st&#34;&gt;&amp;quot;role&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;user&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;content&amp;quot;&lt;/span&gt;: transcription[&lt;span class=&#34;st&#34;&gt;&amp;#39;text&amp;#39;&lt;/span&gt;]})&lt;/span&gt;
+&lt;span id=&#34;cb7-27&#34;&gt;&lt;a href=&#34;#cb7-27&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-28&#34;&gt;&lt;a href=&#34;#cb7-28&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    bot &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; openai.ChatCompletion.create(model&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;gpt-3.5-turbo&amp;quot;&lt;/span&gt;, messages&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;st.session_state[&lt;span class=&#34;st&#34;&gt;&amp;#39;messages&amp;#39;&lt;/span&gt;])&lt;/span&gt;
+&lt;span id=&#34;cb7-29&#34;&gt;&lt;a href=&#34;#cb7-29&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    response &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; bot.choices[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;].message.content&lt;/span&gt;
+&lt;span id=&#34;cb7-30&#34;&gt;&lt;a href=&#34;#cb7-30&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    st.write(&lt;span class=&#34;ss&#34;&gt;f&amp;quot;GPT: &lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;response&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb7-31&#34;&gt;&lt;a href=&#34;#cb7-31&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-32&#34;&gt;&lt;a href=&#34;#cb7-32&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    save_text_as_audio(response, output_audio_filename)&lt;/span&gt;
+&lt;span id=&#34;cb7-33&#34;&gt;&lt;a href=&#34;#cb7-33&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    play_audio(output_audio_filename)&lt;/span&gt;
+&lt;span id=&#34;cb7-34&#34;&gt;&lt;a href=&#34;#cb7-34&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-35&#34;&gt;&lt;a href=&#34;#cb7-35&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    st.session_state[&lt;span class=&#34;st&#34;&gt;&amp;#39;messages&amp;#39;&lt;/span&gt;].append({&lt;span class=&#34;st&#34;&gt;&amp;quot;role&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;assistant&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;content&amp;quot;&lt;/span&gt;: response})&lt;/span&gt;
+&lt;span id=&#34;cb7-36&#34;&gt;&lt;a href=&#34;#cb7-36&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-37&#34;&gt;&lt;a href=&#34;#cb7-37&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-38&#34;&gt;&lt;a href=&#34;#cb7-38&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;st.download_button(label&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Download conversation&amp;quot;&lt;/span&gt;, &lt;/span&gt;
+&lt;span id=&#34;cb7-39&#34;&gt;&lt;a href=&#34;#cb7-39&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                   data &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; pd.DataFrame(st.session_state[&lt;span class=&#34;st&#34;&gt;&amp;#39;messages&amp;#39;&lt;/span&gt;]).to_csv(index&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;False&lt;/span&gt;).encode(&lt;span class=&#34;st&#34;&gt;&amp;#39;utf-8&amp;#39;&lt;/span&gt;), &lt;/span&gt;
+&lt;span id=&#34;cb7-40&#34;&gt;&lt;a href=&#34;#cb7-40&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                   file_name&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;output_conversation_filename)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Where I added a slider to define the numbers of seconds you want to record, and the possibility of downloading the full conversation at the end.
+Also, I’ve used a couple of different functions than in the example above: &lt;code&gt;save_text_as_audio&lt;/code&gt; and &lt;code&gt;play_audio&lt;/code&gt;. The reason is simply because I couldn’t make the &lt;code&gt;say&lt;/code&gt; function work on the Streamlit app, probably because of something related to the multiprocessing thing.&lt;/p&gt;
+&lt;p&gt;You can find all the code &lt;a href=&#34;https://github.com/PabloCanovas/chatgpt-whisper-streamlit-voice-assistant&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;conclusion&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Conclusion&lt;/h1&gt;
+&lt;p&gt;In this blog post, I’ve shown you how to build a virtual assistant using OpenAI GPT and Whisper APIs. I have taken you through the steps of building an interactive console-based program and a browser-based app using Streamlit.&lt;/p&gt;
+&lt;p&gt;A possible next step could be deploying the app to the web, maybe on Heroku, AWS or GCP. In case you are going for it, keep me in the loop! I’d be happy to know this could be useful to anyone.&lt;/p&gt;
+&lt;p&gt;Happy building!&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python content!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Making Your Python Programs Speak: A Practical Guide to Text-to-Speech</title>
+      <link>/post/python-text-to-speech-practical-guide/</link>
+      <pubDate>Sat, 18 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>/post/python-text-to-speech-practical-guide/</guid>
+      <description>
+&lt;script src=&#34;/post/python-text-to-speech-practical-guide/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;300px&#34; width=&#34;400px&#34; alt=&#34;Two robots talking as an image for a quick Guide to Text-to-Speech with Python&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;text-to-speech-python-libraries&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;&lt;strong&gt;Text-to-speech Python libraries&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;With the rise of the new AI models like GPT-4, being able to communicate with machines in a natural and intuitive way is becoming more and more important. Text-to-speech is a powerful technology that can help bridge the gap between humans and machines by enabling machines to speak and understand human language.
+In this blog post, we’ll explore some of the possibilities and libraries available for text-to-speech.&lt;/p&gt;
+&lt;p&gt;In Python, there are several modules available to easily convert text into speech. Today we are going to explore two of the most popular ones: &lt;code&gt;pyttsx3&lt;/code&gt; and &lt;code&gt;gTTS&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pyttsx3&lt;/code&gt; is a comprehensive library that provides support for multiple languages and custom voices, while &lt;code&gt;gTTS&lt;/code&gt; is a simpler and easy to use option that uses Google Translate’s services to generate online speech.&lt;/p&gt;
+&lt;div id=&#34;tldr---i-simply-want-to-play-out-loud-some-text&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;&lt;strong&gt;TL;DR&lt;/strong&gt; - I simply want to play out loud some text&lt;/h3&gt;
+&lt;p&gt;The simplest way I could came up with was using the &lt;code&gt;pyttsx3&lt;/code&gt; library.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; pyttsx3&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;pyttsx3.speak(&lt;span class=&#34;st&#34;&gt;&amp;quot;Oh wow! It&amp;#39;s amazing I got this to work in just one line of code&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Initializing the engine and use the commands &lt;code&gt;say&lt;/code&gt; and &lt;code&gt;runAndWait&lt;/code&gt; would be the standard way to work with the API.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;engine &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; pyttsx3.init()&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;engine.say(&lt;span class=&#34;st&#34;&gt;&amp;quot;Oh wow! I can&amp;#39;t believe I did this in less than 5 minutes&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;engine.runAndWait()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Once we have the engine, we can tune some parameters.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;i-dont-like-the-voice-how-can-i-change-it&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;I don’t like the voice, how can I change it?&lt;/h3&gt;
+&lt;p&gt;We can go through all the voices installed in our system with the following:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;engine &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; pyttsx3.init()&lt;/span&gt;
+&lt;span id=&#34;cb3-2&#34;&gt;&lt;a href=&#34;#cb3-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;voices &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; engine.getProperty(&lt;span class=&#34;st&#34;&gt;&amp;#39;voices&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb3-3&#34;&gt;&lt;a href=&#34;#cb3-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;for&lt;/span&gt; voice &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; voices:&lt;/span&gt;
+&lt;span id=&#34;cb3-4&#34;&gt;&lt;a href=&#34;#cb3-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;   engine.setProperty(&lt;span class=&#34;st&#34;&gt;&amp;#39;voice&amp;#39;&lt;/span&gt;, voice.&lt;span class=&#34;bu&#34;&gt;id&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb3-5&#34;&gt;&lt;a href=&#34;#cb3-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;   engine.say(&lt;span class=&#34;st&#34;&gt;&amp;#39;This is a test to know how each voice sounds like&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb3-6&#34;&gt;&lt;a href=&#34;#cb3-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-7&#34;&gt;&lt;a href=&#34;#cb3-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;engine.runAndWait()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;And then we can set the desired voice like this:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb4-1&#34;&gt;&lt;a href=&#34;#cb4-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;voices &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; engine.getProperty(&lt;span class=&#34;st&#34;&gt;&amp;#39;voices&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb4-2&#34;&gt;&lt;a href=&#34;#cb4-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;engine.setProperty(&lt;span class=&#34;st&#34;&gt;&amp;#39;voice&amp;#39;&lt;/span&gt;, voices[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;].&lt;span class=&#34;bu&#34;&gt;id&lt;/span&gt;)      &lt;span class=&#34;co&#34;&gt;# Change index to change voice. 0 for male and 1 for female&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-3&#34;&gt;&lt;a href=&#34;#cb4-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;engine.say(&lt;span class=&#34;st&#34;&gt;&amp;quot;Oh wow! I can&amp;#39;t believe changing the voice was that easy&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb4-4&#34;&gt;&lt;a href=&#34;#cb4-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;engine.runAndWait()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;how-to-save-the-speech-as-an-audio-file&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;How to save the speech as an audio file?&lt;/h3&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;engine &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; pyttsx3.init()&lt;/span&gt;
+&lt;span id=&#34;cb5-2&#34;&gt;&lt;a href=&#34;#cb5-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-3&#34;&gt;&lt;a href=&#34;#cb5-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;filename &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;audio_file.wav&amp;quot;&lt;/span&gt;                &lt;span class=&#34;co&#34;&gt;# It handles both .mp3 and .wav                          &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-4&#34;&gt;&lt;a href=&#34;#cb5-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;engine.save_to_file(&lt;span class=&#34;st&#34;&gt;&amp;#39;I am saving this text as a wav file&amp;#39;&lt;/span&gt;, filename)&lt;/span&gt;
+&lt;span id=&#34;cb5-5&#34;&gt;&lt;a href=&#34;#cb5-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;engine.runAndWait()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;tuning-parameters&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Tuning parameters&lt;/h3&gt;
+&lt;p&gt;We can easily change parameters such as &lt;em&gt;rate&lt;/em&gt;, &lt;em&gt;volume&lt;/em&gt; or &lt;em&gt;voice&lt;/em&gt; like this:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb6-1&#34;&gt;&lt;a href=&#34;#cb6-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;rate &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; engine.getProperty(&lt;span class=&#34;st&#34;&gt;&amp;#39;rate&amp;#39;&lt;/span&gt;)                 &lt;span class=&#34;co&#34;&gt;# get current rate&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-2&#34;&gt;&lt;a href=&#34;#cb6-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(rate)                      &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## 200&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb8-1&#34;&gt;&lt;a href=&#34;#cb8-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;engine.setProperty(&lt;span class=&#34;st&#34;&gt;&amp;#39;rate&amp;#39;&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;250&lt;/span&gt;)                   &lt;span class=&#34;co&#34;&gt;# set a new rate&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;how-can-i-stop-the-audio-playback&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;How can I stop the audio playback?&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;When working with text-to-speech in Python, one potential issue you may encounter is the main program becoming stuck or unresponsive while the audio is being played. This can be a frustrating and limiting problem, especially if you’re working on a real-time application where responsiveness is crucial such as an AI voice assistant bot.&lt;/p&gt;
+&lt;p&gt;This is because the code that generates and plays the audio is typically executed in a sequential manner, meaning that the program has to wait for the audio to finish before moving on to the next task.&lt;/p&gt;
+&lt;p&gt;To overcome this problem, one solution is to use multiprocessing, which involves creating multiple processes to execute different parts of the program in parallel. That way, the audio generation and playback are handled by a separate process, allowing the main program to continue executing without being blocked.&lt;/p&gt;
+&lt;p&gt;To make this happen, we need to run the &lt;code&gt;say&lt;/code&gt; or &lt;code&gt;speak&lt;/code&gt; function in another thread and use &lt;code&gt;is_pressed&lt;/code&gt; from the &lt;code&gt;keyboard&lt;/code&gt; module as a callback.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb9&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb9-1&#34;&gt;&lt;a href=&#34;#cb9-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; multiprocessing&lt;/span&gt;
+&lt;span id=&#34;cb9-2&#34;&gt;&lt;a href=&#34;#cb9-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; pyttsx3&lt;/span&gt;
+&lt;span id=&#34;cb9-3&#34;&gt;&lt;a href=&#34;#cb9-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; keyboard&lt;/span&gt;
+&lt;span id=&#34;cb9-4&#34;&gt;&lt;a href=&#34;#cb9-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-5&#34;&gt;&lt;a href=&#34;#cb9-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; _say(text):&lt;/span&gt;
+&lt;span id=&#34;cb9-6&#34;&gt;&lt;a href=&#34;#cb9-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    pyttsx3.speak(text)&lt;/span&gt;
+&lt;span id=&#34;cb9-7&#34;&gt;&lt;a href=&#34;#cb9-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-8&#34;&gt;&lt;a href=&#34;#cb9-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; say(phrase):&lt;/span&gt;
+&lt;span id=&#34;cb9-9&#34;&gt;&lt;a href=&#34;#cb9-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;	&lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;__name__&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;__main__&amp;quot;&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb9-10&#34;&gt;&lt;a href=&#34;#cb9-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;		p &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; multiprocessing.Process(target&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;_say, args&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;(text,))&lt;/span&gt;
+&lt;span id=&#34;cb9-11&#34;&gt;&lt;a href=&#34;#cb9-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;		p.start()&lt;/span&gt;
+&lt;span id=&#34;cb9-12&#34;&gt;&lt;a href=&#34;#cb9-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;		&lt;span class=&#34;cf&#34;&gt;while&lt;/span&gt; p.is_alive():&lt;/span&gt;
+&lt;span id=&#34;cb9-13&#34;&gt;&lt;a href=&#34;#cb9-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;			&lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; keyboard.is_pressed(&lt;span class=&#34;st&#34;&gt;&amp;#39;esc&amp;#39;&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb9-14&#34;&gt;&lt;a href=&#34;#cb9-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;				p.terminate()&lt;/span&gt;
+&lt;span id=&#34;cb9-15&#34;&gt;&lt;a href=&#34;#cb9-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;			&lt;span class=&#34;cf&#34;&gt;else&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb9-16&#34;&gt;&lt;a href=&#34;#cb9-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;				&lt;span class=&#34;cf&#34;&gt;continue&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-17&#34;&gt;&lt;a href=&#34;#cb9-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;		p.join()&lt;/span&gt;
+&lt;span id=&#34;cb9-18&#34;&gt;&lt;a href=&#34;#cb9-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-19&#34;&gt;&lt;a href=&#34;#cb9-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;text &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;this text is being read right now, and I can terminate it whenever I want&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-20&#34;&gt;&lt;a href=&#34;#cb9-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-21&#34;&gt;&lt;a href=&#34;#cb9-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;for&lt;/span&gt; i &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;range&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb9-22&#34;&gt;&lt;a href=&#34;#cb9-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;	say(text)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;alternative-gtts&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Alternative: gTTS&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;If you’re looking for an alternative to &lt;code&gt;pyttsx3&lt;/code&gt;, you might want to consider using the &lt;code&gt;gTTS&lt;/code&gt; (Google Text-to-Speech) module along with the &lt;code&gt;playsound&lt;/code&gt; library. Combining these two libraries is a quick way to add text-to-speech capabilities to your project.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb10&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb10-1&#34;&gt;&lt;a href=&#34;#cb10-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; gtts &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; gTTS&lt;/span&gt;
+&lt;span id=&#34;cb10-2&#34;&gt;&lt;a href=&#34;#cb10-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; playsound &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; playsound&lt;/span&gt;
+&lt;span id=&#34;cb10-3&#34;&gt;&lt;a href=&#34;#cb10-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-4&#34;&gt;&lt;a href=&#34;#cb10-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;filename &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;my_gtts_file.mp3&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-5&#34;&gt;&lt;a href=&#34;#cb10-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-6&#34;&gt;&lt;a href=&#34;#cb10-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;tts &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; gTTS(&lt;span class=&#34;st&#34;&gt;&amp;quot;Oh wow! I can&amp;#39;t believe this whas that easy&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb10-7&#34;&gt;&lt;a href=&#34;#cb10-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;tts.save(filename)&lt;/span&gt;
+&lt;span id=&#34;cb10-8&#34;&gt;&lt;a href=&#34;#cb10-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;playsound(filename)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Hopefully, this article has given you a brief overview of a couple text-to-speech options available in Python and how you can use them to improve the accessibility and user experience of your projects with just a few lines of code.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Mock Celery task in Pytest</title>
+      <link>/vizs-and-tips/mock-celery-task-pytest/</link>
+      <pubDate>Sun, 05 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>/vizs-and-tips/mock-celery-task-pytest/</guid>
+      <description>
+&lt;script src=&#34;/vizs-and-tips/mock-celery-task-pytest/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; width=&#34;400px&#34; alt=&#34;Python logo and Celery logo&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;mock-celery-task-in-pytest&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Mock Celery task in Pytest&lt;/h1&gt;
+&lt;p&gt;Let’s get straight to the point. Although there are several ways to do it, and depending on the characteristics of each project, one may be more interesting than another, let’s look at one that generally can be useful for us.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;pytest-celery-fixture&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Pytest Celery Fixture&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;This could be an example of celery config:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; pytest&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;at&#34;&gt;@pytest.fixture&lt;/span&gt;(scope&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;session&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; celery_config(celery_envvars: &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; {&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;task_serializer&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;pickle&amp;quot;&lt;/span&gt;, &lt;span class=&#34;co&#34;&gt;# default json&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;result_serializer&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;pickle&amp;quot;&lt;/span&gt;, &lt;span class=&#34;co&#34;&gt;# default json&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;broker_url&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;memory://&amp;quot;&lt;/span&gt;, &lt;span class=&#34;co&#34;&gt;# default &amp;quot;amqp://&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;result_backend&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;rpc&amp;quot;&lt;/span&gt;, &lt;span class=&#34;co&#34;&gt;# no dafault&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;imports&amp;quot;&lt;/span&gt;: [&lt;span class=&#34;st&#34;&gt;&amp;quot;&amp;lt;your_module&amp;gt;&amp;quot;&lt;/span&gt;],&lt;/span&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    }&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It shouldn’t be mandatory/recommendable to set task_always_eager or CELERY_ALWAYS_EAGER to True, per Celery docs advice. This executed locally instead of being sent to the queue.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;creating-a-celery-task-test&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Creating a Celery task test&lt;/strong&gt;&lt;/h2&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; celery&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;at&#34;&gt;@celery.shared_task&lt;/span&gt;(bind&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; add_task(&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;, a, b):&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; a&lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;b&lt;span class=&#34;op&#34;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; test_one_pending_iterations(&lt;/span&gt;
+&lt;span id=&#34;cb3-2&#34;&gt;&lt;a href=&#34;#cb3-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    celery_app: celery.Celery,&lt;/span&gt;
+&lt;span id=&#34;cb3-3&#34;&gt;&lt;a href=&#34;#cb3-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    celery_worker: celery.Celery.WorkController,&lt;/span&gt;
+&lt;span id=&#34;cb3-4&#34;&gt;&lt;a href=&#34;#cb3-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;) &lt;span class=&#34;op&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb3-5&#34;&gt;&lt;a href=&#34;#cb3-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;assert&lt;/span&gt; add.delay(&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;stay-updated-on-python-tips&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Stay updated on Python tips&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Happy testing and may your bugs tremble in fear at the sight of your PyTest prowess!&lt;/p&gt;
+&lt;p&gt;If you want to stay updated…&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+&lt;/style&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pydantic, Enums and IntEnums. A Story of Validation</title>
+      <link>/post/pydantic-enum-intenum/</link>
+      <pubDate>Wed, 05 Oct 2022 00:00:00 +0000</pubDate>
+      <guid>/post/pydantic-enum-intenum/</guid>
+      <description>
+&lt;script src=&#34;/post/pydantic-enum-intenum/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; width=&#34;400px&#34; alt=&#34;Pydantic Python library logo.&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;what-is-a-enum-and-its-integration-with-pydantic&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;What is a Enum and its integration with Pydantic?&lt;/h1&gt;
+&lt;p&gt;Oh, this is great question! Never heard that one before. An Enum, for the uninitiated, is a nifty little feature that united with the Pydantic library that helps you control the chaos of the data jungle. &lt;strong&gt;It’s a combination of Python’s Enum (short for enumeration) and Pydantic’s validation powers. Enums let you define a set of named values that your data must adhere to.&lt;/strong&gt; Pydantic then checks if your data is part of this exclusive club, and if it isn’t, kindly shows it the door.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;how-does-pydantic-and-enum-help-me&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;How does Pydantic and Enum help me?&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;If you’ve ever dealt with data, you know that it has a mind of its own. Sometimes, it’s pristine and perfect. Other times, it’s a dumpster fire. Enums are here to save you from those days when your data decides to go rogue.&lt;/p&gt;
+&lt;p&gt;By defining enums and using them in your Pydantic models, you create a set of rules that your data must follow, like a stern yet fair teacher. This way, you can ensure that only valid data enters your system, and any outliers are dealt with accordingly.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; enum &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Enum&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; pydantic &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; BaseModel, ValidationError&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Pet(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  name: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  animal_type: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  sex: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;You can be more specific defining your Pydantic models by using Enums:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; pydantic &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; ValidationError&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Sex(Enum):&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  MALE &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;male&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  FEMALE &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;female&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-6&#34;&gt;&lt;a href=&#34;#cb2-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;
+&lt;span id=&#34;cb2-7&#34;&gt;&lt;a href=&#34;#cb2-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; DomesticAnimals(Enum):&lt;/span&gt;
+&lt;span id=&#34;cb2-8&#34;&gt;&lt;a href=&#34;#cb2-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  CAT &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;cat&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-9&#34;&gt;&lt;a href=&#34;#cb2-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  DOG &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;dog&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-10&#34;&gt;&lt;a href=&#34;#cb2-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  FISH &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;fish&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-11&#34;&gt;&lt;a href=&#34;#cb2-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  BIRD &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;bird&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-12&#34;&gt;&lt;a href=&#34;#cb2-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-13&#34;&gt;&lt;a href=&#34;#cb2-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# And then&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-14&#34;&gt;&lt;a href=&#34;#cb2-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-15&#34;&gt;&lt;a href=&#34;#cb2-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Pet(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb2-16&#34;&gt;&lt;a href=&#34;#cb2-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  name: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-17&#34;&gt;&lt;a href=&#34;#cb2-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  animal_type: DomesticAnimals&lt;/span&gt;
+&lt;span id=&#34;cb2-18&#34;&gt;&lt;a href=&#34;#cb2-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  sex: Sex&lt;/span&gt;
+&lt;span id=&#34;cb2-19&#34;&gt;&lt;a href=&#34;#cb2-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;
+&lt;span id=&#34;cb2-20&#34;&gt;&lt;a href=&#34;#cb2-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;Pet(name&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;Timmy&amp;#39;&lt;/span&gt;, animal_type&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;bird&amp;#39;&lt;/span&gt;, sex&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;male&amp;#39;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## Pet(name=&amp;#39;Timmy&amp;#39;, animal_type=&amp;lt;DomesticAnimals.BIRD: &amp;#39;bird&amp;#39;&amp;gt;, sex=&amp;lt;Sex.MALE: &amp;#39;male&amp;#39;&amp;gt;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Adding a non existent value (Tiger not in allowed in domestic animals) to an existent Enum will raise a &lt;code&gt;value is not a valid enumeration member;&lt;/code&gt; error. This is one of the main use cases for them:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb4-1&#34;&gt;&lt;a href=&#34;#cb4-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; pytest&lt;/span&gt;
+&lt;span id=&#34;cb4-2&#34;&gt;&lt;a href=&#34;#cb4-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-3&#34;&gt;&lt;a href=&#34;#cb4-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;with&lt;/span&gt; pytest.raises(ValidationError, match&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39; value is not a valid enumeration member&amp;#39;&lt;/span&gt;) &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; e_info:&lt;/span&gt;
+&lt;span id=&#34;cb4-4&#34;&gt;&lt;a href=&#34;#cb4-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  Pet(&lt;/span&gt;
+&lt;span id=&#34;cb4-5&#34;&gt;&lt;a href=&#34;#cb4-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    name&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;Timmy&amp;#39;&lt;/span&gt;, &lt;/span&gt;
+&lt;span id=&#34;cb4-6&#34;&gt;&lt;a href=&#34;#cb4-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    animal_type&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;tiger&amp;#39;&lt;/span&gt;, &lt;/span&gt;
+&lt;span id=&#34;cb4-7&#34;&gt;&lt;a href=&#34;#cb4-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    sex&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;male&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-8&#34;&gt;&lt;a href=&#34;#cb4-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  )&lt;/span&gt;
+&lt;span id=&#34;cb4-9&#34;&gt;&lt;a href=&#34;#cb4-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(e_info.value)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## 1 validation error for Pet
+## animal_type
+##   value is not a valid enumeration member; permitted: &amp;#39;cat&amp;#39;, &amp;#39;dog&amp;#39;, &amp;#39;fish&amp;#39;, &amp;#39;bird&amp;#39; (type=type_error.enum; enum_values=[&amp;lt;DomesticAnimals.CAT: &amp;#39;cat&amp;#39;&amp;gt;, &amp;lt;DomesticAnimals.DOG: &amp;#39;dog&amp;#39;&amp;gt;, &amp;lt;DomesticAnimals.FISH: &amp;#39;fish&amp;#39;&amp;gt;, &amp;lt;DomesticAnimals.BIRD: &amp;#39;bird&amp;#39;&amp;gt;])&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(*Note the &lt;code&gt;UPPER_CASE_NOTATION&lt;/code&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;what-about-intenum-which-is-the-difference-between-enum-and-intenum&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;What about IntENum? Which is the difference between Enum and IntEnum?&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;In a nutshell, the main difference between Enum and IntEnum is the type of values they represent. Enum is a generic enumeration class for any data type, while IntEnum is specifically designed for integer values and allows for direct comparison with integers.&lt;/p&gt;
+&lt;p&gt;Two are the main benefits that bring using IntEnums in the correct use cases:
+- As IntEnum ensures that all the enumeration members have an integer value, it’s also possible to order them.
+- IntEnum members can be compared to integers directly, while Enum members can’t be used in integer comparison operators.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb6-1&#34;&gt;&lt;a href=&#34;#cb6-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; enum &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; IntEnum&lt;/span&gt;
+&lt;span id=&#34;cb6-2&#34;&gt;&lt;a href=&#34;#cb6-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; pytest&lt;/span&gt;
+&lt;span id=&#34;cb6-3&#34;&gt;&lt;a href=&#34;#cb6-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-4&#34;&gt;&lt;a href=&#34;#cb6-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; ResponseCode(IntEnum):&lt;/span&gt;
+&lt;span id=&#34;cb6-5&#34;&gt;&lt;a href=&#34;#cb6-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    OK &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;200&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-6&#34;&gt;&lt;a href=&#34;#cb6-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    NOT_FOUND &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;404&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-7&#34;&gt;&lt;a href=&#34;#cb6-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    ERROR &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;500&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-8&#34;&gt;&lt;a href=&#34;#cb6-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb6-9&#34;&gt;&lt;a href=&#34;#cb6-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;assert&lt;/span&gt; ResponseCode.OK &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;200&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-10&#34;&gt;&lt;a href=&#34;#cb6-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;assert&lt;/span&gt; ResponseCode.OK &lt;span class=&#34;op&#34;&gt;&amp;lt;=&lt;/span&gt; ResponseCode.NOT_FOUND&lt;/span&gt;
+&lt;span id=&#34;cb6-11&#34;&gt;&lt;a href=&#34;#cb6-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-12&#34;&gt;&lt;a href=&#34;#cb6-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;with&lt;/span&gt; pytest.raises(&lt;span class=&#34;pp&#34;&gt;TypeError&lt;/span&gt;, match&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;cannot extend enumeration&amp;#39;&lt;/span&gt;) &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; e_info: &lt;span class=&#34;co&#34;&gt;# Check that a TypeError is raised&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-13&#34;&gt;&lt;a href=&#34;#cb6-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; ExtendedResponseCode(ResponseCode):&lt;/span&gt;
+&lt;span id=&#34;cb6-14&#34;&gt;&lt;a href=&#34;#cb6-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;      CUSTOM &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;300&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-15&#34;&gt;&lt;a href=&#34;#cb6-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(e_info.value)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## ExtendedResponseCode: cannot extend enumeration &amp;#39;ResponseCode&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;is-it-possible-to-subclass-an-enum-or-an-strenum-intenum&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Is it possible to subclass an Enum (or an StrEnum / IntEnum)?&lt;/h1&gt;
+&lt;p&gt;It is not supposed to be possible. If you do so by direct inheritance a TypeError may be raised. To explain that, the documentation says: “Allowing subclassing of enums that define members would lead to a violation of some important invariants of types and instances.”&lt;/p&gt;
+&lt;p&gt;Which are those violations? Let’s check the &lt;a href=&#34;https://mail.python.org/pipermail/python-dev/2013-April/125716.html&#34;&gt;Guido comment in (2013)&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb8-1&#34;&gt;&lt;a href=&#34;#cb8-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; enum &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Enum&lt;/span&gt;
+&lt;span id=&#34;cb8-2&#34;&gt;&lt;a href=&#34;#cb8-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-3&#34;&gt;&lt;a href=&#34;#cb8-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Color(Enum):&lt;/span&gt;
+&lt;span id=&#34;cb8-4&#34;&gt;&lt;a href=&#34;#cb8-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  red &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-5&#34;&gt;&lt;a href=&#34;#cb8-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  green &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-6&#34;&gt;&lt;a href=&#34;#cb8-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  blue &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-7&#34;&gt;&lt;a href=&#34;#cb8-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-8&#34;&gt;&lt;a href=&#34;#cb8-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; MoreColor(Color): &lt;span class=&#34;co&#34;&gt;# this is not possible as we&amp;#39;ve seen&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-9&#34;&gt;&lt;a href=&#34;#cb8-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  cyan &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-10&#34;&gt;&lt;a href=&#34;#cb8-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  magenta &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-11&#34;&gt;&lt;a href=&#34;#cb8-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  yellow &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;6&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-12&#34;&gt;&lt;a href=&#34;#cb8-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-13&#34;&gt;&lt;a href=&#34;#cb8-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;(MoreColor.red) &lt;span class=&#34;kw&#34;&gt;is&lt;/span&gt; Color&lt;/span&gt;
+&lt;span id=&#34;cb8-14&#34;&gt;&lt;a href=&#34;#cb8-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-15&#34;&gt;&lt;a href=&#34;#cb8-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;(MoreColor.red) &lt;span class=&#34;kw&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;not&lt;/span&gt; MoreColor&lt;/span&gt;
+&lt;span id=&#34;cb8-16&#34;&gt;&lt;a href=&#34;#cb8-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-17&#34;&gt;&lt;a href=&#34;#cb8-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#In other words, while `red` is accessible in MoreColor, it&amp;#39;s actually a&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-18&#34;&gt;&lt;a href=&#34;#cb8-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#Color instance?&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-19&#34;&gt;&lt;a href=&#34;#cb8-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-20&#34;&gt;&lt;a href=&#34;#cb8-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#Oh dear, this is actually a mess. I don&amp;#39;t want MoreColor.red and&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-21&#34;&gt;&lt;a href=&#34;#cb8-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#Color.red to be distinct objects, but then the isinstance() checks&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-22&#34;&gt;&lt;a href=&#34;#cb8-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#will become confusing. If we don&amp;#39;t override isinstance(), we&amp;#39;ll get&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-23&#34;&gt;&lt;a href=&#34;#cb8-23&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-24&#34;&gt;&lt;a href=&#34;#cb8-24&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#not isinstance(Color.red, MoreColor)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-25&#34;&gt;&lt;a href=&#34;#cb8-25&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#isinstance(MoreColor.yellow, Color)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In some Python versions, this is working without an error message, but it is a unwanted behaviour.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb9&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb9-1&#34;&gt;&lt;a href=&#34;#cb9-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Color(Enum):&lt;/span&gt;
+&lt;span id=&#34;cb9-2&#34;&gt;&lt;a href=&#34;#cb9-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  red &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-3&#34;&gt;&lt;a href=&#34;#cb9-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  green &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-4&#34;&gt;&lt;a href=&#34;#cb9-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  blue &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-5&#34;&gt;&lt;a href=&#34;#cb9-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-6&#34;&gt;&lt;a href=&#34;#cb9-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; MoreColor(Enum, Color):&lt;/span&gt;
+&lt;span id=&#34;cb9-7&#34;&gt;&lt;a href=&#34;#cb9-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  cyan &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-8&#34;&gt;&lt;a href=&#34;#cb9-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  magenta &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-9&#34;&gt;&lt;a href=&#34;#cb9-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  yellow &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;6&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;One could argue that enumerations exist to guarantee mutual exclusion over a finite not ordered set. Appending additional members onto an existing enumeration don’t violates this guarantee. So being sure about your use case and what you’re doing, it’s possible to create a workaround. &lt;strong&gt;A clean solution using a decorator is&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb10&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb10-1&#34;&gt;&lt;a href=&#34;#cb10-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; enum &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Enum&lt;/span&gt;
+&lt;span id=&#34;cb10-2&#34;&gt;&lt;a href=&#34;#cb10-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; typing &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Any, Callable&lt;/span&gt;
+&lt;span id=&#34;cb10-3&#34;&gt;&lt;a href=&#34;#cb10-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-4&#34;&gt;&lt;a href=&#34;#cb10-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; EnumBase(Enum):&lt;/span&gt;
+&lt;span id=&#34;cb10-5&#34;&gt;&lt;a href=&#34;#cb10-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;__eq__&lt;/span&gt;(&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;, other: Any) &lt;span class=&#34;op&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;bool&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb10-6&#34;&gt;&lt;a href=&#34;#cb10-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;isinstance&lt;/span&gt;(other, Enum):&lt;/span&gt;
+&lt;span id=&#34;cb10-7&#34;&gt;&lt;a href=&#34;#cb10-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;.value &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; other.value&lt;/span&gt;
+&lt;span id=&#34;cb10-8&#34;&gt;&lt;a href=&#34;#cb10-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;False&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-9&#34;&gt;&lt;a href=&#34;#cb10-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;      &lt;/span&gt;
+&lt;span id=&#34;cb10-10&#34;&gt;&lt;a href=&#34;#cb10-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; extend_enum(parent_enum: EnumBase) &lt;span class=&#34;op&#34;&gt;-&amp;gt;&lt;/span&gt; Callable[[EnumBase], EnumBase]:&lt;/span&gt;
+&lt;span id=&#34;cb10-11&#34;&gt;&lt;a href=&#34;#cb10-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;co&#34;&gt;&amp;quot;&amp;quot;&amp;quot;Decorator function that extends an enum class with values from another enum class.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-12&#34;&gt;&lt;a href=&#34;#cb10-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; wrapper(extended_enum: EnumBase) &lt;span class=&#34;op&#34;&gt;-&amp;gt;&lt;/span&gt; EnumBase:&lt;/span&gt;
+&lt;span id=&#34;cb10-13&#34;&gt;&lt;a href=&#34;#cb10-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        joined &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; {}&lt;/span&gt;
+&lt;span id=&#34;cb10-14&#34;&gt;&lt;a href=&#34;#cb10-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;for&lt;/span&gt; item &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; parent_enum:&lt;/span&gt;
+&lt;span id=&#34;cb10-15&#34;&gt;&lt;a href=&#34;#cb10-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            joined[item.name] &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; item.value&lt;/span&gt;
+&lt;span id=&#34;cb10-16&#34;&gt;&lt;a href=&#34;#cb10-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;for&lt;/span&gt; item &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; extended_enum:&lt;/span&gt;
+&lt;span id=&#34;cb10-17&#34;&gt;&lt;a href=&#34;#cb10-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            joined[item.name] &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; item.value&lt;/span&gt;
+&lt;span id=&#34;cb10-18&#34;&gt;&lt;a href=&#34;#cb10-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; EnumBase(extended_enum.&lt;span class=&#34;va&#34;&gt;__name__&lt;/span&gt;, joined)&lt;/span&gt;
+&lt;span id=&#34;cb10-19&#34;&gt;&lt;a href=&#34;#cb10-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; wrapper&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb11-1&#34;&gt;&lt;a href=&#34;#cb11-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Parent(EnumBase):&lt;/span&gt;
+&lt;span id=&#34;cb11-2&#34;&gt;&lt;a href=&#34;#cb11-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  A &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-3&#34;&gt;&lt;a href=&#34;#cb11-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  B &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-4&#34;&gt;&lt;a href=&#34;#cb11-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;
+&lt;span id=&#34;cb11-5&#34;&gt;&lt;a href=&#34;#cb11-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;at&#34;&gt;@extend_enum&lt;/span&gt;(Parent)&lt;/span&gt;
+&lt;span id=&#34;cb11-6&#34;&gt;&lt;a href=&#34;#cb11-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; ExtendedParent(EnumBase):&lt;/span&gt;
+&lt;span id=&#34;cb11-7&#34;&gt;&lt;a href=&#34;#cb11-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  C &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-8&#34;&gt;&lt;a href=&#34;#cb11-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;
+&lt;span id=&#34;cb11-9&#34;&gt;&lt;a href=&#34;#cb11-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb11-10&#34;&gt;&lt;a href=&#34;#cb11-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;(Parent.A) &lt;span class=&#34;kw&#34;&gt;is&lt;/span&gt; Parent,&lt;/span&gt;
+&lt;span id=&#34;cb11-11&#34;&gt;&lt;a href=&#34;#cb11-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;(Parent.A) &lt;span class=&#34;kw&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;not&lt;/span&gt; ExtendedParent,&lt;/span&gt;
+&lt;span id=&#34;cb11-12&#34;&gt;&lt;a href=&#34;#cb11-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;Parent.A &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; ExtendedParent.A&lt;/span&gt;
+&lt;span id=&#34;cb11-13&#34;&gt;&lt;a href=&#34;#cb11-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## True True True&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But this is not a perfect solution, as it has some drawbacks or limitations you should be aware of. In this case, a nor related Enum (called &lt;code&gt;RandomEnum&lt;/code&gt;) that implements the same enum value, is equal in the comparison to our &lt;code&gt;Parent&lt;/code&gt; and &lt;code&gt;ExtendedParent&lt;/code&gt; classes :&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb13&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb13-1&#34;&gt;&lt;a href=&#34;#cb13-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-2&#34;&gt;&lt;a href=&#34;#cb13-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; RandomEnum(EnumBase):&lt;/span&gt;
+&lt;span id=&#34;cb13-3&#34;&gt;&lt;a href=&#34;#cb13-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  A &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-4&#34;&gt;&lt;a href=&#34;#cb13-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;
+&lt;span id=&#34;cb13-5&#34;&gt;&lt;a href=&#34;#cb13-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;Parent.A &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; RandomEnum.A &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; ExtendedParent.A&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## True&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;stay-updated-on-pydantic-and-python-tips&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Stay updated on Pydantic and Python tips&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Hopefully, this post has helped you become familiar with Enum usage in Pydantic and allowed you to enjoy a showcase of some of its functionalities.&lt;/p&gt;
+&lt;p&gt;If you want to stay updated…&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python and Pydantic tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+&lt;/style&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>@staticmethod in Python</title>
@@ -306,13 +1439,42 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
       <guid>/vizs-and-tips/magic-whos-method-jupyter-notebook/</guid>
       <description>
+&lt;script src=&#34;/vizs-and-tips/magic-whos-method-jupyter-notebook/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;A recurrent complaint beginner users have about Jupyter Notebooks is the lack of information about the self-created environment variables. If you have this question, probably first of all you should be sure about the Jupyter Notebooks main purpose (totally different from IDEs like Spyder or Pycharm).&lt;/p&gt;
 &lt;p&gt;But in case a notebook is all what you need, you have few ways to display this information. The first and easiest one is to use the magic method &lt;strong&gt;%whos&lt;/strong&gt;
-&lt;img src=&#34;/vizs-and-tips/magic-whos-metodo-jupyter-notebook/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;jupyter_magic_who.PNG&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Two alternative ways are nbextension and Jupyter Lab variable inspector. You can find more information &lt;a href=&#34;https://stackoverflow.com/questions/37718907/variable-explorer-in-jupyter-notebook&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
 </description>
     </item>
     
