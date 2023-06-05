@@ -1,15 +1,10 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/vizs-and-tips/static-method-python-decorator/</loc>
-    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/authors/</loc>
-    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2023-05-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -24,7 +19,7 @@
   
   <url>
     <loc>/authors/carlos-vecina/</loc>
-    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2023-05-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -39,7 +34,7 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
+    <lastmod>2023-05-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -53,98 +48,18 @@
   </url>
   
   <url>
-    <loc>/categories/python/</loc>
-    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/python/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/python/"
-                />
+    <loc>/post/the-project-tracker-chatgpt3-streamlit-open-source/</loc>
+    <lastmod>2023-05-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/tips/</loc>
-    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/tips/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/tips/"
-                />
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/"
-                />
-  </url>
-  
-  <url>
-    <loc>/vizs-and-tips/</loc>
-    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/vizs-and-tips/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/vizs-and-tips/"
-                />
-  </url>
-  
-  <url>
-    <loc>/post/remote-work-in-europe/</loc>
-    <lastmod>2021-06-16T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/post/data-visualization-remote-workers-across-europe/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/post/remote-work-in-europe/"
-                />
-  </url>
-  
-  <url>
-    <loc>/categories/post/</loc>
-    <lastmod>2021-06-16T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/post/"
-                />
+    <loc>/categories/posts/</loc>
+    <lastmod>2023-05-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2021-06-16T00:00:00+00:00</lastmod>
+    <lastmod>2023-05-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -159,7 +74,7 @@
   
   <url>
     <loc>/categories/r/</loc>
-    <lastmod>2021-06-16T00:00:00+00:00</lastmod>
+    <lastmod>2023-05-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -169,6 +84,216 @@
                 rel="alternate"
                 hreflang="en"
                 href="/categories/r/"
+                />
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2023-05-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/"
+                />
+  </url>
+  
+  <url>
+    <loc>/vizs-and-tips/modifying-variables-the-right-way/</loc>
+    <lastmod>2023-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/pablo-canovas/</loc>
+    <lastmod>2023-04-04T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/authors/pablo-canovas/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/authors/pablo-canovas/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2023-04-04T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/tidyverse/</loc>
+    <lastmod>2023-04-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/tips/</loc>
+    <lastmod>2023-04-04T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/tips/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/tips/"
+                />
+  </url>
+  
+  <url>
+    <loc>/vizs-and-tips/</loc>
+    <lastmod>2023-04-04T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/"
+                />
+  </url>
+  
+  <url>
+    <loc>/vizs-and-tips/python-polars-pipe-function-to-one-more-columns/</loc>
+    <lastmod>2023-03-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/python/</loc>
+    <lastmod>2023-03-28T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/python/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/python/"
+                />
+  </url>
+  
+  <url>
+    <loc>/categories/post/</loc>
+    <lastmod>2023-03-23T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/post/gpt-whisper-build-your-own-voice-assistant/</loc>
+    <lastmod>2023-03-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/vizs-and-tips/how-to-create-multiple-lags-in-r/</loc>
+    <lastmod>2023-03-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/python-text-to-speech-practical-guide/</loc>
+    <lastmod>2023-03-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/algotrading/</loc>
+    <lastmod>2023-03-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/algotrading/</loc>
+    <lastmod>2023-03-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/scraping-financial-data-finviz-rvest-package/</loc>
+    <lastmod>2023-03-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/value-invest-market-cap-data-r-ggplot-financial-times-theme/</loc>
+    <lastmod>2023-03-10T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/vizs-and-tips/mock-celery-task-pytest/</loc>
+    <lastmod>2023-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/pytest/</loc>
+    <lastmod>2023-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/python/</loc>
+    <lastmod>2023-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/pydantic/</loc>
+    <lastmod>2022-10-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/pydantic-enum-intenum/</loc>
+    <lastmod>2022-10-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ggplot/</loc>
+    <lastmod>2022-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/dynamically-access-dataframe-variables-tidyeval-ggplot/</loc>
+    <lastmod>2022-02-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/vizs-and-tips/static-method-python-decorator/</loc>
+    <lastmod>2022-01-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/remote-work-in-europe/</loc>
+    <lastmod>2021-06-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/post/data-visualization-remote-workers-across-europe/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/remote-work-in-europe/"
                 />
   </url>
   
@@ -238,47 +363,12 @@
   </url>
   
   <url>
-    <loc>/authors/pablo-canovas/</loc>
-    <lastmod>2020-06-28T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/authors/pablo-canovas/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/authors/pablo-canovas/"
-                />
-  </url>
-  
-  <url>
     <loc>/post/analyzing-data-covid19-r-package/</loc>
     <lastmod>2020-05-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/covid/</loc>
-    <lastmod>2020-05-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2020-05-27T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tags/"
-                />
-  </url>
-  
-  <url>
-    <loc>/tags/tidyverse/</loc>
     <lastmod>2020-05-27T00:00:00+00:00</lastmod>
   </url>
   
@@ -493,8 +583,13 @@
   </url>
   
   <url>
-    <loc>/categories/metrics/</loc>
+    <loc>/categories/timeseries/</loc>
     <lastmod>2019-09-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/metrics/</loc>
+    <lastmod>2019-08-26T00:00:00+00:00</lastmod>
   </url>
   
   <url>

@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pydantic | TypeThePipe</title>
+    <link>/tags/pydantic/</link>
+      <atom:link href="/tags/pydantic/index.xml" rel="self" type="application/rss+xml" />
+    <description>Pydantic</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 05 Oct 2022 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/icon-32.png</url>
+      <title>Pydantic</title>
+      <link>/tags/pydantic/</link>
+    </image>
+    
+    <item>
+      <title>Pydantic, Enums and IntEnums. A Story of Validation</title>
+      <link>/post/pydantic-enum-intenum/</link>
+      <pubDate>Wed, 05 Oct 2022 00:00:00 +0000</pubDate>
+      <guid>/post/pydantic-enum-intenum/</guid>
+      <description>
+&lt;script src=&#34;/post/pydantic-enum-intenum/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; width=&#34;400px&#34; alt=&#34;Pydantic Python library logo.&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;what-is-a-enum-and-its-integration-with-pydantic&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;What is a Enum and its integration with Pydantic?&lt;/h1&gt;
+&lt;p&gt;Oh, this is great question! Never heard that one before. An Enum, for the uninitiated, is a nifty little feature that united with the Pydantic library that helps you control the chaos of the data jungle. &lt;strong&gt;It’s a combination of Python’s Enum (short for enumeration) and Pydantic’s validation powers. Enums let you define a set of named values that your data must adhere to.&lt;/strong&gt; Pydantic then checks if your data is part of this exclusive club, and if it isn’t, kindly shows it the door.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;how-does-pydantic-and-enum-help-me&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;How does Pydantic and Enum help me?&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;If you’ve ever dealt with data, you know that it has a mind of its own. Sometimes, it’s pristine and perfect. Other times, it’s a dumpster fire. Enums are here to save you from those days when your data decides to go rogue.&lt;/p&gt;
+&lt;p&gt;By defining enums and using them in your Pydantic models, you create a set of rules that your data must follow, like a stern yet fair teacher. This way, you can ensure that only valid data enters your system, and any outliers are dealt with accordingly.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; enum &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Enum&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; pydantic &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; BaseModel, ValidationError&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Pet(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  name: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  animal_type: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  sex: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;You can be more specific defining your Pydantic models by using Enums:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; pydantic &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; ValidationError&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Sex(Enum):&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  MALE &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;male&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  FEMALE &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;female&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-6&#34;&gt;&lt;a href=&#34;#cb2-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;
+&lt;span id=&#34;cb2-7&#34;&gt;&lt;a href=&#34;#cb2-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; DomesticAnimals(Enum):&lt;/span&gt;
+&lt;span id=&#34;cb2-8&#34;&gt;&lt;a href=&#34;#cb2-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  CAT &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;cat&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-9&#34;&gt;&lt;a href=&#34;#cb2-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  DOG &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;dog&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-10&#34;&gt;&lt;a href=&#34;#cb2-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  FISH &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;fish&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-11&#34;&gt;&lt;a href=&#34;#cb2-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  BIRD &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;bird&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-12&#34;&gt;&lt;a href=&#34;#cb2-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-13&#34;&gt;&lt;a href=&#34;#cb2-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# And then&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-14&#34;&gt;&lt;a href=&#34;#cb2-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-15&#34;&gt;&lt;a href=&#34;#cb2-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Pet(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb2-16&#34;&gt;&lt;a href=&#34;#cb2-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  name: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-17&#34;&gt;&lt;a href=&#34;#cb2-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  animal_type: DomesticAnimals&lt;/span&gt;
+&lt;span id=&#34;cb2-18&#34;&gt;&lt;a href=&#34;#cb2-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  sex: Sex&lt;/span&gt;
+&lt;span id=&#34;cb2-19&#34;&gt;&lt;a href=&#34;#cb2-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;
+&lt;span id=&#34;cb2-20&#34;&gt;&lt;a href=&#34;#cb2-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;Pet(name&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;Timmy&amp;#39;&lt;/span&gt;, animal_type&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;bird&amp;#39;&lt;/span&gt;, sex&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;male&amp;#39;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## Pet(name=&amp;#39;Timmy&amp;#39;, animal_type=&amp;lt;DomesticAnimals.BIRD: &amp;#39;bird&amp;#39;&amp;gt;, sex=&amp;lt;Sex.MALE: &amp;#39;male&amp;#39;&amp;gt;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Adding a non existent value (Tiger not in allowed in domestic animals) to an existent Enum will raise a &lt;code&gt;value is not a valid enumeration member;&lt;/code&gt; error. This is one of the main use cases for them:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb4-1&#34;&gt;&lt;a href=&#34;#cb4-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; pytest&lt;/span&gt;
+&lt;span id=&#34;cb4-2&#34;&gt;&lt;a href=&#34;#cb4-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-3&#34;&gt;&lt;a href=&#34;#cb4-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;with&lt;/span&gt; pytest.raises(ValidationError, match&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39; value is not a valid enumeration member&amp;#39;&lt;/span&gt;) &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; e_info:&lt;/span&gt;
+&lt;span id=&#34;cb4-4&#34;&gt;&lt;a href=&#34;#cb4-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  Pet(&lt;/span&gt;
+&lt;span id=&#34;cb4-5&#34;&gt;&lt;a href=&#34;#cb4-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    name&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;Timmy&amp;#39;&lt;/span&gt;, &lt;/span&gt;
+&lt;span id=&#34;cb4-6&#34;&gt;&lt;a href=&#34;#cb4-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    animal_type&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;tiger&amp;#39;&lt;/span&gt;, &lt;/span&gt;
+&lt;span id=&#34;cb4-7&#34;&gt;&lt;a href=&#34;#cb4-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    sex&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;male&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-8&#34;&gt;&lt;a href=&#34;#cb4-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  )&lt;/span&gt;
+&lt;span id=&#34;cb4-9&#34;&gt;&lt;a href=&#34;#cb4-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(e_info.value)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## 1 validation error for Pet
+## animal_type
+##   value is not a valid enumeration member; permitted: &amp;#39;cat&amp;#39;, &amp;#39;dog&amp;#39;, &amp;#39;fish&amp;#39;, &amp;#39;bird&amp;#39; (type=type_error.enum; enum_values=[&amp;lt;DomesticAnimals.CAT: &amp;#39;cat&amp;#39;&amp;gt;, &amp;lt;DomesticAnimals.DOG: &amp;#39;dog&amp;#39;&amp;gt;, &amp;lt;DomesticAnimals.FISH: &amp;#39;fish&amp;#39;&amp;gt;, &amp;lt;DomesticAnimals.BIRD: &amp;#39;bird&amp;#39;&amp;gt;])&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;(*Note the &lt;code&gt;UPPER_CASE_NOTATION&lt;/code&gt;)&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;what-about-intenum-which-is-the-difference-between-enum-and-intenum&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;What about IntENum? Which is the difference between Enum and IntEnum?&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;In a nutshell, the main difference between Enum and IntEnum is the type of values they represent. Enum is a generic enumeration class for any data type, while IntEnum is specifically designed for integer values and allows for direct comparison with integers.&lt;/p&gt;
+&lt;p&gt;Two are the main benefits that bring using IntEnums in the correct use cases:
+- As IntEnum ensures that all the enumeration members have an integer value, it’s also possible to order them.
+- IntEnum members can be compared to integers directly, while Enum members can’t be used in integer comparison operators.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb6-1&#34;&gt;&lt;a href=&#34;#cb6-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; enum &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; IntEnum&lt;/span&gt;
+&lt;span id=&#34;cb6-2&#34;&gt;&lt;a href=&#34;#cb6-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; pytest&lt;/span&gt;
+&lt;span id=&#34;cb6-3&#34;&gt;&lt;a href=&#34;#cb6-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-4&#34;&gt;&lt;a href=&#34;#cb6-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; ResponseCode(IntEnum):&lt;/span&gt;
+&lt;span id=&#34;cb6-5&#34;&gt;&lt;a href=&#34;#cb6-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    OK &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;200&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-6&#34;&gt;&lt;a href=&#34;#cb6-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    NOT_FOUND &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;404&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-7&#34;&gt;&lt;a href=&#34;#cb6-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    ERROR &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;500&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-8&#34;&gt;&lt;a href=&#34;#cb6-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb6-9&#34;&gt;&lt;a href=&#34;#cb6-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;assert&lt;/span&gt; ResponseCode.OK &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;200&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-10&#34;&gt;&lt;a href=&#34;#cb6-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;assert&lt;/span&gt; ResponseCode.OK &lt;span class=&#34;op&#34;&gt;&amp;lt;=&lt;/span&gt; ResponseCode.NOT_FOUND&lt;/span&gt;
+&lt;span id=&#34;cb6-11&#34;&gt;&lt;a href=&#34;#cb6-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-12&#34;&gt;&lt;a href=&#34;#cb6-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;with&lt;/span&gt; pytest.raises(&lt;span class=&#34;pp&#34;&gt;TypeError&lt;/span&gt;, match&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;cannot extend enumeration&amp;#39;&lt;/span&gt;) &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; e_info: &lt;span class=&#34;co&#34;&gt;# Check that a TypeError is raised&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-13&#34;&gt;&lt;a href=&#34;#cb6-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; ExtendedResponseCode(ResponseCode):&lt;/span&gt;
+&lt;span id=&#34;cb6-14&#34;&gt;&lt;a href=&#34;#cb6-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;      CUSTOM &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;300&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-15&#34;&gt;&lt;a href=&#34;#cb6-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(e_info.value)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## ExtendedResponseCode: cannot extend enumeration &amp;#39;ResponseCode&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;is-it-possible-to-subclass-an-enum-or-an-strenum-intenum&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Is it possible to subclass an Enum (or an StrEnum / IntEnum)?&lt;/h1&gt;
+&lt;p&gt;It is not supposed to be possible. If you do so by direct inheritance a TypeError may be raised. To explain that, the documentation says: “Allowing subclassing of enums that define members would lead to a violation of some important invariants of types and instances.”&lt;/p&gt;
+&lt;p&gt;Which are those violations? Let’s check the &lt;a href=&#34;https://mail.python.org/pipermail/python-dev/2013-April/125716.html&#34;&gt;Guido comment in (2013)&lt;/a&gt;:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb8-1&#34;&gt;&lt;a href=&#34;#cb8-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; enum &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Enum&lt;/span&gt;
+&lt;span id=&#34;cb8-2&#34;&gt;&lt;a href=&#34;#cb8-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-3&#34;&gt;&lt;a href=&#34;#cb8-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Color(Enum):&lt;/span&gt;
+&lt;span id=&#34;cb8-4&#34;&gt;&lt;a href=&#34;#cb8-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  red &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-5&#34;&gt;&lt;a href=&#34;#cb8-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  green &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-6&#34;&gt;&lt;a href=&#34;#cb8-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  blue &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-7&#34;&gt;&lt;a href=&#34;#cb8-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-8&#34;&gt;&lt;a href=&#34;#cb8-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; MoreColor(Color): &lt;span class=&#34;co&#34;&gt;# this is not possible as we&amp;#39;ve seen&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-9&#34;&gt;&lt;a href=&#34;#cb8-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  cyan &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-10&#34;&gt;&lt;a href=&#34;#cb8-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  magenta &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-11&#34;&gt;&lt;a href=&#34;#cb8-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  yellow &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;6&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-12&#34;&gt;&lt;a href=&#34;#cb8-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-13&#34;&gt;&lt;a href=&#34;#cb8-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;(MoreColor.red) &lt;span class=&#34;kw&#34;&gt;is&lt;/span&gt; Color&lt;/span&gt;
+&lt;span id=&#34;cb8-14&#34;&gt;&lt;a href=&#34;#cb8-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-15&#34;&gt;&lt;a href=&#34;#cb8-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;(MoreColor.red) &lt;span class=&#34;kw&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;not&lt;/span&gt; MoreColor&lt;/span&gt;
+&lt;span id=&#34;cb8-16&#34;&gt;&lt;a href=&#34;#cb8-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-17&#34;&gt;&lt;a href=&#34;#cb8-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#In other words, while `red` is accessible in MoreColor, it&amp;#39;s actually a&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-18&#34;&gt;&lt;a href=&#34;#cb8-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#Color instance?&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-19&#34;&gt;&lt;a href=&#34;#cb8-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-20&#34;&gt;&lt;a href=&#34;#cb8-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#Oh dear, this is actually a mess. I don&amp;#39;t want MoreColor.red and&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-21&#34;&gt;&lt;a href=&#34;#cb8-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#Color.red to be distinct objects, but then the isinstance() checks&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-22&#34;&gt;&lt;a href=&#34;#cb8-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#will become confusing. If we don&amp;#39;t override isinstance(), we&amp;#39;ll get&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-23&#34;&gt;&lt;a href=&#34;#cb8-23&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-24&#34;&gt;&lt;a href=&#34;#cb8-24&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#not isinstance(Color.red, MoreColor)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-25&#34;&gt;&lt;a href=&#34;#cb8-25&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#isinstance(MoreColor.yellow, Color)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;In some Python versions, this is working without an error message, but it is a unwanted behaviour.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb9&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb9-1&#34;&gt;&lt;a href=&#34;#cb9-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Color(Enum):&lt;/span&gt;
+&lt;span id=&#34;cb9-2&#34;&gt;&lt;a href=&#34;#cb9-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  red &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-3&#34;&gt;&lt;a href=&#34;#cb9-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  green &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-4&#34;&gt;&lt;a href=&#34;#cb9-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  blue &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-5&#34;&gt;&lt;a href=&#34;#cb9-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-6&#34;&gt;&lt;a href=&#34;#cb9-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; MoreColor(Enum, Color):&lt;/span&gt;
+&lt;span id=&#34;cb9-7&#34;&gt;&lt;a href=&#34;#cb9-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  cyan &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-8&#34;&gt;&lt;a href=&#34;#cb9-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  magenta &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-9&#34;&gt;&lt;a href=&#34;#cb9-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  yellow &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;6&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;One could argue that enumerations exist to guarantee mutual exclusion over a finite not ordered set. Appending additional members onto an existing enumeration don’t violates this guarantee. So being sure about your use case and what you’re doing, it’s possible to create a workaround. &lt;strong&gt;A clean solution using a decorator is&lt;/strong&gt;:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb10&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb10-1&#34;&gt;&lt;a href=&#34;#cb10-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; enum &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Enum&lt;/span&gt;
+&lt;span id=&#34;cb10-2&#34;&gt;&lt;a href=&#34;#cb10-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; typing &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Any, Callable&lt;/span&gt;
+&lt;span id=&#34;cb10-3&#34;&gt;&lt;a href=&#34;#cb10-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-4&#34;&gt;&lt;a href=&#34;#cb10-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; EnumBase(Enum):&lt;/span&gt;
+&lt;span id=&#34;cb10-5&#34;&gt;&lt;a href=&#34;#cb10-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;__eq__&lt;/span&gt;(&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;, other: Any) &lt;span class=&#34;op&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;bool&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb10-6&#34;&gt;&lt;a href=&#34;#cb10-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;isinstance&lt;/span&gt;(other, Enum):&lt;/span&gt;
+&lt;span id=&#34;cb10-7&#34;&gt;&lt;a href=&#34;#cb10-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;.value &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; other.value&lt;/span&gt;
+&lt;span id=&#34;cb10-8&#34;&gt;&lt;a href=&#34;#cb10-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;False&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-9&#34;&gt;&lt;a href=&#34;#cb10-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;      &lt;/span&gt;
+&lt;span id=&#34;cb10-10&#34;&gt;&lt;a href=&#34;#cb10-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; extend_enum(parent_enum: EnumBase) &lt;span class=&#34;op&#34;&gt;-&amp;gt;&lt;/span&gt; Callable[[EnumBase], EnumBase]:&lt;/span&gt;
+&lt;span id=&#34;cb10-11&#34;&gt;&lt;a href=&#34;#cb10-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;co&#34;&gt;&amp;quot;&amp;quot;&amp;quot;Decorator function that extends an enum class with values from another enum class.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-12&#34;&gt;&lt;a href=&#34;#cb10-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; wrapper(extended_enum: EnumBase) &lt;span class=&#34;op&#34;&gt;-&amp;gt;&lt;/span&gt; EnumBase:&lt;/span&gt;
+&lt;span id=&#34;cb10-13&#34;&gt;&lt;a href=&#34;#cb10-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        joined &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; {}&lt;/span&gt;
+&lt;span id=&#34;cb10-14&#34;&gt;&lt;a href=&#34;#cb10-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;for&lt;/span&gt; item &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; parent_enum:&lt;/span&gt;
+&lt;span id=&#34;cb10-15&#34;&gt;&lt;a href=&#34;#cb10-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            joined[item.name] &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; item.value&lt;/span&gt;
+&lt;span id=&#34;cb10-16&#34;&gt;&lt;a href=&#34;#cb10-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;for&lt;/span&gt; item &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; extended_enum:&lt;/span&gt;
+&lt;span id=&#34;cb10-17&#34;&gt;&lt;a href=&#34;#cb10-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            joined[item.name] &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; item.value&lt;/span&gt;
+&lt;span id=&#34;cb10-18&#34;&gt;&lt;a href=&#34;#cb10-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; EnumBase(extended_enum.&lt;span class=&#34;va&#34;&gt;__name__&lt;/span&gt;, joined)&lt;/span&gt;
+&lt;span id=&#34;cb10-19&#34;&gt;&lt;a href=&#34;#cb10-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; wrapper&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb11-1&#34;&gt;&lt;a href=&#34;#cb11-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Parent(EnumBase):&lt;/span&gt;
+&lt;span id=&#34;cb11-2&#34;&gt;&lt;a href=&#34;#cb11-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  A &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-3&#34;&gt;&lt;a href=&#34;#cb11-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  B &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-4&#34;&gt;&lt;a href=&#34;#cb11-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;
+&lt;span id=&#34;cb11-5&#34;&gt;&lt;a href=&#34;#cb11-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;at&#34;&gt;@extend_enum&lt;/span&gt;(Parent)&lt;/span&gt;
+&lt;span id=&#34;cb11-6&#34;&gt;&lt;a href=&#34;#cb11-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; ExtendedParent(EnumBase):&lt;/span&gt;
+&lt;span id=&#34;cb11-7&#34;&gt;&lt;a href=&#34;#cb11-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  C &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb11-8&#34;&gt;&lt;a href=&#34;#cb11-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;
+&lt;span id=&#34;cb11-9&#34;&gt;&lt;a href=&#34;#cb11-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb11-10&#34;&gt;&lt;a href=&#34;#cb11-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;(Parent.A) &lt;span class=&#34;kw&#34;&gt;is&lt;/span&gt; Parent,&lt;/span&gt;
+&lt;span id=&#34;cb11-11&#34;&gt;&lt;a href=&#34;#cb11-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;(Parent.A) &lt;span class=&#34;kw&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;not&lt;/span&gt; ExtendedParent,&lt;/span&gt;
+&lt;span id=&#34;cb11-12&#34;&gt;&lt;a href=&#34;#cb11-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;Parent.A &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; ExtendedParent.A&lt;/span&gt;
+&lt;span id=&#34;cb11-13&#34;&gt;&lt;a href=&#34;#cb11-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## True True True&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;But this is not a perfect solution, as it has some drawbacks or limitations you should be aware of. In this case, a nor related Enum (called &lt;code&gt;RandomEnum&lt;/code&gt;) that implements the same enum value, is equal in the comparison to our &lt;code&gt;Parent&lt;/code&gt; and &lt;code&gt;ExtendedParent&lt;/code&gt; classes :&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb13&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb13-1&#34;&gt;&lt;a href=&#34;#cb13-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-2&#34;&gt;&lt;a href=&#34;#cb13-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; RandomEnum(EnumBase):&lt;/span&gt;
+&lt;span id=&#34;cb13-3&#34;&gt;&lt;a href=&#34;#cb13-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  A &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb13-4&#34;&gt;&lt;a href=&#34;#cb13-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;/span&gt;
+&lt;span id=&#34;cb13-5&#34;&gt;&lt;a href=&#34;#cb13-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;Parent.A &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; RandomEnum.A &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; ExtendedParent.A&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## True&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;stay-updated-on-pydantic-and-python-tips&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Stay updated on Pydantic and Python tips&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Hopefully, this post has helped you become familiar with Enum usage in Pydantic and allowed you to enjoy a showcase of some of its functionalities.&lt;/p&gt;
+&lt;p&gt;If you want to stay updated…&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python and Pydantic tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+&lt;/style&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -5,12 +5,748 @@
     <link>/vizs-and-tips/</link>
       <atom:link href="/vizs-and-tips/index.xml" rel="self" type="application/rss+xml" />
     <description>Vizs &amp; Tips</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sat, 01 Jan 2022 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Tue, 04 Apr 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-32.png</url>
       <title>Vizs &amp; Tips</title>
       <link>/vizs-and-tips/</link>
     </image>
+    
+    <item>
+      <title>How to Modify Variables the Right Way in R</title>
+      <link>/vizs-and-tips/modifying-variables-the-right-way/</link>
+      <pubDate>Tue, 04 Apr 2023 00:00:00 +0000</pubDate>
+      <guid>/vizs-and-tips/modifying-variables-the-right-way/</guid>
+      <description>
+&lt;script src=&#34;/vizs-and-tips/modifying-variables-the-right-way/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; style=&#34;width:250px; height:250px&#34; alt=&#34;Modify variables in R&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;introduction&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;In data analysis and data science, it’s common to work with large datasets that require some form of manipulation to be useful. In this small article, we’ll explore how to create and modify columns in a dataframe using modern R tools from the tidyverse package. We can do that on several ways, so we are going from basic to advanced level.&lt;/p&gt;
+&lt;p&gt;Let’s use the &lt;code&gt;starwars&lt;/code&gt; dataset for that purpose:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;data&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;starwars&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;head&lt;/span&gt;(starwars, &lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 4 × 8&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   name           height  mass hair_color  skin_color  eye_color birth_year sex    &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;chr&amp;gt;           &amp;lt;int&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;          &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 1 Luke Skywalker    172    77 blond       fair        blue            19   male   &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 2 C-3PO             167    75 NA          gold        yellow         112   none   &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-6&#34;&gt;&lt;a href=&#34;#cb2-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 3 R2-D2              96    32 NA          white, blue red             33   none   &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-7&#34;&gt;&lt;a href=&#34;#cb2-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 4 Darth Vader       202   136 none        white       yellow          41.9 male   &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;The most basic example is using &lt;code&gt;mutate&lt;/code&gt; to create and modify variables.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;starwars &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb3-2&#34;&gt;&lt;a href=&#34;#cb3-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;mutate&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb3-3&#34;&gt;&lt;a href=&#34;#cb3-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;at&#34;&gt;height =&lt;/span&gt; height &lt;span class=&#34;sc&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb3-4&#34;&gt;&lt;a href=&#34;#cb3-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;at&#34;&gt;new_numeric_column =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;row_number&lt;/span&gt;(),&lt;/span&gt;
+&lt;span id=&#34;cb3-5&#34;&gt;&lt;a href=&#34;#cb3-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;at&#34;&gt;new_char_column =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;This variable is new&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-6&#34;&gt;&lt;a href=&#34;#cb3-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  ) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb3-7&#34;&gt;&lt;a href=&#34;#cb3-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;select&lt;/span&gt;(name, height, new_numeric_column, new_char_column) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb3-8&#34;&gt;&lt;a href=&#34;#cb3-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;head&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb4-1&#34;&gt;&lt;a href=&#34;#cb4-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 4 × 4&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-2&#34;&gt;&lt;a href=&#34;#cb4-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   name           height new_numeric_column new_char_column     &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-3&#34;&gt;&lt;a href=&#34;#cb4-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;chr&amp;gt;           &amp;lt;dbl&amp;gt;              &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;               &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-4&#34;&gt;&lt;a href=&#34;#cb4-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 1 Luke Skywalker    344                  1 This variable is new&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-5&#34;&gt;&lt;a href=&#34;#cb4-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 2 C-3PO             334                  2 This variable is new&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-6&#34;&gt;&lt;a href=&#34;#cb4-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 3 R2-D2             192                  3 This variable is new&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-7&#34;&gt;&lt;a href=&#34;#cb4-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 4 Darth Vader       404                  4 This variable is new&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note how the second variable we created is recycled to match the length of the dataset.
+But you already knew that, right?&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;common-tricks&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Common tricks&lt;/h1&gt;
+&lt;p&gt;A common trick is making use of &lt;code&gt;if_else&lt;/code&gt; to &lt;strong&gt;conditionally modify some variables&lt;/strong&gt;. I use this structure on a daily basis.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;starwars &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb5-2&#34;&gt;&lt;a href=&#34;#cb5-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;height =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;if_else&lt;/span&gt;(hair_color &lt;span class=&#34;sc&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;blond&amp;quot;&lt;/span&gt;, height &lt;span class=&#34;sc&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt;, height)) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb5-3&#34;&gt;&lt;a href=&#34;#cb5-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;select&lt;/span&gt;(name, height, mass, hair_color) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb5-4&#34;&gt;&lt;a href=&#34;#cb5-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;head&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb6-1&#34;&gt;&lt;a href=&#34;#cb6-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 4 × 8&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-2&#34;&gt;&lt;a href=&#34;#cb6-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   name           height  mass hair_color   &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-3&#34;&gt;&lt;a href=&#34;#cb6-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;chr&amp;gt;           &amp;lt;int&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;chr&amp;gt;        &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-4&#34;&gt;&lt;a href=&#34;#cb6-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 1 Luke Skywalker    344    77 blond        &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-5&#34;&gt;&lt;a href=&#34;#cb6-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 2 C-3PO             167    75 NA           &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-6&#34;&gt;&lt;a href=&#34;#cb6-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 3 R2-D2              96    32 NA           &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-7&#34;&gt;&lt;a href=&#34;#cb6-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 4 Darth Vader       202   136 none         &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Another common use case is to rely on the &lt;code&gt;case_when&lt;/code&gt; function to modify the variable based on several conditions:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;starwars &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb7-2&#34;&gt;&lt;a href=&#34;#cb7-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;mod_height =&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;case_when&lt;/span&gt;(eye_color &lt;span class=&#34;sc&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;blue&amp;quot;&lt;/span&gt; &lt;span class=&#34;sc&#34;&gt;~&lt;/span&gt; height&lt;span class=&#34;sc&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb7-3&#34;&gt;&lt;a href=&#34;#cb7-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                                eye_color &lt;span class=&#34;sc&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;red&amp;quot;&lt;/span&gt; &lt;span class=&#34;sc&#34;&gt;~&lt;/span&gt; height&lt;span class=&#34;sc&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb7-4&#34;&gt;&lt;a href=&#34;#cb7-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                                eye_color &lt;span class=&#34;sc&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;yellow&amp;quot;&lt;/span&gt; &lt;span class=&#34;sc&#34;&gt;~&lt;/span&gt; height&lt;span class=&#34;sc&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb7-5&#34;&gt;&lt;a href=&#34;#cb7-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                                &lt;span class=&#34;cn&#34;&gt;TRUE&lt;/span&gt; &lt;span class=&#34;sc&#34;&gt;~&lt;/span&gt; height)) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb7-6&#34;&gt;&lt;a href=&#34;#cb7-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;select&lt;/span&gt;(name, height, eye_color, mod_height) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb7-7&#34;&gt;&lt;a href=&#34;#cb7-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;head&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb8-1&#34;&gt;&lt;a href=&#34;#cb8-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   name           height eye_color mod_height&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-2&#34;&gt;&lt;a href=&#34;#cb8-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;chr&amp;gt;           &amp;lt;int&amp;gt; &amp;lt;chr&amp;gt;          &amp;lt;dbl&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-3&#34;&gt;&lt;a href=&#34;#cb8-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 1 Luke Skywalker    172 blue              86&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-4&#34;&gt;&lt;a href=&#34;#cb8-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 2 C-3PO             167 yellow          1670&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-5&#34;&gt;&lt;a href=&#34;#cb8-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 3 R2-D2              96 red              192&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-6&#34;&gt;&lt;a href=&#34;#cb8-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 4 Darth Vader       202 yellow          2020 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note that we should end the &lt;code&gt;case_when&lt;/code&gt; with an option that always yields &lt;code&gt;TRUE&lt;/code&gt; because the conditions are evaluated in order. If our data doesn’t meet any condition we are leaving the column as is.&lt;/p&gt;
+&lt;p&gt;All these are fairly basic examples. Let’s go with the &lt;code&gt;dplyr&lt;/code&gt; advanced way of creating and modifying variables.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-advanced-way-using-across&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;The Advanced Way: Using across()&lt;/h1&gt;
+&lt;p&gt;In modern R, we can simultaneously modify several columns at once using the verb &lt;code&gt;across&lt;/code&gt;. We need to pass the transformation we will be performing on those variables as well. For that, we are using a lambda function which basically means that we are creating the function on-the-fly but we are not storing it.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb9&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb9-1&#34;&gt;&lt;a href=&#34;#cb9-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;starwars &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb9-2&#34;&gt;&lt;a href=&#34;#cb9-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;across&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;c&lt;/span&gt;(height, mass, birth_year), &lt;span class=&#34;sc&#34;&gt;~&lt;/span&gt; .x&lt;span class=&#34;sc&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt;)) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb9-3&#34;&gt;&lt;a href=&#34;#cb9-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;select&lt;/span&gt;(name, height, mass, birth_year) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb9-4&#34;&gt;&lt;a href=&#34;#cb9-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;head&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb10&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb10-1&#34;&gt;&lt;a href=&#34;#cb10-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 4 × 4&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-2&#34;&gt;&lt;a href=&#34;#cb10-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   name           height  mass birth_year&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-3&#34;&gt;&lt;a href=&#34;#cb10-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;chr&amp;gt;           &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;      &amp;lt;dbl&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-4&#34;&gt;&lt;a href=&#34;#cb10-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 1 Luke Skywalker   1720   770        190&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-5&#34;&gt;&lt;a href=&#34;#cb10-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 2 C-3PO            1670   750       1120&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-6&#34;&gt;&lt;a href=&#34;#cb10-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 3 R2-D2             960   320        330&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb10-7&#34;&gt;&lt;a href=&#34;#cb10-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 4 Darth Vader      2020  1360        419&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That’s quite nice but sometimes you don’t want to modify the existing columns but creating new ones.
+This is an important use case: &lt;strong&gt;batch-creating several columns at once based on the existing ones&lt;/strong&gt;. I already discussed how to do it in &lt;a href=&#34;https://typethepipe.com/vizs-and-tips/how-to-create-multiple-lags-in-r/&#34;&gt;How to create multiple lags like a Pro&lt;/a&gt;. We can use the &lt;code&gt;.names&lt;/code&gt; argument to dynamically specify the new column names, like this:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb11&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb11-1&#34;&gt;&lt;a href=&#34;#cb11-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;starwars &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb11-2&#34;&gt;&lt;a href=&#34;#cb11-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;across&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;c&lt;/span&gt;(height, mass, birth_year), &lt;span class=&#34;sc&#34;&gt;~&lt;/span&gt; .x &lt;span class=&#34;sc&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;, &lt;span class=&#34;at&#34;&gt;.names =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;{.col}_x100&amp;quot;&lt;/span&gt;)) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb11-3&#34;&gt;&lt;a href=&#34;#cb11-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;select&lt;/span&gt;(name, height, mass, birth_year, height_x100, mass_x100, birth_year_x100) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb11-4&#34;&gt;&lt;a href=&#34;#cb11-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;head&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb12&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb12-1&#34;&gt;&lt;a href=&#34;#cb12-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 4 × 7&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb12-2&#34;&gt;&lt;a href=&#34;#cb12-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   name           height  mass birth_year height_x100 mass_x100 birth_year_x100&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb12-3&#34;&gt;&lt;a href=&#34;#cb12-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;chr&amp;gt;           &amp;lt;int&amp;gt; &amp;lt;dbl&amp;gt;      &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;           &amp;lt;dbl&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb12-4&#34;&gt;&lt;a href=&#34;#cb12-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 1 Luke Skywalker    172    77       19         17200      7700            1900&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb12-5&#34;&gt;&lt;a href=&#34;#cb12-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 2 C-3PO             167    75      112         16700      7500           11200&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb12-6&#34;&gt;&lt;a href=&#34;#cb12-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 3 R2-D2              96    32       33          9600      3200            3300&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb12-7&#34;&gt;&lt;a href=&#34;#cb12-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 4 Darth Vader       202   136       41.9       20200     13600            4190&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Awesome, right? However, I still had to type them all manually. There is a better way.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-pro-way-using-across-tidyselectors&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;The Pro Way: Using across() + tidyselectors&lt;/h1&gt;
+&lt;p&gt;What if we want to modify a lot of columns? There must be a better way to avoid having to type them all…
+Sure there is! &lt;a href=&#34;https://dplyr.tidyverse.org/reference/dplyr_tidy_select.html&#34;&gt;&lt;code&gt;tidyselectors&lt;/code&gt;&lt;/a&gt; to the rescue! Those are a family of functions that allow us to dynamically select several columns based on a condition. Let’s see that with an example.&lt;/p&gt;
+&lt;p&gt;Let’s say we want to modify only the numerical variables. We can do that easily with the help of &lt;code&gt;where&lt;/code&gt; function and the neat part is this family of functions works with several verbs of the Tidyverse. For instance, they work with &lt;code&gt;select&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb13&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb13-1&#34;&gt;&lt;a href=&#34;#cb13-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;starwars &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb13-2&#34;&gt;&lt;a href=&#34;#cb13-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;select&lt;/span&gt;(name, &lt;span class=&#34;fu&#34;&gt;where&lt;/span&gt;(is.numeric)) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb13-3&#34;&gt;&lt;a href=&#34;#cb13-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;head&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb14&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb14-1&#34;&gt;&lt;a href=&#34;#cb14-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 4 × 4&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb14-2&#34;&gt;&lt;a href=&#34;#cb14-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   name           height  mass birth_year&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb14-3&#34;&gt;&lt;a href=&#34;#cb14-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;chr&amp;gt;           &amp;lt;int&amp;gt; &amp;lt;dbl&amp;gt;      &amp;lt;dbl&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb14-4&#34;&gt;&lt;a href=&#34;#cb14-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 1 Luke Skywalker    172    77       19  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb14-5&#34;&gt;&lt;a href=&#34;#cb14-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 2 C-3PO             167    75      112  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb14-6&#34;&gt;&lt;a href=&#34;#cb14-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 3 R2-D2              96    32       33  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb14-7&#34;&gt;&lt;a href=&#34;#cb14-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 4 Darth Vader       202   136       41.9&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;But also with &lt;code&gt;mutate&lt;/code&gt;! So combining &lt;code&gt;across&lt;/code&gt; with &lt;code&gt;where&lt;/code&gt; we can apply the function only over the desired columns (without having to type them!)&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb15&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb15-1&#34;&gt;&lt;a href=&#34;#cb15-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;starwars &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb15-2&#34;&gt;&lt;a href=&#34;#cb15-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;across&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;where&lt;/span&gt;(is.numeric), &lt;span class=&#34;sc&#34;&gt;~&lt;/span&gt; .x &lt;span class=&#34;sc&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;100&lt;/span&gt;)) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb15-3&#34;&gt;&lt;a href=&#34;#cb15-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;select&lt;/span&gt;(name, &lt;span class=&#34;fu&#34;&gt;where&lt;/span&gt;(is.numeric)) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb15-4&#34;&gt;&lt;a href=&#34;#cb15-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;head&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb16&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb16-1&#34;&gt;&lt;a href=&#34;#cb16-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 4 × 4&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb16-2&#34;&gt;&lt;a href=&#34;#cb16-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   name           height  mass birth_year&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb16-3&#34;&gt;&lt;a href=&#34;#cb16-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;chr&amp;gt;           &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;      &amp;lt;dbl&amp;gt;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb16-4&#34;&gt;&lt;a href=&#34;#cb16-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 1 Luke Skywalker  17200  7700       1900&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb16-5&#34;&gt;&lt;a href=&#34;#cb16-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 2 C-3PO           16700  7500      11200&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb16-6&#34;&gt;&lt;a href=&#34;#cb16-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 3 R2-D2            9600  3200       3300&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb16-7&#34;&gt;&lt;a href=&#34;#cb16-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 4 Darth Vader     20200 13600       4190&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note how the &lt;code&gt;name&lt;/code&gt; feature hasn’t been modified, as it is not a numeric variable. This is a really handy trick specially when you are working with big datasets and need to perform an operation on many columns at once.&lt;/p&gt;
+&lt;p&gt;Also, it is worth noting that we can pass &lt;strong&gt;any&lt;/strong&gt; function to &lt;code&gt;across&lt;/code&gt; to modify the selected columns. We don’t necessarily have to define the operation with a lambda function, but any existing function can be used.&lt;/p&gt;
+&lt;p&gt;Here is another powerful example working with character columns. We can apply an existing function to make all of them uppercase:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb17&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb17-1&#34;&gt;&lt;a href=&#34;#cb17-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;starwars &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb17-2&#34;&gt;&lt;a href=&#34;#cb17-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;across&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;where&lt;/span&gt;(is.character), toupper)) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb17-3&#34;&gt;&lt;a href=&#34;#cb17-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;select&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;where&lt;/span&gt;(is.character)) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb17-4&#34;&gt;&lt;a href=&#34;#cb17-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;head&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb18&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb18-1&#34;&gt;&lt;a href=&#34;#cb18-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 4 × 8&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb18-2&#34;&gt;&lt;a href=&#34;#cb18-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   name           hair_color skin_color  eye_color sex   gender    homeworld species&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb18-3&#34;&gt;&lt;a href=&#34;#cb18-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;chr&amp;gt;          &amp;lt;chr&amp;gt;      &amp;lt;chr&amp;gt;       &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt; &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;     &amp;lt;chr&amp;gt;  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb18-4&#34;&gt;&lt;a href=&#34;#cb18-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 1 LUKE SKYWALKER BLOND      FAIR        BLUE      MALE  MASCULINE TATOOINE  HUMAN  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb18-5&#34;&gt;&lt;a href=&#34;#cb18-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 2 C-3PO          NA         GOLD        YELLOW    NONE  MASCULINE TATOOINE  DROID  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb18-6&#34;&gt;&lt;a href=&#34;#cb18-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 3 R2-D2          NA         WHITE, BLUE RED       NONE  MASCULINE NABOO     DROID  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb18-7&#34;&gt;&lt;a href=&#34;#cb18-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 4 DARTH VADER    NONE       WHITE       YELLOW    MALE  MASCULINE TATOOINE  HUMAN &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Also, you don’t have to rely only on the &lt;code&gt;where&lt;/code&gt; tidyselector, you can use many others like &lt;code&gt;contains&lt;/code&gt;, &lt;code&gt;matches&lt;/code&gt;, &lt;code&gt;starts_with&lt;/code&gt; or &lt;code&gt;ends_with&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Here’s another example example using &lt;code&gt;ends_with&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb19&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb19-1&#34;&gt;&lt;a href=&#34;#cb19-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;starwars &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb19-2&#34;&gt;&lt;a href=&#34;#cb19-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;across&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;ends_with&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;_color&amp;quot;&lt;/span&gt;), &lt;span class=&#34;sc&#34;&gt;~&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;paste0&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;the color is &amp;quot;&lt;/span&gt;, .x))) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb19-3&#34;&gt;&lt;a href=&#34;#cb19-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;select&lt;/span&gt;(name, &lt;span class=&#34;fu&#34;&gt;ends_with&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;_color&amp;quot;&lt;/span&gt;)) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb19-4&#34;&gt;&lt;a href=&#34;#cb19-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;head&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb20&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb20-1&#34;&gt;&lt;a href=&#34;#cb20-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 4 × 4&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb20-2&#34;&gt;&lt;a href=&#34;#cb20-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   name           hair_color         skin_color               eye_color           &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb20-3&#34;&gt;&lt;a href=&#34;#cb20-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;chr&amp;gt;          &amp;lt;chr&amp;gt;              &amp;lt;chr&amp;gt;                    &amp;lt;chr&amp;gt;                &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb20-4&#34;&gt;&lt;a href=&#34;#cb20-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 1 Luke Skywalker the color is blond the color is fair        the color is blue     &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb20-5&#34;&gt;&lt;a href=&#34;#cb20-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 2 C-3PO          the color is NA    the color is gold        the color is yellow  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb20-6&#34;&gt;&lt;a href=&#34;#cb20-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 3 R2-D2          the color is NA    the color is white, blue the color is red      &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb20-7&#34;&gt;&lt;a href=&#34;#cb20-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 4 Darth Vader    the color is none  the color is white       the color is yellow   &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Handy stuff, right? There is so much more possibilities to discover. You can read more about it on the &lt;a href=&#34;https://dplyr.tidyverse.org/reference/across.html&#34;&gt;across reference&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more R tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pipe function in Python Polars. Don&#39;t leave the pipe flow!</title>
+      <link>/vizs-and-tips/python-polars-pipe-function-to-one-more-columns/</link>
+      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>/vizs-and-tips/python-polars-pipe-function-to-one-more-columns/</guid>
+      <description>
+&lt;script src=&#34;/vizs-and-tips/python-polars-pipe-function-to-one-more-columns/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;Well, well, hanging out in Python, missing the &lt;code&gt;pipe feeling&lt;/code&gt;?? There are some good news! The pipe function in the Polars Python module allows you to chain operations together by passing the result of one operation as the input to the next operation. For sure, this is not one of the greatest advantages that Polars offers over Pandas…. But it does feel so nice!&lt;/p&gt;
+&lt;p&gt;Here you can find and example of &lt;strong&gt;how to keep the pipe flow even in Python!&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; polars &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; pl&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; random &lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Create a Polars DataFrame with base columns&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;df &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; pl.DataFrame({&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;: [&lt;span class=&#34;st&#34;&gt;&amp;#39;Alice&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;Bob&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;Charlie&amp;#39;&lt;/span&gt;], &lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;#39;offensive_skill&amp;#39;&lt;/span&gt;: [&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;30&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;85&lt;/span&gt;], &lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;#39;defensive_skill&amp;#39;&lt;/span&gt;: [&lt;span class=&#34;dv&#34;&gt;92&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;30&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt;]&lt;/span&gt;
+&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    })&lt;/span&gt;
+&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Define polars custom functions to apply&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-12&#34;&gt;&lt;a href=&#34;#cb1-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; add_position_column(df):&lt;/span&gt;
+&lt;span id=&#34;cb1-13&#34;&gt;&lt;a href=&#34;#cb1-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    df &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; df.with_columns( &lt;/span&gt;
+&lt;span id=&#34;cb1-14&#34;&gt;&lt;a href=&#34;#cb1-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        pl.when(pl.col(&lt;span class=&#34;st&#34;&gt;&amp;#39;defensive_skill&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;50&lt;/span&gt;).then(&lt;span class=&#34;st&#34;&gt;&amp;#39;CB&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-15&#34;&gt;&lt;a href=&#34;#cb1-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        .when(pl.col(&lt;span class=&#34;st&#34;&gt;&amp;#39;offensive_skill&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;50&lt;/span&gt;).then(&lt;span class=&#34;st&#34;&gt;&amp;#39;FW&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-16&#34;&gt;&lt;a href=&#34;#cb1-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        .otherwise(&lt;span class=&#34;st&#34;&gt;&amp;#39;bench&amp;#39;&lt;/span&gt;).alias(&lt;span class=&#34;st&#34;&gt;&amp;quot;position&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-17&#34;&gt;&lt;a href=&#34;#cb1-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    )&lt;/span&gt;
+&lt;span id=&#34;cb1-18&#34;&gt;&lt;a href=&#34;#cb1-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; df&lt;/span&gt;
+&lt;span id=&#34;cb1-19&#34;&gt;&lt;a href=&#34;#cb1-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-20&#34;&gt;&lt;a href=&#34;#cb1-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; add_squad_number_column(df):&lt;/span&gt;
+&lt;span id=&#34;cb1-21&#34;&gt;&lt;a href=&#34;#cb1-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    df &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; df.with_columns( &lt;/span&gt;
+&lt;span id=&#34;cb1-22&#34;&gt;&lt;a href=&#34;#cb1-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        pl.when(pl.col(&lt;span class=&#34;st&#34;&gt;&amp;#39;position&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;CD&amp;#39;&lt;/span&gt;).then(pl.lit(random.sample(&lt;span class=&#34;bu&#34;&gt;range&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;6&lt;/span&gt;), &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;], dtype&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;pl.Int8))&lt;/span&gt;
+&lt;span id=&#34;cb1-23&#34;&gt;&lt;a href=&#34;#cb1-23&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        .when(pl.col(&lt;span class=&#34;st&#34;&gt;&amp;#39;position&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;FW&amp;#39;&lt;/span&gt;).then(pl.lit(random.sample(&lt;span class=&#34;bu&#34;&gt;range&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;7&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;19&lt;/span&gt;), &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;], dtype&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;pl.Int8))&lt;/span&gt;
+&lt;span id=&#34;cb1-24&#34;&gt;&lt;a href=&#34;#cb1-24&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        .otherwise(&lt;span class=&#34;st&#34;&gt;&amp;#39;-&amp;#39;&lt;/span&gt;).alias(&lt;span class=&#34;st&#34;&gt;&amp;quot;squad_number&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-25&#34;&gt;&lt;a href=&#34;#cb1-25&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    )&lt;/span&gt;
+&lt;span id=&#34;cb1-26&#34;&gt;&lt;a href=&#34;#cb1-26&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; df&lt;/span&gt;
+&lt;span id=&#34;cb1-27&#34;&gt;&lt;a href=&#34;#cb1-27&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-28&#34;&gt;&lt;a href=&#34;#cb1-28&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Chain operations together using the pipe function&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-29&#34;&gt;&lt;a href=&#34;#cb1-29&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-30&#34;&gt;&lt;a href=&#34;#cb1-30&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb1-31&#34;&gt;&lt;a href=&#34;#cb1-31&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    df&lt;/span&gt;
+&lt;span id=&#34;cb1-32&#34;&gt;&lt;a href=&#34;#cb1-32&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .pipe(add_position_column)&lt;/span&gt;
+&lt;span id=&#34;cb1-33&#34;&gt;&lt;a href=&#34;#cb1-33&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .pipe(add_squad_number_column)&lt;/span&gt;
+&lt;span id=&#34;cb1-34&#34;&gt;&lt;a href=&#34;#cb1-34&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div&gt;&lt;style&gt;
+.dataframe &gt; thead &gt; tr &gt; th,
+.dataframe &gt; tbody &gt; tr &gt; td {
+  text-align: right;
+}
+&lt;/style&gt;
+&lt;small&gt;shape: (3, 5)&lt;/small&gt;&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;offensive_skill&lt;/th&gt;&lt;th&gt;defensive_skill&lt;/th&gt;&lt;th&gt;position&lt;/th&gt;&lt;th&gt;squad_number&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;i64&lt;/td&gt;&lt;td&gt;i64&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Alice&amp;quot;&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;92&lt;/td&gt;&lt;td&gt;&amp;quot;CB&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;-&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Bob&amp;quot;&lt;/td&gt;&lt;td&gt;30&lt;/td&gt;&lt;td&gt;30&lt;/td&gt;&lt;td&gt;&amp;quot;bench&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;-&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Charlie&amp;quot;&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;td&gt;&amp;quot;FW&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;15&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;polars-pipe-and-lazy-evaluation&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Polars pipe and lazy evaluation&lt;/h1&gt;
+&lt;p&gt;An extra trick is to use the &lt;a href=&#34;https://pola-rs.github.io/polars/py-polars/html/reference/dataframe/api/polars.DataFrame.pipe.html#:~:text=to%20the%20UDF.-,Notes,-It%20is%20recommended&#34;&gt;lazy evaluation&lt;/a&gt; in order to maximize the advantages of query optimization and parallelization. We need a big enough df and complex operations to make it worth.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;result &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; (&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    df.lazy()&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .pipe(add_position_column)&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .pipe(add_squad_number_column)&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .collect()&lt;/span&gt;
+&lt;span id=&#34;cb2-6&#34;&gt;&lt;a href=&#34;#cb2-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb2-7&#34;&gt;&lt;a href=&#34;#cb2-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-8&#34;&gt;&lt;a href=&#34;#cb2-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;result&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div&gt;&lt;style&gt;
+.dataframe &gt; thead &gt; tr &gt; th,
+.dataframe &gt; tbody &gt; tr &gt; td {
+  text-align: right;
+}
+&lt;/style&gt;
+&lt;small&gt;shape: (3, 5)&lt;/small&gt;&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;offensive_skill&lt;/th&gt;&lt;th&gt;defensive_skill&lt;/th&gt;&lt;th&gt;position&lt;/th&gt;&lt;th&gt;squad_number&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;i64&lt;/td&gt;&lt;td&gt;i64&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Alice&amp;quot;&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;92&lt;/td&gt;&lt;td&gt;&amp;quot;CB&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;-&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Bob&amp;quot;&lt;/td&gt;&lt;td&gt;30&lt;/td&gt;&lt;td&gt;30&lt;/td&gt;&lt;td&gt;&amp;quot;bench&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;-&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Charlie&amp;quot;&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;td&gt;&amp;quot;FW&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;12&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python content!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Unlocking the Power of purrr: How to Create Multiple Lags Like a Pro in R</title>
+      <link>/vizs-and-tips/how-to-create-multiple-lags-in-r/</link>
+      <pubDate>Wed, 22 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>/vizs-and-tips/how-to-create-multiple-lags-in-r/</guid>
+      <description>
+&lt;script src=&#34;/vizs-and-tips/how-to-create-multiple-lags-in-r/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; style=&#34;width:800px; height:450px&#34; alt=&#34;An ethereal representation of multiple Time Series&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;Are you tired of creating lag variables one by one? Are you ready to level up your time series analysis game? Forget everything you know about creating lag variables. There’s a better way, and it’s been right in front of you all along.&lt;/p&gt;
+&lt;p&gt;This is a good one. We’ll make use of the semi-unknown &lt;a href=&#34;https://purrr.tidyverse.org/reference/partial.html&#34;&gt;&lt;code&gt;partial&lt;/code&gt;&lt;/a&gt; function to create a useful wrapper around the &lt;code&gt;lag&lt;/code&gt; function. Let’s go straight to the point.&lt;/p&gt;
+&lt;p&gt;First, we create a new function called &lt;code&gt;map_lag&lt;/code&gt;. This function is essentially a mapped version of the &lt;code&gt;lag&lt;/code&gt; function from &lt;code&gt;dplyr&lt;/code&gt;, where we pre-fill the &lt;code&gt;n&lt;/code&gt; argument to create different lag functions. Then, we can apply this list of functions, each one representing a different lag length, to the desired variable.&lt;/p&gt;
+&lt;p&gt;And just like that, voila! We have multiple lag variables without breaking a sweat. To make things even better, we can change the names of our newly created lag variables on the fly to make them more meaningful.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;calculate_lags &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; &lt;span class=&#34;cf&#34;&gt;function&lt;/span&gt;(df, var, lags){&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  map_lag &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; lags &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;map&lt;/span&gt;(&lt;span class=&#34;sc&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;partial&lt;/span&gt;(lag, &lt;span class=&#34;at&#34;&gt;n =&lt;/span&gt; .x))&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;return&lt;/span&gt;(df &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;mutate&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;across&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;.cols =&lt;/span&gt; {{var}}, &lt;span class=&#34;at&#34;&gt;.fns =&lt;/span&gt; map_lag, &lt;span class=&#34;at&#34;&gt;.names =&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;{.col}_lag{lags}&amp;quot;&lt;/span&gt;)))&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Let’s see a quick example. We’ll be using the closing prices of the TSLA stock to showcase its use. We have a data frame like this:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;tsla &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;head&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 4 × 6
+##   date        open  high   low close    volume
+##   &amp;lt;date&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;
+## 1 2022-01-03  383.  400.  379.  400. 104686047
+## 2 2022-01-04  397.  403.  374.  383. 100248258
+## 3 2022-01-05  382.  390.  360.  363.  80119797
+## 4 2022-01-06  359   363.  340.  355.  90336474&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We simply pass the desired lags to the function, as well as the column we will apply the lags on. Note that we are also using &lt;a href=&#34;../../post/dynamically-access-dataframe-variables-tidyeval-ggplot/&#34;&gt;tidyevaluation&lt;/a&gt; to reference the column without quotes. This way we keep the tidyverse vibe intact.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb4-1&#34;&gt;&lt;a href=&#34;#cb4-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;tsla &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;calculate_lags&lt;/span&gt;(close, &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;3&lt;/span&gt;) &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;head&lt;/span&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## # A tibble: 6 × 9
+##   date        open  high   low close    volume close_lag1 close_lag2 close_lag3
+##   &amp;lt;date&amp;gt;     &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;     &amp;lt;dbl&amp;gt;      &amp;lt;dbl&amp;gt;      &amp;lt;dbl&amp;gt;      &amp;lt;dbl&amp;gt;
+## 1 2022-01-03  383.  400.  379.  400. 104686047        NA         NA         NA 
+## 2 2022-01-04  397.  403.  374.  383. 100248258       400.        NA         NA 
+## 3 2022-01-05  382.  390.  360.  363.  80119797       383.       400.        NA 
+## 4 2022-01-06  359   363.  340.  355.  90336474       363.       383.       400.
+## 5 2022-01-07  360.  360.  337.  342.  84164748       355.       363.       383.
+## 6 2022-01-10  333.  353.  327.  353.  91814877       342.       355.       363.&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;It’s time to create your own lags like a pro. Embrace the power of &lt;code&gt;purrr&lt;/code&gt; and &lt;code&gt;partial&lt;/code&gt; and take your time series analysis to the next level. You will impress your colleagues with your advanced R skills and will have more time to focus on the real analysis.&lt;/p&gt;
+&lt;p&gt;Short and sweet!&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more R tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Mock Celery task in Pytest</title>
+      <link>/vizs-and-tips/mock-celery-task-pytest/</link>
+      <pubDate>Sun, 05 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>/vizs-and-tips/mock-celery-task-pytest/</guid>
+      <description>
+&lt;script src=&#34;/vizs-and-tips/mock-celery-task-pytest/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; width=&#34;400px&#34; alt=&#34;Python logo and Celery logo&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;mock-celery-task-in-pytest&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Mock Celery task in Pytest&lt;/h1&gt;
+&lt;p&gt;Let’s get straight to the point. Although there are several ways to do it, and depending on the characteristics of each project, one may be more interesting than another, let’s look at one that generally can be useful for us.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;pytest-celery-fixture&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Pytest Celery Fixture&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;This could be an example of celery config:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; pytest&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;at&#34;&gt;@pytest.fixture&lt;/span&gt;(scope&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;session&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; celery_config(celery_envvars: &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; {&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;task_serializer&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;pickle&amp;quot;&lt;/span&gt;, &lt;span class=&#34;co&#34;&gt;# default json&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;result_serializer&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;pickle&amp;quot;&lt;/span&gt;, &lt;span class=&#34;co&#34;&gt;# default json&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;broker_url&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;memory://&amp;quot;&lt;/span&gt;, &lt;span class=&#34;co&#34;&gt;# default &amp;quot;amqp://&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;result_backend&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;rpc&amp;quot;&lt;/span&gt;, &lt;span class=&#34;co&#34;&gt;# no dafault&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;imports&amp;quot;&lt;/span&gt;: [&lt;span class=&#34;st&#34;&gt;&amp;quot;&amp;lt;your_module&amp;gt;&amp;quot;&lt;/span&gt;],&lt;/span&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    }&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It shouldn’t be mandatory/recommendable to set task_always_eager or CELERY_ALWAYS_EAGER to True, per Celery docs advice. This executed locally instead of being sent to the queue.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;creating-a-celery-task-test&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Creating a Celery task test&lt;/strong&gt;&lt;/h2&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; celery&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;at&#34;&gt;@celery.shared_task&lt;/span&gt;(bind&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; add_task(&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;, a, b):&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; a&lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;b&lt;span class=&#34;op&#34;&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; test_one_pending_iterations(&lt;/span&gt;
+&lt;span id=&#34;cb3-2&#34;&gt;&lt;a href=&#34;#cb3-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    celery_app: celery.Celery,&lt;/span&gt;
+&lt;span id=&#34;cb3-3&#34;&gt;&lt;a href=&#34;#cb3-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    celery_worker: celery.Celery.WorkController,&lt;/span&gt;
+&lt;span id=&#34;cb3-4&#34;&gt;&lt;a href=&#34;#cb3-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;) &lt;span class=&#34;op&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb3-5&#34;&gt;&lt;a href=&#34;#cb3-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;assert&lt;/span&gt; add.delay(&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;4&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;stay-updated-on-python-tips&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Stay updated on Python tips&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Happy testing and may your bugs tremble in fear at the sight of your PyTest prowess!&lt;/p&gt;
+&lt;p&gt;If you want to stay updated…&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+&lt;/style&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>@staticmethod in Python</title>
@@ -1887,13 +2623,42 @@ q2_weighted_mean
       <pubDate>Tue, 14 Jan 2020 00:00:00 +0000</pubDate>
       <guid>/vizs-and-tips/magic-whos-method-jupyter-notebook/</guid>
       <description>
+&lt;script src=&#34;/vizs-and-tips/magic-whos-method-jupyter-notebook/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 
 
 &lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;A recurrent complaint beginner users have about Jupyter Notebooks is the lack of information about the self-created environment variables. If you have this question, probably first of all you should be sure about the Jupyter Notebooks main purpose (totally different from IDEs like Spyder or Pycharm).&lt;/p&gt;
 &lt;p&gt;But in case a notebook is all what you need, you have few ways to display this information. The first and easiest one is to use the magic method &lt;strong&gt;%whos&lt;/strong&gt;
-&lt;img src=&#34;/vizs-and-tips/magic-whos-metodo-jupyter-notebook/jupyter_magic_who.png&#34; /&gt;&lt;/p&gt;
+&lt;img src=&#34;jupyter_magic_who.PNG&#34; /&gt;&lt;/p&gt;
 &lt;p&gt;Two alternative ways are nbextension and Jupyter Lab variable inspector. You can find more information &lt;a href=&#34;https://stackoverflow.com/questions/37718907/variable-explorer-in-jupyter-notebook&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
 </description>
     </item>
     
@@ -2342,27 +3107,30 @@ This way:&lt;/p&gt;
       <pubDate>Sat, 05 Oct 2019 00:00:00 +0000</pubDate>
       <guid>/vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns/</guid>
       <description>
+&lt;script src=&#34;/vizs-and-tips/filtering-data-frame-by-condition-on-multiple-columns/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
 &lt;style type=&#34;text/css&#34;&gt;
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -2371,17 +3139,17 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #c4a000; } /* Attribute */
+code span.at { color: #204a87; } /* Attribute */
 code span.bn { color: #0000cf; } /* BaseN */
 code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4e9a06; } /* Char */
-code span.cn { color: #000000; } /* Constant */
+code span.cn { color: #8f5902; } /* Constant */
 code span.co { color: #8f5902; font-style: italic; } /* Comment */
 code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
 code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
@@ -2390,14 +3158,14 @@ code span.dv { color: #0000cf; } /* DecVal */
 code span.er { color: #a40000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #0000cf; } /* Float */
-code span.fu { color: #000000; } /* Function */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
 code span.im { } /* Import */
 code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
 code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
 code span.ot { color: #8f5902; } /* Other */
 code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code span.sc { color: #000000; } /* SpecialChar */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
 code span.ss { color: #4e9a06; } /* SpecialString */
 code span.st { color: #4e9a06; } /* String */
 code span.va { color: #000000; } /* Variable */
@@ -2414,80 +3182,108 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       overflow-x: hidden;
 }
 &lt;/style&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 10 x 6&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;co&#34;&gt;#    rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;co&#34;&gt;#    &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;co&#34;&gt;#  1     1          5.1        NA            1.4         0.2 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;co&#34;&gt;#  2     2         NA           3            1.4        NA   setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;co&#34;&gt;#  3     3          4.7         3.2          1.3         0.2 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;#  4     4         NA           3.1          1.5         0.2 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;#  5     5          5           3.6          1.4         0.2 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;co&#34;&gt;#  6     6          5.4         3.9          1.7         0.4 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;co&#34;&gt;#  7     7          4.6         3.4          1.4         0.3 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-11&#34; title=&#34;11&#34;&gt;&lt;span class=&#34;co&#34;&gt;#  8     8         NA           3.4          1.5         0.2 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-12&#34; title=&#34;12&#34;&gt;&lt;span class=&#34;co&#34;&gt;#  9     9          4.4         2.9          1.4         0.2 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb1-13&#34; title=&#34;13&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 10    10         NA          NA           NA          NA   setosa &lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 10 x 6&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#    rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#    &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#  1     1          5.1        NA            1.4         0.2 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#  2     2         NA           3            1.4        NA   setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#  3     3          4.7         3.2          1.3         0.2 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#  4     4         NA           3.1          1.5         0.2 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#  5     5          5           3.6          1.4         0.2 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#  6     6          5.4         3.9          1.7         0.4 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#  7     7          4.6         3.4          1.4         0.3 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#  8     8         NA           3.4          1.5         0.2 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-12&#34;&gt;&lt;a href=&#34;#cb1-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#  9     9          4.4         2.9          1.4         0.2 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-13&#34;&gt;&lt;a href=&#34;#cb1-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 10    10         NA          NA           NA          NA   setosa &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;We could write the condition on every column, but that would cumbersome:&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-1&#34; title=&#34;1&#34;&gt;iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;st&#34;&gt;  &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(Sepal.Length) &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;st&#34;&gt;           &lt;/span&gt;&lt;span class=&#34;op&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(Sepal.Width) &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;st&#34;&gt;           &lt;/span&gt;&lt;span class=&#34;op&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(Petal.Length) &lt;span class=&#34;op&#34;&gt;&amp;amp;&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb2-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;st&#34;&gt;           &lt;/span&gt;&lt;span class=&#34;op&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(Petal.Width))&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;iris &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  &lt;span class=&#34;fu&#34;&gt;filter&lt;/span&gt;(&lt;span class=&#34;sc&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;is.na&lt;/span&gt;(Sepal.Length) &lt;span class=&#34;sc&#34;&gt;&amp;amp;&lt;/span&gt; &lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;           &lt;span class=&#34;sc&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;is.na&lt;/span&gt;(Sepal.Width) &lt;span class=&#34;sc&#34;&gt;&amp;amp;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;           &lt;span class=&#34;sc&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;is.na&lt;/span&gt;(Petal.Length) &lt;span class=&#34;sc&#34;&gt;&amp;amp;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;           &lt;span class=&#34;sc&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;is.na&lt;/span&gt;(Petal.Width))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Instead, we just have to select the columns we will filter on and apply the condition:&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-1&#34; title=&#34;1&#34;&gt;features &amp;lt;-&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;names&lt;/span&gt;() &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;keep&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;~&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;str_detect&lt;/span&gt;(.,&lt;span class=&#34;st&#34;&gt;&amp;quot;[.]&amp;quot;&lt;/span&gt;))&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb3-2&#34; title=&#34;2&#34;&gt;iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter_at&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;vars&lt;/span&gt;(features), &lt;span class=&#34;kw&#34;&gt;all_vars&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(.)))&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-1&#34; title=&#34;1&#34;&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 5 x 6&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-2&#34; title=&#34;2&#34;&gt;&lt;span class=&#34;co&#34;&gt;#   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 1     3          4.7         3.2          1.3         0.2 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 2     5          5           3.6          1.4         0.2 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 3     6          5.4         3.9          1.7         0.4 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 4     7          4.6         3.4          1.4         0.3 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb4-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 5     9          4.4         2.9          1.4         0.2 setosa &lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;features &lt;span class=&#34;ot&#34;&gt;&amp;lt;-&lt;/span&gt; iris &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;names&lt;/span&gt;() &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;keep&lt;/span&gt;(&lt;span class=&#34;sc&#34;&gt;~&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;str_detect&lt;/span&gt;(.,&lt;span class=&#34;st&#34;&gt;&amp;quot;[.]&amp;quot;&lt;/span&gt;))&lt;/span&gt;
+&lt;span id=&#34;cb3-2&#34;&gt;&lt;a href=&#34;#cb3-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;iris &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;filter_at&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;vars&lt;/span&gt;(features), &lt;span class=&#34;fu&#34;&gt;all_vars&lt;/span&gt;(&lt;span class=&#34;sc&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;fu&#34;&gt;is.na&lt;/span&gt;(.)))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb4-1&#34;&gt;&lt;a href=&#34;#cb4-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 5 x 6&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-2&#34;&gt;&lt;a href=&#34;#cb4-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-3&#34;&gt;&lt;a href=&#34;#cb4-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-4&#34;&gt;&lt;a href=&#34;#cb4-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 1     3          4.7         3.2          1.3         0.2 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-5&#34;&gt;&lt;a href=&#34;#cb4-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 2     5          5           3.6          1.4         0.2 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-6&#34;&gt;&lt;a href=&#34;#cb4-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 3     6          5.4         3.9          1.7         0.4 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-7&#34;&gt;&lt;a href=&#34;#cb4-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 4     7          4.6         3.4          1.4         0.3 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-8&#34;&gt;&lt;a href=&#34;#cb4-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 5     9          4.4         2.9          1.4         0.2 setosa &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Here we have used the function &lt;code&gt;all_vars&lt;/code&gt; in the predicate to explicit that
 &lt;strong&gt;every feature must satisfy the condition.&lt;/strong&gt;
 To be honest, for that purpose it would have been easier to simply use &lt;code&gt;iris %&amp;gt;% na.omit()&lt;/code&gt;.&lt;/p&gt;
 &lt;p&gt;But what if we wanted the opposite? &lt;strong&gt;Keeping only the rows with &lt;em&gt;all&lt;/em&gt; the selected features missing&lt;/strong&gt; is as easy as changing the predicate part:&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-1&#34; title=&#34;1&#34;&gt;iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter_at&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;vars&lt;/span&gt;(features), &lt;span class=&#34;kw&#34;&gt;all_vars&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(.)))&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-2&#34; title=&#34;2&#34;&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 1 x 6&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;co&#34;&gt;#   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb5-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 1    10           NA          NA           NA          NA setosa &lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;iris &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;filter_at&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;vars&lt;/span&gt;(features), &lt;span class=&#34;fu&#34;&gt;all_vars&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;is.na&lt;/span&gt;(.)))&lt;/span&gt;
+&lt;span id=&#34;cb5-2&#34;&gt;&lt;a href=&#34;#cb5-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-3&#34;&gt;&lt;a href=&#34;#cb5-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 1 x 6&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-4&#34;&gt;&lt;a href=&#34;#cb5-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-5&#34;&gt;&lt;a href=&#34;#cb5-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-6&#34;&gt;&lt;a href=&#34;#cb5-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 1    10           NA          NA           NA          NA setosa &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Another option is to apply the condition on &lt;em&gt;any&lt;/em&gt; feature. That’s where &lt;code&gt;any_vars&lt;/code&gt; comes handy. Here we &lt;strong&gt;keep only the observations with &lt;em&gt;at least one&lt;/em&gt; missing feature:&lt;/strong&gt;&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-1&#34; title=&#34;1&#34;&gt;iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter_at&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;vars&lt;/span&gt;(features), &lt;span class=&#34;kw&#34;&gt;any_vars&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;is.na&lt;/span&gt;(.)))&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-2&#34; title=&#34;2&#34;&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 5 x 6&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;co&#34;&gt;#   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 1     1          5.1        NA            1.4         0.2 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 2     2         NA           3            1.4        NA   setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 3     4         NA           3.1          1.5         0.2 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 4     8         NA           3.4          1.5         0.2 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb6-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 5    10         NA          NA           NA          NA   setosa &lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb6-1&#34;&gt;&lt;a href=&#34;#cb6-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;iris &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;filter_at&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;vars&lt;/span&gt;(features), &lt;span class=&#34;fu&#34;&gt;any_vars&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;is.na&lt;/span&gt;(.)))&lt;/span&gt;
+&lt;span id=&#34;cb6-2&#34;&gt;&lt;a href=&#34;#cb6-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-3&#34;&gt;&lt;a href=&#34;#cb6-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 5 x 6&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-4&#34;&gt;&lt;a href=&#34;#cb6-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-5&#34;&gt;&lt;a href=&#34;#cb6-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-6&#34;&gt;&lt;a href=&#34;#cb6-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 1     1          5.1        NA            1.4         0.2 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-7&#34;&gt;&lt;a href=&#34;#cb6-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 2     2         NA           3            1.4        NA   setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-8&#34;&gt;&lt;a href=&#34;#cb6-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 3     4         NA           3.1          1.5         0.2 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-9&#34;&gt;&lt;a href=&#34;#cb6-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 4     8         NA           3.4          1.5         0.2 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-10&#34;&gt;&lt;a href=&#34;#cb6-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 5    10         NA          NA           NA          NA   setosa &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Also, there are some other fancy ways to manipulate data frames with the filter family. One trick is using &lt;code&gt;contains()&lt;/code&gt; or &lt;code&gt;starts_with()&lt;/code&gt; to select the variables:&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-1&#34; title=&#34;1&#34;&gt;iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter_at&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;vars&lt;/span&gt;(&lt;span class=&#34;kw&#34;&gt;contains&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;Length&amp;quot;&lt;/span&gt;)), &lt;span class=&#34;kw&#34;&gt;all_vars&lt;/span&gt;(. &lt;span class=&#34;op&#34;&gt;&amp;gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;fl&#34;&gt;1.4&lt;/span&gt;))&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-2&#34; title=&#34;2&#34;&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 5 x 6&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;co&#34;&gt;#   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 1     1          5.1        NA            1.4         0.2 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 2     5          5           3.6          1.4         0.2 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 3     6          5.4         3.9          1.7         0.4 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 4     7          4.6         3.4          1.4         0.3 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb7-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 5     9          4.4         2.9          1.4         0.2 setosa &lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;iris &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;filter_at&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;vars&lt;/span&gt;(&lt;span class=&#34;fu&#34;&gt;contains&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;Length&amp;quot;&lt;/span&gt;)), &lt;span class=&#34;fu&#34;&gt;all_vars&lt;/span&gt;(. &lt;span class=&#34;sc&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;1.4&lt;/span&gt;))&lt;/span&gt;
+&lt;span id=&#34;cb7-2&#34;&gt;&lt;a href=&#34;#cb7-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-3&#34;&gt;&lt;a href=&#34;#cb7-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 5 x 6&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-4&#34;&gt;&lt;a href=&#34;#cb7-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-5&#34;&gt;&lt;a href=&#34;#cb7-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-6&#34;&gt;&lt;a href=&#34;#cb7-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 1     1          5.1        NA            1.4         0.2 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-7&#34;&gt;&lt;a href=&#34;#cb7-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 2     5          5           3.6          1.4         0.2 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-8&#34;&gt;&lt;a href=&#34;#cb7-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 3     6          5.4         3.9          1.7         0.4 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-9&#34;&gt;&lt;a href=&#34;#cb7-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 4     7          4.6         3.4          1.4         0.3 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-10&#34;&gt;&lt;a href=&#34;#cb7-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 5     9          4.4         2.9          1.4         0.2 setosa &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Another example is applying the condition on columns that satisfy certain condition with &lt;code&gt;filter_if&lt;/code&gt; (notice the &lt;code&gt;rowid&lt;/code&gt; fetaure here):&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-1&#34; title=&#34;1&#34;&gt;iris &lt;span class=&#34;op&#34;&gt;%&amp;gt;%&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;kw&#34;&gt;filter_if&lt;/span&gt;(is.numeric, &lt;span class=&#34;kw&#34;&gt;any_vars&lt;/span&gt;(. &lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&#34;st&#34;&gt; &lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;))&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-2&#34; title=&#34;2&#34;&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-3&#34; title=&#34;3&#34;&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 6 x 6&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-4&#34; title=&#34;4&#34;&gt;&lt;span class=&#34;co&#34;&gt;#   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species&lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-5&#34; title=&#34;5&#34;&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-6&#34; title=&#34;6&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 1     1          5.1        NA            1.4         0.2 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-7&#34; title=&#34;7&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 2     6          5.4         3.9          1.7         0.4 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-8&#34; title=&#34;8&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 3     7          4.6         3.4          1.4         0.3 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-9&#34; title=&#34;9&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 4     8         NA           3.4          1.5         0.2 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-10&#34; title=&#34;10&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 5     9          4.4         2.9          1.4         0.2 setosa &lt;/span&gt;&lt;/a&gt;
-&lt;a class=&#34;sourceLine&#34; id=&#34;cb8-11&#34; title=&#34;11&#34;&gt;&lt;span class=&#34;co&#34;&gt;# 6    10         NA          NA           NA          NA   setosa &lt;/span&gt;&lt;/a&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb8-1&#34;&gt;&lt;a href=&#34;#cb8-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;iris &lt;span class=&#34;sc&#34;&gt;%&amp;gt;%&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;filter_if&lt;/span&gt;(is.numeric, &lt;span class=&#34;fu&#34;&gt;any_vars&lt;/span&gt;(. &lt;span class=&#34;sc&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;))&lt;/span&gt;
+&lt;span id=&#34;cb8-2&#34;&gt;&lt;a href=&#34;#cb8-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-3&#34;&gt;&lt;a href=&#34;#cb8-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# # A tibble: 6 x 6&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-4&#34;&gt;&lt;a href=&#34;#cb8-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   rowid Sepal.Length Sepal.Width Petal.Length Petal.Width Species&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-5&#34;&gt;&lt;a href=&#34;#cb8-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#   &amp;lt;int&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt;        &amp;lt;dbl&amp;gt;       &amp;lt;dbl&amp;gt; &amp;lt;fct&amp;gt;  &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-6&#34;&gt;&lt;a href=&#34;#cb8-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 1     1          5.1        NA            1.4         0.2 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-7&#34;&gt;&lt;a href=&#34;#cb8-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 2     6          5.4         3.9          1.7         0.4 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-8&#34;&gt;&lt;a href=&#34;#cb8-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 3     7          4.6         3.4          1.4         0.3 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-9&#34;&gt;&lt;a href=&#34;#cb8-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 4     8         NA           3.4          1.5         0.2 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-10&#34;&gt;&lt;a href=&#34;#cb8-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 5     9          4.4         2.9          1.4         0.2 setosa &lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-11&#34;&gt;&lt;a href=&#34;#cb8-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# 6    10         NA          NA           NA          NA   setosa &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more useful R tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
 </description>
     </item>
     
