@@ -57,8 +57,6 @@ def add_task(self, a, b):
 ```
 
 ```{python}
-@pytest.mark.usefixtures("celery_app")
-@pytest.mark.usefixtures("celery_worker")
 def test_one_pending_iterations(
     celery_app: celery.Celery,
     celery_worker: celery.Celery.WorkController,
