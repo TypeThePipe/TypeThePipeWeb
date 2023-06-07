@@ -1,5 +1,5 @@
 ---
-title: Ursina vector rotation. The right and easy way!
+title: Ursina vector rotation. The right and easy way to deal with this 3d Python module!
 author: Carlos Vecina Tebar
 date: '2023-05-07'
 slug: ursina-vector-rotation
@@ -87,7 +87,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><img src="featured.png" width="400px" alt="Ursina Python 3d rotation" /></p>
 <div id="ursina-object-manipulation.-entity-and-vector-rotations-made-easy" class="section level1">
 <h1>Ursina object manipulation. Entity and vector rotations made easy</h1>
-<p>Let’s get straight to the point. Although there are several ways to do it. Let’s take a look at one that generally can be useful for us. We start rotating a simple vector using auxiliary functions. In the second part, we’re exploring how to rotate a proper Ursina Entity. We’re going to make our little cube do a mind-blowing pirouette.</p>
+<p>Ursina is a Python module that provides a lightweight game development framework. It is built on top of the popular game engine, Panda3D, and aims to simplify the process of creating 2D and 3D games using Python.</p>
+<p>Let’s get straight to the point. Although there are several ways to do it, we’re showing a simple but robust approach. Let’s take a look at one that generally can be useful for us. We start rotating a simple vector using auxiliary functions. In the second part, we’re exploring how to rotate a proper Ursina Entity. We’re going to make our little cube do a mind-blowing pirouette.</p>
 <p><br></p>
 <div id="ursina-vector-rotation.-how-to-rotate-a-vec3-object" class="section level2">
 <h2><strong>Ursina vector rotation. How to rotate a Vec3 object</strong></h2>
@@ -146,10 +147,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="entity-3d-object-rotation-in-ursina" class="section level2">
 <h2><strong>Entity 3d object rotation in Ursina</strong></h2>
-<p>As annotated <a href="https://stackoverflow.com/questions/70320542/how-do-you-rotate-ursina-entities-around-their-local-axes#:~:text=The%20default%20rotation%20axes%20in,seen%20from%20the%20outside%20in.">here</a>, The predefined rotation axes in Ursina are as described below:</p>
-<p>x: Perform a clockwise rotation around the x-axis, observed from the external viewpoint.
-y: Perform a clockwise rotation around the y-axis, observed from the external viewpoint.
-z: Perform a counterclockwise rotation around the z-axis, observed from the external viewpoint. This direction is reversed due to the nature of 2D games.</p>
+<p>As annotated <a href="https://stackoverflow.com/questions/70320542/how-do-you-rotate-ursina-entities-around-their-local-axes#:~:text=The%20default%20rotation%20axes%20in,seen%20from%20the%20outside%20in.">here</a>, the predefined rotation axes in Ursina are as described below:</p>
+<p>x: Perform a clockwise rotation around the x-axis, observed from the external viewpoint.</p>
+<p>y: Perform a clockwise rotation around the y-axis, observed from the external viewpoint.</p>
+<p>z: Perform a counterclockwise rotation around the z-axis, observed from the external viewpoint. This direction is reversed due to the nature of 2D games.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>app <span class="op">=</span> Ursina()</span>
 <span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
 <span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>rotation_resetter <span class="op">=</span> Entity()</span>

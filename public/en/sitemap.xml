@@ -4,7 +4,7 @@
   
   <url>
     <loc>/authors/</loc>
-    <lastmod>2023-05-07T00:00:00+00:00</lastmod>
+    <lastmod>2023-05-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -19,7 +19,7 @@
   
   <url>
     <loc>/authors/carlos-vecina/</loc>
-    <lastmod>2023-05-07T00:00:00+00:00</lastmod>
+    <lastmod>2023-05-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -34,7 +34,7 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2023-05-07T00:00:00+00:00</lastmod>
+    <lastmod>2023-05-01T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -44,96 +44,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/categories/"
-                />
-  </url>
-  
-  <url>
-    <loc>/tags/pytest/</loc>
-    <lastmod>2023-05-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/python/</loc>
-    <lastmod>2023-05-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/python/</loc>
-    <lastmod>2023-05-07T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/python/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/python/"
-                />
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2023-05-07T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tags/"
-                />
-  </url>
-  
-  <url>
-    <loc>/categories/tips/</loc>
-    <lastmod>2023-05-07T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/tips/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/tips/"
-                />
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2023-05-07T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/"
-                />
-  </url>
-  
-  <url>
-    <loc>/vizs-and-tips/ursina-vector-rotation/</loc>
-    <lastmod>2023-05-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/vizs-and-tips/</loc>
-    <lastmod>2023-05-07T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/vizs-and-tips/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/vizs-and-tips/"
                 />
   </url>
   
@@ -178,6 +88,21 @@
   </url>
   
   <url>
+    <loc>/</loc>
+    <lastmod>2023-05-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/"
+                />
+  </url>
+  
+  <url>
     <loc>/vizs-and-tips/modifying-variables-the-right-way/</loc>
     <lastmod>2023-04-04T00:00:00+00:00</lastmod>
   </url>
@@ -198,13 +123,73 @@
   </url>
   
   <url>
+    <loc>/tags/</loc>
+    <lastmod>2023-04-04T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/"
+                />
+  </url>
+  
+  <url>
     <loc>/tags/tidyverse/</loc>
     <lastmod>2023-04-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
+    <loc>/categories/tips/</loc>
+    <lastmod>2023-04-04T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/tips/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/tips/"
+                />
+  </url>
+  
+  <url>
+    <loc>/vizs-and-tips/</loc>
+    <lastmod>2023-04-04T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/"
+                />
+  </url>
+  
+  <url>
     <loc>/vizs-and-tips/python-polars-pipe-function-to-one-more-columns/</loc>
     <lastmod>2023-03-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/python/</loc>
+    <lastmod>2023-03-28T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/python/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/python/"
+                />
   </url>
   
   <url>
@@ -238,12 +223,12 @@
   </url>
   
   <url>
-    <loc>/tags/algotrading/</loc>
+    <loc>/categories/algotrading/</loc>
     <lastmod>2023-03-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/algotrading/</loc>
+    <loc>/tags/algotrading/</loc>
     <lastmod>2023-03-14T00:00:00+00:00</lastmod>
   </url>
   
@@ -259,6 +244,16 @@
   
   <url>
     <loc>/vizs-and-tips/mock-celery-task-pytest/</loc>
+    <lastmod>2023-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/pytest/</loc>
+    <lastmod>2023-03-05T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/python/</loc>
     <lastmod>2023-03-05T00:00:00+00:00</lastmod>
   </url>
   

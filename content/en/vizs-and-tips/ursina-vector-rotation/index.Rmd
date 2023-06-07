@@ -1,5 +1,5 @@
 ---
-title: Ursina vector rotation. The right and easy way!
+title: Ursina vector rotation. The right and easy way to deal with this 3d Python module!
 author: Carlos Vecina Tebar
 date: '2023-05-07'
 slug: ursina-vector-rotation
@@ -20,7 +20,9 @@ featured: false
 
 # Ursina object manipulation. Entity and vector rotations made easy
 
-Let's get straight to the point. Although there are several ways to do it. Let's take a look at one that generally can be useful for us. We start rotating a simple vector using auxiliary functions. In the second part, we're exploring how to rotate a proper Ursina Entity. We're going to make our little cube do a mind-blowing pirouette.
+Ursina is a Python module that provides a lightweight game development framework. It is built on top of the popular game engine, Panda3D, and aims to simplify the process of creating 2D and 3D games using Python.
+
+Let's get straight to the point. Although there are several ways to do it, we're showing a simple but robust approach. Let's take a look at one that generally can be useful for us. We start rotating a simple vector using auxiliary functions. In the second part, we're exploring how to rotate a proper Ursina Entity. We're going to make our little cube do a mind-blowing pirouette.
 
 <br>
 
@@ -83,11 +85,14 @@ plt.show()
 
 ## **Entity 3d object rotation in Ursina**
 
-As annotated [here](https://stackoverflow.com/questions/70320542/how-do-you-rotate-ursina-entities-around-their-local-axes#:~:text=The%20default%20rotation%20axes%20in,seen%20from%20the%20outside%20in.), The predefined rotation axes in Ursina are as described below:
+As annotated [here](https://stackoverflow.com/questions/70320542/how-do-you-rotate-ursina-entities-around-their-local-axes#:~:text=The%20default%20rotation%20axes%20in,seen%20from%20the%20outside%20in.), the predefined rotation axes in Ursina are as described below:
 
 x: Perform a clockwise rotation around the x-axis, observed from the external viewpoint.
+
 y: Perform a clockwise rotation around the y-axis, observed from the external viewpoint.
+
 z: Perform a counterclockwise rotation around the z-axis, observed from the external viewpoint. This direction is reversed due to the nature of 2D games.
+
 
 ```{python}
 app = Ursina()
