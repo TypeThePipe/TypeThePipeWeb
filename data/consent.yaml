@@ -1,0 +1,9 @@
+items:
+  - title: Google Anaytics (functional)
+    description: This code gives us insight into the number of anonymized people that visit our website, where they are from and what they are clicking on in order to create better content.
+    is_functional: true
+    script_file: ga.js
+  - title: Marketing
+    description: Marketing pourposes cookies.
+    is_functional: false
+    script_file: mkt.js
