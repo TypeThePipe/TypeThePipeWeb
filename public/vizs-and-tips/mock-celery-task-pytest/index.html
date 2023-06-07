@@ -715,11 +715,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="at">@celery.shared_task</span>(bind<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="kw">def</span> add_task(<span class="va">self</span>, a, b):</span>
 <span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>    <span class="cf">return</span> a<span class="op">+</span>b<span class="op">;</span></span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="kw">def</span> test_one_pending_iterations(</span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>    celery_app: celery.Celery,</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>    celery_worker: celery.Celery.WorkController,</span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>    <span class="cf">assert</span> add.delay(<span class="dv">2</span>, <span class="dv">2</span>) <span class="op">==</span> <span class="dv">4</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="at">@pytest.mark.usefixtures</span>(<span class="st">&quot;celery_app&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="at">@pytest.mark.usefixtures</span>(<span class="st">&quot;celery_worker&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="kw">def</span> test_one_pending_iterations(</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>    celery_app: celery.Celery,</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>    celery_worker: celery.Celery.WorkController,</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>    <span class="cf">assert</span> add.delay(<span class="dv">2</span>, <span class="dv">2</span>) <span class="op">==</span> <span class="dv">4</span></span></code></pre></div>
 </div>
 <div id="stay-updated-on-python-tips" class="section level2">
 <h2><strong>Stay updated on Python tips</strong></h2>
