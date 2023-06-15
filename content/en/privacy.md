@@ -105,3 +105,9 @@ Safari
 Google Chrome
 Third Party Cookies
 This website may use third-party services, as Google Analytics, to collect information for statistical purposes and for the use of the website.
+
+<span id="ezoic-privacy-policy-embed"></span>
+
+To be CCPA compliant, If you have your own privacy policy page, you must include the following link in your page by July 1, 2020:
+
+<http://g.ezoic.net/privacy/typethepipe.com/annualRequestSummary>(https://pubdash.ezoic.com/settings/privacy/privacypolicy#:~:text=To%20be%20CCPA,typethepipe.com/annualRequestSummary)
