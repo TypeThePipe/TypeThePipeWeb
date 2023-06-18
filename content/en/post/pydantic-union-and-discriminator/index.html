@@ -1,0 +1,271 @@
+---
+title: Pydantic discriminated unions. Some examples to simplify data structures and ensure type safety
+author: Carlos Vecina Tebar
+date: '2023-06-18'
+slug: pydantic-discriminated-union
+output: 
+  blogdown::html_page:
+    highlight: pygments 
+categories:
+  - Python
+  - Post
+tags: [Python, Pydantic]
+subtitle: "Powerful type validation and discriminated Unions with Pydantic: Simplify data structures and ensure type safety. We are showcasing a few straightforward examples."
+summary: "Powerful type validation and discriminated Unions with Pydantic: Simplify data structures and ensure type safety. We are showcasing a few straightforward examples."
+authors: [carlos-vecina]
+featured: false
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="featured.png" width="400px" alt="Pydantic Python library logo." /></p>
+<div id="what-is-an-union-discriminator-or-tagged-unions-and-its-role-in-pydantic" class="section level1">
+<h1>What is an union discriminator or tagged unions, and its role in Pydantic?</h1>
+<p>Well, well, well, look who decided to stroll into the world of Pydantic discriminators! 🕶️ Brace yourselves, folks, because we’re about to take a sarcastic and catchy rollercoaster ride through this wild jungle of coding wonders. Buckle up!</p>
+<p>So, what’s all the buzz about Pydantic discriminators? Oh, they’re just the coolest thing since sliced bread, my friends! Picture this: you have a bunch of data models, each with their own quirks and peculiarities. It’s like dealing with a bunch of divas in a high school drama, except instead of gossip, it’s all about attributes and properties. Drama queens, am I right?</p>
+<p>Now, let’s say you want to pick out the perfect model from this chaotic ensemble. How on earth are you going to do that? Fear not, because Pydantic discriminators are here to save the day, just like a superhero with an ironic sense of humor. They’re like the Sherlock Holmes of model selection, deducing the perfect fit for you.</p>
+<p><br></p>
+<div id="how-does-pydantic-discriminator-works" class="section level2">
+<h2><strong>How does Pydantic discriminator works?</strong></h2>
+<p>Pydantic’s discriminator feature allows the definition of data structures with multiple types, using a discriminator field to determine the actual object type. This enables type validation and serialization/deserialization based on the discriminator value, ensuring data integrity and flexibility in representing different types of objects.</p>
+<p>Since <a href="https://docs.pydantic.dev/latest/usage/types/#discriminated-unions-aka-tagged-unions:~:text=Required%20Fields.-,Discriminated%20Unions%20(a.k.a.%20Tagged%20Unions,-)">Pydantic 1.9, we could make use of it</a>. Let’s showcase it in an easy way:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">from</span> pydantic <span class="im">import</span> BaseModel, Field, parse_obj_as</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Literal, Union, Annotated</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="kw">class</span> Tiger(BaseModel):</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    animal_type: Literal[<span class="st">&quot;tiger&quot;</span>] <span class="op">=</span> <span class="st">&quot;tiger&quot;</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>    ferocity_scale: <span class="bu">float</span> <span class="op">=</span> Field(..., ge<span class="op">=</span><span class="dv">0</span>, le<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="kw">class</span> Shark(BaseModel):</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    animal_type: Literal[<span class="st">&quot;shark&quot;</span>] <span class="op">=</span> <span class="st">&quot;shark&quot;</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    ferocity_scale: <span class="bu">float</span> <span class="op">=</span> Field(..., ge<span class="op">=</span><span class="dv">0</span>, le<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="kw">class</span> Lion(BaseModel):</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    animal_type: Literal[<span class="st">&quot;lion&quot;</span>] <span class="op">=</span> <span class="st">&quot;lion&quot;</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    ferocity_scale: <span class="bu">float</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="kw">class</span> WildAnimal(BaseModel):</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>    __root__: Annotated[Union[Tiger, Shark, Lion], Field(..., discriminator<span class="op">=</span><span class="st">&#39;animal_type&#39;</span>)]</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>my_shark <span class="op">=</span> WildAnimal.parse_obj({<span class="st">&#39;animal_type&#39;</span>: <span class="st">&#39;shark&#39;</span>, <span class="st">&#39;ferocity_scale&#39;</span>: <span class="dv">5</span>}).__root__</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="co">#print(Shark(ferocity_scale=5).json())</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="co"># Desarialice</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>WildAnimal.parse_raw(Shark(ferocity_scale<span class="op">=</span><span class="dv">5</span>).json())</span></code></pre></div>
+<pre><code>## WildAnimal(__root__=Shark(animal_type=&#39;shark&#39;, ferocity_scale=5.0))</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(my_shark, Shark))</span></code></pre></div>
+<pre><code>## True</code></pre>
+<p>The below polimorfic code example and some other interesting discussions could be found here:
+<a href="https://github.com/pydantic/pydantic/discussions/5785" class="uri">https://github.com/pydantic/pydantic/discussions/5785</a></p>
+<p><br></p>
+</div>
+<div id="pydantic-annotated-union-discriminator-example" class="section level2">
+<h2><strong>Pydantic Annotated union discriminator example</strong></h2>
+<p>But we could use a very simple approach to achieve most of the usage by using the <code>Annotated</code> union.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>Animal <span class="op">=</span> Annotated[Union[Tiger, Shark], Field(discriminator<span class="op">=</span><span class="st">&#39;animal_type&#39;</span>)]</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>raw_data <span class="op">=</span> {</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>    <span class="st">&quot;animal_type&quot;</span>: <span class="st">&quot;tiger&quot;</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>    <span class="st">&quot;ferocity_scale&quot;</span>: <span class="dv">6</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>}</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>parse_obj_as(Animal, raw_data)</span></code></pre></div>
+<pre><code>## Tiger(animal_type=&#39;tiger&#39;, ferocity_scale=6.0)</code></pre>
+<p>Get ready for the magic of the Field class, courtesy of Pydantic. It’s armed with a special power called “discriminator.” By setting the discriminator to “pet_type,” we unlock the ability to distinguish between our fantastic creatures. It’s like giving them their own special spotlight!</p>
+<p>Hold on tight, because we’re about to venture into the wild lands of raw_data. It holds the secrets of a “pet_type” with the fiery spirit of a “tiger” and a mesmerizing “stripes” count of 6. It’s as if we’re peering into a digital zoo!</p>
+<p>And now, it’s showtime! We summon the powerful parse_obj_as to work its coding wizardry. We present it with our regal Animal and the enigmatic raw_data. Abracadabra! With a wave of its wand, the transformation unfolds. The raw data morphs into a stunning representation of our chosen Animal. It’s like a magical metamorphosis!</p>
+<p><br></p>
+</div>
+<div id="example-of-polimorfic-base-model" class="section level2">
+<h2><strong>Example of Polimorfic Base Model</strong></h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="kw">class</span> PolymorphicBaseModel(BaseModel):</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>    <span class="bu">type</span>: <span class="bu">str</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>    _subtypes <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init_subclass__</span>(subcls, <span class="bu">type</span><span class="op">=</span><span class="va">None</span>, <span class="op">**</span>kwargs):</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init_subclass__</span>(<span class="op">**</span>kwargs)</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">type</span>:</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>            <span class="co"># n.b. if a subclass declares its own _subtypes dict, it&#39;ll take precedence over this one.</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>            <span class="co"># This would allow us to re-use the same type names across different classes.</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">type</span> <span class="kw">in</span> subcls._subtypes:</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>                <span class="cf">raise</span> <span class="pp">AttributeError</span>(</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>                    <span class="ss">f&quot;Class </span><span class="sc">{</span>subcls<span class="sc">}</span><span class="ss"> cannot be registered with polymorphic type=&#39;</span><span class="sc">{</span><span class="bu">type</span><span class="sc">}</span><span class="ss">&#39; because it&#39;s already registered &quot;</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>                    <span class="ss">f&quot; to </span><span class="sc">{</span>subcls<span class="sc">.</span>_subtypes[<span class="bu">type</span>]<span class="sc">}</span><span class="ss">&quot;</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>                )</span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>            subcls._subtypes[<span class="bu">type</span>] <span class="op">=</span> subcls</span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>    <span class="at">@classmethod</span></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>    <span class="kw">def</span> _convert_to_real_type(cls, data):</span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>        data_type <span class="op">=</span> data.get(<span class="st">&quot;type&quot;</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a>        <span class="cf">if</span> data_type <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f&quot;Missing &#39;type&#39; for </span><span class="sc">{</span>cls<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a>        subcls <span class="op">=</span> cls._subtypes.get(data_type)</span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a>        <span class="cf">if</span> subcls <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">TypeError</span>(<span class="ss">f&quot;Unsupported sub-type: </span><span class="sc">{</span>data_type<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="bu">issubclass</span>(subcls, cls):</span>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">TypeError</span>(<span class="ss">f&quot;Inferred class </span><span class="sc">{</span>subcls<span class="sc">}</span><span class="ss"> is not a subclass of </span><span class="sc">{</span>cls<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a></span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a>        <span class="cf">return</span> subcls(<span class="op">**</span>data)</span>
+<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a>    <span class="at">@classmethod</span></span>
+<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a>    <span class="kw">def</span> parse_obj(cls, data):</span>
+<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a>        <span class="cf">return</span> cls._convert_to_real_type(data)</span>
+<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a>    </span>
+<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a>    </span>
+<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a><span class="kw">class</span> Animal(PolymorphicBaseModel):</span>
+<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a>    name: <span class="bu">str</span></span>
+<span id="cb7-40"><a href="#cb7-40" tabindex="-1"></a>    color: <span class="bu">str</span> <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb7-41"><a href="#cb7-41" tabindex="-1"></a></span>
+<span id="cb7-42"><a href="#cb7-42" tabindex="-1"></a><span class="kw">class</span> Cat(Animal, <span class="bu">type</span><span class="op">=</span><span class="st">&quot;cat&quot;</span>):</span>
+<span id="cb7-43"><a href="#cb7-43" tabindex="-1"></a>    <span class="bu">type</span>: Literal[<span class="st">&quot;cat&quot;</span>] <span class="op">=</span> <span class="st">&quot;cat&quot;</span></span>
+<span id="cb7-44"><a href="#cb7-44" tabindex="-1"></a>    hairless: <span class="bu">bool</span></span>
+<span id="cb7-45"><a href="#cb7-45" tabindex="-1"></a></span>
+<span id="cb7-46"><a href="#cb7-46" tabindex="-1"></a><span class="kw">class</span> Dog(Animal, <span class="bu">type</span><span class="op">=</span><span class="st">&quot;dog&quot;</span>):</span>
+<span id="cb7-47"><a href="#cb7-47" tabindex="-1"></a>    <span class="bu">type</span>: Literal[<span class="st">&quot;dog&quot;</span>] <span class="op">=</span> <span class="st">&quot;dog&quot;</span></span>
+<span id="cb7-48"><a href="#cb7-48" tabindex="-1"></a>    breed: <span class="bu">str</span></span>
+<span id="cb7-49"><a href="#cb7-49" tabindex="-1"></a></span>
+<span id="cb7-50"><a href="#cb7-50" tabindex="-1"></a>cat_instance <span class="op">=</span> Animal.parse_obj({<span class="st">&quot;type&quot;</span>:<span class="st">&quot;cat&quot;</span>, <span class="st">&quot;hairless&quot;</span>: <span class="va">False</span>, <span class="st">&quot;name&quot;</span>: <span class="st">&quot;meaw&quot;</span>, <span class="st">&quot;color&quot;</span>: <span class="st">&quot;black&quot;</span>})</span>
+<span id="cb7-51"><a href="#cb7-51" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(cat_instance, Cat))</span></code></pre></div>
+<pre><code>## True</code></pre>
+<p>Tthe PolymorphicBaseModel, a base class that sets the stage for polymorphic behavior. It defines a required type attribute and introduces a hidden _subtypes dictionary to keep track of subtypes.</p>
+<p>Next, we dive into the <strong>init_subclass</strong> method, where the magic happens. It allows subclasses to register themselves with a specific polymorphic type. This lets us distinguish between different subtypes within the PolymorphicBaseModel hierarchy.</p>
+<p>But hold on, there’s more to uncover! We make use of the _convert_to_real_type method, responsible for converting data to its actual subtype based on the provided type attribute. It checks if the type is valid, finds the corresponding subclass, and ensures it is a valid subclass of the base class.</p>
+<p>Finally, we arrive at the parse_obj method, where the true parsing takes place. It serves as the entry point for parsing objects of the polymorphic hierarchy. Using the _convert_to_real_type method, it transforms the data into an instance of the appropriate subclass.</p>
+<p>And there you have it! A glimpse into the realm of polymorphic models. It’s a world where base classes and subtypes come together, allowing for flexible and dynamic object parsing. Embrace the power of polymorphism and let your code adapt and evolve with grace!</p>
+<p><br></p>
+</div>
+<div id="pydantic-2-typeadapter-to-parse-data-into-a-discriminated-union" class="section level2">
+<h2><strong>Pydantic 2: TypeAdapter to parse data into a discriminated union</strong></h2>
+<p>In Pydantic v2, you can utilize the TypeAdapter to parse data into a discriminated union. However, please note that Pydantic v2 is currently in pre-release, and the module’s current version is v1.7.</p>
+<p>Therefore, <strong>make sure to upgrade to Pydantic v2 when it becomes available to utilize this feature.</strong></p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>from pydantic import TypeAdapter</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>adapter <span class="ot">=</span> <span class="fu">TypeAdapter</span>(Annotated[Union[Child1, Child2], <span class="fu">Field</span>(<span class="at">discriminator=</span><span class="st">&#39;type&#39;</span>)])</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>child <span class="ot">=</span> <span class="fu">adapter.validate_json</span>(my_json_data)</span></code></pre></div>
+<p><br></p>
+</div>
+<div id="stay-updated-on-pydantic-and-python-tips" class="section level2">
+<h2><strong>Stay updated on Pydantic and Python tips</strong></h2>
+<p>Hopefully, this post has helped familiarize you with the usage of unions and discriminators in Pydantic, showcasing some of its functionalities and enabling you to enjoy their benefits.</p>
+<p>If you want to stay updated…</p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more Python and Pydantic tips!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+<style>
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+</style>
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
+</div>
+</div>

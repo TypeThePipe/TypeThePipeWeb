@@ -10,6 +10,8 @@ Using Academic, Hugo and Blogdown.
 # Trendy content
 [How to create multiple lags like a Pro](https://typethepipe.com/vizs-and-tips/how-to-create-multiple-lags-in-r/)
 
+[Pydantic discriminated unions](https://typethepipe.com/post/pydantic-discriminated-union/)
+
 [Geom Ribbon shadow confidence intervals](https://typethepipe.com/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/)
 
 [Voice assistant Python Wishper ChatGPT 3](https://typethepipe.com/post/gpt-whisper-build-your-own-voice-assistant/)
