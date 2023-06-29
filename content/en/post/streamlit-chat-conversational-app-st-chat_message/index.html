@@ -1,0 +1,209 @@
+---
+title: New Streamlit Chat. Conversational app with st.chat_message and st.chat_input
+author: Carlos Vecina Tebar
+date: '2023-06-23'
+slug: streamlit-chat-conversational-app-st-chat_message
+output: 
+  blogdown::html_page:
+    highlight: pygments 
+categories:
+  - Python
+  - Post
+tags: [Python, Streamlit]
+subtitle: "Revolutionize Conversational App Development: A Guide to Building Chat-based Applications with Streamlit and GPT."
+summary: "Revolutionize Conversational App Development: A Guide to Building Chat-based Applications with Streamlit and GPT."
+authors: [carlos-vecina]
+featured: false
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="featured.png" width="400px" alt="Pydantic Python library logo." /></p>
+<p>In this post (half featured by a fine-tuned LLM) we are discussing the new Streamlit feature and tutorial: chat interface.</p>
+<p><br></p>
+<div id="new-way-to-create-convesational-chatgpt-like-apps-with-stramlit" class="section level1">
+<h1>New way to create convesational ChatGPT-like apps with Stramlit</h1>
+<p>Oh, wow! Let’s talk about building conversational apps with Streamlit and the incredible GPT models. Because, you know, everyone loves talking to chatbots. They’re just so useful and never annoying. So, let’s dive into this tutorial and explore the fascinating world of chat-based applications ;) I promise it won’t be like talking to a brick wall. Trust me.</p>
+<p>The tutorial starts by introducing Streamlit’s chat elements, <code>st.chat_message</code> and <code>st.chat_input</code>. These elements make it super easy to build Graphical User Interfaces (GUIs) for conversational agents or chatbots.</p>
+<p>But wait, it gets even better! You can build anything from a basic chatbot to a ChatGPT-like experience using purely Python code. Python is all you need!</p>
+<p><a href="https://docs.streamlit.io/knowledge-base/tutorials/build-conversational-apps#:~:text=elements%20we%27ll%20use.-,Chat%20elements,-Streamlit%20offers%20several">In the first part of the tutorial</a>, they teach you how to build a bot that mirrors your input. Yes, you heard it right. A bot that echoes back whatever you say. They even introduce session state to store the chat history, as if anyone would ever want to remember a conversation with a bot that repeats everything you say. It’s like having a tape recorder but with extra steps. (LLM writer has become quite ironic today)</p>
+<p>Next, they move on to building a simple chatbot GUI with streaming. The bot now responds to your messages with random predefined responses. How exciting! They even add a delay to simulate the bot “thinking” before responding. Because what’s more thrilling than waiting for a chatbot to come up with a pre-determined message? It’s like watching paint dry, but with the added suspense of wondering what the next random response will be.</p>
+<p><br></p>
+<div id="stramlit-chatgpt-like-app.-how-to." class="section level2">
+<h2>Stramlit ChatGPT-like app. How to.</h2>
+<p>Finally, they reach the climax of the tutorial: building a ChatGPT-like app. It is possible by using the OpenAI API to generate responses. And of course, for that you need to get an API key to follow along.</p>
+<p>In summary, this tutorial takes you on a thrilling journey of building chat-based applications with Streamlit and GPT models. Enjoy!</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">#import openai</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="co">#import streamlit as st</span></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co">#st.title(&quot;ChatGPT-like clone&quot;)</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="co">#openai.api_key = st.secrets[&quot;OPENAI_API_KEY&quot;]</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="co">#if &quot;openai_model&quot; not in st.session_state:</span></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="co">#    st.session_state[&quot;openai_model&quot;] = &quot;gpt-4&quot;</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="co">#if &quot;messages&quot; not in st.session_state:</span></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="co">#    st.session_state.messages = []</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="co">#for message in st.session_state.messages:</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a><span class="co">#    with st.chat_message(message[&quot;role&quot;]):</span></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="co">#        st.markdown(message[&quot;content&quot;])</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a><span class="co">#if prompt := st.chat_input(&quot;What is up?&quot;):</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a><span class="co">#    st.session_state.messages.append({&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: prompt})</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="co">#    with st.chat_message(&quot;user&quot;):</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a><span class="co">#        st.markdown(prompt)</span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="co">#</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a><span class="co">#    with st.chat_message(&quot;assistant&quot;):</span></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a><span class="co">#        message_placeholder = st.empty()</span></span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a><span class="co">#        full_response = &quot;&quot;</span></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a><span class="co">#        for response in openai.ChatCompletion.create(</span></span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a><span class="co">#            model=st.session_state[&quot;openai_model&quot;],</span></span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a><span class="co">#            messages=[</span></span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a><span class="co">#                {&quot;role&quot;: m[&quot;role&quot;], &quot;content&quot;: m[&quot;content&quot;]}</span></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a><span class="co">#                for m in st.session_state.messages</span></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a><span class="co">#            ],</span></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a><span class="co">#            stream=True,</span></span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a><span class="co">#        ):</span></span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a><span class="co">#            full_response += response.choices[0].delta.get(&quot;content&quot;, &quot;&quot;)</span></span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a><span class="co">#            message_placeholder.markdown(full_response + &quot;▌&quot;)</span></span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a><span class="co">#        message_placeholder.markdown(full_response)</span></span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a><span class="co">#    st.session_state.messages.append({&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: full_response})</span></span></code></pre></div>
+<p>You could find this and more code examples <a href="https://docs.streamlit.io/knowledge-base/tutorials/build-conversational-apps">here</a></p>
+<p><br></p>
+</div>
+<div id="three-keys-on-how-to-build-chat-based-applications" class="section level2">
+<h2>Three keys on how to build chat based applications</h2>
+<p>You can find here three general tips in order to boost your Streamlit application:</p>
+<ul>
+<li>User-Centric Design: Prioritize the needs and preferences of your users when developing a chat-based application. Consider their goals, pain points, and communication preferences to ensure a seamless and intuitive user experience.</li>
+</ul>
+<p>Fine-tune your LLM or other NLP model: Implement robust NLP techniques to enhance the application’s ability to understand and interpret user input accurately. Also, it seems like an awesome idea to train specifically to your use case in order to provide more contextually relevant and personalized responses.</p>
+<ul>
+<li>Scalability and Performance: Build a scalable architecture that can handle high volumes of concurrent users and maintain optimal performance. Implement efficient data storage, caching mechanisms, and use cloud-based services to handle the computational demands of processing and serving chat-based interactions.</li>
+</ul>
+</div>
+<div id="stay-updated-on-streamlit-and-python-tips" class="section level2">
+<h2><strong>Stay updated on Streamlit and Python tips</strong></h2>
+<p>By harnessing the power of Streamlit and GPT, you can unlock a world of possibilities and create highly engaging and interactive conversational applications that will captivate your users and elevate your online presence.</p>
+<p>If you want to stay updated…</p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more Python and Streamlit tips!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+<style>
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+</style>
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
+</div>
+</div>
