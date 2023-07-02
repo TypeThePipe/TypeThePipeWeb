@@ -16,6 +16,10 @@ authors: [carlos-vecina]
 featured: false
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
 <img src="./featured.png" width="400px" alt="Pydantic Python library logo." />
 
 In this post (half featured by a fine-tuned LLM) we are discussing the new Streamlit feature and tutorial: chat interface.
@@ -42,44 +46,44 @@ Finally, they reach the climax of the tutorial: building a ChatGPT-like app. It 
 
 In summary, this tutorial takes you on a thrilling journey of building chat-based applications with Streamlit and GPT models. Enjoy!
 
-```{python}
-#import openai
-#import streamlit as st
-#
-#st.title("ChatGPT-like clone")
-#
-#openai.api_key = st.secrets["OPENAI_API_KEY"]
-#
-#if "openai_model" not in st.session_state:
-#    st.session_state["openai_model"] = "gpt-4"
-#
-#if "messages" not in st.session_state:
-#    st.session_state.messages = []
-#
-#for message in st.session_state.messages:
-#    with st.chat_message(message["role"]):
-#        st.markdown(message["content"])
-#
-#if prompt := st.chat_input("What is up?"):
-#    st.session_state.messages.append({"role": "user", "content": prompt})
-#    with st.chat_message("user"):
-#        st.markdown(prompt)
-#
-#    with st.chat_message("assistant"):
-#        message_placeholder = st.empty()
-#        full_response = ""
-#        for response in openai.ChatCompletion.create(
-#            model=st.session_state["openai_model"],
-#            messages=[
-#                {"role": m["role"], "content": m["content"]}
-#                for m in st.session_state.messages
-#            ],
-#            stream=True,
-#        ):
-#            full_response += response.choices[0].delta.get("content", "")
-#            message_placeholder.markdown(full_response + "▌")
-#        message_placeholder.markdown(full_response)
-#    st.session_state.messages.append({"role": "assistant", "content": full_response})
+```{python, eval=FALSE, warning=FALSE, message=FALSE}
+import openai
+import streamlit as st
+
+st.title("ChatGPT-like clone")
+
+openai.api_key = st.secrets["OPENAI_API_KEY"]
+
+if "openai_model" not in st.session_state:
+    st.session_state["openai_model"] = "gpt-4"
+
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
+if prompt := st.chat_input("What is up?"):
+    st.session_state.messages.append({"role": "user", "content": prompt})
+    with st.chat_message("user"):
+        st.markdown(prompt)
+
+    with st.chat_message("assistant"):
+        message_placeholder = st.empty()
+        full_response = ""
+        for response in openai.ChatCompletion.create(
+            model=st.session_state["openai_model"],
+            messages=[
+                {"role": m["role"], "content": m["content"]}
+                for m in st.session_state.messages
+            ],
+            stream=True,
+        ):
+            full_response += response.choices[0].delta.get("content", "")
+            message_placeholder.markdown(full_response + "▌")
+        message_placeholder.markdown(full_response)
+    st.session_state.messages.append({"role": "assistant", "content": full_response})
 ```
 
 You could find this and more code examples [here](https://docs.streamlit.io/knowledge-base/tutorials/build-conversational-apps)
@@ -92,7 +96,7 @@ You can find here three general tips in order to boost your Streamlit applicatio
 
 - User-Centric Design: Prioritize the needs and preferences of your users when developing a chat-based application. Consider their goals, pain points, and communication preferences to ensure a seamless and intuitive user experience.
 
-Fine-tune your LLM or other NLP model: Implement robust NLP techniques to enhance the application's ability to understand and interpret user input accurately. Also, it seems like an awesome idea to train specifically to your use case in order to provide more contextually relevant and personalized responses.
+- Fine-tune your LLM or other NLP model: Implement robust NLP techniques to enhance the application's ability to understand and interpret user input accurately. Also, it seems like an awesome idea to train specifically to your use case in order to provide more contextually relevant and personalized responses.
 
 - Scalability and Performance: Build a scalable architecture that can handle high volumes of concurrent users and maintain optimal performance. Implement efficient data storage, caching mechanisms, and use cloud-based services to handle the computational demands of processing and serving chat-based interactions.
 
