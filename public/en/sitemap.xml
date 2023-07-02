@@ -3,33 +3,8 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/privacy/</loc>
-    <lastmod>2023-05-28T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/terms/</loc>
-    <lastmod>2023-05-28T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2023-05-28T00:00:00+01:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/"
-                />
-  </url>
-  
-  <url>
     <loc>/authors/</loc>
-    <lastmod>2023-05-07T00:00:00+00:00</lastmod>
+    <lastmod>2023-06-23T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -44,7 +19,7 @@
   
   <url>
     <loc>/authors/carlos-vecina/</loc>
-    <lastmod>2023-05-07T00:00:00+00:00</lastmod>
+    <lastmod>2023-06-23T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -59,7 +34,7 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2023-05-07T00:00:00+00:00</lastmod>
+    <lastmod>2023-06-23T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -73,18 +48,43 @@
   </url>
   
   <url>
-    <loc>/tags/pytest/</loc>
-    <lastmod>2023-05-07T00:00:00+00:00</lastmod>
+    <loc>/post/streamlit-chat-conversational-app-st-chat_message/</loc>
+    <lastmod>2023-06-23T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/python/</loc>
-    <lastmod>2023-05-07T00:00:00+00:00</lastmod>
+    <loc>/categories/post/</loc>
+    <lastmod>2023-06-23T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/post/"
+                />
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2023-06-23T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/"
+                />
   </url>
   
   <url>
     <loc>/categories/python/</loc>
-    <lastmod>2023-05-07T00:00:00+00:00</lastmod>
+    <lastmod>2023-06-23T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -98,8 +98,18 @@
   </url>
   
   <url>
+    <loc>/tags/python/</loc>
+    <lastmod>2023-06-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/streamlit/</loc>
+    <lastmod>2023-06-23T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/</loc>
-    <lastmod>2023-05-07T00:00:00+00:00</lastmod>
+    <lastmod>2023-06-23T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="es"
@@ -110,6 +120,46 @@
                 hreflang="en"
                 href="/tags/"
                 />
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2023-06-23T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/"
+                />
+  </url>
+  
+  <url>
+    <loc>/tags/pydantic/</loc>
+    <lastmod>2023-06-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/pydantic-discriminated-union/</loc>
+    <lastmod>2023-06-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/privacy/</loc>
+    <lastmod>2023-05-28T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/terms/</loc>
+    <lastmod>2023-05-28T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/pytest/</loc>
+    <lastmod>2023-05-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -158,21 +208,6 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2023-05-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/post/"
-                />
-  </url>
-  
-  <url>
     <loc>/categories/r/</loc>
     <lastmod>2023-05-01T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -218,21 +253,6 @@
   </url>
   
   <url>
-    <loc>/categories/post/</loc>
-    <lastmod>2023-03-23T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/post/"
-                />
-  </url>
-  
-  <url>
     <loc>/post/gpt-whisper-build-your-own-voice-assistant/</loc>
     <lastmod>2023-03-23T00:00:00+00:00</lastmod>
   </url>
@@ -248,12 +268,12 @@
   </url>
   
   <url>
-    <loc>/categories/algotrading/</loc>
+    <loc>/tags/algotrading/</loc>
     <lastmod>2023-03-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/algotrading/</loc>
+    <loc>/categories/algotrading/</loc>
     <lastmod>2023-03-14T00:00:00+00:00</lastmod>
   </url>
   
@@ -270,11 +290,6 @@
   <url>
     <loc>/vizs-and-tips/mock-celery-task-pytest/</loc>
     <lastmod>2023-03-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/pydantic/</loc>
-    <lastmod>2022-10-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>

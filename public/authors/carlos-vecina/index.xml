@@ -5,12 +5,474 @@
     <link>/authors/carlos-vecina/</link>
       <atom:link href="/authors/carlos-vecina/index.xml" rel="self" type="application/rss+xml" />
     <description>Carlos Vecina</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 07 May 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 23 Jun 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-32.png</url>
       <title>Carlos Vecina</title>
       <link>/authors/carlos-vecina/</link>
     </image>
+    
+    <item>
+      <title>New Streamlit Chat. Conversational app with st.chat_message and st.chat_input</title>
+      <link>/post/streamlit-chat-conversational-app-st-chat_message/</link>
+      <pubDate>Fri, 23 Jun 2023 00:00:00 +0000</pubDate>
+      <guid>/post/streamlit-chat-conversational-app-st-chat_message/</guid>
+      <description>
+&lt;script src=&#34;/post/streamlit-chat-conversational-app-st-chat_message/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; width=&#34;400px&#34; alt=&#34;Pydantic Python library logo.&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;In this post (half featured by a fine-tuned LLM) we are discussing the new Streamlit feature and tutorial: chat interface.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;new-way-to-create-convesational-chatgpt-like-apps-with-stramlit&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;New way to create convesational ChatGPT-like apps with Stramlit&lt;/h1&gt;
+&lt;p&gt;Oh, wow! Let’s talk about building conversational apps with Streamlit and the incredible GPT models. Because, you know, everyone loves talking to chatbots. They’re just so useful and never annoying. So, let’s dive into this tutorial and explore the fascinating world of chat-based applications ;) I promise it won’t be like talking to a brick wall. Trust me.&lt;/p&gt;
+&lt;p&gt;The tutorial starts by introducing Streamlit’s chat elements, &lt;code&gt;st.chat_message&lt;/code&gt; and &lt;code&gt;st.chat_input&lt;/code&gt;. These elements make it super easy to build Graphical User Interfaces (GUIs) for conversational agents or chatbots.&lt;/p&gt;
+&lt;p&gt;But wait, it gets even better! You can build anything from a basic chatbot to a ChatGPT-like experience using purely Python code. Python is all you need!&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://docs.streamlit.io/knowledge-base/tutorials/build-conversational-apps#:~:text=elements%20we%27ll%20use.-,Chat%20elements,-Streamlit%20offers%20several&#34;&gt;In the first part of the tutorial&lt;/a&gt;, they teach you how to build a bot that mirrors your input. Yes, you heard it right. A bot that echoes back whatever you say. They even introduce session state to store the chat history, as if anyone would ever want to remember a conversation with a bot that repeats everything you say. It’s like having a tape recorder but with extra steps. (LLM writer has become quite ironic today)&lt;/p&gt;
+&lt;p&gt;Next, they move on to building a simple chatbot GUI with streaming. The bot now responds to your messages with random predefined responses. How exciting! They even add a delay to simulate the bot “thinking” before responding. Because what’s more thrilling than waiting for a chatbot to come up with a pre-determined message? It’s like watching paint dry, but with the added suspense of wondering what the next random response will be.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;stramlit-chatgpt-like-app.-how-to.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Stramlit ChatGPT-like app. How to.&lt;/h2&gt;
+&lt;p&gt;Finally, they reach the climax of the tutorial: building a ChatGPT-like app. It is possible by using the OpenAI API to generate responses. And of course, for that you need to get an API key to follow along.&lt;/p&gt;
+&lt;p&gt;In summary, this tutorial takes you on a thrilling journey of building chat-based applications with Streamlit and GPT models. Enjoy!&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#import openai&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#import streamlit as st&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#st.title(&amp;quot;ChatGPT-like clone&amp;quot;)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#openai.api_key = st.secrets[&amp;quot;OPENAI_API_KEY&amp;quot;]&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#if &amp;quot;openai_model&amp;quot; not in st.session_state:&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#    st.session_state[&amp;quot;openai_model&amp;quot;] = &amp;quot;gpt-4&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#if &amp;quot;messages&amp;quot; not in st.session_state:&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-12&#34;&gt;&lt;a href=&#34;#cb1-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#    st.session_state.messages = []&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-13&#34;&gt;&lt;a href=&#34;#cb1-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-14&#34;&gt;&lt;a href=&#34;#cb1-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#for message in st.session_state.messages:&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-15&#34;&gt;&lt;a href=&#34;#cb1-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#    with st.chat_message(message[&amp;quot;role&amp;quot;]):&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-16&#34;&gt;&lt;a href=&#34;#cb1-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#        st.markdown(message[&amp;quot;content&amp;quot;])&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-17&#34;&gt;&lt;a href=&#34;#cb1-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-18&#34;&gt;&lt;a href=&#34;#cb1-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#if prompt := st.chat_input(&amp;quot;What is up?&amp;quot;):&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-19&#34;&gt;&lt;a href=&#34;#cb1-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#    st.session_state.messages.append({&amp;quot;role&amp;quot;: &amp;quot;user&amp;quot;, &amp;quot;content&amp;quot;: prompt})&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-20&#34;&gt;&lt;a href=&#34;#cb1-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#    with st.chat_message(&amp;quot;user&amp;quot;):&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-21&#34;&gt;&lt;a href=&#34;#cb1-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#        st.markdown(prompt)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-22&#34;&gt;&lt;a href=&#34;#cb1-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-23&#34;&gt;&lt;a href=&#34;#cb1-23&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#    with st.chat_message(&amp;quot;assistant&amp;quot;):&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-24&#34;&gt;&lt;a href=&#34;#cb1-24&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#        message_placeholder = st.empty()&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-25&#34;&gt;&lt;a href=&#34;#cb1-25&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#        full_response = &amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-26&#34;&gt;&lt;a href=&#34;#cb1-26&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#        for response in openai.ChatCompletion.create(&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-27&#34;&gt;&lt;a href=&#34;#cb1-27&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#            model=st.session_state[&amp;quot;openai_model&amp;quot;],&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-28&#34;&gt;&lt;a href=&#34;#cb1-28&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#            messages=[&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-29&#34;&gt;&lt;a href=&#34;#cb1-29&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#                {&amp;quot;role&amp;quot;: m[&amp;quot;role&amp;quot;], &amp;quot;content&amp;quot;: m[&amp;quot;content&amp;quot;]}&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-30&#34;&gt;&lt;a href=&#34;#cb1-30&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#                for m in st.session_state.messages&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-31&#34;&gt;&lt;a href=&#34;#cb1-31&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#            ],&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-32&#34;&gt;&lt;a href=&#34;#cb1-32&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#            stream=True,&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-33&#34;&gt;&lt;a href=&#34;#cb1-33&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#        ):&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-34&#34;&gt;&lt;a href=&#34;#cb1-34&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#            full_response += response.choices[0].delta.get(&amp;quot;content&amp;quot;, &amp;quot;&amp;quot;)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-35&#34;&gt;&lt;a href=&#34;#cb1-35&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#            message_placeholder.markdown(full_response + &amp;quot;▌&amp;quot;)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-36&#34;&gt;&lt;a href=&#34;#cb1-36&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#        message_placeholder.markdown(full_response)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-37&#34;&gt;&lt;a href=&#34;#cb1-37&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#    st.session_state.messages.append({&amp;quot;role&amp;quot;: &amp;quot;assistant&amp;quot;, &amp;quot;content&amp;quot;: full_response})&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You could find this and more code examples &lt;a href=&#34;https://docs.streamlit.io/knowledge-base/tutorials/build-conversational-apps&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;three-keys-on-how-to-build-chat-based-applications&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Three keys on how to build chat based applications&lt;/h2&gt;
+&lt;p&gt;You can find here three general tips in order to boost your Streamlit application:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;User-Centric Design: Prioritize the needs and preferences of your users when developing a chat-based application. Consider their goals, pain points, and communication preferences to ensure a seamless and intuitive user experience.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Fine-tune your LLM or other NLP model: Implement robust NLP techniques to enhance the application’s ability to understand and interpret user input accurately. Also, it seems like an awesome idea to train specifically to your use case in order to provide more contextually relevant and personalized responses.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Scalability and Performance: Build a scalable architecture that can handle high volumes of concurrent users and maintain optimal performance. Implement efficient data storage, caching mechanisms, and use cloud-based services to handle the computational demands of processing and serving chat-based interactions.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id=&#34;stay-updated-on-streamlit-and-python-tips&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Stay updated on Streamlit and Python tips&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;By harnessing the power of Streamlit and GPT, you can unlock a world of possibilities and create highly engaging and interactive conversational applications that will captivate your users and elevate your online presence.&lt;/p&gt;
+&lt;p&gt;If you want to stay updated…&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python and Streamlit tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+&lt;/style&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pydantic discriminated unions. Some examples to simplify data structures and ensure type safety</title>
+      <link>/post/pydantic-discriminated-union/</link>
+      <pubDate>Sun, 18 Jun 2023 00:00:00 +0000</pubDate>
+      <guid>/post/pydantic-discriminated-union/</guid>
+      <description>
+&lt;script src=&#34;/post/pydantic-discriminated-union/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; width=&#34;400px&#34; alt=&#34;Pydantic Python library logo.&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;what-is-an-union-discriminator-or-tagged-unions-and-its-role-in-pydantic&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;What is an union discriminator or tagged unions, and its role in Pydantic?&lt;/h1&gt;
+&lt;p&gt;Well, well, well, look who decided to stroll into the world of Pydantic discriminators! 🕶️ Brace yourselves, folks, because we’re about to take a sarcastic and catchy rollercoaster ride through this wild jungle of coding wonders. Buckle up!&lt;/p&gt;
+&lt;p&gt;So, what’s all the buzz about Pydantic discriminators? Oh, they’re just the coolest thing since sliced bread, my friends! Picture this: you have a bunch of data models, each with their own quirks and peculiarities. It’s like dealing with a bunch of divas in a high school drama, except instead of gossip, it’s all about attributes and properties. Drama queens, am I right?&lt;/p&gt;
+&lt;p&gt;Now, let’s say you want to pick out the perfect model from this chaotic ensemble. How on earth are you going to do that? Fear not, because Pydantic discriminators are here to save the day, just like a superhero with an ironic sense of humor. They’re like the Sherlock Holmes of model selection, deducing the perfect fit for you.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;how-does-pydantic-discriminator-works&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;How does Pydantic discriminator works?&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Pydantic’s discriminator feature allows the definition of data structures with multiple types, using a discriminator field to determine the actual object type. This enables type validation and serialization/deserialization based on the discriminator value, ensuring data integrity and flexibility in representing different types of objects.&lt;/p&gt;
+&lt;p&gt;Since &lt;a href=&#34;https://docs.pydantic.dev/latest/usage/types/#discriminated-unions-aka-tagged-unions:~:text=Required%20Fields.-,Discriminated%20Unions%20(a.k.a.%20Tagged%20Unions,-)&#34;&gt;Pydantic 1.9, we could make use of it&lt;/a&gt;. Let’s showcase it in an easy way:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; pydantic &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; BaseModel, Field, parse_obj_as&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; typing &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Literal, Union, Annotated&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Tiger(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    animal_type: Literal[&lt;span class=&#34;st&#34;&gt;&amp;quot;tiger&amp;quot;&lt;/span&gt;] &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;tiger&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    ferocity_scale: &lt;span class=&#34;bu&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Field(..., ge&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, le&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Shark(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    animal_type: Literal[&lt;span class=&#34;st&#34;&gt;&amp;quot;shark&amp;quot;&lt;/span&gt;] &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;shark&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    ferocity_scale: &lt;span class=&#34;bu&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Field(..., ge&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, le&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-12&#34;&gt;&lt;a href=&#34;#cb1-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Lion(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb1-13&#34;&gt;&lt;a href=&#34;#cb1-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    animal_type: Literal[&lt;span class=&#34;st&#34;&gt;&amp;quot;lion&amp;quot;&lt;/span&gt;] &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;lion&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-14&#34;&gt;&lt;a href=&#34;#cb1-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    ferocity_scale: &lt;span class=&#34;bu&#34;&gt;float&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-15&#34;&gt;&lt;a href=&#34;#cb1-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-16&#34;&gt;&lt;a href=&#34;#cb1-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; WildAnimal(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb1-17&#34;&gt;&lt;a href=&#34;#cb1-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    __root__: Annotated[Union[Tiger, Shark, Lion], Field(..., discriminator&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;animal_type&amp;#39;&lt;/span&gt;)]&lt;/span&gt;
+&lt;span id=&#34;cb1-18&#34;&gt;&lt;a href=&#34;#cb1-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-19&#34;&gt;&lt;a href=&#34;#cb1-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;my_shark &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; WildAnimal.parse_obj({&lt;span class=&#34;st&#34;&gt;&amp;#39;animal_type&amp;#39;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;#39;shark&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;ferocity_scale&amp;#39;&lt;/span&gt;: &lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;}).__root__&lt;/span&gt;
+&lt;span id=&#34;cb1-20&#34;&gt;&lt;a href=&#34;#cb1-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#print(Shark(ferocity_scale=5).json())&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-21&#34;&gt;&lt;a href=&#34;#cb1-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-22&#34;&gt;&lt;a href=&#34;#cb1-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Desarialice&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-23&#34;&gt;&lt;a href=&#34;#cb1-23&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;WildAnimal.parse_raw(Shark(ferocity_scale&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;).json())&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## WildAnimal(__root__=Shark(animal_type=&amp;#39;shark&amp;#39;, ferocity_scale=5.0))&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;bu&#34;&gt;isinstance&lt;/span&gt;(my_shark, Shark))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## True&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The below polimorfic code example and some other interesting discussions could be found here:
+&lt;a href=&#34;https://github.com/pydantic/pydantic/discussions/5785&#34; class=&#34;uri&#34;&gt;https://github.com/pydantic/pydantic/discussions/5785&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;pydantic-annotated-union-discriminator-example&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Pydantic Annotated union discriminator example&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;But we could use a very simple approach to achieve most of the usage by using the &lt;code&gt;Annotated&lt;/code&gt; union.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;Animal &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Annotated[Union[Tiger, Shark], Field(discriminator&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;animal_type&amp;#39;&lt;/span&gt;)]&lt;/span&gt;
+&lt;span id=&#34;cb5-2&#34;&gt;&lt;a href=&#34;#cb5-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;raw_data &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; {&lt;/span&gt;
+&lt;span id=&#34;cb5-3&#34;&gt;&lt;a href=&#34;#cb5-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;animal_type&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;tiger&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb5-4&#34;&gt;&lt;a href=&#34;#cb5-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;ferocity_scale&amp;quot;&lt;/span&gt;: &lt;span class=&#34;dv&#34;&gt;6&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-5&#34;&gt;&lt;a href=&#34;#cb5-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;}&lt;/span&gt;
+&lt;span id=&#34;cb5-6&#34;&gt;&lt;a href=&#34;#cb5-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;parse_obj_as(Animal, raw_data)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## Tiger(animal_type=&amp;#39;tiger&amp;#39;, ferocity_scale=6.0)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Get ready for the magic of the Field class, courtesy of Pydantic. It’s armed with a special power called “discriminator.” By setting the discriminator to “pet_type,” we unlock the ability to distinguish between our fantastic creatures. It’s like giving them their own special spotlight!&lt;/p&gt;
+&lt;p&gt;Hold on tight, because we’re about to venture into the wild lands of raw_data. It holds the secrets of a “pet_type” with the fiery spirit of a “tiger” and a mesmerizing “stripes” count of 6. It’s as if we’re peering into a digital zoo!&lt;/p&gt;
+&lt;p&gt;And now, it’s showtime! We summon the powerful parse_obj_as to work its coding wizardry. We present it with our regal Animal and the enigmatic raw_data. Abracadabra! With a wave of its wand, the transformation unfolds. The raw data morphs into a stunning representation of our chosen Animal. It’s like a magical metamorphosis!&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;example-of-polimorfic-base-model&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Example of Polimorfic Base Model&lt;/strong&gt;&lt;/h2&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; PolymorphicBaseModel(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb7-2&#34;&gt;&lt;a href=&#34;#cb7-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-3&#34;&gt;&lt;a href=&#34;#cb7-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-4&#34;&gt;&lt;a href=&#34;#cb7-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    _subtypes &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;dict&lt;/span&gt;()&lt;/span&gt;
+&lt;span id=&#34;cb7-5&#34;&gt;&lt;a href=&#34;#cb7-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-6&#34;&gt;&lt;a href=&#34;#cb7-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;__init_subclass__&lt;/span&gt;(subcls, &lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;, &lt;span class=&#34;op&#34;&gt;**&lt;/span&gt;kwargs):&lt;/span&gt;
+&lt;span id=&#34;cb7-7&#34;&gt;&lt;a href=&#34;#cb7-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;bu&#34;&gt;super&lt;/span&gt;().&lt;span class=&#34;fu&#34;&gt;__init_subclass__&lt;/span&gt;(&lt;span class=&#34;op&#34;&gt;**&lt;/span&gt;kwargs)&lt;/span&gt;
+&lt;span id=&#34;cb7-8&#34;&gt;&lt;a href=&#34;#cb7-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb7-9&#34;&gt;&lt;a href=&#34;#cb7-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            &lt;span class=&#34;co&#34;&gt;# n.b. if a subclass declares its own _subtypes dict, it&amp;#39;ll take precedence over this one.&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-10&#34;&gt;&lt;a href=&#34;#cb7-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            &lt;span class=&#34;co&#34;&gt;# This would allow us to re-use the same type names across different classes.&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-11&#34;&gt;&lt;a href=&#34;#cb7-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; subcls._subtypes:&lt;/span&gt;
+&lt;span id=&#34;cb7-12&#34;&gt;&lt;a href=&#34;#cb7-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                &lt;span class=&#34;cf&#34;&gt;raise&lt;/span&gt; &lt;span class=&#34;pp&#34;&gt;AttributeError&lt;/span&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb7-13&#34;&gt;&lt;a href=&#34;#cb7-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                    &lt;span class=&#34;ss&#34;&gt;f&amp;quot;Class &lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;subcls&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt; cannot be registered with polymorphic type=&amp;#39;&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;#39; because it&amp;#39;s already registered &amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-14&#34;&gt;&lt;a href=&#34;#cb7-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                    &lt;span class=&#34;ss&#34;&gt;f&amp;quot; to &lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;subcls&lt;span class=&#34;sc&#34;&gt;.&lt;/span&gt;_subtypes[&lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;]&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-15&#34;&gt;&lt;a href=&#34;#cb7-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                )&lt;/span&gt;
+&lt;span id=&#34;cb7-16&#34;&gt;&lt;a href=&#34;#cb7-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            subcls._subtypes[&lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;] &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; subcls&lt;/span&gt;
+&lt;span id=&#34;cb7-17&#34;&gt;&lt;a href=&#34;#cb7-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;at&#34;&gt;@classmethod&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-18&#34;&gt;&lt;a href=&#34;#cb7-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; _convert_to_real_type(cls, data):&lt;/span&gt;
+&lt;span id=&#34;cb7-19&#34;&gt;&lt;a href=&#34;#cb7-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        data_type &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; data.get(&lt;span class=&#34;st&#34;&gt;&amp;quot;type&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb7-20&#34;&gt;&lt;a href=&#34;#cb7-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-21&#34;&gt;&lt;a href=&#34;#cb7-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; data_type &lt;span class=&#34;kw&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb7-22&#34;&gt;&lt;a href=&#34;#cb7-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            &lt;span class=&#34;cf&#34;&gt;raise&lt;/span&gt; &lt;span class=&#34;pp&#34;&gt;ValueError&lt;/span&gt;(&lt;span class=&#34;ss&#34;&gt;f&amp;quot;Missing &amp;#39;type&amp;#39; for &lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;cls&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb7-23&#34;&gt;&lt;a href=&#34;#cb7-23&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-24&#34;&gt;&lt;a href=&#34;#cb7-24&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        subcls &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; cls._subtypes.get(data_type)&lt;/span&gt;
+&lt;span id=&#34;cb7-25&#34;&gt;&lt;a href=&#34;#cb7-25&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-26&#34;&gt;&lt;a href=&#34;#cb7-26&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; subcls &lt;span class=&#34;kw&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb7-27&#34;&gt;&lt;a href=&#34;#cb7-27&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            &lt;span class=&#34;cf&#34;&gt;raise&lt;/span&gt; &lt;span class=&#34;pp&#34;&gt;TypeError&lt;/span&gt;(&lt;span class=&#34;ss&#34;&gt;f&amp;quot;Unsupported sub-type: &lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;data_type&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb7-28&#34;&gt;&lt;a href=&#34;#cb7-28&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;issubclass&lt;/span&gt;(subcls, cls):&lt;/span&gt;
+&lt;span id=&#34;cb7-29&#34;&gt;&lt;a href=&#34;#cb7-29&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            &lt;span class=&#34;cf&#34;&gt;raise&lt;/span&gt; &lt;span class=&#34;pp&#34;&gt;TypeError&lt;/span&gt;(&lt;span class=&#34;ss&#34;&gt;f&amp;quot;Inferred class &lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;subcls&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt; is not a subclass of &lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;cls&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb7-30&#34;&gt;&lt;a href=&#34;#cb7-30&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-31&#34;&gt;&lt;a href=&#34;#cb7-31&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; subcls(&lt;span class=&#34;op&#34;&gt;**&lt;/span&gt;data)&lt;/span&gt;
+&lt;span id=&#34;cb7-32&#34;&gt;&lt;a href=&#34;#cb7-32&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-33&#34;&gt;&lt;a href=&#34;#cb7-33&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;at&#34;&gt;@classmethod&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-34&#34;&gt;&lt;a href=&#34;#cb7-34&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; parse_obj(cls, data):&lt;/span&gt;
+&lt;span id=&#34;cb7-35&#34;&gt;&lt;a href=&#34;#cb7-35&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; cls._convert_to_real_type(data)&lt;/span&gt;
+&lt;span id=&#34;cb7-36&#34;&gt;&lt;a href=&#34;#cb7-36&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb7-37&#34;&gt;&lt;a href=&#34;#cb7-37&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb7-38&#34;&gt;&lt;a href=&#34;#cb7-38&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Animal(PolymorphicBaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb7-39&#34;&gt;&lt;a href=&#34;#cb7-39&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    name: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-40&#34;&gt;&lt;a href=&#34;#cb7-40&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    color: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-41&#34;&gt;&lt;a href=&#34;#cb7-41&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-42&#34;&gt;&lt;a href=&#34;#cb7-42&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Cat(Animal, &lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;cat&amp;quot;&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb7-43&#34;&gt;&lt;a href=&#34;#cb7-43&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;: Literal[&lt;span class=&#34;st&#34;&gt;&amp;quot;cat&amp;quot;&lt;/span&gt;] &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;cat&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-44&#34;&gt;&lt;a href=&#34;#cb7-44&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    hairless: &lt;span class=&#34;bu&#34;&gt;bool&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-45&#34;&gt;&lt;a href=&#34;#cb7-45&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-46&#34;&gt;&lt;a href=&#34;#cb7-46&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Dog(Animal, &lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;dog&amp;quot;&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb7-47&#34;&gt;&lt;a href=&#34;#cb7-47&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;bu&#34;&gt;type&lt;/span&gt;: Literal[&lt;span class=&#34;st&#34;&gt;&amp;quot;dog&amp;quot;&lt;/span&gt;] &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;dog&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-48&#34;&gt;&lt;a href=&#34;#cb7-48&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    breed: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-49&#34;&gt;&lt;a href=&#34;#cb7-49&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-50&#34;&gt;&lt;a href=&#34;#cb7-50&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;cat_instance &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Animal.parse_obj({&lt;span class=&#34;st&#34;&gt;&amp;quot;type&amp;quot;&lt;/span&gt;:&lt;span class=&#34;st&#34;&gt;&amp;quot;cat&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;hairless&amp;quot;&lt;/span&gt;: &lt;span class=&#34;va&#34;&gt;False&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;name&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;meaw&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;color&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;black&amp;quot;&lt;/span&gt;})&lt;/span&gt;
+&lt;span id=&#34;cb7-51&#34;&gt;&lt;a href=&#34;#cb7-51&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;bu&#34;&gt;isinstance&lt;/span&gt;(cat_instance, Cat))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## True&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Tthe PolymorphicBaseModel, a base class that sets the stage for polymorphic behavior. It defines a required type attribute and introduces a hidden _subtypes dictionary to keep track of subtypes.&lt;/p&gt;
+&lt;p&gt;Next, we dive into the &lt;strong&gt;init_subclass&lt;/strong&gt; method, where the magic happens. It allows subclasses to register themselves with a specific polymorphic type. This lets us distinguish between different subtypes within the PolymorphicBaseModel hierarchy.&lt;/p&gt;
+&lt;p&gt;But hold on, there’s more to uncover! We make use of the _convert_to_real_type method, responsible for converting data to its actual subtype based on the provided type attribute. It checks if the type is valid, finds the corresponding subclass, and ensures it is a valid subclass of the base class.&lt;/p&gt;
+&lt;p&gt;Finally, we arrive at the parse_obj method, where the true parsing takes place. It serves as the entry point for parsing objects of the polymorphic hierarchy. Using the _convert_to_real_type method, it transforms the data into an instance of the appropriate subclass.&lt;/p&gt;
+&lt;p&gt;And there you have it! A glimpse into the realm of polymorphic models. It’s a world where base classes and subtypes come together, allowing for flexible and dynamic object parsing. Embrace the power of polymorphism and let your code adapt and evolve with grace!&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;pydantic-2-typeadapter-to-parse-data-into-a-discriminated-union&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Pydantic 2: TypeAdapter to parse data into a discriminated union&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;In Pydantic v2, you can utilize the TypeAdapter to parse data into a discriminated union. However, please note that Pydantic v2 is currently in pre-release, and the module’s current version is v1.7.&lt;/p&gt;
+&lt;p&gt;Therefore, &lt;strong&gt;make sure to upgrade to Pydantic v2 when it becomes available to utilize this feature.&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb9&#34;&gt;&lt;pre class=&#34;sourceCode r&#34;&gt;&lt;code class=&#34;sourceCode r&#34;&gt;&lt;span id=&#34;cb9-1&#34;&gt;&lt;a href=&#34;#cb9-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;from pydantic import TypeAdapter&lt;/span&gt;
+&lt;span id=&#34;cb9-2&#34;&gt;&lt;a href=&#34;#cb9-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-3&#34;&gt;&lt;a href=&#34;#cb9-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;adapter &lt;span class=&#34;ot&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;TypeAdapter&lt;/span&gt;(Annotated[Union[Child1, Child2], &lt;span class=&#34;fu&#34;&gt;Field&lt;/span&gt;(&lt;span class=&#34;at&#34;&gt;discriminator=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;type&amp;#39;&lt;/span&gt;)])&lt;/span&gt;
+&lt;span id=&#34;cb9-4&#34;&gt;&lt;a href=&#34;#cb9-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-5&#34;&gt;&lt;a href=&#34;#cb9-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;child &lt;span class=&#34;ot&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;fu&#34;&gt;adapter.validate_json&lt;/span&gt;(my_json_data)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;stay-updated-on-pydantic-and-python-tips&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Stay updated on Pydantic and Python tips&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Hopefully, this post has helped familiarize you with the usage of unions and discriminators in Pydantic, showcasing some of its functionalities and enabling you to enjoy their benefits.&lt;/p&gt;
+&lt;p&gt;If you want to stay updated…&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python and Pydantic tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+&lt;/style&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Ursina vector rotation. The right and easy way to deal with this 3d Python module!</title>
