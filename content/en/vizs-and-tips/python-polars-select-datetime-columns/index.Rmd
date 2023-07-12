@@ -1,8 +1,8 @@
 ---
-title: "Select datetime columns matching their time zone with Polars Selectors and calculate offset with the new dst_offset. Python Polars series. "
+title: "Select datetime columns matching time zones with Python Polars selectors. Calculate offset with the new dst_offset."
 author: "Carlos Vecina Tebar"
 date: "2023-07-12"
-slug: "python-polars-select-datetime-columns-python-polars-selector"
+slug: "python-polars-select-datetime-columns-selector"
 output:
   blogdown::html_page:
     highlight: tango
