@@ -1,0 +1,401 @@
+---
+title: "Efficient Column Selection in Polars: Utilizing Polars Selectors for Python DataFrame Manipulation"
+author: "Carlos Vecina Tebar"
+date: "2023-09-20"
+slug: "python-polars-selectors-select-multiple-columns"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- Python
+- Tips
+tags: []
+subtitle: "Mastering Column Selection in Python. Polars Selectors for Efficient DataFrame Handling"
+summary: "Mastering Column Selection in Python. Polars Selectors for Efficient DataFrame Handling."
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="featured.png" height="250px" width="400px"/></p>
+<p><br></p>
+<div id="column-selection-in-polars" class="section level1">
+<h1>Column selection in Polars</h1>
+<p>Embarking on the transition from the trusty Pandas Python library to the exhilarating realm of Polars for data manipulation is like setting off on a thrilling adventure!</p>
+<p>Are you tired of the endless code scrolling just to pick the right columns for your Python DataFrames? Look no further! This post could be your hidden gem for precise and efficient column selection. In this guide, we’ll take you on a journey through the intricacies of Polars Selectors, helping you simplify your data analysis tasks and supercharge your Python projects.</p>
+<p>Whether you’re a data scientist, analyst, or developer, mastering this essential skill will save you time and effort, avoiding unwanted extra SO searches. Let’s dive in the way you work with DataFrames in Python with Polars!</p>
+<p><br></p>
+<div id="polars-choosing-columns-with-square-brackets" class="section level2">
+<h2>Polars: Choosing Columns with Square Brackets</h2>
+<p>This approach comes with certain limitations and is best suited for interactive and exploratory coding.</p>
+<p>Let’s explore some examples after creating the base DataFrame (note it’s not Lazy for this time, which you usually will use while working with high amounts of data):</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">import</span> random </span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="co"># Create a Polars DataFrame with base columns</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>df <span class="op">=</span> pl.DataFrame({</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>    <span class="st">&#39;name&#39;</span>: [<span class="st">&#39;Alice&#39;</span>, <span class="st">&#39;Bob&#39;</span>, <span class="st">&#39;Charlie&#39;</span>], </span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>    <span class="st">&#39;offensive_skill&#39;</span>: [<span class="dv">5</span>, <span class="dv">30</span>, <span class="dv">85</span>], </span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>    <span class="st">&#39;defensive_skill&#39;</span>: [<span class="dv">92</span>, <span class="dv">30</span>, <span class="dv">10</span>]</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    },</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    schema<span class="op">=</span>{</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>        <span class="st">&quot;name&quot;</span>:pl.Utf8,</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>        <span class="st">&quot;offensive_skill&quot;</span>:pl.Int32,</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>        <span class="st">&quot;defensive_skill&quot;</span>:pl.Int32</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    }</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>)</span></code></pre></div>
+<p>We can select a column using square brackets with a string inside <code>[]</code>. Note that the output is a Polars <code>Series</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>df[<span class="st">&quot;name&quot;</span>].head(<span class="dv">3</span>)</span></code></pre></div>
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (3,)</small><table border="1" class="dataframe"><thead><tr><th>name</th></tr><tr><td>str</td></tr></thead><tbody><tr><td>&quot;Alice&quot;</td></tr><tr><td>&quot;Bob&quot;</td></tr><tr><td>&quot;Charlie&quot;</td></tr></tbody></table></div>
+<p>We can choose a column with a list of strings inside <code>[]</code>. We should expect now a Polars <code>DataFrame</code> as an output:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>df[[<span class="st">&quot;name&quot;</span>,<span class="st">&quot;defensive_skill&quot;</span>]].head(<span class="dv">3</span>)</span></code></pre></div>
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (3, 2)</small><table border="1" class="dataframe"><thead><tr><th>name</th><th>defensive_skill</th></tr><tr><td>str</td><td>i32</td></tr></thead><tbody><tr><td>&quot;Alice&quot;</td><td>92</td></tr><tr><td>&quot;Bob&quot;</td><td>30</td></tr><tr><td>&quot;Charlie&quot;</td><td>10</td></tr></tbody></table></div>
+<p>The major caveats about square brackets column selection is that it can only be used in eager mode.
+So let’s start and deepen into the native Polars <code>select</code> expression.</p>
+<p><br></p>
+</div>
+<div id="polars-select" class="section level2">
+<h2>Polars Select</h2>
+<p>One of the key benefits of using Polars <code>select</code> function is that it can be employed in lazy mode, allowing for optimization and parallel execution by Polars.</p>
+<p>It’s essential to note that this method consistently yields a Polars DataFrame.</p>
+<p>To effortlessly choose specific columns, simply pass their string names as a list to the Polars select function.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>(</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>    df</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>    .select(</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>        [<span class="st">&quot;name&quot;</span>, <span class="st">&quot;defensive_skill&quot;</span>]</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>    )</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>    .head(<span class="dv">3</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>)</span></code></pre></div>
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (3, 2)</small><table border="1" class="dataframe"><thead><tr><th>name</th><th>defensive_skill</th></tr><tr><td>str</td><td>i32</td></tr></thead><tbody><tr><td>&quot;Alice&quot;</td><td>92</td></tr><tr><td>&quot;Bob&quot;</td><td>30</td></tr><tr><td>&quot;Charlie&quot;</td><td>10</td></tr></tbody></table></div>
+<p>In the next paragraphs we will discover that this is just a simple way to do it, as you usually would use <code>pl.col()</code> inside <code>select()</code> function.</p>
+<p><br></p>
+<div id="polars-selecting-columns-by-regex" class="section level3">
+<h3>Polars selecting columns by regex</h3>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>df.select(</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>    <span class="st">&quot;^.*skill$&quot;</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>)</span></code></pre></div>
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (3, 2)</small><table border="1" class="dataframe"><thead><tr><th>offensive_skill</th><th>defensive_skill</th></tr><tr><td>i32</td><td>i32</td></tr></thead><tbody><tr><td>5</td><td>92</td></tr><tr><td>30</td><td>30</td></tr><tr><td>85</td><td>10</td></tr></tbody></table></div>
+<p><br></p>
+</div>
+<div id="selecting-columns-with-an-expression-with-polars-and-aliasing" class="section level3">
+<h3>Selecting columns with an expression with Polars and aliasing</h3>
+<p>As we commented previously, we can create powerful column expressions and transformations while selecting by using <code>pl.col()</code>:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>(</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>    df</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>    .select(</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>        pl.col(<span class="st">&quot;defensive_skill&quot;</span>).mean().alias(<span class="st">&quot;defensive_skill_mean&quot;</span>),</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>        pl.col(<span class="st">&quot;defensive_skill&quot;</span>).std().alias(<span class="st">&quot;defensive_skill_std&quot;</span>),</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>        pl.col(<span class="st">&quot;offensive_skill&quot;</span>).mean().suffix(<span class="st">&quot;_mean&quot;</span>), <span class="co"># shorter to add a suffix to a column name</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>        pl.col(<span class="st">&quot;offensive_skill&quot;</span>).std().suffix(<span class="st">&quot;_std&quot;</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>    )</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>    .head(<span class="dv">3</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>)</span></code></pre></div>
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (1, 4)</small><table border="1" class="dataframe"><thead><tr><th>defensive_skill_mean</th><th>defensive_skill_std</th><th>offensive_skill_mean</th><th>offensive_skill_std</th></tr><tr><td>f64</td><td>f64</td><td>f64</td><td>f64</td></tr></thead><tbody><tr><td>44.0</td><td>42.755117</td><td>40.0</td><td>40.926764</td></tr></tbody></table></div>
+<p><br></p>
+</div>
+<div id="polars-selecting-all-columns-or-exclude" class="section level3">
+<h3>Polars selecting all columns or exclude</h3>
+<p>Polars offers the flexibility to select all columns or exclude specific ones, providing you with powerful control over your data manipulation tasks.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>df.select(</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>    pl.<span class="bu">all</span>()</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>)</span></code></pre></div>
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (3, 3)</small><table border="1" class="dataframe"><thead><tr><th>name</th><th>offensive_skill</th><th>defensive_skill</th></tr><tr><td>str</td><td>i32</td><td>i32</td></tr></thead><tbody><tr><td>&quot;Alice&quot;</td><td>5</td><td>92</td></tr><tr><td>&quot;Bob&quot;</td><td>30</td><td>30</td></tr><tr><td>&quot;Charlie&quot;</td><td>85</td><td>10</td></tr></tbody></table></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>df.select(</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>    pl.exclude(<span class="st">&quot;defensive_skill&quot;</span>) </span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>    <span class="co">#pl.exclude([&quot;name&quot;, &quot;defensive_skill&quot;]) # pass a list for select several columns</span></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>)</span></code></pre></div>
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (3, 2)</small><table border="1" class="dataframe"><thead><tr><th>name</th><th>offensive_skill</th></tr><tr><td>str</td><td>i32</td></tr></thead><tbody><tr><td>&quot;Alice&quot;</td><td>5</td></tr><tr><td>&quot;Bob&quot;</td><td>30</td></tr><tr><td>&quot;Charlie&quot;</td><td>85</td></tr></tbody></table></div>
+<p><br></p>
+</div>
+<div id="polars-selecting-columns-based-on-type" class="section level3">
+<h3>Polars selecting columns based on type</h3>
+<p>Also, Polars’ capability to select columns based on their data type will simplify your data analysis.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>df.select(</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>    pl.col(pl.Utf8)</span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>    <span class="co">#pl.col([pl.Utf8, pl.Int32]) # several types as a list</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>    <span class="co">#pl.col(pl.NUMERIC_TYPES) # all numeric types</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>)</span></code></pre></div>
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (3, 1)</small><table border="1" class="dataframe"><thead><tr><th>name</th></tr><tr><td>str</td></tr></thead><tbody><tr><td>&quot;Alice&quot;</td></tr><tr><td>&quot;Bob&quot;</td></tr><tr><td>&quot;Charlie&quot;</td></tr></tbody></table></div>
+<p><br></p>
+</div>
+</div>
+<div id="polars-selectors-api" class="section level2">
+<h2>Polars selectors API</h2>
+<p>Enhance your data analysis efficiency with Selectors! Selectors provide a convenient way to select columns from DataFrame or LazyFrame objects based on their name, data type, or other attributes. They streamline and extend the functionality offered by the col() expression, while also enabling the easy application of expressions to the selected columns. Say goodbye to tedious column selection and hello to the simplicity of Selectors!</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="im">import</span> polars.selectors <span class="im">as</span> cs</span></code></pre></div>
+<p>One could use this API to easily select columns by type as the example above, but in a simpler / more readable way:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>df.select(</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>    cs.string()</span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>)</span></code></pre></div>
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (3, 1)</small><table border="1" class="dataframe"><thead><tr><th>name</th></tr><tr><td>str</td></tr></thead><tbody><tr><td>&quot;Alice&quot;</td></tr><tr><td>&quot;Bob&quot;</td></tr><tr><td>&quot;Charlie&quot;</td></tr></tbody></table></div>
+<p>For datetime and timezone selection and manipulation with Polars, please find our post about <a href="https://typethepipe.com/vizs-and-tips/python-polars-select-datetime-columns-selector/">selecting datetimes and timezones with Polar selectors</a></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>df.select(</span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a>    cs.datetime()</span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a>)</span></code></pre></div>
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (0, 0)</small><table border="1" class="dataframe"><thead><tr></tr><tr></tr></thead><tbody></tbody></table></div>
+<p>A summary of all selector functions:</p>
+<table>
+<colgroup>
+<col width="36%" />
+<col width="63%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>📊 all()</td>
+<td>Select all columns.</td>
+</tr>
+<tr class="even">
+<td>📈 by_dtype(*dtypes)</td>
+<td>Select columns matching the given data types.</td>
+</tr>
+<tr class="odd">
+<td>🏷️ by_name(*names)</td>
+<td>Select columns matching the given names.</td>
+</tr>
+<tr class="even">
+<td>🧩 categorical()</td>
+<td>Select all categorical columns.</td>
+</tr>
+<tr class="odd">
+<td>🔍 contains(substring)</td>
+<td>Select columns containing the given substring(s).</td>
+</tr>
+<tr class="even">
+<td>📅 date()</td>
+<td>Select all date columns.</td>
+</tr>
+<tr class="odd">
+<td>⏳ datetime([time_unit, time_zone])</td>
+<td>Select datetime columns, optionally filter by unit/zone.</td>
+</tr>
+<tr class="even">
+<td>⏱️ duration([time_unit])</td>
+<td>Select duration columns, optionally filter by unit.</td>
+</tr>
+<tr class="odd">
+<td>🏁 ends_with(*suffix)</td>
+<td>Select columns ending with the given substring(s).</td>
+</tr>
+<tr class="even">
+<td>📦 expand_selector(target, selector)</td>
+<td>Expand a selector to column names with respect to a specific target.</td>
+</tr>
+<tr class="odd">
+<td>⏮️ first()</td>
+<td>Select the first column in the current scope.</td>
+</tr>
+<tr class="even">
+<td>📈 float()</td>
+<td>Select all float columns.</td>
+</tr>
+<tr class="odd">
+<td>🔢 integer()</td>
+<td>Select all integer columns.</td>
+</tr>
+<tr class="even">
+<td>🧐 is_selector(obj)</td>
+<td>Check if the object/expression is a selector.</td>
+</tr>
+<tr class="odd">
+<td>⏭️ last()</td>
+<td>Select the last column in the current scope.</td>
+</tr>
+<tr class="even">
+<td>🔍 matches(pattern)</td>
+<td>Select columns matching the given regex pattern.</td>
+</tr>
+<tr class="odd">
+<td>📊 numeric()</td>
+<td>Select all numeric columns.</td>
+</tr>
+<tr class="even">
+<td>🚀 starts_with(*prefix)</td>
+<td>Select columns starting with the given substring(s).</td>
+</tr>
+<tr class="odd">
+<td>📝 string(*[, include_categorical])</td>
+<td>Select Utf8 (and optionally Categorical) string columns.</td>
+</tr>
+<tr class="even">
+<td>📆 temporal()</td>
+<td>Select all temporal columns.</td>
+</tr>
+<tr class="odd">
+<td>🕰️ time()</td>
+<td>Select all time columns.</td>
+</tr>
+</tbody>
+</table>
+<p>All of them could be find in the <a href="https://pola-rs.github.io/polars/py-polars/html/reference/selectors.html">Polars selectors documentation</a></p>
+<p><br></p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more Python content!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
+</div>
+</div>
