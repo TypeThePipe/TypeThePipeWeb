@@ -1,7 +1,7 @@
 ---
 title: "How to upper strip in Python"
 author: Carlos Vecina Tebar
-date: "2023-10-09"
+date: "2023-10-08"
 slug: "upper-strip-python"
 translationKey: "upper-strip-python"
 output:
@@ -10,7 +10,7 @@ output:
 categories:
 - Python
 - Tips
-tags: [Python, Streamlit]
+tags: [Python]
 subtitle: "Strip uppercases in Python strings. Elevate Your Python Basics: A Beginner's tip with strip() and string.ascii_uppercase"
 summary: "Strip uppercases in Python strings. Elevate Your Python Basics: A Beginner's tip with strip() and string.ascii_uppercase."
 authors: [carlos-vecina]
@@ -108,7 +108,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="strip-uppercase-strings" class="section level3">
 <h3>Strip uppercase strings</h3>
-<p>As we can see in the `<code>strip()</code> docstring, it accepts a string chain. To remove uppercases letters in the beginning and the end of a given string, we could make use of <code>string</code> module, and specifically, <code>string.ascii_uppercase</code> object.</p>
+<p>As we can see in the `<code>strip()</code> docstring, it accepts a string chain. To remove uppercase letters in the beginning and the end of a given string, we could make use of <code>string</code>, and specifically, <code>string.ascii_uppercase</code> object.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>text.strip(string.ascii_uppercase)</span></code></pre></div>
 <p>As one can see, all the surrounding uppercase letters has been removed in this copy of the string. We could do better adding stripping also blank spaces and ‘:’ symbol.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>text.strip(string.ascii_uppercase <span class="op">+</span> <span class="st">&quot; &quot;</span> <span class="op">+</span> <span class="st">&quot;:&quot;</span>)</span></code></pre></div>
@@ -116,7 +116,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="lstrip-and-rstrip" class="section level3">
 <h3>Lstrip and Rstrip</h3>
-<p>If you want to just to do it on the left or right of the string, you could use the common lstrip() and rstrip() string methods.</p>
+<p>If you want to just to do it on the left or right of the string, you could use the common <code>lstrip()</code> and rstrip() string methods.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>text.rstrip(string.ascii_uppercase <span class="op">+</span> <span class="st">&quot; &quot;</span>)</span></code></pre></div>
 <p><br></p>
 </div>

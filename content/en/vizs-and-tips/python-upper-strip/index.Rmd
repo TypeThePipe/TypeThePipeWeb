@@ -1,7 +1,7 @@
 ---
 title: "How to upper strip in Python"
 author: Carlos Vecina Tebar
-date: "2023-10-09"
+date: "2023-10-08"
 slug: "upper-strip-python"
 translationKey: "upper-strip-python"
 output:
@@ -10,7 +10,7 @@ output:
 categories:
 - Python
 - Tips
-tags: [Python, Streamlit]
+tags: [Python]
 subtitle: "Strip uppercases in Python strings. Elevate Your Python Basics: A Beginner's tip with strip() and string.ascii_uppercase"
 summary: "Strip uppercases in Python strings. Elevate Your Python Basics: A Beginner's tip with strip() and string.ascii_uppercase."
 authors: [carlos-vecina]
@@ -63,7 +63,7 @@ print(text)
 
 ### Strip uppercase strings
 
-As we can see in the ``strip()` docstring, it accepts a string chain. To remove uppercases letters in the beginning and the end of a given string, we could make use of `string` module, and specifically, `string.ascii_uppercase` object.
+As we can see in the ``strip()` docstring, it accepts a string chain. To remove uppercase letters in the beginning and the end of a given string, we could make use of `string`, and specifically, `string.ascii_uppercase` object.
 
 ```{python}
 
@@ -83,7 +83,7 @@ text.strip(string.ascii_uppercase + " " + ":")
 
 ### Lstrip and Rstrip
 
-If you want to just to do it on the left or right of the string, you could use the common lstrip() and rstrip() string methods.
+If you want to just to do it on the left or right of the string, you could use the common `lstrip()` and rstrip() string methods.
 
 ```{python}
 
