@@ -1,7 +1,7 @@
 ---
 title: "How to upper strip in Python"
 author: Carlos Vecina Tebar
-date: "2023-10-08"
+date: "2023-10-07"
 slug: "upper-strip-python"
 translationKey: "upper-strip-python"
 output:
