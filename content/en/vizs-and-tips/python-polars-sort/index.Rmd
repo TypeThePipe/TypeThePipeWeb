@@ -2,7 +2,7 @@
 title: "Sort in Python Polars. Arrange your DataFrames and Series"
 author: "Carlos Vecina Tebar"
 date: "2023-10-08"
-slug: "python-polars-sorts"
+slug: "python-polars-sort"
 output:
   blogdown::html_page:
     highlight: tango
