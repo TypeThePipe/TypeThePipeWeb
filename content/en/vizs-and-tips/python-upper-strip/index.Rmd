@@ -1,7 +1,7 @@
 ---
 title: "How to upper strip in Python"
 author: Carlos Vecina Tebar
-date: "2023-10-07"
+date: "2023-10-6"
 slug: "upper-strip-python"
 translationKey: "upper-strip-python"
 output:
@@ -24,7 +24,7 @@ draft: false
 <br>
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+knitr::opts_chunk$set(echo = TRUE, eval = TRUE)
 ```
 
 <br>
@@ -33,7 +33,7 @@ knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ## **Python string upper strip**
 
 
-In the ever-evolving world of Python programming, there are certain functions and methods that stand as essential tools in the toolkit of every coder. Among these, the combination of the upper() and strip() functions emerges as a powerful duo for text manipulation. In this blog post, we'll delve into the intricacies of these two string methods, exploring how they can be harnessed to transform and sanitize text data, all while maintaining the readability and elegance that Python is celebrated.
+In the ever-evolving world of Python programming, there are certain functions and methods that stand as essential tools in the toolkit of every coder. Among these, the combination of the `upper()` and `strip()` functions emerges as a powerful duo for text manipulation. In this blog post, we'll delve into the intricacies of these two string methods, exploring how they can be harnessed to transform and sanitize text data, all while maintaining the readability and elegance that Python is celebrated.
 
 Imagine you have this string:
 
