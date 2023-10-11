@@ -1,0 +1,256 @@
+---
+title: "Mastering Python Polars json manipulation. Do it in an easy and robust way!"
+author: "Carlos Vecina Tebar"
+date: "2023-10-09"
+slug: "python-polars-json-manipulation"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- Python
+- Tips
+tags: [Python, Polars]
+subtitle: "Unlock the Full Potential of Polars for Seamless JSON Data Handling"
+summary: "Unlock the Full Potential of Polars for Seamless JSON Data Handling."
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<img src="./featured.png" height="250px" width="400px" alt="Polars Python with sort dataframes message"/>
+
+As you may know, the JSON format comes in handy for various programming tasks, ranging from configuration files to storing model weights and parameters, making it a versatile choice. With Polars, you can effortlessly load, manipulate, and write JSON files, streamlining your data handling processes.
+
+JSON (JavaScript Object Notation) is a user-friendly data format, known for its simplicity and readability, making it perfect for a variety of applications. Its versatility and compatibility with numerous programming languages make it a powerhouse for modern data representation and exchange.
+
+<br>
+
+# How to work with JSON files in Polars
+
+Among the dynamic world of data manipulation and analysis, there is a Python library that's shaking things up: it is the already treated in TypeThePipe, Polars. While data processing is frequently associated with the Pandas library, Polars emerges as a star, boasting lightning-fast performance and a rich set of features. What sets Polars apart is it ability to handle JSON data, making it an indispensable asset for individuals working with intricate and ever-changing data structures. In this blog post, we're about to unravel the wonders of JSON manipulation and reveal how this library has the power to serialize / deserialize JSON DataFrames, LazyDataFrames and Expresions.
+
+<br>
+
+## **Reading JSON with Polars read_json**
+
+Polars `read_json` method is a practical tool for working with JSON data. It allows you to easily import JSON data and convert it into a structured DataFrame or LazyDataFrame, simplifying the process of data analysis. 
+
+Also, you can add schema and schema override function parameters. Even if you're dealing with complex or straightforward JSON structures, this method efficiently handles the conversion, saving you time and effort. It's a useful feature making data manipulation more reliable and robust.
+
+```{python}
+import json
+
+config_json = {
+    "model_type": "regression",
+    "model_reg_vars": {
+        "price": "continuous",
+        "zip_range": "categorical"
+    },
+    "model_dep_var": {
+        "y": "categorical"
+    },
+    "model_version_tag": 1.19
+}
+
+
+with open('data.json', 'w', encoding='utf-8') as f:
+    json.dump(config_json, f, indent=2)
+
+```
+
+
+```{python}
+import polars as pl
+
+df_from_json = (
+pl.read_json("data.json",
+    schema={
+        'model_type': pl.Utf8, 
+        'model_reg_vars': pl.Struct([pl.Field('price', pl.Utf8), pl.Field('zip_range', pl.Utf8)]), 
+        'model_dep_var': pl.Struct([pl.Field('y', pl.Utf8)]), 
+        'model_version_tag': pl.Float64
+        }
+    )
+)
+```
+
+```{python}
+pl.read_json("data.json").schema
+```
+
+<br>
+
+### Unesting JSON fields from DataFrame columns
+
+Several strategies can be taken for unnesting JSON fields from a POlars DataFrame. First one one can `rename_fields` as Struct method.
+
+```{python}
+model_reg_col_name = "model_reg_vars"
+struct_names = [f'{model_reg_col_name}_{i}' for i in df_from_json[model_reg_col_name].struct.fields]
+
+(
+    df_from_json
+    .select(pl.col(model_reg_col_name).struct.rename_fields(struct_names))
+    .unnest(model_reg_col_name)
+)
+```
+Another way if you have few nested fields and know their name, you can simply use `select()` and access them by `struct.field()`
+
+```{python}
+df_from_json.select(
+    pl.all().exclude("model_reg_vars"),
+    pl.col("model_reg_vars").struct.field("zip_range"),
+    pl.col("model_reg_vars").struct.field("price")
+)
+```
+<br>
+
+### Unnesting several columns in Polars
+
+
+Unnesting several struct columns in Polars is a task that often arises when dealing with complex and nested data. Polars provides a convenient way to do this by using the unnest method on multiple struct columns simultaneously. This operation essentially "flattens" the nested structures, making the data more accessible for analysis and manipulation. By specifying the column names that need to be unnested, you can efficiently work with the data contained within those structures, simplifying your data processing tasks in Polars.
+
+```{python}
+df_from_json.unnest("model_dep_var", "model_reg_vars")
+```
+This is cool as long as the nested fields names don't collide. If so, `unnest` function is expected to fail.
+
+A hacky way to do it avoiding duplicated columns errors are this one proposed in SO question response. It is quite hacker because you should monkey patch Polars DataFrame `unnest` function. Doing it without a clear strategy, could lead to inconsistencies across your project code.
+
+```{python}
+def unnest(self, columns, *more_columns, prefix=None, suffix=None, col_prefix=False, col_suffix=False, drop_existing=False):
+    if isinstance(columns, str):
+        columns = [columns]
+    if more_columns:
+        columns = list(columns)
+        columns.extend(more_columns)
+    #check to see if any new parameters are used, if not just return as is current behavior
+    if drop_existing==False and not (prefix or suffix or col_prefix or col_suffix):
+        return self._from_pydf(self._df.unnest(columns))
+    final_prefix=""
+    final_suffix=""
+    
+    for col in columns:
+        if col_prefix:
+            final_prefix=col+"_"+prefix if prefix else col+"_"
+        if col_suffix:
+            final_suffix="_"+col+suffix if suffix else "_"+col
+        tempdf = self[0].select(col)
+        innercols = tempdf._from_pydf(tempdf._df.unnest([col])).columns
+        newcols = [final_prefix+innercol+final_suffix for innercol in innercols]
+        self = (
+            self
+                .with_columns(pl.col(col).struct.rename_fields(newcols))
+                .drop([drop_col for drop_col in newcols if drop_col in self.columns])
+        )
+    return self._from_pydf(self._df.unnest(columns))
+pl.DataFrame.unnest=unnest
+```
+
+<br>
+
+This way, you can add programmatically column suffix, as an equivalent of what we have seen in the previous section.
+
+```{python}
+df_from_json.unnest("model_dep_var", "model_reg_vars", col_suffix=True)
+```
+<br>
+
+## **Polars write_json**
+
+```{python}
+df_from_json.write_json()
+```
+
+```{python}
+df_from_json.write_json(row_oriented=True)
+```
+But what about serializing not Polars DataFrames but Polars expressions. It is also possible!
+
+<br>
+
+## **Serialize Polars expresions and LazyDataFrames**
+
+Starting from `polars >= 0.18.1`, it is possible to serialize / deserialize an expression to make it work as follow:
+
+```{python}
+json_cond_select1 = pl.col('model_type').alias('ml_model_category').meta.write_json()
+json_cond_select2 = pl.col('model_version_tag').meta.write_json()
+json_cond_filter1 = (pl.col('model_version_tag') == 1.19).meta.write_json()
+
+```
+
+The expressions are serializable individually, and the whole `expr_config` is also serializable.
+
+```{python}
+expr_config = {
+     'select': [
+        pl.Expr.from_json(json_cond_select1),
+        pl.Expr.from_json(json_cond_select2),
+                ],
+     'filters': [
+        pl.Expr.from_json(json_cond_filter1),
+      ]
+}
+
+
+(
+    pl.read_json("data.json")
+    .filter(pl.all_horizontal(expr_config["filters"]))
+    .select(expr_config["select"])
+).lazy().write_json()
+```
+
+<br>
+
+### **Stay updated on Polars tips**
+
+Hopefully, this post has helped you become familiar with Polars JSON serialization and usage and allowed you to enjoy a showcase of some of its features.
+
+If you want to stay updated...
+
+```{=html}
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more Python Polars content!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+```
+
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
+
+

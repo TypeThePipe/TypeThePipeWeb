@@ -1,0 +1,293 @@
+---
+title: "Mastering Python Polars json manipulation. Do it in an easy and robust way!"
+author: "Carlos Vecina Tebar"
+date: "2023-10-09"
+slug: "python-polars-json-manipulation"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- Python
+- Tips
+tags: [Python, Polars]
+subtitle: "Unlock the Full Potential of Polars for Seamless JSON Data Handling"
+summary: "Unlock the Full Potential of Polars for Seamless JSON Data Handling."
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="featured.png" height="250px" width="400px" alt="Polars Python with sort dataframes message"/></p>
+<p>As you may know, the JSON format comes in handy for various programming tasks, ranging from configuration files to storing model weights and parameters, making it a versatile choice. With Polars, you can effortlessly load, manipulate, and write JSON files, streamlining your data handling processes.</p>
+<p>JSON (JavaScript Object Notation) is a user-friendly data format, known for its simplicity and readability, making it perfect for a variety of applications. Its versatility and compatibility with numerous programming languages make it a powerhouse for modern data representation and exchange.</p>
+<p><br></p>
+<div id="how-to-work-with-json-files-in-polars" class="section level1">
+<h1>How to work with JSON files in Polars</h1>
+<p>Among the dynamic world of data manipulation and analysis, there is a Python library that’s shaking things up: it is the already treated in TypeThePipe, Polars. While data processing is frequently associated with the Pandas library, Polars emerges as a star, boasting lightning-fast performance and a rich set of features. What sets Polars apart is it ability to handle JSON data, making it an indispensable asset for individuals working with intricate and ever-changing data structures. In this blog post, we’re about to unravel the wonders of JSON manipulation and reveal how this library has the power to serialize / deserialize JSON DataFrames, LazyDataFrames and Expresions.</p>
+<p><br></p>
+<div id="reading-json-with-polars-read_json" class="section level2">
+<h2><strong>Reading JSON with Polars read_json</strong></h2>
+<p>Polars <code>read_json</code> method is a practical tool for working with JSON data. It allows you to easily import JSON data and convert it into a structured DataFrame or LazyDataFrame, simplifying the process of data analysis.</p>
+<p>Also, you can add schema and schema override function parameters. Even if you’re dealing with complex or straightforward JSON structures, this method efficiently handles the conversion, saving you time and effort. It’s a useful feature making data manipulation more reliable and robust.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> json</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>config_json <span class="op">=</span> {</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>    <span class="st">&quot;model_type&quot;</span>: <span class="st">&quot;regression&quot;</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    <span class="st">&quot;model_reg_vars&quot;</span>: {</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>        <span class="st">&quot;price&quot;</span>: <span class="st">&quot;continuous&quot;</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>        <span class="st">&quot;zip_range&quot;</span>: <span class="st">&quot;categorical&quot;</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>    },</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    <span class="st">&quot;model_dep_var&quot;</span>: {</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>        <span class="st">&quot;y&quot;</span>: <span class="st">&quot;categorical&quot;</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>    },</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>    <span class="st">&quot;model_version_tag&quot;</span>: <span class="fl">1.19</span></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>}</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="cf">with</span> <span class="bu">open</span>(<span class="st">&#39;data.json&#39;</span>, <span class="st">&#39;w&#39;</span>, encoding<span class="op">=</span><span class="st">&#39;utf-8&#39;</span>) <span class="im">as</span> f:</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>    json.dump(config_json, f, indent<span class="op">=</span><span class="dv">2</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>df_from_json <span class="op">=</span> (</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>pl.read_json(<span class="st">&quot;data.json&quot;</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>    schema<span class="op">=</span>{</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>        <span class="st">&#39;model_type&#39;</span>: pl.Utf8, </span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>        <span class="st">&#39;model_reg_vars&#39;</span>: pl.Struct([pl.Field(<span class="st">&#39;price&#39;</span>, pl.Utf8), pl.Field(<span class="st">&#39;zip_range&#39;</span>, pl.Utf8)]), </span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>        <span class="st">&#39;model_dep_var&#39;</span>: pl.Struct([pl.Field(<span class="st">&#39;y&#39;</span>, pl.Utf8)]), </span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>        <span class="st">&#39;model_version_tag&#39;</span>: pl.Float64</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>        }</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>    )</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>pl.read_json(<span class="st">&quot;data.json&quot;</span>).schema</span></code></pre></div>
+<pre><code>## {&#39;model_type&#39;: Utf8, &#39;model_reg_vars&#39;: Struct([Field(&#39;price&#39;, Utf8), Field(&#39;zip_range&#39;, Utf8)]), &#39;model_dep_var&#39;: Struct([Field(&#39;y&#39;, Utf8)]), &#39;model_version_tag&#39;: Float64}</code></pre>
+<p><br></p>
+<div id="unesting-json-fields-from-dataframe-columns" class="section level3">
+<h3>Unesting JSON fields from DataFrame columns</h3>
+<p>Several strategies can be taken for unnesting JSON fields from a POlars DataFrame. First one one can <code>rename_fields</code> as Struct method.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>model_reg_col_name <span class="op">=</span> <span class="st">&quot;model_reg_vars&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>struct_names <span class="op">=</span> [<span class="ss">f&#39;</span><span class="sc">{</span>model_reg_col_name<span class="sc">}</span><span class="ss">_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">&#39;</span> <span class="cf">for</span> i <span class="kw">in</span> df_from_json[model_reg_col_name].struct.fields]</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>(</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>    df_from_json</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>    .select(pl.col(model_reg_col_name).struct.rename_fields(struct_names))</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>    .unnest(model_reg_col_name)</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>)</span></code></pre></div>
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (1, 2)</small><table border="1" class="dataframe"><thead><tr><th>model_reg_vars_price</th><th>model_reg_vars_zip_range</th></tr><tr><td>str</td><td>str</td></tr></thead><tbody><tr><td>&quot;continuous&quot;</td><td>&quot;categorical&quot;</td></tr></tbody></table></div>
+<p>Another way if you have few nested fields and know their name, you can simply use <code>select()</code> and access them by <code>struct.field()</code></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>df_from_json.select(</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>    pl.<span class="bu">all</span>().exclude(<span class="st">&quot;model_reg_vars&quot;</span>),</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>    pl.col(<span class="st">&quot;model_reg_vars&quot;</span>).struct.field(<span class="st">&quot;zip_range&quot;</span>),</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>    pl.col(<span class="st">&quot;model_reg_vars&quot;</span>).struct.field(<span class="st">&quot;price&quot;</span>)</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>)</span></code></pre></div>
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (1, 5)</small><table border="1" class="dataframe"><thead><tr><th>model_type</th><th>model_dep_var</th><th>model_version_tag</th><th>zip_range</th><th>price</th></tr><tr><td>str</td><td>struct[1]</td><td>f64</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>&quot;regression&quot;</td><td>{&quot;categorical&quot;}</td><td>1.19</td><td>&quot;categorical&quot;</td><td>&quot;continuous&quot;</td></tr></tbody></table></div>
+<p><br></p>
+</div>
+<div id="unnesting-several-columns-in-polars" class="section level3">
+<h3>Unnesting several columns in Polars</h3>
+<p>Unnesting several struct columns in Polars is a task that often arises when dealing with complex and nested data. Polars provides a convenient way to do this by using the unnest method on multiple struct columns simultaneously. This operation essentially “flattens” the nested structures, making the data more accessible for analysis and manipulation. By specifying the column names that need to be unnested, you can efficiently work with the data contained within those structures, simplifying your data processing tasks in Polars.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>df_from_json.unnest(<span class="st">&quot;model_dep_var&quot;</span>, <span class="st">&quot;model_reg_vars&quot;</span>)</span></code></pre></div>
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (1, 5)</small><table border="1" class="dataframe"><thead><tr><th>model_type</th><th>price</th><th>zip_range</th><th>y</th><th>model_version_tag</th></tr><tr><td>str</td><td>str</td><td>str</td><td>str</td><td>f64</td></tr></thead><tbody><tr><td>&quot;regression&quot;</td><td>&quot;continuous&quot;</td><td>&quot;categorical&quot;</td><td>&quot;categorical&quot;</td><td>1.19</td></tr></tbody></table></div>
+<p>This is cool as long as the nested fields names don’t collide. If so, <code>unnest</code> function is expected to fail.</p>
+<p>A hacky way to do it avoiding duplicated columns errors are this one proposed in SO question response. It is quite hacker because you should monkey patch Polars DataFrame <code>unnest</code> function. Doing it without a clear strategy, could lead to inconsistencies across your project code.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="kw">def</span> unnest(<span class="va">self</span>, columns, <span class="op">*</span>more_columns, prefix<span class="op">=</span><span class="va">None</span>, suffix<span class="op">=</span><span class="va">None</span>, col_prefix<span class="op">=</span><span class="va">False</span>, col_suffix<span class="op">=</span><span class="va">False</span>, drop_existing<span class="op">=</span><span class="va">False</span>):</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">isinstance</span>(columns, <span class="bu">str</span>):</span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a>        columns <span class="op">=</span> [columns]</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>    <span class="cf">if</span> more_columns:</span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>        columns <span class="op">=</span> <span class="bu">list</span>(columns)</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>        columns.extend(more_columns)</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a>    <span class="co">#check to see if any new parameters are used, if not just return as is current behavior</span></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a>    <span class="cf">if</span> drop_existing<span class="op">==</span><span class="va">False</span> <span class="kw">and</span> <span class="kw">not</span> (prefix <span class="kw">or</span> suffix <span class="kw">or</span> col_prefix <span class="kw">or</span> col_suffix):</span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">self</span>._from_pydf(<span class="va">self</span>._df.unnest(columns))</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>    final_prefix<span class="op">=</span><span class="st">&quot;&quot;</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>    final_suffix<span class="op">=</span><span class="st">&quot;&quot;</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>    </span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a>    <span class="cf">for</span> col <span class="kw">in</span> columns:</span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a>        <span class="cf">if</span> col_prefix:</span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>            final_prefix<span class="op">=</span>col<span class="op">+</span><span class="st">&quot;_&quot;</span><span class="op">+</span>prefix <span class="cf">if</span> prefix <span class="cf">else</span> col<span class="op">+</span><span class="st">&quot;_&quot;</span></span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a>        <span class="cf">if</span> col_suffix:</span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a>            final_suffix<span class="op">=</span><span class="st">&quot;_&quot;</span><span class="op">+</span>col<span class="op">+</span>suffix <span class="cf">if</span> suffix <span class="cf">else</span> <span class="st">&quot;_&quot;</span><span class="op">+</span>col</span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a>        tempdf <span class="op">=</span> <span class="va">self</span>[<span class="dv">0</span>].select(col)</span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a>        innercols <span class="op">=</span> tempdf._from_pydf(tempdf._df.unnest([col])).columns</span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a>        newcols <span class="op">=</span> [final_prefix<span class="op">+</span>innercol<span class="op">+</span>final_suffix <span class="cf">for</span> innercol <span class="kw">in</span> innercols]</span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a>        <span class="va">self</span> <span class="op">=</span> (</span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a>            <span class="va">self</span></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a>                .with_columns(pl.col(col).struct.rename_fields(newcols))</span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a>                .drop([drop_col <span class="cf">for</span> drop_col <span class="kw">in</span> newcols <span class="cf">if</span> drop_col <span class="kw">in</span> <span class="va">self</span>.columns])</span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a>        )</span>
+<span id="cb8-26"><a href="#cb8-26" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">self</span>._from_pydf(<span class="va">self</span>._df.unnest(columns))</span>
+<span id="cb8-27"><a href="#cb8-27" tabindex="-1"></a>pl.DataFrame.unnest<span class="op">=</span>unnest</span></code></pre></div>
+<p><br></p>
+<p>This way, you can add programmatically column suffix, as an equivalent of what we have seen in the previous section.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>df_from_json.unnest(<span class="st">&quot;model_dep_var&quot;</span>, <span class="st">&quot;model_reg_vars&quot;</span>, col_suffix<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<div><style>
+.dataframe > thead > tr > th,
+.dataframe > tbody > tr > td {
+  text-align: right;
+}
+</style>
+<small>shape: (1, 5)</small><table border="1" class="dataframe"><thead><tr><th>model_type</th><th>price_model_reg_vars</th><th>zip_range_model_reg_vars</th><th>y_model_dep_var</th><th>model_version_tag</th></tr><tr><td>str</td><td>str</td><td>str</td><td>str</td><td>f64</td></tr></thead><tbody><tr><td>&quot;regression&quot;</td><td>&quot;continuous&quot;</td><td>&quot;categorical&quot;</td><td>&quot;categorical&quot;</td><td>1.19</td></tr></tbody></table></div>
+<p><br></p>
+</div>
+</div>
+<div id="polars-write_json" class="section level2">
+<h2><strong>Polars write_json</strong></h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>df_from_json.write_json()</span></code></pre></div>
+<pre><code>## &#39;{&quot;columns&quot;:[{&quot;name&quot;:&quot;model_type&quot;,&quot;datatype&quot;:&quot;Utf8&quot;,&quot;values&quot;:[&quot;regression&quot;]},{&quot;name&quot;:&quot;model_reg_vars&quot;,&quot;datatype&quot;:{&quot;Struct&quot;:[{&quot;name&quot;:&quot;price&quot;,&quot;dtype&quot;:&quot;Utf8&quot;},{&quot;name&quot;:&quot;zip_range&quot;,&quot;dtype&quot;:&quot;Utf8&quot;}]},&quot;values&quot;:[{&quot;name&quot;:&quot;price&quot;,&quot;datatype&quot;:&quot;Utf8&quot;,&quot;values&quot;:[&quot;continuous&quot;]},{&quot;name&quot;:&quot;zip_range&quot;,&quot;datatype&quot;:&quot;Utf8&quot;,&quot;values&quot;:[&quot;categorical&quot;]}]},{&quot;name&quot;:&quot;model_dep_var&quot;,&quot;datatype&quot;:{&quot;Struct&quot;:[{&quot;name&quot;:&quot;y&quot;,&quot;dtype&quot;:&quot;Utf8&quot;}]},&quot;values&quot;:[{&quot;name&quot;:&quot;y&quot;,&quot;datatype&quot;:&quot;Utf8&quot;,&quot;values&quot;:[&quot;categorical&quot;]}]},{&quot;name&quot;:&quot;model_version_tag&quot;,&quot;datatype&quot;:&quot;Float64&quot;,&quot;values&quot;:[1.19]}]}&#39;</code></pre>
+<div class="sourceCode" id="cb12"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a>df_from_json.write_json(row_oriented<span class="op">=</span><span class="va">True</span>)</span></code></pre></div>
+<pre><code>## &#39;[{&quot;model_type&quot;:&quot;regression&quot;,&quot;model_reg_vars&quot;:{&quot;price&quot;:&quot;continuous&quot;,&quot;zip_range&quot;:&quot;categorical&quot;},&quot;model_dep_var&quot;:{&quot;y&quot;:&quot;categorical&quot;},&quot;model_version_tag&quot;:1.19}]&#39;</code></pre>
+<p>But what about serializing not Polars DataFrames but Polars expressions. It is also possible!</p>
+<p><br></p>
+</div>
+<div id="serialize-polars-expresions-and-lazydataframes" class="section level2">
+<h2><strong>Serialize Polars expresions and LazyDataFrames</strong></h2>
+<p>Starting from <code>polars &gt;= 0.18.1</code>, it is possible to serialize / deserialize an expression to make it work as follow:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>json_cond_select1 <span class="op">=</span> pl.col(<span class="st">&#39;model_type&#39;</span>).alias(<span class="st">&#39;ml_model_category&#39;</span>).meta.write_json()</span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a>json_cond_select2 <span class="op">=</span> pl.col(<span class="st">&#39;model_version_tag&#39;</span>).meta.write_json()</span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a>json_cond_filter1 <span class="op">=</span> (pl.col(<span class="st">&#39;model_version_tag&#39;</span>) <span class="op">==</span> <span class="fl">1.19</span>).meta.write_json()</span></code></pre></div>
+<p>The expressions are serializable individually, and the whole <code>expr_config</code> is also serializable.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a>expr_config <span class="op">=</span> {</span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a>     <span class="st">&#39;select&#39;</span>: [</span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a>        pl.Expr.from_json(json_cond_select1),</span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a>        pl.Expr.from_json(json_cond_select2),</span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a>                ],</span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a>     <span class="st">&#39;filters&#39;</span>: [</span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a>        pl.Expr.from_json(json_cond_filter1),</span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a>      ]</span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a>}</span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a></span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a></span>
+<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a>(</span>
+<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a>    pl.read_json(<span class="st">&quot;data.json&quot;</span>)</span>
+<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a>    .<span class="bu">filter</span>(pl.all_horizontal(expr_config[<span class="st">&quot;filters&quot;</span>]))</span>
+<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a>    .select(expr_config[<span class="st">&quot;select&quot;</span>])</span>
+<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a>).lazy().write_json()</span></code></pre></div>
+<pre><code>## &#39;{&quot;DataFrameScan&quot;:{&quot;df&quot;:{&quot;columns&quot;:[{&quot;name&quot;:&quot;ml_model_category&quot;,&quot;datatype&quot;:&quot;Utf8&quot;,&quot;values&quot;:[&quot;regression&quot;]},{&quot;name&quot;:&quot;model_version_tag&quot;,&quot;datatype&quot;:&quot;Float64&quot;,&quot;values&quot;:[1.19]}]},&quot;schema&quot;:{&quot;inner&quot;:{&quot;ml_model_category&quot;:&quot;Utf8&quot;,&quot;model_version_tag&quot;:&quot;Float64&quot;}},&quot;output_schema&quot;:null,&quot;projection&quot;:null,&quot;selection&quot;:null}}&#39;</code></pre>
+<p><br></p>
+<div id="stay-updated-on-polars-tips" class="section level3">
+<h3><strong>Stay updated on Polars tips</strong></h3>
+<p>Hopefully, this post has helped you become familiar with Polars JSON serialization and usage and allowed you to enjoy a showcase of some of its features.</p>
+<p>If you want to stay updated…</p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more Python Polars content!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
+</div>
+</div>
+</div>
