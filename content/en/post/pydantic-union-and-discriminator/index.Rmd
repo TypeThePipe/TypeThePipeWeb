@@ -3,6 +3,7 @@ title: Pydantic discriminated unions. Some examples to simplify data structures 
 author: Carlos Vecina Tebar
 date: '2023-06-18'
 slug: pydantic-discriminated-union
+translationKey: pydantic-discriminated-union
 output: 
   blogdown::html_page:
     highlight: pygments 

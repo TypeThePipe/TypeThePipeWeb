@@ -1,5 +1,5 @@
 ---
-title: Pydantic, Enums and IntEnums. A Story of Validation
+title: Pydantic, Enums e IntEnums. Una historia de validación
 author: Carlos Vecina Tebar
 date: '2022-10-05'
 slug: pydantic-enum-intenum
@@ -11,25 +11,26 @@ categories:
   - Python
   - Post
 tags: [Python, Pydantic]
-subtitle: "Taming Data Validation: Mastering Pydantic, Enums and IntEnums for Robust Python Applications."
-summary: "Mastering Pydantic, Enums and IntEnums for robust Python applications. Merge the power of Pydantic data validations and the concept of Enum, IntEnum and StrEnum."
+subtitle: "Validación y tipado de Datos en Python: Dominando Pydantic, Enums e IntEnums para Aplicaciones Python Robustas."
+summary: "Dominando Pydantic, Enums e IntEnums para aplicaciones Python robustas. Fusiona el poder de las validaciones de datos de Pydantic y el concepto de Enum, IntEnum y StrEnum."
 authors: [carlos-vecina]
 featured: false
 ---
 
 <img src="./featured.png" width="400px" alt="Pydantic Python library logo." />
 
-# What is a Enum and its integration with Pydantic?
 
-Oh, this is great question! Never heard that one before. An Enum, for the uninitiated, is a nifty little feature that united with the Pydantic library that helps you control the chaos of the data jungle. **It's a combination of Python's Enum (short for enumeration) and Pydantic's validation powers. Enums let you define a set of named values that your data must adhere to.** Pydantic then checks if your data is part of this exclusive club, and if it isn't, kindly shows it the door.
+# ¿Qué es un Enum y su integración con Pydantic?
+¡Oh, esta es una gran pregunta! ¡Nunca la había escuchado antes! Un Enum, para los no iniciados, es una característica ingeniosa que, cuando se combina con la biblioteca Pydantic, te ayuda a controlar el caos de la jungla de datos. **Es una combinación del Enum de Python (abreviatura de enumeración) y el poder de validación de Pydantic. Los Enums te permiten definir un conjunto de valores con nombres a los que tus datos deben adherirse.** Pydantic luego verifica si tus datos son parte de este club exclusivo y, si no lo son, amablemente les muestra la puerta de salida.
 
 <br>
 
-## **How does Pydantic and Enum help me?**
 
-If you've ever dealt with data, you know that it has a mind of its own. Sometimes, it's pristine and perfect. Other times, it's a dumpster fire. Enums are here to save you from those days when your data decides to go rogue.
+## **¿Cómo me ayudan Pydantic y Enum?**
 
-By defining enums and using them in your Pydantic models, you create a set of rules that your data must follow, like a stern yet fair teacher. This way, you can ensure that only valid data enters your system, and any outliers are dealt with accordingly.
+Si alguna vez has trabajado con datos, sabes que tienen voluntad propia. A veces son impecables y perfectos. En otras ocasiones, son un desastre total. Los Enums están aquí para salvarte de esos días en los que tus datos deciden actuar por su cuenta.
+
+Al definir Enums y utilizarlos en tus modelos de Pydantic, creas un conjunto de reglas que tus datos deben seguir, como un profesor estricto pero justo. De esta manera, puedes asegurarte de que solo datos válidos entren en tu sistema y que cualquier valor atípico se maneje adecuadamente.
 
 ```{python}
 from enum import Enum
@@ -42,7 +43,7 @@ class Pet(BaseModel):
   
 ```
 
-**You can be more specific defining your Pydantic models by using Enums:**
+**Puedes ser más específico al definir tus modelos de Pydantic utilizando Enums:**
 
 ```{python}
 from pydantic import ValidationError
@@ -68,7 +69,9 @@ Pet(name='Timmy', animal_type='bird', sex='male')
 
 ```
 
-Adding a non existent value (Tiger not in allowed in domestic animals) to an existent Enum will raise a `value is not a valid enumeration member;` error. This is one of the main use cases for them:
+
+Agregar un valor que no existe (por ejemplo, "Tigre", que no está permitido en animales domésticos) a un Enum existente generará un error el valor no es un miembro de la enumeración válido. Este es uno de los principales casos de uso para ellos.
+
 ```{python}
 import pytest
 
@@ -85,13 +88,14 @@ print(e_info.value)
 
 <br>
 
-## **What about IntENum? Which is the difference between Enum and IntEnum?**
+## **¿Y qué hay de IntEnum? ¿Cuál es la diferencia entre Enum e IntEnum?**
 
-In a nutshell, the main difference between Enum and IntEnum is the type of values they represent. Enum is a generic enumeration class for any data type, while IntEnum is specifically designed for integer values and allows for direct comparison with integers.
+En resumen, la principal diferencia entre Enum e IntEnum radica en el tipo de valores que representan. Enum es una clase de enumeración genérica que puede utilizarse con cualquier tipo de datos, mientras que IntEnum está específicamente diseñado para valores enteros y permite la comparación directa con enteros.
 
-Two are the main benefits that bring using IntEnums in the correct use cases:
-- As IntEnum ensures that all the enumeration members have an integer value, it's also possible to order them.
-- IntEnum members can be compared to integers directly, while Enum members can't be used in integer comparison operators.
+Existen dos beneficios principales al utilizar IntEnums en los casos de uso correctos:
+
+- Dado que IntEnum garantiza que todos los miembros de la enumeración tienen un valor entero, es posible ordenarlos.
+- Los miembros de IntEnum pueden compararse directamente con enteros, mientras que los miembros de Enum no pueden utilizarse en operadores de comparación de enteros.
 
 ```{python}
 from enum import IntEnum
@@ -114,11 +118,11 @@ print(e_info.value)
 
 <br>
 
-# Is it possible to subclass an Enum (or an StrEnum / IntEnum)?
+# ¿Es posible crear una subclase de un Enum (o un StrEnum / IntEnum)?
 
-It is not supposed to be possible. If you do so by direct inheritance a TypeError may be raised. To explain that, the documentation says: "Allowing subclassing of enums that define members would lead to a violation of some important invariants of types and instances."
+No se supone que sea posible. Si intentas hacerlo mediante la herencia directa, es posible que se genere un `TypeError`. Para explicarlo, la documentación dice: "Permitir la creación de subclases de enums que definen miembros llevaría a una violación de algunas invariantes importantes de tipos e instancias."
 
-Which are those violations? Let's check the [Guido comment in (2013)](https://mail.python.org/pipermail/python-dev/2013-April/125716.html):
+¿Qué estaríamos infringiendo? Veamos [el comentario de Guido en (2013)](https://mail.python.org/pipermail/python-dev/2013-April/125716.html):
 
 ```{python, eval=FALSE}
 from enum import Enum
@@ -137,19 +141,19 @@ type(MoreColor.red) is Color
 
 type(MoreColor.red) is not MoreColor
 
-#In other words, while `red` is accessible in MoreColor, it's actually a
-#Color instance?
+#En otras palabras, mientras 'red' es accesible en MoreColor
+#es realmente una instancia de Color?
 
-#Oh dear, this is actually a mess. I don't want MoreColor.red and
-#Color.red to be distinct objects, but then the isinstance() checks
-#will become confusing. If we don't override isinstance(), we'll get
+#Vaya, esto es un caos. No queremos que MoreColor.red y
+#Color.red sean objetos diferentes, pero usando isinstance() check
+#parece confuso.
 
 #not isinstance(Color.red, MoreColor)
 #isinstance(MoreColor.yellow, Color)
 ```
 
 
-In some Python versions, this is working without an error message, but it is a unwanted behaviour.
+En algunas versiones de Python, esto funciona sin mostrar un mensaje de error, pero es un comportamiento no deseado.
 
 ```{python, eval=FALSE}
 class Color(Enum):
@@ -163,8 +167,7 @@ class MoreColor(Enum, Color):
   yellow = 6
 ```
 
-One could argue that enumerations exist to guarantee mutual exclusion over a finite not ordered set. Appending additional members onto an existing enumeration don't violates this guarantee. So being sure about your use case and what you're doing, it's possible to create a workaround. **A clean solution using a decorator is**:
-
+Uno podría argumentar que las enumeraciones existen para garantizar la exclusión mutua sobre un conjunto finito no ordenado. Agregar miembros adicionales a una enumeración existente no viola esta garantía. Por lo tanto, si estás seguro de tu caso de uso y de lo que estás haciendo, es posible crear una solución alternativa. **Una solución limpia utilizando un decorador es:**
 ```{python}
 from enum import Enum
 from typing import Any, Callable
@@ -203,7 +206,8 @@ Parent.A == ExtendedParent.A
 )
 ```
 
-But this is not a perfect solution, as it has some drawbacks or limitations you should be aware of. In this case, a nor related Enum (called `RandomEnum`) that implements the same enum value, is equal in the comparison to our `Parent` and `ExtendedParent` classes :
+Pero esta no es una solución perfecta, ya que tiene algunas desventajas o limitaciones de las que debes ser consciente. En este caso, un Enum no relacionado (llamado `RandomEnum`) que implementa el mismo valor de enumeración es igual en la comparación con nuestras clases `Parent` y `ExtendedParent`:
+
 ```{python}
 
 class RandomEnum(EnumBase):
@@ -214,11 +218,11 @@ Parent.A == RandomEnum.A == ExtendedParent.A
 
 <br>
 
-## **Stay updated on Pydantic and Python tips**
+## **Mantente actualizado en consejos de Pydantic y Python**
 
-Hopefully, this post has helped you become familiar with Enum usage in Pydantic and allowed you to enjoy a showcase of some of its functionalities.
+Esperamos que esta publicación te haya ayudado a familiarizarte con el uso de Enum en Pydantic y te haya permitido disfrutar de una presentación de algunas de sus funcionalidades.
 
-If you want to stay updated...
+Si deseas mantenerte actualizado...
 
 ```{=html}
 <!-- Begin Mailchimp Signup Form -->
@@ -239,7 +243,7 @@ If you want to stay updated...
 <div id="mc_embed_signup">
 <form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
  <div id="mc_embed_signup_scroll">
-	<label for="mce-EMAIL"> Suscribe for more Python and Pydantic tips!</label>
+	<label for="mce-EMAIL"> ¡Suscribete para más consejos de Python y Pydantic!</label>
 	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
     <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
     <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
