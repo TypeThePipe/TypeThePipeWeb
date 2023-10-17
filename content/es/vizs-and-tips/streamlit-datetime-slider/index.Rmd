@@ -1,8 +1,8 @@
 ---
 title: "¿Cómo crear en Streamlit un Datetime Slider o deslizante de fechas."
 author: Carlos Vecina Tebar
-date: "2023-07-02"
-slug: "streamlit-datetime-slider"
+date: "2023-09-02"
+slug: "streamlit-datetime-slider-python"
 translationKey: "streamlit-datetime-slider"
 output:
   blogdown::html_page:

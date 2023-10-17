@@ -1,8 +1,8 @@
 ---
-title: Pydantic discriminated unions. Some examples to simplify data structures and ensure type safety
+title: Pydantic discriminated unions. Ejmplos de uniones discriminadas para simplificar las estructuras de datos y mejorar el tipado.
 author: Carlos Vecina Tebar
-date: '2023-06-18'
-slug: pydantic-discriminated-union
+date: '2023-10-18'
+slug: pydantic-union-discriminada
 translationKey: pydantic-discriminated-union
 output: 
   blogdown::html_page:
@@ -11,8 +11,8 @@ categories:
   - Python
   - Post
 tags: [Python, Pydantic]
-subtitle: "Powerful type validation and discriminated Unions with Pydantic: Simplify data structures and ensure type safety. We are showcasing a few straightforward examples."
-summary: "Powerful type validation and discriminated Unions with Pydantic: Simplify data structures and ensure type safety. We are showcasing a few straightforward examples."
+subtitle: "Validación de tipos poderosa y uniones discriminadas con Pydantic: Simplifica las estructuras de datos y garantiza la seguridad de tipos. Estamos mostrando algunos ejemplos sencillos"
+summary: "Validación de tipos poderosa y uniones discriminadas con Pydantic: Simplifica las estructuras de datos y garantiza la seguridad de tipos. Estamos mostrando algunos ejemplos sencillos"
 authors: [carlos-vecina]
 featured: false
 ---
@@ -86,16 +86,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 
 <p><img src="featured.png" width="400px" alt="Pydantic Python library logo." /></p>
-<div id="what-is-an-union-discriminator-or-tagged-unions-and-its-role-in-pydantic" class="section level1">
-<h1>What is an union discriminator or tagged unions, and its role in Pydantic?</h1>
-<p>Well, well, well, look who decided to stroll into the world of Pydantic discriminators! 🕶️ Brace yourselves, folks, because we’re about to take a sarcastic and catchy rollercoaster ride through this wild jungle of coding wonders. Buckle up!</p>
-<p>So, what’s all the buzz about Pydantic discriminators? Oh, they’re just the coolest thing since sliced bread, my friends! Picture this: you have a bunch of data models, each with their own quirks and peculiarities. It’s like dealing with a bunch of divas in a high school drama, except instead of gossip, it’s all about attributes and properties. Drama queens, am I right?</p>
-<p>Now, let’s say you want to pick out the perfect model from this chaotic ensemble. How on earth are you going to do that? Fear not, because Pydantic discriminators are here to save the day, just like a superhero with an ironic sense of humor. They’re like the Sherlock Holmes of model selection, deducing the perfect fit for you.</p>
+<div id="qué-es-un-discriminated-union-discriminador-de-uniones-o-uniones-etiquetadas-y-cuál-es-su-papel-en-pydantic" class="section level1">
+<h1>¿Qué es un ‘discriminated union’, discriminador de uniones o uniones etiquetadas y cuál es su papel en Pydantic?</h1>
+<p>Bueno, bueno, bueno, ¡miren quién decidió pasear por el mundo de los discriminadores de Pydantic! 🕶️ Prepárense, amigos, porque estamos a punto de embarcarnos en un irónico y pegajoso paseo en montaña rusa por esta selva salvaje de maravillas de la programación. ¡Abróchense los cinturones!</p>
+<p>Entonces, ¿de qué se trata todo el revuelo de los discriminadores de Pydantic? ¡Oh, son simplemente lo más genial desde el pan rebanado, amigos míos! Imaginen esto: tienen un montón de modelos de datos, cada uno con sus propias peculiaridades y excentricidades. Es como lidiar con un grupo de divas en un drama de secundaria, excepto que en lugar de chismes, se trata de atributos y propiedades. Reinas del drama, ¿verdad?</p>
+<p>Ahora, digamos que quieren elegir el modelo perfecto de este conjunto caótico. ¿Cómo diablos van a hacerlo? No teman, porque los discriminadores de Pydantic están aquí para salvar el día, como un superhéroe con un sentido del humor irónico. Son como el Sherlock Holmes de la selección de modelos, deduciendo el ajuste perfecto para ustedes.</p>
 <p><br></p>
 <div id="how-does-pydantic-discriminator-works" class="section level2">
 <h2><strong>How does Pydantic discriminator works?</strong></h2>
-<p>Pydantic’s discriminator feature allows the definition of data structures with multiple types, using a discriminator field to determine the actual object type. This enables type validation and serialization/deserialization based on the discriminator value, ensuring data integrity and flexibility in representing different types of objects.</p>
-<p>Since <a href="https://docs.pydantic.dev/latest/usage/types/#discriminated-unions-aka-tagged-unions:~:text=Required%20Fields.-,Discriminated%20Unions%20(a.k.a.%20Tagged%20Unions,-)">Pydantic 1.9, we could make use of it</a>. Let’s showcase it in an easy way:</p>
+<p>El discriminador de Pydantic permite la definición de estructuras de datos con múltiples tipos, utilizando un campo de discriminador para determinar el tipo real del objeto. Esto habilita la validación de tipos y la serialización/deserialización basada en el valor del discriminador, asegurando la integridad de los datos y la flexibilidad en la representación de diferentes tipos de objetos.</p>
+<p>A partir de <a href="https://docs.pydantic.dev/latest/usage/types/#discriminated-unions-aka-tagged-unions:~:text=Required%20Fields.-,Discriminated%20Unions%20(a.k.a.%20Tagged%20Unions,-)">Pydantic 1.9, lo tenemos disponible</a>. Let’s showcase it in an easy way:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">from</span> pydantic <span class="im">import</span> BaseModel, Field, parse_obj_as</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Literal, Union, Annotated</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
@@ -122,13 +122,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>## WildAnimal(__root__=Shark(animal_type=&#39;shark&#39;, ferocity_scale=5.0))</code></pre>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(my_shark, Shark))</span></code></pre></div>
 <pre><code>## True</code></pre>
-<p>The below polimorfic code example and some other interesting discussions could be found here:
+<p>Puedes encontrar este ejemplo de polimosfirmo junto con algun ejemplo de código, además de alguna interesante discusión en:
 <a href="https://github.com/pydantic/pydantic/discussions/5785" class="uri">https://github.com/pydantic/pydantic/discussions/5785</a></p>
 <p><br></p>
 </div>
-<div id="pydantic-annotated-union-discriminator-example" class="section level2">
-<h2><strong>Pydantic Annotated union discriminator example</strong></h2>
-<p>But we could use a very simple approach to achieve most of the usage by using the <code>Annotated</code> union.</p>
+<div id="ejemplo-de-discriminador-de-unión-anotada-pydantic" class="section level2">
+<h2><strong>Ejemplo de discriminador de unión anotada Pydantic</strong></h2>
+<p>Pero podríamos utilizar un enfoque muy simple para lograr la mayoría de los usos mediante el uso de la unión <code>Annotated</code>.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>Animal <span class="op">=</span> Annotated[Union[Tiger, Shark], Field(discriminator<span class="op">=</span><span class="st">&#39;animal_type&#39;</span>)]</span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>raw_data <span class="op">=</span> {</span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>    <span class="st">&quot;animal_type&quot;</span>: <span class="st">&quot;tiger&quot;</span>,</span>
@@ -136,9 +136,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>}</span>
 <span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>parse_obj_as(Animal, raw_data)</span></code></pre></div>
 <pre><code>## Tiger(animal_type=&#39;tiger&#39;, ferocity_scale=6.0)</code></pre>
-<p>Get ready for the magic of the Field class, courtesy of Pydantic. It’s armed with a special power called “discriminator.” By setting the discriminator to “pet_type,” we unlock the ability to distinguish between our fantastic creatures. It’s like giving them their own special spotlight!</p>
-<p>Hold on tight, because we’re about to venture into the wild lands of raw_data. It holds the secrets of a “pet_type” with the fiery spirit of a “tiger” and a mesmerizing “stripes” count of 6. It’s as if we’re peering into a digital zoo!</p>
-<p>And now, it’s showtime! We summon the powerful parse_obj_as to work its coding wizardry. We present it with our regal Animal and the enigmatic raw_data. Abracadabra! With a wave of its wand, the transformation unfolds. The raw data morphs into a stunning representation of our chosen Animal. It’s like a magical metamorphosis!</p>
+<p>Prepárate para la magia de la clase <code>Field</code>, cortesía de Pydantic. Está equipada con un poder especial llamado “discriminator”. Al configurar el discriminador en “pet_type”, desbloqueamos la capacidad de distinguir entre nuestras criaturas fantásticas. ¡Es como darles su propio foco especial!</p>
+<p>¡Agárrate fuerte, porque estamos a punto de adentrarnos en las tierras salvajes de raw_data. Guarda los secretos de un “pet_type” con el espíritu ardiente de un “tigre” y un fascinante recuento de “rayas” de 6. Es como si estuviéramos mirando a un zoológico digital.</p>
+<p>¡Y ahora, es hora del espectáculo! Invocamos al poderoso parse_obj_as para que haga su magia de codificación. Le presentamos a nuestro majestuoso Animal y al enigmático raw_data. ¡Abra Kadabra! Con un movimiento de su varita, la transformación se despliega. Los datos crudos se convierten en una impresionante representación de nuestro Animal elegido. ¡Es como una metamorfosis mágica!</p>
 <p><br></p>
 </div>
 <div id="example-of-polimorfic-base-model" class="section level2">
@@ -195,17 +195,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-50"><a href="#cb7-50" tabindex="-1"></a>cat_instance <span class="op">=</span> Animal.parse_obj({<span class="st">&quot;type&quot;</span>:<span class="st">&quot;cat&quot;</span>, <span class="st">&quot;hairless&quot;</span>: <span class="va">False</span>, <span class="st">&quot;name&quot;</span>: <span class="st">&quot;meaw&quot;</span>, <span class="st">&quot;color&quot;</span>: <span class="st">&quot;black&quot;</span>})</span>
 <span id="cb7-51"><a href="#cb7-51" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(cat_instance, Cat))</span></code></pre></div>
 <pre><code>## True</code></pre>
-<p>Tthe PolymorphicBaseModel, a base class that sets the stage for polymorphic behavior. It defines a required type attribute and introduces a hidden _subtypes dictionary to keep track of subtypes.</p>
-<p>Next, we dive into the <strong>init_subclass</strong> method, where the magic happens. It allows subclasses to register themselves with a specific polymorphic type. This lets us distinguish between different subtypes within the PolymorphicBaseModel hierarchy.</p>
-<p>But hold on, there’s more to uncover! We make use of the _convert_to_real_type method, responsible for converting data to its actual subtype based on the provided type attribute. It checks if the type is valid, finds the corresponding subclass, and ensures it is a valid subclass of the base class.</p>
-<p>Finally, we arrive at the parse_obj method, where the true parsing takes place. It serves as the entry point for parsing objects of the polymorphic hierarchy. Using the _convert_to_real_type method, it transforms the data into an instance of the appropriate subclass.</p>
-<p>And there you have it! A glimpse into the realm of polymorphic models. It’s a world where base classes and subtypes come together, allowing for flexible and dynamic object parsing. Embrace the power of polymorphism and let your code adapt and evolve with grace!</p>
+<p>El <code>PolymorphicBaseModel</code>, una clase base que sienta las bases para el comportamiento polimórfico. Define un atributo de tipo requerido e introduce un diccionario oculto <code>_subtypes</code> para llevar un registro de los subtipos.</p>
+<p>A continuación, nos sumergimos en el método init_subclass, donde sucede la magia. Permite que las subclases se registren a sí mismas con un tipo polimórfico específico. Esto nos permite distinguir entre diferentes subtipos dentro de la jerarquía de PolymorphicBaseModel.</p>
+<p>¡Pero espera, hay más por descubrir! Hacemos uso del método <code>_convert_to_real_type</code>, encargado de convertir los datos a su subtipo real en función del atributo de tipo proporcionado. Comprueba si el tipo es válido, encuentra la subclase correspondiente y asegura que sea una subclase válida de la clase base.</p>
+<p>Finalmente, llegamos al método parse_obj, donde tiene lugar el verdadero análisis. Sirve como punto de entrada para analizar objetos de la jerarquía polimórfica. Utilizando el método <code>_convert_to_real_type</code>, transforma los datos en una instancia de la subclase adecuada.</p>
+<p>¡Y ahí lo tienes! Un vistazo al mundo de los modelos polimórficos. Es un mundo donde las clases base y los subtipos se unen, permitiendo un análisis de objetos flexible y dinámico. Aprovecha el poder del polimorfismo y permite que tu código se adapte y evolucione con elegancia.</p>
 <p><br></p>
 </div>
-<div id="pydantic-2-typeadapter-to-parse-data-into-a-discriminated-union" class="section level2">
-<h2><strong>Pydantic 2: TypeAdapter to parse data into a discriminated union</strong></h2>
-<p>In Pydantic v2, you can utilize the TypeAdapter to parse data into a discriminated union. However, please note that Pydantic v2 is currently in pre-release, and the module’s current version is v1.7.</p>
-<p>Therefore, <strong>make sure to upgrade to Pydantic v2 when it becomes available to utilize this feature.</strong></p>
+<div id="pydantic-2-typeadapter-para-analizar-datos-en-una-unión-discriminada" class="section level2">
+<h2><strong>Pydantic 2: TypeAdapter para analizar datos en una unión discriminada</strong></h2>
+<p>En Pydantic v2, puedes utilizar el TypeAdapter para analizar datos en una unión discriminada. Sin embargo, ten en cuenta que Pydantic v2 se encuentra actualmente (2023-06-18) en prelanzamiento, y la versión actual del módulo es la v1.7.</p>
+<p>Por lo tanto, asegúrate de actualizar a Pydantic v2 cuando esté disponible para aprovechar esta característica.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>from pydantic import TypeAdapter</span>
 <span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
 <span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>adapter <span class="ot">=</span> <span class="fu">TypeAdapter</span>(Annotated[Union[Child1, Child2], <span class="fu">Field</span>(<span class="at">discriminator=</span><span class="st">&#39;type&#39;</span>)])</span>
@@ -213,10 +213,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>child <span class="ot">=</span> <span class="fu">adapter.validate_json</span>(my_json_data)</span></code></pre></div>
 <p><br></p>
 </div>
-<div id="stay-updated-on-pydantic-and-python-tips" class="section level2">
-<h2><strong>Stay updated on Pydantic and Python tips</strong></h2>
-<p>Hopefully, this post has helped familiarize you with the usage of unions and discriminators in Pydantic, showcasing some of its functionalities and enabling you to enjoy their benefits.</p>
-<p>If you want to stay updated…</p>
+<div id="mantente-al-tanto-de-consejos-sobre-pydantic-y-python" class="section level2">
+<h2><strong>Mantente al tanto de consejos sobre Pydantic y Python</strong></h2>
+<p>Esperamos que esta publicación te haya ayudado a familiarizarte con el uso de uniones y discriminadores en Pydantic, mostrando algunas de sus funcionalidades y permitiéndote disfrutar de sus beneficios.</p>
+<p>Si deseas mantenerte actualizado…</p>
 <!-- Begin Mailchimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
 <link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
@@ -235,7 +235,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="mc_embed_signup">
 <form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
  <div id="mc_embed_signup_scroll">
-	<label for="mce-EMAIL"> Suscribe for more Python and Pydantic tips!</label>
+	<label for="mce-EMAIL"> ¡Suscribete para más consejos sobre Python y Pydantic!</label>
 	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
     <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
     <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
