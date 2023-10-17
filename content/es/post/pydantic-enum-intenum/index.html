@@ -1,0 +1,307 @@
+---
+title: Pydantic, Enums e IntEnums. Una historia de validación
+author: Carlos Vecina Tebar
+date: '2022-10-05'
+slug: pydantic-enum-intenum
+translationKey: pydantic-enum-intenum
+output: 
+  blogdown::html_page:
+    highlight: pygments 
+categories:
+  - Python
+  - Post
+tags: [Python, Pydantic]
+subtitle: "Validación y tipado de Datos en Python: Dominando Pydantic, Enums e IntEnums para Aplicaciones Python Robustas."
+summary: "Dominando Pydantic, Enums e IntEnums para aplicaciones Python robustas. Fusiona el poder de las validaciones de datos de Pydantic y el concepto de Enum, IntEnum y StrEnum."
+authors: [carlos-vecina]
+featured: false
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="featured.png" width="400px" alt="Pydantic Python library logo." /></p>
+<div id="qué-es-un-enum-y-su-integración-con-pydantic" class="section level1">
+<h1>¿Qué es un Enum y su integración con Pydantic?</h1>
+<p>¡Oh, esta es una gran pregunta! ¡Nunca la había escuchado antes! Un Enum, para los no iniciados, es una característica ingeniosa que, cuando se combina con la biblioteca Pydantic, te ayuda a controlar el caos de la jungla de datos. <strong>Es una combinación del Enum de Python (abreviatura de enumeración) y el poder de validación de Pydantic. Los Enums te permiten definir un conjunto de valores con nombres a los que tus datos deben adherirse.</strong> Pydantic luego verifica si tus datos son parte de este club exclusivo y, si no lo son, amablemente les muestra la puerta de salida.</p>
+<p><br></p>
+<div id="cómo-me-ayudan-pydantic-y-enum" class="section level2">
+<h2><strong>¿Cómo me ayudan Pydantic y Enum?</strong></h2>
+<p>Si alguna vez has trabajado con datos, sabes que tienen voluntad propia. A veces son impecables y perfectos. En otras ocasiones, son un desastre total. Los Enums están aquí para salvarte de esos días en los que tus datos deciden actuar por su cuenta.</p>
+<p>Al definir Enums y utilizarlos en tus modelos de Pydantic, creas un conjunto de reglas que tus datos deben seguir, como un profesor estricto pero justo. De esta manera, puedes asegurarte de que solo datos válidos entren en tu sistema y que cualquier valor atípico se maneje adecuadamente.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">from</span> enum <span class="im">import</span> Enum</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">from</span> pydantic <span class="im">import</span> BaseModel, ValidationError</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="kw">class</span> Pet(BaseModel):</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  name: <span class="bu">str</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  animal_type: <span class="bu">str</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  sex: <span class="bu">str</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  </span></code></pre></div>
+<p><strong>Puedes ser más específico al definir tus modelos de Pydantic utilizando Enums:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">from</span> pydantic <span class="im">import</span> ValidationError</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="kw">class</span> Sex(Enum):</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>  MALE <span class="op">=</span> <span class="st">&#39;male&#39;</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>  FEMALE <span class="op">=</span> <span class="st">&#39;female&#39;</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>  </span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="kw">class</span> DomesticAnimals(Enum):</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>  CAT <span class="op">=</span> <span class="st">&#39;cat&#39;</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>  DOG <span class="op">=</span> <span class="st">&#39;dog&#39;</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>  FISH <span class="op">=</span> <span class="st">&#39;fish&#39;</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>  BIRD <span class="op">=</span> <span class="st">&#39;bird&#39;</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co"># And then</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="kw">class</span> Pet(BaseModel):</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>  name: <span class="bu">str</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>  animal_type: DomesticAnimals</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>  sex: Sex</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>  </span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>Pet(name<span class="op">=</span><span class="st">&#39;Timmy&#39;</span>, animal_type<span class="op">=</span><span class="st">&#39;bird&#39;</span>, sex<span class="op">=</span><span class="st">&#39;male&#39;</span>)</span></code></pre></div>
+<pre><code>## Pet(name=&#39;Timmy&#39;, animal_type=&lt;DomesticAnimals.BIRD: &#39;bird&#39;&gt;, sex=&lt;Sex.MALE: &#39;male&#39;&gt;)</code></pre>
+<p>Agregar un valor que no existe (por ejemplo, “Tigre”, que no está permitido en animales domésticos) a un Enum existente generará un error el valor no es un miembro de la enumeración válido. Este es uno de los principales casos de uso para ellos.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="im">import</span> pytest</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="cf">with</span> pytest.raises(ValidationError, match<span class="op">=</span><span class="st">&#39; value is not a valid enumeration member&#39;</span>) <span class="im">as</span> e_info:</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  Pet(</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>    name<span class="op">=</span><span class="st">&#39;Timmy&#39;</span>, </span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>    animal_type<span class="op">=</span><span class="st">&#39;tiger&#39;</span>, </span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>    sex<span class="op">=</span><span class="st">&#39;male&#39;</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>  )</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="bu">print</span>(e_info.value)</span></code></pre></div>
+<pre><code>## 1 validation error for Pet
+## animal_type
+##   value is not a valid enumeration member; permitted: &#39;cat&#39;, &#39;dog&#39;, &#39;fish&#39;, &#39;bird&#39; (type=type_error.enum; enum_values=[&lt;DomesticAnimals.CAT: &#39;cat&#39;&gt;, &lt;DomesticAnimals.DOG: &#39;dog&#39;&gt;, &lt;DomesticAnimals.FISH: &#39;fish&#39;&gt;, &lt;DomesticAnimals.BIRD: &#39;bird&#39;&gt;])</code></pre>
+<p>(*Note the <code>UPPER_CASE_NOTATION</code>)</p>
+<p><br></p>
+</div>
+<div id="y-qué-hay-de-intenum-cuál-es-la-diferencia-entre-enum-e-intenum" class="section level2">
+<h2><strong>¿Y qué hay de IntEnum? ¿Cuál es la diferencia entre Enum e IntEnum?</strong></h2>
+<p>En resumen, la principal diferencia entre Enum e IntEnum radica en el tipo de valores que representan. Enum es una clase de enumeración genérica que puede utilizarse con cualquier tipo de datos, mientras que IntEnum está específicamente diseñado para valores enteros y permite la comparación directa con enteros.</p>
+<p>Existen dos beneficios principales al utilizar IntEnums en los casos de uso correctos:</p>
+<ul>
+<li>Dado que IntEnum garantiza que todos los miembros de la enumeración tienen un valor entero, es posible ordenarlos.</li>
+<li>Los miembros de IntEnum pueden compararse directamente con enteros, mientras que los miembros de Enum no pueden utilizarse en operadores de comparación de enteros.</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="im">from</span> enum <span class="im">import</span> IntEnum</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="im">import</span> pytest</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="kw">class</span> ResponseCode(IntEnum):</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>    OK <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>    NOT_FOUND <span class="op">=</span> <span class="dv">404</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>    ERROR <span class="op">=</span> <span class="dv">500</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>    </span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="cf">assert</span> ResponseCode.OK <span class="op">==</span> <span class="dv">200</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="cf">assert</span> ResponseCode.OK <span class="op">&lt;=</span> ResponseCode.NOT_FOUND</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="cf">with</span> pytest.raises(<span class="pp">TypeError</span>, match<span class="op">=</span><span class="st">&#39;cannot extend enumeration&#39;</span>) <span class="im">as</span> e_info: <span class="co"># Check that a TypeError is raised</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>  <span class="kw">class</span> ExtendedResponseCode(ResponseCode):</span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>      CUSTOM <span class="op">=</span> <span class="dv">300</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="bu">print</span>(e_info.value)</span></code></pre></div>
+<pre><code>## ExtendedResponseCode: cannot extend enumeration &#39;ResponseCode&#39;</code></pre>
+<p><br></p>
+</div>
+</div>
+<div id="es-posible-crear-una-subclase-de-un-enum-o-un-strenum-intenum" class="section level1">
+<h1>¿Es posible crear una subclase de un Enum (o un StrEnum / IntEnum)?</h1>
+<p>No se supone que sea posible. Si intentas hacerlo mediante la herencia directa, es posible que se genere un <code>TypeError</code>. Para explicarlo, la documentación dice: “Permitir la creación de subclases de enums que definen miembros llevaría a una violación de algunas invariantes importantes de tipos e instancias.”</p>
+<p>¿Qué estaríamos infringiendo? Veamos <a href="https://mail.python.org/pipermail/python-dev/2013-April/125716.html">el comentario de Guido en (2013)</a>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="im">from</span> enum <span class="im">import</span> Enum</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="kw">class</span> Color(Enum):</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  red <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>  green <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>  blue <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="kw">class</span> MoreColor(Color): <span class="co"># this is not possible as we&#39;ve seen</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>  cyan <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>  magenta <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>  yellow <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="bu">type</span>(MoreColor.red) <span class="kw">is</span> Color</span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="bu">type</span>(MoreColor.red) <span class="kw">is</span> <span class="kw">not</span> MoreColor</span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="co">#En otras palabras, mientras &#39;red&#39; es accesible en MoreColor</span></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="co">#es realmente una instancia de Color?</span></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co">#Vaya, esto es un caos. No queremos que MoreColor.red y</span></span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="co">#Color.red sean objetos diferentes, pero usando isinstance() check</span></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="co">#parece confuso.</span></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a><span class="co">#not isinstance(Color.red, MoreColor)</span></span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a><span class="co">#isinstance(MoreColor.yellow, Color)</span></span></code></pre></div>
+<p>En algunas versiones de Python, esto funciona sin mostrar un mensaje de error, pero es un comportamiento no deseado.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="kw">class</span> Color(Enum):</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  red <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  green <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  blue <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="kw">class</span> MoreColor(Enum, Color):</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>  cyan <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>  magenta <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>  yellow <span class="op">=</span> <span class="dv">6</span></span></code></pre></div>
+<p>Uno podría argumentar que las enumeraciones existen para garantizar la exclusión mutua sobre un conjunto finito no ordenado. Agregar miembros adicionales a una enumeración existente no viola esta garantía. Por lo tanto, si estás seguro de tu caso de uso y de lo que estás haciendo, es posible crear una solución alternativa. <strong>Una solución limpia utilizando un decorador es:</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="im">from</span> enum <span class="im">import</span> Enum</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Any, Callable</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="kw">class</span> EnumBase(Enum):</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__eq__</span>(<span class="va">self</span>, other: Any) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">isinstance</span>(other, Enum):</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">self</span>.value <span class="op">==</span> other.value</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>      </span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="kw">def</span> extend_enum(parent_enum: EnumBase) <span class="op">-&gt;</span> Callable[[EnumBase], EnumBase]:</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Decorator function that extends an enum class with values from another enum class.&quot;&quot;&quot;</span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>    <span class="kw">def</span> wrapper(extended_enum: EnumBase) <span class="op">-&gt;</span> EnumBase:</span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>        joined <span class="op">=</span> {}</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>        <span class="cf">for</span> item <span class="kw">in</span> parent_enum:</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>            joined[item.name] <span class="op">=</span> item.value</span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>        <span class="cf">for</span> item <span class="kw">in</span> extended_enum:</span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>            joined[item.name] <span class="op">=</span> item.value</span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>        <span class="cf">return</span> EnumBase(extended_enum.<span class="va">__name__</span>, joined)</span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a>    <span class="cf">return</span> wrapper</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="kw">class</span> Parent(EnumBase):</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>  A <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>  B <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>  </span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="at">@extend_enum</span>(Parent)</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="kw">class</span> ExtendedParent(EnumBase):</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>  C <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>  </span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="bu">type</span>(Parent.A) <span class="kw">is</span> Parent,</span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="bu">type</span>(Parent.A) <span class="kw">is</span> <span class="kw">not</span> ExtendedParent,</span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>Parent.A <span class="op">==</span> ExtendedParent.A</span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## True True True</code></pre>
+<p>Pero esta no es una solución perfecta, ya que tiene algunas desventajas o limitaciones de las que debes ser consciente. En este caso, un Enum no relacionado (llamado <code>RandomEnum</code>) que implementa el mismo valor de enumeración es igual en la comparación con nuestras clases <code>Parent</code> y <code>ExtendedParent</code>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="kw">class</span> RandomEnum(EnumBase):</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>  A <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  </span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>Parent.A <span class="op">==</span> RandomEnum.A <span class="op">==</span> ExtendedParent.A</span></code></pre></div>
+<pre><code>## True</code></pre>
+<p><br></p>
+<div id="mantente-actualizado-en-consejos-de-pydantic-y-python" class="section level2">
+<h2><strong>Mantente actualizado en consejos de Pydantic y Python</strong></h2>
+<p>Esperamos que esta publicación te haya ayudado a familiarizarte con el uso de Enum en Pydantic y te haya permitido disfrutar de una presentación de algunas de sus funcionalidades.</p>
+<p>Si deseas mantenerte actualizado…</p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> ¡Suscribete para más consejos de Python y Pydantic!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+<style>
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+</style>
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
+</div>
+</div>
