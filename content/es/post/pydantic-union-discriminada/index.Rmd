@@ -1,7 +1,7 @@
 ---
 title: Pydantic discriminated unions. Ejmplos de uniones discriminadas para simplificar las estructuras de datos y mejorar el tipado.
 author: Carlos Vecina Tebar
-date: '2023-10-18'
+date: '2023-09-18'
 slug: pydantic-union-discriminada
 translationKey: pydantic-discriminated-union
 output: 

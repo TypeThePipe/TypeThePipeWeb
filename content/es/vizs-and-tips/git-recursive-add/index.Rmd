@@ -1,0 +1,81 @@
+---
+title: "Git add recursivo. Cómo añadir directorios y subdirectorios recursivamente"
+author: "Carlos Vecina Tebar"
+date: "2023-01-05"
+slug: "git-add-recursivo"
+translationKey: "git-recursive-add-files"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- Tips
+tags: []
+subtitle: "¿Estas empezando con Git y quieres añadir ficheros recursivamente? Veamos como hacerlo en una sola línea."
+summary: "¿Estas empezando con Git y quieres añadir ficheros recursivamente? Veamos como hacerlo en una sola línea."
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+<img src="./featured.png" height="250px" width="400px" />
+
+
+El comando `git add` es una operación fundamental en el sistema de control de versiones Git. Una necesidad recurrente entre los aprendices de Git es agregar todos los archivos en un directorio / capeta o directorios anidados. Para hacerlo, simplemente necesitamos una instrucción. Este comando es `git add .`. Funciona de manera recursiva de forma predeterminada.
+
+
+```{bash}
+git add .
+```
+
+Si en lugar de ejecutarlo en el directorio actual, quieres hacerlo en un subdirectorio, es tan fácil como:
+
+```{bash}
+git add libs/
+```
+
+Note that you should prefer the `.` over the usage of `*` as the shell interprets it and replaces it with all the files and folders in the current directory.
+
+Puedes usar git add con la opción `--all` o `--update` para preparar los archivos que han sido eliminados para su eliminación.
+
+Como nota final, uno podría añadir archivos enumerados en el `.gitignore` (ignorándolos) al agregar la bandera `-f` o `--force`. Si lo haces en un directorio, funcionará de manera recursiva.
+
+
+```{bash}
+git add --force libs/
+```
+
+
+```{=html}
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more Git tips!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+```
