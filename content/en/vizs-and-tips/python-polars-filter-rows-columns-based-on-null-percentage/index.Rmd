@@ -1,0 +1,114 @@
+---
+title: "Polars: Filter rows and columns based on percentage of NAs / nulls"
+author: "Carlos Vecina Tebar"
+date: "2023-10-18"
+slug: "python-polars-filter-rows-columns-based-on-null-percentage"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- Python
+- Tips
+tags: [Polars]
+subtitle: "Optimizing Data Cleanup: Filtering Rows by Null Percentage in Python Polars. Manage NAs with precision."
+summary: "Optimizing Data Cleanup: Filtering Rows by Null Percentage in Python Polars. Manage NAs with precision."
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<img src="./featured.png" height="250px" width="400px"/>
+
+Polars is well-known for working with LazyFrames and avoiding materializing data till necessary. That's the main reason Polars Selectors work with schema available. But **filtering rows and columns based on NAs** is a first basic step needed for many data analysis.
+
+So let's see the most idiomatic way we have to do so, as the trade-off of syntactic sugar vs high performance of query planning and lazy evaluation.
+
+```{python}
+import polars as pl
+
+df = pl.DataFrame({
+    "column_1": [1, 2, 3],
+    "column_2": [4, None, 5],
+    "column_3": [None, 6, None],
+    "column_4": [7, 8, 9]
+}).lazy()
+```
+
+## Filter rows based on percentage of NAs
+
+How to filter rows based on null percentage in Python Polars? As you may notice, we could include it in a Polars Lazy pipeline.
+
+```{python}
+df.filter(pl.sum_horizontal(pl.all().is_null() / pl.all().count()) < 0.7).collect()
+```
+
+<br>
+
+## Filter and drop columns based on percentage of NAs
+
+Do you want to **select columns that are populated higher than a given percentage?** Here what it takes to do so. Of course, the main computation needs to materialize. But you know, you can't make an omelette without breaking some eggs.
+
+Has we posted about [dropping columns based on NAs percentage without leaving the pipe flow](https://typethepipe.com/vizs-and-tips/selecting-columns-based-on-nas-percentage-r-tidyverse/), we are not doing it on Python Polars.
+
+```{python}
+df.select(
+    [
+        column for i, column in
+        enumerate(df.columns) if df.select(pl.all().is_null().sum() / pl.all().count() < 0.6).collect().to_numpy()[0][i]
+]
+).collect()
+```
+Or even better, as suggested [here](https://stackoverflow.com/questions/77326446/filter-rows-and-select-columns-based-on-na-null-percentage#:~:text=df.select(col.name%20for%20col%20in%20df.null_count()%20/%20df.height%20if%20col.item()%20%3C%3D%20max_nas_perc)):
+
+
+```{python}
+df_mat = df.collect()
+df.select(col.name for col in df_mat.null_count() / df_mat.height if col.item() <= 0.2).collect()
+```
+<br>
+
+```{=html}
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more Python Polars content!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+```
+
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
+
+
