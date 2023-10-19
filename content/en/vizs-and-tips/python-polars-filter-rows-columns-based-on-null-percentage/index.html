@@ -95,8 +95,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>    <span class="st">&quot;column_3&quot;</span>: [<span class="va">None</span>, <span class="dv">6</span>, <span class="va">None</span>],</span>
 <span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>    <span class="st">&quot;column_4&quot;</span>: [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]</span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>}).lazy()</span></code></pre></div>
+<p><br></p>
 <div id="filter-rows-based-on-percentage-of-nas" class="section level2">
-<h2>Filter rows based on percentage of NAs</h2>
+<h2><strong>Filter rows based on percentage of NAs</strong></h2>
 <p>How to filter rows based on null percentage in Python Polars? As you may notice, we could include it in a Polars Lazy pipeline.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>df.<span class="bu">filter</span>(pl.sum_horizontal(pl.<span class="bu">all</span>().is_null() <span class="op">/</span> pl.<span class="bu">all</span>().count()) <span class="op">&lt;</span> <span class="fl">0.7</span>).collect()</span></code></pre></div>
 <div><style>
@@ -109,7 +110,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <p><br></p>
 </div>
 <div id="filter-and-drop-columns-based-on-percentage-of-nas" class="section level2">
-<h2>Filter and drop columns based on percentage of NAs</h2>
+<h2><strong>Filter and drop columns based on percentage of NAs</strong></h2>
 <p>Do you want to <strong>select columns that are populated higher than a given percentage?</strong> Here what it takes to do so. Of course, the main computation needs to materialize. But you know, you can’t make an omelette without breaking some eggs.</p>
 <p>Has we posted about <a href="https://typethepipe.com/vizs-and-tips/selecting-columns-based-on-nas-percentage-r-tidyverse/">dropping columns based on NAs percentage without leaving the pipe flow</a>, we are not doing it on Python Polars.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>df.select(</span>

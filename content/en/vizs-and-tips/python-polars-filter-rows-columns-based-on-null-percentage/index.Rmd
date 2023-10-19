@@ -38,7 +38,9 @@ df = pl.DataFrame({
 }).lazy()
 ```
 
-## Filter rows based on percentage of NAs
+<br>
+
+## **Filter rows based on percentage of NAs**
 
 How to filter rows based on null percentage in Python Polars? As you may notice, we could include it in a Polars Lazy pipeline.
 
@@ -48,7 +50,7 @@ df.filter(pl.sum_horizontal(pl.all().is_null() / pl.all().count()) < 0.7).collec
 
 <br>
 
-## Filter and drop columns based on percentage of NAs
+## **Filter and drop columns based on percentage of NAs**
 
 Do you want to **select columns that are populated higher than a given percentage?** Here what it takes to do so. Of course, the main computation needs to materialize. But you know, you can't make an omelette without breaking some eggs.
 
