@@ -6,8 +6,8 @@ active = true  # Activate this widget? true/false
 weight = 4  # Order that this section will appear.
 
 title = "Mentorship Program"
-subtitle = "We are about to open a (limited seats) **free Data Career path mentorship program.** \n Don't miss the date and contact us for more information!!"
-placeholder = "Share briefly your background, core skills, desired next steps in your career..."
+subtitle = "Estamos preparando (plazas limitadas) **programa de mentoría de carrera profesional en Data.** \n ¡No te pierdas la oportunidad y contacta para recibir más información!"
+placeholder = "Completa con tu background, habilidades, principales dudas y expectativas en tu carrera..."
 # Automatically link email and phone?
 autolink = true
 
