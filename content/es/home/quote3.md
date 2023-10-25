@@ -66,8 +66,8 @@ subtitle = ""
 <div id="mc_embed_signup">
 <form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
  <div id="mc_embed_signup_scroll">
-	<label for="mce-EMAIL"> ¿Te gustan nuestros posts? :)</label>
-	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email de contacto" required>
+	<label for="mce-EMAIL"> **¿Te gustan nuestros posts? :)**</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="tu mejor mail" required><input type="hidden" name="tags" value="7614568"></div>
     <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
     <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
     <div class="clear"><div class="shake-chunk shake-constant shake-constant--hover"><input type="submit" value="¡Mantedme informado!" name="subscribe" id="mc-embedded-subscribe" class="button"></div></div>

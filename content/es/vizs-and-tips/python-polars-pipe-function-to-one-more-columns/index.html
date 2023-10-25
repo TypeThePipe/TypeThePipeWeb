@@ -1,5 +1,5 @@
 ---
-title: "Pipe function in Python Polars. Don't leave the pipe flow!"
+title: "Función pipe en Python Polars. ¡No te salgas del pipeline!"
 author: "Carlos Vecina Tebar"
 date: "2023-03-28"
 slug: "python-polars-pipe-funcion"
@@ -85,7 +85,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<p><img src="featured.png" height="250px" width="400px"/></p>
+<p><img src="featured.png" height="250px" width="400px" alt="Polars Python con mensaje que dice 'pipe'"/></p>
 <div id="polars-pipeline.-aplica-tus-functiones-custom-udf-con-la-función-pipe" class="section level1">
 <h1>Polars pipeline. Aplica tus functiones custom (udf) con la función pipe</h1>
 <p>Bueno, bueno, estás con Python y echas de menos el rollito <code>pipe</code>?? Encadenar transformaciones a dataframes de manera elegante nunca está de más. Pues.. ¡traemos buenas noticias! En nuestra transición de Pandas a Polars a la hora de trabajar con dataframes, la sintaxis de este último nos ha acabado de encandilar.</p>
@@ -133,7 +133,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   text-align: right;
 }
 </style>
-<small>shape: (3, 5)</small><table border="1" class="dataframe"><thead><tr><th>name</th><th>offensive_skill</th><th>defensive_skill</th><th>position</th><th>squad_number</th></tr><tr><td>str</td><td>i64</td><td>i64</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>&quot;Alice&quot;</td><td>5</td><td>92</td><td>&quot;CB&quot;</td><td>&quot;-&quot;</td></tr><tr><td>&quot;Bob&quot;</td><td>30</td><td>30</td><td>&quot;bench&quot;</td><td>&quot;-&quot;</td></tr><tr><td>&quot;Charlie&quot;</td><td>85</td><td>10</td><td>&quot;FW&quot;</td><td>&quot;8&quot;</td></tr></tbody></table></div>
+<small>shape: (3, 5)</small><table border="1" class="dataframe"><thead><tr><th>name</th><th>offensive_skill</th><th>defensive_skill</th><th>position</th><th>squad_number</th></tr><tr><td>str</td><td>i64</td><td>i64</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>&quot;Alice&quot;</td><td>5</td><td>92</td><td>&quot;CB&quot;</td><td>&quot;-&quot;</td></tr><tr><td>&quot;Bob&quot;</td><td>30</td><td>30</td><td>&quot;bench&quot;</td><td>&quot;-&quot;</td></tr><tr><td>&quot;Charlie&quot;</td><td>85</td><td>10</td><td>&quot;FW&quot;</td><td>&quot;9&quot;</td></tr></tbody></table></div>
 <p><br></p>
 <div id="polars-pipe-y-lazy-evaluation" class="section level2">
 <h2><strong>Polars pipe y ‘lazy evaluation’</strong></h2>
@@ -152,7 +152,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   text-align: right;
 }
 </style>
-<small>shape: (3, 5)</small><table border="1" class="dataframe"><thead><tr><th>name</th><th>offensive_skill</th><th>defensive_skill</th><th>position</th><th>squad_number</th></tr><tr><td>str</td><td>i64</td><td>i64</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>&quot;Alice&quot;</td><td>5</td><td>92</td><td>&quot;CB&quot;</td><td>&quot;-&quot;</td></tr><tr><td>&quot;Bob&quot;</td><td>30</td><td>30</td><td>&quot;bench&quot;</td><td>&quot;-&quot;</td></tr><tr><td>&quot;Charlie&quot;</td><td>85</td><td>10</td><td>&quot;FW&quot;</td><td>&quot;13&quot;</td></tr></tbody></table></div>
+<small>shape: (3, 5)</small><table border="1" class="dataframe"><thead><tr><th>name</th><th>offensive_skill</th><th>defensive_skill</th><th>position</th><th>squad_number</th></tr><tr><td>str</td><td>i64</td><td>i64</td><td>str</td><td>str</td></tr></thead><tbody><tr><td>&quot;Alice&quot;</td><td>5</td><td>92</td><td>&quot;CB&quot;</td><td>&quot;-&quot;</td></tr><tr><td>&quot;Bob&quot;</td><td>30</td><td>30</td><td>&quot;bench&quot;</td><td>&quot;-&quot;</td></tr><tr><td>&quot;Charlie&quot;</td><td>85</td><td>10</td><td>&quot;FW&quot;</td><td>&quot;8&quot;</td></tr></tbody></table></div>
 <p>Usando el método .pipe(), podremos separar funcionalidades y mantener el código más mantenible a largo plazo, mientras mantenemos las ventajas de la paralelización de Polars.</p>
 <p><br></p>
 </div>
@@ -179,11 +179,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <div id="mc_embed_signup">
 <form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
  <div id="mc_embed_signup_scroll">
-	<label for="mce-EMAIL"> ¡Suscribete pra más contenido sobre Python! </label>
-	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required><input type="hidden" name="tags" value="7614568"></div>
+	<label for="mce-EMAIL"> ¡Suscribete para más contenido sobre Python! </label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="tu mejor email" required><input type="hidden" name="tags" value="7614568"></div>
     <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
     <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
-    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    <div class="clear"><input type="submit" value="¡Dale!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
     </div>
 </form>
 </div>
