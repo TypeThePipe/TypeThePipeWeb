@@ -1,7 +1,8 @@
 ---
-title: "Shadowing your ggplot lines. Forecasting confidence interval use case."
+title: "Shadowing your ggplot2 lines. Forecasting confidence interval in R use case."
 author: Carlos Vecina Tebar
 date: "2019-11-18"
+lastmod: "2023-10-27"
 slug: "ggplot-geom_ribbon-shadow-confidence-interval"
 translationKey: "grafica-intervalos-confianza-ggplot-geom_ribbon-plot-R"
 output:
@@ -11,14 +12,14 @@ categories:
 - R
 - Tips
 tags: []
-subtitle: 'Plot your confidence interval easily with R! With ggplot geom_ribbon() you can add shadowed areas to your lines. We show you how to deal with it!'
-summary: "Plot your confidence intervals easily"
+subtitle: 'Plot your confidence interval easily with R! With ggplot2 geom_ribbon() function you can add shadowed areas to your lines. We show you how to deal with it!'
+summary: "Plot your confidence interval easily with R! With ggplot2 geom_ribbon() function you can add shadowed areas to your lines. We show you how to deal with it!"
 authors: [carlos-vecina]
 featured: false
 draft: false
 ---
 
-<img src="/en/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/featured.png" height="250px" width="400px" alt="R ggplot2 plot of the forecast(in red) and it's condidence intervals(in blue) using geom_ribbon function." />
+<img src="/en/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/featured.png" height="250px" width="400px" alt="R ggplot2 plot of the forecast(in red) and it's confidence intervals(in blue) using geom_ribbon function." />
 
 <br>
 ```{r, include=FALSE}
@@ -27,6 +28,8 @@ nchar("Plot your confidence interval easily with R! With ggplot geom_ribbon() de
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
+
+# Exploring the Versatility of ggplot2 and geom_ribbon() in Data Visualization
 
 Yesterday I was asked to easily plot confidence intervals at ggplot2 chart. Then I came up with this shadowing ggplot2 feature called ```geom_ribbon()```. 
 
@@ -46,11 +49,17 @@ huron %>%
                   ymax = value + std),    # shadowing cnf intervals
               fill = "steelblue2") + 
   geom_line(color = "firebrick",
-            size = 1)                     # point estimate
+            linewidth = 1)                     # point estimate
 
 ```
 
-For a multi-line plot, you should include the colour and group aesthetic as follows:
+<br>
+
+## Ggplot geom_ribbon for multiple lines
+
+With just a few lines of code, you can create these stunning multiple line plots that make your data come to life. Whether you're tracking stock prices over time, visualizing weather patterns... one'd like to add to a multiple line ggplot chart a confidence intervals bands.
+
+To add variance bands for your multiple line ggplot graph, you should include the colour and group aesthetic as follows:
 
 ```{r, warning=FALSE, message=FALSE}
 library(tidyverse)
@@ -65,9 +74,13 @@ huron %>%
                   ymax = value + std,
                   group=group),
               fill = "steelblue2") + 
-  geom_line(color = "firebrick", size = 1)
+  geom_line(color = "firebrick", linewidth = 1)
 
 ```
+
+You can shade in those confidence intervals, highlight uncertainty, and add that extra pop to your plots. It's seriously the secret weapon to take your data viz game up a notch. So, if you haven't unleashed the power of geom_ribbon() with ggplot yet, you're missing out on some seriously cool data-plotting adventures. Trust me, your charts are about to get a whole lot more exciting! 🚀
+
+Update 2023-10-27: aesthetic `size` has been deprecated in favour to `linewidth` argument since ggplot2 3.4.0 version.
 
 <br>
 

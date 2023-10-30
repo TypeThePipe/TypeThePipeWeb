@@ -1,7 +1,8 @@
 ---
-title: "Shadowing your ggplot lines. Forecasting confidence interval use case."
+title: "Shadowing your ggplot2 lines. Forecasting confidence interval in R use case."
 author: Carlos Vecina Tebar
 date: "2019-11-18"
+lastmod: "2023-10-27"
 slug: "ggplot-geom_ribbon-shadow-confidence-interval"
 translationKey: "grafica-intervalos-confianza-ggplot-geom_ribbon-plot-R"
 output:
@@ -11,8 +12,8 @@ categories:
 - R
 - Tips
 tags: []
-subtitle: 'Plot your confidence interval easily with R! With ggplot geom_ribbon() you can add shadowed areas to your lines. We show you how to deal with it!'
-summary: "Plot your confidence intervals easily"
+subtitle: 'Plot your confidence interval easily with R! With ggplot2 geom_ribbon() function you can add shadowed areas to your lines. We show you how to deal with it!'
+summary: "Plot your confidence interval easily with R! With ggplot2 geom_ribbon() function you can add shadowed areas to your lines. We show you how to deal with it!"
 authors: [carlos-vecina]
 featured: false
 draft: false
@@ -85,8 +86,10 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 </style>
 
 
-<p><img src="/en/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/featured.png" height="250px" width="400px" alt="R ggplot2 plot of the forecast(in red) and it's condidence intervals(in blue) using geom_ribbon function." /></p>
+<p><img src="/en/vizs-and-tips/ggplot-geom_ribbon-shadow-confidence-interval/featured.png" height="250px" width="400px" alt="R ggplot2 plot of the forecast(in red) and it's confidence intervals(in blue) using geom_ribbon function." /></p>
 <p><br></p>
+<div id="exploring-the-versatility-of-ggplot2-and-geom_ribbon-in-data-visualization" class="section level1">
+<h1>Exploring the Versatility of ggplot2 and geom_ribbon() in Data Visualization</h1>
 <p>Yesterday I was asked to easily plot confidence intervals at ggplot2 chart. Then I came up with this shadowing ggplot2 feature called <code>geom_ribbon()</code>.</p>
 <p>It’s not a trivial issue as long as you need to gather your data in order to achieve a <em>tidy</em> format. When you already have this data frame, all you need is <strong>geom_ribbon()</strong>.</p>
 <p>By using the following commented code you are able to show not only your point estimated forecast but also its confidence or prediction intervals.</p>
@@ -102,7 +105,11 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>              <span class="at">fill =</span> <span class="st">&quot;steelblue2&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;firebrick&quot;</span>,</span>
 <span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>            <span class="at">size =</span> <span class="dv">1</span>)                     <span class="co"># point estimate</span></span></code></pre></div>
-<p>For a multi-line plot, you should include the colour and group aesthetic as follows:</p>
+<p><br></p>
+<div id="ggplot-geom_ribbon-for-multiple-lines" class="section level2">
+<h2>Ggplot geom_ribbon for multiple lines</h2>
+<p>With just a few lines of code, you can create these stunning multiple line plots that make your data come to life. Whether you’re tracking stock prices over time, visualizing weather patterns… one’d like to add to a multiple line ggplot chart a confidence intervals bands.</p>
+<p>To add variance bands for your multiple line ggplot graph, you should include the colour and group aesthetic as follows:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>huron <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">year =</span> <span class="fu">rep</span>(<span class="dv">1875</span><span class="sc">:</span><span class="dv">1972</span>,<span class="dv">2</span>), </span>
 <span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>                    <span class="at">group =</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">&quot;a&quot;</span>,<span class="dv">98</span>),<span class="fu">rep</span>(<span class="st">&quot;b&quot;</span>,<span class="dv">98</span>)),</span>
@@ -117,6 +124,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>              <span class="at">fill =</span> <span class="st">&quot;steelblue2&quot;</span>) <span class="sc">+</span> </span>
 <span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>  <span class="fu">geom_line</span>(<span class="at">color =</span> <span class="st">&quot;firebrick&quot;</span>, <span class="at">size =</span> <span class="dv">1</span>)</span></code></pre></div>
 <p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>You can shade in those confidence intervals, highlight uncertainty, and add that extra pop to your plots. It’s seriously the secret weapon to take your data viz game up a notch. So, if you haven’t unleashed the power of geom_ribbon() with ggplot yet, you’re missing out on some seriously cool data-plotting adventures. Trust me, your charts are about to get a whole lot more exciting! 🚀</p>
 <p><br></p>
 <p>You can see related R visualizations and tips on <a href="https://typethepipe.com">TypeThePipe</a></p>
 <p><br></p>
+</div>
+</div>
