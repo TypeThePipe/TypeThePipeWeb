@@ -110,7 +110,7 @@ By adding this new field, and running the Alembic revision, a new column would b
 As we have seeing in the previous paragraph, it is quite simple to add a new field to the SQLModel. After running the Alembic migrations, we would have:
 
 ```{python}
-"""Add listings user_rating field
+"""Add listings updated_at field
 
 Revision ID: d23aa9jc7d5p
 Revises: cc9a661c7f9f
