@@ -1,0 +1,287 @@
+---
+title: 'Diccionarios en Python. Domina los básicos: Crear, añadir y eliminar elementos.'
+author: Carlos Vecina Tebar
+date: '2023-11-08'
+slug: diccionario-en-python
+translationKey: diccionario-en-python
+output: 
+  blogdown::html_page:
+    highlight: pygments 
+categories:
+  - Python
+  - Post
+tags: [Python, Pydantic]
+subtitle: "Validación y tipado de Datos en Python: Dominando Pydantic, Enums e IntEnums para Aplicaciones Python Robustas."
+summary: "Dominando Pydantic, Enums e IntEnums para aplicaciones Python robustas. Fusiona el poder de las validaciones de datos de Pydantic y el concepto de Enum, IntEnum y StrEnum."
+authors: [carlos-vecina]
+featured: false
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="featured.png" width="400px" alt="imagen con una serpiente con los colores de Python sobre un diccionario" /></p>
+<div id="diccionarios-en-python.-añade-elementos-recorre-el-diccionario-y-mucho-más." class="section level1">
+<h1>Diccionarios en Python. Añade elementos, recorre el diccionario y mucho más.</h1>
+<p>Bienvenidos al mundo de Python, donde las estructuras de datos como los diccionarios pueden transformar tu forma de manejar la información. <strong>Un diccionario en Python es una herramienta versátil, capaz de mapear claves únicas a valores.</strong> Aprender a añadir elementos y manipular estos diccionarios es esencial para cualquier desarrollador o analista de datos.</p>
+<div id="qué-es-un-diccionario-en-python" class="section level2">
+<h2><strong>¿Qué es un Diccionario en Python?</strong></h2>
+<p>Python ofrece diversas estructuras de datos, siendo el diccionario una de las más potentes. Un diccionario en Python es <strong>una colección desordenada de elementos, cada uno con una clave y un valor.</strong> Es ideal para almacenar y recuperar datos con una etiqueta, similar a cómo funciona un diccionario real.</p>
+<p>Como la mayoría de las estructuras de datos de Python, los diccionarios tienen métodos inherentes y a nuestra disposición. Un ejemplo de ellos son: <code>.keys()</code>, <code>.values()</code>, <code>.update()</code> y <code>.items()</code></p>
+<p>Estos métodos proporcionan un conjunto poderoso de herramientas para manejar los diccionarios en Python, permitiendo a los desarrolladores principiantes manipular eficientemente esta estructura de datos clave-valor. Cada método tiene un propósito específico y entender cuándo y cómo usar cada uno es fundamental para la programación eficiente en Python.</p>
+<div id="creando-tu-primer-diccionario" class="section level3">
+<h3>Creando tu Primer Diccionario:</h3>
+<p>Para comenzar, definamos un diccionario en Python. Es una tarea sencilla y directa. Utilizamos las llaves <code>{}</code> con una estructura interna de <code>{"clave": "valor"}</code>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>mi_diccionario <span class="op">=</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>    <span class="st">&#39;nombre&#39;</span>: <span class="st">&#39;Marta&#39;</span>, </span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>    <span class="st">&#39;edad&#39;</span>: <span class="dv">45</span>, </span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>    <span class="st">&#39;ciudad&#39;</span>: <span class="st">&#39;Buenos Aires&#39;</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>}</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="bu">print</span>(mi_diccionario)</span></code></pre></div>
+<pre><code>## {&#39;nombre&#39;: &#39;Marta&#39;, &#39;edad&#39;: 45, &#39;ciudad&#39;: &#39;Buenos Aires&#39;}</code></pre>
+<p><strong>Los elementos previos a <code>:</code> son las <code>claves</code>.</strong> Estas son únicas y, como hemos dicho, desordenadas (significando que no es posible acceder por índice ni hacer ninguna operación con ellos en las que se espere un orden determinado para las claves).
+<strong>Los segundos elementos son los <code>valores</code>.</strong> Es importante colocar una coma detrás de cada clave-valor.</p>
+<p>Puesto que no hay muchas limitaciones respecto al tipo de objetos que pueden ser incluidos en los valores de un diccionario, por supuesto es posible tener diccionarios anidados. Sería:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>mi_diccionario <span class="op">=</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>    <span class="st">&#39;nombre&#39;</span>: <span class="st">&#39;Marta&#39;</span>, </span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>    <span class="st">&#39;edad&#39;</span>: <span class="dv">45</span>, </span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>    <span class="st">&#39;ciudad&#39;</span>: <span class="st">&#39;Buenos Aires&#39;</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>    <span class="st">&#39;direccion&#39;</span>: {<span class="st">&#39;calle&#39;</span>: <span class="st">&#39;XXX&#39;</span>, <span class="st">&#39;codigo_postal&#39;</span>: <span class="st">&#39;030303&#39;</span>}</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>}</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a><span class="bu">print</span>(mi_diccionario)</span></code></pre></div>
+<pre><code>## {&#39;nombre&#39;: &#39;Marta&#39;, &#39;edad&#39;: 45, &#39;ciudad&#39;: &#39;Buenos Aires&#39;, &#39;direccion&#39;: {&#39;calle&#39;: &#39;XXX&#39;, &#39;codigo_postal&#39;: &#39;030303&#39;}}</code></pre>
+<p><br></p>
+</div>
+</div>
+<div id="cómo-añadir-elementos-a-un-diccionario" class="section level2">
+<h2><strong>Cómo Añadir Elementos a un Diccionario</strong></h2>
+<p>Añadir elementos a un diccionario es una tarea común. Veamos cómo se hace de manera eficiente.</p>
+<p>Para añadir un elemento individual podemos hacerlo de la siguiente forma:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>mi_diccionario[<span class="st">&#39;profesión&#39;</span>] <span class="op">=</span> <span class="st">&#39;Desarrolladora&#39;</span></span></code></pre></div>
+<p>Para hacer lo propio con múltiples elementos, podemos hacer uso del método anteriormente comnetado: <code>update()</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>mi_diccionario.update({<span class="st">&#39;empresa&#39;</span>: <span class="st">&#39;GG&#39;</span>, <span class="st">&#39;hobby&#39;</span>: <span class="st">&#39;Ajedrez&#39;</span>})</span></code></pre></div>
+<p>Como vemos, usamos el método <code>update</code> de nuestro diccionario inicial para añadirle un segundo diccionario que creamos con las llaves <code>{}</code>.</p>
+<p>Por supuesto, un diccionario previamente asignado a una variable funcionará, pero cualquier otro tipo de objeto no va a funcionar.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># No es aceptado sin ser tipo diccionario {}</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="co">#mi_diccionario.update(&quot;no&quot;:&quot;funciona&quot;)  </span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>si_funciona_dict <span class="op">=</span> {<span class="st">&quot;si&quot;</span>: <span class="st">&quot;funciona&quot;</span>}</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>mi_diccionario.update(si_funciona_dict)</span></code></pre></div>
+<p>Esto funciona porque el <code>type(si_funciona_dict)</code> es diccionario, y como comentábamos es necesario otro diccionario como tipo para ser añadido.</p>
+<p>Para terminar este apartado de añadido de elementos a un diccionario, veamos que tal y como introdujimos, las restricciones en cuanto a qué tipo de valores / objetos podemos añadir a un diccionario son muy pocas.</p>
+<p>Por ello, podemos añadir otros diccionarios, listas o incluso objetos creados por nosostros como valor en los diccionarios de Python.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a>mi_diccionario[<span class="st">&#39;lenguajes&#39;</span>] <span class="op">=</span> [<span class="st">&#39;Python&#39;</span>, <span class="st">&#39;Rust&#39;</span>]</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a>mi_diccionario[<span class="st">&#39;educación&#39;</span>] <span class="op">=</span> {<span class="st">&#39;grado&#39;</span>: <span class="st">&#39;B.Sc.&#39;</span>, <span class="st">&#39;especialización&#39;</span>: <span class="st">&#39;Informática&#39;</span>}</span></code></pre></div>
+<p><br></p>
+</div>
+<div id="selección-y-elliminación-de-elementos" class="section level2">
+<h2><strong>Selección y elliminación de elementos</strong></h2>
+<p>En Python, puedes seleccionar y eliminar elementos de un diccionario de varias maneras. Aquí están las más comunes, junto con ejemplos para cada una:</p>
+<p><strong>Selección de Elementos en un Diccionario:</strong></p>
+<p>Acceso Directo por Clave:
+Usas la clave directamente para obtener el valor.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>d <span class="op">=</span> {<span class="st">&#39;nombre&#39;</span>: <span class="st">&#39;Alicia&#39;</span>, <span class="st">&#39;edad&#39;</span>: <span class="dv">25</span>, <span class="st">&#39;nota&#39;</span>: <span class="fl">8.4</span>}</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>nombre <span class="op">=</span> d[<span class="st">&#39;nombre&#39;</span>]  <span class="co"># &#39;Alice&#39;</span></span></code></pre></div>
+<p>Esto lanzará un KeyError si la clave no existe.</p>
+<p>Método <code>.get()</code>:</p>
+<p>Obtiene el valor asociado con la clave. Al contrario de la anterior manera, de este modo nos devuelve un valor predeterminado si la clave no existe, sin lanzar un error que pare la ejecución.</p>
+<p>Para muchos usos esta es la mejor manera de proceder.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a>edad <span class="op">=</span> d.get(<span class="st">&#39;edad&#39;</span>, <span class="st">&#39;No especificado&#39;</span>)  <span class="co"># 25</span></span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a>profesion <span class="op">=</span> d.get(<span class="st">&#39;profesion&#39;</span>, <span class="st">&#39;No especificado&#39;</span>)  <span class="co"># &#39;No especificado&#39;</span></span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a>profesion <span class="op">=</span> d.get(<span class="st">&#39;profesion&#39;</span>, <span class="va">None</span>)  <span class="co"># Nulo, pero sin fallar</span></span></code></pre></div>
+<p>Uso de <code>.items()</code> para Selección:
+Iterar sobre pares clave-valor para seleccionar datos.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="cf">for</span> clave, valor <span class="kw">in</span> d.items():</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>clave<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>valor<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>## nombre: Alicia
+## edad: 25
+## nota: 8.4</code></pre>
+<p><strong>Eliminación de Elementos en un Diccionario:</strong></p>
+<p>Método <code>.pop()</code>:
+Elimina la clave y devuelve el valor. Si la clave no se encuentra, se devuelve un valor por defecto si se ha especificado, de lo contrario se lanzará un KeyError.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a>edad <span class="op">=</span> d.pop(<span class="st">&#39;edad&#39;</span>, <span class="st">&#39;Clave no encontrada&#39;</span>)  <span class="co"># Elimina &#39;edad&#39; y devuelve 25</span></span></code></pre></div>
+<p>Método <code>.popitem()</code>:
+Elimina y devuelve un par clave-valor. En las versiones de Python 3.7 en adelante, este método elimina el último par agregado.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a>item <span class="op">=</span> d.popitem()  <span class="co"># Devuelve y elimina el último par agregado (&#39;nombre&#39;: &#39;Alice&#39;)</span></span></code></pre></div>
+<p>Operador <code>del</code>:
+Elimina la clave y su valor asociado. Si la clave no existe, se lanzará un KeyError.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="kw">del</span> d[<span class="st">&#39;nombre&#39;</span>]  <span class="co"># Elimina la clave &#39;nombre&#39; y su valor asociado</span></span></code></pre></div>
+<p>Comprensión de Diccionarios para Filtrar:
+Crea un nuevo diccionario con elementos seleccionados, efectivamente eliminando los que no quieres. Esta manera de crear diccionarios la vamos a comentar en detalle en el siguiente párrafo.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a>d <span class="op">=</span> {k: v <span class="cf">for</span> k, v <span class="kw">in</span> d.items() <span class="cf">if</span> v <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>}  <span class="co"># Elimina elementos con valores None</span></span></code></pre></div>
+<p>Método <code>.clear()</code>:
+Elimina todos los elementos del diccionario, dejándolo vacío.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a>d.clear()  <span class="co"># Elimina todos los elementos</span></span></code></pre></div>
+<p>Estas operaciones te permiten tener un control detallado sobre la selección y eliminación de elementos en los diccionarios de Python, lo que es esencial para la gestión eficiente de datos y estructuras de datos en tus programas.</p>
+<p><br></p>
+</div>
+<div id="iteración-diccionarios-y-dict-comprehension-o-compresión-de-diccionario" class="section level2">
+<h2><strong>Iteración, diccionarios y ‘dict comprehension’ o compresión de diccionario</strong></h2>
+<p>La iteración sobre diccionarios es un aspecto fundamental de su uso. Aquí te mostramos cómo iterar sobre las claves y valores.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="cf">for</span> clave, valor <span class="kw">in</span> mi_diccionario.items():</span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;</span><span class="sc">{</span>clave<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>valor<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<pre><code>## nombre: Marta
+## edad: 45
+## ciudad: Buenos Aires
+## direccion: {&#39;calle&#39;: &#39;XXX&#39;, &#39;codigo_postal&#39;: &#39;030303&#39;}
+## profesión: Desarrolladora
+## empresa: GG
+## hobby: Ajedrez
+## si: funciona
+## lenguajes: [&#39;Python&#39;, &#39;Rust&#39;]
+## educación: {&#39;grado&#39;: &#39;B.Sc.&#39;, &#39;especialización&#39;: &#39;Informática&#39;}</code></pre>
+<p>Respecto a la creación de diccionarios por compresión, igual que las listas, consiste en la creación del diccionario de la siguiente manera:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a>comprension_dict <span class="op">=</span> {<span class="ss">f&#39;clave_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">&#39;</span>: i <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>)}</span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a><span class="co"># Es lo mismo que hacer</span></span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a></span>
+<span id="cb20-5"><a href="#cb20-5" tabindex="-1"></a>bucle_dict <span class="op">=</span> {}</span>
+<span id="cb20-6"><a href="#cb20-6" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">3</span>):</span>
+<span id="cb20-7"><a href="#cb20-7" tabindex="-1"></a>    bucle_dict.update({<span class="ss">f&#39;clave_</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">&#39;</span>: i})</span>
+<span id="cb20-8"><a href="#cb20-8" tabindex="-1"></a>    </span>
+<span id="cb20-9"><a href="#cb20-9" tabindex="-1"></a>comprension_dict <span class="op">==</span> bucle_dict</span></code></pre></div>
+<pre><code>## True</code></pre>
+<p>Hay alguna otra cosa aquí. Aparte de la comprensión, que como vemos consiste convertir en diccionario el iterable que hay en su interior, también tenemos un <code>f-string</code>. Los <code>f-string</code> es la manera que tenemos en las nuevas versiones de Python para añadir el valor de una expresión o variable dentro de strings. A la string se le añade una <code>f''</code> o `f”“.</p>
+<p><br></p>
+</div>
+<div id="todos-los-métodos-de-los-diccionarios" class="section level2">
+<h2><strong>Todos los métodos de los diccionarios</strong></h2>
+<p>Por aquí te dejamos la explicación de todos los métodos de los diccionarios disponibles. Los paréntesis vacíos es porque el método no espera argumentos. En aquellos métodos que sí se esperan argumentos, añadimos entre paréntesis el tipo de los argumentos.</p>
+<ul>
+<li><p><code>dict.clear()</code>: Vacía todos los elementos del diccionario, dejándolo como un diccionario vacío.</p></li>
+<li><p><code>dict.copy()</code>: Retorna una copia superficial del diccionario. Útil cuando necesitas trabajar con una copia y no modificar el original.</p></li>
+<li><p><code>dict.fromkeys(seq[, v])</code>: Crea un nuevo diccionario con claves a partir de seq y valores todos establecidos a v. Si v no se proporciona, el valor por defecto será None.</p></li>
+<li><p><code>dict.get(key[, d])</code>: Devuelve el valor para key si key está en el diccionario; de lo contrario, devuelve d, que por defecto es None. Es una forma segura de acceder a los valores sin el riesgo de una excepción.</p></li>
+<li><p><code>dict.items()</code>: Devuelve una vista de los pares clave-valor del diccionario, lo que es útil para iterar sobre ellos.</p></li>
+<li><p><code>dict.keys()</code>: Devuelve una vista de las claves en el diccionario. Útil cuando solo necesitas trabajar con las claves.</p></li>
+<li><p><code>dict.pop(key[, d])</code>: Elimina la clave especificada y devuelve el valor correspondiente. Si la clave no se encuentra, y se proporciona el argumento d, se devuelve d; si d no se proporciona, se lanza una excepción.</p></li>
+<li><p><code>dict.popitem()</code>: Elimina y devuelve un par (clave, valor) del diccionario. Los pares se devuelven en un orden LIFO (last-in, first-out). Es útil para desestructurar diccionarios.</p></li>
+<li><p><code>dict.setdefault(key[, d])</code>: Devuelve el valor de la clave si está en el diccionario. Si no está, inserta la clave con un valor de d y lo devuelve (d es por defecto None).</p></li>
+<li><p><code>dict.update([other])</code>: Actualiza el diccionario con los pares clave-valor de other, sobrescribiendo las claves existentes. other puede ser otro diccionario o cualquier iterable de pares clave-valor.</p></li>
+<li><p><code>dict.values()</code>: Devuelve una vista de todos los valores en el diccionario. Es útil cuando los valores son lo que te interesa.</p></li>
+</ul>
+<p>Dominar cómo añadir elementos y trabajar con diccionarios en Python es un paso crucial en tu viaje como programador. Estas operaciones son la base de la manipulación de datos y te abrirán las puertas a técnicas más avanzadas de programación y análisis de datos.</p>
+<p><br></p>
+</div>
+<div id="mantente-actualizado-en-consejos-de-python-principiante-e-intermedio" class="section level2">
+<h2><strong>Mantente actualizado en consejos de Python principiante e intermedio</strong></h2>
+<p>Ahora que conoces cómo trabajar con diccionarios en Python y cómo añadir elementos, te animamos a experimentar por tu cuenta. Crea tus propios diccionarios, juega con ellos y ve cómo puedes optimizar tus códigos y análisis.</p>
+<p>Si deseas mantenerte actualizado…</p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> ¡Síguenos para más contenido sobre Python! </label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="tu mejor email" required><input type="hidden" name="tags" value="7614568"></div>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Seguir" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+<style>
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+</style>
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
+</div>
+</div>
