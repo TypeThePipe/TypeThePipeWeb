@@ -10,9 +10,9 @@ output:
 categories:
   - Python
   - Post
-tags: [Python, Pydantic]
-subtitle: "Validación y tipado de Datos en Python: Dominando Pydantic, Enums e IntEnums para Aplicaciones Python Robustas."
-summary: "Dominando Pydantic, Enums e IntEnums para aplicaciones Python robustas. Fusiona el poder de las validaciones de datos de Pydantic y el concepto de Enum, IntEnum y StrEnum."
+tags: [Python, Principiantes]
+subtitle: "Descubre cómo dominar los diccionarios en Python con nuestra guía exhaustiva. Aprende a crear, manejar y optimizar diccionarios para tus proyectos de programación."
+summary: "Descubre cómo dominar los diccionarios en Python con nuestra guía exhaustiva. Aprende a crear, manejar y optimizar diccionarios para tus proyectos de programación."
 authors: [carlos-vecina]
 featured: false
 ---
@@ -24,13 +24,14 @@ featured: false
 Bienvenidos al mundo de Python, donde las estructuras de datos como los diccionarios pueden transformar tu forma de manejar la información. **Un diccionario en Python es una herramienta versátil, capaz de mapear claves únicas a valores.** Aprender a añadir elementos y manipular estos diccionarios es esencial para cualquier desarrollador o analista de datos.
 
 ## **¿Qué es un Diccionario en Python?**
-Python ofrece diversas estructuras de datos, siendo el diccionario una de las más potentes. Un diccionario en Python es **una colección desordenada de elementos, cada uno con una clave y un valor.** Es ideal para almacenar y recuperar datos con una etiqueta, similar a cómo funciona un diccionario real.
+Python ofrece diversas estructuras de datos, [siendo el diccionario una de las más potentes](https://docs.python.org/3/tutorial/datastructures.html#dictionaries:~:text=5.5.-,Dictionaries,-%C2%B6). Un diccionario en Python es **una colección desordenada de elementos, cada uno con una clave y un valor.** Es ideal para almacenar y recuperar datos con una etiqueta, similar a cómo funciona un diccionario real.
 
 Como la mayoría de las estructuras de datos de Python, los diccionarios tienen métodos inherentes y a nuestra disposición. Un ejemplo de ellos son: `.keys()`, `.values()`, `.update()` y `.items()`
 
 
 Estos métodos proporcionan un conjunto poderoso de herramientas para manejar los diccionarios en Python, permitiendo a los desarrolladores principiantes manipular eficientemente esta estructura de datos clave-valor. Cada método tiene un propósito específico y entender cuándo y cómo usar cada uno es fundamental para la programación eficiente en Python.
 
+<br>
 
 ### Creando tu Primer Diccionario:
 
@@ -65,7 +66,7 @@ print(mi_diccionario)
 
 ## **Cómo Añadir Elementos a un Diccionario**
 
-Añadir elementos a un diccionario es una tarea común. Veamos cómo se hace de manera eficiente.
+[Añadir elementos a un diccionario](https://stackoverflow.com/questions/1024847/how-can-i-add-new-keys-to-a-dictionary) es una tarea común. Veamos cómo se hace de manera eficiente.
 
 Para añadir un elemento individual podemos hacerlo de la siguiente forma:
 
@@ -103,7 +104,7 @@ mi_diccionario['educación'] = {'grado': 'B.Sc.', 'especialización': 'Informát
 
 <br> 
 
-## **Selección y elliminación de elementos**
+## **Selección y eliminación de elementos**
 
 En Python, puedes seleccionar y eliminar elementos de un diccionario de varias maneras. Aquí están las más comunes, junto con ejemplos para cada una:
 
