@@ -209,7 +209,7 @@ for i in range(3):
 comprension_dict == bucle_dict
 
 ```
-Hay alguna otra cosa aquí. Aparte de la comprensión, que como vemos consiste convertir en diccionario el iterable que hay en su interior, también tenemos un `f-string`. Los `f-string` es la manera que tenemos en las nuevas versiones de Python para añadir el valor de una expresión o variable dentro de strings. A la string se le añade una `f''` o `f"".
+Hay alguna otra cosa aquí. Aparte de la comprensión, que como vemos consiste convertir en diccionario el iterable que hay en su interior, también tenemos un `f-string`. Los `f-string` es la manera que tenemos en las nuevas versiones de Python para añadir el valor de una expresión o variable dentro de strings. A la string se le añade una `f''` o `f""`.
 
 <br>
 
