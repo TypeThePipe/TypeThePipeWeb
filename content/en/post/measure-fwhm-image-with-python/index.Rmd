@@ -144,6 +144,7 @@ plt.show()
 print(f"The Full Width at Half Maximum (FWHM) is: {fwhm} pixels")
 ```
 
+![](./fwhm.webp)
 ```{python}
 # Assuming 'cross_section', 'crosses_half', and 'half_max' are obtained as shown before
 # Also assuming 'image' is the 2D numpy array from the grayscale image
@@ -168,6 +169,7 @@ plt.ylabel('Pixel Position Y')
 plt.show()
 ```
 
+![](./Image_with_FWHM_Indicated.webp)
 
 <br>
 
