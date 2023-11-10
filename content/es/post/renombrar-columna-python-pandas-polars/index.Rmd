@@ -25,16 +25,15 @@ En el mundo del análisis de datos con Python, los DataFrames son una herramient
 
 <br>
 
-## **¿Por qué renombrar columnas?**
+## **¿Por qué renombrar columnas? Renombrar columnas en Pandas con `rename`**
 Renombrar columnas en un DataFrame puede ser necesario por varios motivos:
 
-Claridad: Los nombres de las columnas pueden ser confusos o demasiado técnicos.
-Consistencia: En proyectos con múltiples DataFrames, es útil tener nombres de columnas consistentes.
-Necesidades de Análisis: Algunas funciones o métodos pueden requerir nombres de columna específicos.
-Utilizando Pandas para Renombrar Columnas
-Pandas es una biblioteca de Python que proporciona estructuras de datos y herramientas de análisis de datos. Uno de sus objetos más poderosos es el DataFrame, que puedes modificar fácilmente, incluyendo la acción de renombrar columnas.
+- Claridad: Los nombres de las columnas pueden ser confusos o demasiado técnicos.
+- Consistencia: En proyectos con múltiples DataFrames, es útil tener nombres de columnas consistentes.
+- Necesidades de Análisis: Algunas funciones o métodos pueden requerir nombres de columna específicos.
 
-Instalación de Pandas
+Como ya sabemos, Pandas es una biblioteca de Python que proporciona estructuras de datos y herramientas de análisis de datos. Uno de sus objetos más poderosos es el DataFrame, que puedes modificar fácilmente, incluyendo la acción de renombrar columnas.
+
 Si aún no tienes instalado Pandas, puedes hacerlo usando pip, poetry o el gestor de dependencias / entornos que suelas utilizar en tus proyectos
 
 Ahora, veamos un ejemplo de cómo renombrar columnas en un DataFrame en Python:
@@ -100,7 +99,7 @@ Al renombrar columnas de un DataFrame en Python, es importante seguir ciertas bu
 
 `Simplicidad:` Escoge nombres de columna simples y descriptivos.
 
-`Consistencia:` Usa un estilo consistente, como snake_case o camelCase.
+`Consistencia:` Usa un estilo consistente, como snake_case (ej. `ranking_score`) o camelCase (`rankingScore`). Puedes usar linters y formateadores que te ayuden a mantener la consistencia en tus projectos y repositorios de código.
 
 `Unicidad:` Asegúrate de que cada nombre de columna sea único dentro del DataFrame.
 
@@ -108,9 +107,9 @@ Al renombrar columnas de un DataFrame en Python, es importante seguir ciertas bu
 
 ## **Mantente actualizado en consejos de Python principiante e intermedio**
 
-Renombrar columnas en un DataFrame en Python es una tarea común y sencilla, pero esencial para mantener tus datos organizados y fáciles de entender. Con Pandas, puedes hacerlo en una línea de código, lo cual simplifica enormemente el proceso de limpieza y preparación de datos antes de proceder al análisis.
+Renombrar columnas en un DataFrame en Python es una tarea común y sencilla, pero esencial para mantener tus datos organizados y fáciles de entender. Tanto con Pandas y Polars, puedes hacerlo en una línea de código, lo cual simplifica enormemente el proceso de limpieza y preparación de datos antes de proceder al análisis.
 
-Esperamos que este tutorial te haya ayudado a entender cómo renombrar columnas en un DataFrame en Python y te motive a seguir explorando las poderosas capacidades de Pandas. ¡Feliz análisis de datos!
+Esperamos que este tutorial te haya ayudado a entender cómo renombrar columnas en un DataFrame en Python y te motive a seguir explorando las poderosas capacidades de las librerías expuestas. ¡Feliz análisis de datos!
 
 Si deseas mantenerte actualizado...
 
