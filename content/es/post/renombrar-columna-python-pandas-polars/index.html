@@ -1,0 +1,253 @@
+---
+title: 'Cómo renombrar columnas en un DataFrame en Python usando Pandas y Polars'
+author: Carlos Vecina Tebar
+date: '2023-11-09'
+slug: renombrar-columna-python-pandas-polars
+translationKey: renombrar-columna-python-pandas-polars
+output: 
+  blogdown::html_page:
+    highlight: pygments 
+categories:
+  - Python
+  - Post
+tags: [Python, Principiantes]
+subtitle: "Descubre cómo dominar los diccionarios en Python con nuestra guía exhaustiva. Aprende a crear, manejar y optimizar diccionarios para tus proyectos de programación."
+summary: "Descubre cómo dominar los diccionarios en Python con nuestra guía exhaustiva. Aprende a crear, manejar y optimizar diccionarios para tus proyectos de programación."
+authors: [carlos-vecina]
+featured: false
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="featured.png" width="400px" alt="Imagen que en la que aparece el texto Renombrar Columnas sobre un fondo de programación en Python" /></p>
+<div id="cómo-renombrar-columnas-en-un-dataframe-en-python-una-guía-práctica" class="section level1">
+<h1>Cómo renombrar columnas en un DataFrame en Python: Una Guía práctica</h1>
+<p>En el mundo del análisis de datos con Python, los DataFrames son una herramienta fundamental. Sin embargo, es común encontrarse con la necesidad de renombrar columnas para mejorar la legibilidad o para cumplir con ciertas convenciones de nombrado. Aquí te explicamos cómo puedes renombrar columnas de un DataFrame en Python utilizando la biblioteca Pandas, esencial para la manipulación de datos.</p>
+<p><br></p>
+<div id="por-qué-renombrar-columnas" class="section level2">
+<h2><strong>¿Por qué renombrar columnas?</strong></h2>
+<p>Renombrar columnas en un DataFrame puede ser necesario por varios motivos:</p>
+<p>Claridad: Los nombres de las columnas pueden ser confusos o demasiado técnicos.
+Consistencia: En proyectos con múltiples DataFrames, es útil tener nombres de columnas consistentes.
+Necesidades de Análisis: Algunas funciones o métodos pueden requerir nombres de columna específicos.
+Utilizando Pandas para Renombrar Columnas
+Pandas es una biblioteca de Python que proporciona estructuras de datos y herramientas de análisis de datos. Uno de sus objetos más poderosos es el DataFrame, que puedes modificar fácilmente, incluyendo la acción de renombrar columnas.</p>
+<p>Instalación de Pandas
+Si aún no tienes instalado Pandas, puedes hacerlo usando pip:</p>
+<p>bash
+Copy code
+pip install pandas
+Ejemplo de Código para Renombrar Columnas
+Ahora, veamos un ejemplo de cómo renombrar columnas en un DataFrame en Python:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># Crear un DataFrame de ejemplo</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    <span class="st">&#39;A&#39;</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>    <span class="st">&#39;B&#39;</span>: [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>],</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>    <span class="st">&#39;C&#39;</span>: [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>})</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a><span class="co"># Imprimir el DataFrame original</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;DataFrame Original:</span><span class="ch">\n</span><span class="st">&quot;</span>, df)</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a><span class="co"># Renombrar columnas utilizando un diccionario</span></span></code></pre></div>
+<pre><code>## DataFrame Original:
+##     A  B  C
+## 0  1  4  7
+## 1  2  5  8
+## 2  3  6  9</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>df.rename(columns<span class="op">=</span>{<span class="st">&#39;A&#39;</span>: <span class="st">&#39;Primera&#39;</span>, <span class="st">&#39;B&#39;</span>: <span class="st">&#39;Segunda&#39;</span>, <span class="st">&#39;C&#39;</span>: <span class="st">&#39;Tercera&#39;</span>}, inplace<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="co"># Imprimir el DataFrame después de renombrar columnas</span></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">DataFrame con Columnas Renombradas:</span><span class="ch">\n</span><span class="st">&quot;</span>, df)</span></code></pre></div>
+<pre><code>## 
+## DataFrame con Columnas Renombradas:
+##     Primera  Segunda  Tercera
+## 0        1        4        7
+## 1        2        5        8
+## 2        3        6        9</code></pre>
+<p>Importar Pandas: La biblioteca Pandas es esencial para trabajar con DataFrames, así que la importamos con el alias pd.</p>
+<p>Crear un DataFrame: Creamos un DataFrame simple con tres columnas nombradas ‘A’, ‘B’, y ‘C’ con algunos datos de ejemplo.</p>
+<p>Imprimir el DataFrame Original: Mostramos el DataFrame antes de aplicar el cambio para tener un punto de comparación.</p>
+<p>Renombrar Columnas: Utilizamos el método .rename() del DataFrame para renombrar las columnas. Pasamos un diccionario con los nombres actuales de las columnas como claves y los nuevos nombres como valores. El argumento inplace=True aplica los cambios directamente en el DataFrame original.</p>
+<p>Imprimir el DataFrame Modificado: Finalmente, mostramos el DataFrame con las columnas ya renombradas para confirmar los cambios.</p>
+<p><br></p>
+</div>
+<div id="renombrar-columnas-en-polars" class="section level2">
+<h2><strong>Renombrar columnas en Polars</strong></h2>
+<p>Por supuesto, además de Pandas, existen otras bibliotecas de Python que manejan DataFrames de manera eficiente. Una de ellas es Polars, que se está abriendo paso en el ecosistema de Python. Es conocida por su rapidez y rendimiento al manejar grandes conjuntos de datos. Al igual que en Pandas, renombrar columnas en un DataFrame en Python usando Polars es una tarea sencilla pero fundamental para mantener los datos organizados.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co"># Crear un DataFrame de ejemplo en Polars</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>df_polars <span class="op">=</span> pl.DataFrame({</span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>    <span class="st">&#39;A&#39;</span>: [<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>],</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>    <span class="st">&#39;B&#39;</span>: [<span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>],</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>    <span class="st">&#39;C&#39;</span>: [<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>]</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>})</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;DataFrame Original de Polars:</span><span class="ch">\n</span><span class="st">&quot;</span>, df_polars)</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a></span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a></span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a><span class="co"># Renombrar columnas en Polars</span></span></code></pre></div>
+<pre><code>## DataFrame Original de Polars:
+##  shape: (3, 3)
+## ┌─────┬─────┬─────┐
+## │ A   ┆ B   ┆ C   │
+## │ --- ┆ --- ┆ --- │
+## │ i64 ┆ i64 ┆ i64 │
+## ╞═════╪═════╪═════╡
+## │ 1   ┆ 4   ┆ 7   │
+## │ 2   ┆ 5   ┆ 8   │
+## │ 3   ┆ 6   ┆ 9   │
+## └─────┴─────┴─────┘</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>df_polars <span class="op">=</span> df_polars.rename({<span class="st">&quot;A&quot;</span>: <span class="st">&quot;Primera&quot;</span>, <span class="st">&quot;B&quot;</span>: <span class="st">&quot;Segunda&quot;</span>, <span class="st">&quot;C&quot;</span>: <span class="st">&quot;Tercera&quot;</span>})</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="co"># Imprimir el DataFrame después de renombrar columnas</span></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;</span><span class="ch">\n</span><span class="st">DataFrame de Polars con Columnas Renombradas:</span><span class="ch">\n</span><span class="st">&quot;</span>, df_polars)</span></code></pre></div>
+<pre><code>## 
+## DataFrame de Polars con Columnas Renombradas:
+##  shape: (3, 3)
+## ┌─────────┬─────────┬─────────┐
+## │ Primera ┆ Segunda ┆ Tercera │
+## │ ---     ┆ ---     ┆ ---     │
+## │ i64     ┆ i64     ┆ i64     │
+## ╞═════════╪═════════╪═════════╡
+## │ 1       ┆ 4       ┆ 7       │
+## │ 2       ┆ 5       ┆ 8       │
+## │ 3       ┆ 6       ┆ 9       │
+## └─────────┴─────────┴─────────┘</code></pre>
+<p>En este ejemplo, creamos un DataFrame de Polars con datos de muestra y lo imprimimos. Posteriormente, usamos el método .rename() para cambiar los nombres de las columnas. A diferencia de Pandas, no necesitas especificar inplace=True, ya que en Polars la asignación se realiza de manera directa al objeto.</p>
+<p><br></p>
+</div>
+<div id="buenas-prácticas-al-renombrar-columnas" class="section level2">
+<h2><strong>Buenas prácticas al renombrar columnas</strong></h2>
+<p>Al renombrar columnas de un DataFrame en Python, es importante seguir ciertas buenas prácticas:</p>
+<p><code>Simplicidad:</code> Escoge nombres de columna simples y descriptivos.</p>
+<p><code>Consistencia:</code> Usa un estilo consistente, como snake_case o camelCase.</p>
+<p><code>Unicidad:</code> Asegúrate de que cada nombre de columna sea único dentro del DataFrame.</p>
+<p><br></p>
+</div>
+<div id="mantente-actualizado-en-consejos-de-python-principiante-e-intermedio" class="section level2">
+<h2><strong>Mantente actualizado en consejos de Python principiante e intermedio</strong></h2>
+<p>Renombrar columnas en un DataFrame en Python es una tarea común y sencilla, pero esencial para mantener tus datos organizados y fáciles de entender. Con Pandas, puedes hacerlo en una línea de código, lo cual simplifica enormemente el proceso de limpieza y preparación de datos antes de proceder al análisis.</p>
+<p>Esperamos que este tutorial te haya ayudado a entender cómo renombrar columnas en un DataFrame en Python y te motive a seguir explorando las poderosas capacidades de Pandas. ¡Feliz análisis de datos!</p>
+<p>Si deseas mantenerte actualizado…</p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> ¡Síguenos para más contenido sobre Python! </label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="tu mejor email" required><input type="hidden" name="tags" value="7614568"></div>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Seguir" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+<style>
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+</style>
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
+</div>
+</div>
