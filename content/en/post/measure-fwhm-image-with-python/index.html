@@ -1,0 +1,248 @@
+---
+title: Measure FWHM from image with Python
+author: Carlos Vecina Tebar
+date: '2023-11-09'
+slug: measure-fwhm-image-with-python
+translationKey: measure-fwhm-image-with-python
+output: 
+  blogdown::html_page:
+    highlight: pygments 
+categories:
+  - Python
+  - Post
+tags: [Python]
+subtitle: "How to Measure Full Width at Half Maximum (FWHM) from an Image in Python: A Step-by-Step Guide."
+summary: "How to Measure Full Width at Half Maximum (FWHM) from an Image in Python: A Step-by-Step Guide."
+authors: [carlos-vecina]
+featured: false
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="featured.png" width="400px" alt="Blue palette distribution plot showing a histogram of a image analysis of FWHM in Python." /></p>
+<p>In the realm of image analysis and signal processing, the concept of Full Width at Half Maximum (FWHM) is a vital metric used to determine the spread of a signal or the resolution of an imaging system. This guide will walk you through the process of measuring the FWHM from an image using Python, a powerful programming language beloved for its simplicity and robust libraries. Whether you’re a researcher analyzing microscopic images or an engineer working on improving camera resolution, mastering the FWHM calculation in Python can provide insightful data on your subject matter.</p>
+<div id="measuring-fwhm-from-an-image" class="section level1">
+<h1>Measuring FWHM from an Image</h1>
+<p><br></p>
+<div id="what-is-fwhm" class="section level2">
+<h2><strong>What is FWHM?</strong></h2>
+<p><strong>FWHM is a measurement of the width of a signal or a peak at its half maximum height</strong>. In imaging, it’s often used to describe the resolution of a system, with a smaller FWHM indicating a higher resolution and sharper images. In practical terms, measuring the FWHM from an image can tell us about the blur or spread of a particular feature, which is crucial for various applications such as materials science, astronomy, and medical imaging.</p>
+<p>We’ll start by loading and preprocessing our image, ensuring it’s in the perfect state for analysis. Then, we’ll move on to the critical task of identifying the peak intensity values. Finally, we will meticulously calculate the FWHM, dissecting each pixel’s contribution to the bigger picture.</p>
+<p>Before diving into the code, ensure you have the <strong>following prerequisites covered:</strong></p>
+<ul>
+<li>Python installed on your system (preferably Python 3.7 or above)</li>
+<li>Image processing libraries: NumPy and SciPy</li>
+<li>Image reading and displaying library: OpenCV or Pillow</li>
+<li>Matplotlib library for plotting (optional but recommended)</li>
+</ul>
+<p>You can install the necessary Python libraries using pip:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">pip</span> install numpy scipy opencv-python pillow matplotlib</span></code></pre></div>
+<p><br></p>
+</div>
+<div id="hands-on-in-measuring-fwhm-from-an-image-in-python" class="section level2">
+<h2><strong>Hands-on in measuring FWHM from an Image in Python</strong></h2>
+<p>Now, let’s get our hands dirty with some Python code. The following steps and accompanying code snippets will help you measure the FWHM from an image.</p>
+<p>Step 1: Read the image in grayscale</p>
+<p>The first step in our journey is to read the image. By converting it to grayscale, we reduce the complexity of the image, focusing solely on intensity values rather than color. This simplification is crucial as it makes subsequent analysis more straightforward and computationally efficient. The code snippet below utilizes OpenCV, a powerful library for image operations, to load the image and check its validity, ensuring that we have a solid starting point for our analysis.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">import</span> cv2</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>image_path <span class="op">=</span> <span class="st">&#39;path_to_your_image.jpg&#39;</span></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>image <span class="op">=</span> cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a><span class="cf">if</span> image <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>    <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&quot;Image not found or the path is incorrect&quot;</span>)</span></code></pre></div>
+<p>Step 2: Detect the Peaks</p>
+<p>To measure the FWHM, we first need to identify the peak in the image. This could be the brightest point in an astronomical image or the highest intensity value in a spectroscopic image.
+The next step involves detecting the peak in the image. <strong>Peaks in an image can signify various things depending on the context</strong> – it could represent the brightest star in a galaxy or the highest concentration of a substance in a microscopic image. By using NumPy, a fundamental package for scientific computing with Python, we can efficiently locate the peak pixel, setting the stage for the crucial task of FWHM measurement.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>peak_pixel <span class="op">=</span> np.unravel_index(np.argmax(image, axis<span class="op">=</span><span class="va">None</span>), image.shape)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>peak_value <span class="op">=</span> image[peak_pixel]</span></code></pre></div>
+<p>Step 3: Calculate the Half Maximum</p>
+<p>Here, we calculate the half maximum value, a vital reference point for determining the FWHM. The half maximum is essentially half the peak intensity value, and it is around this value that we measure the width of the peak. This step is straightforward yet pivotal, as accurate calculation of this value is crucial for the correct measurement of the FWHM.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>half_max <span class="op">=</span> peak_value <span class="op">/</span> <span class="fl">2.0</span></span></code></pre></div>
+<p>Step 4: Measure the FWHM</p>
+<p><strong>This crucial step involves measuring the width of the peak at its half maximum intensity.</strong> We focus on a one-dimensional slice of the image, typically a horizontal line that passes through the peak. This approach simplifies the problem while still providing us with valuable insights into the image’s characteristics. The FWHM is determined by finding where the intensity values cross the half maximum value, allowing us to quantify the spread of the peak.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Get the horizontal cross-section of the image at the peak</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>cross_section <span class="op">=</span> image[peak_pixel[<span class="dv">0</span>], :]</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="co"># Find where the cross_section crosses the half maximum</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>crosses_half <span class="op">=</span> np.where(cross_section <span class="op">&gt;=</span> half_max)[<span class="dv">0</span>]</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a><span class="co"># Calculate FWHM</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>fwhm <span class="op">=</span> crosses_half[<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> crosses_half[<span class="dv">0</span>] <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>Step <span class="dv">5</span>: Display Results (Optional)</span></code></pre></div>
+<p>Enhanced Robustness in FWHM Calculation</p>
+<p>Incorporating error handling at this stage enhances the robustness and reliability of our script. By anticipating and managing potential errors, we can ensure that the script provides clear and actionable feedback, making it more user-friendly and easier to debug. This step is particularly important when dealing with a variety of images, where unexpected data formats or issues might arise.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="co"># Assuming previous variables (cross_section, half_max) are defined</span></span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a>    crosses_half <span class="op">=</span> np.where(cross_section <span class="op">&gt;=</span> half_max)[<span class="dv">0</span>]</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>    </span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>    <span class="cf">if</span> crosses_half.size <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>        <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="st">&quot;No points cross the half maximum. Check the image and data.&quot;</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>    </span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>    fwhm <span class="op">=</span> crosses_half[<span class="op">-</span><span class="dv">1</span>] <span class="op">-</span> crosses_half[<span class="dv">0</span>] <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;The Full Width at Half Maximum (FWHM) is: </span><span class="sc">{</span>fwhm<span class="sc">}</span><span class="ss"> pixels&quot;</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="cf">except</span> <span class="pp">ValueError</span> <span class="im">as</span> ve:</span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>    <span class="bu">print</span>(ve)</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a><span class="cf">except</span> <span class="pp">Exception</span> <span class="im">as</span> e:</span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;An error occurred while calculating the FWHM: </span><span class="sc">{</span>e<span class="sc">}</span><span class="ss">&quot;</span>)</span></code></pre></div>
+<p>Step 5: Plot the cross-section with the FWHM</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a>plt.plot(cross_section)</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>plt.plot([crosses_half[<span class="dv">0</span>], crosses_half[<span class="op">-</span><span class="dv">1</span>]], [half_max, half_max], <span class="st">&#39;ro-&#39;</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a>plt.title(<span class="st">&#39;FWHM Measurement&#39;</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;Pixel Position&#39;</span>)</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;Pixel Value&#39;</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>plt.show()</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f&quot;The Full Width at Half Maximum (FWHM) is: </span><span class="sc">{</span>fwhm<span class="sc">}</span><span class="ss"> pixels&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="co"># Assuming &#39;cross_section&#39;, &#39;crosses_half&#39;, and &#39;half_max&#39; are obtained as shown before</span></span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="co"># Also assuming &#39;image&#39; is the 2D numpy array from the grayscale image</span></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a><span class="co"># Display the image</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>plt.imshow(image, cmap<span class="op">=</span><span class="st">&#39;gray&#39;</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>plt.colorbar()</span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="co"># Draw a horizontal line at the y-coordinate of the peak</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>plt.axhline(y<span class="op">=</span>peak_pixel[<span class="dv">0</span>], color<span class="op">=</span><span class="st">&#39;cyan&#39;</span>, linestyle<span class="op">=</span><span class="st">&#39;--&#39;</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a><span class="co"># Plot the FWHM on the image</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a>plt.plot([crosses_half[<span class="dv">0</span>], crosses_half[<span class="op">-</span><span class="dv">1</span>]], [peak_pixel[<span class="dv">0</span>], peak_pixel[<span class="dv">0</span>]], <span class="st">&#39;ro-&#39;</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a></span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a><span class="co"># Adding annotations</span></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a>plt.text(crosses_half[<span class="dv">0</span>], peak_pixel[<span class="dv">0</span>], <span class="st">&#39;FWHM Start&#39;</span>, color<span class="op">=</span><span class="st">&#39;white&#39;</span>)</span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a>plt.text(crosses_half[<span class="op">-</span><span class="dv">1</span>], peak_pixel[<span class="dv">0</span>], <span class="st">&#39;FWHM End&#39;</span>, color<span class="op">=</span><span class="st">&#39;white&#39;</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a>plt.title(<span class="st">&#39;Image with FWHM Indicated&#39;</span>)</span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a>plt.xlabel(<span class="st">&#39;Pixel Position X&#39;</span>)</span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a>plt.ylabel(<span class="st">&#39;Pixel Position Y&#39;</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a>plt.show()</span></code></pre></div>
+<p><br></p>
+</div>
+<div id="stay-updated-on-python-tips" class="section level2">
+<h2><strong>Stay updated on Python tips</strong></h2>
+<p>You’ve now learned how to measure the Full Width at Half Maximum (FWHM) from an image using Python! This technique is broadly applicable and <strong>can be expanded</strong> to measure FWHM in two dimensions, apply to various types of data, and customized for your specific needs. The Python ecosystem provides a straightforward and efficient path to add image analysis capabilities to your skill set.</p>
+<p>Remember, for different types of images or more complex scenarios, you might need to apply image <strong>preprocessing techniques such as noise reduction, thresholding, or edge detection to enhance the accuracy of your FWHM measurements.</strong></p>
+<p>If you want to stay updated…</p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more Python tips!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+<style>
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+</style>
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
+</div>
+</div>
