@@ -98,7 +98,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Consistencia: En proyectos con múltiples DataFrames, es útil tener nombres de columnas consistentes.</li>
 <li>Necesidades de Análisis: Algunas funciones o métodos pueden requerir nombres de columna específicos.</li>
 </ul>
-<p>Como ya sabemos, Pandas es una biblioteca de Python que proporciona estructuras de datos y herramientas de análisis de datos. Uno de sus objetos más poderosos es el DataFrame, que puedes modificar fácilmente, incluyendo la acción de renombrar columnas.</p>
+<p>Como ya sabemos, Pandas (échale un ojo <a href="https://pandas.pydata.org/docs/">a su última versión</a>) es una biblioteca de Python que proporciona estructuras de datos y herramientas de análisis de datos. Uno de sus objetos más poderosos es el DataFrame, que puedes modificar fácilmente, incluyendo la acción de renombrar columnas.</p>
 <p>Si aún no tienes instalado Pandas, puedes hacerlo usando pip, poetry o el gestor de dependencias / entornos que suelas utilizar en tus proyectos</p>
 <p>Ahora, veamos un ejemplo de cómo renombrar columnas en un DataFrame en Python:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
@@ -135,7 +135,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="renombrar-columnas-en-polars" class="section level2">
 <h2><strong>Renombrar columnas en Polars</strong></h2>
-<p>Por supuesto, además de Pandas, existen otras bibliotecas de Python que manejan DataFrames de manera eficiente. Una de ellas es Polars, que se está abriendo paso en el ecosistema de Python. Es conocida por su rapidez y rendimiento al manejar grandes conjuntos de datos. Al igual que en Pandas, renombrar columnas en un DataFrame en Python usando Polars es una tarea sencilla pero fundamental para mantener los datos organizados.</p>
+<p>Por supuesto, además de Pandas, existen otras bibliotecas de Python que manejan DataFrames de manera eficiente. Una de ellas es <a href="https://www.pola.rs/">Polars</a>, que se está abriendo paso en el ecosistema de Python. Es conocida por su rapidez y rendimiento al manejar grandes conjuntos de datos. Al igual que en Pandas, renombrar columnas en un DataFrame en Python usando Polars es una tarea sencilla pero fundamental para mantener los datos organizados.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
 <span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
 <span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co"># Crear un DataFrame de ejemplo en Polars</span></span>
@@ -176,6 +176,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## │ 3       ┆ 6       ┆ 9       │
 ## └─────────┴─────────┴─────────┘</code></pre>
 <p>En este ejemplo, creamos un DataFrame de Polars con datos de muestra y lo imprimimos. Posteriormente, usamos el método .rename() para cambiar los nombres de las columnas. A diferencia de Pandas, no necesitas especificar inplace=True, ya que en Polars la asignación se realiza de manera directa al objeto.</p>
+<p>Para seguir leyendo más características de Polars, te dejamos este post sobre <a href="https://typethepipe.com/es/vizs-and-tips/python-polars-pipe-funcion/">cómo aplicar funciones de manera encadenada a un DataFrame de Polars</a></p>
 <p><br></p>
 </div>
 <div id="buenas-prácticas-al-renombrar-columnas" class="section level2">
