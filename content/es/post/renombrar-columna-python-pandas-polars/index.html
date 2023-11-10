@@ -99,12 +99,8 @@ Necesidades de Análisis: Algunas funciones o métodos pueden requerir nombres d
 Utilizando Pandas para Renombrar Columnas
 Pandas es una biblioteca de Python que proporciona estructuras de datos y herramientas de análisis de datos. Uno de sus objetos más poderosos es el DataFrame, que puedes modificar fácilmente, incluyendo la acción de renombrar columnas.</p>
 <p>Instalación de Pandas
-Si aún no tienes instalado Pandas, puedes hacerlo usando pip:</p>
-<p>bash
-Copy code
-pip install pandas
-Ejemplo de Código para Renombrar Columnas
-Ahora, veamos un ejemplo de cómo renombrar columnas en un DataFrame en Python:</p>
+Si aún no tienes instalado Pandas, puedes hacerlo usando pip, poetry o el gestor de dependencias / entornos que suelas utilizar en tus proyectos</p>
+<p>Ahora, veamos un ejemplo de cómo renombrar columnas en un DataFrame en Python:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="co"># Crear un DataFrame de ejemplo</span></span>
@@ -133,11 +129,8 @@ Ahora, veamos un ejemplo de cómo renombrar columnas en un DataFrame en Python:<
 ## 0        1        4        7
 ## 1        2        5        8
 ## 2        3        6        9</code></pre>
-<p>Importar Pandas: La biblioteca Pandas es esencial para trabajar con DataFrames, así que la importamos con el alias pd.</p>
-<p>Crear un DataFrame: Creamos un DataFrame simple con tres columnas nombradas ‘A’, ‘B’, y ‘C’ con algunos datos de ejemplo.</p>
-<p>Imprimir el DataFrame Original: Mostramos el DataFrame antes de aplicar el cambio para tener un punto de comparación.</p>
-<p>Renombrar Columnas: Utilizamos el método .rename() del DataFrame para renombrar las columnas. Pasamos un diccionario con los nombres actuales de las columnas como claves y los nuevos nombres como valores. El argumento inplace=True aplica los cambios directamente en el DataFrame original.</p>
-<p>Imprimir el DataFrame Modificado: Finalmente, mostramos el DataFrame con las columnas ya renombradas para confirmar los cambios.</p>
+<p>Para trabajar con DataFrames en Python, es esencial comenzar importando la biblioteca Pandas, lo cual hacemos utilizando el alias ‘pd’. Una vez importada Pandas, creamos un DataFrame simple, compuesto por tres columnas denominadas ‘A’, ‘B’ y ‘C’, las cuales se llenan con datos de ejemplo. El siguiente paso es renombrar estas columnas, para lo cual <strong>utilizamos el método .rename() del DataFrame.</strong> Este método requiere pasar <strong>un diccionario que asocie los nombres actuales de las columnas (las claves) con los nuevos nombres deseados (los valores).</strong></p>
+<p>Al especificar <strong>el argumento inplace=True, aseguramos que los cambios se apliquen directamente en el DataFrame original.</strong> Finalmente, para confirmar que los cambios se han realizado correctamente, imprimimos el DataFrame modificado, mostrando así las columnas con sus nuevos nombres.</p>
 <p><br></p>
 </div>
 <div id="renombrar-columnas-en-polars" class="section level2">
