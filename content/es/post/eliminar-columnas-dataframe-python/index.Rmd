@@ -1,0 +1,203 @@
+---
+title: "Eliminar columnas de una DataFrame de Python Pandas... ¡y en Polars!"
+author: "Carlos Vecina Tebar"
+date: "2023-11-15"
+slug: "eliminar-columnas-dataframe-python"
+translationKey: "eliminar-columnas-dataframe-python"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- Python
+- Post
+- Serie Pandas
+tags: [Python, Pandas, Polars]
+subtitle: "Veamos las diferentes y mejores maneras de eliminar columnas en un DataFrame usando las dos principales librerías de Python, Pandas y la nueva librería de alto rendimiento llamada Polars."
+summary: "Veamos las diferentes y mejores maneras de eliminar columnas en un DataFrame usando las dos principales librerías de Python, Pandas y la nueva librería de alto rendimiento llamada Polars."
+authors: [carlos-vecina]
+featured: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<img src="./featured.gif" height="250px" width="400px" alt="Polars Python con mensaje que dice 'json'"/>
+
+¿Eres un entusiasta de la ciencia de datos o un profesional que busca agilizar tu flujo de trabajo? Bueno, has llegado al lugar perfecto. En el universo de Python, la biblioteca Pandas es tu aliada clave para conquistar los desafíos del manejo de datos. Imagínate tener en tus manos una caja de herramientas súper potente que transforma la manera en que juegas con los datos. Eso es exactamente lo que Pandas te ofrece.
+
+Ahora, hablemos de una habilidad esencial en tu arsenal de ciencia de datos: eliminar columnas en un DataFrame con Pandas. ¿Por qué es tan crucial? Porque en el mundo real, los datos no siempre llegan en el formato perfecto. A veces, menos es más y necesitas depurar tu DataFrame para obtener esa visión clara que te conducirá a *insights* impresionantes.
+
+Este artículo no es solo un tutorial, es tu guía definitiva sobre cómo **eliminar columnas en Pandas y en Polars, cubriendo varios métodos y ofreciendo ejemplos de código para cada uno.**. Prepárate para potenciar tus habilidades. ¡Vamos allá! 
+
+<br>
+
+## **Eliminación de columnas en Pandas**
+
+Empecemos creando un *dataframe* inicial al que iremos haciendo diferentes 'perrerías'.
+
+```{python}
+import pandas as pd
+
+
+base_df = pd.DataFrame({
+    'id': [1, 2, 3],
+    'nombre': ['Ana', 'Carlos', 'Mike'],
+    'provincia': ['Alicante', 'Alicante', 'Denver'],
+    'departamento': [3, 3, 3],
+    'equipo': [17, 17, 25],
+
+})
+base_df
+```
+<br>
+
+### 1- Método `.drop()`
+
+Como hemos comentado, `drop` puede usarse tanto para filas como para columnas, así que utilizaremos el argumento `axis=1` para indicar que nos referimos a las columnas. Para hacer referencia a las filas, usaríamos `axis=0`.
+
+Por último, como muchos otros métodos de los Pandas DataFrames, debemos decidir si queremos hacerlo `inplace`o no. Esto tendrá efectos en la apariencia de nuestro código y en el rendimiento del programa.
+Sin embargo, `drop`es uno de los métodos en los que se desaconseja el uso, ya que no presenta mejoras de rendimiento y sólo limita el encadenamiento de funciones (ya que lo hacemos *inplace* lo que nos devuelve es un None). Más información en [este post](https://sourcery.ai/blog/pandas-inplace/#:~:text=The%20%22Group%204%22%20methods%20where%20the%20usage%20of%20inplace%20is%20possible%20but%20discouraged%3A) y en la [PDEP-8](https://github.com/pandas-dev/pandas/pull/51466) donde podéis seguir la conversación sobre el tema, abierta a fecha de publicación 16/11. 
+En caso de no usar *inplace*, deberemos reasignar el resultado del `drop`.
+
+```{python}
+# Eliminar una columna
+base_df.drop('provincia', axis=1) #, inplace=True) en caso de que no queramos, por defecto a false
+
+# Eliminar múltiples columnas
+base_df.drop(['id', 'departamento'], axis=1) # inplace=True)
+```
+<br>
+
+### 2- Selección de columnas mediante corchetes `[]` y métodos `.loc` e `.iloc`
+
+```{python}
+base_df[['nombre', 'provincia']]
+
+```
+
+También podemos usar loc / iloc para la selección de columnas. Esta opción suele ser muy poco más lenta que la anterior si sólo quieres eliminar columnas, mientras ofrece mucha más flexibilidad.
+
+```{python}
+base_df.loc[:, ['nombre', 'provincia']]
+```
+
+```{python}
+base_df.loc[:, ['nombre', 'provincia']]
+```
+
+Lo bueno del método nativo de Pandas, es que nos ofrece una manera flexible de selección de columnas y filas por los filtros y condiciones que nosotros queramos fácilmente.
+
+<br>
+
+### 3- Uso de `del`
+
+Limitaciones: Es menos flexible que drop(), ya que solo puede eliminar una columna a la vez y no devuelve una copia del DataFrame, lo que puede ser un inconveniente en ciertos flujos de trabajo. el funcionamiento es como el `inplace` del método drop.
+
+```{python}
+copia_df = base_df.copy()
+del copia_df['departamento']
+del copia_df['provincia']
+copia_df
+```
+
+
+**Importante:** usamos el método `copy()` a la hora de hacer una copia del dataframe. En caso de no hacerlo, lo que hacemos es hacer una `copia por referencia` por lo que las modificaciones que le hagamos al objeto nuevo, serán también aplicados al dataframe original. Veamos el ejemplo:
+
+```{python}
+copia_de_copia_df = copia_df
+del copia_de_copia_df['equipo']
+copia_df
+```
+
+
+<br>
+
+## **Eliminar columnas en Polars**
+
+Usemos el DataFrame de Pandas y transformémoslo a Polars:
+
+```{python}
+import polars as pl # usando version 0.19.3
+
+base_df_pl = pl.from_pandas(base_df)
+```
+
+Del mismo modo que lo hacíamos en Pandas, Polars implementa n método para sus dataframes con el mismo nombre [`drop`](https://pola-rs.github.io/polars/py-polars/html/reference/dataframe/api/polars.DataFrame.drop.html).
+
+```{python}
+base_df_pl.drop(["id","equipo"])
+```
+También se podemos indicar el nombre de las columnas separadas por coma sin usar una lista.
+
+Otra que manera que tenemos disponible es usar los **Polars selectors junto con `drop`**, pudiendo eliminar columnas de manera más interesante. Podemos eliminar columnas de un dataframe según su tipo.
+
+```{python}
+import polars.selectors as cs
+
+base_df_pl.dtypes
+```
+
+```{python}
+base_df_pl.drop(cs.numeric())
+```
+
+Deberemos, como anteriormente, reasignar el resultado o bien a la misma variable, o bien a una nueva según convenga.
+
+Por último, para eliminar columnas en base a su contenido (más allá del tipo), no tenemos una manera 'pytonica' de hacerlo con la API de Polars y que encaje por ejemplo en un *pipeline* Lazy. Deberemos materializar los datos y obtener los nombres de las columnas que cumplan nuestras condiciones deseadas, y ahora sí se podría incluir dentro de un `drop`.
+
+```{python}
+# Seleccionamos las columas de texto donde el número de elementos únicos sea mayor a 2
+col_name_diff = [col.name for col in base_df_pl.select(cs.string().n_unique() > 2) if col.all()]
+base_df_pl.select(col_name_diff)
+```
+
+<br>
+
+### **Mantente al día de las novedades de Pandas y Polars**
+
+Espero que esta publicación te haya ayudado a familiarizarte con la selección y eliminación de columnas en dataframes de Pandas y Polars, y te haya permitido disfrutar de una exhibición de algunas de sus características.
+
+Si deseas mantenerte actualizado y no perderte nada...
+
+```{=html}
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> ¡Suscribete para más contenido de Python Polars!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="tu mejor email" required><input type="hidden" name="tags" value="7614568"></div>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="¡Dale!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+```
+
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
+
+
