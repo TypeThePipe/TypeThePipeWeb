@@ -196,8 +196,6 @@
 
   {{ partial "jsonld/main" (dict "page" . "summary" $desc) }}
 
-  {{ partial "cookie_consent" . }}
-
   {{ partial "custom_head" . }}
 
   <title>{{ if not .IsHome }}{{ .Params.name | default .Title }} | {{ end }}{{ site.Title }}</title>

@@ -5,12 +5,60 @@
     <link>/es/tags/</link>
       <atom:link href="/es/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Wed, 15 Nov 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-32.png</url>
       <title>Tags</title>
       <link>/es/tags/</link>
     </image>
+    
+    <item>
+      <title>Pandas</title>
+      <link>/es/tags/pandas/</link>
+      <pubDate>Wed, 15 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>/es/tags/pandas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Polars</title>
+      <link>/es/tags/polars/</link>
+      <pubDate>Wed, 15 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>/es/tags/polars/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Python</title>
+      <link>/es/tags/python/</link>
+      <pubDate>Wed, 15 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>/es/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Principiantes</title>
+      <link>/es/tags/principiantes/</link>
+      <pubDate>Thu, 09 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>/es/tags/principiantes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pydantic</title>
+      <link>/es/tags/pydantic/</link>
+      <pubDate>Wed, 08 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>/es/tags/pydantic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Streamlit</title>
+      <link>/es/tags/streamlit/</link>
+      <pubDate>Sat, 02 Sep 2023 00:00:00 +0000</pubDate>
+      <guid>/es/tags/streamlit/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

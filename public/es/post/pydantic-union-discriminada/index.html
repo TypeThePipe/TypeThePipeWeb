@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+  <meta name="robots" content="index,follow">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Pablo Cánovas">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Validación de tipos poderosa y uniones discriminadas con Pydantic: Simplifica las estructuras de datos y garantiza la seguridad de tipos. Estamos mostrando algunos ejemplos sencillos">
+
+  
+  <link rel="alternate" hreflang="en" href="/post/pydantic-discriminated-union/">
+  
+  <link rel="alternate" hreflang="es" href="/es/post/pydantic-union-discriminada/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#0294A5">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BHP7JGTF0S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'G-BHP7JGTF0S', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/es/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu9e801daf4e49b28938f4da726192ad03_202286_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu9e801daf4e49b28938f4da726192ad03_202286_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/es/post/pydantic-union-discriminada/">
+
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="TypeThePipe">
+  <meta property="og:url" content="/es/post/pydantic-union-discriminada/">
+  <meta property="og:title" content="Pydantic discriminated unions. Ejmplos de uniones discriminadas para simplificar las estructuras de datos y mejorar el tipado. | TypeThePipe">
+  <meta property="og:description" content="Validación de tipos poderosa y uniones discriminadas con Pydantic: Simplifica las estructuras de datos y garantiza la seguridad de tipos. Estamos mostrando algunos ejemplos sencillos"><meta property="og:image" content="/es/post/pydantic-union-discriminada/featured.png">
+  <meta property="twitter:image" content="/es/post/pydantic-union-discriminada/featured.png"><meta property="og:locale" content="es">
+  
+    
+      <meta property="article:published_time" content="2023-09-18T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2023-09-18T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/es/post/pydantic-union-discriminada/"
+  },
+  "headline": "Pydantic discriminated unions. Ejmplos de uniones discriminadas para simplificar las estructuras de datos y mejorar el tipado.",
+  
+  "image": [
+    "/es/post/pydantic-union-discriminada/featured.png"
+  ],
+  
+  "datePublished": "2023-09-18T00:00:00Z",
+  "dateModified": "2023-09-18T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Carlos Vecina"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "TypeThePipe",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/logo_hu98b613e11a8f47913471a1a46318bc6c_19561_192x192_fit_lanczos_2.png"
+    }
+  },
+  "description": "Validación de tipos poderosa y uniones discriminadas con Pydantic: Simplifica las estructuras de datos y garantiza la seguridad de tipos. Estamos mostrando algunos ejemplos sencillos"
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+  <title>Pydantic discriminated unions. Ejmplos de uniones discriminadas para simplificar las estructuras de datos y mejorar el tipado. | TypeThePipe</title>
+  <script async defer src="https://tools.luckyorange.com/core/lo.js?site-id=10579286"></script>
+  
+  
+<script>var ezoicId = 473828; </script>
+<script type="text/javascript" src="//go.ezoic.net/ezoic/ezoic.js"></script>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Buscar</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Buscar..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+  
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/es"><img src="/images/logo_hu98b613e11a8f47913471a1a46318bc6c_19561_0x70_resize_lanczos_2.png" alt="TypeThePipe"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Barra de navegación">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/es"><img src="/images/logo_hu98b613e11a8f47913471a1a46318bc6c_19561_0x70_resize_lanczos_2.png" alt="TypeThePipe"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/es/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/es/#vizstips"><span>Vizs & Tips</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/es/#people"><span>Nosotros</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+      
+      <li class="nav-item dropdown i18n-dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-globe mr-1" aria-hidden="true"></i><span class="d-none d-lg-inline">Español</span>
+        </a>
+        <div class="dropdown-menu">
+          <div class="dropdown-item dropdown-item-active">
+            <span>Español</span>
+          </div>
+          
+          <a class="dropdown-item" href="/post/pydantic-discriminated-union/">
+            <span>English</span>
+          </a>
+          
+        </div>
+      </li>
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+
+        <article class="article">
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Pydantic discriminated unions. Ejmplos de uniones discriminadas para simplificar las estructuras de datos y mejorar el tipado.</h1>
+
+  
+  <p class="page-subtitle">Validación de tipos poderosa y uniones discriminadas con Pydantic: Simplifica las estructuras de datos y garantiza la seguridad de tipos. Estamos mostrando algunos ejemplos sencillos</p>
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  
+  <span><a href="/es/authors/carlos-vecina/">Carlos Vecina</a></span>
+  </div>
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/es/categories/python/">Python</a>, <a href="/es/categories/post/">Post</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+            <div class="article-container">
+              <div class="article-style">
+                
+<script src="/es/post/pydantic-union-discriminada/index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="featured.png" width="400px" alt="Pydantic Python módulo logo." /></p>
+<div id="qué-es-un-discriminated-union-discriminador-de-uniones-o-uniones-etiquetadas-y-cuál-es-su-papel-en-pydantic" class="section level1">
+<h1>¿Qué es un ‘discriminated union’, discriminador de uniones o uniones etiquetadas y cuál es su papel en Pydantic?</h1>
+<p>Bueno, bueno, bueno, ¡miren quién decidió pasear por el mundo de los discriminadores de Pydantic! 🕶️ Prepárense, amigos, porque estamos a punto de embarcarnos en un irónico y pegajoso paseo en montaña rusa por esta selva salvaje de maravillas de la programación. ¡Abróchense los cinturones!</p>
+<p>Entonces, ¿de qué se trata todo el revuelo de los discriminadores de Pydantic? ¡Oh, son simplemente lo más genial desde el pan rebanado, amigos míos! Imaginen esto: tienen un montón de modelos de datos, cada uno con sus propias peculiaridades y excentricidades. Es como lidiar con un grupo de divas en un drama de secundaria, excepto que en lugar de chismes, se trata de atributos y propiedades. Reinas del drama, ¿verdad?</p>
+<p>Ahora, digamos que quieren elegir el modelo perfecto de este conjunto caótico. ¿Cómo diablos van a hacerlo? No teman, porque los discriminadores de Pydantic están aquí para salvar el día, como un superhéroe con un sentido del humor irónico. Son como el Sherlock Holmes de la selección de modelos, deduciendo el ajuste perfecto para ustedes.</p>
+<p><br></p>
+<div id="how-does-pydantic-discriminator-works" class="section level2">
+<h2><strong>How does Pydantic discriminator works?</strong></h2>
+<p>El discriminador de Pydantic permite la definición de estructuras de datos con múltiples tipos, utilizando un campo de discriminador para determinar el tipo real del objeto. Esto habilita la validación de tipos y la serialización/deserialización basada en el valor del discriminador, asegurando la integridad de los datos y la flexibilidad en la representación de diferentes tipos de objetos.</p>
+<p>A partir de <a href="https://docs.pydantic.dev/latest/usage/types/#discriminated-unions-aka-tagged-unions:~:text=Required%20Fields.-,Discriminated%20Unions%20(a.k.a.%20Tagged%20Unions,-)">Pydantic 1.9, lo tenemos disponible</a>. Let’s showcase it in an easy way:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">from</span> pydantic <span class="im">import</span> BaseModel, Field, parse_obj_as</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Literal, Union, Annotated</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="kw">class</span> Tiger(BaseModel):</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    animal_type: Literal[<span class="st">&quot;tiger&quot;</span>] <span class="op">=</span> <span class="st">&quot;tiger&quot;</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>    ferocity_scale: <span class="bu">float</span> <span class="op">=</span> Field(..., ge<span class="op">=</span><span class="dv">0</span>, le<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="kw">class</span> Shark(BaseModel):</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    animal_type: Literal[<span class="st">&quot;shark&quot;</span>] <span class="op">=</span> <span class="st">&quot;shark&quot;</span></span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    ferocity_scale: <span class="bu">float</span> <span class="op">=</span> Field(..., ge<span class="op">=</span><span class="dv">0</span>, le<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a><span class="kw">class</span> Lion(BaseModel):</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    animal_type: Literal[<span class="st">&quot;lion&quot;</span>] <span class="op">=</span> <span class="st">&quot;lion&quot;</span></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    ferocity_scale: <span class="bu">float</span></span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a><span class="kw">class</span> WildAnimal(BaseModel):</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>    __root__: Annotated[Union[Tiger, Shark, Lion], Field(..., discriminator<span class="op">=</span><span class="st">&#39;animal_type&#39;</span>)]</span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>my_shark <span class="op">=</span> WildAnimal.parse_obj({<span class="st">&#39;animal_type&#39;</span>: <span class="st">&#39;shark&#39;</span>, <span class="st">&#39;ferocity_scale&#39;</span>: <span class="dv">5</span>}).__root__</span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a><span class="co">#print(Shark(ferocity_scale=5).json())</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a><span class="co"># Desarialice</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a>WildAnimal.parse_raw(Shark(ferocity_scale<span class="op">=</span><span class="dv">5</span>).json())</span></code></pre></div>
+<pre><code>## WildAnimal(__root__=Shark(animal_type=&#39;shark&#39;, ferocity_scale=5.0))</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(my_shark, Shark))</span></code></pre></div>
+<pre><code>## True</code></pre>
+<p>Puedes encontrar este ejemplo de polimosfirmo junto con algun ejemplo de código, además de alguna interesante discusión en:
+<a href="https://github.com/pydantic/pydantic/discussions/5785" class="uri">https://github.com/pydantic/pydantic/discussions/5785</a></p>
+<p><br></p>
+</div>
+<div id="ejemplo-de-discriminador-de-unión-anotada-pydantic" class="section level2">
+<h2><strong>Ejemplo de discriminador de unión anotada Pydantic</strong></h2>
+<p>Pero podríamos utilizar un enfoque muy simple para lograr la mayoría de los usos mediante el uso de la unión <code>Annotated</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>Animal <span class="op">=</span> Annotated[Union[Tiger, Shark], Field(discriminator<span class="op">=</span><span class="st">&#39;animal_type&#39;</span>)]</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>raw_data <span class="op">=</span> {</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>    <span class="st">&quot;animal_type&quot;</span>: <span class="st">&quot;tiger&quot;</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>    <span class="st">&quot;ferocity_scale&quot;</span>: <span class="dv">6</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>}</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>parse_obj_as(Animal, raw_data)</span></code></pre></div>
+<pre><code>## Tiger(animal_type=&#39;tiger&#39;, ferocity_scale=6.0)</code></pre>
+<p>Prepárate para la magia de la clase <code>Field</code>, cortesía de Pydantic. Está equipada con un poder especial llamado “discriminator”. Al configurar el discriminador en “pet_type”, desbloqueamos la capacidad de distinguir entre nuestras criaturas fantásticas. ¡Es como darles su propio foco especial!</p>
+<p>¡Agárrate fuerte, porque estamos a punto de adentrarnos en las tierras salvajes de raw_data. Guarda los secretos de un “pet_type” con el espíritu ardiente de un “tigre” y un fascinante recuento de “rayas” de 6. Es como si estuviéramos mirando a un zoológico digital.</p>
+<p>¡Y ahora, es hora del espectáculo! Invocamos al poderoso parse_obj_as para que haga su magia de codificación. Le presentamos a nuestro majestuoso Animal y al enigmático raw_data. ¡Abra Kadabra! Con un movimiento de su varita, la transformación se despliega. Los datos crudos se convierten en una impresionante representación de nuestro Animal elegido. ¡Es como una metamorfosis mágica!</p>
+<p><br></p>
+</div>
+<div id="example-of-polimorfic-base-model" class="section level2">
+<h2><strong>Example of Polimorfic Base Model</strong></h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="kw">class</span> PolymorphicBaseModel(BaseModel):</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>    <span class="bu">type</span>: <span class="bu">str</span></span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a>    _subtypes <span class="op">=</span> <span class="bu">dict</span>()</span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__init_subclass__</span>(subcls, <span class="bu">type</span><span class="op">=</span><span class="va">None</span>, <span class="op">**</span>kwargs):</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a>        <span class="bu">super</span>().<span class="fu">__init_subclass__</span>(<span class="op">**</span>kwargs)</span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">type</span>:</span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a>            <span class="co"># n.b. if a subclass declares its own _subtypes dict, it&#39;ll take precedence over this one.</span></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>            <span class="co"># This would allow us to re-use the same type names across different classes.</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>            <span class="cf">if</span> <span class="bu">type</span> <span class="kw">in</span> subcls._subtypes:</span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a>                <span class="cf">raise</span> <span class="pp">AttributeError</span>(</span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>                    <span class="ss">f&quot;Class </span><span class="sc">{</span>subcls<span class="sc">}</span><span class="ss"> cannot be registered with polymorphic type=&#39;</span><span class="sc">{</span><span class="bu">type</span><span class="sc">}</span><span class="ss">&#39; because it&#39;s already registered &quot;</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a>                    <span class="ss">f&quot; to </span><span class="sc">{</span>subcls<span class="sc">.</span>_subtypes[<span class="bu">type</span>]<span class="sc">}</span><span class="ss">&quot;</span></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>                )</span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a>            subcls._subtypes[<span class="bu">type</span>] <span class="op">=</span> subcls</span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a>    <span class="at">@classmethod</span></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a>    <span class="kw">def</span> _convert_to_real_type(cls, data):</span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>        data_type <span class="op">=</span> data.get(<span class="st">&quot;type&quot;</span>)</span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a></span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a>        <span class="cf">if</span> data_type <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">ValueError</span>(<span class="ss">f&quot;Missing &#39;type&#39; for </span><span class="sc">{</span>cls<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a>        subcls <span class="op">=</span> cls._subtypes.get(data_type)</span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a>        <span class="cf">if</span> subcls <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">TypeError</span>(<span class="ss">f&quot;Unsupported sub-type: </span><span class="sc">{</span>data_type<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> <span class="bu">issubclass</span>(subcls, cls):</span>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a>            <span class="cf">raise</span> <span class="pp">TypeError</span>(<span class="ss">f&quot;Inferred class </span><span class="sc">{</span>subcls<span class="sc">}</span><span class="ss"> is not a subclass of </span><span class="sc">{</span>cls<span class="sc">}</span><span class="ss">&quot;</span>)</span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a></span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a>        <span class="cf">return</span> subcls(<span class="op">**</span>data)</span>
+<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a>    <span class="at">@classmethod</span></span>
+<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a>    <span class="kw">def</span> parse_obj(cls, data):</span>
+<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a>        <span class="cf">return</span> cls._convert_to_real_type(data)</span>
+<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a>    </span>
+<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a>    </span>
+<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a><span class="kw">class</span> Animal(PolymorphicBaseModel):</span>
+<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a>    name: <span class="bu">str</span></span>
+<span id="cb7-40"><a href="#cb7-40" tabindex="-1"></a>    color: <span class="bu">str</span> <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb7-41"><a href="#cb7-41" tabindex="-1"></a></span>
+<span id="cb7-42"><a href="#cb7-42" tabindex="-1"></a><span class="kw">class</span> Cat(Animal, <span class="bu">type</span><span class="op">=</span><span class="st">&quot;cat&quot;</span>):</span>
+<span id="cb7-43"><a href="#cb7-43" tabindex="-1"></a>    <span class="bu">type</span>: Literal[<span class="st">&quot;cat&quot;</span>] <span class="op">=</span> <span class="st">&quot;cat&quot;</span></span>
+<span id="cb7-44"><a href="#cb7-44" tabindex="-1"></a>    hairless: <span class="bu">bool</span></span>
+<span id="cb7-45"><a href="#cb7-45" tabindex="-1"></a></span>
+<span id="cb7-46"><a href="#cb7-46" tabindex="-1"></a><span class="kw">class</span> Dog(Animal, <span class="bu">type</span><span class="op">=</span><span class="st">&quot;dog&quot;</span>):</span>
+<span id="cb7-47"><a href="#cb7-47" tabindex="-1"></a>    <span class="bu">type</span>: Literal[<span class="st">&quot;dog&quot;</span>] <span class="op">=</span> <span class="st">&quot;dog&quot;</span></span>
+<span id="cb7-48"><a href="#cb7-48" tabindex="-1"></a>    breed: <span class="bu">str</span></span>
+<span id="cb7-49"><a href="#cb7-49" tabindex="-1"></a></span>
+<span id="cb7-50"><a href="#cb7-50" tabindex="-1"></a>cat_instance <span class="op">=</span> Animal.parse_obj({<span class="st">&quot;type&quot;</span>:<span class="st">&quot;cat&quot;</span>, <span class="st">&quot;hairless&quot;</span>: <span class="va">False</span>, <span class="st">&quot;name&quot;</span>: <span class="st">&quot;meaw&quot;</span>, <span class="st">&quot;color&quot;</span>: <span class="st">&quot;black&quot;</span>})</span>
+<span id="cb7-51"><a href="#cb7-51" tabindex="-1"></a><span class="bu">print</span>(<span class="bu">isinstance</span>(cat_instance, Cat))</span></code></pre></div>
+<pre><code>## True</code></pre>
+<p>El <code>PolymorphicBaseModel</code>, una clase base que sienta las bases para el comportamiento polimórfico. Define un atributo de tipo requerido e introduce un diccionario oculto <code>_subtypes</code> para llevar un registro de los subtipos.</p>
+<p>A continuación, nos sumergimos en el método init_subclass, donde sucede la magia. Permite que las subclases se registren a sí mismas con un tipo polimórfico específico. Esto nos permite distinguir entre diferentes subtipos dentro de la jerarquía de PolymorphicBaseModel.</p>
+<p>¡Pero espera, hay más por descubrir! Hacemos uso del método <code>_convert_to_real_type</code>, encargado de convertir los datos a su subtipo real en función del atributo de tipo proporcionado. Comprueba si el tipo es válido, encuentra la subclase correspondiente y asegura que sea una subclase válida de la clase base.</p>
+<p>Finalmente, llegamos al método parse_obj, donde tiene lugar el verdadero análisis. Sirve como punto de entrada para analizar objetos de la jerarquía polimórfica. Utilizando el método <code>_convert_to_real_type</code>, transforma los datos en una instancia de la subclase adecuada.</p>
+<p>¡Y ahí lo tienes! Un vistazo al mundo de los modelos polimórficos. Es un mundo donde las clases base y los subtipos se unen, permitiendo un análisis de objetos flexible y dinámico. Aprovecha el poder del polimorfismo y permite que tu código se adapte y evolucione con elegancia.</p>
+<p><br></p>
+</div>
+<div id="pydantic-2-typeadapter-para-analizar-datos-en-una-unión-discriminada" class="section level2">
+<h2><strong>Pydantic 2: TypeAdapter para analizar datos en una unión discriminada</strong></h2>
+<p>En Pydantic v2, puedes utilizar el TypeAdapter para analizar datos en una unión discriminada. Sin embargo, ten en cuenta que Pydantic v2 se encuentra actualmente (2023-06-18) en prelanzamiento, y la versión actual del módulo es la v1.7.</p>
+<p>Por lo tanto, asegúrate de actualizar a Pydantic v2 cuando esté disponible para aprovechar esta característica.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>from pydantic import TypeAdapter</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>adapter <span class="ot">=</span> <span class="fu">TypeAdapter</span>(Annotated[Union[Child1, Child2], <span class="fu">Field</span>(<span class="at">discriminator=</span><span class="st">&#39;type&#39;</span>)])</span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a>child <span class="ot">=</span> <span class="fu">adapter.validate_json</span>(my_json_data)</span></code></pre></div>
+<p><br></p>
+</div>
+<div id="mantente-al-tanto-de-consejos-sobre-pydantic-y-python" class="section level2">
+<h2><strong>Mantente al tanto de consejos sobre Pydantic y Python</strong></h2>
+<p>Esperamos que esta publicación te haya ayudado a familiarizarte con el uso de uniones y discriminadores en Pydantic, mostrando algunas de sus funcionalidades y permitiéndote disfrutar de sus beneficios.</p>
+<p>Si deseas mantenerte actualizado…</p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> ¡Suscribete para más contenido sobre Python y Pydantic! </label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="tu mejor email" required><input type="hidden" name="tags" value="7614568"></div>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="¡Dale!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+<style>
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+</style>
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
+</div>
+</div>
+
+              </div>
+              
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/es/tags/python/">Python</a>
+  
+  <a class="badge badge-light" href="/es/tags/pydantic/">Pydantic</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/es/post/pydantic-union-discriminada/&amp;text=Pydantic%20discriminated%20unions.%20Ejmplos%20de%20uniones%20discriminadas%20para%20simplificar%20las%20estructuras%20de%20datos%20y%20mejorar%20el%20tipado." target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/es/post/pydantic-union-discriminada/&amp;t=Pydantic%20discriminated%20unions.%20Ejmplos%20de%20uniones%20discriminadas%20para%20simplificar%20las%20estructuras%20de%20datos%20y%20mejorar%20el%20tipado." target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Pydantic%20discriminated%20unions.%20Ejmplos%20de%20uniones%20discriminadas%20para%20simplificar%20las%20estructuras%20de%20datos%20y%20mejorar%20el%20tipado.&amp;body=/es/post/pydantic-union-discriminada/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/es/post/pydantic-union-discriminada/&amp;title=Pydantic%20discriminated%20unions.%20Ejmplos%20de%20uniones%20discriminadas%20para%20simplificar%20las%20estructuras%20de%20datos%20y%20mejorar%20el%20tipado." target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Pydantic%20discriminated%20unions.%20Ejmplos%20de%20uniones%20discriminadas%20para%20simplificar%20las%20estructuras%20de%20datos%20y%20mejorar%20el%20tipado.%20/es/post/pydantic-union-discriminada/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/es/post/pydantic-union-discriminada/&amp;title=Pydantic%20discriminated%20unions.%20Ejmplos%20de%20uniones%20discriminadas%20para%20simplificar%20las%20estructuras%20de%20datos%20y%20mejorar%20el%20tipado." target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+
+
+
+
+
+  
+  
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/es/authors/carlos-vecina/carlos-vecina-avatar_hudcecee8c8ed4dd07fd2b73e656fad71c_149347_270x270_fill_lanczos_center_2.png" alt="Carlos Vecina">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/es/authors/carlos-vecina/">Carlos Vecina</a></h5>
+      <h6 class="card-subtitle">Senior Data Scientist at Jobandtalent</h6>
+      <p class="card-text">Senior Data Scientist at Jobandtalent  |  AI &amp; Data Science para aportar valor en la empresa</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/es/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/deepchals" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/carlos-vecina/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/CarlosVecina" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://autarponics.com" target="_blank" rel="noopener">
+        <i class="fa fa-home"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Relacionado</h3>
+    <ul>
+      
+      <li><a href="/es/post/pydantic-enum-intenum/">Pydantic, Enums e IntEnums. Una historia de validación</a></li>
+      
+      <li><a href="/es/post/pydantic-enum-intenum/">Pydantic, Enums e IntEnums. Una historia de validación</a></li>
+      
+      <li><a href="/es/vizs-and-tips/streamlit-datetime-slider-python/">¿Cómo crear en Streamlit un Datetime Slider o deslizante de fechas.</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+            </div>
+        </article>
+  
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/python.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/es/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No se encontraron resultados","placeholder":"Buscar...","results":"resultados encontrados"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Proyectos",
+        'publication' : "Publicaciones",
+        'talk' : "Charlas"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.37431be2d92d7fb0160054761ab79602.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
+    
+    
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+	<a href="https://www.r-bloggers.com/">
+	<img border="0" alt="R Bloggers icon" src="/img/r_bloggers.png" width="100" height="100">
+	</a>
+	<br>
+	<a href="https://www.python-bloggers.com/">
+	<img border="0" alt="Python Bloggers icon" src="/img/python_logo.png" width="100" height="100">
+	</a>
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+  <style>
+    #consent-notice {padding: 1rem 1rem; display: none; text-align: center; position: fixed; bottom: 0; width: calc(100% - 2rem); background: #222; color: rgba(255,255,255,0.8);}
+    #consent-notice span {margin-right: 1rem;}
+    #consent-notice button {cursor: pointer; display: inline-block; width: auto;}
+    #consent-notice span a {color: inherit; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.5);}
+    #consent-notice button.btn {margin-left: 0.5rem;}
+    #consent-notice button.btn.manage-consent {background: rgba(255,255,255,0.1); font-weight: normal;}
+    
+    #consent-overlay {position: fixed; left: 0; top: 0; width: 100%; height: 100vh; display: none; background: rgba(0,0,0,0.75); z-index: 999999; overflow: auto; cursor: pointer;}
+    #consent-overlay.active {display: flex;}
+    #consent-overlay > div {background: white; width: 100%; max-width: 30rem; padding: 1.75rem; margin: auto; cursor: initial;}
+    #consent-overlay > div > div {display: flex; align-items: flex-start; margin-bottom: 1rem;}
+    #consent-overlay > div > div:last-child {margin: 0;}
+    #consent-overlay h3 {padding-top: 0;}
+    #consent-overlay input {margin-top: 0.3rem;}
+    #consent-overlay label {display: block;}
+    #consent-overlay .btn {margin-right: 0.5rem;}
+    #consent-overlay button.btn.save-consent {background: rgba(0,0,0,0.6); font-weight: normal;}
+
+    @media (max-width: 767px) {
+        #consent-overlay > div {padding: 1.75rem 1rem;}
+        #consent-notice span {display: block; padding-top: 3px; margin-bottom: 1.5rem;}
+        #consent-notice button.btn {position: relative; bottom: 4px;}
+    }
+</style>
+<div id="consent-notice"><span>We would like to use <a class="manage-consent" href="#manage-consent">third party code</a> to improve the functionality of this website.</span><button class="btn manage-consent">Manage preferences</button><button class="btn deny-consent">Deny</button><button class="btn approve-consent">Allow</button></div>
+<div id="consent-overlay">
+    <div>
+        
+            <div>
+                <input type="checkbox" id="item0" value="1" name="item0" checked disabled />
+                <label for="item0">
+                    <h3>Google Anaytics (functional)</h3>
+                    <p>This code gives us insight into the number of anonymized people that visit our website, where they are from and what they are clicking on in order to create better content.</p>
+                </label>
+            </div>
+        
+            <div>
+                <input type="checkbox" id="item1" value="1" name="item1"  />
+                <label for="item1">
+                    <h3>Marketing</h3>
+                    <p>Marketing pourposes cookies.</p>
+                </label>
+            </div>
+        
+        <div>
+            <button id="save-consent" class="btn save-consent" data-consentvalue="0">Save preferences</button>
+            <button class="btn approve-consent">Allow all</button>
+        </div>
+    </div>
+</div>
+<script>
+
+    const scripts = [];
+    scripts[ 0 ] = "/js/mkt.js";
+
+    function createCookie(name,value,days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+    function eraseCookie(name) {
+        createCookie(name,"",-1);
+    }
+    function denyAllConsentScripts() {
+        var consentValue = "";
+        scripts.forEach(function(){
+            consentValue = consentValue + "0";
+        });
+        acceptSomeConsentScripts(consentValue);
+    }
+    function acceptAllConsentScripts() {
+        var consentValue = "";
+        scripts.forEach(function(){
+            consentValue = consentValue + "1";
+        });
+        acceptSomeConsentScripts(consentValue);
+    }
+    function acceptSomeConsentScripts(consentValue) {
+        setConsentInputs(consentValue);
+        createCookie('consent-settings',consentValue,31);
+        document.getElementById('consent-notice').style.display = 'none';
+        document.getElementById('consent-overlay').classList.remove('active');
+        loadConsentScripts(consentValue);
+    }
+    function loadConsentScripts(consentValue) {
+        scripts.forEach(function(value,key){
+            
+            if(consentValue[key]=="1") {
+                var s = document.createElement('script');
+                s.type = 'text/javascript';
+                s.src = value;
+                document.body.appendChild(s);
+            }
+        });
+    }
+    function setConsentInputs(consentValue) {
+        var elements = document.querySelectorAll('#consent-overlay input:not([disabled])');
+        elements.forEach(function(el,index) {
+            if(consentValue[index]=="1") el.checked = true;
+            else el.checked = false;
+        });
+    }
+    function setConsentValue() {
+        var elements = document.querySelectorAll('#consent-overlay input:not([disabled])');
+        var consentValue = "";
+        elements.forEach(function(el) {
+            if(el.checked) consentValue = consentValue + "1";
+            else consentValue = consentValue + "0";
+        });
+        document.getElementById("save-consent").dataset.consentvalue = consentValue;
+    }
+
+    var elements = document.querySelectorAll('#consent-overlay input:not([disabled])');
+    elements.forEach(function(el) {
+        el.checked = false;
+    });
+
+    if(readCookie('consent-settings')) {
+        var consentValue = readCookie('consent-settings').toString();
+        
+        setConsentInputs(consentValue);
+        loadConsentScripts(consentValue);
+    } else {
+        document.getElementById('consent-notice').style.display = 'block';
+    }
+    var elements = document.querySelectorAll('.manage-consent');
+    elements.forEach(function(el) {
+        el.addEventListener("click",function() {
+            document.getElementById('consent-overlay').classList.toggle('active');
+        });
+    });
+    var elements = document.querySelectorAll('.deny-consent');
+    elements.forEach(function(el) {
+        el.addEventListener("click",function() {
+            denyAllConsentScripts();
+        });
+    });
+    var elements = document.querySelectorAll('.approve-consent');
+    elements.forEach(function(el) {
+        el.addEventListener("click",function() {
+            acceptAllConsentScripts();
+        });
+    });
+    document.getElementById("save-consent").addEventListener("click",function() {
+        setConsentValue();
+        acceptSomeConsentScripts(this.dataset.consentvalue);
+    });
+    document.getElementById("consent-overlay").addEventListener("click",function(e) {
+        if (!document.querySelector("#consent-overlay > div").contains(e.target)){
+            this.classList.toggle('active');
+        }
+    });
+</script>
+
+
+    
+        <script type="text/javascript" src="/js/ga.js"></script>
+    
+
+    
+
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Citar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copiar
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Descargar
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

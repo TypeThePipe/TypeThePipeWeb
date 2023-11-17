@@ -5,12 +5,912 @@
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 23 Jun 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 09 Nov 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-32.png</url>
       <title>Posts</title>
       <link>/post/</link>
     </image>
+    
+    <item>
+      <title>Measure FWHM from image with Python</title>
+      <link>/post/measure-fwhm-image-with-python/</link>
+      <pubDate>Thu, 09 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>/post/measure-fwhm-image-with-python/</guid>
+      <description>
+&lt;script src=&#34;/post/measure-fwhm-image-with-python/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; width=&#34;400px&#34; alt=&#34;Blue palette distribution plot showing a histogram of a image analysis of FWHM in Python.&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;In the realm of image analysis and signal processing, the concept of Full Width at Half Maximum (FWHM) is a vital metric used to determine the spread of a signal or the resolution of an imaging system. This guide will walk you through the process of measuring the FWHM from an image using Python, a powerful programming language beloved for its simplicity and robust libraries. Whether you’re a researcher analyzing microscopic images or an engineer working on improving camera resolution, mastering the FWHM calculation in Python can provide insightful data on your subject matter.&lt;/p&gt;
+&lt;div id=&#34;measuring-fwhm-from-an-image&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Measuring FWHM from an Image&lt;/h1&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;what-is-fwhm&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;What is FWHM?&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;FWHM is a measurement of the width of a signal or a peak at its half maximum height&lt;/strong&gt;. In imaging, it’s often used to describe the resolution of a system, with a smaller FWHM indicating a higher resolution and sharper images. In practical terms, measuring the FWHM from an image can tell us about the blur or spread of a particular feature, which is crucial for various applications such as materials science, astronomy, and medical imaging.&lt;/p&gt;
+&lt;p&gt;We’ll start by loading and preprocessing our image, ensuring it’s in the perfect state for analysis. Then, we’ll move on to the critical task of identifying the peak intensity values. Finally, we will meticulously calculate the FWHM, dissecting each pixel’s contribution to the bigger picture.&lt;/p&gt;
+&lt;p&gt;Before diving into the code, ensure you have the &lt;strong&gt;following prerequisites covered:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Python installed on your system (preferably Python 3.7 or above)&lt;/li&gt;
+&lt;li&gt;Image processing libraries: NumPy and SciPy&lt;/li&gt;
+&lt;li&gt;Image reading and displaying library: OpenCV or Pillow&lt;/li&gt;
+&lt;li&gt;Matplotlib library for plotting (optional but recommended)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can install the necessary Python libraries using pip:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode bash&#34;&gt;&lt;code class=&#34;sourceCode bash&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;ex&#34;&gt;pip&lt;/span&gt; install numpy scipy opencv-python pillow matplotlib&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;hands-on-in-measuring-fwhm-from-an-image-in-python&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Hands-on in measuring FWHM from an Image in Python&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Now, let’s get our hands dirty with some Python code. The following steps and accompanying code snippets will help you measure the FWHM from an image.&lt;/p&gt;
+&lt;p&gt;Step 1: Read the image in grayscale&lt;/p&gt;
+&lt;p&gt;The first step in our journey is to read the image. By converting it to grayscale, we reduce the complexity of the image, focusing solely on intensity values rather than color. This simplification is crucial as it makes subsequent analysis more straightforward and computationally efficient. The code snippet below utilizes OpenCV, a powerful library for image operations, to load the image and check its validity, ensuring that we have a solid starting point for our analysis.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; cv2&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;image_path &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;path_to_your_image.jpg&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;image &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-6&#34;&gt;&lt;a href=&#34;#cb2-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; image &lt;span class=&#34;kw&#34;&gt;is&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb2-7&#34;&gt;&lt;a href=&#34;#cb2-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;raise&lt;/span&gt; &lt;span class=&#34;pp&#34;&gt;ValueError&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;Image not found or the path is incorrect&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Step 2: Detect the Peaks&lt;/p&gt;
+&lt;p&gt;To measure the FWHM, we first need to identify the peak in the image. This could be the brightest point in an astronomical image or the highest intensity value in a spectroscopic image.
+The next step involves detecting the peak in the image. &lt;strong&gt;Peaks in an image can signify various things depending on the context&lt;/strong&gt; – it could represent the brightest star in a galaxy or the highest concentration of a substance in a microscopic image. By using NumPy, a fundamental package for scientific computing with Python, we can efficiently locate the peak pixel, setting the stage for the crucial task of FWHM measurement.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; numpy &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; np&lt;/span&gt;
+&lt;span id=&#34;cb3-2&#34;&gt;&lt;a href=&#34;#cb3-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-3&#34;&gt;&lt;a href=&#34;#cb3-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;peak_pixel &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; np.unravel_index(np.argmax(image, axis&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;), image.shape)&lt;/span&gt;
+&lt;span id=&#34;cb3-4&#34;&gt;&lt;a href=&#34;#cb3-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;peak_value &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; image[peak_pixel]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Step 3: Calculate the Half Maximum&lt;/p&gt;
+&lt;p&gt;Here, we calculate the half maximum value, a vital reference point for determining the FWHM. The half maximum is essentially half the peak intensity value, and it is around this value that we measure the width of the peak. This step is straightforward yet pivotal, as accurate calculation of this value is crucial for the correct measurement of the FWHM.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb4-1&#34;&gt;&lt;a href=&#34;#cb4-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;half_max &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; peak_value &lt;span class=&#34;op&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;2.0&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Step 4: Measure the FWHM&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;This crucial step involves measuring the width of the peak at its half maximum intensity.&lt;/strong&gt; We focus on a one-dimensional slice of the image, typically a horizontal line that passes through the peak. This approach simplifies the problem while still providing us with valuable insights into the image’s characteristics. The FWHM is determined by finding where the intensity values cross the half maximum value, allowing us to quantify the spread of the peak.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Get the horizontal cross-section of the image at the peak&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-2&#34;&gt;&lt;a href=&#34;#cb5-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;cross_section &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; image[peak_pixel[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;], :]&lt;/span&gt;
+&lt;span id=&#34;cb5-3&#34;&gt;&lt;a href=&#34;#cb5-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-4&#34;&gt;&lt;a href=&#34;#cb5-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Find where the cross_section crosses the half maximum&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-5&#34;&gt;&lt;a href=&#34;#cb5-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;crosses_half &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; np.where(cross_section &lt;span class=&#34;op&#34;&gt;&amp;gt;=&lt;/span&gt; half_max)[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;]&lt;/span&gt;
+&lt;span id=&#34;cb5-6&#34;&gt;&lt;a href=&#34;#cb5-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-7&#34;&gt;&lt;a href=&#34;#cb5-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Calculate FWHM&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-8&#34;&gt;&lt;a href=&#34;#cb5-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;fwhm &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; crosses_half[&lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;] &lt;span class=&#34;op&#34;&gt;-&lt;/span&gt; crosses_half[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;] &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-9&#34;&gt;&lt;a href=&#34;#cb5-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;Step &lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;: Display Results (Optional)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Enhanced Robustness in FWHM Calculation&lt;/p&gt;
+&lt;p&gt;Incorporating error handling at this stage enhances the robustness and reliability of our script. By anticipating and managing potential errors, we can ensure that the script provides clear and actionable feedback, making it more user-friendly and easier to debug. This step is particularly important when dealing with a variety of images, where unexpected data formats or issues might arise.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb6-1&#34;&gt;&lt;a href=&#34;#cb6-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Assuming previous variables (cross_section, half_max) are defined&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-2&#34;&gt;&lt;a href=&#34;#cb6-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-3&#34;&gt;&lt;a href=&#34;#cb6-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;try&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb6-4&#34;&gt;&lt;a href=&#34;#cb6-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    crosses_half &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; np.where(cross_section &lt;span class=&#34;op&#34;&gt;&amp;gt;=&lt;/span&gt; half_max)[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;]&lt;/span&gt;
+&lt;span id=&#34;cb6-5&#34;&gt;&lt;a href=&#34;#cb6-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb6-6&#34;&gt;&lt;a href=&#34;#cb6-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; crosses_half.size &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb6-7&#34;&gt;&lt;a href=&#34;#cb6-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;raise&lt;/span&gt; &lt;span class=&#34;pp&#34;&gt;ValueError&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;quot;No points cross the half maximum. Check the image and data.&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb6-8&#34;&gt;&lt;a href=&#34;#cb6-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb6-9&#34;&gt;&lt;a href=&#34;#cb6-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    fwhm &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; crosses_half[&lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;] &lt;span class=&#34;op&#34;&gt;-&lt;/span&gt; crosses_half[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;] &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-10&#34;&gt;&lt;a href=&#34;#cb6-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;ss&#34;&gt;f&amp;quot;The Full Width at Half Maximum (FWHM) is: &lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;fwhm&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt; pixels&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb6-11&#34;&gt;&lt;a href=&#34;#cb6-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;except&lt;/span&gt; &lt;span class=&#34;pp&#34;&gt;ValueError&lt;/span&gt; &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; ve:&lt;/span&gt;
+&lt;span id=&#34;cb6-12&#34;&gt;&lt;a href=&#34;#cb6-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(ve)&lt;/span&gt;
+&lt;span id=&#34;cb6-13&#34;&gt;&lt;a href=&#34;#cb6-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;except&lt;/span&gt; &lt;span class=&#34;pp&#34;&gt;Exception&lt;/span&gt; &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; e:&lt;/span&gt;
+&lt;span id=&#34;cb6-14&#34;&gt;&lt;a href=&#34;#cb6-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;ss&#34;&gt;f&amp;quot;An error occurred while calculating the FWHM: &lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;e&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Step 5: Plot the cross-section with the FWHM&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; matplotlib.pyplot &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; plt&lt;/span&gt;
+&lt;span id=&#34;cb7-2&#34;&gt;&lt;a href=&#34;#cb7-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-3&#34;&gt;&lt;a href=&#34;#cb7-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;plt.plot(cross_section)&lt;/span&gt;
+&lt;span id=&#34;cb7-4&#34;&gt;&lt;a href=&#34;#cb7-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;plt.plot([crosses_half[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;], crosses_half[&lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]], [half_max, half_max], &lt;span class=&#34;st&#34;&gt;&amp;#39;ro-&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb7-5&#34;&gt;&lt;a href=&#34;#cb7-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;plt.title(&lt;span class=&#34;st&#34;&gt;&amp;#39;FWHM Measurement&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb7-6&#34;&gt;&lt;a href=&#34;#cb7-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;plt.xlabel(&lt;span class=&#34;st&#34;&gt;&amp;#39;Pixel Position&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb7-7&#34;&gt;&lt;a href=&#34;#cb7-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;plt.ylabel(&lt;span class=&#34;st&#34;&gt;&amp;#39;Pixel Value&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb7-8&#34;&gt;&lt;a href=&#34;#cb7-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;plt.show()&lt;/span&gt;
+&lt;span id=&#34;cb7-9&#34;&gt;&lt;a href=&#34;#cb7-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-10&#34;&gt;&lt;a href=&#34;#cb7-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;bu&#34;&gt;print&lt;/span&gt;(&lt;span class=&#34;ss&#34;&gt;f&amp;quot;The Full Width at Half Maximum (FWHM) is: &lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;fwhm&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt; pixels&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;fwhm.webp&#34; /&gt;&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb8-1&#34;&gt;&lt;a href=&#34;#cb8-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Assuming &amp;#39;cross_section&amp;#39;, &amp;#39;crosses_half&amp;#39;, and &amp;#39;half_max&amp;#39; are obtained as shown before&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-2&#34;&gt;&lt;a href=&#34;#cb8-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Also assuming &amp;#39;image&amp;#39; is the 2D numpy array from the grayscale image&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-3&#34;&gt;&lt;a href=&#34;#cb8-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-4&#34;&gt;&lt;a href=&#34;#cb8-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Display the image&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-5&#34;&gt;&lt;a href=&#34;#cb8-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;plt.imshow(image, cmap&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;gray&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb8-6&#34;&gt;&lt;a href=&#34;#cb8-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;plt.colorbar()&lt;/span&gt;
+&lt;span id=&#34;cb8-7&#34;&gt;&lt;a href=&#34;#cb8-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-8&#34;&gt;&lt;a href=&#34;#cb8-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Draw a horizontal line at the y-coordinate of the peak&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-9&#34;&gt;&lt;a href=&#34;#cb8-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;plt.axhline(y&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;peak_pixel[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;], color&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;cyan&amp;#39;&lt;/span&gt;, linestyle&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;--&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb8-10&#34;&gt;&lt;a href=&#34;#cb8-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-11&#34;&gt;&lt;a href=&#34;#cb8-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Plot the FWHM on the image&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-12&#34;&gt;&lt;a href=&#34;#cb8-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;plt.plot([crosses_half[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;], crosses_half[&lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;]], [peak_pixel[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;], peak_pixel[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;]], &lt;span class=&#34;st&#34;&gt;&amp;#39;ro-&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb8-13&#34;&gt;&lt;a href=&#34;#cb8-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-14&#34;&gt;&lt;a href=&#34;#cb8-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Adding annotations&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-15&#34;&gt;&lt;a href=&#34;#cb8-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;plt.text(crosses_half[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;], peak_pixel[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;], &lt;span class=&#34;st&#34;&gt;&amp;#39;FWHM Start&amp;#39;&lt;/span&gt;, color&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;white&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb8-16&#34;&gt;&lt;a href=&#34;#cb8-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;plt.text(crosses_half[&lt;span class=&#34;op&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;], peak_pixel[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;], &lt;span class=&#34;st&#34;&gt;&amp;#39;FWHM End&amp;#39;&lt;/span&gt;, color&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;white&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb8-17&#34;&gt;&lt;a href=&#34;#cb8-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-18&#34;&gt;&lt;a href=&#34;#cb8-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;plt.title(&lt;span class=&#34;st&#34;&gt;&amp;#39;Image with FWHM Indicated&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb8-19&#34;&gt;&lt;a href=&#34;#cb8-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;plt.xlabel(&lt;span class=&#34;st&#34;&gt;&amp;#39;Pixel Position X&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb8-20&#34;&gt;&lt;a href=&#34;#cb8-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;plt.ylabel(&lt;span class=&#34;st&#34;&gt;&amp;#39;Pixel Position Y&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb8-21&#34;&gt;&lt;a href=&#34;#cb8-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;plt.show()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&#34;Image_with_FWHM_Indicated.webp&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;stay-updated-on-python-tips&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Stay updated on Python tips&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;You’ve now learned how to measure the Full Width at Half Maximum (FWHM) from an image using Python! This technique is broadly applicable and &lt;strong&gt;can be expanded&lt;/strong&gt; to measure FWHM in two dimensions, apply to various types of data, and customized for your specific needs. The Python ecosystem provides a straightforward and efficient path to add image analysis capabilities to your skill set.&lt;/p&gt;
+&lt;p&gt;Remember, for different types of images or more complex scenarios, you might need to apply image &lt;strong&gt;preprocessing techniques such as noise reduction, thresholding, or edge detection to enhance the accuracy of your FWHM measurements.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;If you want to stay updated…&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+&lt;/style&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Add new not nullable column while working with SQLModel and Alembic migrations.</title>
+      <link>/post/sqlmodel-alembic-add-not-nullable-column/</link>
+      <pubDate>Mon, 30 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>/post/sqlmodel-alembic-add-not-nullable-column/</guid>
+      <description>
+&lt;script src=&#34;/post/sqlmodel-alembic-add-not-nullable-column/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; width=&#34;400px&#34; alt=&#34;SQLModel, SQLAlchemy and Pydantic python modeles logos. Also a sentence saying &#39;Add new not nullable column&#39;&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;what-is-the-interaction-between-sqlmodel-and-alembic&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;What is the interaction between SQLModel and Alembic?&lt;/h1&gt;
+&lt;p&gt;SQLModel and Alembic migrations? They’re like a power duo in the whole database game. SQLModel is a quite new library for defining data models, combining Pydantic and SQLALchemy. It is true that SQLALchemy v2 addresses common spots. But if you’re in the &lt;a href=&#34;https://fastapi.tiangolo.com/tutorial/first-steps/&#34;&gt;FastAPI&lt;/a&gt; and Pydantic ecosystem, it’s worth to give a try. It feels so natural! On the other hand, Alembic, well, it’s your go-to database migration tool in Python. When you put them together, managing your database schema becomes a whole lot smoother. Today, we’re diving into a cool move: &lt;strong&gt;adding a not nullable column to your database tables.&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;But first of all, if you come from the Data Analytics or Data Science world, you could be asking…&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;what-is-a-database-migration-why-use-alembic&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;What is a database migration? Why use Alembic?&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;When you’re managing a production service database, you would need to be sure database status is stable, robust and changes are trackeable. Imagine you want to add a new column to an existing table. You better have a Python model (SQLAlchemy or SQLModel) specifying its characteristics (type, nullable, default value…). Also, you need to &lt;strong&gt;keep track of the previous database status, the delta change of adding the column, and the way to revert to previous database status if needed.&lt;/strong&gt; This features are often avoided in beginners / PoC data science / analytics projects, but it comes as mandatory if you want to step up your project robustness and quality.&lt;/p&gt;
+&lt;p&gt;Alembic, in particular, is like the cool maestro in this orchestra. &lt;strong&gt;Alembic creates and tracks migration scripts, which are like roadmaps for your database’s journey.&lt;/strong&gt; This way, you can make changes without losing your data’s integrity. So, whether you’re giving your database a makeover with fresh features, fixing those pesky bugs, or just keeping everything neat and tidy, a tool like Alembic is your trusty sidekick in the world of data-driven projects.&lt;/p&gt;
+&lt;p&gt;You can check the &lt;a href=&#34;https://alembic.sqlalchemy.org/en/latest/tutorial.html&#34;&gt;Alembic starting guide&lt;/a&gt; as a first step. The basic commands are:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode bash&#34;&gt;&lt;code class=&#34;sourceCode bash&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# init the alembic project&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;ex&#34;&gt;alembic&lt;/span&gt; init alembic&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# add a revision (a database change)&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;ex&#34;&gt;alembic&lt;/span&gt; revision &lt;span class=&#34;at&#34;&gt;-m&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;Add updated_at column&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# sync the database status to the last revision&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;ex&#34;&gt;alembic&lt;/span&gt; upgrade head&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;how-to-add-a-new-column-in-sqlmodel-and-alembic&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;How to add a new column in SQLModel and Alembic&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Imagine you have this SQLModel object, representing a database entity.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; datetime&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; pydantic &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; BaseModel &lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; sqlmodel &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; SQLModel, Field&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; enum &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Enum&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-6&#34;&gt;&lt;a href=&#34;#cb2-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; ListingAddress(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb2-7&#34;&gt;&lt;a href=&#34;#cb2-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    country_code: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-8&#34;&gt;&lt;a href=&#34;#cb2-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    nuts3_region: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-9&#34;&gt;&lt;a href=&#34;#cb2-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    postal_code: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-10&#34;&gt;&lt;a href=&#34;#cb2-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb2-11&#34;&gt;&lt;a href=&#34;#cb2-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; ListingType(Enum):&lt;/span&gt;
+&lt;span id=&#34;cb2-12&#34;&gt;&lt;a href=&#34;#cb2-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    SALE: &lt;span class=&#34;st&#34;&gt;&amp;#39;sale&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-13&#34;&gt;&lt;a href=&#34;#cb2-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    RENT: &lt;span class=&#34;st&#34;&gt;&amp;#39;rent&amp;#39;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-14&#34;&gt;&lt;a href=&#34;#cb2-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb2-15&#34;&gt;&lt;a href=&#34;#cb2-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Listings(SQLModel):&lt;/span&gt;
+&lt;span id=&#34;cb2-16&#34;&gt;&lt;a href=&#34;#cb2-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;bu&#34;&gt;id&lt;/span&gt;: &lt;span class=&#34;bu&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Field(primary_key&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb2-17&#34;&gt;&lt;a href=&#34;#cb2-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    address: ListingAddress&lt;/span&gt;
+&lt;span id=&#34;cb2-18&#34;&gt;&lt;a href=&#34;#cb2-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    listing_type: ListingType&lt;/span&gt;
+&lt;span id=&#34;cb2-19&#34;&gt;&lt;a href=&#34;#cb2-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    listed_price: &lt;span class=&#34;bu&#34;&gt;float&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-20&#34;&gt;&lt;a href=&#34;#cb2-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    tags: &lt;span class=&#34;bu&#34;&gt;list&lt;/span&gt;[&lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;] &lt;span class=&#34;op&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Field(default&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;, nullable&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb2-21&#34;&gt;&lt;a href=&#34;#cb2-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    user_rating: &lt;span class=&#34;bu&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Field(default&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;, nullable&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;, ge&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, le&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;) &lt;span class=&#34;co&#34;&gt;# new nullable column&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-22&#34;&gt;&lt;a href=&#34;#cb2-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    created_at: datetime.datetime&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Imagine you want to add a new column. Let’s add two of them. One nullable (called &lt;code&gt;user_rating&lt;/code&gt;) and other not nullable (&lt;code&gt;updated_at&lt;/code&gt;). In the SQLModel object it should be easy and you could do it like:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Listings(SQLModel):&lt;/span&gt;
+&lt;span id=&#34;cb3-2&#34;&gt;&lt;a href=&#34;#cb3-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;bu&#34;&gt;id&lt;/span&gt;: &lt;span class=&#34;bu&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Field(primary_key&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb3-3&#34;&gt;&lt;a href=&#34;#cb3-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    address: ListingAddress&lt;/span&gt;
+&lt;span id=&#34;cb3-4&#34;&gt;&lt;a href=&#34;#cb3-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    listing_type: ListingType&lt;/span&gt;
+&lt;span id=&#34;cb3-5&#34;&gt;&lt;a href=&#34;#cb3-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    listed_price: &lt;span class=&#34;bu&#34;&gt;float&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-6&#34;&gt;&lt;a href=&#34;#cb3-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    tags: &lt;span class=&#34;bu&#34;&gt;list&lt;/span&gt;[&lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;] &lt;span class=&#34;op&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Field(default&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;, nullable&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb3-7&#34;&gt;&lt;a href=&#34;#cb3-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    user_rating: &lt;span class=&#34;bu&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Field(default&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;, nullable&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;, ge&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;, le&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;) &lt;span class=&#34;co&#34;&gt;# new nullable column&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb3-8&#34;&gt;&lt;a href=&#34;#cb3-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    created_at: datetime.datetime&lt;/span&gt;
+&lt;span id=&#34;cb3-9&#34;&gt;&lt;a href=&#34;#cb3-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    updated_at: datetime.datetime &lt;span class=&#34;co&#34;&gt;# new NOT nullable column&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note that the default &lt;code&gt;Field``nullabe&lt;/code&gt; value is &lt;code&gt;False&lt;/code&gt;. A good practice would be to add Fields to all, adding descriptions and some metadata. In this example we used Field just as needed to make it primary_kay or nullable.&lt;/p&gt;
+&lt;p&gt;By adding this new field, and running the Alembic revision, a new column would be added. Let’s check that the two different new fields would have different impact in the database migrations.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;how-to-add-a-new-column-in-sqlmodel-and-alembic-1&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;How to add a new column in SQLModel and Alembic&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;As we have seeing in the previous paragraph, it is quite simple to add a new field to the SQLModel. After running the Alembic migrations, we would have:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb4-1&#34;&gt;&lt;a href=&#34;#cb4-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;&amp;quot;&amp;quot;&amp;quot;Add listings updated_at field&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-2&#34;&gt;&lt;a href=&#34;#cb4-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-3&#34;&gt;&lt;a href=&#34;#cb4-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;Revision ID: d23aa9jc7d5p&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-4&#34;&gt;&lt;a href=&#34;#cb4-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;Revises: cc9a661c7f9f&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-5&#34;&gt;&lt;a href=&#34;#cb4-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;Create Date: 2023-10-30 00:00:00&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-6&#34;&gt;&lt;a href=&#34;#cb4-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-7&#34;&gt;&lt;a href=&#34;#cb4-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-8&#34;&gt;&lt;a href=&#34;#cb4-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; sqlalchemy &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; sa&lt;/span&gt;
+&lt;span id=&#34;cb4-9&#34;&gt;&lt;a href=&#34;#cb4-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; alembic &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; op&lt;/span&gt;
+&lt;span id=&#34;cb4-10&#34;&gt;&lt;a href=&#34;#cb4-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-11&#34;&gt;&lt;a href=&#34;#cb4-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# revision identifiers, used by Alembic.&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-12&#34;&gt;&lt;a href=&#34;#cb4-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;revision &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;d23aa9jc7d5p&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-13&#34;&gt;&lt;a href=&#34;#cb4-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;down_revision &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;cc9a661c7f9f&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-14&#34;&gt;&lt;a href=&#34;#cb4-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;branch_labels &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-15&#34;&gt;&lt;a href=&#34;#cb4-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;depends_on &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-16&#34;&gt;&lt;a href=&#34;#cb4-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-17&#34;&gt;&lt;a href=&#34;#cb4-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-18&#34;&gt;&lt;a href=&#34;#cb4-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; upgrade() &lt;span class=&#34;op&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb4-19&#34;&gt;&lt;a href=&#34;#cb4-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;co&#34;&gt;# &lt;/span&gt;&lt;span class=&#34;al&#34;&gt;###&lt;/span&gt;&lt;span class=&#34;co&#34;&gt; commands auto generated by Alembic - please adjust! &lt;/span&gt;&lt;span class=&#34;al&#34;&gt;###&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-20&#34;&gt;&lt;a href=&#34;#cb4-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    op.add_column(&lt;/span&gt;
+&lt;span id=&#34;cb4-21&#34;&gt;&lt;a href=&#34;#cb4-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;listings&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb4-22&#34;&gt;&lt;a href=&#34;#cb4-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        sa.Column(&lt;span class=&#34;st&#34;&gt;&amp;quot;user_rating&amp;quot;&lt;/span&gt;, sa.Float(), nullable&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb4-23&#34;&gt;&lt;a href=&#34;#cb4-23&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    )&lt;/span&gt;
+&lt;span id=&#34;cb4-24&#34;&gt;&lt;a href=&#34;#cb4-24&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;co&#34;&gt;# &lt;/span&gt;&lt;span class=&#34;al&#34;&gt;###&lt;/span&gt;&lt;span class=&#34;co&#34;&gt; end Alembic commands &lt;/span&gt;&lt;span class=&#34;al&#34;&gt;###&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-25&#34;&gt;&lt;a href=&#34;#cb4-25&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-26&#34;&gt;&lt;a href=&#34;#cb4-26&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-27&#34;&gt;&lt;a href=&#34;#cb4-27&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; downgrade() &lt;span class=&#34;op&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb4-28&#34;&gt;&lt;a href=&#34;#cb4-28&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;co&#34;&gt;# &lt;/span&gt;&lt;span class=&#34;al&#34;&gt;###&lt;/span&gt;&lt;span class=&#34;co&#34;&gt; commands auto generated by Alembic - please adjust! &lt;/span&gt;&lt;span class=&#34;al&#34;&gt;###&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-29&#34;&gt;&lt;a href=&#34;#cb4-29&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    op.drop_column(&lt;span class=&#34;st&#34;&gt;&amp;quot;listings&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;user_rating&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb4-30&#34;&gt;&lt;a href=&#34;#cb4-30&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;co&#34;&gt;# &lt;/span&gt;&lt;span class=&#34;al&#34;&gt;###&lt;/span&gt;&lt;span class=&#34;co&#34;&gt; end Alembic commands &lt;/span&gt;&lt;span class=&#34;al&#34;&gt;###&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Would you like to add default values to previous rows for this new column? Usually, what you use with SQLModel / SQLAlchemy is the &lt;code&gt;default_generator&lt;/code&gt; argument. It looks like:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    op.add_column(&lt;/span&gt;
+&lt;span id=&#34;cb5-2&#34;&gt;&lt;a href=&#34;#cb5-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;listings&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb5-3&#34;&gt;&lt;a href=&#34;#cb5-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        sa.Column(&lt;span class=&#34;st&#34;&gt;&amp;quot;user_rating&amp;quot;&lt;/span&gt;, sa.Float(), nullable&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;, server_default&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;0.0&amp;quot;&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb5-4&#34;&gt;&lt;a href=&#34;#cb5-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    )&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;But, is it possible to add a &lt;strong&gt;new column not nullable&lt;/strong&gt; and fill the past records with other columns?&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;how-to-add-a-new-column-not-nullable-column-in-sqlmodel-and-alembic&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;&lt;strong&gt;How to add a new column NOT nullable column in SQLModel and Alembic&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;But what if the column should be not nullable?? It throws an error in the running the migration cause of course the existing database has not the column, so creating it would create null values.&lt;/p&gt;
+&lt;p&gt;If you want to fill the null values with other columns values, an easy way to do it is to have the following Alembic migration file:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb6-1&#34;&gt;&lt;a href=&#34;#cb6-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;&amp;quot;&amp;quot;&amp;quot;Add listings updated_at field&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-2&#34;&gt;&lt;a href=&#34;#cb6-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-3&#34;&gt;&lt;a href=&#34;#cb6-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;Revision ID: d23aa9jc7d5p&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-4&#34;&gt;&lt;a href=&#34;#cb6-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;Revises: cc9a661c7f9f&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-5&#34;&gt;&lt;a href=&#34;#cb6-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;Create Date: 2023-10-30 00:00:00&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-6&#34;&gt;&lt;a href=&#34;#cb6-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-7&#34;&gt;&lt;a href=&#34;#cb6-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-8&#34;&gt;&lt;a href=&#34;#cb6-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; sqlalchemy &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; sa&lt;/span&gt;
+&lt;span id=&#34;cb6-9&#34;&gt;&lt;a href=&#34;#cb6-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; alembic &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; op&lt;/span&gt;
+&lt;span id=&#34;cb6-10&#34;&gt;&lt;a href=&#34;#cb6-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-11&#34;&gt;&lt;a href=&#34;#cb6-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# revision identifiers, used by Alembic.&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-12&#34;&gt;&lt;a href=&#34;#cb6-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;revision &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;d23aa9jc7d5p&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-13&#34;&gt;&lt;a href=&#34;#cb6-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;down_revision &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;cc9a661c7f9f&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-14&#34;&gt;&lt;a href=&#34;#cb6-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;branch_labels &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-15&#34;&gt;&lt;a href=&#34;#cb6-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;depends_on &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-16&#34;&gt;&lt;a href=&#34;#cb6-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-17&#34;&gt;&lt;a href=&#34;#cb6-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-18&#34;&gt;&lt;a href=&#34;#cb6-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; upgrade() &lt;span class=&#34;op&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb6-19&#34;&gt;&lt;a href=&#34;#cb6-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;co&#34;&gt;# &lt;/span&gt;&lt;span class=&#34;al&#34;&gt;###&lt;/span&gt;&lt;span class=&#34;co&#34;&gt; commands auto generated by Alembic - please adjust! &lt;/span&gt;&lt;span class=&#34;al&#34;&gt;###&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-20&#34;&gt;&lt;a href=&#34;#cb6-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    op.add_column(&lt;/span&gt;
+&lt;span id=&#34;cb6-21&#34;&gt;&lt;a href=&#34;#cb6-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;listings&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb6-22&#34;&gt;&lt;a href=&#34;#cb6-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        sa.Column(&lt;span class=&#34;st&#34;&gt;&amp;quot;updated_at&amp;quot;&lt;/span&gt;, sa.DateTime(), nullable&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb6-23&#34;&gt;&lt;a href=&#34;#cb6-23&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    )&lt;/span&gt;
+&lt;span id=&#34;cb6-24&#34;&gt;&lt;a href=&#34;#cb6-24&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    op.execute(&lt;/span&gt;
+&lt;span id=&#34;cb6-25&#34;&gt;&lt;a href=&#34;#cb6-25&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-26&#34;&gt;&lt;a href=&#34;#cb6-26&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;        UPDATE listings&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-27&#34;&gt;&lt;a href=&#34;#cb6-27&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;        SET updated_at = created_at&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-28&#34;&gt;&lt;a href=&#34;#cb6-28&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;        WHERE updated_at is NULL;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-29&#34;&gt;&lt;a href=&#34;#cb6-29&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;st&#34;&gt;        &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-30&#34;&gt;&lt;a href=&#34;#cb6-30&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    )&lt;/span&gt;
+&lt;span id=&#34;cb6-31&#34;&gt;&lt;a href=&#34;#cb6-31&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    op.alter_column(&lt;span class=&#34;st&#34;&gt;&amp;quot;listings&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;updated_at&amp;quot;&lt;/span&gt;, nullable&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;False&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb6-32&#34;&gt;&lt;a href=&#34;#cb6-32&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;co&#34;&gt;# &lt;/span&gt;&lt;span class=&#34;al&#34;&gt;###&lt;/span&gt;&lt;span class=&#34;co&#34;&gt; end Alembic commands &lt;/span&gt;&lt;span class=&#34;al&#34;&gt;###&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-33&#34;&gt;&lt;a href=&#34;#cb6-33&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-34&#34;&gt;&lt;a href=&#34;#cb6-34&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-35&#34;&gt;&lt;a href=&#34;#cb6-35&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; downgrade() &lt;span class=&#34;op&#34;&gt;-&amp;gt;&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;:&lt;/span&gt;
+&lt;span id=&#34;cb6-36&#34;&gt;&lt;a href=&#34;#cb6-36&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;co&#34;&gt;# &lt;/span&gt;&lt;span class=&#34;al&#34;&gt;###&lt;/span&gt;&lt;span class=&#34;co&#34;&gt; commands auto generated by Alembic - please adjust! &lt;/span&gt;&lt;span class=&#34;al&#34;&gt;###&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb6-37&#34;&gt;&lt;a href=&#34;#cb6-37&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    op.drop_column(&lt;span class=&#34;st&#34;&gt;&amp;quot;listings&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;updated_at&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb6-38&#34;&gt;&lt;a href=&#34;#cb6-38&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;co&#34;&gt;# &lt;/span&gt;&lt;span class=&#34;al&#34;&gt;###&lt;/span&gt;&lt;span class=&#34;co&#34;&gt; end Alembic commands &lt;/span&gt;&lt;span class=&#34;al&#34;&gt;###&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;It is not auto-generated by the SQLModel object, but it is still easy to achieve.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;stay-updated-on-pydantic-and-python-tips&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Stay updated on Pydantic and Python tips&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Hopefully, this post has helped you getting and overview on SQLModel and Alembic. Also, how to add not nullable columns while using SQLModel and Alembic.&lt;/p&gt;
+&lt;p&gt;If you want to stay updated…&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python, SQLModel and Pydantic tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+&lt;/style&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Pydantic parse objects with parse_obj and parse_obj_as methods</title>
+      <link>/post/pydantic-parse-obj/</link>
+      <pubDate>Mon, 23 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>/post/pydantic-parse-obj/</guid>
+      <description>
+&lt;script src=&#34;/post/pydantic-parse-obj/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; width=&#34;400px&#34; alt=&#34;Pydantic Python library logo.&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;converting-objects-and-files-into-pydantic-models-all-you-need-to-know-about-parse_obj-function&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Converting objects and files into Pydantic models? All you need to know about parse_obj function&lt;/h1&gt;
+&lt;p&gt;Converting objects and files into Pydantic models might sound like a magical transformation, and in a way, it is! In this enchanting journey of data manipulation, we’re going to unveil all the secrets you need to know. Pydantic, with its data validation superpowers, not only helps you create well-structured models but also allows you to effortlessly breathe life into them from various sources.&lt;/p&gt;
+&lt;p&gt;Imagine turning a plain, old Python dictionary or even a JSON file into a fully-fledged Pydantic model with just a few lines of code. It’s like casting a spell! Whether you’re dealing with API responses, database records, or just want to make sense of your data, Pydantic has your back. So, prepare to unlock the magic of converting objects and files into Pydantic models, and let’s embark on this captivating adventure together!&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;how-to-load-a-pydantic-model-from-an-object.-pydantic-parse_obj-example&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;How to load a Pydantic model from an object. Pydantic parse_obj example&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Hey there, Pydantic enthusiasts! If you’ve ever delved into the world of Pydantic, you know it’s a superhero in the realm of data validation and parsing in Python. But what’s the deal with loading a Pydantic model from an object, you ask? Well, it’s an exciting adventure, and in this Pydantic parse_obj example, we’re about to embark on a thrilling journey together!&lt;/p&gt;
+&lt;p&gt;Picture this: you’re dealing with API requests, taming wild database records, or just trying to wrangle some unruly data. That’s where Pydantic’s parse_obj swoops in like a caped crusader, making data validation and transformation a total breeze. So, fasten your seatbelts, and let’s learn how to wield this incredible power and turn your Python data-handling tasks into a supercharged, fun-filled experience!&lt;/p&gt;
+&lt;p&gt;Certainly! Here’s an expanded section that dives deeper into the topic of “pydantic parse_obj” with more in-depth information, examples, and use cases:&lt;/p&gt;
+&lt;p&gt;In-Depth Exploration of Pydantic’s parse_obj Method
+Pydantic’s parse_obj method is a powerful feature that deserves a closer look. This method is a cornerstone of Pydantic’s data parsing capabilities, allowing you to seamlessly transform raw data into well-structured Pydantic models. In this section, we’ll delve deeper into how parse_obj works, provide practical examples, and explore its versatile use cases.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;understanding-parse_obj&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;&lt;strong&gt;Understanding parse_obj:&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Pydantic’s parse_obj method is a powerful feature that deserves a closer look. This method is a cornerstone of Pydantic’s data parsing capabilities, allowing you to seamlessly transform raw data into well-structured Pydantic models. In this section, we’ll delve deeper into how parse_obj works, provide practical examples, and explore its versatile use cases.&lt;/p&gt;
+&lt;p&gt;At its core, parse_obj is designed to take unstructured data, such as dictionaries or JSON objects, and convert them into Pydantic models with defined structures. This method is particularly useful when dealing with data from various sources like API responses or user inputs.&lt;/p&gt;
+&lt;p&gt;Here we could see a basic usage:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; pydantic &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; BaseModel, Field, parse_obj_as&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; typing &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Literal, Optional, Annotated, Union&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; datetime &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; date&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; ComputerScienceApplicant(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Config:&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        orm_mode &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    name: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    degree: Literal[&lt;span class=&#34;st&#34;&gt;&amp;quot;ComputerScience&amp;quot;&lt;/span&gt;]&lt;/span&gt;
+&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    birth_date: date &lt;span class=&#34;op&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt; &lt;span class=&#34;co&#34;&gt;# preferred now vs Optional[]&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb1-12&#34;&gt;&lt;a href=&#34;#cb1-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; BiologyApplicant(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb1-13&#34;&gt;&lt;a href=&#34;#cb1-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    name: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-14&#34;&gt;&lt;a href=&#34;#cb1-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    degree: Literal[&lt;span class=&#34;st&#34;&gt;&amp;quot;Biology&amp;quot;&lt;/span&gt;]&lt;/span&gt;
+&lt;span id=&#34;cb1-15&#34;&gt;&lt;a href=&#34;#cb1-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    birth_date: date &lt;span class=&#34;op&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-16&#34;&gt;&lt;a href=&#34;#cb1-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb1-17&#34;&gt;&lt;a href=&#34;#cb1-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-18&#34;&gt;&lt;a href=&#34;#cb1-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;applicant_dict &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; {&lt;span class=&#34;st&#34;&gt;&amp;quot;name&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;Diana&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;degree&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;ComputerScience&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;birth_date&amp;quot;&lt;/span&gt;: date(&lt;span class=&#34;dv&#34;&gt;2022&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)}&lt;/span&gt;
+&lt;span id=&#34;cb1-19&#34;&gt;&lt;a href=&#34;#cb1-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;ComputerScienceApplicant(&lt;span class=&#34;op&#34;&gt;**&lt;/span&gt;applicant_dict)&lt;/span&gt;
+&lt;span id=&#34;cb1-20&#34;&gt;&lt;a href=&#34;#cb1-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;ComputerScienceApplicant.parse_obj(applicant_dict)&lt;/span&gt;
+&lt;span id=&#34;cb1-21&#34;&gt;&lt;a href=&#34;#cb1-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;ComputerScienceApplicant.from_orm(ComputerScienceApplicant(&lt;span class=&#34;op&#34;&gt;**&lt;/span&gt;applicant_dict))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note that, even you could achieve it by different methods, Pydantic parse_obj method is preferred over the dict unpacking way.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-correct-usage-of-parse_obj_as-and-parse_file_as.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;The correct usage of parse_obj_as and parse_file_as.&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;From converting between BaseModels to parse_obj into discriminated union.&lt;/p&gt;
+&lt;p&gt;Pydantic offers a nifty standalone utility function known as parse_obj_as that’s like a versatile tool in your Python utility belt. It enables you to apply Pydantic’s parsing wizardry in a more flexible and on-the-fly manner, allowing you to work with a broader range of Pydantic-compatible types.&lt;/p&gt;
+&lt;p&gt;Why is this so cool, you could ask? Well, think of it like this: you’re in a situation where you need to parse results into a type that doesn’t directly inherit from BaseModel. This function is handy also to parse and object into a Pydantic discriminated union without creating another class. For example:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;Applicant &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Annotated[Union[ComputerScienceApplicant, BiologyApplicant], Field(discriminator&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;degree&amp;quot;&lt;/span&gt;)]&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#Applicant.parse_obj({&amp;quot;isPrimary&amp;quot;: True, &amp;quot;dateOfBirth&amp;quot;: date(2022,1,1)})&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;parse_obj_as(Applicant, {&lt;span class=&#34;st&#34;&gt;&amp;quot;name&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;Paul&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;degree&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;Biology&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;birth_date&amp;quot;&lt;/span&gt;: date(&lt;span class=&#34;dv&#34;&gt;2012&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)})&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can explore more about &lt;a href=&#34;https://typethepipe.com/post/pydantic-discriminated-union/&#34;&gt;Annotated union discriminator&lt;/a&gt; post.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;´&lt;/p&gt;
+&lt;div id=&#34;load-pydantic-model-from-file-with-parse_file_as&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Load Pydantic model from file with parse_file_as&lt;/h3&gt;
+&lt;p&gt;Pydantic offers us an extra layer for load a file into a Pydantic model directly. This feature can be especially handy when you need to work with structured data stored in files such as JSON or other formats. Here there is a simple example:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;parse_file_as(path&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;applicants.json&amp;quot;&lt;/span&gt;, type_&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;Applicant)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That under-the-hood, it is a few code lines / time-saving tool that is calling to load_file, and then parse_obj_as as the previous example.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;how-to-parse-a-list-of-objects-to-a-list-of-pydantic-basemodels&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;How to parse a list of objects to a list of Pydantic BaseModels?&lt;/h3&gt;
+&lt;p&gt;OK, so we already get how to convert raw objects into Pydantic models. If you have any doubt, feel free to contact us.&lt;/p&gt;
+&lt;p&gt;So what about nested Pydantic models? For example, following the previous example, we need a list of Applicants.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;In Pydantic V1:
+This is now possible using the already commented parse_obj_as. We could use now the base type &lt;code&gt;list&lt;/code&gt; and do it without the need of an specific object.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb4-1&#34;&gt;&lt;a href=&#34;#cb4-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;users &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; [&lt;/span&gt;
+&lt;span id=&#34;cb4-2&#34;&gt;&lt;a href=&#34;#cb4-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    {&lt;span class=&#34;st&#34;&gt;&amp;quot;name&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;Paul&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;degree&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;ComputerScience&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;birth_date&amp;quot;&lt;/span&gt;: date(&lt;span class=&#34;dv&#34;&gt;2012&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)}, &lt;/span&gt;
+&lt;span id=&#34;cb4-3&#34;&gt;&lt;a href=&#34;#cb4-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    {&lt;span class=&#34;st&#34;&gt;&amp;quot;name&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;Celia&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;degree&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;Biology&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;birth_date&amp;quot;&lt;/span&gt;: date(&lt;span class=&#34;dv&#34;&gt;1994&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;12&lt;/span&gt;)}&lt;/span&gt;
+&lt;span id=&#34;cb4-4&#34;&gt;&lt;a href=&#34;#cb4-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;]&lt;/span&gt;
+&lt;span id=&#34;cb4-5&#34;&gt;&lt;a href=&#34;#cb4-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-6&#34;&gt;&lt;a href=&#34;#cb4-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;parse_obj_as(&lt;span class=&#34;bu&#34;&gt;list&lt;/span&gt;[Applicant], users)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;An alternative way to do that, if you want to create a new object representative of this list, them:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; ApplicantList(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb5-2&#34;&gt;&lt;a href=&#34;#cb5-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    __root__: &lt;span class=&#34;bu&#34;&gt;list&lt;/span&gt;[Applicant]&lt;/span&gt;
+&lt;span id=&#34;cb5-3&#34;&gt;&lt;a href=&#34;#cb5-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb5-4&#34;&gt;&lt;a href=&#34;#cb5-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;ApplicantList.parse_obj(users)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note that if you convert it to &lt;code&gt;.dict()&lt;/code&gt; the root key is conserved, but if you do it with &lt;code&gt;.json()&lt;/code&gt; method, the &lt;code&gt;__root__&lt;/code&gt; key will disappear. You also have the option to overwrite the dict method as follows:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb6-1&#34;&gt;&lt;a href=&#34;#cb6-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; ApplicantList(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb6-2&#34;&gt;&lt;a href=&#34;#cb6-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    __root__: &lt;span class=&#34;bu&#34;&gt;list&lt;/span&gt;[Applicant]&lt;/span&gt;
+&lt;span id=&#34;cb6-3&#34;&gt;&lt;a href=&#34;#cb6-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb6-4&#34;&gt;&lt;a href=&#34;#cb6-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;dict&lt;/span&gt;(&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb6-5&#34;&gt;&lt;a href=&#34;#cb6-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;super&lt;/span&gt;().&lt;span class=&#34;bu&#34;&gt;dict&lt;/span&gt;()[&lt;span class=&#34;st&#34;&gt;&amp;#39;__root__&amp;#39;&lt;/span&gt;]&lt;/span&gt;
+&lt;span id=&#34;cb6-6&#34;&gt;&lt;a href=&#34;#cb6-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb6-7&#34;&gt;&lt;a href=&#34;#cb6-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;ApplicantList.parse_obj(users).&lt;span class=&#34;bu&#34;&gt;dict&lt;/span&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;In Pydantic V2:
+Use &lt;a href=&#34;https://typethepipe.com/post/pydantic-discriminated-union/&#34;&gt;Type Adapter&lt;/a&gt; as we state in that post, in order to do:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; pydantic &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; TypeAdapter&lt;/span&gt;
+&lt;span id=&#34;cb7-2&#34;&gt;&lt;a href=&#34;#cb7-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-3&#34;&gt;&lt;a href=&#34;#cb7-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;users &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; [&lt;/span&gt;
+&lt;span id=&#34;cb7-4&#34;&gt;&lt;a href=&#34;#cb7-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    {&lt;span class=&#34;st&#34;&gt;&amp;quot;name&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;Paul&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;degree&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;ComputerScience&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;birth_date&amp;quot;&lt;/span&gt;: date(&lt;span class=&#34;dv&#34;&gt;2012&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)}, &lt;/span&gt;
+&lt;span id=&#34;cb7-5&#34;&gt;&lt;a href=&#34;#cb7-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    {&lt;span class=&#34;st&#34;&gt;&amp;quot;name&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;Celia&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;degree&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;Biology&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;birth_date&amp;quot;&lt;/span&gt;: date(&lt;span class=&#34;dv&#34;&gt;1994&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;12&lt;/span&gt;)}&lt;/span&gt;
+&lt;span id=&#34;cb7-6&#34;&gt;&lt;a href=&#34;#cb7-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;]&lt;/span&gt;
+&lt;span id=&#34;cb7-7&#34;&gt;&lt;a href=&#34;#cb7-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-8&#34;&gt;&lt;a href=&#34;#cb7-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;ta &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; TypeAdapter(List[User])&lt;/span&gt;
+&lt;span id=&#34;cb7-9&#34;&gt;&lt;a href=&#34;#cb7-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;m &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; ta.validate_python(users)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;´&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;pydantic-list-of-different-types&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Pydantic list of different types&lt;/h3&gt;
+&lt;p&gt;When you need to work with a list containing different types of data, Pydantic offers a straightforward solution. Here’s how you can define a Pydantic model for a list that accommodates different data types:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb8-1&#34;&gt;&lt;a href=&#34;#cb8-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; ApplicantList(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb8-2&#34;&gt;&lt;a href=&#34;#cb8-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    __root__: &lt;span class=&#34;bu&#34;&gt;list&lt;/span&gt;[ComputerScienceApplicant &lt;span class=&#34;op&#34;&gt;|&lt;/span&gt; BiologyApplicant]&lt;/span&gt;
+&lt;span id=&#34;cb8-3&#34;&gt;&lt;a href=&#34;#cb8-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb8-4&#34;&gt;&lt;a href=&#34;#cb8-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;ApplicantList.parse_obj(users)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;convert-between-pydantic-basemodels&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Convert between Pydantic BaseModels&lt;/h3&gt;
+&lt;p&gt;Also it could be convinient to mutate and convert between different BaseModels. Whether you’re migrating from one data model to another, integrating data from various sources, or even orchestrating a complex data transformation dance, Pydantic simplifies the process. With just a few lines of code, you can mutate, merge, and seamlessly convert between different BaseModels.&lt;/p&gt;
+&lt;p&gt;In this exmple we are converting from a regular BaseModel to another, without existing inheritance between them.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb9&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb9-1&#34;&gt;&lt;a href=&#34;#cb9-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; pydantic &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; BaseModel, parse_obj_as&lt;/span&gt;
+&lt;span id=&#34;cb9-2&#34;&gt;&lt;a href=&#34;#cb9-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; enum &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Enum&lt;/span&gt;
+&lt;span id=&#34;cb9-3&#34;&gt;&lt;a href=&#34;#cb9-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-4&#34;&gt;&lt;a href=&#34;#cb9-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; PetTypeEnum(Enum):&lt;/span&gt;
+&lt;span id=&#34;cb9-5&#34;&gt;&lt;a href=&#34;#cb9-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    DOG &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;dog&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-6&#34;&gt;&lt;a href=&#34;#cb9-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    CAT &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;cat&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-7&#34;&gt;&lt;a href=&#34;#cb9-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    BIRD &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;bird&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-8&#34;&gt;&lt;a href=&#34;#cb9-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-9&#34;&gt;&lt;a href=&#34;#cb9-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Pet(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb9-10&#34;&gt;&lt;a href=&#34;#cb9-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  name: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-11&#34;&gt;&lt;a href=&#34;#cb9-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  pet_type: PetTypeEnum&lt;/span&gt;
+&lt;span id=&#34;cb9-12&#34;&gt;&lt;a href=&#34;#cb9-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-13&#34;&gt;&lt;a href=&#34;#cb9-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; TypelessPet(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb9-14&#34;&gt;&lt;a href=&#34;#cb9-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  name: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-15&#34;&gt;&lt;a href=&#34;#cb9-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-16&#34;&gt;&lt;a href=&#34;#cb9-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;meww &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Pet(name&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Meww&amp;quot;&lt;/span&gt;, pet_type&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;cat&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb9-17&#34;&gt;&lt;a href=&#34;#cb9-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;typeless_meww &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; parse_obj_as(TypelessPet, meww)&lt;/span&gt;
+&lt;span id=&#34;cb9-18&#34;&gt;&lt;a href=&#34;#cb9-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-19&#34;&gt;&lt;a href=&#34;#cb9-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;assert&lt;/span&gt; meww.pet_type.value &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;cat&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-20&#34;&gt;&lt;a href=&#34;#cb9-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;assert&lt;/span&gt; typeless_meww.name &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; meww.name&lt;/span&gt;
+&lt;span id=&#34;cb9-21&#34;&gt;&lt;a href=&#34;#cb9-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;assert&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;hasattr&lt;/span&gt;(typeless_meww, &lt;span class=&#34;st&#34;&gt;&amp;quot;pet_type&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;´&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;stay-updated-on-pydantic-and-python-tips&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Stay updated on Pydantic and Python tips&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Hopefully, this post has helped familiarize you with the usage of unions and discriminators in Pydantic, showcasing some of its functionalities and enabling you to enjoy their benefits.&lt;/p&gt;
+&lt;p&gt;If you want to stay updated…&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python and Pydantic tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+&lt;/style&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Unlocking the Power of GPT-4V: The Multimodal Revolution</title>
+      <link>/post/gpt4v-new-era-lmm-large-multimodal-models/</link>
+      <pubDate>Wed, 20 Sep 2023 00:00:00 +0000</pubDate>
+      <guid>/post/gpt4v-new-era-lmm-large-multimodal-models/</guid>
+      <description>
+&lt;script src=&#34;/post/gpt4v-new-era-lmm-large-multimodal-models/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; width=&#34;400px&#34; alt=&#34;Asking ChatGPT4-V(ision) to solve a captcha.&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;unlocking-the-power-of-gpt-4-the-multimodal-revolution&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Unlocking the Power of GPT-4: The Multimodal Revolution&lt;/h1&gt;
+&lt;p&gt;One of the most anticipated features of ChatGPT is here. As you know, behind OpenAI’s chatbot, there’s a ‘brain’ called GPT-4. Its announcement in March surprised everyone, not only due to its improved intelligence but also its multimodal capabilities. Multimodality means the ability of an AI to work not just with text data. OpenAI presented examples where GPT can take images as input, visualize, understand, analyze them, and use its text generation capabilities to reason and perform intelligent tasks. This advancement was revealed in March, but it wasn’t until a few weeks ago that OpenAI started enabling this functionality for many ChatGPT users. Now, many of you may find that if you go to the regular version of GPT-4, you can activate this new functionality. You can include images in your prompts and ask ChatGPT to provide detailed descriptions of the elements in them or even write poems about them.&lt;/p&gt;
+&lt;p&gt;This is a groundbreaking development, as &lt;strong&gt;GPT-4’s vision model opens the door to numerous possibilities. Multimodal models, like GPT-4V, which combine both text and images&lt;/strong&gt;, could revolutionize various fields. They can be applied to tasks like interpreting images for users who are visually impaired or providing details on an object or scene based on a photo. These models have enormous potential in fields like computer vision, content generation, and data interpretation. They can assist with tasks like image description, content generation, information extraction, and even counting elements within images. The possibilities are vast, and these models could redefine how we interact with technology.&lt;/p&gt;
+&lt;p&gt;However, it’s important to note that there are limitations and safeguards in place. These models are restricted from performing certain tasks, like recognizing specific individuals in images or interpreting medical images for diagnosis, in order to ensure responsible and ethical use. The line between what GPT-4V can and cannot do is determined by the safeguards in place, and OpenAI is cautious about not allowing misuse or harmful actions.&lt;/p&gt;
+&lt;p&gt;So, while the capabilities of GPT-4V are exciting, they also come with &lt;strong&gt;responsibilities and ethical considerations&lt;/strong&gt;, and users should be mindful of the model’s limitations and the guidelines for its use. OpenAI is continuously working to refine these models and expand their capabilities while ensuring safe and responsible use. The future of AI, particularly in multimodal models, is full of possibilities, and it’s up to the community and organizations to harness this technology for the greater good. It carries a set of responsibilities and ethical considerations that both users and developers must take into account. OpenAI continues to work diligently to refine these models, expand their capabilities, and ensure that they are used in a safe, ethical, and responsible manner. The future of AI, particularly in the realm of multimodal models. The onus is on the community and organizations to harness this technology for the greater good, marking a new era in human-AI collaboration.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;the-march-surprise-gpt-4s-multimodal-capabilities&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;The March Surprise: GPT-4’s Multimodal Capabilities&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;In March, the AI community was taken by storm when OpenAI unveiled GPT-4’s Multimodal Capabilities. This significant step in artificial intelligence marked a major leap forward in how machines comprehend and interact with the world. GPT-4’s newfound ability to process and generate and &lt;strong&gt;interpret content based on not just text but also images has opened up a realm of possibilities&lt;/strong&gt;. It’s no longer confined to the limits of text-based information; instead, it can analyze images, interpret scenes, and provide detailed descriptions. This exciting development has pushed the boundaries of AI, making it more adaptable to the visual world, and offers an exciting glimpse into the future of artificial intelligence.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;empowering-chatgpt-with-visual-intelligence-a-game-changing-update&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Empowering ChatGPT with Visual Intelligence: A Game-Changing Update&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;One of the most highly-anticipated and groundbreaking features of ChatGPT is finally here, and it’s poised to revolutionize the way we interact with AI. Behind OpenAI’s advanced chatbot, ChatGPT, stands the formidable brain of GPT-4, an AI model celebrated for its exceptional intelligence and its remarkable multimodal capabilities. While its announcement in March took the tech world by surprise, it wasn’t just the improved intelligence that turned heads. What truly left the industry astounded was GPT-4’s ability to work with not only text but also images, marking a significant leap towards AI’s integration into the visual realm. It’s a monumental update that is now accessible to many ChatGPT users.&lt;/p&gt;
+&lt;p&gt;The essence of this update lies in multimodality, where an AI model, in this case, GPT-4, possesses the remarkable capability to process and generate content not only from text inputs but also from images. In practice, it can take images as inputs, analyze them, understand their content, and provide meaningful descriptions. More than that, GPT-4 can seamlessly combine its newfound visual understanding with its well-known text generation capabilities, allowing it to reason, explain, and perform various intelligent tasks based on both textual and visual information. The integration of visual intelligence is not a mere add-on; it’s a transformative leap that expands AI’s horizons and empowers ChatGPT to better understand and respond to the diverse content and queries it receives from users.&lt;/p&gt;
+&lt;p&gt;This great development ushers in a world of possibilities. It’s not just limited to generating descriptions; it’s about envisioning how multimodal models like GPT-4V, which combine both text and images, could reshape numerous fields. From assisting visually impaired users by interpreting images to providing intricate details about objects or scenes based on a photograph, these models hold the potential to revolutionize areas like computer vision, content creation, and data interpretation. They can facilitate image descriptions, content generation, information extraction, and even counting objects within images, opening new avenues for AI to enhance our daily lives.&lt;/p&gt;
+&lt;p&gt;However, with great power comes great responsibility. While GPT-4V’s capabilities are awe-inspiring, there are significant limitations and safeguards in place. Certain tasks, such as recognizing specific individuals in images or interpreting medical images for diagnostic purposes, are off-limits to ensure responsible and ethical use. The boundaries of what GPT-4V can and cannot do are clearly defined by these safeguards, emphasizing OpenAI’s commitment to preventing misuse and harmful actions. This underscores the importance of users being aware of the model’s limitations and adhering to ethical guidelines.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;a-new-dawn-openai-opens-the-door-to-image-infused-conversations&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;A New Dawn: OpenAI Opens the Door to Image-Infused Conversations&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;The implications of this development extend far and wide. Imagine asking ChatGPT about a picturesque landscape, attaching an image, and receiving a vivid description filled with details. Picture a scenario where visually impaired individuals can seek assistance in comprehending the content of images they encounter. Consider the potential for AI to generate detailed and contextually relevant responses based on the visual content provided. These scenarios are not futuristic dreams but real possibilities today, thanks to OpenAI’s groundbreaking move.&lt;/p&gt;
+&lt;p&gt;Here we have some other example use cases that could be worth exploring:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Art and Culture Appreciation:&lt;/strong&gt; Envision a scenario where art enthusiasts can share an image of a famous painting or sculpture with ChatGPT. Instead of just receiving basic information about the artwork, they can receive an insightful analysis, historical context, and even the emotional impact it has had on viewers over time. This would provide a richer and more engaging way to explore the world of art and culture.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Travel and Tourism:&lt;/strong&gt; Travelers planning their next adventure could send images of destinations they’re interested in to ChatGPT. In response, they might receive personalized travel recommendations, historical background, and even tips on the best time to visit. It’s like having a knowledgeable travel guide at your fingertips, catering to your preferences and interests.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Education and Learning:&lt;/strong&gt; In the realm of education, students could submit images of complex mathematical problems, scientific diagrams, or historical artifacts. ChatGPT could assist by not only solving problems but also providing detailed explanations. For instance, when shown a physics experiment setup, it could explain the principles at play, making learning more interactive and engaging.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Culinary Adventures:&lt;/strong&gt; Food enthusiasts might share photos of exotic dishes they’ve encountered. In return, ChatGPT could offer detailed recipes, origins of the dish, and even recommendations for complementary wines or sides. This transforms recipe sharing into a culinary journey.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Accessibility for the Visually Impaired:&lt;/strong&gt; As previously mentioned, this development has the power to make the world more accessible for the visually impaired. Imagine someone using a smartphone to capture an image of a document, sign, or object they need to understand. ChatGPT can assist by providing vocal descriptions and explanations, empowering visually impaired individuals to navigate the visual world with greater ease and independence.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Real-Time Data Interpretation:&lt;/strong&gt; In professional settings, this technology can streamline data interpretation. Engineers, for example, could capture images of complex machinery or schematics, and ChatGPT could quickly analyze and provide insights, potentially expediting troubleshooting and maintenance processes.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Content Creation:&lt;/strong&gt; Content creators can leverage ChatGPT for more imaginative projects. By sharing images, they can receive unique, contextually relevant suggestions for their next video, blog post, or advertising campaign. This approach could revolutionize the creative process and inspire innovative ideas.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Empowering Remote Work:&lt;/strong&gt; In the era of remote work, employees can use this technology to enhance collaboration. Sharing images of diagrams, whiteboard sketches, or architectural plans, they can seek instant clarifications and brainstorm more effectively.&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;stay-updated-on-typethepipe&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Stay updated on TypeThePipe&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Hopefully, this post has helped you become familiar with GPT4V and its possibilities.&lt;/p&gt;
+&lt;p&gt;If you want to stay updated…&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more AI news!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+&lt;/style&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>New Streamlit Chat. Conversational app with st.chat_message and st.chat_input</title>
@@ -101,43 +1001,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;h2&gt;Stramlit ChatGPT-like app. How to.&lt;/h2&gt;
 &lt;p&gt;Finally, they reach the climax of the tutorial: building a ChatGPT-like app. It is possible by using the OpenAI API to generate responses. And of course, for that you need to get an API key to follow along.&lt;/p&gt;
 &lt;p&gt;In summary, this tutorial takes you on a thrilling journey of building chat-based applications with Streamlit and GPT models. Enjoy!&lt;/p&gt;
-&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#import openai&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#import streamlit as st&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#st.title(&amp;quot;ChatGPT-like clone&amp;quot;)&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#openai.api_key = st.secrets[&amp;quot;OPENAI_API_KEY&amp;quot;]&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#if &amp;quot;openai_model&amp;quot; not in st.session_state:&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#    st.session_state[&amp;quot;openai_model&amp;quot;] = &amp;quot;gpt-4&amp;quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#if &amp;quot;messages&amp;quot; not in st.session_state:&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-12&#34;&gt;&lt;a href=&#34;#cb1-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#    st.session_state.messages = []&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-13&#34;&gt;&lt;a href=&#34;#cb1-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-14&#34;&gt;&lt;a href=&#34;#cb1-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#for message in st.session_state.messages:&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-15&#34;&gt;&lt;a href=&#34;#cb1-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#    with st.chat_message(message[&amp;quot;role&amp;quot;]):&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-16&#34;&gt;&lt;a href=&#34;#cb1-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#        st.markdown(message[&amp;quot;content&amp;quot;])&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-17&#34;&gt;&lt;a href=&#34;#cb1-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-18&#34;&gt;&lt;a href=&#34;#cb1-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#if prompt := st.chat_input(&amp;quot;What is up?&amp;quot;):&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-19&#34;&gt;&lt;a href=&#34;#cb1-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#    st.session_state.messages.append({&amp;quot;role&amp;quot;: &amp;quot;user&amp;quot;, &amp;quot;content&amp;quot;: prompt})&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-20&#34;&gt;&lt;a href=&#34;#cb1-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#    with st.chat_message(&amp;quot;user&amp;quot;):&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-21&#34;&gt;&lt;a href=&#34;#cb1-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#        st.markdown(prompt)&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-22&#34;&gt;&lt;a href=&#34;#cb1-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-23&#34;&gt;&lt;a href=&#34;#cb1-23&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#    with st.chat_message(&amp;quot;assistant&amp;quot;):&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-24&#34;&gt;&lt;a href=&#34;#cb1-24&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#        message_placeholder = st.empty()&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-25&#34;&gt;&lt;a href=&#34;#cb1-25&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#        full_response = &amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-26&#34;&gt;&lt;a href=&#34;#cb1-26&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#        for response in openai.ChatCompletion.create(&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-27&#34;&gt;&lt;a href=&#34;#cb1-27&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#            model=st.session_state[&amp;quot;openai_model&amp;quot;],&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-28&#34;&gt;&lt;a href=&#34;#cb1-28&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#            messages=[&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-29&#34;&gt;&lt;a href=&#34;#cb1-29&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#                {&amp;quot;role&amp;quot;: m[&amp;quot;role&amp;quot;], &amp;quot;content&amp;quot;: m[&amp;quot;content&amp;quot;]}&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-30&#34;&gt;&lt;a href=&#34;#cb1-30&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#                for m in st.session_state.messages&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-31&#34;&gt;&lt;a href=&#34;#cb1-31&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#            ],&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-32&#34;&gt;&lt;a href=&#34;#cb1-32&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#            stream=True,&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-33&#34;&gt;&lt;a href=&#34;#cb1-33&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#        ):&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-34&#34;&gt;&lt;a href=&#34;#cb1-34&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#            full_response += response.choices[0].delta.get(&amp;quot;content&amp;quot;, &amp;quot;&amp;quot;)&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-35&#34;&gt;&lt;a href=&#34;#cb1-35&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#            message_placeholder.markdown(full_response + &amp;quot;▌&amp;quot;)&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-36&#34;&gt;&lt;a href=&#34;#cb1-36&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#        message_placeholder.markdown(full_response)&lt;/span&gt;&lt;/span&gt;
-&lt;span id=&#34;cb1-37&#34;&gt;&lt;a href=&#34;#cb1-37&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#    st.session_state.messages.append({&amp;quot;role&amp;quot;: &amp;quot;assistant&amp;quot;, &amp;quot;content&amp;quot;: full_response})&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; openai&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; streamlit &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; st&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;st.title(&lt;span class=&#34;st&#34;&gt;&amp;quot;ChatGPT-like clone&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;openai.api_key &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; st.secrets[&lt;span class=&#34;st&#34;&gt;&amp;quot;OPENAI_API_KEY&amp;quot;&lt;/span&gt;]&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;openai_model&amp;quot;&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; st.session_state:&lt;/span&gt;
+&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    st.session_state[&lt;span class=&#34;st&#34;&gt;&amp;quot;openai_model&amp;quot;&lt;/span&gt;] &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;gpt-4&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;messages&amp;quot;&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; st.session_state:&lt;/span&gt;
+&lt;span id=&#34;cb1-12&#34;&gt;&lt;a href=&#34;#cb1-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    st.session_state.messages &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; []&lt;/span&gt;
+&lt;span id=&#34;cb1-13&#34;&gt;&lt;a href=&#34;#cb1-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-14&#34;&gt;&lt;a href=&#34;#cb1-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;for&lt;/span&gt; message &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; st.session_state.messages:&lt;/span&gt;
+&lt;span id=&#34;cb1-15&#34;&gt;&lt;a href=&#34;#cb1-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;with&lt;/span&gt; st.chat_message(message[&lt;span class=&#34;st&#34;&gt;&amp;quot;role&amp;quot;&lt;/span&gt;]):&lt;/span&gt;
+&lt;span id=&#34;cb1-16&#34;&gt;&lt;a href=&#34;#cb1-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        st.markdown(message[&lt;span class=&#34;st&#34;&gt;&amp;quot;content&amp;quot;&lt;/span&gt;])&lt;/span&gt;
+&lt;span id=&#34;cb1-17&#34;&gt;&lt;a href=&#34;#cb1-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-18&#34;&gt;&lt;a href=&#34;#cb1-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; prompt &lt;span class=&#34;op&#34;&gt;:=&lt;/span&gt; st.chat_input(&lt;span class=&#34;st&#34;&gt;&amp;quot;What is up?&amp;quot;&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb1-19&#34;&gt;&lt;a href=&#34;#cb1-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    st.session_state.messages.append({&lt;span class=&#34;st&#34;&gt;&amp;quot;role&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;user&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;content&amp;quot;&lt;/span&gt;: prompt})&lt;/span&gt;
+&lt;span id=&#34;cb1-20&#34;&gt;&lt;a href=&#34;#cb1-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;with&lt;/span&gt; st.chat_message(&lt;span class=&#34;st&#34;&gt;&amp;quot;user&amp;quot;&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb1-21&#34;&gt;&lt;a href=&#34;#cb1-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        st.markdown(prompt)&lt;/span&gt;
+&lt;span id=&#34;cb1-22&#34;&gt;&lt;a href=&#34;#cb1-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-23&#34;&gt;&lt;a href=&#34;#cb1-23&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;with&lt;/span&gt; st.chat_message(&lt;span class=&#34;st&#34;&gt;&amp;quot;assistant&amp;quot;&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb1-24&#34;&gt;&lt;a href=&#34;#cb1-24&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        message_placeholder &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; st.empty()&lt;/span&gt;
+&lt;span id=&#34;cb1-25&#34;&gt;&lt;a href=&#34;#cb1-25&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        full_response &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-26&#34;&gt;&lt;a href=&#34;#cb1-26&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;for&lt;/span&gt; response &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; openai.ChatCompletion.create(&lt;/span&gt;
+&lt;span id=&#34;cb1-27&#34;&gt;&lt;a href=&#34;#cb1-27&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            model&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;st.session_state[&lt;span class=&#34;st&#34;&gt;&amp;quot;openai_model&amp;quot;&lt;/span&gt;],&lt;/span&gt;
+&lt;span id=&#34;cb1-28&#34;&gt;&lt;a href=&#34;#cb1-28&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            messages&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;[&lt;/span&gt;
+&lt;span id=&#34;cb1-29&#34;&gt;&lt;a href=&#34;#cb1-29&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                {&lt;span class=&#34;st&#34;&gt;&amp;quot;role&amp;quot;&lt;/span&gt;: m[&lt;span class=&#34;st&#34;&gt;&amp;quot;role&amp;quot;&lt;/span&gt;], &lt;span class=&#34;st&#34;&gt;&amp;quot;content&amp;quot;&lt;/span&gt;: m[&lt;span class=&#34;st&#34;&gt;&amp;quot;content&amp;quot;&lt;/span&gt;]}&lt;/span&gt;
+&lt;span id=&#34;cb1-30&#34;&gt;&lt;a href=&#34;#cb1-30&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                &lt;span class=&#34;cf&#34;&gt;for&lt;/span&gt; m &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; st.session_state.messages&lt;/span&gt;
+&lt;span id=&#34;cb1-31&#34;&gt;&lt;a href=&#34;#cb1-31&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            ],&lt;/span&gt;
+&lt;span id=&#34;cb1-32&#34;&gt;&lt;a href=&#34;#cb1-32&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            stream&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb1-33&#34;&gt;&lt;a href=&#34;#cb1-33&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        ):&lt;/span&gt;
+&lt;span id=&#34;cb1-34&#34;&gt;&lt;a href=&#34;#cb1-34&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            full_response &lt;span class=&#34;op&#34;&gt;+=&lt;/span&gt; response.choices[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;].delta.get(&lt;span class=&#34;st&#34;&gt;&amp;quot;content&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-35&#34;&gt;&lt;a href=&#34;#cb1-35&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            message_placeholder.markdown(full_response &lt;span class=&#34;op&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;▌&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-36&#34;&gt;&lt;a href=&#34;#cb1-36&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        message_placeholder.markdown(full_response)&lt;/span&gt;
+&lt;span id=&#34;cb1-37&#34;&gt;&lt;a href=&#34;#cb1-37&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    st.session_state.messages.append({&lt;span class=&#34;st&#34;&gt;&amp;quot;role&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;assistant&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;content&amp;quot;&lt;/span&gt;: full_response})&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;You could find this and more code examples &lt;a href=&#34;https://docs.streamlit.io/knowledge-base/tutorials/build-conversational-apps&#34;&gt;here&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br&gt;&lt;/p&gt;
 &lt;/div&gt;
@@ -145,11 +1045,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 &lt;h2&gt;Three keys on how to build chat based applications&lt;/h2&gt;
 &lt;p&gt;You can find here three general tips in order to boost your Streamlit application:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;User-Centric Design: Prioritize the needs and preferences of your users when developing a chat-based application. Consider their goals, pain points, and communication preferences to ensure a seamless and intuitive user experience.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;Fine-tune your LLM or other NLP model: Implement robust NLP techniques to enhance the application’s ability to understand and interpret user input accurately. Also, it seems like an awesome idea to train specifically to your use case in order to provide more contextually relevant and personalized responses.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Scalability and Performance: Build a scalable architecture that can handle high volumes of concurrent users and maintain optimal performance. Implement efficient data storage, caching mechanisms, and use cloud-based services to handle the computational demands of processing and serving chat-based interactions.&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;User-Centric Design: Prioritize the needs and preferences of your users when developing a chat-based application. Consider their goals, pain points, and communication preferences to ensure a seamless and intuitive user experience.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Fine-tune your LLM or other NLP model: Implement robust NLP techniques to enhance the application’s ability to understand and interpret user input accurately. Also, it seems like an awesome idea to train specifically to your use case in order to provide more contextually relevant and personalized responses.&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Scalability and Performance: Build a scalable architecture that can handle high volumes of concurrent users and maintain optimal performance. Implement efficient data storage, caching mechanisms, and use cloud-based services to handle the computational demands of processing and serving chat-based interactions.&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;div id=&#34;stay-updated-on-streamlit-and-python-tips&#34; class=&#34;section level2&#34;&gt;

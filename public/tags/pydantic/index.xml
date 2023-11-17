@@ -5,12 +5,287 @@
     <link>/tags/pydantic/</link>
       <atom:link href="/tags/pydantic/index.xml" rel="self" type="application/rss+xml" />
     <description>Pydantic</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Sun, 18 Jun 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 23 Oct 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-32.png</url>
       <title>Pydantic</title>
       <link>/tags/pydantic/</link>
     </image>
+    
+    <item>
+      <title>Pydantic parse objects with parse_obj and parse_obj_as methods</title>
+      <link>/post/pydantic-parse-obj/</link>
+      <pubDate>Mon, 23 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>/post/pydantic-parse-obj/</guid>
+      <description>
+&lt;script src=&#34;/post/pydantic-parse-obj/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; width=&#34;400px&#34; alt=&#34;Pydantic Python library logo.&#34; /&gt;&lt;/p&gt;
+&lt;div id=&#34;converting-objects-and-files-into-pydantic-models-all-you-need-to-know-about-parse_obj-function&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Converting objects and files into Pydantic models? All you need to know about parse_obj function&lt;/h1&gt;
+&lt;p&gt;Converting objects and files into Pydantic models might sound like a magical transformation, and in a way, it is! In this enchanting journey of data manipulation, we’re going to unveil all the secrets you need to know. Pydantic, with its data validation superpowers, not only helps you create well-structured models but also allows you to effortlessly breathe life into them from various sources.&lt;/p&gt;
+&lt;p&gt;Imagine turning a plain, old Python dictionary or even a JSON file into a fully-fledged Pydantic model with just a few lines of code. It’s like casting a spell! Whether you’re dealing with API responses, database records, or just want to make sense of your data, Pydantic has your back. So, prepare to unlock the magic of converting objects and files into Pydantic models, and let’s embark on this captivating adventure together!&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;how-to-load-a-pydantic-model-from-an-object.-pydantic-parse_obj-example&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;How to load a Pydantic model from an object. Pydantic parse_obj example&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Hey there, Pydantic enthusiasts! If you’ve ever delved into the world of Pydantic, you know it’s a superhero in the realm of data validation and parsing in Python. But what’s the deal with loading a Pydantic model from an object, you ask? Well, it’s an exciting adventure, and in this Pydantic parse_obj example, we’re about to embark on a thrilling journey together!&lt;/p&gt;
+&lt;p&gt;Picture this: you’re dealing with API requests, taming wild database records, or just trying to wrangle some unruly data. That’s where Pydantic’s parse_obj swoops in like a caped crusader, making data validation and transformation a total breeze. So, fasten your seatbelts, and let’s learn how to wield this incredible power and turn your Python data-handling tasks into a supercharged, fun-filled experience!&lt;/p&gt;
+&lt;p&gt;Certainly! Here’s an expanded section that dives deeper into the topic of “pydantic parse_obj” with more in-depth information, examples, and use cases:&lt;/p&gt;
+&lt;p&gt;In-Depth Exploration of Pydantic’s parse_obj Method
+Pydantic’s parse_obj method is a powerful feature that deserves a closer look. This method is a cornerstone of Pydantic’s data parsing capabilities, allowing you to seamlessly transform raw data into well-structured Pydantic models. In this section, we’ll delve deeper into how parse_obj works, provide practical examples, and explore its versatile use cases.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;understanding-parse_obj&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;&lt;strong&gt;Understanding parse_obj:&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Pydantic’s parse_obj method is a powerful feature that deserves a closer look. This method is a cornerstone of Pydantic’s data parsing capabilities, allowing you to seamlessly transform raw data into well-structured Pydantic models. In this section, we’ll delve deeper into how parse_obj works, provide practical examples, and explore its versatile use cases.&lt;/p&gt;
+&lt;p&gt;At its core, parse_obj is designed to take unstructured data, such as dictionaries or JSON objects, and convert them into Pydantic models with defined structures. This method is particularly useful when dealing with data from various sources like API responses or user inputs.&lt;/p&gt;
+&lt;p&gt;Here we could see a basic usage:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; pydantic &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; BaseModel, Field, parse_obj_as&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; typing &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Literal, Optional, Annotated, Union&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; datetime &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; date&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; ComputerScienceApplicant(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Config:&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        orm_mode &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    name: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    degree: Literal[&lt;span class=&#34;st&#34;&gt;&amp;quot;ComputerScience&amp;quot;&lt;/span&gt;]&lt;/span&gt;
+&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    birth_date: date &lt;span class=&#34;op&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt; &lt;span class=&#34;co&#34;&gt;# preferred now vs Optional[]&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb1-12&#34;&gt;&lt;a href=&#34;#cb1-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; BiologyApplicant(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb1-13&#34;&gt;&lt;a href=&#34;#cb1-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    name: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-14&#34;&gt;&lt;a href=&#34;#cb1-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    degree: Literal[&lt;span class=&#34;st&#34;&gt;&amp;quot;Biology&amp;quot;&lt;/span&gt;]&lt;/span&gt;
+&lt;span id=&#34;cb1-15&#34;&gt;&lt;a href=&#34;#cb1-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    birth_date: date &lt;span class=&#34;op&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-16&#34;&gt;&lt;a href=&#34;#cb1-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb1-17&#34;&gt;&lt;a href=&#34;#cb1-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-18&#34;&gt;&lt;a href=&#34;#cb1-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;applicant_dict &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; {&lt;span class=&#34;st&#34;&gt;&amp;quot;name&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;Diana&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;degree&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;ComputerScience&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;birth_date&amp;quot;&lt;/span&gt;: date(&lt;span class=&#34;dv&#34;&gt;2022&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)}&lt;/span&gt;
+&lt;span id=&#34;cb1-19&#34;&gt;&lt;a href=&#34;#cb1-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;ComputerScienceApplicant(&lt;span class=&#34;op&#34;&gt;**&lt;/span&gt;applicant_dict)&lt;/span&gt;
+&lt;span id=&#34;cb1-20&#34;&gt;&lt;a href=&#34;#cb1-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;ComputerScienceApplicant.parse_obj(applicant_dict)&lt;/span&gt;
+&lt;span id=&#34;cb1-21&#34;&gt;&lt;a href=&#34;#cb1-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;ComputerScienceApplicant.from_orm(ComputerScienceApplicant(&lt;span class=&#34;op&#34;&gt;**&lt;/span&gt;applicant_dict))&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note that, even you could achieve it by different methods, Pydantic parse_obj method is preferred over the dict unpacking way.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;the-correct-usage-of-parse_obj_as-and-parse_file_as.&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;The correct usage of parse_obj_as and parse_file_as.&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;From converting between BaseModels to parse_obj into discriminated union.&lt;/p&gt;
+&lt;p&gt;Pydantic offers a nifty standalone utility function known as parse_obj_as that’s like a versatile tool in your Python utility belt. It enables you to apply Pydantic’s parsing wizardry in a more flexible and on-the-fly manner, allowing you to work with a broader range of Pydantic-compatible types.&lt;/p&gt;
+&lt;p&gt;Why is this so cool, you could ask? Well, think of it like this: you’re in a situation where you need to parse results into a type that doesn’t directly inherit from BaseModel. This function is handy also to parse and object into a Pydantic discriminated union without creating another class. For example:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;Applicant &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Annotated[Union[ComputerScienceApplicant, BiologyApplicant], Field(discriminator&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;degree&amp;quot;&lt;/span&gt;)]&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;#Applicant.parse_obj({&amp;quot;isPrimary&amp;quot;: True, &amp;quot;dateOfBirth&amp;quot;: date(2022,1,1)})&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;parse_obj_as(Applicant, {&lt;span class=&#34;st&#34;&gt;&amp;quot;name&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;Paul&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;degree&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;Biology&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;birth_date&amp;quot;&lt;/span&gt;: date(&lt;span class=&#34;dv&#34;&gt;2012&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)})&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;You can explore more about &lt;a href=&#34;https://typethepipe.com/post/pydantic-discriminated-union/&#34;&gt;Annotated union discriminator&lt;/a&gt; post.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;´&lt;/p&gt;
+&lt;div id=&#34;load-pydantic-model-from-file-with-parse_file_as&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Load Pydantic model from file with parse_file_as&lt;/h3&gt;
+&lt;p&gt;Pydantic offers us an extra layer for load a file into a Pydantic model directly. This feature can be especially handy when you need to work with structured data stored in files such as JSON or other formats. Here there is a simple example:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;parse_file_as(path&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;applicants.json&amp;quot;&lt;/span&gt;, type_&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;Applicant)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;That under-the-hood, it is a few code lines / time-saving tool that is calling to load_file, and then parse_obj_as as the previous example.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;how-to-parse-a-list-of-objects-to-a-list-of-pydantic-basemodels&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;How to parse a list of objects to a list of Pydantic BaseModels?&lt;/h3&gt;
+&lt;p&gt;OK, so we already get how to convert raw objects into Pydantic models. If you have any doubt, feel free to contact us.&lt;/p&gt;
+&lt;p&gt;So what about nested Pydantic models? For example, following the previous example, we need a list of Applicants.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;In Pydantic V1:
+This is now possible using the already commented parse_obj_as. We could use now the base type &lt;code&gt;list&lt;/code&gt; and do it without the need of an specific object.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb4&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb4-1&#34;&gt;&lt;a href=&#34;#cb4-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;users &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; [&lt;/span&gt;
+&lt;span id=&#34;cb4-2&#34;&gt;&lt;a href=&#34;#cb4-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    {&lt;span class=&#34;st&#34;&gt;&amp;quot;name&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;Paul&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;degree&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;ComputerScience&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;birth_date&amp;quot;&lt;/span&gt;: date(&lt;span class=&#34;dv&#34;&gt;2012&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)}, &lt;/span&gt;
+&lt;span id=&#34;cb4-3&#34;&gt;&lt;a href=&#34;#cb4-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    {&lt;span class=&#34;st&#34;&gt;&amp;quot;name&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;Celia&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;degree&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;Biology&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;birth_date&amp;quot;&lt;/span&gt;: date(&lt;span class=&#34;dv&#34;&gt;1994&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;12&lt;/span&gt;)}&lt;/span&gt;
+&lt;span id=&#34;cb4-4&#34;&gt;&lt;a href=&#34;#cb4-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;]&lt;/span&gt;
+&lt;span id=&#34;cb4-5&#34;&gt;&lt;a href=&#34;#cb4-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb4-6&#34;&gt;&lt;a href=&#34;#cb4-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;parse_obj_as(&lt;span class=&#34;bu&#34;&gt;list&lt;/span&gt;[Applicant], users)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;An alternative way to do that, if you want to create a new object representative of this list, them:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; ApplicantList(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb5-2&#34;&gt;&lt;a href=&#34;#cb5-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    __root__: &lt;span class=&#34;bu&#34;&gt;list&lt;/span&gt;[Applicant]&lt;/span&gt;
+&lt;span id=&#34;cb5-3&#34;&gt;&lt;a href=&#34;#cb5-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb5-4&#34;&gt;&lt;a href=&#34;#cb5-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;ApplicantList.parse_obj(users)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note that if you convert it to &lt;code&gt;.dict()&lt;/code&gt; the root key is conserved, but if you do it with &lt;code&gt;.json()&lt;/code&gt; method, the &lt;code&gt;__root__&lt;/code&gt; key will disappear. You also have the option to overwrite the dict method as follows:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb6-1&#34;&gt;&lt;a href=&#34;#cb6-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; ApplicantList(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb6-2&#34;&gt;&lt;a href=&#34;#cb6-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    __root__: &lt;span class=&#34;bu&#34;&gt;list&lt;/span&gt;[Applicant]&lt;/span&gt;
+&lt;span id=&#34;cb6-3&#34;&gt;&lt;a href=&#34;#cb6-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb6-4&#34;&gt;&lt;a href=&#34;#cb6-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;dict&lt;/span&gt;(&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb6-5&#34;&gt;&lt;a href=&#34;#cb6-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;super&lt;/span&gt;().&lt;span class=&#34;bu&#34;&gt;dict&lt;/span&gt;()[&lt;span class=&#34;st&#34;&gt;&amp;#39;__root__&amp;#39;&lt;/span&gt;]&lt;/span&gt;
+&lt;span id=&#34;cb6-6&#34;&gt;&lt;a href=&#34;#cb6-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb6-7&#34;&gt;&lt;a href=&#34;#cb6-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;ApplicantList.parse_obj(users).&lt;span class=&#34;bu&#34;&gt;dict&lt;/span&gt;()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;In Pydantic V2:
+Use &lt;a href=&#34;https://typethepipe.com/post/pydantic-discriminated-union/&#34;&gt;Type Adapter&lt;/a&gt; as we state in that post, in order to do:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; pydantic &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; TypeAdapter&lt;/span&gt;
+&lt;span id=&#34;cb7-2&#34;&gt;&lt;a href=&#34;#cb7-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-3&#34;&gt;&lt;a href=&#34;#cb7-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;users &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; [&lt;/span&gt;
+&lt;span id=&#34;cb7-4&#34;&gt;&lt;a href=&#34;#cb7-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    {&lt;span class=&#34;st&#34;&gt;&amp;quot;name&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;Paul&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;degree&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;ComputerScience&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;birth_date&amp;quot;&lt;/span&gt;: date(&lt;span class=&#34;dv&#34;&gt;2012&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)}, &lt;/span&gt;
+&lt;span id=&#34;cb7-5&#34;&gt;&lt;a href=&#34;#cb7-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    {&lt;span class=&#34;st&#34;&gt;&amp;quot;name&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;Celia&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;degree&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;Biology&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;birth_date&amp;quot;&lt;/span&gt;: date(&lt;span class=&#34;dv&#34;&gt;1994&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;12&lt;/span&gt;)}&lt;/span&gt;
+&lt;span id=&#34;cb7-6&#34;&gt;&lt;a href=&#34;#cb7-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;]&lt;/span&gt;
+&lt;span id=&#34;cb7-7&#34;&gt;&lt;a href=&#34;#cb7-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb7-8&#34;&gt;&lt;a href=&#34;#cb7-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;ta &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; TypeAdapter(List[User])&lt;/span&gt;
+&lt;span id=&#34;cb7-9&#34;&gt;&lt;a href=&#34;#cb7-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;m &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; ta.validate_python(users)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;´&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;pydantic-list-of-different-types&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Pydantic list of different types&lt;/h3&gt;
+&lt;p&gt;When you need to work with a list containing different types of data, Pydantic offers a straightforward solution. Here’s how you can define a Pydantic model for a list that accommodates different data types:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb8-1&#34;&gt;&lt;a href=&#34;#cb8-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; ApplicantList(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb8-2&#34;&gt;&lt;a href=&#34;#cb8-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    __root__: &lt;span class=&#34;bu&#34;&gt;list&lt;/span&gt;[ComputerScienceApplicant &lt;span class=&#34;op&#34;&gt;|&lt;/span&gt; BiologyApplicant]&lt;/span&gt;
+&lt;span id=&#34;cb8-3&#34;&gt;&lt;a href=&#34;#cb8-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb8-4&#34;&gt;&lt;a href=&#34;#cb8-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;ApplicantList.parse_obj(users)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;convert-between-pydantic-basemodels&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Convert between Pydantic BaseModels&lt;/h3&gt;
+&lt;p&gt;Also it could be convinient to mutate and convert between different BaseModels. Whether you’re migrating from one data model to another, integrating data from various sources, or even orchestrating a complex data transformation dance, Pydantic simplifies the process. With just a few lines of code, you can mutate, merge, and seamlessly convert between different BaseModels.&lt;/p&gt;
+&lt;p&gt;In this exmple we are converting from a regular BaseModel to another, without existing inheritance between them.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb9&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb9-1&#34;&gt;&lt;a href=&#34;#cb9-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; pydantic &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; BaseModel, parse_obj_as&lt;/span&gt;
+&lt;span id=&#34;cb9-2&#34;&gt;&lt;a href=&#34;#cb9-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;from&lt;/span&gt; enum &lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; Enum&lt;/span&gt;
+&lt;span id=&#34;cb9-3&#34;&gt;&lt;a href=&#34;#cb9-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-4&#34;&gt;&lt;a href=&#34;#cb9-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; PetTypeEnum(Enum):&lt;/span&gt;
+&lt;span id=&#34;cb9-5&#34;&gt;&lt;a href=&#34;#cb9-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    DOG &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;dog&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-6&#34;&gt;&lt;a href=&#34;#cb9-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    CAT &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;cat&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-7&#34;&gt;&lt;a href=&#34;#cb9-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    BIRD &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;bird&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-8&#34;&gt;&lt;a href=&#34;#cb9-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-9&#34;&gt;&lt;a href=&#34;#cb9-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; Pet(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb9-10&#34;&gt;&lt;a href=&#34;#cb9-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  name: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-11&#34;&gt;&lt;a href=&#34;#cb9-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  pet_type: PetTypeEnum&lt;/span&gt;
+&lt;span id=&#34;cb9-12&#34;&gt;&lt;a href=&#34;#cb9-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-13&#34;&gt;&lt;a href=&#34;#cb9-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;class&lt;/span&gt; TypelessPet(BaseModel):&lt;/span&gt;
+&lt;span id=&#34;cb9-14&#34;&gt;&lt;a href=&#34;#cb9-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;  name: &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-15&#34;&gt;&lt;a href=&#34;#cb9-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-16&#34;&gt;&lt;a href=&#34;#cb9-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;meww &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; Pet(name&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;Meww&amp;quot;&lt;/span&gt;, pet_type&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;cat&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb9-17&#34;&gt;&lt;a href=&#34;#cb9-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;typeless_meww &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; parse_obj_as(TypelessPet, meww)&lt;/span&gt;
+&lt;span id=&#34;cb9-18&#34;&gt;&lt;a href=&#34;#cb9-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-19&#34;&gt;&lt;a href=&#34;#cb9-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;assert&lt;/span&gt; meww.pet_type.value &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;cat&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb9-20&#34;&gt;&lt;a href=&#34;#cb9-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;assert&lt;/span&gt; typeless_meww.name &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; meww.name&lt;/span&gt;
+&lt;span id=&#34;cb9-21&#34;&gt;&lt;a href=&#34;#cb9-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;assert&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;hasattr&lt;/span&gt;(typeless_meww, &lt;span class=&#34;st&#34;&gt;&amp;quot;pet_type&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;´&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;stay-updated-on-pydantic-and-python-tips&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Stay updated on Pydantic and Python tips&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Hopefully, this post has helped familiarize you with the usage of unions and discriminators in Pydantic, showcasing some of its functionalities and enabling you to enjoy their benefits.&lt;/p&gt;
+&lt;p&gt;If you want to stay updated…&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Python and Pydantic tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+&lt;/style&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
     
     <item>
       <title>Pydantic discriminated unions. Some examples to simplify data structures and ensure type safety</title>

@@ -5,12 +5,920 @@
     <link>/es/vizs-and-tips/</link>
       <atom:link href="/es/vizs-and-tips/index.xml" rel="self" type="application/rss+xml" />
     <description>Vizs &amp; Tips</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Mon, 30 Mar 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Tue, 07 Nov 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-32.png</url>
       <title>Vizs &amp; Tips</title>
       <link>/es/vizs-and-tips/</link>
     </image>
+    
+    <item>
+      <title>Cómo añadir y eliminar elementos en una lista de Python</title>
+      <link>/es/vizs-and-tips/python-anadir-eliminar-elementos-lista/</link>
+      <pubDate>Tue, 07 Nov 2023 00:00:00 +0000</pubDate>
+      <guid>/es/vizs-and-tips/python-anadir-eliminar-elementos-lista/</guid>
+      <description>
+&lt;script src=&#34;/es/vizs-and-tips/python-anadir-eliminar-elementos-lista/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+
+&lt;div id=&#34;TOC&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#las-listas-en-python.-entendiendo-sus-características-y-cómo-añadir-y-eliminar-elementos-de-ellas&#34; id=&#34;toc-las-listas-en-python.-entendiendo-sus-características-y-cómo-añadir-y-eliminar-elementos-de-ellas&#34;&gt;Las listas en Python. Entendiendo sus características y cómo añadir y eliminar elementos de ellas&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#añadir-elementos-a-una-lista-de-python&#34; id=&#34;toc-añadir-elementos-a-una-lista-de-python&#34;&gt;Añadir elementos a una lista de Python&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#append&#34; id=&#34;toc-append&#34;&gt;&lt;code&gt;append()&lt;/code&gt;:&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#extend-y-operador-alternativas-para-la-concatenación.&#34; id=&#34;toc-extend-y-operador-alternativas-para-la-concatenación.&#34;&gt;&lt;code&gt;extend()&lt;/code&gt; y operador &lt;code&gt;+&lt;/code&gt;: Alternativas para la concatenación.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#insert-añade-elemento-en-una-posición-determinado-de-la-lista&#34; id=&#34;toc-insert-añade-elemento-en-una-posición-determinado-de-la-lista&#34;&gt;&lt;code&gt;insert()&lt;/code&gt;: Añade elemento en una posición determinado de la lista&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#eliminar-elementos-de-la-lista&#34; id=&#34;toc-eliminar-elementos-de-la-lista&#34;&gt;Eliminar elementos de la lista&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;#remove-por-elemento&#34; id=&#34;toc-remove-por-elemento&#34;&gt;&lt;code&gt;remove()&lt;/code&gt;: Por elemento&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#pop-elimina-elemento-de-una-lista-basado-en-su-índice.&#34; id=&#34;toc-pop-elimina-elemento-de-una-lista-basado-en-su-índice.&#34;&gt;&lt;code&gt;pop()&lt;/code&gt;: Elimina elemento de una lista basado en su índice.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#clear-vacia-por-completo-la-list&#34; id=&#34;toc-clear-vacia-por-completo-la-list&#34;&gt;&lt;code&gt;clear()&lt;/code&gt;: Vacia por completo la list&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#python-sets-conjuntos-y-hashlists-como-listas-sin-elementos-duplicados&#34; id=&#34;toc-python-sets-conjuntos-y-hashlists-como-listas-sin-elementos-duplicados&#34;&gt;Python sets (conjuntos) y HashLists como listas sin elementos duplicados&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#mantente-al-día-de-python-en-typethepipe&#34; id=&#34;toc-mantente-al-día-de-python-en-typethepipe&#34;&gt;Mantente al día de Python en Typethepipe&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; alt=&#34;Métodos de Lista de Python con mensaje que dice &#39;Typethepipe&#39;&#34;/&gt;&lt;/p&gt;
+&lt;div id=&#34;las-listas-en-python.-entendiendo-sus-características-y-cómo-añadir-y-eliminar-elementos-de-ellas&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Las listas en Python. Entendiendo sus características y cómo añadir y eliminar elementos de ellas&lt;/h1&gt;
+&lt;p&gt;En Python, las listas son una estructura de datos versátil y ampliamente utilizada que permite almacenar una &lt;strong&gt;colección ordenada de elementos&lt;/strong&gt;, que pueden ser de diferentes tipos. Las principales características de las listas incluyen:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;su capacidad para contener elementos heterogéneos,&lt;/li&gt;
+&lt;li&gt;su indexación basada en cero,&lt;/li&gt;
+&lt;li&gt;la capacidad de modificar elementos existentes,&lt;/li&gt;
+&lt;li&gt;agregar nuevos elementos y eliminar elementos.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Las listas son mutables&lt;/strong&gt;, lo que significa que pueden cambiar su contenido después de haber sido creadas. Además, las listas admiten operaciones como la concatenación, la reproducción y la aplicación de funciones a cada elemento de la lista, lo que las hace herramientas poderosas para manipular y organizar datos.&lt;/p&gt;
+&lt;p&gt;Con ejemplos prácticos y consejos útiles, este post te ayudará a dominar las habilidades fundamentales para trabajar con listas en Python y optimizar la manipulación de datos en tus proyectos de programación.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;añadir-elementos-a-una-lista-de-python&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Añadir elementos a una lista de Python&lt;/h2&gt;
+&lt;p&gt;Para añadir elementos a una lista, nos podemos valer del método &lt;code&gt;append()&lt;/code&gt; para &lt;strong&gt;agregar un elemento&lt;/strong&gt; al final de la lista o el método &lt;code&gt;insert()&lt;/code&gt; para insertar un elemento en una &lt;strong&gt;posición específic&lt;/strong&gt;a. También puedes extender una lista con otra lista utilizando el método &lt;code&gt;extend()&lt;/code&gt; o utilizar el operador &lt;code&gt;+&lt;/code&gt; para concatenar dos listas. Estas opciones te brindan la flexibilidad para modificar tus listas según tus necesidades, lo que es esencial en el desarrollo de aplicaciones y la manipulación de datos en Python.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;append&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;&lt;code&gt;append()&lt;/code&gt;:&lt;/h3&gt;
+&lt;p&gt;Imagina que estás creando una lista de reproducción de música. Cada vez que descubres una nueva canción que te encanta, simplemente la añades al final de tu lista con &lt;code&gt;append()&lt;/code&gt;. ¡Así de fácil!&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;
+mi_lista = []
+mi_lista.append(&amp;#39;tomate&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Recuerda que append() siempre añade elementos al final de la lista. Si necesitas insertar elementos en una posición específica, lo comentaremos en los siguientes parágrafos.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;extend-y-operador-alternativas-para-la-concatenación.&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;&lt;code&gt;extend()&lt;/code&gt; y operador &lt;code&gt;+&lt;/code&gt;: Alternativas para la concatenación.&lt;/h3&gt;
+&lt;p&gt;También podemos concatenar listas. Esto se puede hacer con el operador &lt;code&gt;+&lt;/code&gt; entre dos listas o bien usando el método &lt;code&gt;extend&lt;/code&gt; de una de ellas. Ambas operaciones deben partir de la existencia de dos listas, y el resultado será una lista con los elementos de las dos iniciales, sin anidación de listas.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;
+mi_lista_alimentos_ext = mi_lista + [&amp;quot;lechuga&amp;quot;, &amp;quot;pimiento&amp;quot;, &amp;quot;ajo&amp;quot;]
+
+mi_lista.extend([&amp;quot;lechuga&amp;quot;, &amp;quot;pimiento&amp;quot;, &amp;quot;ajo&amp;quot;])
+
+mi_lista == mi_lista_alimentos_ext&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## True&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;mi_lista_alimentos_ext&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [&amp;#39;tomate&amp;#39;, &amp;#39;lechuga&amp;#39;, &amp;#39;pimiento&amp;#39;, &amp;#39;ajo&amp;#39;]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Por anidación de listas nos referimos al siguiente ejemplo, que según el caso y pese a ser un objeto más complejo y haber otras alternativas, también nos va a ser útil. Tendremos una lista como elemento dentro de otra lista.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;mi_lista.append([&amp;#39;tomate&amp;#39;])
+mi_lista&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [&amp;#39;tomate&amp;#39;, &amp;#39;lechuga&amp;#39;, &amp;#39;pimiento&amp;#39;, &amp;#39;ajo&amp;#39;, [&amp;#39;tomate&amp;#39;]]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;La ventaja de usar &lt;code&gt;extend()&lt;/code&gt; es que modificas una lista existente en lugar de crear una nueva.&lt;/p&gt;
+&lt;p&gt;Ambas opciones de concatenación son útiles en diferentes situaciones, dependiendo de si prefieres mantener intactas tus listas originales o si estás dispuesto a modificar una de ellas para obtener la concatenación deseada.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;insert-añade-elemento-en-una-posición-determinado-de-la-lista&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;&lt;code&gt;insert()&lt;/code&gt;: Añade elemento en una posición determinado de la lista&lt;/h3&gt;
+&lt;p&gt;O insertar el elemento en un índice determinado:&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;mi_lista.insert(0, [&amp;quot;a&amp;quot;, &amp;quot;b&amp;quot;, &amp;quot;b&amp;quot;])
+mi_lista&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [[&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;b&amp;#39;], &amp;#39;tomate&amp;#39;, &amp;#39;lechuga&amp;#39;, &amp;#39;pimiento&amp;#39;, &amp;#39;ajo&amp;#39;, [&amp;#39;tomate&amp;#39;]]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;La posibilidad de insertar elementos en una ubicación específica &lt;strong&gt;es útil cuando necesitas mantener un orden particular en tu lista&lt;/strong&gt; o cuando deseas insertar elementos en medio de una secuencia sin reemplazar los elementos existentes. Esta funcionalidad es especialmente valiosa en situaciones en las que se requiere una manipulación precisa de los datos almacenados en una lista. Aunque, de nuevo, en esas situaciones viene bien evaluar si en lugar de ello, necesitamos hacer uso de un objeto diferente a la lista . Todo dependerá de la utilidad que necesitemos conseguir.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;eliminar-elementos-de-la-lista&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Eliminar elementos de la lista&lt;/h2&gt;
+&lt;p&gt;¿Qué pasa si por el contratrio lo que necesitamos es eliminar elementos de una lista? Eliminar elementos de una lista en Python es una operación común, ya que te permite mantener tus datos actualizados y adaptados a las necesidades de tu aplicación. Par aello, puedes utilizar métodos como &lt;code&gt;remove()&lt;/code&gt;, que &lt;strong&gt;elimina la primera ocurrencia de un valor específico&lt;/strong&gt;, o &lt;code&gt;pop()&lt;/code&gt;, que elimina un elemento en &lt;strong&gt;una posición dada y lo devuelve&lt;/strong&gt;. También puedes utilizar la instrucción del para eliminar elementos por su índice. Además, puedes emplear métodos como &lt;code&gt;clear()&lt;/code&gt; para &lt;strong&gt;vaciar por completo la lista&lt;/strong&gt; o &lt;em&gt;slicing&lt;/em&gt; para crear una nueva lista sin los elementos que deseas eliminar. Estas herramientas te permiten gestionar eficazmente tus datos en Python y mantener tus listas actualizadas de acuerdo a las necesidades de tu programa.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;remove-por-elemento&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;&lt;code&gt;remove()&lt;/code&gt;: Por elemento&lt;/h3&gt;
+&lt;p&gt;El método remove() en Python se utiliza para &lt;strong&gt;eliminar la primera ocurrencia&lt;/strong&gt; de un elemento específico en una lista. Es importante destacar que si intentas eliminar un elemento que no existe en la lista, se generará un error.&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;mi_lista.remove(&amp;#39;tomate&amp;#39;)
+mi_lista&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [[&amp;#39;a&amp;#39;, &amp;#39;b&amp;#39;, &amp;#39;b&amp;#39;], &amp;#39;lechuga&amp;#39;, &amp;#39;pimiento&amp;#39;, &amp;#39;ajo&amp;#39;, [&amp;#39;tomate&amp;#39;]]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Para eliminar todas las ocurrencias, es necesario por tanto algo como:&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;mi_lista = [1, 2, 3, 4, 3, 5, 6, 3]
+elemento_a_eliminar = 3
+
+mi_lista = [x for x in mi_lista if x != elemento_a_eliminar]
+
+print(mi_lista)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [1, 2, 4, 5, 6]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;De esta manera, podemos fácilmente eliminar todos los determinados elementos en una lista, no solo la primera ocurrencia.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;pop-elimina-elemento-de-una-lista-basado-en-su-índice.&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;&lt;code&gt;pop()&lt;/code&gt;: Elimina elemento de una lista basado en su índice.&lt;/h3&gt;
+&lt;p&gt;El método &lt;code&gt;pop()&lt;/code&gt; en Python es una herramienta versátil que te permite eliminar elementos de una lista según su índice, lo que lo convierte en una función imprescindible para el manejo de datos. Al especificar un índice como primer argumento, &lt;strong&gt;pop() elimina el elemento en esa posición y lo devuelve&lt;/strong&gt;, lo que te brinda el poder de acceder a ese elemento antes de su eliminación si es necesario. Además, si utilizas pop() sin un índice, eliminará y te devolverá el último elemento de la lista de forma predeterminada. Esta flexibilidad lo convierte en una función de alto valor tanto para tareas simples como para complejas en programación, y es esencial para mantener el control y la precisión en la manipulación de tus listas en Python.&lt;/p&gt;
+&lt;p&gt;Veamos un ejemplo:&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;mi_lista.pop(0)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## 1&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;y aquí lo guardamos en un objecto &lt;code&gt;mi_carrito_compra&lt;/code&gt; mientras lo eliminamos de la lista de alimentos:&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;mi_carrito_compra = []
+mi_carrito_compra.append(mi_lista_alimentos_ext.pop(0))
+mi_carrito_compra&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## [&amp;#39;tomate&amp;#39;]&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Por defecto, si no se le pasa ningún índice, el método &lt;code&gt;pop()&lt;/code&gt; extraerá de la lista el último elemento.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;clear-vacia-por-completo-la-list&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;&lt;code&gt;clear()&lt;/code&gt;: Vacia por completo la list&lt;/h3&gt;
+&lt;p&gt;El método &lt;strong&gt;clear() en Python es como un “botón de reinicio” para tus listas&lt;/strong&gt;. Cuando lo utilizas, vacía por completo una lista, eliminando todos sus elementos. Por ejemplo, si estás desarrollando una aplicación que almacena datos temporales en una lista y deseas borrar esos datos de manera eficiente cuando ya no son necesarios, clear() es la función que necesitas.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;python-sets-conjuntos-y-hashlists-como-listas-sin-elementos-duplicados&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Python sets (conjuntos) y HashLists como listas sin elementos duplicados&lt;/h3&gt;
+&lt;p&gt;Los conjuntos en Python son estructuras de datos que funcionan de manera similar a las listas, pero con una característica fundamental: no permiten elementos duplicados. Al usar conjuntos, puedes crear colecciones de datos únicos de manera eficiente. Esto significa que si intentas agregar un elemento que ya está presente en el conjunto, simplemente se ignorará, lo que es perfecto cuando necesitas garantizar la unicidad de tus datos. Pueden expresarse con &lt;code&gt;set()&lt;/code&gt; o con &lt;code&gt;{}&lt;/code&gt; por ejemplo: &lt;code&gt;{1, 2, 3}&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Veamos un ejemplo de conjuntos en Python:&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;mi_lista_con_duplicados = [&amp;quot;manzana&amp;quot;, &amp;quot;platano&amp;quot;, &amp;quot;manzana&amp;quot;]
+set(mi_lista_con_duplicados)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## {&amp;#39;platano&amp;#39;, &amp;#39;manzana&amp;#39;}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;y sus operaciones entre conjuntos de Python más básicas:&lt;/p&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;mi_nueva_lista = [&amp;quot;uva&amp;quot;, &amp;quot;manzana&amp;quot;]
+
+set(mi_lista_con_duplicados) - set(mi_nueva_lista)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## {&amp;#39;platano&amp;#39;}&lt;/code&gt;&lt;/pre&gt;
+&lt;pre class=&#34;python&#34;&gt;&lt;code&gt;set(mi_lista_con_duplicados + mi_nueva_lista)&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;## {&amp;#39;uva&amp;#39;, &amp;#39;platano&amp;#39;, &amp;#39;manzana&amp;#39;}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;El principal uso de los conjuntos o &lt;code&gt;sets&lt;/code&gt; es la comprobación rápida de pertenencia. Por lo tanto, no depende del orden, por lo que podemos considerarlos como ‘no ordenados’ a diferencia de las listas.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;mantente-al-día-de-python-en-typethepipe&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Mantente al día de Python en Typethepipe&lt;/h2&gt;
+&lt;p&gt;Mantente al día con las últimas novedades y consejos en programación en Typethepipe. Síguenos para estar al tanto de los avances en el mundo de Python y continuar mejorando tus habilidades de desarrollo. ¡Hasta la próxima y no olvides &lt;strong&gt;Seguirnos&lt;/strong&gt;!&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; ¡Suscribete para más contenido sobre Python y Data Science! &lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;tu mejor email&#34; required&gt;&lt;input type=&#34;hidden&#34; name=&#34;tags&#34; value=&#34;7614568&#34;&gt;&lt;/div&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Síguenos&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Python Polars para la manipulación de archivos json. ¡Hazlo de manera fácil y robusta!</title>
+      <link>/es/vizs-and-tips/python-polars-manipulacion-json/</link>
+      <pubDate>Mon, 09 Oct 2023 00:00:00 +0000</pubDate>
+      <guid>/es/vizs-and-tips/python-polars-manipulacion-json/</guid>
+      <description>
+&lt;script src=&#34;/es/vizs-and-tips/python-polars-manipulacion-json/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; alt=&#34;Polars Python con mensaje que dice &#39;json&#39;&#34;/&gt;&lt;/p&gt;
+&lt;p&gt;Como bien sabes, el formato JSON resulta útil para diversas tareas de programación, que van desde archivos de configuración hasta el almacenamiento de pesos y parámetros de modelos, lo que lo convierte en una elección versátil. Con Polars, puedes cargar, manipular y escribir archivos JSON sin esfuerzo, agilizando tus procesos de manejo de datos.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;JSON (JavaScript Object Notation) es un formato de datos amigable para el usuario, conocido por su simplicidad y legibilidad&lt;/strong&gt;, lo que lo hace perfecto para una variedad de aplicaciones. Su versatilidad y compatibilidad con numerosos lenguajes de programación lo convierten en una herramienta poderosa para la representación y el intercambio de datos en la era moderna.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;cómo-trabajar-con-archivos-json-en-polars&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Cómo trabajar con archivos JSON en Polars&lt;/h1&gt;
+&lt;p&gt;En medio del mundo dinámico de la manipulación y el análisis de datos, hay una biblioteca de Python que está causando sensación: como ya hemos tratado en TypeThePipe, se trata de Polars. Si bien el procesamiento de datos se asocia con frecuencia a la biblioteca Pandas, &lt;strong&gt;Polars emerge durante los últimos meses, destacándose por su rendimiento ultrarrápido y un amplio conjunto de funciones, cada vez más creciente.&lt;/strong&gt; Lo que distingue a Polars es su capacidad para manejar datos JSON, lo que lo convierte en un activo indispensable para las personas que trabajan con estructuras de datos complejas y siempre cambiantes.&lt;/p&gt;
+&lt;p&gt;En este post, vamos a indagar en la manipulación de JSON y revelar cómo fácilmente podemos serializar/deserializar DataFrames, LazyDataFrames y Expresiones de JSON.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;leyendo-json-con-la-función-de-polars-read_json&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Leyendo JSON con la función de Polars read_json&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;La función de Polars &lt;code&gt;read_json&lt;/code&gt; nos permite fácilmente importar datos desde JSON y convertirlos en un DataFrame o LazyDataFrame estructurado, simplificandonos el proceso de análisis de datos.&lt;/p&gt;
+&lt;p&gt;Además, puedes agregar parámetros relativos al esquema del mismo. Bien estés trabajando con estructuras JSON complejas o sencillas, este método maneja la conversión de manera eficiente, lo que te ahorra tiempo y esfuerzo. Es una característica útil que hace que la manipulación de datos sea más confiable y robusta.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; json&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;config_json &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; {&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;model_type&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;regression&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;model_reg_vars&amp;quot;&lt;/span&gt;: {&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;price&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;continuous&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;zip_range&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;categorical&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    },&lt;/span&gt;
+&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;model_dep_var&amp;quot;&lt;/span&gt;: {&lt;/span&gt;
+&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;quot;y&amp;quot;&lt;/span&gt;: &lt;span class=&#34;st&#34;&gt;&amp;quot;categorical&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    },&lt;/span&gt;
+&lt;span id=&#34;cb1-12&#34;&gt;&lt;a href=&#34;#cb1-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;model_version_tag&amp;quot;&lt;/span&gt;: &lt;span class=&#34;fl&#34;&gt;1.19&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-13&#34;&gt;&lt;a href=&#34;#cb1-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;}&lt;/span&gt;
+&lt;span id=&#34;cb1-14&#34;&gt;&lt;a href=&#34;#cb1-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-15&#34;&gt;&lt;a href=&#34;#cb1-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-16&#34;&gt;&lt;a href=&#34;#cb1-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;cf&#34;&gt;with&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;open&lt;/span&gt;(&lt;span class=&#34;st&#34;&gt;&amp;#39;data.json&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;w&amp;#39;&lt;/span&gt;, encoding&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;#39;utf-8&amp;#39;&lt;/span&gt;) &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; f:&lt;/span&gt;
+&lt;span id=&#34;cb1-17&#34;&gt;&lt;a href=&#34;#cb1-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    json.dump(config_json, f, indent&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; polars &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; pl&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;df_from_json &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; (&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;pl.read_json(&lt;span class=&#34;st&#34;&gt;&amp;quot;data.json&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    schema&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;{&lt;/span&gt;
+&lt;span id=&#34;cb2-6&#34;&gt;&lt;a href=&#34;#cb2-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;#39;model_type&amp;#39;&lt;/span&gt;: pl.Utf8, &lt;/span&gt;
+&lt;span id=&#34;cb2-7&#34;&gt;&lt;a href=&#34;#cb2-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;#39;model_reg_vars&amp;#39;&lt;/span&gt;: pl.Struct([pl.Field(&lt;span class=&#34;st&#34;&gt;&amp;#39;price&amp;#39;&lt;/span&gt;, pl.Utf8), pl.Field(&lt;span class=&#34;st&#34;&gt;&amp;#39;zip_range&amp;#39;&lt;/span&gt;, pl.Utf8)]), &lt;/span&gt;
+&lt;span id=&#34;cb2-8&#34;&gt;&lt;a href=&#34;#cb2-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;#39;model_dep_var&amp;#39;&lt;/span&gt;: pl.Struct([pl.Field(&lt;span class=&#34;st&#34;&gt;&amp;#39;y&amp;#39;&lt;/span&gt;, pl.Utf8)]), &lt;/span&gt;
+&lt;span id=&#34;cb2-9&#34;&gt;&lt;a href=&#34;#cb2-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;st&#34;&gt;&amp;#39;model_version_tag&amp;#39;&lt;/span&gt;: pl.Float64&lt;/span&gt;
+&lt;span id=&#34;cb2-10&#34;&gt;&lt;a href=&#34;#cb2-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        }&lt;/span&gt;
+&lt;span id=&#34;cb2-11&#34;&gt;&lt;a href=&#34;#cb2-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    )&lt;/span&gt;
+&lt;span id=&#34;cb2-12&#34;&gt;&lt;a href=&#34;#cb2-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;pl.read_json(&lt;span class=&#34;st&#34;&gt;&amp;quot;data.json&amp;quot;&lt;/span&gt;).schema&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## {&amp;#39;model_type&amp;#39;: Utf8, &amp;#39;model_reg_vars&amp;#39;: Struct([Field(&amp;#39;price&amp;#39;, Utf8), Field(&amp;#39;zip_range&amp;#39;, Utf8)]), &amp;#39;model_dep_var&amp;#39;: Struct([Field(&amp;#39;y&amp;#39;, Utf8)]), &amp;#39;model_version_tag&amp;#39;: Float64}&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;desanidando-campos-de-json-dentro-de-columnas-dataframe&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;&lt;strong&gt;Desanidando campos de JSON dentro de columnas DataFrame&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Several strategies can be taken for unnesting JSON fields from a POlars DataFrame. First one one can &lt;code&gt;rename_fields&lt;/code&gt; as Struct method.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb5&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb5-1&#34;&gt;&lt;a href=&#34;#cb5-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;model_reg_col_name &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;model_reg_vars&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-2&#34;&gt;&lt;a href=&#34;#cb5-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;struct_names &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; [&lt;span class=&#34;ss&#34;&gt;f&amp;#39;&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;model_reg_col_name&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;_&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;{&lt;/span&gt;i&lt;span class=&#34;sc&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;ss&#34;&gt;&amp;#39;&lt;/span&gt; &lt;span class=&#34;cf&#34;&gt;for&lt;/span&gt; i &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; df_from_json[model_reg_col_name].struct.fields]&lt;/span&gt;
+&lt;span id=&#34;cb5-3&#34;&gt;&lt;a href=&#34;#cb5-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb5-4&#34;&gt;&lt;a href=&#34;#cb5-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb5-5&#34;&gt;&lt;a href=&#34;#cb5-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    df_from_json&lt;/span&gt;
+&lt;span id=&#34;cb5-6&#34;&gt;&lt;a href=&#34;#cb5-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .select(pl.col(model_reg_col_name).struct.rename_fields(struct_names))&lt;/span&gt;
+&lt;span id=&#34;cb5-7&#34;&gt;&lt;a href=&#34;#cb5-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .unnest(model_reg_col_name)&lt;/span&gt;
+&lt;span id=&#34;cb5-8&#34;&gt;&lt;a href=&#34;#cb5-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div&gt;&lt;style&gt;
+.dataframe &gt; thead &gt; tr &gt; th,
+.dataframe &gt; tbody &gt; tr &gt; td {
+  text-align: right;
+}
+&lt;/style&gt;
+&lt;small&gt;shape: (1, 2)&lt;/small&gt;&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;model_reg_vars_price&lt;/th&gt;&lt;th&gt;model_reg_vars_zip_range&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;continuous&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;categorical&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;p&gt;Another way if you have few nested fields and know their name, you can simply use &lt;code&gt;select()&lt;/code&gt; and access them by &lt;code&gt;struct.field()&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb6&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb6-1&#34;&gt;&lt;a href=&#34;#cb6-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;df_from_json.select(&lt;/span&gt;
+&lt;span id=&#34;cb6-2&#34;&gt;&lt;a href=&#34;#cb6-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    pl.&lt;span class=&#34;bu&#34;&gt;all&lt;/span&gt;().exclude(&lt;span class=&#34;st&#34;&gt;&amp;quot;model_reg_vars&amp;quot;&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb6-3&#34;&gt;&lt;a href=&#34;#cb6-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    pl.col(&lt;span class=&#34;st&#34;&gt;&amp;quot;model_reg_vars&amp;quot;&lt;/span&gt;).struct.field(&lt;span class=&#34;st&#34;&gt;&amp;quot;zip_range&amp;quot;&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb6-4&#34;&gt;&lt;a href=&#34;#cb6-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    pl.col(&lt;span class=&#34;st&#34;&gt;&amp;quot;model_reg_vars&amp;quot;&lt;/span&gt;).struct.field(&lt;span class=&#34;st&#34;&gt;&amp;quot;price&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb6-5&#34;&gt;&lt;a href=&#34;#cb6-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div&gt;&lt;style&gt;
+.dataframe &gt; thead &gt; tr &gt; th,
+.dataframe &gt; tbody &gt; tr &gt; td {
+  text-align: right;
+}
+&lt;/style&gt;
+&lt;small&gt;shape: (1, 5)&lt;/small&gt;&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;model_type&lt;/th&gt;&lt;th&gt;model_dep_var&lt;/th&gt;&lt;th&gt;model_version_tag&lt;/th&gt;&lt;th&gt;zip_range&lt;/th&gt;&lt;th&gt;price&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;struct[1]&lt;/td&gt;&lt;td&gt;f64&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;regression&amp;quot;&lt;/td&gt;&lt;td&gt;{&amp;quot;categorical&amp;quot;}&lt;/td&gt;&lt;td&gt;1.19&lt;/td&gt;&lt;td&gt;&amp;quot;categorical&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;continuous&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;desanidando-campos-dentro-de-varias-columnas-en-polars&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Desanidando campos dentro de varias columnas en Polars&lt;/h3&gt;
+&lt;p&gt;Desanidar varias columnas de tipo ‘struct’ en Polars es una tarea que a menudo surge al tratar con datos complejos y anidados. Polars proporciona una forma directa de hacerlo utilizando el método ‘unnest’ en múltiples columnas de tipo ‘struct’ de manera simultánea. Esta operación esencialmente aplana las estructuras anidadas, haciendo que los datos sean más accesibles para su análisis y manipulación. Al especificar los nombres de las columnas que deben desanidarse, puedes trabajar de manera eficiente con los datos contenidos en esas estructuras, simplificando tus tareas de procesamiento de datos en Polars.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb7&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb7-1&#34;&gt;&lt;a href=&#34;#cb7-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;df_from_json.unnest(&lt;span class=&#34;st&#34;&gt;&amp;quot;model_dep_var&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;model_reg_vars&amp;quot;&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div&gt;&lt;style&gt;
+.dataframe &gt; thead &gt; tr &gt; th,
+.dataframe &gt; tbody &gt; tr &gt; td {
+  text-align: right;
+}
+&lt;/style&gt;
+&lt;small&gt;shape: (1, 5)&lt;/small&gt;&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;model_type&lt;/th&gt;&lt;th&gt;price&lt;/th&gt;&lt;th&gt;zip_range&lt;/th&gt;&lt;th&gt;y&lt;/th&gt;&lt;th&gt;model_version_tag&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;f64&lt;/td&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;regression&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;continuous&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;categorical&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;categorical&amp;quot;&lt;/td&gt;&lt;td&gt;1.19&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;p&gt;Esto es genial siempre y cuando los nombres de los campos anidados no colisionen. Si eso sucede, se espera que la función ‘unnest’ falle.&lt;/p&gt;
+&lt;p&gt;Una manera un tanto ingeniosa de evitar errores por columnas duplicadas es la que se propone en la respuesta a la pregunta de Stack Overflow. Sin embargo, es un enfoque un tanto ‘hacker’ porque debes modificar la función ‘unnest’ del DataFrame de Polars. Hacerlo sin una estrategia clara podría dar lugar a inconsistencias en el código de tu proyecto&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb8&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb8-1&#34;&gt;&lt;a href=&#34;#cb8-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; unnest(&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;, columns, &lt;span class=&#34;op&#34;&gt;*&lt;/span&gt;more_columns, prefix&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;, suffix&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;None&lt;/span&gt;, col_prefix&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;False&lt;/span&gt;, col_suffix&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;False&lt;/span&gt;, drop_existing&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;False&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb8-2&#34;&gt;&lt;a href=&#34;#cb8-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;isinstance&lt;/span&gt;(columns, &lt;span class=&#34;bu&#34;&gt;str&lt;/span&gt;):&lt;/span&gt;
+&lt;span id=&#34;cb8-3&#34;&gt;&lt;a href=&#34;#cb8-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        columns &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; [columns]&lt;/span&gt;
+&lt;span id=&#34;cb8-4&#34;&gt;&lt;a href=&#34;#cb8-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; more_columns:&lt;/span&gt;
+&lt;span id=&#34;cb8-5&#34;&gt;&lt;a href=&#34;#cb8-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        columns &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;bu&#34;&gt;list&lt;/span&gt;(columns)&lt;/span&gt;
+&lt;span id=&#34;cb8-6&#34;&gt;&lt;a href=&#34;#cb8-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        columns.extend(more_columns)&lt;/span&gt;
+&lt;span id=&#34;cb8-7&#34;&gt;&lt;a href=&#34;#cb8-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;co&#34;&gt;#check to see if any new parameters are used, if not just return as is current behavior&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-8&#34;&gt;&lt;a href=&#34;#cb8-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; drop_existing&lt;span class=&#34;op&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;False&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;and&lt;/span&gt; &lt;span class=&#34;kw&#34;&gt;not&lt;/span&gt; (prefix &lt;span class=&#34;kw&#34;&gt;or&lt;/span&gt; suffix &lt;span class=&#34;kw&#34;&gt;or&lt;/span&gt; col_prefix &lt;span class=&#34;kw&#34;&gt;or&lt;/span&gt; col_suffix):&lt;/span&gt;
+&lt;span id=&#34;cb8-9&#34;&gt;&lt;a href=&#34;#cb8-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;._from_pydf(&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;._df.unnest(columns))&lt;/span&gt;
+&lt;span id=&#34;cb8-10&#34;&gt;&lt;a href=&#34;#cb8-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    final_prefix&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-11&#34;&gt;&lt;a href=&#34;#cb8-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    final_suffix&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-12&#34;&gt;&lt;a href=&#34;#cb8-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb8-13&#34;&gt;&lt;a href=&#34;#cb8-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;for&lt;/span&gt; col &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; columns:&lt;/span&gt;
+&lt;span id=&#34;cb8-14&#34;&gt;&lt;a href=&#34;#cb8-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; col_prefix:&lt;/span&gt;
+&lt;span id=&#34;cb8-15&#34;&gt;&lt;a href=&#34;#cb8-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            final_prefix&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;col&lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;_&amp;quot;&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;prefix &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; prefix &lt;span class=&#34;cf&#34;&gt;else&lt;/span&gt; col&lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;_&amp;quot;&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-16&#34;&gt;&lt;a href=&#34;#cb8-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; col_suffix:&lt;/span&gt;
+&lt;span id=&#34;cb8-17&#34;&gt;&lt;a href=&#34;#cb8-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            final_suffix&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;_&amp;quot;&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;col&lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;suffix &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; suffix &lt;span class=&#34;cf&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;quot;_&amp;quot;&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;col&lt;/span&gt;
+&lt;span id=&#34;cb8-18&#34;&gt;&lt;a href=&#34;#cb8-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        tempdf &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;].select(col)&lt;/span&gt;
+&lt;span id=&#34;cb8-19&#34;&gt;&lt;a href=&#34;#cb8-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        innercols &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; tempdf._from_pydf(tempdf._df.unnest([col])).columns&lt;/span&gt;
+&lt;span id=&#34;cb8-20&#34;&gt;&lt;a href=&#34;#cb8-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        newcols &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; [final_prefix&lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;innercol&lt;span class=&#34;op&#34;&gt;+&lt;/span&gt;final_suffix &lt;span class=&#34;cf&#34;&gt;for&lt;/span&gt; innercol &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; innercols]&lt;/span&gt;
+&lt;span id=&#34;cb8-21&#34;&gt;&lt;a href=&#34;#cb8-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        &lt;span class=&#34;va&#34;&gt;self&lt;/span&gt; &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; (&lt;/span&gt;
+&lt;span id=&#34;cb8-22&#34;&gt;&lt;a href=&#34;#cb8-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;            &lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb8-23&#34;&gt;&lt;a href=&#34;#cb8-23&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                .with_columns(pl.col(col).struct.rename_fields(newcols))&lt;/span&gt;
+&lt;span id=&#34;cb8-24&#34;&gt;&lt;a href=&#34;#cb8-24&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                .drop([drop_col &lt;span class=&#34;cf&#34;&gt;for&lt;/span&gt; drop_col &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; newcols &lt;span class=&#34;cf&#34;&gt;if&lt;/span&gt; drop_col &lt;span class=&#34;kw&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;.columns])&lt;/span&gt;
+&lt;span id=&#34;cb8-25&#34;&gt;&lt;a href=&#34;#cb8-25&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        )&lt;/span&gt;
+&lt;span id=&#34;cb8-26&#34;&gt;&lt;a href=&#34;#cb8-26&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;._from_pydf(&lt;span class=&#34;va&#34;&gt;self&lt;/span&gt;._df.unnest(columns))&lt;/span&gt;
+&lt;span id=&#34;cb8-27&#34;&gt;&lt;a href=&#34;#cb8-27&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;pl.DataFrame.unnest&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;unnest&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;De esta manera, puedes agregar programáticamente un sufijo a las columnas, como equivalente a lo que hemos visto en la sección anterior.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb9&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb9-1&#34;&gt;&lt;a href=&#34;#cb9-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;df_from_json.unnest(&lt;span class=&#34;st&#34;&gt;&amp;quot;model_dep_var&amp;quot;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;quot;model_reg_vars&amp;quot;&lt;/span&gt;, col_suffix&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div&gt;&lt;style&gt;
+.dataframe &gt; thead &gt; tr &gt; th,
+.dataframe &gt; tbody &gt; tr &gt; td {
+  text-align: right;
+}
+&lt;/style&gt;
+&lt;small&gt;shape: (1, 5)&lt;/small&gt;&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;model_type&lt;/th&gt;&lt;th&gt;price_model_reg_vars&lt;/th&gt;&lt;th&gt;zip_range_model_reg_vars&lt;/th&gt;&lt;th&gt;y_model_dep_var&lt;/th&gt;&lt;th&gt;model_version_tag&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;f64&lt;/td&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;regression&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;continuous&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;categorical&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;categorical&amp;quot;&lt;/td&gt;&lt;td&gt;1.19&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;polars-write_json&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Polars write_json&lt;/strong&gt;&lt;/h2&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb10&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb10-1&#34;&gt;&lt;a href=&#34;#cb10-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;df_from_json.write_json()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;#39;{&amp;quot;columns&amp;quot;:[{&amp;quot;name&amp;quot;:&amp;quot;model_type&amp;quot;,&amp;quot;datatype&amp;quot;:&amp;quot;Utf8&amp;quot;,&amp;quot;values&amp;quot;:[&amp;quot;regression&amp;quot;]},{&amp;quot;name&amp;quot;:&amp;quot;model_reg_vars&amp;quot;,&amp;quot;datatype&amp;quot;:{&amp;quot;Struct&amp;quot;:[{&amp;quot;name&amp;quot;:&amp;quot;price&amp;quot;,&amp;quot;dtype&amp;quot;:&amp;quot;Utf8&amp;quot;},{&amp;quot;name&amp;quot;:&amp;quot;zip_range&amp;quot;,&amp;quot;dtype&amp;quot;:&amp;quot;Utf8&amp;quot;}]},&amp;quot;values&amp;quot;:[{&amp;quot;name&amp;quot;:&amp;quot;price&amp;quot;,&amp;quot;datatype&amp;quot;:&amp;quot;Utf8&amp;quot;,&amp;quot;values&amp;quot;:[&amp;quot;continuous&amp;quot;]},{&amp;quot;name&amp;quot;:&amp;quot;zip_range&amp;quot;,&amp;quot;datatype&amp;quot;:&amp;quot;Utf8&amp;quot;,&amp;quot;values&amp;quot;:[&amp;quot;categorical&amp;quot;]}]},{&amp;quot;name&amp;quot;:&amp;quot;model_dep_var&amp;quot;,&amp;quot;datatype&amp;quot;:{&amp;quot;Struct&amp;quot;:[{&amp;quot;name&amp;quot;:&amp;quot;y&amp;quot;,&amp;quot;dtype&amp;quot;:&amp;quot;Utf8&amp;quot;}]},&amp;quot;values&amp;quot;:[{&amp;quot;name&amp;quot;:&amp;quot;y&amp;quot;,&amp;quot;datatype&amp;quot;:&amp;quot;Utf8&amp;quot;,&amp;quot;values&amp;quot;:[&amp;quot;categorical&amp;quot;]}]},{&amp;quot;name&amp;quot;:&amp;quot;model_version_tag&amp;quot;,&amp;quot;datatype&amp;quot;:&amp;quot;Float64&amp;quot;,&amp;quot;values&amp;quot;:[1.19]}]}&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb12&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb12-1&#34;&gt;&lt;a href=&#34;#cb12-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;df_from_json.write_json(row_oriented&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;va&#34;&gt;True&lt;/span&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;#39;[{&amp;quot;model_type&amp;quot;:&amp;quot;regression&amp;quot;,&amp;quot;model_reg_vars&amp;quot;:{&amp;quot;price&amp;quot;:&amp;quot;continuous&amp;quot;,&amp;quot;zip_range&amp;quot;:&amp;quot;categorical&amp;quot;},&amp;quot;model_dep_var&amp;quot;:{&amp;quot;y&amp;quot;:&amp;quot;categorical&amp;quot;},&amp;quot;model_version_tag&amp;quot;:1.19}]&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Pero, ¿qué sucede con la serialización de no solo DataFrames de Polars, sino también expresiones de Polars? ¡También es posible!&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;serializa-expresiones-de-polars-y-lazydataframes&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Serializa expresiones de Polars y LazyDataFrames&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;A partir de &lt;code&gt;polars &amp;gt;= 0.18.1&lt;/code&gt;, es posible serializar/deserializar una expresión para que funcione de la siguiente manera:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb14&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb14-1&#34;&gt;&lt;a href=&#34;#cb14-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;json_cond_select1 &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; pl.col(&lt;span class=&#34;st&#34;&gt;&amp;#39;model_type&amp;#39;&lt;/span&gt;).alias(&lt;span class=&#34;st&#34;&gt;&amp;#39;ml_model_category&amp;#39;&lt;/span&gt;).meta.write_json()&lt;/span&gt;
+&lt;span id=&#34;cb14-2&#34;&gt;&lt;a href=&#34;#cb14-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;json_cond_select2 &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; pl.col(&lt;span class=&#34;st&#34;&gt;&amp;#39;model_version_tag&amp;#39;&lt;/span&gt;).meta.write_json()&lt;/span&gt;
+&lt;span id=&#34;cb14-3&#34;&gt;&lt;a href=&#34;#cb14-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;json_cond_filter1 &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; (pl.col(&lt;span class=&#34;st&#34;&gt;&amp;#39;model_version_tag&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;fl&#34;&gt;1.19&lt;/span&gt;).meta.write_json()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Las expresiones son serializables individualmente, y la configuración completa de &lt;code&gt;expr_config&lt;/code&gt; también es serializable.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb15&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb15-1&#34;&gt;&lt;a href=&#34;#cb15-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;expr_config &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; {&lt;/span&gt;
+&lt;span id=&#34;cb15-2&#34;&gt;&lt;a href=&#34;#cb15-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;     &lt;span class=&#34;st&#34;&gt;&amp;#39;select&amp;#39;&lt;/span&gt;: [&lt;/span&gt;
+&lt;span id=&#34;cb15-3&#34;&gt;&lt;a href=&#34;#cb15-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        pl.Expr.from_json(json_cond_select1),&lt;/span&gt;
+&lt;span id=&#34;cb15-4&#34;&gt;&lt;a href=&#34;#cb15-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        pl.Expr.from_json(json_cond_select2),&lt;/span&gt;
+&lt;span id=&#34;cb15-5&#34;&gt;&lt;a href=&#34;#cb15-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;                ],&lt;/span&gt;
+&lt;span id=&#34;cb15-6&#34;&gt;&lt;a href=&#34;#cb15-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;     &lt;span class=&#34;st&#34;&gt;&amp;#39;filters&amp;#39;&lt;/span&gt;: [&lt;/span&gt;
+&lt;span id=&#34;cb15-7&#34;&gt;&lt;a href=&#34;#cb15-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        pl.Expr.from_json(json_cond_filter1),&lt;/span&gt;
+&lt;span id=&#34;cb15-8&#34;&gt;&lt;a href=&#34;#cb15-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;      ]&lt;/span&gt;
+&lt;span id=&#34;cb15-9&#34;&gt;&lt;a href=&#34;#cb15-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;}&lt;/span&gt;
+&lt;span id=&#34;cb15-10&#34;&gt;&lt;a href=&#34;#cb15-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-11&#34;&gt;&lt;a href=&#34;#cb15-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb15-12&#34;&gt;&lt;a href=&#34;#cb15-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb15-13&#34;&gt;&lt;a href=&#34;#cb15-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    pl.read_json(&lt;span class=&#34;st&#34;&gt;&amp;quot;data.json&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb15-14&#34;&gt;&lt;a href=&#34;#cb15-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .&lt;span class=&#34;bu&#34;&gt;filter&lt;/span&gt;(pl.all_horizontal(expr_config[&lt;span class=&#34;st&#34;&gt;&amp;quot;filters&amp;quot;&lt;/span&gt;]))&lt;/span&gt;
+&lt;span id=&#34;cb15-15&#34;&gt;&lt;a href=&#34;#cb15-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .select(expr_config[&lt;span class=&#34;st&#34;&gt;&amp;quot;select&amp;quot;&lt;/span&gt;])&lt;/span&gt;
+&lt;span id=&#34;cb15-16&#34;&gt;&lt;a href=&#34;#cb15-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;).lazy().write_json()&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;pre&gt;&lt;code&gt;## &amp;#39;{&amp;quot;DataFrameScan&amp;quot;:{&amp;quot;df&amp;quot;:{&amp;quot;columns&amp;quot;:[{&amp;quot;name&amp;quot;:&amp;quot;ml_model_category&amp;quot;,&amp;quot;datatype&amp;quot;:&amp;quot;Utf8&amp;quot;,&amp;quot;values&amp;quot;:[&amp;quot;regression&amp;quot;]},{&amp;quot;name&amp;quot;:&amp;quot;model_version_tag&amp;quot;,&amp;quot;datatype&amp;quot;:&amp;quot;Float64&amp;quot;,&amp;quot;values&amp;quot;:[1.19]}]},&amp;quot;schema&amp;quot;:{&amp;quot;inner&amp;quot;:{&amp;quot;ml_model_category&amp;quot;:&amp;quot;Utf8&amp;quot;,&amp;quot;model_version_tag&amp;quot;:&amp;quot;Float64&amp;quot;}},&amp;quot;output_schema&amp;quot;:null,&amp;quot;projection&amp;quot;:null,&amp;quot;selection&amp;quot;:null}}&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;mantente-al-día-de-las-novedades-de-polars&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;&lt;strong&gt;Mantente al día de las novedades de Polars&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;Espero que esta publicación te haya ayudado a familiarizarte con la serialización y el uso de JSON en Polars, y te haya permitido disfrutar de una exhibición de algunas de sus características.&lt;/p&gt;
+&lt;p&gt;Si deseas mantenerte actualizado y no perderte nada…&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; ¡Suscribete para más contenido de Python Polars!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;tu mejor email&#34; required&gt;&lt;input type=&#34;hidden&#34; name=&#34;tags&#34; value=&#34;7614568&#34;&gt;&lt;/div&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;¡Dale!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>¿Cómo crear en Streamlit un Datetime Slider o deslizante de fechas.</title>
+      <link>/es/vizs-and-tips/streamlit-datetime-slider-python/</link>
+      <pubDate>Sat, 02 Sep 2023 00:00:00 +0000</pubDate>
+      <guid>/es/vizs-and-tips/streamlit-datetime-slider-python/</guid>
+      <description>
+&lt;script src=&#34;/es/vizs-and-tips/streamlit-datetime-slider-python/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; width=&#34;400px&#34; alt=&#34;Un Streamlit Datetime Slider interactivo con la fecha mínima de 2022-01-01 y fecha máxima de 2023-07-01.&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Ayer, me pidieron configurar de manera sencilla un control deslizante de fecha y hora en Streamlit. Anteriormente, requería cierto esfuerzo y ajustes en la función &lt;code&gt;st.slider()&lt;/code&gt;. Sin embargo, ahora es posible lograrlo de manera fluida, ya que la función del control deslizante funciona casi a la perfección con fechas.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; datetime&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; streamlit &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; st&lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;MIN_MAX_RANGE &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; (datetime.datetime(&lt;span class=&#34;dv&#34;&gt;2022&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;), datetime.datetime(&lt;span class=&#34;dv&#34;&gt;2023&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;7&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;))&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;PRE_SELECTED_DATES &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; (datetime.datetime(&lt;span class=&#34;dv&#34;&gt;2023&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;), datetime.datetime(&lt;span class=&#34;dv&#34;&gt;2023&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;7&lt;/span&gt;,&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;))&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;selected_min, selected_ax &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; st.slider(&lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;Datetime slider&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    value&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;PRE_SELECTED_DATES,&lt;/span&gt;
+&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    min_value&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;MIN_MAX_RANGE[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;],&lt;/span&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    max_value&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;MIN_MAX_RANGE[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;],&lt;/span&gt;
+&lt;span id=&#34;cb1-12&#34;&gt;&lt;a href=&#34;#cb1-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Para configurar los pasos del control deslizante cuando el usuario interactúa con él, puedes hacerlo de la siguiente manera. Ten en cuenta que los valores intermedios no serán seleccionables por defecto y podrían requerir un paso adicional. Además, existe la opción de personalizar el formato de la fecha para su visualización.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;selected_min, selected_ax &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; st.slider(&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;quot;Datetime slider&amp;quot;&lt;/span&gt;,&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    value&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;PRE_SELECTED_DATES,&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    step&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;datetime.timedelta(days&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;),&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    min_value&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;MIN_MAX_RANGE[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;],&lt;/span&gt;
+&lt;span id=&#34;cb2-6&#34;&gt;&lt;a href=&#34;#cb2-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    max_value&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;MIN_MAX_RANGE[&lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;],&lt;/span&gt;
+&lt;span id=&#34;cb2-7&#34;&gt;&lt;a href=&#34;#cb2-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;bu&#34;&gt;format&lt;/span&gt;&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;st&#34;&gt;&amp;quot;YYYY-MM-DD&amp;quot;&lt;/span&gt;,    &lt;/span&gt;
+&lt;span id=&#34;cb2-8&#34;&gt;&lt;a href=&#34;#cb2-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Otra funcionalidad de los controles deslizantes es incluir un ayudante, que usamos con bastante frecuencia. Sin embargo, ten en cuenta que en ciertas versiones de Streamlit, utilizar el argumento “help” en el control deslizante de fecha y hora podría alterar la visualización del título del control deslizante.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;p&gt;Puedes acceder a más contenido gratis sobre Streamlit en nuestro blog &lt;a href=&#34;https://typethepipe.com&#34;&gt;TypeThePipe&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; ¡Suscribete para más contenido sobre Python! &lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;tu mejor email&#34; required&gt;&lt;input type=&#34;hidden&#34; name=&#34;tags&#34; value=&#34;7614568&#34;&gt;&lt;/div&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;¡Dale!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Función pipe en Python Polars. ¡No te salgas del pipeline!</title>
+      <link>/es/vizs-and-tips/python-polars-pipe-funcion/</link>
+      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+      <guid>/es/vizs-and-tips/python-polars-pipe-funcion/</guid>
+      <description>
+&lt;script src=&#34;/es/vizs-and-tips/python-polars-pipe-funcion/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; alt=&#34;Polars Python con mensaje que dice &#39;pipe&#39;&#34;/&gt;&lt;/p&gt;
+&lt;div id=&#34;polars-pipeline.-aplica-tus-functiones-custom-udf-con-la-función-pipe&#34; class=&#34;section level1&#34;&gt;
+&lt;h1&gt;Polars pipeline. Aplica tus functiones custom (udf) con la función pipe&lt;/h1&gt;
+&lt;p&gt;Bueno, bueno, estás con Python y echas de menos el rollito &lt;code&gt;pipe&lt;/code&gt;?? Encadenar transformaciones a dataframes de manera elegante nunca está de más. Pues.. ¡traemos buenas noticias! En nuestra transición de Pandas a Polars a la hora de trabajar con dataframes, la sintaxis de este último nos ha acabado de encandilar.&lt;/p&gt;
+&lt;p&gt;La función &lt;code&gt;pipe&lt;/code&gt;del módulo Polars nos permiten encadenar operaciones pasando el resultado de las mismas como input dde la siguiente operación. Recuerda por ejemplo a los pipes de bash o del ecosistema tidyverse dplyr de R.&lt;/p&gt;
+&lt;p&gt;Por supuesto, esta no es una de las mejores ventajas que Polars presenta sobre Pandas… ¡pero nos gusta bastante!&lt;/p&gt;
+&lt;p&gt;Sigue leyendo para descrubir de un vistazo &lt;strong&gt;cómo mantenerse en dentro del pipeline con Polars Python!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;La función pipe ofrece una forma estructurada de aplicar una secuencia de funciones definidas por el usuario (UDFs). Aquí tienes un ejemplo:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; polars &lt;span class=&#34;im&#34;&gt;as&lt;/span&gt; pl&lt;/span&gt;
+&lt;span id=&#34;cb1-2&#34;&gt;&lt;a href=&#34;#cb1-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;im&#34;&gt;import&lt;/span&gt; random &lt;/span&gt;
+&lt;span id=&#34;cb1-3&#34;&gt;&lt;a href=&#34;#cb1-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-4&#34;&gt;&lt;a href=&#34;#cb1-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Creamos el Polars DataFrame con las columnas base&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-5&#34;&gt;&lt;a href=&#34;#cb1-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;df &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; pl.DataFrame({&lt;/span&gt;
+&lt;span id=&#34;cb1-6&#34;&gt;&lt;a href=&#34;#cb1-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;#39;name&amp;#39;&lt;/span&gt;: [&lt;span class=&#34;st&#34;&gt;&amp;#39;Alice&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;Bob&amp;#39;&lt;/span&gt;, &lt;span class=&#34;st&#34;&gt;&amp;#39;Charlie&amp;#39;&lt;/span&gt;], &lt;/span&gt;
+&lt;span id=&#34;cb1-7&#34;&gt;&lt;a href=&#34;#cb1-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;#39;offensive_skill&amp;#39;&lt;/span&gt;: [&lt;span class=&#34;dv&#34;&gt;5&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;30&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;85&lt;/span&gt;], &lt;/span&gt;
+&lt;span id=&#34;cb1-8&#34;&gt;&lt;a href=&#34;#cb1-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;st&#34;&gt;&amp;#39;defensive_skill&amp;#39;&lt;/span&gt;: [&lt;span class=&#34;dv&#34;&gt;92&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;30&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;10&lt;/span&gt;]&lt;/span&gt;
+&lt;span id=&#34;cb1-9&#34;&gt;&lt;a href=&#34;#cb1-9&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    })&lt;/span&gt;
+&lt;span id=&#34;cb1-10&#34;&gt;&lt;a href=&#34;#cb1-10&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;/span&gt;
+&lt;span id=&#34;cb1-11&#34;&gt;&lt;a href=&#34;#cb1-11&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Definimos las funciones custom que aplicar&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-12&#34;&gt;&lt;a href=&#34;#cb1-12&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; add_position_column(df):&lt;/span&gt;
+&lt;span id=&#34;cb1-13&#34;&gt;&lt;a href=&#34;#cb1-13&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    df &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; df.with_columns( &lt;/span&gt;
+&lt;span id=&#34;cb1-14&#34;&gt;&lt;a href=&#34;#cb1-14&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        pl.when(pl.col(&lt;span class=&#34;st&#34;&gt;&amp;#39;defensive_skill&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;50&lt;/span&gt;).then(&lt;span class=&#34;st&#34;&gt;&amp;#39;CB&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-15&#34;&gt;&lt;a href=&#34;#cb1-15&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        .when(pl.col(&lt;span class=&#34;st&#34;&gt;&amp;#39;offensive_skill&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;dv&#34;&gt;50&lt;/span&gt;).then(&lt;span class=&#34;st&#34;&gt;&amp;#39;FW&amp;#39;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-16&#34;&gt;&lt;a href=&#34;#cb1-16&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        .otherwise(&lt;span class=&#34;st&#34;&gt;&amp;#39;bench&amp;#39;&lt;/span&gt;).alias(&lt;span class=&#34;st&#34;&gt;&amp;quot;position&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-17&#34;&gt;&lt;a href=&#34;#cb1-17&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    )&lt;/span&gt;
+&lt;span id=&#34;cb1-18&#34;&gt;&lt;a href=&#34;#cb1-18&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; df&lt;/span&gt;
+&lt;span id=&#34;cb1-19&#34;&gt;&lt;a href=&#34;#cb1-19&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-20&#34;&gt;&lt;a href=&#34;#cb1-20&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;kw&#34;&gt;def&lt;/span&gt; add_squad_number_column(df):&lt;/span&gt;
+&lt;span id=&#34;cb1-21&#34;&gt;&lt;a href=&#34;#cb1-21&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    df &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; df.with_columns( &lt;/span&gt;
+&lt;span id=&#34;cb1-22&#34;&gt;&lt;a href=&#34;#cb1-22&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        pl.when(pl.col(&lt;span class=&#34;st&#34;&gt;&amp;#39;position&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;CD&amp;#39;&lt;/span&gt;).then(pl.lit(random.sample(&lt;span class=&#34;bu&#34;&gt;range&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;2&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;6&lt;/span&gt;), &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;], dtype&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;pl.Int8))&lt;/span&gt;
+&lt;span id=&#34;cb1-23&#34;&gt;&lt;a href=&#34;#cb1-23&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        .when(pl.col(&lt;span class=&#34;st&#34;&gt;&amp;#39;position&amp;#39;&lt;/span&gt;) &lt;span class=&#34;op&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;st&#34;&gt;&amp;#39;FW&amp;#39;&lt;/span&gt;).then(pl.lit(random.sample(&lt;span class=&#34;bu&#34;&gt;range&lt;/span&gt;(&lt;span class=&#34;dv&#34;&gt;7&lt;/span&gt;, &lt;span class=&#34;dv&#34;&gt;19&lt;/span&gt;), &lt;span class=&#34;dv&#34;&gt;1&lt;/span&gt;)[&lt;span class=&#34;dv&#34;&gt;0&lt;/span&gt;], dtype&lt;span class=&#34;op&#34;&gt;=&lt;/span&gt;pl.Int8))&lt;/span&gt;
+&lt;span id=&#34;cb1-24&#34;&gt;&lt;a href=&#34;#cb1-24&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;        .otherwise(&lt;span class=&#34;st&#34;&gt;&amp;#39;-&amp;#39;&lt;/span&gt;).alias(&lt;span class=&#34;st&#34;&gt;&amp;quot;squad_number&amp;quot;&lt;/span&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb1-25&#34;&gt;&lt;a href=&#34;#cb1-25&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    )&lt;/span&gt;
+&lt;span id=&#34;cb1-26&#34;&gt;&lt;a href=&#34;#cb1-26&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    &lt;span class=&#34;cf&#34;&gt;return&lt;/span&gt; df&lt;/span&gt;
+&lt;span id=&#34;cb1-27&#34;&gt;&lt;a href=&#34;#cb1-27&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-28&#34;&gt;&lt;a href=&#34;#cb1-28&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;co&#34;&gt;# Encadena las operaciones usando la función pipe&lt;/span&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-29&#34;&gt;&lt;a href=&#34;#cb1-29&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb1-30&#34;&gt;&lt;a href=&#34;#cb1-30&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;(&lt;/span&gt;
+&lt;span id=&#34;cb1-31&#34;&gt;&lt;a href=&#34;#cb1-31&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    df&lt;/span&gt;
+&lt;span id=&#34;cb1-32&#34;&gt;&lt;a href=&#34;#cb1-32&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .pipe(add_position_column)&lt;/span&gt;
+&lt;span id=&#34;cb1-33&#34;&gt;&lt;a href=&#34;#cb1-33&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .pipe(add_squad_number_column)&lt;/span&gt;
+&lt;span id=&#34;cb1-34&#34;&gt;&lt;a href=&#34;#cb1-34&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div&gt;&lt;style&gt;
+.dataframe &gt; thead &gt; tr &gt; th,
+.dataframe &gt; tbody &gt; tr &gt; td {
+  text-align: right;
+}
+&lt;/style&gt;
+&lt;small&gt;shape: (3, 5)&lt;/small&gt;&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;offensive_skill&lt;/th&gt;&lt;th&gt;defensive_skill&lt;/th&gt;&lt;th&gt;position&lt;/th&gt;&lt;th&gt;squad_number&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;i64&lt;/td&gt;&lt;td&gt;i64&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Alice&amp;quot;&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;92&lt;/td&gt;&lt;td&gt;&amp;quot;CB&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;-&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Bob&amp;quot;&lt;/td&gt;&lt;td&gt;30&lt;/td&gt;&lt;td&gt;30&lt;/td&gt;&lt;td&gt;&amp;quot;bench&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;-&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Charlie&amp;quot;&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;td&gt;&amp;quot;FW&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;9&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;div id=&#34;polars-pipe-y-lazy-evaluation&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Polars pipe y ‘lazy evaluation’&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Un truco extra a la hora de usar la función pipe de Polars, es el uso de &lt;a href=&#34;https://pola-rs.github.io/polars/py-polars/html/reference/dataframe/api/polars.DataFrame.pipe.html#:~:text=to%20the%20UDF.-,Notes,-It%20is%20recommended&#34;&gt;lazy evaluation&lt;/a&gt; con el objetivo de maximizar las ventajas de la optimización de query y paralelización.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode python&#34;&gt;&lt;code class=&#34;sourceCode python&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;result &lt;span class=&#34;op&#34;&gt;=&lt;/span&gt; (&lt;/span&gt;
+&lt;span id=&#34;cb2-2&#34;&gt;&lt;a href=&#34;#cb2-2&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    df.lazy()&lt;/span&gt;
+&lt;span id=&#34;cb2-3&#34;&gt;&lt;a href=&#34;#cb2-3&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .pipe(add_position_column)&lt;/span&gt;
+&lt;span id=&#34;cb2-4&#34;&gt;&lt;a href=&#34;#cb2-4&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .pipe(add_squad_number_column)&lt;/span&gt;
+&lt;span id=&#34;cb2-5&#34;&gt;&lt;a href=&#34;#cb2-5&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;    .collect()&lt;/span&gt;
+&lt;span id=&#34;cb2-6&#34;&gt;&lt;a href=&#34;#cb2-6&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;)&lt;/span&gt;
+&lt;span id=&#34;cb2-7&#34;&gt;&lt;a href=&#34;#cb2-7&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;/span&gt;
+&lt;span id=&#34;cb2-8&#34;&gt;&lt;a href=&#34;#cb2-8&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;result&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div&gt;&lt;style&gt;
+.dataframe &gt; thead &gt; tr &gt; th,
+.dataframe &gt; tbody &gt; tr &gt; td {
+  text-align: right;
+}
+&lt;/style&gt;
+&lt;small&gt;shape: (3, 5)&lt;/small&gt;&lt;table border=&#34;1&#34; class=&#34;dataframe&#34;&gt;&lt;thead&gt;&lt;tr&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;offensive_skill&lt;/th&gt;&lt;th&gt;defensive_skill&lt;/th&gt;&lt;th&gt;position&lt;/th&gt;&lt;th&gt;squad_number&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;i64&lt;/td&gt;&lt;td&gt;i64&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;td&gt;str&lt;/td&gt;&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Alice&amp;quot;&lt;/td&gt;&lt;td&gt;5&lt;/td&gt;&lt;td&gt;92&lt;/td&gt;&lt;td&gt;&amp;quot;CB&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;-&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Bob&amp;quot;&lt;/td&gt;&lt;td&gt;30&lt;/td&gt;&lt;td&gt;30&lt;/td&gt;&lt;td&gt;&amp;quot;bench&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;-&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;&amp;quot;Charlie&amp;quot;&lt;/td&gt;&lt;td&gt;85&lt;/td&gt;&lt;td&gt;10&lt;/td&gt;&lt;td&gt;&amp;quot;FW&amp;quot;&lt;/td&gt;&lt;td&gt;&amp;quot;8&amp;quot;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;&lt;/div&gt;
+&lt;p&gt;Usando el método .pipe(), podremos separar funcionalidades y mantener el código más mantenible a largo plazo, mientras mantenemos las ventajas de la paralelización de Polars.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;polars-user-defined-functions-udfs&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;&lt;strong&gt;Polars user defined functions (udfs)&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;En este punto, deberías estar convencido de que las expresiones de Polars son tan poderosas y flexibles que hay mucho menos necesidad de funciones personalizadas de Python en comparación con otras bibliotecas.&lt;/p&gt;
+&lt;p&gt;Sin embargo, aún necesitas tener la capacidad de pasar el estado de una expresión a una biblioteca de terceros o aplicar tu función de caja negra sobre los datos en Polars.&lt;/p&gt;
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; ¡Suscribete para más contenido sobre Python! &lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;tu mejor email&#34; required&gt;&lt;input type=&#34;hidden&#34; name=&#34;tags&#34; value=&#34;7614568&#34;&gt;&lt;/div&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;¡Dale!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+&lt;style&gt;
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+&lt;/style&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Git add recursivo. Cómo añadir directorios y subdirectorios recursivamente</title>
+      <link>/es/vizs-and-tips/git-add-recursivo/</link>
+      <pubDate>Thu, 05 Jan 2023 00:00:00 +0000</pubDate>
+      <guid>/es/vizs-and-tips/git-add-recursivo/</guid>
+      <description>
+&lt;script src=&#34;/es/vizs-and-tips/git-add-recursivo/index_files/header-attrs/header-attrs.js&#34;&gt;&lt;/script&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+pre &gt; code.sourceCode { white-space: pre; position: relative; }
+pre &gt; code.sourceCode &gt; span { display: inline-block; line-height: 1.25; }
+pre &gt; code.sourceCode &gt; span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode &gt; span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre &gt; code.sourceCode { white-space: pre-wrap; }
+pre &gt; code.sourceCode &gt; span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code &gt; span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code &gt; span &gt; a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre &gt; code.sourceCode &gt; span &gt; a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+&lt;/style&gt;
+
+
+&lt;p&gt;&lt;img src=&#34;featured.png&#34; height=&#34;250px&#34; width=&#34;400px&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;El comando &lt;code&gt;git add&lt;/code&gt; es una operación fundamental en el sistema de control de versiones Git. Una necesidad recurrente entre los aprendices de Git es agregar todos los archivos en un directorio / capeta o directorios anidados. Para hacerlo, simplemente necesitamos una instrucción. Este comando es &lt;code&gt;git add .&lt;/code&gt;. Funciona de manera recursiva de forma predeterminada.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb1&#34;&gt;&lt;pre class=&#34;sourceCode bash&#34;&gt;&lt;code class=&#34;sourceCode bash&#34;&gt;&lt;span id=&#34;cb1-1&#34;&gt;&lt;a href=&#34;#cb1-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;git&lt;/span&gt; add .&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Si en lugar de ejecutarlo en el directorio actual, quieres hacerlo en un subdirectorio, es tan fácil como:&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb2&#34;&gt;&lt;pre class=&#34;sourceCode bash&#34;&gt;&lt;code class=&#34;sourceCode bash&#34;&gt;&lt;span id=&#34;cb2-1&#34;&gt;&lt;a href=&#34;#cb2-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;git&lt;/span&gt; add libs/&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Note that you should prefer the &lt;code&gt;.&lt;/code&gt; over the usage of &lt;code&gt;*&lt;/code&gt; as the shell interprets it and replaces it with all the files and folders in the current directory.&lt;/p&gt;
+&lt;p&gt;Puedes usar git add con la opción &lt;code&gt;--all&lt;/code&gt; o &lt;code&gt;--update&lt;/code&gt; para preparar los archivos que han sido eliminados para su eliminación.&lt;/p&gt;
+&lt;p&gt;Como nota final, uno podría añadir archivos enumerados en el &lt;code&gt;.gitignore&lt;/code&gt; (ignorándolos) al agregar la bandera &lt;code&gt;-f&lt;/code&gt; o &lt;code&gt;--force&lt;/code&gt;. Si lo haces en un directorio, funcionará de manera recursiva.&lt;/p&gt;
+&lt;div class=&#34;sourceCode&#34; id=&#34;cb3&#34;&gt;&lt;pre class=&#34;sourceCode bash&#34;&gt;&lt;code class=&#34;sourceCode bash&#34;&gt;&lt;span id=&#34;cb3-1&#34;&gt;&lt;a href=&#34;#cb3-1&#34; tabindex=&#34;-1&#34;&gt;&lt;/a&gt;&lt;span class=&#34;fu&#34;&gt;git&lt;/span&gt; add &lt;span class=&#34;at&#34;&gt;--force&lt;/span&gt; libs/&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;!-- Begin Mailchimp Signup Form --&gt;
+&lt;link href=&#34;//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css&#34; rel=&#34;stylesheet&#34; type=&#34;text/css&#34;&gt;
+&lt;link rel=&#34;stylesheet&#34; type=&#34;text/css&#34; href=&#34;https://csshake.surge.sh/csshake.min.css&#34;&gt;
+&lt;style type=&#34;text/css&#34;&gt;
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+&lt;/style&gt;
+&lt;div id=&#34;mc_embed_signup&#34;&gt;
+&lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
+ &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; Suscribe for more Git tips!&lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;your best email&#34; required&gt;
+    &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
+    &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;/div&gt;
+&lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!--End mc_embed_signup--&gt;
+</description>
+    </item>
     
     <item>
       <title>¡Aumenta la velocidad de tus scripts de R!. Optimiza la lectura, escritura y almacenamiento de grandes datasets con el paquete FST</title>
@@ -357,11 +1265,11 @@ q2_weighted_mean
 &lt;div id=&#34;mc_embed_signup&#34;&gt;
 &lt;form action=&#34;https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;amp;id=d95c503a48&#34; method=&#34;post&#34; id=&#34;mc-embedded-subscribe-form&#34; name=&#34;mc-embedded-subscribe-form&#34; class=&#34;validate&#34; target=&#34;_blank&#34; novalidate&gt;
  &lt;div id=&#34;mc_embed_signup_scroll&#34;&gt;
-	&lt;label for=&#34;mce-EMAIL&#34;&gt; ¡Síguenos gratis para más tips de Python!&lt;/label&gt;
-	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;tu mejor email&#34; required&gt;
+	&lt;label for=&#34;mce-EMAIL&#34;&gt; ¡Suscribete para más contenido sobre Python! &lt;/label&gt;
+	&lt;input type=&#34;email&#34; value=&#34;&#34; name=&#34;EMAIL&#34; class=&#34;email&#34; id=&#34;mce-EMAIL&#34; placeholder=&#34;tu mejor email&#34; required&gt;&lt;input type=&#34;hidden&#34; name=&#34;tags&#34; value=&#34;7614568&#34;&gt;&lt;/div&gt;
     &lt;!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups--&gt;
     &lt;div style=&#34;position: absolute; left: -5000px;&#34; aria-hidden=&#34;true&#34;&gt;&lt;input type=&#34;text&#34; name=&#34;b_91551f7ed29389a0de4f47665_d95c503a48&#34; tabindex=&#34;-1&#34; value=&#34;&#34;&gt;&lt;/div&gt;
-    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;Submit!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
+    &lt;div class=&#34;clear&#34;&gt;&lt;input type=&#34;submit&#34; value=&#34;¡Dale!&#34; name=&#34;subscribe&#34; id=&#34;mc-embedded-subscribe&#34; class=&#34;button&#34;&gt;&lt;/div&gt;
     &lt;/div&gt;
 &lt;/form&gt;
 &lt;/div&gt;

@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+  <meta name="robots" content="index,follow">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Pablo Cánovas">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Dominando Pydantic, Enums e IntEnums para aplicaciones Python robustas. Fusiona el poder de las validaciones de datos de Pydantic y el concepto de Enum, IntEnum y StrEnum.">
+
+  
+  <link rel="alternate" hreflang="es" href="/es/post/pydantic-enum-intenum/">
+  
+  <link rel="alternate" hreflang="es" href="/es/post/pydantic-enum-intenum/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#0294A5">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BHP7JGTF0S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'G-BHP7JGTF0S', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/es/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu9e801daf4e49b28938f4da726192ad03_202286_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu9e801daf4e49b28938f4da726192ad03_202286_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/es/post/pydantic-enum-intenum/">
+
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="TypeThePipe">
+  <meta property="og:url" content="/es/post/pydantic-enum-intenum/">
+  <meta property="og:title" content="Pydantic, Enums e IntEnums. Una historia de validación | TypeThePipe">
+  <meta property="og:description" content="Dominando Pydantic, Enums e IntEnums para aplicaciones Python robustas. Fusiona el poder de las validaciones de datos de Pydantic y el concepto de Enum, IntEnum y StrEnum."><meta property="og:image" content="/es/post/pydantic-enum-intenum/featured.png">
+  <meta property="twitter:image" content="/es/post/pydantic-enum-intenum/featured.png"><meta property="og:locale" content="es">
+  
+    
+      <meta property="article:published_time" content="2022-10-05T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2022-10-05T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "/es/post/pydantic-enum-intenum/"
+  },
+  "headline": "Pydantic, Enums e IntEnums. Una historia de validación",
+  
+  "image": [
+    "/es/post/pydantic-enum-intenum/featured.png"
+  ],
+  
+  "datePublished": "2022-10-05T00:00:00Z",
+  "dateModified": "2022-10-05T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Carlos Vecina"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "TypeThePipe",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "/images/logo_hu98b613e11a8f47913471a1a46318bc6c_19561_192x192_fit_lanczos_2.png"
+    }
+  },
+  "description": "Dominando Pydantic, Enums e IntEnums para aplicaciones Python robustas. Fusiona el poder de las validaciones de datos de Pydantic y el concepto de Enum, IntEnum y StrEnum."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+
+
+
+
+
+
+  <title>Pydantic, Enums e IntEnums. Una historia de validación | TypeThePipe</title>
+  <script async defer src="https://tools.luckyorange.com/core/lo.js?site-id=10579286"></script>
+  
+  
+<script>var ezoicId = 473828; </script>
+<script type="text/javascript" src="//go.ezoic.net/ezoic/ezoic.js"></script>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Buscar</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Buscar..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+  
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/es"><img src="/images/logo_hu98b613e11a8f47913471a1a46318bc6c_19561_0x70_resize_lanczos_2.png" alt="TypeThePipe"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Barra de navegación">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/es"><img src="/images/logo_hu98b613e11a8f47913471a1a46318bc6c_19561_0x70_resize_lanczos_2.png" alt="TypeThePipe"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/es/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/es/#vizstips"><span>Vizs & Tips</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/es/#people"><span>Nosotros</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+      
+      <li class="nav-item dropdown i18n-dropdown">
+        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true">
+          <i class="fas fa-globe mr-1" aria-hidden="true"></i><span class="d-none d-lg-inline">Español</span>
+        </a>
+        <div class="dropdown-menu">
+          <div class="dropdown-item dropdown-item-active">
+            <span>Español</span>
+          </div>
+          
+          <a class="dropdown-item" href="/es/post/pydantic-enum-intenum/">
+            <span>Español</span>
+          </a>
+          
+        </div>
+      </li>
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+
+        <article class="article">
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Pydantic, Enums e IntEnums. Una historia de validación</h1>
+
+  
+  <p class="page-subtitle">Validación y tipado de Datos en Python: Dominando Pydantic, Enums e IntEnums para Aplicaciones Python Robustas.</p>
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  
+  <span><a href="/es/authors/carlos-vecina/">Carlos Vecina</a></span>
+  </div>
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/es/categories/python/">Python</a>, <a href="/es/categories/post/">Post</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+            <div class="article-container">
+              <div class="article-style">
+                
+<script src="/es/post/pydantic-enum-intenum/index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="featured.png" width="400px" alt="Logo del módulo de Python Pydantic." /></p>
+<div id="qué-es-un-enum-y-su-integración-con-pydantic" class="section level1">
+<h1>¿Qué es un Enum y su integración con Pydantic?</h1>
+<p>¡Oh, esta es una gran pregunta! ¡Nunca la había escuchado antes! Un Enum, para los no iniciados, es una característica ingeniosa que, cuando se combina con la biblioteca Pydantic, te ayuda a controlar el caos de la jungla de datos. <strong>Es una combinación del Enum de Python (abreviatura de enumeración) y el poder de validación de Pydantic. Los Enums te permiten definir un conjunto de valores con nombres a los que tus datos deben adherirse.</strong> Pydantic luego verifica si tus datos son parte de este club exclusivo y, si no lo son, amablemente les muestra la puerta de salida.</p>
+<p><br></p>
+<div id="cómo-me-ayudan-pydantic-y-enum" class="section level2">
+<h2><strong>¿Cómo me ayudan Pydantic y Enum?</strong></h2>
+<p>Si alguna vez has trabajado con datos, sabes que tienen voluntad propia. A veces son impecables y perfectos. En otras ocasiones, son un desastre total. Los Enums están aquí para salvarte de esos días en los que tus datos deciden actuar por su cuenta.</p>
+<p>Al definir Enums y utilizarlos en tus modelos de Pydantic, creas un conjunto de reglas que tus datos deben seguir, como un profesor estricto pero justo. De esta manera, puedes asegurarte de que solo datos válidos entren en tu sistema y que cualquier valor atípico se maneje adecuadamente.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">from</span> enum <span class="im">import</span> Enum</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">from</span> pydantic <span class="im">import</span> BaseModel, ValidationError</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="kw">class</span> Pet(BaseModel):</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  name: <span class="bu">str</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  animal_type: <span class="bu">str</span></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  sex: <span class="bu">str</span></span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>  </span></code></pre></div>
+<p><strong>Puedes ser más específico al definir tus modelos de Pydantic utilizando Enums:</strong></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">from</span> pydantic <span class="im">import</span> ValidationError</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="kw">class</span> Sex(Enum):</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>  MALE <span class="op">=</span> <span class="st">&#39;male&#39;</span></span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>  FEMALE <span class="op">=</span> <span class="st">&#39;female&#39;</span></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>  </span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a><span class="kw">class</span> DomesticAnimals(Enum):</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>  CAT <span class="op">=</span> <span class="st">&#39;cat&#39;</span></span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>  DOG <span class="op">=</span> <span class="st">&#39;dog&#39;</span></span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>  FISH <span class="op">=</span> <span class="st">&#39;fish&#39;</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>  BIRD <span class="op">=</span> <span class="st">&#39;bird&#39;</span></span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a><span class="co"># And then</span></span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a><span class="kw">class</span> Pet(BaseModel):</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>  name: <span class="bu">str</span></span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>  animal_type: DomesticAnimals</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>  sex: Sex</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>  </span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>Pet(name<span class="op">=</span><span class="st">&#39;Timmy&#39;</span>, animal_type<span class="op">=</span><span class="st">&#39;bird&#39;</span>, sex<span class="op">=</span><span class="st">&#39;male&#39;</span>)</span></code></pre></div>
+<pre><code>## Pet(name=&#39;Timmy&#39;, animal_type=&lt;DomesticAnimals.BIRD: &#39;bird&#39;&gt;, sex=&lt;Sex.MALE: &#39;male&#39;&gt;)</code></pre>
+<p>Agregar un valor que no existe (por ejemplo, “Tigre”, que no está permitido en animales domésticos) a un Enum existente generará un error el valor no es un miembro de la enumeración válido. Este es uno de los principales casos de uso para ellos.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="im">import</span> pytest</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="cf">with</span> pytest.raises(ValidationError, match<span class="op">=</span><span class="st">&#39; value is not a valid enumeration member&#39;</span>) <span class="im">as</span> e_info:</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>  Pet(</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>    name<span class="op">=</span><span class="st">&#39;Timmy&#39;</span>, </span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>    animal_type<span class="op">=</span><span class="st">&#39;tiger&#39;</span>, </span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>    sex<span class="op">=</span><span class="st">&#39;male&#39;</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>  )</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a><span class="bu">print</span>(e_info.value)</span></code></pre></div>
+<pre><code>## 1 validation error for Pet
+## animal_type
+##   value is not a valid enumeration member; permitted: &#39;cat&#39;, &#39;dog&#39;, &#39;fish&#39;, &#39;bird&#39; (type=type_error.enum; enum_values=[&lt;DomesticAnimals.CAT: &#39;cat&#39;&gt;, &lt;DomesticAnimals.DOG: &#39;dog&#39;&gt;, &lt;DomesticAnimals.FISH: &#39;fish&#39;&gt;, &lt;DomesticAnimals.BIRD: &#39;bird&#39;&gt;])</code></pre>
+<p>(*Note the <code>UPPER_CASE_NOTATION</code>)</p>
+<p><br></p>
+</div>
+<div id="y-qué-hay-de-intenum-cuál-es-la-diferencia-entre-enum-e-intenum" class="section level2">
+<h2><strong>¿Y qué hay de IntEnum? ¿Cuál es la diferencia entre Enum e IntEnum?</strong></h2>
+<p>En resumen, la principal diferencia entre Enum e IntEnum radica en el tipo de valores que representan. Enum es una clase de enumeración genérica que puede utilizarse con cualquier tipo de datos, mientras que IntEnum está específicamente diseñado para valores enteros y permite la comparación directa con enteros.</p>
+<p>Existen dos beneficios principales al utilizar IntEnums en los casos de uso correctos:</p>
+<ul>
+<li>Dado que IntEnum garantiza que todos los miembros de la enumeración tienen un valor entero, es posible ordenarlos.</li>
+<li>Los miembros de IntEnum pueden compararse directamente con enteros, mientras que los miembros de Enum no pueden utilizarse en operadores de comparación de enteros.</li>
+</ul>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="im">from</span> enum <span class="im">import</span> IntEnum</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="im">import</span> pytest</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="kw">class</span> ResponseCode(IntEnum):</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>    OK <span class="op">=</span> <span class="dv">200</span></span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>    NOT_FOUND <span class="op">=</span> <span class="dv">404</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>    ERROR <span class="op">=</span> <span class="dv">500</span></span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>    </span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a><span class="cf">assert</span> ResponseCode.OK <span class="op">==</span> <span class="dv">200</span></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a><span class="cf">assert</span> ResponseCode.OK <span class="op">&lt;=</span> ResponseCode.NOT_FOUND</span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="cf">with</span> pytest.raises(<span class="pp">TypeError</span>, match<span class="op">=</span><span class="st">&#39;cannot extend enumeration&#39;</span>) <span class="im">as</span> e_info: <span class="co"># Check that a TypeError is raised</span></span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>  <span class="kw">class</span> ExtendedResponseCode(ResponseCode):</span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>      CUSTOM <span class="op">=</span> <span class="dv">300</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="bu">print</span>(e_info.value)</span></code></pre></div>
+<pre><code>## ExtendedResponseCode: cannot extend enumeration &#39;ResponseCode&#39;</code></pre>
+<p><br></p>
+</div>
+</div>
+<div id="es-posible-crear-una-subclase-de-un-enum-o-un-strenum-intenum" class="section level1">
+<h1>¿Es posible crear una subclase de un Enum (o un StrEnum / IntEnum)?</h1>
+<p>No se supone que sea posible. Si intentas hacerlo mediante la herencia directa, es posible que se genere un <code>TypeError</code>. Para explicarlo, la documentación dice: “Permitir la creación de subclases de enums que definen miembros llevaría a una violación de algunas invariantes importantes de tipos e instancias.”</p>
+<p>¿Qué estaríamos infringiendo? Veamos <a href="https://mail.python.org/pipermail/python-dev/2013-April/125716.html">el comentario de Guido en (2013)</a>:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="im">from</span> enum <span class="im">import</span> Enum</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" tabindex="-1"></a><span class="kw">class</span> Color(Enum):</span>
+<span id="cb8-4"><a href="#cb8-4" tabindex="-1"></a>  red <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb8-5"><a href="#cb8-5" tabindex="-1"></a>  green <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb8-6"><a href="#cb8-6" tabindex="-1"></a>  blue <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb8-7"><a href="#cb8-7" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" tabindex="-1"></a><span class="kw">class</span> MoreColor(Color): <span class="co"># this is not possible as we&#39;ve seen</span></span>
+<span id="cb8-9"><a href="#cb8-9" tabindex="-1"></a>  cyan <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb8-10"><a href="#cb8-10" tabindex="-1"></a>  magenta <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb8-11"><a href="#cb8-11" tabindex="-1"></a>  yellow <span class="op">=</span> <span class="dv">6</span></span>
+<span id="cb8-12"><a href="#cb8-12" tabindex="-1"></a></span>
+<span id="cb8-13"><a href="#cb8-13" tabindex="-1"></a><span class="bu">type</span>(MoreColor.red) <span class="kw">is</span> Color</span>
+<span id="cb8-14"><a href="#cb8-14" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" tabindex="-1"></a><span class="bu">type</span>(MoreColor.red) <span class="kw">is</span> <span class="kw">not</span> MoreColor</span>
+<span id="cb8-16"><a href="#cb8-16" tabindex="-1"></a></span>
+<span id="cb8-17"><a href="#cb8-17" tabindex="-1"></a><span class="co">#En otras palabras, mientras &#39;red&#39; es accesible en MoreColor</span></span>
+<span id="cb8-18"><a href="#cb8-18" tabindex="-1"></a><span class="co">#es realmente una instancia de Color?</span></span>
+<span id="cb8-19"><a href="#cb8-19" tabindex="-1"></a></span>
+<span id="cb8-20"><a href="#cb8-20" tabindex="-1"></a><span class="co">#Vaya, esto es un caos. No queremos que MoreColor.red y</span></span>
+<span id="cb8-21"><a href="#cb8-21" tabindex="-1"></a><span class="co">#Color.red sean objetos diferentes, pero usando isinstance() check</span></span>
+<span id="cb8-22"><a href="#cb8-22" tabindex="-1"></a><span class="co">#parece confuso.</span></span>
+<span id="cb8-23"><a href="#cb8-23" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" tabindex="-1"></a><span class="co">#not isinstance(Color.red, MoreColor)</span></span>
+<span id="cb8-25"><a href="#cb8-25" tabindex="-1"></a><span class="co">#isinstance(MoreColor.yellow, Color)</span></span></code></pre></div>
+<p>En algunas versiones de Python, esto funciona sin mostrar un mensaje de error, pero es un comportamiento no deseado.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="kw">class</span> Color(Enum):</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a>  red <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a>  green <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>  blue <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" tabindex="-1"></a><span class="kw">class</span> MoreColor(Enum, Color):</span>
+<span id="cb9-7"><a href="#cb9-7" tabindex="-1"></a>  cyan <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb9-8"><a href="#cb9-8" tabindex="-1"></a>  magenta <span class="op">=</span> <span class="dv">5</span></span>
+<span id="cb9-9"><a href="#cb9-9" tabindex="-1"></a>  yellow <span class="op">=</span> <span class="dv">6</span></span></code></pre></div>
+<p>Uno podría argumentar que las enumeraciones existen para garantizar la exclusión mutua sobre un conjunto finito no ordenado. Agregar miembros adicionales a una enumeración existente no viola esta garantía. Por lo tanto, si estás seguro de tu caso de uso y de lo que estás haciendo, es posible crear una solución alternativa. <strong>Una solución limpia utilizando un decorador es:</strong></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="im">from</span> enum <span class="im">import</span> Enum</span>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Any, Callable</span>
+<span id="cb10-3"><a href="#cb10-3" tabindex="-1"></a></span>
+<span id="cb10-4"><a href="#cb10-4" tabindex="-1"></a><span class="kw">class</span> EnumBase(Enum):</span>
+<span id="cb10-5"><a href="#cb10-5" tabindex="-1"></a>    <span class="kw">def</span> <span class="fu">__eq__</span>(<span class="va">self</span>, other: Any) <span class="op">-&gt;</span> <span class="bu">bool</span>:</span>
+<span id="cb10-6"><a href="#cb10-6" tabindex="-1"></a>        <span class="cf">if</span> <span class="bu">isinstance</span>(other, Enum):</span>
+<span id="cb10-7"><a href="#cb10-7" tabindex="-1"></a>            <span class="cf">return</span> <span class="va">self</span>.value <span class="op">==</span> other.value</span>
+<span id="cb10-8"><a href="#cb10-8" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">False</span></span>
+<span id="cb10-9"><a href="#cb10-9" tabindex="-1"></a>      </span>
+<span id="cb10-10"><a href="#cb10-10" tabindex="-1"></a><span class="kw">def</span> extend_enum(parent_enum: EnumBase) <span class="op">-&gt;</span> Callable[[EnumBase], EnumBase]:</span>
+<span id="cb10-11"><a href="#cb10-11" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Decorator function that extends an enum class with values from another enum class.&quot;&quot;&quot;</span></span>
+<span id="cb10-12"><a href="#cb10-12" tabindex="-1"></a>    <span class="kw">def</span> wrapper(extended_enum: EnumBase) <span class="op">-&gt;</span> EnumBase:</span>
+<span id="cb10-13"><a href="#cb10-13" tabindex="-1"></a>        joined <span class="op">=</span> {}</span>
+<span id="cb10-14"><a href="#cb10-14" tabindex="-1"></a>        <span class="cf">for</span> item <span class="kw">in</span> parent_enum:</span>
+<span id="cb10-15"><a href="#cb10-15" tabindex="-1"></a>            joined[item.name] <span class="op">=</span> item.value</span>
+<span id="cb10-16"><a href="#cb10-16" tabindex="-1"></a>        <span class="cf">for</span> item <span class="kw">in</span> extended_enum:</span>
+<span id="cb10-17"><a href="#cb10-17" tabindex="-1"></a>            joined[item.name] <span class="op">=</span> item.value</span>
+<span id="cb10-18"><a href="#cb10-18" tabindex="-1"></a>        <span class="cf">return</span> EnumBase(extended_enum.<span class="va">__name__</span>, joined)</span>
+<span id="cb10-19"><a href="#cb10-19" tabindex="-1"></a>    <span class="cf">return</span> wrapper</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="kw">class</span> Parent(EnumBase):</span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a>  A <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb11-3"><a href="#cb11-3" tabindex="-1"></a>  B <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb11-4"><a href="#cb11-4" tabindex="-1"></a>  </span>
+<span id="cb11-5"><a href="#cb11-5" tabindex="-1"></a><span class="at">@extend_enum</span>(Parent)</span>
+<span id="cb11-6"><a href="#cb11-6" tabindex="-1"></a><span class="kw">class</span> ExtendedParent(EnumBase):</span>
+<span id="cb11-7"><a href="#cb11-7" tabindex="-1"></a>  C <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb11-8"><a href="#cb11-8" tabindex="-1"></a>  </span>
+<span id="cb11-9"><a href="#cb11-9" tabindex="-1"></a><span class="bu">print</span>(</span>
+<span id="cb11-10"><a href="#cb11-10" tabindex="-1"></a><span class="bu">type</span>(Parent.A) <span class="kw">is</span> Parent,</span>
+<span id="cb11-11"><a href="#cb11-11" tabindex="-1"></a><span class="bu">type</span>(Parent.A) <span class="kw">is</span> <span class="kw">not</span> ExtendedParent,</span>
+<span id="cb11-12"><a href="#cb11-12" tabindex="-1"></a>Parent.A <span class="op">==</span> ExtendedParent.A</span>
+<span id="cb11-13"><a href="#cb11-13" tabindex="-1"></a>)</span></code></pre></div>
+<pre><code>## True True True</code></pre>
+<p>Pero esta no es una solución perfecta, ya que tiene algunas desventajas o limitaciones de las que debes ser consciente. En este caso, un Enum no relacionado (llamado <code>RandomEnum</code>) que implementa el mismo valor de enumeración es igual en la comparación con nuestras clases <code>Parent</code> y <code>ExtendedParent</code>:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="kw">class</span> RandomEnum(EnumBase):</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>  A <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  </span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>Parent.A <span class="op">==</span> RandomEnum.A <span class="op">==</span> ExtendedParent.A</span></code></pre></div>
+<pre><code>## True</code></pre>
+<p><br></p>
+<div id="mantente-actualizado-en-consejos-de-pydantic-y-python" class="section level2">
+<h2><strong>Mantente actualizado en consejos de Pydantic y Python</strong></h2>
+<p>Esperamos que esta publicación te haya ayudado a familiarizarte con el uso de Enum en Pydantic y te haya permitido disfrutar de una presentación de algunas de sus funcionalidades.</p>
+<p>Si deseas mantenerte actualizado…</p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> ¡Suscribete para más contenido sobre Python y Pydantic! </label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="tu mejor email" required><input type="hidden" name="tags" value="7614568"></div>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="¡Dale!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+<style>
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+</style>
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
+</div>
+</div>
+
+              </div>
+              
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/es/tags/python/">Python</a>
+  
+  <a class="badge badge-light" href="/es/tags/pydantic/">Pydantic</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/es/post/pydantic-enum-intenum/&amp;text=Pydantic,%20Enums%20e%20IntEnums.%20Una%20historia%20de%20validaci%c3%b3n" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/es/post/pydantic-enum-intenum/&amp;t=Pydantic,%20Enums%20e%20IntEnums.%20Una%20historia%20de%20validaci%c3%b3n" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Pydantic,%20Enums%20e%20IntEnums.%20Una%20historia%20de%20validaci%c3%b3n&amp;body=/es/post/pydantic-enum-intenum/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/es/post/pydantic-enum-intenum/&amp;title=Pydantic,%20Enums%20e%20IntEnums.%20Una%20historia%20de%20validaci%c3%b3n" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=Pydantic,%20Enums%20e%20IntEnums.%20Una%20historia%20de%20validaci%c3%b3n%20/es/post/pydantic-enum-intenum/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/es/post/pydantic-enum-intenum/&amp;title=Pydantic,%20Enums%20e%20IntEnums.%20Una%20historia%20de%20validaci%c3%b3n" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+
+
+
+
+
+  
+  
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/es/authors/carlos-vecina/carlos-vecina-avatar_hudcecee8c8ed4dd07fd2b73e656fad71c_149347_270x270_fill_lanczos_center_2.png" alt="Carlos Vecina">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/es/authors/carlos-vecina/">Carlos Vecina</a></h5>
+      <h6 class="card-subtitle">Senior Data Scientist at Jobandtalent</h6>
+      <p class="card-text">Senior Data Scientist at Jobandtalent  |  AI &amp; Data Science para aportar valor en la empresa</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/es/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/deepchals" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/carlos-vecina/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/CarlosVecina" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://autarponics.com" target="_blank" rel="noopener">
+        <i class="fa fa-home"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Relacionado</h3>
+    <ul>
+      
+      <li><a href="/es/post/pydantic-enum-intenum/">Pydantic, Enums e IntEnums. Una historia de validación</a></li>
+      
+    </ul>
+  </div>
+  
+
+
+            </div>
+        </article>
+  
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/python.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/es/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No se encontraron resultados","placeholder":"Buscar...","results":"resultados encontrados"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Proyectos",
+        'publication' : "Publicaciones",
+        'talk' : "Charlas"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.37431be2d92d7fb0160054761ab79602.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
+    
+    
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+	<a href="https://www.r-bloggers.com/">
+	<img border="0" alt="R Bloggers icon" src="/img/r_bloggers.png" width="100" height="100">
+	</a>
+	<br>
+	<a href="https://www.python-bloggers.com/">
+	<img border="0" alt="Python Bloggers icon" src="/img/python_logo.png" width="100" height="100">
+	</a>
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+  <style>
+    #consent-notice {padding: 1rem 1rem; display: none; text-align: center; position: fixed; bottom: 0; width: calc(100% - 2rem); background: #222; color: rgba(255,255,255,0.8);}
+    #consent-notice span {margin-right: 1rem;}
+    #consent-notice button {cursor: pointer; display: inline-block; width: auto;}
+    #consent-notice span a {color: inherit; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.5);}
+    #consent-notice button.btn {margin-left: 0.5rem;}
+    #consent-notice button.btn.manage-consent {background: rgba(255,255,255,0.1); font-weight: normal;}
+    
+    #consent-overlay {position: fixed; left: 0; top: 0; width: 100%; height: 100vh; display: none; background: rgba(0,0,0,0.75); z-index: 999999; overflow: auto; cursor: pointer;}
+    #consent-overlay.active {display: flex;}
+    #consent-overlay > div {background: white; width: 100%; max-width: 30rem; padding: 1.75rem; margin: auto; cursor: initial;}
+    #consent-overlay > div > div {display: flex; align-items: flex-start; margin-bottom: 1rem;}
+    #consent-overlay > div > div:last-child {margin: 0;}
+    #consent-overlay h3 {padding-top: 0;}
+    #consent-overlay input {margin-top: 0.3rem;}
+    #consent-overlay label {display: block;}
+    #consent-overlay .btn {margin-right: 0.5rem;}
+    #consent-overlay button.btn.save-consent {background: rgba(0,0,0,0.6); font-weight: normal;}
+
+    @media (max-width: 767px) {
+        #consent-overlay > div {padding: 1.75rem 1rem;}
+        #consent-notice span {display: block; padding-top: 3px; margin-bottom: 1.5rem;}
+        #consent-notice button.btn {position: relative; bottom: 4px;}
+    }
+</style>
+<div id="consent-notice"><span>We would like to use <a class="manage-consent" href="#manage-consent">third party code</a> to improve the functionality of this website.</span><button class="btn manage-consent">Manage preferences</button><button class="btn deny-consent">Deny</button><button class="btn approve-consent">Allow</button></div>
+<div id="consent-overlay">
+    <div>
+        
+            <div>
+                <input type="checkbox" id="item0" value="1" name="item0" checked disabled />
+                <label for="item0">
+                    <h3>Google Anaytics (functional)</h3>
+                    <p>This code gives us insight into the number of anonymized people that visit our website, where they are from and what they are clicking on in order to create better content.</p>
+                </label>
+            </div>
+        
+            <div>
+                <input type="checkbox" id="item1" value="1" name="item1"  />
+                <label for="item1">
+                    <h3>Marketing</h3>
+                    <p>Marketing pourposes cookies.</p>
+                </label>
+            </div>
+        
+        <div>
+            <button id="save-consent" class="btn save-consent" data-consentvalue="0">Save preferences</button>
+            <button class="btn approve-consent">Allow all</button>
+        </div>
+    </div>
+</div>
+<script>
+
+    const scripts = [];
+    scripts[ 0 ] = "/js/mkt.js";
+
+    function createCookie(name,value,days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+    function eraseCookie(name) {
+        createCookie(name,"",-1);
+    }
+    function denyAllConsentScripts() {
+        var consentValue = "";
+        scripts.forEach(function(){
+            consentValue = consentValue + "0";
+        });
+        acceptSomeConsentScripts(consentValue);
+    }
+    function acceptAllConsentScripts() {
+        var consentValue = "";
+        scripts.forEach(function(){
+            consentValue = consentValue + "1";
+        });
+        acceptSomeConsentScripts(consentValue);
+    }
+    function acceptSomeConsentScripts(consentValue) {
+        setConsentInputs(consentValue);
+        createCookie('consent-settings',consentValue,31);
+        document.getElementById('consent-notice').style.display = 'none';
+        document.getElementById('consent-overlay').classList.remove('active');
+        loadConsentScripts(consentValue);
+    }
+    function loadConsentScripts(consentValue) {
+        scripts.forEach(function(value,key){
+            
+            if(consentValue[key]=="1") {
+                var s = document.createElement('script');
+                s.type = 'text/javascript';
+                s.src = value;
+                document.body.appendChild(s);
+            }
+        });
+    }
+    function setConsentInputs(consentValue) {
+        var elements = document.querySelectorAll('#consent-overlay input:not([disabled])');
+        elements.forEach(function(el,index) {
+            if(consentValue[index]=="1") el.checked = true;
+            else el.checked = false;
+        });
+    }
+    function setConsentValue() {
+        var elements = document.querySelectorAll('#consent-overlay input:not([disabled])');
+        var consentValue = "";
+        elements.forEach(function(el) {
+            if(el.checked) consentValue = consentValue + "1";
+            else consentValue = consentValue + "0";
+        });
+        document.getElementById("save-consent").dataset.consentvalue = consentValue;
+    }
+
+    var elements = document.querySelectorAll('#consent-overlay input:not([disabled])');
+    elements.forEach(function(el) {
+        el.checked = false;
+    });
+
+    if(readCookie('consent-settings')) {
+        var consentValue = readCookie('consent-settings').toString();
+        
+        setConsentInputs(consentValue);
+        loadConsentScripts(consentValue);
+    } else {
+        document.getElementById('consent-notice').style.display = 'block';
+    }
+    var elements = document.querySelectorAll('.manage-consent');
+    elements.forEach(function(el) {
+        el.addEventListener("click",function() {
+            document.getElementById('consent-overlay').classList.toggle('active');
+        });
+    });
+    var elements = document.querySelectorAll('.deny-consent');
+    elements.forEach(function(el) {
+        el.addEventListener("click",function() {
+            denyAllConsentScripts();
+        });
+    });
+    var elements = document.querySelectorAll('.approve-consent');
+    elements.forEach(function(el) {
+        el.addEventListener("click",function() {
+            acceptAllConsentScripts();
+        });
+    });
+    document.getElementById("save-consent").addEventListener("click",function() {
+        setConsentValue();
+        acceptSomeConsentScripts(this.dataset.consentvalue);
+    });
+    document.getElementById("consent-overlay").addEventListener("click",function(e) {
+        if (!document.querySelector("#consent-overlay > div").contains(e.target)){
+            this.classList.toggle('active');
+        }
+    });
+</script>
+
+
+    
+        <script type="text/javascript" src="/js/ga.js"></script>
+    
+
+    
+
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Citar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copiar
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Descargar
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

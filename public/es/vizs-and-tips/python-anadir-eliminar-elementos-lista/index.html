@@ -1,0 +1,1358 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.8.0">
+  <meta name="robots" content="index,follow">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Pablo Cánovas">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Conviértete en un maestro de la manipulación de Listas en Python: Añade y elimina elementos con Precisión. Con ejemplos prácticos y consejos útiles, este post te ayudará a dominar las habilidades fundamentales para trabajar con listas en Python.">
+
+  
+  <link rel="alternate" hreflang="es" href="/es/vizs-and-tips/python-anadir-eliminar-elementos-lista/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="#0294A5">
+  
+
+  
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0-1/css/all.min.css" integrity="sha256-4w9DunooKSr3MFXHXWyFER38WmPdm361bQS/2KUWZbU=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+        
+      
+    
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.css" integrity="sha256-SHMGCYmST46SoyGgo4YR/9AlK1vf3ff84Aq9yK4hdqM=" crossorigin="anonymous">
+    
+
+    
+
+    
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/lazysizes/5.1.2/lazysizes.min.js" integrity="sha256-Md1qLToewPeKjfAHU1zyPwOutccPAm5tahnaw7Osw0A=" crossorigin="anonymous" async></script>
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+
+      
+      
+
+      
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/academic.css">
+
+  
+
+
+
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-BHP7JGTF0S"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+      dataLayer.push(arguments);
+  }
+
+  function trackOutboundLink(url, target) {
+    gtag('event', 'click', {
+         'event_category': 'outbound',
+         'event_label': url,
+         'transport_type': 'beacon',
+         'event_callback': function () {
+           if (target !== '_blank') {
+             document.location = url;
+           }
+         }
+    });
+    console.debug("Outbound link clicked: " + url);
+  }
+
+  function onClickCallback(event) {
+    if ((event.target.tagName !== 'A') || (event.target.host === window.location.host)) {
+      return;
+    }
+    trackOutboundLink(event.target, event.target.getAttribute('target'));  
+  }
+
+  gtag('js', new Date());
+  gtag('config', 'G-BHP7JGTF0S', {});
+
+  
+  document.addEventListener('click', onClickCallback, false);
+</script>
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/es/index.webmanifest">
+  <link rel="icon" type="image/png" href="/images/icon_hu9e801daf4e49b28938f4da726192ad03_202286_32x32_fill_lanczos_center_2.png">
+  <link rel="apple-touch-icon" type="image/png" href="/images/icon_hu9e801daf4e49b28938f4da726192ad03_202286_192x192_fill_lanczos_center_2.png">
+
+  <link rel="canonical" href="/es/vizs-and-tips/python-anadir-eliminar-elementos-lista/">
+
+  
+  
+  
+  
+  
+    
+  
+  
+  <meta property="twitter:card" content="summary_large_image">
+  
+  <meta property="og:site_name" content="TypeThePipe">
+  <meta property="og:url" content="/es/vizs-and-tips/python-anadir-eliminar-elementos-lista/">
+  <meta property="og:title" content="Cómo añadir y eliminar elementos en una lista de Python | TypeThePipe">
+  <meta property="og:description" content="Conviértete en un maestro de la manipulación de Listas en Python: Añade y elimina elementos con Precisión. Con ejemplos prácticos y consejos útiles, este post te ayudará a dominar las habilidades fundamentales para trabajar con listas en Python."><meta property="og:image" content="/es/vizs-and-tips/python-anadir-eliminar-elementos-lista/featured.png">
+  <meta property="twitter:image" content="/es/vizs-and-tips/python-anadir-eliminar-elementos-lista/featured.png"><meta property="og:locale" content="es">
+  
+    
+      <meta property="article:published_time" content="2023-11-07T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2023-11-07T00:00:00&#43;00:00">
+  
+
+  
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+  <title>Cómo añadir y eliminar elementos en una lista de Python | TypeThePipe</title>
+  <script async defer src="https://tools.luckyorange.com/core/lo.js?site-id=10579286"></script>
+  
+  
+<script>var ezoicId = 473828; </script>
+<script type="text/javascript" src="//go.ezoic.net/ezoic/ezoic.js"></script>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" >
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Buscar</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Buscar..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search">
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+
+
+
+
+
+
+  
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/es"><img src="/images/logo_hu98b613e11a8f47913471a1a46318bc6c_19561_0x70_resize_lanczos_2.png" alt="TypeThePipe"></a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Barra de navegación">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/es"><img src="/images/logo_hu98b613e11a8f47913471a1a46318bc6c_19561_0x70_resize_lanczos_2.png" alt="TypeThePipe"></a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/es/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/es/#vizstips"><span>Vizs & Tips</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/es/#people"><span>Nosotros</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+      
+      <li class="nav-item">
+        <a class="nav-link js-search" href="#"><i class="fas fa-search" aria-hidden="true"></i></a>
+      </li>
+      
+
+      
+
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  
+
+
+        <article class="article">
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+
+<div class="article-container pt-3">
+  <h1>Cómo añadir y eliminar elementos en una lista de Python</h1>
+
+  
+  <p class="page-subtitle">Conviértete en un maestro de la manipulación de Listas en Python: Añade y elimina elementos con Precisión. Con ejemplos prácticos y consejos útiles, este post te ayudará a dominar las habilidades fundamentales para trabajar con listas en Python.</p>
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+  
+  
+  <div>
+    
+
+  
+  <span><a href="/es/authors/carlos-vecina/">Carlos Vecina</a></span>
+  </div>
+  
+  
+
+  
+
+  
+
+  
+
+  
+  
+  
+
+  
+  
+  
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/es/categories/python/">Python</a>, <a href="/es/categories/tips/">Tips</a></span>
+  
+
+</div>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+
+
+
+            <div class="article-container">
+              <div class="article-style">
+                
+<script src="/es/vizs-and-tips/python-anadir-eliminar-elementos-lista/index_files/header-attrs/header-attrs.js"></script>
+
+<div id="TOC">
+<ul>
+<li><a href="#las-listas-en-python.-entendiendo-sus-características-y-cómo-añadir-y-eliminar-elementos-de-ellas" id="toc-las-listas-en-python.-entendiendo-sus-características-y-cómo-añadir-y-eliminar-elementos-de-ellas">Las listas en Python. Entendiendo sus características y cómo añadir y eliminar elementos de ellas</a>
+<ul>
+<li><a href="#añadir-elementos-a-una-lista-de-python" id="toc-añadir-elementos-a-una-lista-de-python">Añadir elementos a una lista de Python</a>
+<ul>
+<li><a href="#append" id="toc-append"><code>append()</code>:</a></li>
+<li><a href="#extend-y-operador-alternativas-para-la-concatenación." id="toc-extend-y-operador-alternativas-para-la-concatenación."><code>extend()</code> y operador <code>+</code>: Alternativas para la concatenación.</a></li>
+<li><a href="#insert-añade-elemento-en-una-posición-determinado-de-la-lista" id="toc-insert-añade-elemento-en-una-posición-determinado-de-la-lista"><code>insert()</code>: Añade elemento en una posición determinado de la lista</a></li>
+</ul></li>
+<li><a href="#eliminar-elementos-de-la-lista" id="toc-eliminar-elementos-de-la-lista">Eliminar elementos de la lista</a>
+<ul>
+<li><a href="#remove-por-elemento" id="toc-remove-por-elemento"><code>remove()</code>: Por elemento</a></li>
+<li><a href="#pop-elimina-elemento-de-una-lista-basado-en-su-índice." id="toc-pop-elimina-elemento-de-una-lista-basado-en-su-índice."><code>pop()</code>: Elimina elemento de una lista basado en su índice.</a></li>
+<li><a href="#clear-vacia-por-completo-la-list" id="toc-clear-vacia-por-completo-la-list"><code>clear()</code>: Vacia por completo la list</a></li>
+<li><a href="#python-sets-conjuntos-y-hashlists-como-listas-sin-elementos-duplicados" id="toc-python-sets-conjuntos-y-hashlists-como-listas-sin-elementos-duplicados">Python sets (conjuntos) y HashLists como listas sin elementos duplicados</a></li>
+</ul></li>
+<li><a href="#mantente-al-día-de-python-en-typethepipe" id="toc-mantente-al-día-de-python-en-typethepipe">Mantente al día de Python en Typethepipe</a></li>
+</ul></li>
+</ul>
+</div>
+
+<p><img src="featured.png" height="250px" width="400px" alt="Métodos de Lista de Python con mensaje que dice 'Typethepipe'"/></p>
+<div id="las-listas-en-python.-entendiendo-sus-características-y-cómo-añadir-y-eliminar-elementos-de-ellas" class="section level1">
+<h1>Las listas en Python. Entendiendo sus características y cómo añadir y eliminar elementos de ellas</h1>
+<p>En Python, las listas son una estructura de datos versátil y ampliamente utilizada que permite almacenar una <strong>colección ordenada de elementos</strong>, que pueden ser de diferentes tipos. Las principales características de las listas incluyen:</p>
+<ul>
+<li>su capacidad para contener elementos heterogéneos,</li>
+<li>su indexación basada en cero,</li>
+<li>la capacidad de modificar elementos existentes,</li>
+<li>agregar nuevos elementos y eliminar elementos.</li>
+</ul>
+<p><strong>Las listas son mutables</strong>, lo que significa que pueden cambiar su contenido después de haber sido creadas. Además, las listas admiten operaciones como la concatenación, la reproducción y la aplicación de funciones a cada elemento de la lista, lo que las hace herramientas poderosas para manipular y organizar datos.</p>
+<p>Con ejemplos prácticos y consejos útiles, este post te ayudará a dominar las habilidades fundamentales para trabajar con listas en Python y optimizar la manipulación de datos en tus proyectos de programación.</p>
+<p><br></p>
+<div id="añadir-elementos-a-una-lista-de-python" class="section level2">
+<h2>Añadir elementos a una lista de Python</h2>
+<p>Para añadir elementos a una lista, nos podemos valer del método <code>append()</code> para <strong>agregar un elemento</strong> al final de la lista o el método <code>insert()</code> para insertar un elemento en una <strong>posición específic</strong>a. También puedes extender una lista con otra lista utilizando el método <code>extend()</code> o utilizar el operador <code>+</code> para concatenar dos listas. Estas opciones te brindan la flexibilidad para modificar tus listas según tus necesidades, lo que es esencial en el desarrollo de aplicaciones y la manipulación de datos en Python.</p>
+<p><br></p>
+<div id="append" class="section level3">
+<h3><code>append()</code>:</h3>
+<p>Imagina que estás creando una lista de reproducción de música. Cada vez que descubres una nueva canción que te encanta, simplemente la añades al final de tu lista con <code>append()</code>. ¡Así de fácil!</p>
+<pre class="python"><code>
+mi_lista = []
+mi_lista.append(&#39;tomate&#39;)</code></pre>
+<p>Recuerda que append() siempre añade elementos al final de la lista. Si necesitas insertar elementos en una posición específica, lo comentaremos en los siguientes parágrafos.</p>
+<p><br></p>
+</div>
+<div id="extend-y-operador-alternativas-para-la-concatenación." class="section level3">
+<h3><code>extend()</code> y operador <code>+</code>: Alternativas para la concatenación.</h3>
+<p>También podemos concatenar listas. Esto se puede hacer con el operador <code>+</code> entre dos listas o bien usando el método <code>extend</code> de una de ellas. Ambas operaciones deben partir de la existencia de dos listas, y el resultado será una lista con los elementos de las dos iniciales, sin anidación de listas.</p>
+<pre class="python"><code>
+mi_lista_alimentos_ext = mi_lista + [&quot;lechuga&quot;, &quot;pimiento&quot;, &quot;ajo&quot;]
+
+mi_lista.extend([&quot;lechuga&quot;, &quot;pimiento&quot;, &quot;ajo&quot;])
+
+mi_lista == mi_lista_alimentos_ext</code></pre>
+<pre><code>## True</code></pre>
+<pre class="python"><code>mi_lista_alimentos_ext</code></pre>
+<pre><code>## [&#39;tomate&#39;, &#39;lechuga&#39;, &#39;pimiento&#39;, &#39;ajo&#39;]</code></pre>
+<p>Por anidación de listas nos referimos al siguiente ejemplo, que según el caso y pese a ser un objeto más complejo y haber otras alternativas, también nos va a ser útil. Tendremos una lista como elemento dentro de otra lista.</p>
+<pre class="python"><code>mi_lista.append([&#39;tomate&#39;])
+mi_lista</code></pre>
+<pre><code>## [&#39;tomate&#39;, &#39;lechuga&#39;, &#39;pimiento&#39;, &#39;ajo&#39;, [&#39;tomate&#39;]]</code></pre>
+<p>La ventaja de usar <code>extend()</code> es que modificas una lista existente en lugar de crear una nueva.</p>
+<p>Ambas opciones de concatenación son útiles en diferentes situaciones, dependiendo de si prefieres mantener intactas tus listas originales o si estás dispuesto a modificar una de ellas para obtener la concatenación deseada.</p>
+<p><br></p>
+</div>
+<div id="insert-añade-elemento-en-una-posición-determinado-de-la-lista" class="section level3">
+<h3><code>insert()</code>: Añade elemento en una posición determinado de la lista</h3>
+<p>O insertar el elemento en un índice determinado:</p>
+<pre class="python"><code>mi_lista.insert(0, [&quot;a&quot;, &quot;b&quot;, &quot;b&quot;])
+mi_lista</code></pre>
+<pre><code>## [[&#39;a&#39;, &#39;b&#39;, &#39;b&#39;], &#39;tomate&#39;, &#39;lechuga&#39;, &#39;pimiento&#39;, &#39;ajo&#39;, [&#39;tomate&#39;]]</code></pre>
+<p>La posibilidad de insertar elementos en una ubicación específica <strong>es útil cuando necesitas mantener un orden particular en tu lista</strong> o cuando deseas insertar elementos en medio de una secuencia sin reemplazar los elementos existentes. Esta funcionalidad es especialmente valiosa en situaciones en las que se requiere una manipulación precisa de los datos almacenados en una lista. Aunque, de nuevo, en esas situaciones viene bien evaluar si en lugar de ello, necesitamos hacer uso de un objeto diferente a la lista . Todo dependerá de la utilidad que necesitemos conseguir.</p>
+<p><br></p>
+</div>
+</div>
+<div id="eliminar-elementos-de-la-lista" class="section level2">
+<h2>Eliminar elementos de la lista</h2>
+<p>¿Qué pasa si por el contratrio lo que necesitamos es eliminar elementos de una lista? Eliminar elementos de una lista en Python es una operación común, ya que te permite mantener tus datos actualizados y adaptados a las necesidades de tu aplicación. Par aello, puedes utilizar métodos como <code>remove()</code>, que <strong>elimina la primera ocurrencia de un valor específico</strong>, o <code>pop()</code>, que elimina un elemento en <strong>una posición dada y lo devuelve</strong>. También puedes utilizar la instrucción del para eliminar elementos por su índice. Además, puedes emplear métodos como <code>clear()</code> para <strong>vaciar por completo la lista</strong> o <em>slicing</em> para crear una nueva lista sin los elementos que deseas eliminar. Estas herramientas te permiten gestionar eficazmente tus datos en Python y mantener tus listas actualizadas de acuerdo a las necesidades de tu programa.</p>
+<p><br></p>
+<div id="remove-por-elemento" class="section level3">
+<h3><code>remove()</code>: Por elemento</h3>
+<p>El método remove() en Python se utiliza para <strong>eliminar la primera ocurrencia</strong> de un elemento específico en una lista. Es importante destacar que si intentas eliminar un elemento que no existe en la lista, se generará un error.</p>
+<pre class="python"><code>mi_lista.remove(&#39;tomate&#39;)
+mi_lista</code></pre>
+<pre><code>## [[&#39;a&#39;, &#39;b&#39;, &#39;b&#39;], &#39;lechuga&#39;, &#39;pimiento&#39;, &#39;ajo&#39;, [&#39;tomate&#39;]]</code></pre>
+<p>Para eliminar todas las ocurrencias, es necesario por tanto algo como:</p>
+<pre class="python"><code>mi_lista = [1, 2, 3, 4, 3, 5, 6, 3]
+elemento_a_eliminar = 3
+
+mi_lista = [x for x in mi_lista if x != elemento_a_eliminar]
+
+print(mi_lista)</code></pre>
+<pre><code>## [1, 2, 4, 5, 6]</code></pre>
+<p>De esta manera, podemos fácilmente eliminar todos los determinados elementos en una lista, no solo la primera ocurrencia.</p>
+<p><br></p>
+</div>
+<div id="pop-elimina-elemento-de-una-lista-basado-en-su-índice." class="section level3">
+<h3><code>pop()</code>: Elimina elemento de una lista basado en su índice.</h3>
+<p>El método <code>pop()</code> en Python es una herramienta versátil que te permite eliminar elementos de una lista según su índice, lo que lo convierte en una función imprescindible para el manejo de datos. Al especificar un índice como primer argumento, <strong>pop() elimina el elemento en esa posición y lo devuelve</strong>, lo que te brinda el poder de acceder a ese elemento antes de su eliminación si es necesario. Además, si utilizas pop() sin un índice, eliminará y te devolverá el último elemento de la lista de forma predeterminada. Esta flexibilidad lo convierte en una función de alto valor tanto para tareas simples como para complejas en programación, y es esencial para mantener el control y la precisión en la manipulación de tus listas en Python.</p>
+<p>Veamos un ejemplo:</p>
+<pre class="python"><code>mi_lista.pop(0)</code></pre>
+<pre><code>## 1</code></pre>
+<p>y aquí lo guardamos en un objecto <code>mi_carrito_compra</code> mientras lo eliminamos de la lista de alimentos:</p>
+<pre class="python"><code>mi_carrito_compra = []
+mi_carrito_compra.append(mi_lista_alimentos_ext.pop(0))
+mi_carrito_compra</code></pre>
+<pre><code>## [&#39;tomate&#39;]</code></pre>
+<p>Por defecto, si no se le pasa ningún índice, el método <code>pop()</code> extraerá de la lista el último elemento.</p>
+<p><br></p>
+</div>
+<div id="clear-vacia-por-completo-la-list" class="section level3">
+<h3><code>clear()</code>: Vacia por completo la list</h3>
+<p>El método <strong>clear() en Python es como un “botón de reinicio” para tus listas</strong>. Cuando lo utilizas, vacía por completo una lista, eliminando todos sus elementos. Por ejemplo, si estás desarrollando una aplicación que almacena datos temporales en una lista y deseas borrar esos datos de manera eficiente cuando ya no son necesarios, clear() es la función que necesitas.</p>
+<p><br></p>
+</div>
+<div id="python-sets-conjuntos-y-hashlists-como-listas-sin-elementos-duplicados" class="section level3">
+<h3>Python sets (conjuntos) y HashLists como listas sin elementos duplicados</h3>
+<p>Los conjuntos en Python son estructuras de datos que funcionan de manera similar a las listas, pero con una característica fundamental: no permiten elementos duplicados. Al usar conjuntos, puedes crear colecciones de datos únicos de manera eficiente. Esto significa que si intentas agregar un elemento que ya está presente en el conjunto, simplemente se ignorará, lo que es perfecto cuando necesitas garantizar la unicidad de tus datos. Pueden expresarse con <code>set()</code> o con <code>{}</code> por ejemplo: <code>{1, 2, 3}</code>.</p>
+<p>Veamos un ejemplo de conjuntos en Python:</p>
+<pre class="python"><code>mi_lista_con_duplicados = [&quot;manzana&quot;, &quot;platano&quot;, &quot;manzana&quot;]
+set(mi_lista_con_duplicados)</code></pre>
+<pre><code>## {&#39;platano&#39;, &#39;manzana&#39;}</code></pre>
+<p>y sus operaciones entre conjuntos de Python más básicas:</p>
+<pre class="python"><code>mi_nueva_lista = [&quot;uva&quot;, &quot;manzana&quot;]
+
+set(mi_lista_con_duplicados) - set(mi_nueva_lista)</code></pre>
+<pre><code>## {&#39;platano&#39;}</code></pre>
+<pre class="python"><code>set(mi_lista_con_duplicados + mi_nueva_lista)</code></pre>
+<pre><code>## {&#39;uva&#39;, &#39;platano&#39;, &#39;manzana&#39;}</code></pre>
+<p>El principal uso de los conjuntos o <code>sets</code> es la comprobación rápida de pertenencia. Por lo tanto, no depende del orden, por lo que podemos considerarlos como ‘no ordenados’ a diferencia de las listas.</p>
+<p><br></p>
+</div>
+</div>
+<div id="mantente-al-día-de-python-en-typethepipe" class="section level2">
+<h2>Mantente al día de Python en Typethepipe</h2>
+<p>Mantente al día con las últimas novedades y consejos en programación en Typethepipe. Síguenos para estar al tanto de los avances en el mundo de Python y continuar mejorando tus habilidades de desarrollo. ¡Hasta la próxima y no olvides <strong>Seguirnos</strong>!</p>
+<p><br></p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> ¡Suscribete para más contenido sobre Python y Data Science! </label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="tu mejor email" required><input type="hidden" name="tags" value="7614568"></div>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Síguenos" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
+</div>
+</div>
+
+              </div>
+              
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=/es/vizs-and-tips/python-anadir-eliminar-elementos-lista/&amp;text=C%c3%b3mo%20a%c3%b1adir%20y%20eliminar%20elementos%20en%20una%20lista%20de%20Python" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=/es/vizs-and-tips/python-anadir-eliminar-elementos-lista/&amp;t=C%c3%b3mo%20a%c3%b1adir%20y%20eliminar%20elementos%20en%20una%20lista%20de%20Python" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=C%c3%b3mo%20a%c3%b1adir%20y%20eliminar%20elementos%20en%20una%20lista%20de%20Python&amp;body=/es/vizs-and-tips/python-anadir-eliminar-elementos-lista/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=/es/vizs-and-tips/python-anadir-eliminar-elementos-lista/&amp;title=C%c3%b3mo%20a%c3%b1adir%20y%20eliminar%20elementos%20en%20una%20lista%20de%20Python" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=C%c3%b3mo%20a%c3%b1adir%20y%20eliminar%20elementos%20en%20una%20lista%20de%20Python%20/es/vizs-and-tips/python-anadir-eliminar-elementos-lista/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=/es/vizs-and-tips/python-anadir-eliminar-elementos-lista/&amp;title=C%c3%b3mo%20a%c3%b1adir%20y%20eliminar%20elementos%20en%20una%20lista%20de%20Python" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+    
+
+
+
+
+
+  
+  
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="avatar mr-3 avatar-circle" src="/es/authors/carlos-vecina/carlos-vecina-avatar_hudcecee8c8ed4dd07fd2b73e656fad71c_149347_270x270_fill_lanczos_center_2.png" alt="Carlos Vecina">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/es/authors/carlos-vecina/">Carlos Vecina</a></h5>
+      <h6 class="card-subtitle">Senior Data Scientist at Jobandtalent</h6>
+      <p class="card-text">Senior Data Scientist at Jobandtalent  |  AI &amp; Data Science para aportar valor en la empresa</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/es/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/deepchals" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/carlos-vecina/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/CarlosVecina" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://autarponics.com" target="_blank" rel="noopener">
+        <i class="fa fa-home"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+            </div>
+        </article>
+  
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/highlight.min.js" integrity="sha256-eOgo0OtLL4cdq7RdwRUiGKLX9XsIJ7nGhWEKbohmVAQ=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/languages/python.min.js"></script>
+        
+      
+
+    
+
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.5.1/leaflet.js" integrity="sha256-EErZamuLefUnbMBQbsEqu1USa+btR2oIlCpBJbyD4/g=" crossorigin="anonymous"></script>
+    
+
+    
+    
+    <script>const code_highlighting = true;</script>
+    
+
+    
+    
+    <script>const isSiteThemeDark = false;</script>
+    
+
+    
+    
+    
+    
+    
+    
+    <script>
+      const search_config = {"indexURI":"/es/index.json","minLength":1,"threshold":0.3};
+      const i18n = {"no_results":"No se encontraron resultados","placeholder":"Buscar...","results":"resultados encontrados"};
+      const content_type = {
+        'post': "Posts",
+        'project': "Proyectos",
+        'publication' : "Publicaciones",
+        'talk' : "Charlas"
+        };
+    </script>
+    
+
+    
+    
+
+    
+    
+    <script id="search-hit-fuse-template" type="text/x-template">
+      <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+      </div>
+    </script>
+    
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/3.2.1/fuse.min.js" integrity="sha256-VzgmKYmhsGNNN4Ph1kMW+BjoYJM2jV5i4IlFoeZA9XI=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.min.js" integrity="sha256-4HLtjeVgH0eIB3aZ9mLYF6E8oU5chNdjU6p6rrXpl9U=" crossorigin="anonymous"></script>
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    
+    
+    
+    <script src="/js/academic.min.37431be2d92d7fb0160054761ab79602.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+
+    
+    
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+	<a href="https://www.r-bloggers.com/">
+	<img border="0" alt="R Bloggers icon" src="/img/r_bloggers.png" width="100" height="100">
+	</a>
+	<br>
+	<a href="https://www.python-bloggers.com/">
+	<img border="0" alt="Python Bloggers icon" src="/img/python_logo.png" width="100" height="100">
+	</a>
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+  <style>
+    #consent-notice {padding: 1rem 1rem; display: none; text-align: center; position: fixed; bottom: 0; width: calc(100% - 2rem); background: #222; color: rgba(255,255,255,0.8);}
+    #consent-notice span {margin-right: 1rem;}
+    #consent-notice button {cursor: pointer; display: inline-block; width: auto;}
+    #consent-notice span a {color: inherit; text-decoration: underline; text-decoration-color: rgba(255,255,255,0.5);}
+    #consent-notice button.btn {margin-left: 0.5rem;}
+    #consent-notice button.btn.manage-consent {background: rgba(255,255,255,0.1); font-weight: normal;}
+    
+    #consent-overlay {position: fixed; left: 0; top: 0; width: 100%; height: 100vh; display: none; background: rgba(0,0,0,0.75); z-index: 999999; overflow: auto; cursor: pointer;}
+    #consent-overlay.active {display: flex;}
+    #consent-overlay > div {background: white; width: 100%; max-width: 30rem; padding: 1.75rem; margin: auto; cursor: initial;}
+    #consent-overlay > div > div {display: flex; align-items: flex-start; margin-bottom: 1rem;}
+    #consent-overlay > div > div:last-child {margin: 0;}
+    #consent-overlay h3 {padding-top: 0;}
+    #consent-overlay input {margin-top: 0.3rem;}
+    #consent-overlay label {display: block;}
+    #consent-overlay .btn {margin-right: 0.5rem;}
+    #consent-overlay button.btn.save-consent {background: rgba(0,0,0,0.6); font-weight: normal;}
+
+    @media (max-width: 767px) {
+        #consent-overlay > div {padding: 1.75rem 1rem;}
+        #consent-notice span {display: block; padding-top: 3px; margin-bottom: 1.5rem;}
+        #consent-notice button.btn {position: relative; bottom: 4px;}
+    }
+</style>
+<div id="consent-notice"><span>We would like to use <a class="manage-consent" href="#manage-consent">third party code</a> to improve the functionality of this website.</span><button class="btn manage-consent">Manage preferences</button><button class="btn deny-consent">Deny</button><button class="btn approve-consent">Allow</button></div>
+<div id="consent-overlay">
+    <div>
+        
+            <div>
+                <input type="checkbox" id="item0" value="1" name="item0" checked disabled />
+                <label for="item0">
+                    <h3>Google Anaytics (functional)</h3>
+                    <p>This code gives us insight into the number of anonymized people that visit our website, where they are from and what they are clicking on in order to create better content.</p>
+                </label>
+            </div>
+        
+            <div>
+                <input type="checkbox" id="item1" value="1" name="item1"  />
+                <label for="item1">
+                    <h3>Marketing</h3>
+                    <p>Marketing pourposes cookies.</p>
+                </label>
+            </div>
+        
+        <div>
+            <button id="save-consent" class="btn save-consent" data-consentvalue="0">Save preferences</button>
+            <button class="btn approve-consent">Allow all</button>
+        </div>
+    </div>
+</div>
+<script>
+
+    const scripts = [];
+    scripts[ 0 ] = "/js/mkt.js";
+
+    function createCookie(name,value,days) {
+        var expires = "";
+        if (days) {
+            var date = new Date();
+            date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + value + expires + "; path=/";
+    }
+    function readCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for(var i=0;i < ca.length;i++) {
+            var c = ca[i];
+            while (c.charAt(0)==' ') c = c.substring(1,c.length);
+            if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+        }
+        return null;
+    }
+    function eraseCookie(name) {
+        createCookie(name,"",-1);
+    }
+    function denyAllConsentScripts() {
+        var consentValue = "";
+        scripts.forEach(function(){
+            consentValue = consentValue + "0";
+        });
+        acceptSomeConsentScripts(consentValue);
+    }
+    function acceptAllConsentScripts() {
+        var consentValue = "";
+        scripts.forEach(function(){
+            consentValue = consentValue + "1";
+        });
+        acceptSomeConsentScripts(consentValue);
+    }
+    function acceptSomeConsentScripts(consentValue) {
+        setConsentInputs(consentValue);
+        createCookie('consent-settings',consentValue,31);
+        document.getElementById('consent-notice').style.display = 'none';
+        document.getElementById('consent-overlay').classList.remove('active');
+        loadConsentScripts(consentValue);
+    }
+    function loadConsentScripts(consentValue) {
+        scripts.forEach(function(value,key){
+            
+            if(consentValue[key]=="1") {
+                var s = document.createElement('script');
+                s.type = 'text/javascript';
+                s.src = value;
+                document.body.appendChild(s);
+            }
+        });
+    }
+    function setConsentInputs(consentValue) {
+        var elements = document.querySelectorAll('#consent-overlay input:not([disabled])');
+        elements.forEach(function(el,index) {
+            if(consentValue[index]=="1") el.checked = true;
+            else el.checked = false;
+        });
+    }
+    function setConsentValue() {
+        var elements = document.querySelectorAll('#consent-overlay input:not([disabled])');
+        var consentValue = "";
+        elements.forEach(function(el) {
+            if(el.checked) consentValue = consentValue + "1";
+            else consentValue = consentValue + "0";
+        });
+        document.getElementById("save-consent").dataset.consentvalue = consentValue;
+    }
+
+    var elements = document.querySelectorAll('#consent-overlay input:not([disabled])');
+    elements.forEach(function(el) {
+        el.checked = false;
+    });
+
+    if(readCookie('consent-settings')) {
+        var consentValue = readCookie('consent-settings').toString();
+        
+        setConsentInputs(consentValue);
+        loadConsentScripts(consentValue);
+    } else {
+        document.getElementById('consent-notice').style.display = 'block';
+    }
+    var elements = document.querySelectorAll('.manage-consent');
+    elements.forEach(function(el) {
+        el.addEventListener("click",function() {
+            document.getElementById('consent-overlay').classList.toggle('active');
+        });
+    });
+    var elements = document.querySelectorAll('.deny-consent');
+    elements.forEach(function(el) {
+        el.addEventListener("click",function() {
+            denyAllConsentScripts();
+        });
+    });
+    var elements = document.querySelectorAll('.approve-consent');
+    elements.forEach(function(el) {
+        el.addEventListener("click",function() {
+            acceptAllConsentScripts();
+        });
+    });
+    document.getElementById("save-consent").addEventListener("click",function() {
+        setConsentValue();
+        acceptSomeConsentScripts(this.dataset.consentvalue);
+    });
+    document.getElementById("consent-overlay").addEventListener("click",function(e) {
+        if (!document.querySelector("#consent-overlay > div").contains(e.target)){
+            this.classList.toggle('active');
+        }
+    });
+</script>
+
+
+    
+        <script type="text/javascript" src="/js/ga.js"></script>
+    
+
+    
+
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Citar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copiar
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Descargar
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

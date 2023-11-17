@@ -4,7 +4,7 @@
   
   <url>
     <loc>/es/authors/</loc>
-    <lastmod>2023-03-07T00:00:00+00:00</lastmod>
+    <lastmod>2023-11-15T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -19,7 +19,7 @@
   
   <url>
     <loc>/es/authors/carlos-vecina/</loc>
-    <lastmod>2023-03-07T00:00:00+00:00</lastmod>
+    <lastmod>2023-11-15T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -34,7 +34,7 @@
   
   <url>
     <loc>/es/categories/</loc>
-    <lastmod>2023-03-07T00:00:00+00:00</lastmod>
+    <lastmod>2023-11-15T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -48,8 +48,33 @@
   </url>
   
   <url>
+    <loc>/es/post/eliminar-columnas-dataframe-python/</loc>
+    <lastmod>2023-11-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/es/tags/pandas/</loc>
+    <lastmod>2023-11-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/es/tags/polars/</loc>
+    <lastmod>2023-11-15T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/polars/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/tags/polars/"
+                />
+  </url>
+  
+  <url>
     <loc>/es/categories/post/</loc>
-    <lastmod>2023-03-07T00:00:00+00:00</lastmod>
+    <lastmod>2023-11-15T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -64,7 +89,7 @@
   
   <url>
     <loc>/es/post/</loc>
-    <lastmod>2023-03-07T00:00:00+00:00</lastmod>
+    <lastmod>2023-11-15T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -78,8 +103,23 @@
   </url>
   
   <url>
+    <loc>/es/tags/python/</loc>
+    <lastmod>2023-11-15T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/python/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/tags/python/"
+                />
+  </url>
+  
+  <url>
     <loc>/es/categories/python/</loc>
-    <lastmod>2023-03-07T00:00:00+00:00</lastmod>
+    <lastmod>2023-11-15T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -93,8 +133,28 @@
   </url>
   
   <url>
+    <loc>/es/categories/serie-pandas/</loc>
+    <lastmod>2023-11-15T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/es/tags/</loc>
+    <lastmod>2023-11-15T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/tags/"
+                />
+  </url>
+  
+  <url>
     <loc>/es/</loc>
-    <lastmod>2023-03-07T00:00:00+00:00</lastmod>
+    <lastmod>2023-11-15T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -108,8 +168,183 @@
   </url>
   
   <url>
+    <loc>/es/post/renombrar-columna-python-pandas-polars/</loc>
+    <lastmod>2023-11-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/es/tags/principiantes/</loc>
+    <lastmod>2023-11-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/es/post/diccionario-en-python/</loc>
+    <lastmod>2023-11-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/es/tags/pydantic/</loc>
+    <lastmod>2023-11-08T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/pydantic/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/tags/pydantic/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/vizs-and-tips/python-anadir-eliminar-elementos-lista/</loc>
+    <lastmod>2023-11-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/es/categories/tips/</loc>
+    <lastmod>2023-11-07T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/categories/tips/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/categories/tips/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/vizs-and-tips/</loc>
+    <lastmod>2023-11-07T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/vizs-and-tips/python-polars-manipulacion-json/</loc>
+    <lastmod>2023-10-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/es/post/pydantic-union-discriminada/</loc>
+    <lastmod>2023-09-18T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/post/pydantic-discriminated-union/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/post/pydantic-union-discriminada/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/tags/streamlit/</loc>
+    <lastmod>2023-09-02T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/tags/streamlit/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/tags/streamlit/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/vizs-and-tips/streamlit-datetime-slider-python/</loc>
+    <lastmod>2023-09-02T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/streamlit-datetime-slider/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/streamlit-datetime-slider-python/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/categories/ia/</loc>
+    <lastmod>2023-08-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/es/post/openai-conferencia-gpt-4-turbo-gpts/</loc>
+    <lastmod>2023-08-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/es/vizs-and-tips/python-polars-pipe-funcion/</loc>
+    <lastmod>2023-03-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/es/post/que-es-sqlalchemy-2/</loc>
     <lastmod>2023-03-07T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/es/vizs-and-tips/git-add-recursivo/</loc>
+    <lastmod>2023-01-05T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/git-recursive-add-files/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/vizs-and-tips/git-add-recursivo/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/post/pydantic-enum-intenum/</loc>
+    <lastmod>2022-10-05T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/post/pydantic-enum-intenum/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/post/pydantic-enum-intenum/"
+                />
+  </url>
+  
+  <url>
+    <loc>/es/post/pydantic-enum-intenum/</loc>
+    <lastmod>2022-10-05T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/post/pydantic-enum-intenum/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es"
+                href="/es/post/pydantic-enum-intenum/"
+                />
   </url>
   
   <url>
@@ -208,36 +443,6 @@
   </url>
   
   <url>
-    <loc>/es/categories/tips/</loc>
-    <lastmod>2020-03-30T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/categories/tips/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/categories/tips/"
-                />
-  </url>
-  
-  <url>
-    <loc>/es/vizs-and-tips/</loc>
-    <lastmod>2020-03-30T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/vizs-and-tips/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/vizs-and-tips/"
-                />
-  </url>
-  
-  <url>
     <loc>/es/vizs-and-tips/aumenta-velocidad-scripts-r-lectura-escritura-fst-r/</loc>
     <lastmod>2020-03-30T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -315,6 +520,11 @@
   <url>
     <loc>/es/vizs-and-tips/magic-whos-metodo-jupyter-notebook/</loc>
     <lastmod>2020-01-14T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="/vizs-and-tips/error-cannot-import-name-multihostdsn-from-pydantic-networks/"
+                />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -466,20 +676,6 @@
                 rel="alternate"
                 hreflang="es"
                 href="/es/show/"
-                />
-  </url>
-  
-  <url>
-    <loc>/es/tags/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es"
-                href="/es/tags/"
                 />
   </url>
   
