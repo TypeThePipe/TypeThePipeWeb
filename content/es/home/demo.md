@@ -49,5 +49,5 @@ subtitle = ""
  # CSS class.
  css_class = ""
 +++
-<h1><font size="7rem"><center><b>Data Science Posts, Vizs & Tips</b></center></font></h1>
+<h1><font size="7rem"><center><b>Ciencia de datos, ML/IA y visualizaciones</b></center></font></h1>
 
