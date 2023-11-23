@@ -5,7 +5,7 @@
     <link>/tags/</link>
       <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Thu, 09 Nov 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Fri, 23 Jun 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-32.png</url>
       <title>Tags</title>
@@ -15,72 +15,24 @@
     <item>
       <title>Python</title>
       <link>/tags/python/</link>
-      <pubDate>Thu, 09 Nov 2023 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 23 Jun 2023 00:00:00 +0000</pubDate>
       <guid>/tags/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Alembic</title>
-      <link>/tags/alembic/</link>
-      <pubDate>Mon, 30 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>/tags/alembic/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>SQLModel</title>
-      <link>/tags/sqlmodel/</link>
-      <pubDate>Mon, 30 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>/tags/sqlmodel/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Pydantic</title>
-      <link>/tags/pydantic/</link>
-      <pubDate>Mon, 23 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>/tags/pydantic/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Polars</title>
-      <link>/tags/polars/</link>
-      <pubDate>Wed, 18 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>/tags/polars/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Error</title>
-      <link>/tags/error/</link>
-      <pubDate>Sun, 01 Oct 2023 00:00:00 +0000</pubDate>
-      <guid>/tags/error/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>AI</title>
-      <link>/tags/ai/</link>
-      <pubDate>Wed, 20 Sep 2023 00:00:00 +0000</pubDate>
-      <guid>/tags/ai/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>GPT</title>
-      <link>/tags/gpt/</link>
-      <pubDate>Wed, 20 Sep 2023 00:00:00 +0000</pubDate>
-      <guid>/tags/gpt/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Streamlit</title>
       <link>/tags/streamlit/</link>
-      <pubDate>Sun, 02 Jul 2023 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 23 Jun 2023 00:00:00 +0000</pubDate>
       <guid>/tags/streamlit/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Pydantic</title>
+      <link>/tags/pydantic/</link>
+      <pubDate>Sun, 18 Jun 2023 00:00:00 +0000</pubDate>
+      <guid>/tags/pydantic/</guid>
       <description></description>
     </item>
     

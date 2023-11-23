@@ -5,7 +5,7 @@
     <link>/es/categories/</link>
       <atom:link href="/es/categories/index.xml" rel="self" type="application/rss+xml" />
     <description>Categories</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Wed, 15 Nov 2023 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>es</language><lastBuildDate>Tue, 07 Mar 2023 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/icon-32.png</url>
       <title>Categories</title>
@@ -15,7 +15,7 @@
     <item>
       <title>Post</title>
       <link>/es/categories/post/</link>
-      <pubDate>Wed, 15 Nov 2023 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 07 Mar 2023 00:00:00 +0000</pubDate>
       <guid>/es/categories/post/</guid>
       <description></description>
     </item>
@@ -23,32 +23,8 @@
     <item>
       <title>Python</title>
       <link>/es/categories/python/</link>
-      <pubDate>Wed, 15 Nov 2023 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 07 Mar 2023 00:00:00 +0000</pubDate>
       <guid>/es/categories/python/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Serie Pandas</title>
-      <link>/es/categories/serie-pandas/</link>
-      <pubDate>Wed, 15 Nov 2023 00:00:00 +0000</pubDate>
-      <guid>/es/categories/serie-pandas/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Tips</title>
-      <link>/es/categories/tips/</link>
-      <pubDate>Tue, 07 Nov 2023 00:00:00 +0000</pubDate>
-      <guid>/es/categories/tips/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>IA</title>
-      <link>/es/categories/ia/</link>
-      <pubDate>Sun, 06 Aug 2023 00:00:00 +0000</pubDate>
-      <guid>/es/categories/ia/</guid>
       <description></description>
     </item>
     
@@ -73,6 +49,14 @@
       <link>/es/categories/statistics/</link>
       <pubDate>Sun, 28 Jun 2020 00:00:00 +0000</pubDate>
       <guid>/es/categories/statistics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tips</title>
+      <link>/es/categories/tips/</link>
+      <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
+      <guid>/es/categories/tips/</guid>
       <description></description>
     </item>
     
