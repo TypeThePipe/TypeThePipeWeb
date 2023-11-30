@@ -7734,7 +7734,9 @@ div.alert a {
   height: -webkit-stretch;
   height: stretch;
   max-height: 60px;
-  max-width: fit-content; }
+  max-width: fit-content;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important; }
 
 #navbar-main .main-menu-item ul li .nav-link {
   color: #34495e; }
