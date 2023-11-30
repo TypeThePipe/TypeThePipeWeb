@@ -1,5 +1,5 @@
 ---
-title: "Boosting Python development speed with Ruff: An all-in-one lightning-fast linter"
+title: "Boosting Python development speed with Ruff: An all-in-one lightning fast linter"
 author: Carlos Vecina Tebar
 date: '2023-11-28'
 slug: python-ruff-linter-code-formatter-rules
