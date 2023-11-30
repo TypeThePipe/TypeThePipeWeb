@@ -1,7 +1,7 @@
 ---
 title: "Boosting Python development speed with Ruff: A All-in-one lightning-fast linter"
 author: Carlos Vecina Tebar
-date: '2022-11-28'
+date: '2023-11-28'
 slug: python-ruff-linter-code-formatter-rules
 translationKey: python-ruff-linter-code-formatter-rules
 output: 
@@ -102,12 +102,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1>The Need for Speed. Discover the Ruff module, Ruff rules and the migration from Black</h1>
 <p>In the world of software development, every second counts. For Python developers, the time spent on code linting can sometimes be a real productivity killer. But what if there was a tool that could make this process lightning-fast, giving you nearly real-time feedback as you code? Meet Ruff, the game-changing Python linter that’s about to revolutionize your development workflow.</p>
 <p>Python is renowned for its simplicity and readability, making it a go-to language for many developers. However, as projects grow in complexity, the build times and code analysis can slow down significantly. This is where Ruff steps in. It’s based on a simple but powerful idea: Python tooling could be much, much faster.</p>
-<p>Imagine a Python linter that’s approximately 150 times faster than Flake8 on macOS. That’s Ruff for you. It’s not just slightly faster; it’s blazingly fast. For instance, when linting the entire CPython codebase from scratch, it’s the difference between sitting around for 12+ seconds and getting almost instant feedback in just 300-500 milliseconds. It’s a game-changer that saves you time and makes your development process more efficient.</p>
+<p>Imagine a Python <strong>linter that’s approximately 150 times faster than Flake8</strong> on macOS. That’s Ruff for you. It’s not just slightly faster; it’s blazingly fast. For instance, when linting the entire CPython codebase from scratch, it’s the difference between sitting around for 12+ seconds and getting almost instant feedback in just 300-500 milliseconds. It’s a game-changer that saves you time and makes your development process more efficient.</p>
 <p><br></p>
 <div id="how-ruff-works" class="section level2">
 <h2><strong>How Ruff Works</strong></h2>
-<p>Ruff is written in Rust, but here’s the magic: as a user, you won’t even notice it’s not written in Python. It leverages Rust Python’s AST parser and implements its own AST traversal, visitor abstraction, and lint-rule logic. It supports Python 3.10, including the new pattern matching syntax. Ruff is also pip-installable, making it easy to incorporate into your workflow.</p>
-<p>Ruff is built on two core hypotheses: Python tooling could be rewritten in more performant languages, and an integrated toolchain can tap into efficiencies that aren’t available to a disparate set of tools. Ruff exemplifies these ideas by generating all violations in a single pass and even autofixing issues without a noticeable performance penalty.</p>
+<p>Ruff is written in Rust, but here’s the magic: as a user, you won’t even notice it’s not written in Python. It leverages Rust Python’s AST parser and implements its own AST traversal, visitor abstraction, and lint-rule logic. It supports Python 3.10 and 3.11, including the new pattern matching syntax. Ruff is also pip-installable, making it easy to incorporate into your workflow.</p>
+<p><strong>Ruff is built on two core hypotheses:</strong> Python tooling could be rewritten in more performant languages, and an integrated toolchain can tap into efficiencies that aren’t available to a disparate set of tools. Ruff exemplifies these ideas by generating all violations in a single pass and even autofixing issues without a noticeable performance penalty.</p>
 <p>If you’re curious to experience the speed and efficiency of Ruff for yourself, you can try it today by running or the package manager you are using, like Poetry <code>poetry add ruff</code>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">pip</span> install ruff</span></code></pre></div>
 <p><strong>As linter,</strong> as it is stated in the <a href="https://docs.astral.sh/ruff/linter/">Ruff documentation</a>, ” designed as a drop-in replacement for Flake8 (plus dozens of plugins), isort, pydocstyle, pyupgrade, autoflake, and more.” Ruff has a set of over 700 rules in its linter functionallity.</p>

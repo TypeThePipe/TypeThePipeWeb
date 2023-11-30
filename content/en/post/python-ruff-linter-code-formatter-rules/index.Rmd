@@ -1,7 +1,7 @@
 ---
 title: "Boosting Python development speed with Ruff: A All-in-one lightning-fast linter"
 author: Carlos Vecina Tebar
-date: '2022-11-28'
+date: '2023-11-28'
 slug: python-ruff-linter-code-formatter-rules
 translationKey: python-ruff-linter-code-formatter-rules
 output: 
@@ -34,14 +34,14 @@ In the world of software development, every second counts. For Python developers
 
 Python is renowned for its simplicity and readability, making it a go-to language for many developers. However, as projects grow in complexity, the build times and code analysis can slow down significantly. This is where Ruff steps in. It's based on a simple but powerful idea: Python tooling could be much, much faster.
 
-Imagine a Python linter that's approximately 150 times faster than Flake8 on macOS. That's Ruff for you. It's not just slightly faster; it's blazingly fast. For instance, when linting the entire CPython codebase from scratch, it's the difference between sitting around for 12+ seconds and getting almost instant feedback in just 300-500 milliseconds. It's a game-changer that saves you time and makes your development process more efficient.
+Imagine a Python **linter that's approximately 150 times faster than Flake8** on macOS. That's Ruff for you. It's not just slightly faster; it's blazingly fast. For instance, when linting the entire CPython codebase from scratch, it's the difference between sitting around for 12+ seconds and getting almost instant feedback in just 300-500 milliseconds. It's a game-changer that saves you time and makes your development process more efficient.
 
 <br>
 
 ## **How Ruff Works**
-Ruff is written in Rust, but here's the magic: as a user, you won't even notice it's not written in Python. It leverages Rust Python's AST parser and implements its own AST traversal, visitor abstraction, and lint-rule logic. It supports Python 3.10, including the new pattern matching syntax. Ruff is also pip-installable, making it easy to incorporate into your workflow.
+Ruff is written in Rust, but here's the magic: as a user, you won't even notice it's not written in Python. It leverages Rust Python's AST parser and implements its own AST traversal, visitor abstraction, and lint-rule logic. It supports Python 3.10 and 3.11, including the new pattern matching syntax. Ruff is also pip-installable, making it easy to incorporate into your workflow.
 
-Ruff is built on two core hypotheses: Python tooling could be rewritten in more performant languages, and an integrated toolchain can tap into efficiencies that aren't available to a disparate set of tools. Ruff exemplifies these ideas by generating all violations in a single pass and even autofixing issues without a noticeable performance penalty.
+**Ruff is built on two core hypotheses:** Python tooling could be rewritten in more performant languages, and an integrated toolchain can tap into efficiencies that aren't available to a disparate set of tools. Ruff exemplifies these ideas by generating all violations in a single pass and even autofixing issues without a noticeable performance penalty.
 
 If you're curious to experience the speed and efficiency of Ruff for yourself, you can try it today by running or the package manager you are using, like Poetry `poetry add ruff`.
 
