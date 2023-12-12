@@ -3,7 +3,7 @@
 widget = "mentorship"  # See https://sourcethemes.com/academic/docs/page-builder/
 headless = true  # This file represents a page section.
 active = true  # Activate this widget? true/false
-weight = 4  # Order that this section will appear.
+weight = 6  # Order that this section will appear.
 
 title = "Mentorías"
 subtitle = "Estamos preparando (plazas limitadas) **programa de mentoría de carrera profesional en Data.** \n ¡No te pierdas la oportunidad y contacta para recibir más información!"
