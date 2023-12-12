@@ -1,0 +1,281 @@
+---
+title: Python protocols. When to use them in your projects to abstract and decoupling
+author: Carlos Vecina Tebar
+date: '2023-12-11'
+slug: python-protocols-when-to-use
+translationKey: python-protocols-when-to-use
+output: 
+  blogdown::html_page:
+    highlight: pygments 
+    toc: TRUE
+    toc_depth: 2
+categories:
+  - Python
+  - Post
+tags: [Python]
+subtitle: "What are Python Protocols and when to use them to complement or sustitute abstract classes and MixIns."
+summary: "What are Python Protocols and when to use them to complement or sustitute abstract classes and MixIns."
+authors: [carlos-vecina]
+featured: false
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<div id="TOC">
+<ul>
+<li><a href="#python-protocols.-defining-a-protocol-and-when-to-use-it" id="toc-python-protocols.-defining-a-protocol-and-when-to-use-it"><strong>Python protocols. Defining a protocol and when to use it</strong></a>
+<ul>
+<li><a href="#how-to-define-a-protocol" id="toc-how-to-define-a-protocol"><strong>How to define a Protocol</strong></a></li>
+<li><a href="#composition-of-protocols" id="toc-composition-of-protocols"><strong>Composition of Protocols</strong></a></li>
+<li><a href="#stay-updated-on-python-tips" id="toc-stay-updated-on-python-tips"><strong>Stay updated on Python tips</strong></a></li>
+</ul></li>
+</ul>
+</div>
+
+<p><img src="featured.png" width="400px" alt="Vibrant Python logo with the Protocols composability text." /></p>
+<p><br></p>
+<div id="python-protocols.-defining-a-protocol-and-when-to-use-it" class="section level1">
+<h1><strong>Python protocols. Defining a protocol and when to use it</strong></h1>
+<p>Protocols in Python are a feature introduced in Python 3.8. Protocols provide a way of closing the gap between type hinting and the runtime type system, allowing us to do structural subtyping during typechacking. They annotate duck-typed during that typechecking.</p>
+<p><strong>Protocols are an alternative (or a complement) to inheritance, abstract classes and Mixins.</strong> While those could be great options for some use cases, the first ones may become complicate to follow as the class hierarchy increase in complexity. It usually requires intermediate objects that could became a problem for future new features and code manteiners. Mixins, however, could be a better option as they keep contained each functionality (e.g HashMixIn, ToDictMixIn.. ). The naming convention is usually <code>xMixIn</code> or adding the suffix <code>-able</code> / <code>-ible</code>.</p>
+<p>So, why are Protocols useful in Python? Protocols provide a solid API that users can depend on, without relaying on a specific type. That allow us to write more composable and maintainable code.</p>
+<p><br></p>
+<div id="how-to-define-a-protocol" class="section level2">
+<h2><strong>How to define a Protocol</strong></h2>
+<p>Let’s create an example on how to create API where an Explainable protocol</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">from</span> pydantic <span class="im">import</span> BaseModel</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> List, Optional, Tuple</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="im">import</span> matplotlib.figure</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a><span class="im">from</span> abc <span class="im">import</span> ABC</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a><span class="kw">class</span> BaseScorer(ABC, BaseModel):</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    <span class="at">@abstractmethod</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>    <span class="kw">def</span> predict(<span class="va">self</span>):</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>        ...</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a><span class="kw">class</span> MachineLearningScorer(BaseScorer):</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>    weights: np.ndarray</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>    learning_rate: <span class="bu">float</span></span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>    epochs: <span class="bu">int</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>    batch_size: <span class="bu">int</span></span>
+<span id="cb1-19"><a href="#cb1-19" tabindex="-1"></a>    loss_function: <span class="bu">str</span></span>
+<span id="cb1-20"><a href="#cb1-20" tabindex="-1"></a>    optimizer: <span class="bu">str</span></span>
+<span id="cb1-21"><a href="#cb1-21" tabindex="-1"></a>    accuracy: Optional[<span class="bu">float</span>] <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb1-22"><a href="#cb1-22" tabindex="-1"></a>    training_time: Optional[<span class="bu">float</span>] <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb1-23"><a href="#cb1-23" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" tabindex="-1"></a>    <span class="kw">class</span> Config:</span>
+<span id="cb1-25"><a href="#cb1-25" tabindex="-1"></a>        arbitrary_types_allowed <span class="op">=</span> <span class="va">True</span></span>
+<span id="cb1-26"><a href="#cb1-26" tabindex="-1"></a>    </span>
+<span id="cb1-27"><a href="#cb1-27" tabindex="-1"></a>    <span class="kw">def</span> predict(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">float</span>:</span>
+<span id="cb1-28"><a href="#cb1-28" tabindex="-1"></a>        <span class="co"># Not so smart</span></span>
+<span id="cb1-29"><a href="#cb1-29" tabindex="-1"></a>        <span class="cf">return</span> <span class="fl">1.0</span></span>
+<span id="cb1-30"><a href="#cb1-30" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" tabindex="-1"></a></span>
+<span id="cb1-32"><a href="#cb1-32" tabindex="-1"></a><span class="kw">class</span> Explainable(Protocol):</span>
+<span id="cb1-33"><a href="#cb1-33" tabindex="-1"></a>    model: BaseScorer </span>
+<span id="cb1-34"><a href="#cb1-34" tabindex="-1"></a>    </span>
+<span id="cb1-35"><a href="#cb1-35" tabindex="-1"></a>    <span class="kw">def</span> explain(<span class="va">self</span>) <span class="op">-&gt;</span> Tuple[matplotlib.figure.Figure, plt.Axes] <span class="op">|</span> <span class="bu">str</span>: </span>
+<span id="cb1-36"><a href="#cb1-36" tabindex="-1"></a>        ...</span>
+<span id="cb1-37"><a href="#cb1-37" tabindex="-1"></a>        </span>
+<span id="cb1-38"><a href="#cb1-38" tabindex="-1"></a><span class="kw">class</span> CreditEvaluator(BaseModel):</span>
+<span id="cb1-39"><a href="#cb1-39" tabindex="-1"></a>    model: BaseScorer</span>
+<span id="cb1-40"><a href="#cb1-40" tabindex="-1"></a>    </span>
+<span id="cb1-41"><a href="#cb1-41" tabindex="-1"></a>    <span class="kw">def</span> explain(<span class="va">self</span>) <span class="op">-&gt;</span> Tuple[matplotlib.figure.Figure, plt.Axes] <span class="op">|</span> <span class="bu">str</span>:</span>
+<span id="cb1-42"><a href="#cb1-42" tabindex="-1"></a>        <span class="bu">print</span>(<span class="st">&quot;Credit given due to several reasons&quot;</span>)</span></code></pre></div>
+<p>We can now easily create a function that need Explainable models and asses their fairness:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="kw">def</span> asses_fairness(model: Explainable):</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>    model.explain()</span></code></pre></div>
+<p>Note how all Scorers based on <code>BaseScorer</code> must implement a <code>predict</code> method. However they could be explainable or not</p>
+<p><br></p>
+<div id="understanding-interactions-between-abc-mixins-and-protocols-in-python" class="section level3">
+<h3><strong>Understanding interactions between ABC, MixIns and Protocols in Python</strong></h3>
+<p>Here we have created an example where it is clear how those concepts interact, being both complementary and partially subsitutive.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">from</span> abc <span class="im">import</span> ABC, abstractmethod</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> Protocol</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a><span class="co"># Abstract Base Class</span></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a><span class="kw">class</span> Document(ABC):</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>    <span class="at">@abstractmethod</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>    <span class="kw">def</span> display(<span class="va">self</span>):</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>        <span class="cf">pass</span></span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a><span class="co"># Mixin for search functionality</span></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a><span class="kw">class</span> SearchableMixin:</span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>    <span class="kw">def</span> search(<span class="va">self</span>, query):</span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f&quot;Searching for &#39;</span><span class="sc">{</span>query<span class="sc">}</span><span class="ss">&#39; in </span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>__class__<span class="sc">.</span><span class="va">__name__</span><span class="sc">}</span><span class="ss">&quot;</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a><span class="co"># Protocol for typing</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a><span class="kw">class</span> Displayable(Protocol):</span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>    <span class="kw">def</span> display(<span class="va">self</span>):</span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>        <span class="cf">pass</span></span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a></span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a><span class="co"># Concrete implementation of a Document</span></span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a><span class="kw">class</span> PdfDocument(Document, SearchableMixin):</span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a>    <span class="kw">def</span> display(<span class="va">self</span>):</span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">&quot;Displaying PDF document content&quot;</span></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a></span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a><span class="kw">class</span> WordDocument(Document, SearchableMixin):</span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a>    <span class="kw">def</span> display(<span class="va">self</span>):</span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a>        <span class="cf">return</span> <span class="st">&quot;Displaying Word document content&quot;</span></span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a><span class="kw">def</span> view_document(doc: Displayable):</span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>    <span class="bu">print</span>(doc.display())</span>
+<span id="cb3-31"><a href="#cb3-31" tabindex="-1"></a></span>
+<span id="cb3-32"><a href="#cb3-32" tabindex="-1"></a><span class="co"># Usage</span></span>
+<span id="cb3-33"><a href="#cb3-33" tabindex="-1"></a>pdf <span class="op">=</span> PdfDocument()</span>
+<span id="cb3-34"><a href="#cb3-34" tabindex="-1"></a>word <span class="op">=</span> WordDocument()</span>
+<span id="cb3-35"><a href="#cb3-35" tabindex="-1"></a></span>
+<span id="cb3-36"><a href="#cb3-36" tabindex="-1"></a>view_document(pdf)  <span class="co"># Works with PdfDocument</span></span>
+<span id="cb3-37"><a href="#cb3-37" tabindex="-1"></a>view_document(word) <span class="co"># Works with WordDocument</span></span>
+<span id="cb3-38"><a href="#cb3-38" tabindex="-1"></a></span>
+<span id="cb3-39"><a href="#cb3-39" tabindex="-1"></a><span class="bu">print</span>(pdf.search(<span class="st">&quot;Python&quot;</span>))  <span class="co"># Utilizing mixin method</span></span></code></pre></div>
+<p><strong>Mixins are more tightly coupled to the classes they are mixed into.</strong> They are essentially a set of methods that a class can inherit from to gain certain functionalities. This inheritance implies a closer relationship between the mixin and the class, as the class directly incorporates the mixin’s methods into its own structure.</p>
+<p>In our previous example, <code>SearchableMixin</code> is a mixin because it directly contributes additional functionality (the search method) to the classes that inherit from it (PdfDocument and WordDocument). This functionality is integrated into the structure of these classes.</p>
+<p>Protocols, on the other hand, are more generic and loosely coupled. They are used primarily for type checking, allowing Python to understand that certain classes are “compatible” or fulfill a specific interface, without those classes necessarily inheriting from a common ancestor.</p>
+<p><strong>Protocols don’t provide implementation</strong>,they only define a set of methods that implementing classes should have. In the example, <code>Displayable</code> is a protocol because it is used to indicate that any object passed to view_document must have a display method. It doesn’t matter how the method is implemented or which class hierarchy the object belongs to.</p>
+<p><br></p>
+</div>
+</div>
+<div id="composition-of-protocols" class="section level2">
+<h2><strong>Composition of Protocols</strong></h2>
+<p><strong>Protocols can be mixed without a problem.</strong> But imagine that in our firs example, you have an <code>Explainable</code> protocol and you want also to create a <code>Predictable</code> protocol.</p>
+<p>To refer those protocols on a single type, you can’t do it with an <code>Union</code> type alias, as that will match anything that satisfies at least one protocol, not both of them.</p>
+<p>To achieve that functionality, you should make use of a composite protocol. Note that we need to subclass from Protocol, as <strong>subclassing from other Protocol do not automatically convert it in that.</strong></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> runtime_checkable </span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="kw">class</span> Predictable(Protocol):</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    <span class="kw">def</span> predict(<span class="va">self</span>) <span class="op">-&gt;</span> <span class="bu">list</span>[<span class="bu">int</span>] <span class="op">|</span> <span class="bu">int</span> <span class="op">|</span> <span class="va">None</span>:</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>        ...</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>    </span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a><span class="at">@runtime_checkable</span></span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a><span class="kw">class</span> ShapModel(Predictable, Explainable, Protocol):</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>    ...</span></code></pre></div>
+<p>You can use <code>ShapModel</code> anywhere a model should support <code>predict</code> and <code>explain</code> methods, without having to inherit from any base model. Remember that the especification of the protocol in the class declaration is optional <code>class NewModel(ShapModel)</code> or <code>class NewModel</code>.</p>
+<p>For making it possible to check if an object satisfies a protocol with <code>isinstance()</code>, it is needed to use the <code>runtime_checkable</code> protocol. It is calling a <code>__hasattr__</code> method of each of the expected variables and functions of the protocol.</p>
+<p><br>´</p>
+</div>
+<div id="stay-updated-on-python-tips" class="section level2">
+<h2><strong>Stay updated on Python tips</strong></h2>
+<p>Hopefully, this post has helped familiarize you with Protocols in Python, how to use them and their main advantages and enabling you to enjoy their benefits.</p>
+<p>If you want to stay updated…</p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more Python tips!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+<style>
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+</style>
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
+</div>
+</div>

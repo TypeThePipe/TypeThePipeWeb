@@ -1,0 +1,247 @@
+---
+title: Python protocols. When to use them in your projects to abstract and decoupling
+author: Carlos Vecina Tebar
+date: '2023-12-11'
+slug: python-protocols-when-to-use
+translationKey: python-protocols-when-to-use
+output: 
+  blogdown::html_page:
+    highlight: pygments 
+    toc: TRUE
+    toc_depth: 2
+categories:
+  - Python
+  - Post
+tags: [Python]
+subtitle: "What are Python Protocols and when to use them to complement or sustitute abstract classes and MixIns."
+summary: "What are Python Protocols and when to use them to complement or sustitute abstract classes and MixIns."
+authors: [carlos-vecina]
+featured: false
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+
+<img src="./featured.png" width="400px" alt="Vibrant Python logo with the Protocols composability text." />
+
+<br>
+
+# **Python protocols. Defining a protocol and when to use it**
+
+Protocols in Python are a feature introduced in Python 3.8. Protocols provide a way of closing the gap between type hinting and the runtime type system, allowing us to do structural subtyping during typechacking. They annotate duck-typed during that typechecking.
+
+**Protocols are an alternative (or a complement) to inheritance, abstract classes and Mixins.** While those could be great options for some use cases, the first ones may become complicate to follow as the class hierarchy increase in complexity. It usually requires intermediate objects that could became a problem for future new features and code manteiners. Mixins, however, could be a better option as they keep contained each functionality (e.g HashMixIn, ToDictMixIn.. ). The naming convention is usually `xMixIn` or adding the suffix `-able` / `-ible`.
+
+So, why are Protocols useful in Python? Protocols provide a solid API that users can depend on, without relaying on a specific type. That allow us to write more composable and maintainable code.
+
+<br>
+
+## **How to define a Protocol**
+
+Let's create an example on how to create API where an Explainable protocol 
+
+```{python}
+from pydantic import BaseModel
+from typing import List, Optional, Tuple
+import numpy as np
+
+import matplotlib.pyplot as plt
+import matplotlib.figure
+from abc import ABC
+
+class BaseScorer(ABC, BaseModel):
+    @abstractmethod
+    def predict(self):
+        ...
+
+class MachineLearningScorer(BaseScorer):
+    weights: np.ndarray
+    learning_rate: float
+    epochs: int
+    batch_size: int
+    loss_function: str
+    optimizer: str
+    accuracy: Optional[float] = None
+    training_time: Optional[float] = None
+
+    class Config:
+        arbitrary_types_allowed = True
+    
+    def predict(self) -> float:
+        # Not so smart
+        return 1.0
+
+
+class Explainable(Protocol):
+    model: BaseScorer 
+    
+    def explain(self) -> Tuple[matplotlib.figure.Figure, plt.Axes] | str: 
+        ...
+        
+class CreditEvaluator(BaseModel):
+    model: BaseScorer
+    
+    def explain(self) -> Tuple[matplotlib.figure.Figure, plt.Axes] | str:
+        print("Credit given due to several reasons")
+```
+
+We can now easily create a function that need Explainable models and asses their fairness:
+
+```{python}
+def asses_fairness(model: Explainable):
+    model.explain()
+
+```
+
+Note how all Scorers based on `BaseScorer` must implement a `predict` method. However they could be explainable or not 
+
+
+<br>
+
+### **Understanding interactions between ABC, MixIns and Protocols in Python**
+
+Here we have created an example where it is clear how those concepts interact, being both complementary and partially subsitutive.
+
+```{python}
+from abc import ABC, abstractmethod
+from typing import Protocol
+
+# Abstract Base Class
+class Document(ABC):
+    @abstractmethod
+    def display(self):
+        pass
+
+# Mixin for search functionality
+class SearchableMixin:
+    def search(self, query):
+        return f"Searching for '{query}' in {self.__class__.__name__}"
+
+# Protocol for typing
+class Displayable(Protocol):
+    def display(self):
+        pass
+
+# Concrete implementation of a Document
+class PdfDocument(Document, SearchableMixin):
+    def display(self):
+        return "Displaying PDF document content"
+
+class WordDocument(Document, SearchableMixin):
+    def display(self):
+        return "Displaying Word document content"
+
+def view_document(doc: Displayable):
+    print(doc.display())
+
+# Usage
+pdf = PdfDocument()
+word = WordDocument()
+
+view_document(pdf)  # Works with PdfDocument
+view_document(word) # Works with WordDocument
+
+print(pdf.search("Python"))  # Utilizing mixin method
+```
+
+
+**Mixins are more tightly coupled to the classes they are mixed into.** They are essentially a set of methods that a class can inherit from to gain certain functionalities. This inheritance implies a closer relationship between the mixin and the class, as the class directly incorporates the mixin's methods into its own structure.
+
+In our previous example, `SearchableMixin` is a mixin because it directly contributes additional functionality (the search method) to the classes that inherit from it (PdfDocument and WordDocument). This functionality is integrated into the structure of these classes.
+
+Protocols, on the other hand, are more generic and loosely coupled. They are used primarily for type checking, allowing Python to understand that certain classes are "compatible" or fulfill a specific interface, without those classes necessarily inheriting from a common ancestor.
+
+**Protocols don't provide implementation**,they only define a set of methods that implementing classes should have. In the example, `Displayable` is a protocol because it is used to indicate that any object passed to view_document must have a display method. It doesn’t matter how the method is implemented or which class hierarchy the object belongs to.
+
+<br>
+
+## **Composition of Protocols**
+
+**Protocols can be mixed without a problem.** But imagine that in our firs example, you have an `Explainable` protocol and you want also to create a `Predictable` protocol.
+
+To refer those protocols on a single type, you can't do it with an `Union` type alias, as that will match anything that satisfies at least one protocol, not both of them.
+
+To achieve that functionality, you should make use of a composite protocol. Note that we need to subclass from Protocol, as **subclassing from other Protocol do not automatically convert it in that.**
+
+```{python}
+from typing import runtime_checkable 
+
+class Predictable(Protocol):
+    def predict(self) -> list[int] | int | None:
+        ...
+    
+@runtime_checkable
+class ShapModel(Predictable, Explainable, Protocol):
+    ...
+```
+
+You can use `ShapModel` anywhere a model should support `predict` and `explain` methods, without having to inherit from any base model. Remember that the especification of the protocol in the class declaration is optional `class NewModel(ShapModel)` or `class NewModel`.
+
+For making it possible to check if an object satisfies a protocol with `isinstance()`, it is needed to use the `runtime_checkable` protocol. It is calling a `__hasattr__ ` method of each of the expected variables and functions of the protocol.
+
+<br>´
+
+
+## **Stay updated on Python tips**
+
+Hopefully, this post has helped familiarize you with Protocols in Python, how to use them and their main advantages and enabling you to enjoy their benefits.
+
+If you want to stay updated...
+
+```{=html}
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more Python tips!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+```
+
+
+<style>
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+</style>
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
