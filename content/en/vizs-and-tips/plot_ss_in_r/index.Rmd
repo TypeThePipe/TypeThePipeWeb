@@ -1,0 +1,153 @@
+---
+title: "Plot_ss in R. Smoothing splines and polynomial regression plots"
+author: Carlos Vecina Tebar
+date: "2023-12-18"
+lastmod: "2023-12-18"
+slug: "plot-ss-in-R"
+translationKey: "plot-ss-in-R"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- R
+- Tips
+tags: []
+subtitle: 'Plot your Smoothing Splines regression easily with R! From base stats to ggplot2 geom_smooth(). We show you how to deal with it!'
+summary: "Plot your Smoothing Splines regression easily with R! From base stats to ggplot2 geom_smooth(). We show you how to deal with it!"
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+<img src="/vizs-and-tips/plot-ss-in-r/featured.png" height="250px" width="400px" alt="R ggplot2 plot of the lm and smoothing splines with geom_smooth()." />
+
+
+<br>
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<br>
+
+
+# **What is plot_ss and Smoothing Splines? Work with them in R**
+
+Smoothing splines are a method used in statistics and data analysis to create a smooth curve through a set of data points. They are particularly useful in situations where you have noisy data and want to fit a curve that captures the underlying trend without overfitting to the random noise in the data.
+
+Here are some key points about smoothing splines:
+
+- *Purpose*: They are used for smoothing data, which means reducing noise and making the underlying pattern in the data more apparent.
+
+- *Mathematical Foundation*: A smoothing spline is a type of spline, which is a piecewise polynomial function. In simple terms, it's a series of connected polynomial segments that create a smooth curve.
+
+- *Flexibility*: One of the advantages of smoothing splines is their flexibility. They can fit a wide range of data shapes because the curve is not restricted to a specific form like a straight line or a quadratic curve.
+
+<br>
+
+
+## **Plot_ss in R using base R**
+
+Recently, we dove into teaching the world of smoothing splines in R, and guess what? It's simpler than you might think, especially with base R functions. If you're looking to create elegant, smooth curves through your data, `smooth.spline()` is your new best friend.
+
+```{r}
+n <- 200
+x <- seq(0, 1, length.out = n)
+fx <- sin(2 * pi * x)
+
+# generate noisy data
+set.seed(1)
+y <- fx + rnorm(n, sd = .1)
+```
+
+Use the base `smooth.spline()` without any restriction in knots:
+```{r}
+ss = smooth.spline(x,y)
+ss
+```
+
+
+Let's start with a sinusoidal function, adding it some noise. As we all know, this is an easy case were regression with linear terms fails to fit the data. In the next plot we create a lm regression and a`smooth.spline` fit to that kind of function.
+
+```{r, warning=FALSE, message=FALSE}
+# plot data and f(x)
+plot(x, y)             # data
+lines(x, fx, lwd = 2)  # f(x)
+abline(coef(lm(y ~ x)), lty = 2, col=2)
+lines(x, ss$y, lty = 3, col = 3, lwd = 2)
+legend("topright", legend = c("f(x)", "lm", "smooth.spline"), lty = 1:3, col=1:3, lwd = 2, bty = "n")
+
+```
+
+<br>
+
+## Ggplot geom_smooth for plot ss (smoothing splines) in R
+
+In a more modern R ecosystem, in 2024 the usage of ggplot2 is widely spread even for beginners. We have available `geom_smooth()` in ggplot2 package to fit the plotted data.
+
+We can use geom smooth for smoithing splines, for linear lm regression. But wait, there's more! Polynomial regression with `geom_smooth()` is where things get really interesting. It's like adding swirls and curls to your path, allowing for bends and turns. This is handy when your data's story is more complex, and a straight line just won't do. You can add higher-order terms while keeping the coefficients linear, which is a fancy way of saying you can make your line wiggle and waggle in just the right way to fit the ups and downs of your data.
+
+Let's check and easy code example:
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+df <- data.frame(x = x, y = y)
+(
+ggplot(df, aes(x, y)) 
+  + geom_point() 
+  + geom_smooth() 
+  + geom_smooth( method='lm', color="yellow") 
+  + stat_smooth(method='lm', formula = y~poly(x,3), color="green")
+  + labs(title="Plot Smoothing Splines method and Polynomial regression", linetype = NULL)
+  )
+```
+
+<br>
+
+## **Math behind Smoothing Splines**
+
+<img src="/vizs-and-tips/plot-ss-in-r/formula.png" height="250px" width="400px" alt="Smoothing Splines formula." />
+
+Here, yi are the data points, f(xi) is the value of the spline at point xi and f ′′ (t) is the second derivative of the spline.
+
+Smoothing Parameter (λ):
+
+There's a parameter, often denoted as λ, that controls the trade-off between smoothness and data fitting. A high λ values give more weight to smoothness, leading to a smoother curve that might not fit the data as closely.
+A low λ values do the opposite, fitting the data more closely but potentially resulting in a less smooth curve.
+
+
+<br>
+
+```{=html}
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more R visualiztion tips!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+```
+
+
+<br>

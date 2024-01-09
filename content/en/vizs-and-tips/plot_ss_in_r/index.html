@@ -1,0 +1,188 @@
+---
+title: "Plot_ss in R. Smoothing splines and polynomial regression plots"
+author: Carlos Vecina Tebar
+date: "2023-12-18"
+lastmod: "2023-12-18"
+slug: "plot-ss-in-R"
+translationKey: "plot-ss-in-R"
+output:
+  blogdown::html_page:
+    highlight: tango
+categories:
+- R
+- Tips
+tags: []
+subtitle: 'Plot your Smoothing Splines regression easily with R! From base stats to ggplot2 geom_smooth(). We show you how to deal with it!'
+summary: "Plot your Smoothing Splines regression easily with R! From base stats to ggplot2 geom_smooth(). We show you how to deal with it!"
+authors: [carlos-vecina]
+featured: false
+draft: false
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  background-color: #f8f8f8; }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #204a87; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #204a87; font-weight: bold; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #ce5c00; font-weight: bold; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<p><img src="/vizs-and-tips/plot-ss-in-r/featured.png" height="250px" width="400px" alt="R ggplot2 plot of the lm and smoothing splines with geom_smooth()." /></p>
+<p><br></p>
+<p><br></p>
+<div id="what-is-plot_ss-and-smoothing-splines-work-with-them-in-r" class="section level1">
+<h1><strong>What is plot_ss and Smoothing Splines? Work with them in R</strong></h1>
+<p>Smoothing splines are a method used in statistics and data analysis to create a smooth curve through a set of data points. They are particularly useful in situations where you have noisy data and want to fit a curve that captures the underlying trend without overfitting to the random noise in the data.</p>
+<p>Here are some key points about smoothing splines:</p>
+<ul>
+<li><p><em>Purpose</em>: They are used for smoothing data, which means reducing noise and making the underlying pattern in the data more apparent.</p></li>
+<li><p><em>Mathematical Foundation</em>: A smoothing spline is a type of spline, which is a piecewise polynomial function. In simple terms, it’s a series of connected polynomial segments that create a smooth curve.</p></li>
+<li><p><em>Flexibility</em>: One of the advantages of smoothing splines is their flexibility. They can fit a wide range of data shapes because the curve is not restricted to a specific form like a straight line or a quadratic curve.</p></li>
+</ul>
+<p><br></p>
+<div id="plot_ss-in-r-using-base-r" class="section level2">
+<h2><strong>Plot_ss in R using base R</strong></h2>
+<p>Recently, we dove into teaching the world of smoothing splines in R, and guess what? It’s simpler than you might think, especially with base R functions. If you’re looking to create elegant, smooth curves through your data, <code>smooth.spline()</code> is your new best friend.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">200</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="at">length.out =</span> n)</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>fx <span class="ot">&lt;-</span> <span class="fu">sin</span>(<span class="dv">2</span> <span class="sc">*</span> pi <span class="sc">*</span> x)</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="co"># generate noisy data</span></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>y <span class="ot">&lt;-</span> fx <span class="sc">+</span> <span class="fu">rnorm</span>(n, <span class="at">sd =</span> .<span class="dv">1</span>)</span></code></pre></div>
+<p>Use the base <code>smooth.spline()</code> without any restriction in knots:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>ss <span class="ot">=</span> <span class="fu">smooth.spline</span>(x,y)</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>ss</span></code></pre></div>
+<pre><code>## Call:
+## smooth.spline(x = x, y = y)
+## 
+## Smoothing Parameter  spar= 0.7888247  lambda= 0.0007344578 (12 iterations)
+## Equivalent Degrees of Freedom (Df): 9.104315
+## Penalized Criterion (RSS): 1.619316
+## GCV: 0.008887293</code></pre>
+<p>Let’s start with a sinusoidal function, adding it some noise. As we all know, this is an easy case were regression with linear terms fails to fit the data. In the next plot we create a lm regression and a<code>smooth.spline</code> fit to that kind of function.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># plot data and f(x)</span></span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">plot</span>(x, y)             <span class="co"># data</span></span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a><span class="fu">lines</span>(x, fx, <span class="at">lwd =</span> <span class="dv">2</span>)  <span class="co"># f(x)</span></span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a><span class="fu">abline</span>(<span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x)), <span class="at">lty =</span> <span class="dv">2</span>, <span class="at">col=</span><span class="dv">2</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a><span class="fu">lines</span>(x, ss<span class="sc">$</span>y, <span class="at">lty =</span> <span class="dv">3</span>, <span class="at">col =</span> <span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">2</span>)</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topright&quot;</span>, <span class="at">legend =</span> <span class="fu">c</span>(<span class="st">&quot;f(x)&quot;</span>, <span class="st">&quot;lm&quot;</span>, <span class="st">&quot;smooth.spline&quot;</span>), <span class="at">lty =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">col=</span><span class="dv">1</span><span class="sc">:</span><span class="dv">3</span>, <span class="at">lwd =</span> <span class="dv">2</span>, <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><br></p>
+</div>
+<div id="ggplot-geom_smooth-for-plot-ss-smoothing-splines-in-r" class="section level2">
+<h2>Ggplot geom_smooth for plot ss (smoothing splines) in R</h2>
+<p>In a more modern R ecosystem, in 2024 the usage of ggplot2 is widely spread even for beginners. We have available <code>geom_smooth()</code> in ggplot2 package to fit the plotted data.</p>
+<p>We can use geom smooth for smoithing splines, for linear lm regression. But wait, there’s more! Polynomial regression with <code>geom_smooth()</code> is where things get really interesting. It’s like adding swirls and curls to your path, allowing for bends and turns. This is handy when your data’s story is more complex, and a straight line just won’t do. You can add higher-order terms while keeping the coefficients linear, which is a fancy way of saying you can make your line wiggle and waggle in just the right way to fit the ups and downs of your data.</p>
+<p>Let’s check and easy code example:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> x, <span class="at">y =</span> y)</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>(</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="fu">ggplot</span>(df, <span class="fu">aes</span>(x, y)) </span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  <span class="sc">+</span> <span class="fu">geom_point</span>() </span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  <span class="sc">+</span> <span class="fu">geom_smooth</span>() </span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  <span class="sc">+</span> <span class="fu">geom_smooth</span>( <span class="at">method=</span><span class="st">&#39;lm&#39;</span>, <span class="at">color=</span><span class="st">&quot;yellow&quot;</span>) </span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>  <span class="sc">+</span> <span class="fu">stat_smooth</span>(<span class="at">method=</span><span class="st">&#39;lm&#39;</span>, <span class="at">formula =</span> y<span class="sc">~</span><span class="fu">poly</span>(x,<span class="dv">3</span>), <span class="at">color=</span><span class="st">&quot;green&quot;</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>  <span class="sc">+</span> <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;Plot Smoothing Splines method and Polynomial regression&quot;</span>, <span class="at">linetype =</span> <span class="cn">NULL</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>  )</span></code></pre></div>
+<p><img src="{{< blogdown/postref >}}index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><br></p>
+</div>
+<div id="math-behind-smoothing-splines" class="section level2">
+<h2><strong>Math behind Smoothing Splines</strong></h2>
+<p><img src="/vizs-and-tips/plot-ss-in-r/formula.png" height="250px" width="400px" alt="Smoothing Splines formula." /></p>
+<p>Here, yi are the data points, f(xi) is the value of the spline at point xi and f ′′ (t) is the second derivative of the spline.</p>
+<p>Smoothing Parameter (λ):</p>
+<p>There’s a parameter, often denoted as λ, that controls the trade-off between smoothness and data fitting. A high λ values give more weight to smoothness, leading to a smoother curve that might not fit the data as closely.
+A low λ values do the opposite, fitting the data more closely but potentially resulting in a less smooth curve.</p>
+<p><br></p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more R visualiztion tips!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+<p><br></p>
+</div>
+</div>
