@@ -1,0 +1,258 @@
+---
+title: Plot your GIS data with GeoPandas and Plotnine. A single glance insightful visualization
+author: Carlos Vecina Tebar
+date: '2024-01-10'
+slug: python-geopandas-plot
+translationKey: python-geopandas-plot
+output: 
+  blogdown::html_page:
+    highlight: pygments 
+    toc: TRUE
+    toc_depth: 2
+categories:
+  - Python
+  - Post
+tags: [Python]
+subtitle: "Learn how to use GeoPandas and Plotnine to create high impact and insightful visualization with Python."
+summary: "Learn how to use GeoPandas and Plotnine to create high impact and insightful visualization with Python."
+authors: [carlos-vecina]
+featured: false
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<div id="TOC">
+<ul>
+<li><a href="#geographical-data-visualization-in-python-with-geopandas" id="toc-geographical-data-visualization-in-python-with-geopandas"><strong>Geographical Data Visualization in Python with GeoPandas</strong></a>
+<ul>
+<li><a href="#gis-data-formats" id="toc-gis-data-formats"><strong>GIS data formats</strong></a></li>
+<li><a href="#load-shap-data-into-python-object" id="toc-load-shap-data-into-python-object"><strong>Load SHAP data into Python object</strong></a></li>
+<li><a href="#stay-updated-on-python-tips" id="toc-stay-updated-on-python-tips"><strong>Stay updated on Python tips</strong></a></li>
+</ul></li>
+</ul>
+</div>
+
+<p><img src="featured.png" width="400px" alt="Vibrant Python logo with the Protocols composability text." /></p>
+<p><br></p>
+<div id="geographical-data-visualization-in-python-with-geopandas" class="section level1">
+<h1><strong>Geographical Data Visualization in Python with GeoPandas</strong></h1>
+<p>Working with geographical data can often be a bit tricky for the uninitiated. This post aims to shed some light for those who are encountering geo data for the first time and want an easy way to perform initial manipulations and plot it to gain their first insights.</p>
+<p>We’re about to dive into a sea of coordinates, shapes, and a whole lot of mapping magic!</p>
+<p><br></p>
+<div id="gis-data-formats" class="section level2">
+<h2><strong>GIS data formats</strong></h2>
+<p>First of all, we want to make a summary about the most used data formats for geo data. These are the unsung heroes in the world of mapping and spatial analysis. Imagine trying to describe the vastness of our planet without them – it’s like trying to paint a masterpiece with just one color. Not happening, right?</p>
+<p>First up in our parade of geo data superstars are formats like <strong>Shapefile (SHP), the old faithful of the geo world.</strong> But you’ll need a complete set of three files that are mandatory to make up a shapefile. The three required files are: .SHP for geometry, .SHX is the shape index position and .DBF is the attribute data.</p>
+<p>Developed by ESRI, it’s like the trusty old pickup truck – not the flashiest but gets the job done. Then there’s <strong>GeoJSON</strong>, the cool kid on the block. It’s all about simplicity and web-friendliness, perfect for those who love to mingle with JavaScript and web mapping.</p>
+<p>And let’s not forget about <strong>KML</strong> (Keyhole Markup Language), the go-to for Google Earth enthusiasts. It’s like having a GPS in your pocket – straightforward and ready to guide you through those virtual globetrotting adventures. Each of these formats has its own quirks and charms, kind of like different types of pasta – some are better suited for hearty meaty sauces, while others are perfect for a light seafood affair.</p>
+<p>In short, the world of geo data formats is as diverse and colorful as the world it represents. Whether you’re a GIS guru or a casual map enthusiast, getting to know these formats is like getting the keys to a whole new world of spatial wonders</p>
+<p>Yuo can check more info <a href="https://gisgeography.com/gis-formats/">here</a>!</p>
+<p><br></p>
+</div>
+<div id="load-shap-data-into-python-object" class="section level2">
+<h2><strong>Load SHAP data into Python object</strong></h2>
+<p>Let’s kick things off by accessing the geo data and geometries. Imagine we are a company with central stations spread across the Spanish territory, responsible for the alerts in their vicinity. Each station acts as a sentinel, vigilantly monitoring and responding to the events unfolding around it. So we will begin with defining the country over which we’re planning to plot the stations and event coordinates.</p>
+<p>Now, here comes the fun part: we load the Shape data using GeoPandas. It’s like unlocking a treasure chest of geographical wonders! GeoPandas makes it a breeze, turning what could be a complex task into a walk in the park. Imagine GeoPandas as your trusty GPS, guiding you through the intricate world of geo data with ease and precision. So, grab your data, let’s fire up GeoPandas, and watch as those lines of code magically transform into a map full of possibilities!</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> geopandas <span class="im">as</span> gp</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a><span class="kw">def</span> filter_shp_peninsular_data(df: pd.DataFrame) <span class="op">-&gt;</span> pd.DataFrame:</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    <span class="cf">return</span> df[df[<span class="st">&quot;acom_name&quot;</span>] <span class="op">!=</span> <span class="st">&quot;Canarias&quot;</span>]</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>spain_gis_map <span class="op">=</span> gp.read_file(<span class="st">&#39;./data/georef-spain-provincia/georef-spain-provincia-millesime.shp&#39;</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>peninsular_gis_map <span class="op">=</span> filter_shp_peninsular_data(spain_gis_map)</span></code></pre></div>
+<p>We can filter out any layer in the GeoPandas <code>read_file</code> function with the <code>bbox</code> and <code>mask</code> parameters. But let’s keep it simple for the moment and just load and filter out it.</p>
+<p>For ease of use, we are going to load and filter also the alerts peninsular data. You can easily apply coordinates filters in order to focus in one specific geography. We will transform our internal data read with Polars to GeoPandas dataframe to show how it could be do, but it is not strictly necessary.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">from</span> shapely.geometry <span class="im">import</span> Point</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a><span class="kw">def</span> filter_df_peninsular_data(df: pd.DataFrame) <span class="op">-&gt;</span> pd.DataFrame:</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>    peninsular_bounds_min <span class="op">=</span> peninsular_gis_map[<span class="st">&quot;geometry&quot;</span>].bounds.<span class="bu">min</span>()</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>    peninsular_bounds_max <span class="op">=</span> peninsular_gis_map[<span class="st">&quot;geometry&quot;</span>].bounds.<span class="bu">max</span>()</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>    <span class="cf">return</span> df.<span class="bu">filter</span>(</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>    (</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>        pl.col(<span class="st">&quot;x&quot;</span>)<span class="op">&gt;=</span>peninsular_bounds_min[<span class="st">&quot;minx&quot;</span>]</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>    ) <span class="op">&amp;</span> (</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>        pl.col(<span class="st">&quot;x&quot;</span>)<span class="op">&lt;=</span>peninsular_bounds_max[<span class="st">&quot;maxx&quot;</span>]</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>    ) <span class="op">&amp;</span> (</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>        pl.col(<span class="st">&quot;y&quot;</span>)<span class="op">&gt;=</span>peninsular_bounds_min[<span class="st">&quot;miny&quot;</span>]</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>    ) <span class="op">&amp;</span> (</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>        pl.col(<span class="st">&quot;y&quot;</span>)<span class="op">&lt;=</span>peninsular_bounds_max[<span class="st">&quot;maxy&quot;</span>]</span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>    )</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>    )</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>alerts_geo_df <span class="op">=</span> pl.read_csv(<span class="st">&quot;alers_data.csv&quot;</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>alerts_geo_df <span class="op">=</span> gp.GeoDataFrame({</span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>    <span class="st">&quot;geometry&quot;</span>: alerts_geo_df[<span class="st">&quot;coord&quot;</span>].map_elements(<span class="kw">lambda</span> x: Point(x)),</span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>    <span class="st">&quot;alert_solved&quot;</span>: alerts_geo_df[<span class="st">&quot;alert_solved&quot;</span>].is_not_null(),</span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>    <span class="st">&quot;x&quot;</span>: alerts_geo_df[<span class="st">&quot;x&quot;</span>],</span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>    <span class="st">&quot;y&quot;</span>: alerts_geo_df[<span class="st">&quot;y&quot;</span>],</span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>})</span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a> </span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a>stations_geo_df <span class="op">=</span> pl.read_csv(<span class="st">&quot;stations_data.csv&quot;</span>)</span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a>stations_geo_df <span class="op">=</span> gp.GeoDataFrame({</span>
+<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a>    <span class="st">&quot;geometry&quot;</span>: stations_geo_df[<span class="st">&quot;coord&quot;</span>].map_elements(<span class="kw">lambda</span> x: Point(x)),</span>
+<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a>    <span class="st">&quot;x&quot;</span>: stations_geo_df[<span class="st">&quot;x&quot;</span>],</span>
+<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a>    <span class="st">&quot;y&quot;</span>: stations_geo_df[<span class="st">&quot;y&quot;</span>],</span>
+<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a>})</span></code></pre></div>
+<p><br></p>
+<div id="geopandas-plotting-with-plotnine" class="section level3">
+<h3><strong>Geopandas plotting with Plotnine</strong></h3>
+<p>Let’s start with our mission to plot a map sprinkled with stations (in cheerful yellow) and events (in bold red and blue).</p>
+<p>Once we have the data both country layers and our project datapoints properly formated as GeoPandas DataFrames</p>
+<p>The <code>geom_map</code> function is our stroke of genius, turning geographical data into visual narratives.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>(</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>    ggplot()</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>    <span class="op">+</span> geom_map(peninsular_gis_map, fill<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>    <span class="op">+</span> geom_map(alerts_geo_df, aes(fill<span class="op">=</span><span class="st">&quot;alert_solved&quot;</span>), size<span class="op">=</span><span class="dv">2</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>    <span class="op">+</span> geom_map(stations_geo_df, colour<span class="op">=</span><span class="st">&quot;yellow&quot;</span>, size<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>    <span class="op">+</span> labs(</span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>        title<span class="op">=</span><span class="st">&quot;Alerts solved y/n, by location + Stations (yellow)&quot;</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a>        caption <span class="op">=</span> <span class="st">&quot;Data from  2023-01-01 to 2023-02-01&quot;</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>    )</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="/post/python-geopandas-plot/geopandas_plot.jpeg" width="400px" alt="GeoPandas plot in Python of the Spanish territory and data points." /></p>
+<p><br></p>
+</div>
+<div id="geopandas-plotting-the-most-representative-category-by-location" class="section level3">
+<h3><strong>Geopandas plotting the most representative category by location</strong></h3>
+<p>Now, we’re not just mapping points; we’re painting a picture of the most representative category by location. Think of it as a data detective story, where each clue (or data point) reveals a part of the bigger picture.</p>
+<p>Here’s how we crack the case:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>(</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>    ggplot()</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>    <span class="op">+</span> geom_bin2d(alerts_geo_df, aes(x<span class="op">=</span><span class="st">&quot;x&quot;</span>, y<span class="op">=</span><span class="st">&quot;y&quot;</span>, fill<span class="op">=</span><span class="st">&quot;alert_solved&quot;</span>), bins <span class="op">=</span> <span class="dv">30</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    <span class="op">+</span> geom_map(stations_geo_df, colour<span class="op">=</span><span class="st">&quot;yellow&quot;</span>, size<span class="op">=</span><span class="dv">3</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>    <span class="op">+</span> labs(</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>        title<span class="op">=</span><span class="st">&quot;Alerts solved y/n, by location + Stations (yellow)&quot;</span>,</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>        caption <span class="op">=</span> <span class="st">&quot;Data from  2023-01-01 to 2023-02-01&quot;</span>,</span>
+<span id="cb4-8"><a href="#cb4-8" tabindex="-1"></a>    )</span>
+<span id="cb4-9"><a href="#cb4-9" tabindex="-1"></a>)</span></code></pre></div>
+<p><img src="/post/python-geopandas-plot/geopandas_plot_pixel.jpeg" width="400px" alt="GeoPandas plot in Python of the Spanish territory and data points in a pixel way." /></p>
+<p>With geom_bin2d, we’re transforming our map into a vibrant tapestry, showcasing the most contacted categories in a kaleidoscope of colors. Each square on this grid is like a pixel, together weaving the story of our data’s journey across the Spanish landscape. And, of course, our stations, marked in sunny yellow, stand out as beacons in this sea of information.</p>
+<p><br></p>
+</div>
+</div>
+<div id="stay-updated-on-python-tips" class="section level2">
+<h2><strong>Stay updated on Python tips</strong></h2>
+<p>Hopefully, this post has helped familiarize you with GeoPandas, GIS data nd Plotnine in Python.</p>
+<p>If you want to stay updated…</p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for more Python posts!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+<style>
+p {
+  word-spacing: 3px;
+  text-indent: 20px;
+  text-align: justify;
+}
+.page-subtitle {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+.card-text {
+  text-align: left  !important;
+    text-indent: 0px !important;
+}
+</style>
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
+</div>
+</div>
