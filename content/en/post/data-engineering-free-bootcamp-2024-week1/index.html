@@ -1,0 +1,382 @@
+---
+title: "Data Engineering Bootcamp 2024 (Week 1) Docker & Terraform"
+author: Carlos Vecina Tebar
+date: '2024-01-21'
+slug: "data-engineering-free-bootcamp-2024-week1"
+translationKey: "data-engineering-free-bootcamp-2024-week1"
+output: 
+  blogdown::html_page:
+    highlight: pygments 
+    toc: TRUE
+    toc_depth: 2
+categories:
+  - Python
+  - Post
+  - Data Engineering Bootcamp
+tags: [Python]
+subtitle: "Learn the basics of Docker and Terraform from scratch to enhance your Data Engineering projects. Containerize your data pipelines and manage your infrastructure as code."
+summary: "Learn the basics of Docker and Terraform from scratch to enhance your Data Engineering projects. Containerize your data pipelines and manage your infrastructure as code."
+authors: [carlos-vecina]
+featured: false
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<div id="TOC">
+<ul>
+<li><a href="#free-data-engineering-bootcamp-2024-to-become-a-skilled-data-analytics-engineer.-week-1" id="toc-free-data-engineering-bootcamp-2024-to-become-a-skilled-data-analytics-engineer.-week-1">Free Data Engineering Bootcamp 2024 to become a skilled Data Analytics Engineer. Week 1</a>
+<ul>
+<li><a href="#dockerized-data-pipeline-intro-dockerfile-and-doocker-compose" id="toc-dockerized-data-pipeline-intro-dockerfile-and-doocker-compose"><strong>1. Dockerized data pipeline (Intro, dockerfile and doocker compose)</strong></a></li>
+<li><a href="#terraform-manage-your-gcp-infra.-google-storage-and-google-bigquery" id="toc-terraform-manage-your-gcp-infra.-google-storage-and-google-bigquery"><strong>2. Terraform: Manage your GCP infra. Google Storage and Google BigQuery</strong></a></li>
+<li><a href="#stay-updated-on-the-data-engineering-and-data-analytics-engineer-career-paths" id="toc-stay-updated-on-the-data-engineering-and-data-analytics-engineer-career-paths"><strong>Stay updated on the Data Engineering and Data Analytics Engineer career paths</strong></a></li>
+</ul></li>
+</ul>
+</div>
+
+<p><img src="featured.png" width="400px" alt="Vibrant Python logo with the Protocols composability text." /></p>
+<p><br></p>
+<div id="free-data-engineering-bootcamp-2024-to-become-a-skilled-data-analytics-engineer.-week-1" class="section level1">
+<h1>Free Data Engineering Bootcamp 2024 to become a skilled Data Analytics Engineer. Week 1</h1>
+<p>I’ve just enrolled in the <a href="https://datatalks.club/blog/data-engineering-zoomcamp.html">DataTalks free Data Engineering zootcamp</a>. It’s a fantastic initiative that has been running for several years, with <strong>each cohort occurring annually.</strong></p>
+<p>The course is organized weekly, featuring one online session per week. There are optional weekly homework assignments which are reviewed, and the course concludes with a mandatory Data Eng final project, which is required to earn the certification.</p>
+<p>In this series of posts, <strong>I will be sharing with you my course notes and comments</strong>, and also how I’m resolving the homework.</p>
+<p><br></p>
+<div id="dockerized-data-pipeline-intro-dockerfile-and-doocker-compose" class="section level2">
+<h2><strong>1. Dockerized data pipeline (Intro, dockerfile and doocker compose)</strong></h2>
+<p>Let’s delve into the essentials of Docker, Dockerfile, and Docker Compose. These three components are crucial in the world of software development, especially when dealing with application deployment and management.</p>
+<p><em>Docker: The Cornerstone of Containerization</em></p>
+<p>Docker stands at the forefront of containerization technology. It allows developers to package applications and their dependencies into containers. <strong>A container is an isolated environment, akin to a lightweight, standalone, and secure package of software that includes everything needed to run it: code, runtime, system tools, system libraries, and settings.</strong> This technology ensures consistency across multiple development and release cycles, standardizing your environment across different stages.</p>
+<p><em>Dockerfile: Blueprint for Docker images</em></p>
+<p>A Dockerfile is a text document containing all the commands a user could call on the command line to assemble a Docker image. It automates the process of creating Docker images. A <strong>Dockerfile defines what goes on in the environment inside your container.</strong> It allows you to create a container that meets your specific needs, which can then be run on any Docker-enabled machine.</p>
+<p><em>Docker Compose: Simplifying multi-container applications</em></p>
+<p>Docker Compose is a tool for <strong>defining and running multi-container Docker applications.</strong> With Compose, you use a YAML file to configure your application’s services, networks, and volumes. Then, with a single command, you create and start all the services from your configuration. Docker Compose works in all environments: production, staging, development, testing, as well as CI workflows.</p>
+<p><em>Why these tools matter?</em></p>
+<p>The combination of Docker, Dockerfile, and Docker Compose streamlines the process of developing, shipping, and running applications. Docker encapsulates your application and its environment, <strong>Dockerfile builds the image for this environment, and Docker Compose manages the orchestration of multi-container setups.</strong> Together, they provide a robust and efficient way to handle the lifecycle of applications. This ecosystem is integral for developers looking to leverage the benefits of containerization for more reliable, scalable, and collaborative software development.</p>
+<p><a href="https://docs.docker.com/get-docker/">Get Docker</a> and read there the documentation.</p>
+<p><br></p>
+<div id="what-is-docker-and-why-is-it-useful-for-data-engineering" class="section level3">
+<h3>What is Docker and why is it useful for Data Engineering?</h3>
+<p>Alright, data engineers, gather around! Why should you care about containerization and Docker? Well, it’s like having a Swiss Army knife in your tech toolkit. Here’s why:</p>
+<ul>
+<li><p><em>Local Experimentation</em>: Setting up things locally for experiments becomes a breeze. No more wrestling with conflicting dependencies or environments. Docker keeps it clean and easy.</p></li>
+<li><p><em>Testing and CI</em> Made Simple: Integration tests and CI/CD pipelines? Docker smoothens these processes. It’s like having a rehearsal space for your code before it hits the big stage.</p></li>
+<li><p><em>Batch Jobs</em> and Beyond: While Docker plays nice with AWS Batch, Kubernetes jobs, and more (though that’s a story for another day), it’s a glimpse into the world of possibilities with containerization.</p></li>
+<li><p><em>Spark</em> Joy: If you’re working with Spark, Docker can be a game-changer. It’s like having a consistent and controlled playground for your data processing.</p></li>
+<li><p><em>Serverless</em>, Stress-less: With the rise of serverless architectures like AWS Lambda, Docker ensures that you’re developing in an environment that mirrors your production setup. No more surprises!</p></li>
+</ul>
+<p>So, there you have it. Containers are everywhere, and Docker is leading the parade. It’s not just a tool; it’s an essential part of the modern software development and deployment process.</p>
+<p><br></p>
+</div>
+<div id="run-postgres-and-pgadmin-containers" class="section level3">
+<h3>Run Postgres and PGAdmin containers</h3>
+<p>You may need to create a network in order the containers communicate. Then, run the Postgres database container. Notice that in order to persist the data, as docker containers would be stateless and reinizialized after each run, you may indicate Docker volumes to persist the PG internal and ingested data.</p>
+<pre><code>docker network create pg-network
+
+docker run -it \
+    -e POSTGRES_USER=&quot;root&quot; \
+    -e POSTGRES_PASSWORD=&quot;root&quot; \
+    -e POSTGRES_DB=&quot;ny_taxi&quot; \
+    -v /Users/jobandtalent/data-eng-bootcamp/ny_taxi_pg_data:/var/lib/postgresql/data \
+    -p 5437:5432 \
+    --name pg-database \
+    --network=pg-network \
+    postgres:13    
+``
+
+Let&#39;s create and start the PG Admin container:
+
+
+docker run -it \
+    -e PGADMIN_DEFAULT_EMAIL=&quot;admin@admin.com&quot; \
+    -e PGADMIN_DEFAULT_PASSWORD=&quot;root&quot; \
+    -p 8080:80 \
+    --name pgadmin \
+    --network=pg-network \
+    dpage/pgadmin4</code></pre>
+<p><br></p>
+</div>
+<div id="manage-multiple-containers-with-the-docker-compose-file" class="section level3">
+<h3>Manage multiple containers with the Docker-compose file</h3>
+<p>Instead of managing our containers individually, it is way better to manage them from one single source. The docker-compose file allows you to specify the services/containers you want to build and run, from the image to run till the environment variables and volumes.</p>
+<pre><code>version: &quot;3.11&quot;
+services:
+  pg-database:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=ny_taxi
+    volumes:
+      - ./ny_taxi_pg_data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+  pg-admin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=root
+    ports:
+      - 8080:80
+    volumes:
+      - &quot;pgadmin_conn_data:/var/lib/pgadmin:rw&quot;
+volumes:
+  pgadmin_conn_data:</code></pre>
+<p><br></p>
+</div>
+<div id="create-your-pipeline-script-and-a-dockerfile" class="section level3">
+<h3>Create your pipeline script and a Dockerfile</h3>
+<p>The pipeline script objective is download the ddata from the US taxi rides and insert it in the Postgres database. The script could be as simple as:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="im">import</span> polars <span class="im">as</span> pl</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a><span class="im">from</span> pydantic_settings <span class="im">import</span> BaseSettings, SettingsConfigDict</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> ClassVar</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>TRIPS_TABLE_NAME <span class="op">=</span> <span class="st">&quot;green_taxi_trips&quot;</span></span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>ZONES_TABLE_NAME <span class="op">=</span> <span class="st">&quot;zones&quot;</span></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="#cb3-8" tabindex="-1"></a><span class="kw">class</span> PgConn(BaseSettings):</span>
+<span id="cb3-9"><a href="#cb3-9" tabindex="-1"></a>    model_config <span class="op">=</span> SettingsConfigDict(env_prefix<span class="op">=</span><span class="st">&#39;PG_&#39;</span>, env_file<span class="op">=</span><span class="st">&#39;.env&#39;</span>, env_file_encoding<span class="op">=</span><span class="st">&#39;utf-8&#39;</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" tabindex="-1"></a>    user: <span class="bu">str</span></span>
+<span id="cb3-12"><a href="#cb3-12" tabindex="-1"></a>    pwd: <span class="bu">str</span></span>
+<span id="cb3-13"><a href="#cb3-13" tabindex="-1"></a>    host: <span class="bu">str</span></span>
+<span id="cb3-14"><a href="#cb3-14" tabindex="-1"></a>    port: <span class="bu">int</span></span>
+<span id="cb3-15"><a href="#cb3-15" tabindex="-1"></a>    db: <span class="bu">str</span></span>
+<span id="cb3-16"><a href="#cb3-16" tabindex="-1"></a></span>
+<span id="cb3-17"><a href="#cb3-17" tabindex="-1"></a>    connector: ClassVar[<span class="bu">str</span>] <span class="op">=</span> <span class="st">&quot;postgresql&quot;</span></span>
+<span id="cb3-18"><a href="#cb3-18" tabindex="-1"></a>    </span>
+<span id="cb3-19"><a href="#cb3-19" tabindex="-1"></a>    <span class="at">@property</span></span>
+<span id="cb3-20"><a href="#cb3-20" tabindex="-1"></a>    <span class="kw">def</span> uri(<span class="va">self</span>):</span>
+<span id="cb3-21"><a href="#cb3-21" tabindex="-1"></a>        <span class="cf">return</span> <span class="ss">f&quot;</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>connector<span class="sc">}</span><span class="ss">://</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>user<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>pwd<span class="sc">}</span><span class="ss">@</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>host<span class="sc">}</span><span class="ss">:</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>port<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span><span class="va">self</span><span class="sc">.</span>db<span class="sc">}</span><span class="ss">&quot;</span></span>
+<span id="cb3-22"><a href="#cb3-22" tabindex="-1"></a></span>
+<span id="cb3-23"><a href="#cb3-23" tabindex="-1"></a></span>
+<span id="cb3-24"><a href="#cb3-24" tabindex="-1"></a>df_ny_taxi <span class="op">=</span> pl.read_csv(<span class="st">&quot;https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-09.csv.gz&quot;</span>)</span>
+<span id="cb3-25"><a href="#cb3-25" tabindex="-1"></a>df_zones <span class="op">=</span> pl.read_csv(<span class="st">&quot;https://s3.amazonaws.com/nyc-tlc/misc/taxi+_zone_lookup.csv&quot;</span>)</span>
+<span id="cb3-26"><a href="#cb3-26" tabindex="-1"></a></span>
+<span id="cb3-27"><a href="#cb3-27" tabindex="-1"></a>conn <span class="op">=</span> PgConn()</span>
+<span id="cb3-28"><a href="#cb3-28" tabindex="-1"></a></span>
+<span id="cb3-29"><a href="#cb3-29" tabindex="-1"></a>df_zones.write_database(ZONES_TABLE_NAME, conn.uri)</span>
+<span id="cb3-30"><a href="#cb3-30" tabindex="-1"></a>df_ny_taxi.write_database(TRIPS_TABLE_NAME, conn.uri)</span></code></pre></div>
+<p>We have used Polars and Pydantic (v2) libraries. With Polars, we load the data from csvs and also manage how to write it to the database with <code>write_database</code> DataFrame method. We load Pydantic module in order to create a Postgres connection object, that loads the configuration from the environment. We are using for convenience an .env config file, but it is not mandatory. As we will explain in the following chunk of code, we set the env variables on the <code>Dockerfile</code> and they remain accessible from inside the container, being trivial to load them using <code>BaseSettings</code> and <code>SettingsConfigDict</code>.</p>
+<p>Now, in order to <strong>Dockerize your data pipeline script</strong>, that as we just saw it download and ingest the data to Postgres, we need to create a Dockerfile with the specifications of the container. We are using Poetry as a dependency manager, so we need to include those pyproject.toml (multi-pourpose file, used to specify to Poetry the desired module version constraints) and the poetry.lock (specific for Poetry version pin respecting the package version constraints from pyproject.toml). Also, we may include to the container the actual <code>ingest_data.py</code> Python pipeline file.</p>
+<pre><code>FROM python:3.11
+
+ARG POETRY_VERSION=1.7.1
+
+WORKDIR /app
+
+COPY ingest_data.py ingest_data.py
+COPY .env .env
+COPY pyproject.toml  pyproject.toml
+COPY poetry.lock  poetry.lock
+
+
+RUN pip3 install --no-cache-dir poetry==${POETRY_VERSION} \
+    &amp;&amp; poetry env use 3.11 \
+    &amp;&amp; poetry install --no-cache
+
+
+ENTRYPOINT [ &quot;poetry&quot;, &quot;run&quot;, &quot;python&quot;, &quot;ingest_data.py&quot; ]</code></pre>
+<p>Just by building the container in our root folder and running it, the <code>ingest_data.py</code> script will be executed, and therefore the data downloaded and persisted on the Postgres database.</p>
+<p><br></p>
+</div>
+</div>
+<div id="terraform-manage-your-gcp-infra.-google-storage-and-google-bigquery" class="section level2">
+<h2><strong>2. Terraform: Manage your GCP infra. Google Storage and Google BigQuery</strong></h2>
+<p><br></p>
+<div id="terraform-intro-and-basic-commands" class="section level3">
+<h3>Terraform intro and basic commands</h3>
+<p>Terraform has become a key tool in modern infrastructure management. Terraform, named with a nod to the concept of terraforming planets, applies a similar idea to cloud and local platform infrastructure. It’s about <strong>creating and managing the necessary environment for software to run efficiently on platforms like AWS, GCP…</strong></p>
+<p>Terraform, developed by HashiCorp, is described as an <strong>“infrastructure as code” tool</strong>. It allows users to define and manage both cloud-based and on-premises resources in human-readable configuration files. These files can be versioned, reused, and shared, offering a consistent workflow to manage infrastructure throughout its lifecycle. The advantages of using Terraform include simplicity in <strong>tracking and modifying infrastructure</strong>, ease of collaboration (since configurations are file-based and can be shared on platforms like GitHub), and reproducibility. For instance, an infrastructure set up in a development environment can be replicated in production with minor adjustments. Additionally, Terraform helps in ensuring that resources are properly removed when no longer needed, avoiding unnecessary costs.</p>
+<p>So this tool not only simplifies the process of infrastructure management but also ensures consistency and compliance with your infrastructure setup.</p>
+<p>However, it’s important to note what Terraform is not. It doesn’t handle the deployment or updating of software on the infrastructure; it’s focused solely on the infrastructure itself. It doesn’t allow modifications to immutable resources without destroying and recreating them. For example, changing the type of a virtual machine would require its recreation. Terraform also only manages resources defined within its configuration files.</p>
+<p><br></p>
+</div>
+<div id="set-up-terraform-for-gcp-deploys.-from-gcp-account-permissions-to-the-main.tf-file" class="section level3">
+<h3>Set up Terraform for GCP deploys. From GCP account permissions to the main.tf file</h3>
+<p>Diving into the world of cloud infrastructure can be a daunting task, but with tools like Terraform, the process becomes more manageable and streamlined. Terraform, an open-source infrastructure as code software tool, allows users to define and provision a datacenter infrastructure using a high-level configuration language. Here’s a <strong>guide to setting up Terraform for Google Cloud Platform (GCP).</strong></p>
+<p><strong>Creating a Service Account in GCP</strong></p>
+<p>Before we start coding with Terraform, it’s essential to establish a method for Terraform on our local machine to communicate with GCP. This involves setting up a service account in GCP – a special type of account used by applications, as opposed to individuals, to interact with the GCP services.</p>
+<p>Creating a service account is straightforward. Log into the GCP console, navigate to the “IAM &amp; Admin” section, and create a new service account. This account should be given specific permissions relevant to the resources you plan to manage with Terraform, such as Cloud Storage or BigQuery.</p>
+<p>Once the service account is created, the next step is to manage its keys. These keys are crucial as they authenticate and authorize the Terraform script to perform actions in GCP. It’s vital to handle these keys with care, as they can be used to access your GCP resources. You should never expose these credentials publicly.</p>
+<p><strong>Setting Up Your Local Environment</strong></p>
+<p>After downloading the key as a JSON file, store it securely in your local environment. It’s recommended to create a dedicated directory for these keys to avoid any accidental uploads, especially if you’re using version control like Git.</p>
+<p>Remember, you can configure Terraform to use these credentials in several ways. One common method is to set an environment variable pointing to the JSON file, but you can also specify the path directly in your Terraform configuration.</p>
+<p><strong>Writing Terraform Configuration</strong></p>
+<p>With the service account set up, you can begin writing your Terraform configuration. This is done in a file typically named main.tf. In this file, you define your provider (in this case, GCP) and the resources you wish to create, update, or delete.</p>
+<p>For instance, if you’re setting up a GCP storage bucket, you would define it in your main.tf file. Terraform configurations are declarative, meaning you describe your desired state, and Terraform figures out how to achieve it. You are ready for <code>terraform init</code> to start with your project.</p>
+<p><strong>Planning and Applying Changes</strong></p>
+<p>Before applying any changes, it’s good practice to run <code>terraform plan</code>. This command shows what Terraform will do without actually making any changes. It’s a great way to catch errors or unintended actions.</p>
+<p>Once you’re satisfied with the plan, run <code>terraform apply</code> to make the changes. Terraform will then reach out to GCP and make the necessary adjustments to match your configuration.</p>
+<p><strong>Cleaning Up: Terraform Destroy</strong></p>
+<p>When you no longer need the resources, Terraform makes it easy to clean up. Running <code>terraform destroy</code> will remove the resources defined in your Terraform configuration from your GCP account.</p>
+<p>Lastly, a word on security: If you’re storing your Terraform configuration in a version control system like Git, be mindful of what you commit. Ensure that your service account keys and other sensitive data are not pushed to public repositories. Using a .gitignore file to exclude these sensitive files is a best practice.</p>
+<p>For instance, our <code>main.tf</code> file for creating a GCP Storage Bucket and a Big Query dataset looks like:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>terraform {</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  required_providers {</span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>    google <span class="op">=</span> {</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>      source  <span class="op">=</span> <span class="st">&quot;hashicorp/google&quot;</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>      version <span class="op">=</span> <span class="st">&quot;5.12.0&quot;</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>    }</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  }</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>}</span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>provider <span class="st">&quot;google&quot;</span> {</span>
+<span id="cb5-11"><a href="#cb5-11" tabindex="-1"></a>  credentials <span class="op">=</span> var.credentials</span>
+<span id="cb5-12"><a href="#cb5-12" tabindex="-1"></a>  project     <span class="op">=</span> <span class="st">&quot;concise-quarter-411516&quot;</span></span>
+<span id="cb5-13"><a href="#cb5-13" tabindex="-1"></a>  region      <span class="op">=</span> <span class="st">&quot;us-central1&quot;</span></span>
+<span id="cb5-14"><a href="#cb5-14" tabindex="-1"></a>}</span>
+<span id="cb5-15"><a href="#cb5-15" tabindex="-1"></a></span>
+<span id="cb5-16"><a href="#cb5-16" tabindex="-1"></a>resource <span class="st">&quot;google_storage_bucket&quot;</span> <span class="st">&quot;demo_bucket&quot;</span> {</span>
+<span id="cb5-17"><a href="#cb5-17" tabindex="-1"></a>  name          <span class="op">=</span> var.gsc_bucket_name</span>
+<span id="cb5-18"><a href="#cb5-18" tabindex="-1"></a>  location      <span class="op">=</span> var.location</span>
+<span id="cb5-19"><a href="#cb5-19" tabindex="-1"></a>  force_destroy <span class="op">=</span> true</span>
+<span id="cb5-20"><a href="#cb5-20" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" tabindex="-1"></a></span>
+<span id="cb5-22"><a href="#cb5-22" tabindex="-1"></a>  lifecycle_rule {</span>
+<span id="cb5-23"><a href="#cb5-23" tabindex="-1"></a>    condition {</span>
+<span id="cb5-24"><a href="#cb5-24" tabindex="-1"></a>      age <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb5-25"><a href="#cb5-25" tabindex="-1"></a>    }</span>
+<span id="cb5-26"><a href="#cb5-26" tabindex="-1"></a>    action {</span>
+<span id="cb5-27"><a href="#cb5-27" tabindex="-1"></a>      <span class="bu">type</span> <span class="op">=</span> <span class="st">&quot;AbortIncompleteMultipartUpload&quot;</span></span>
+<span id="cb5-28"><a href="#cb5-28" tabindex="-1"></a>    }</span>
+<span id="cb5-29"><a href="#cb5-29" tabindex="-1"></a>  }</span>
+<span id="cb5-30"><a href="#cb5-30" tabindex="-1"></a>}</span>
+<span id="cb5-31"><a href="#cb5-31" tabindex="-1"></a></span>
+<span id="cb5-32"><a href="#cb5-32" tabindex="-1"></a>resource <span class="st">&quot;google_bigquery_dataset&quot;</span> <span class="st">&quot;demo_dataset&quot;</span> {</span>
+<span id="cb5-33"><a href="#cb5-33" tabindex="-1"></a>  dataset_id <span class="op">=</span> var.bq_dataset_name</span>
+<span id="cb5-34"><a href="#cb5-34" tabindex="-1"></a>}</span></code></pre></div>
+<p>As you may noticed, some of the values are strings/ints/floats but others are <code>var.*</code> values. In the next section we are talking about keeping the Terraform files tidy with the usage of variables.</p>
+<p><br></p>
+</div>
+<div id="parametrize-files-with-variables.tf" class="section level3">
+<h3>Parametrize files with variables.tf</h3>
+<p>Terraform variables offer a centralized and reusable way to manage values in infrastructure automation, separate from deployment plans. They are categorized into two main types: input variables for configuring infrastructure and output variables for retrieving information post-deployment. Input variables define values like server configurations and can be strings, lists, maps, or booleans. String variables simplify complex values, lists represent indexed values, maps store key-value pairs, and booleans handle true/false conditions.</p>
+<p>Output variables are used to extract details like IP addresses after the infrastructure is deployed. Variables can be predefined in a file or via command-line, enhancing flexibility and readability. They also support overriding at deployment, allowing for customized infrastructure management. Sensitive information can be set as environmental variables, prefixed with TF_VAR_, for enhanced security. Terraform variables are essential for clear, manageable, and secure infrastructure plans.</p>
+<p>In our case, we are using <code>variables.tf</code> looks as:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>variable <span class="st">&quot;credentials&quot;</span> {</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a>  default <span class="op">=</span> <span class="st">&quot;./keys/my_creds.json&quot;</span></span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a>}</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a>variable <span class="st">&quot;location&quot;</span> {</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a>  default <span class="op">=</span> <span class="st">&quot;US&quot;</span></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a>}</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a>variable <span class="st">&quot;bq_dataset_name&quot;</span> {</span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a>  description <span class="op">=</span> <span class="st">&quot;BigQuery dataset name&quot;</span></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a>  default     <span class="op">=</span> <span class="st">&quot;demo_dataset&quot;</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a>}</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a>variable <span class="st">&quot;gcs_storage_class&quot;</span> {</span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a>  description <span class="op">=</span> <span class="st">&quot;Bucket Storage class&quot;</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a>  default     <span class="op">=</span> <span class="st">&quot;STANDARD&quot;</span></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a>}</span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a>variable <span class="st">&quot;gsc_bucket_name&quot;</span> {</span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>  description <span class="op">=</span> <span class="st">&quot;Storage bucket name&quot;</span></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a>  default     <span class="op">=</span> <span class="st">&quot;terraform-demo-20240115-demo-bucket&quot;</span></span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a>}</span></code></pre></div>
+<p>We are parametrizing here the credentials file, buckets location, storage class, bucket name…</p>
+<p>As we’ve discussed, mastering Terraform variables is a key step towards advanced infrastructure automation and efficient code management.</p>
+<p><a href="https://upcloud.com/resources/tutorials/terraform-variables">For more information about Terraform variables, you can visit this post.</a></p>
+<p><br>´</p>
+</div>
+</div>
+<div id="stay-updated-on-the-data-engineering-and-data-analytics-engineer-career-paths" class="section level2">
+<h2><strong>Stay updated on the Data Engineering and Data Analytics Engineer career paths</strong></h2>
+<p>This was the content I gathered for the very first week of the <a href="https://datatalks.club/blog/data-engineering-zoomcamp.html">DataTalks Data Engineering bootcamp</a>. I’ve definetively enjoyed it and I’m excited to continue with Week 2.</p>
+<p>If you want to stay updated, homework the homework along with explanations…</p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for Data Eng content and explained homework!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+</div>
+</div>
