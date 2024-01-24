@@ -10,8 +10,8 @@ output:
     toc: TRUE
     toc_depth: 2
 categories:
-- Python
-- Post
+  - Python
+  - Post
 tags: [Python]
 subtitle: "Veamos qué son y en que caso resultan útiles las interesantes functiones lambda en Python. ¡También los mayores errores en su uso!"
 summary: "Veamos qué son y en que caso resultan útiles las interesantes functiones lambda en Python. ¡También los mayores errores en su uso!"
@@ -23,7 +23,7 @@ featured: false
 knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
-<img src="./featured.png" height="250px" width="400px" alt="Polars Python con mensaje que dice 'json'"/>
+<img src="./featured.png" height="250px" width="400px" alt="Serpiente pitón dibujada de color naranja delante de una pantalla de ordenador."/>
 
 # Funciones lambda en Python
 
@@ -48,12 +48,14 @@ Como comentamos, la evolución del lenguaje Python, sobre todo desde el 2.x a 3.
 Veamos un ejemplo de cómo utilizarlo:
 
 
+```{python}
 import pandas as pd
 import numpy as np
 
 df = pd.DataFrame([[4, 9, 10]] * 3, columns=["A", "B", "C"])
 
 df["suma_pares_por_fila"] = df.apply(lambda x: np.sum(x%2^1), axis=1)
+```
 
 
 
@@ -148,14 +150,5 @@ Si deseas mantenerte actualizado y no perderte nada...
 
 <!--End mc_embed_signup-->
 ```
-
-<style>
-.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
-    color: #0e847b;
-    font-style: italic;
-}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
-    color: #008021;
-}
-</style>
 
 

@@ -10,8 +10,8 @@ output:
     toc: TRUE
     toc_depth: 2
 categories:
-- Python
-- Post
+  - Python
+  - Post
 tags: [Python]
 subtitle: "Veamos qué son y en que caso resultan útiles las interesantes functiones lambda en Python. ¡También los mayores errores en su uso!"
 summary: "Veamos qué son y en que caso resultan útiles las interesantes functiones lambda en Python. ¡También los mayores errores en su uso!"
@@ -97,7 +97,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 
-<p><img src="featured.png" height="250px" width="400px" alt="Polars Python con mensaje que dice 'json'"/></p>
+<p><img src="featured.png" height="250px" width="400px" alt="Serpiente pitón dibujada de color naranja delante de una pantalla de ordenador."/></p>
 <div id="funciones-lambda-en-python" class="section level1">
 <h1>Funciones lambda en Python</h1>
 <p><br></p>
@@ -114,10 +114,12 @@ el uso de las funciones lambda ha quedado bastante reducido.</p>
 <h2><strong>Ejemplo de función lambda en las transformaciones Pandas y Polars</strong></h2>
 <p>Como comentamos, la evolución del lenguaje Python, sobre todo desde el 2.x a 3.x, ha ido arrinconando el uso de las funciones anónimas. Quizá donde más se sigan usando es en notebooks o en librerías de tratamiento de DataFrames como <strong>Polars, Pandas o pySpark a la hora de hacer simples modificaciones sobre las columnas con sus respectivos métodos <em>apply</em>,</strong> aunque suele no ser la opción con mejor rendimiento ya que por ejemplo Polars recomienda encarecídamente que si existe alguna función nativa, su rendimiento será mejor al ejecutarse en Rust y ser paralelizable.</p>
 <p>Veamos un ejemplo de cómo utilizarlo:</p>
-<p>import pandas as pd
-import numpy as np</p>
-<p>df = pd.DataFrame([[4, 9, 10]] * 3, columns=[“A”, “B”, “C”])</p>
-<p>df[“suma_pares_por_fila”] = df.apply(lambda x: np.sum(x%2^1), axis=1)</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>df <span class="op">=</span> pd.DataFrame([[<span class="dv">4</span>, <span class="dv">9</span>, <span class="dv">10</span>]] <span class="op">*</span> <span class="dv">3</span>, columns<span class="op">=</span>[<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>])</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>df[<span class="st">&quot;suma_pares_por_fila&quot;</span>] <span class="op">=</span> df.<span class="bu">apply</span>(<span class="kw">lambda</span> x: np.<span class="bu">sum</span>(x<span class="op">%</span><span class="dv">2</span><span class="op">^</span><span class="dv">1</span>), axis<span class="op">=</span><span class="dv">1</span>)</span></code></pre></div>
 <p>De esta manera tenemos los pares, los invertimos con ^1 (operador XOR, cuidado con confundir con el exponente **) para que intercambiar los 0s por 1s y viceversa. Luego sumamos el array con np.sum() para contabilizar el total de pares por fila.</p>
 <p><br></p>
 </div>
@@ -132,24 +134,24 @@ import numpy as np</p>
 <div id="creencias-erroneas-sobre-las-funciones-lambda" class="section level3">
 <h3>Creencias erroneas sobre las funciones Lambda</h3>
 <p>Dado que son más concisas y no son nombradas, mucha gente piensa que son más rápidas en ejecutar. Realmente si analizamos el <a href="https://stackoverflow.com/questions/40777810/python-map-a-lambda-function-to-a-list">código fuente que se ejecuta en una función normal y en una lambda, vemos que es el mismo.</a></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> dis</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="kw">def</span> _(x):</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>    <span class="cf">return</span> f(x, <span class="dv">30</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>dis.dis(_)</span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="dv">2</span>           <span class="dv">0</span> LOAD_GLOBAL              <span class="dv">0</span> (f)</span>
-<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>              <span class="dv">2</span> LOAD_FAST                <span class="dv">0</span> (x)</span>
-<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>              <span class="dv">4</span> LOAD_CONST               <span class="dv">1</span> (<span class="dv">30</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>              <span class="dv">6</span> CALL_FUNCTION            <span class="dv">2</span></span>
-<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>              <span class="dv">8</span> RETURN_VALUE</span>
-<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>dis.dis(<span class="kw">lambda</span> x: f(x, <span class="dv">30</span>))</span>
-<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>  <span class="dv">1</span>           <span class="dv">0</span> LOAD_GLOBAL              <span class="dv">0</span> (f)</span>
-<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>              <span class="dv">2</span> LOAD_FAST                <span class="dv">0</span> (x)</span>
-<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>              <span class="dv">4</span> LOAD_CONST               <span class="dv">1</span> (<span class="dv">30</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>              <span class="dv">6</span> CALL_FUNCTION            <span class="dv">2</span></span>
-<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>              <span class="dv">8</span> RETURN_VALUE</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="im">import</span> dis</span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a><span class="kw">def</span> _(x):</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>    <span class="cf">return</span> f(x, <span class="dv">30</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>dis.dis(_)</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>  <span class="dv">2</span>           <span class="dv">0</span> LOAD_GLOBAL              <span class="dv">0</span> (f)</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>              <span class="dv">2</span> LOAD_FAST                <span class="dv">0</span> (x)</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>              <span class="dv">4</span> LOAD_CONST               <span class="dv">1</span> (<span class="dv">30</span>)</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>              <span class="dv">6</span> CALL_FUNCTION            <span class="dv">2</span></span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>              <span class="dv">8</span> RETURN_VALUE</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>dis.dis(<span class="kw">lambda</span> x: f(x, <span class="dv">30</span>))</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>  <span class="dv">1</span>           <span class="dv">0</span> LOAD_GLOBAL              <span class="dv">0</span> (f)</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>              <span class="dv">2</span> LOAD_FAST                <span class="dv">0</span> (x)</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>              <span class="dv">4</span> LOAD_CONST               <span class="dv">1</span> (<span class="dv">30</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>              <span class="dv">6</span> CALL_FUNCTION            <span class="dv">2</span></span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>              <span class="dv">8</span> RETURN_VALUE</span></code></pre></div>
 <p>Por ello, <strong>nunca las usaremos por <em>performance</em> de nuestro código.</strong></p>
 <p>Tampoco parece buena idea usar funciones lambda para cómputos que vamos a reusar. En estos casos será mejor crear una función o un objeto con estas funcionalidades.</p>
 <p>Por último, hay que tener en cuenta que las funciones lambda tienen su propio <em>scope</em>, pero también acceden al entorno desde el que se las llama y el global, como cualquier otra función. Habrá que tener esto en cuenta para evitar comportamientos indeseados de la función.</p>
@@ -188,14 +190,6 @@ import numpy as np</p>
 </div>
 
 <!--End mc_embed_signup-->
-<style>
-.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
-    color: #0e847b;
-    font-style: italic;
-}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
-    color: #008021;
-}
-</style>
 </div>
 </div>
 </div>
