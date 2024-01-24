@@ -1,0 +1,201 @@
+---
+title: "Funciones lambda en Python. ¿Qué son? ¿Debo utilizarlas?"
+author: "Carlos Vecina Tebar"
+date: "2024-01-23"
+slug: "lambda-python"
+translationKey: "lambda-python"
+output: 
+  blogdown::html_page:
+    highlight: pygments 
+    toc: TRUE
+    toc_depth: 2
+categories:
+- Python
+- Post
+tags: [Python]
+subtitle: "Veamos qué son y en que caso resultan útiles las interesantes functiones lambda en Python. ¡También los mayores errores en su uso!"
+summary: "Veamos qué son y en que caso resultan útiles las interesantes functiones lambda en Python. ¡También los mayores errores en su uso!"
+authors: [carlos-vecina]
+featured: false
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<div id="TOC">
+<ul>
+<li><a href="#funciones-lambda-en-python" id="toc-funciones-lambda-en-python">Funciones lambda en Python</a>
+<ul>
+<li><a href="#qué-es-una-función-lambda-y-para-que-las-usamos-en-python" id="toc-qué-es-una-función-lambda-y-para-que-las-usamos-en-python"><strong>¿Qué es una función Lambda y para que las usamos en Python?</strong></a></li>
+<li><a href="#ejemplo-de-función-lambda-en-las-transformaciones-pandas-y-polars" id="toc-ejemplo-de-función-lambda-en-las-transformaciones-pandas-y-polars"><strong>Ejemplo de función lambda en las transformaciones Pandas y Polars</strong></a></li>
+<li><a href="#errores-comunes-a-la-hora-de-trabajar-con-expresiones-lambda-en-python" id="toc-errores-comunes-a-la-hora-de-trabajar-con-expresiones-lambda-en-python"><strong>Errores comunes a la hora de trabajar con expresiones Lambda en Python</strong></a></li>
+</ul></li>
+</ul>
+</div>
+
+<p><img src="featured.png" height="250px" width="400px" alt="Polars Python con mensaje que dice 'json'"/></p>
+<div id="funciones-lambda-en-python" class="section level1">
+<h1>Funciones lambda en Python</h1>
+<p><br></p>
+<div id="qué-es-una-función-lambda-y-para-que-las-usamos-en-python" class="section level2">
+<h2><strong>¿Qué es una función Lambda y para que las usamos en Python?</strong></h2>
+<p>Como ya sabemos, en Python las funciones se definen con la palabra reservada <code>def</code>. Pero, ¿y si no siempre crear una función nombrada es necesario? ¿Qué pasa si solo queremos aplicar una función
+simple sin declararla previamente?</p>
+<p>Para ello, podemos hacer uso de las <strong>funciones lambda o funciones anónimas.</strong> Son aquellas que no hemos declarado e identificada previamente, y para ello usamos `lambda. En el siguiente apartado veremos un ejemplo práctico.</p>
+<p>Sin embargo, cabe destacar, que como las funciones <code>map</code>, <code>filter</code> y <code>reduce</code> cada vez son menos usadas en favor de comprensión de listas (list comprehension) y los generadores,
+el uso de las funciones lambda ha quedado bastante reducido.</p>
+<p><br></p>
+</div>
+<div id="ejemplo-de-función-lambda-en-las-transformaciones-pandas-y-polars" class="section level2">
+<h2><strong>Ejemplo de función lambda en las transformaciones Pandas y Polars</strong></h2>
+<p>Como comentamos, la evolución del lenguaje Python, sobre todo desde el 2.x a 3.x, ha ido arrinconando el uso de las funciones anónimas. Quizá donde más se sigan usando es en notebooks o en librerías de tratamiento de DataFrames como <strong>Polars, Pandas o pySpark a la hora de hacer simples modificaciones sobre las columnas con sus respectivos métodos <em>apply</em>,</strong> aunque suele no ser la opción con mejor rendimiento ya que por ejemplo Polars recomienda encarecídamente que si existe alguna función nativa, su rendimiento será mejor al ejecutarse en Rust y ser paralelizable.</p>
+<p>Veamos un ejemplo de cómo utilizarlo:</p>
+<p>import pandas as pd
+import numpy as np</p>
+<p>df = pd.DataFrame([[4, 9, 10]] * 3, columns=[“A”, “B”, “C”])</p>
+<p>df[“suma_pares_por_fila”] = df.apply(lambda x: np.sum(x%2^1), axis=1)</p>
+<p>De esta manera tenemos los pares, los invertimos con ^1 (operador XOR, cuidado con confundir con el exponente **) para que intercambiar los 0s por 1s y viceversa. Luego sumamos el array con np.sum() para contabilizar el total de pares por fila.</p>
+<p><br></p>
+</div>
+<div id="errores-comunes-a-la-hora-de-trabajar-con-expresiones-lambda-en-python" class="section level2">
+<h2><strong>Errores comunes a la hora de trabajar con expresiones Lambda en Python</strong></h2>
+<div id="usos-incorrectos" class="section level3">
+<h3>Usos incorrectos</h3>
+<p>El uso indebido de las expresiones lambda puede provocarnos diferentes problemas en el código de nnuestro proyecto. Si por ejemplo las sobreusamos, cuando una función standar con un nombre autodescriptivo hubiese aportado mayor claridad, puede volver nuestro código más complejo de mantener. Especialmente cuando las operaciones son más complejas que una simple línea de código.</p>
+<p>Mientras que las funciones lambda sobre todo puede ayudarnos en proyectos pequeñoos, notebooks y tareas concisas, su uso en proyectos de gran escala compromete también la futura mantenibilidad del código. Python hace un especial énfasis en la legibilidad, por lo que en las ocasiones donde una funcion nombrada pueda aportar mayor claridad, su uso será preferido.</p>
+<p><br></p>
+</div>
+<div id="creencias-erroneas-sobre-las-funciones-lambda" class="section level3">
+<h3>Creencias erroneas sobre las funciones Lambda</h3>
+<p>Dado que son más concisas y no son nombradas, mucha gente piensa que son más rápidas en ejecutar. Realmente si analizamos el <a href="https://stackoverflow.com/questions/40777810/python-map-a-lambda-function-to-a-list">código fuente que se ejecuta en una función normal y en una lambda, vemos que es el mismo.</a></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="im">import</span> dis</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="kw">def</span> _(x):</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>    <span class="cf">return</span> f(x, <span class="dv">30</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>dis.dis(_)</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>  <span class="dv">2</span>           <span class="dv">0</span> LOAD_GLOBAL              <span class="dv">0</span> (f)</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>              <span class="dv">2</span> LOAD_FAST                <span class="dv">0</span> (x)</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>              <span class="dv">4</span> LOAD_CONST               <span class="dv">1</span> (<span class="dv">30</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>              <span class="dv">6</span> CALL_FUNCTION            <span class="dv">2</span></span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>              <span class="dv">8</span> RETURN_VALUE</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>dis.dis(<span class="kw">lambda</span> x: f(x, <span class="dv">30</span>))</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>  <span class="dv">1</span>           <span class="dv">0</span> LOAD_GLOBAL              <span class="dv">0</span> (f)</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>              <span class="dv">2</span> LOAD_FAST                <span class="dv">0</span> (x)</span>
+<span id="cb1-16"><a href="#cb1-16" tabindex="-1"></a>              <span class="dv">4</span> LOAD_CONST               <span class="dv">1</span> (<span class="dv">30</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" tabindex="-1"></a>              <span class="dv">6</span> CALL_FUNCTION            <span class="dv">2</span></span>
+<span id="cb1-18"><a href="#cb1-18" tabindex="-1"></a>              <span class="dv">8</span> RETURN_VALUE</span></code></pre></div>
+<p>Por ello, <strong>nunca las usaremos por <em>performance</em> de nuestro código.</strong></p>
+<p>Tampoco parece buena idea usar funciones lambda para cómputos que vamos a reusar. En estos casos será mejor crear una función o un objeto con estas funcionalidades.</p>
+<p>Por último, hay que tener en cuenta que las funciones lambda tienen su propio <em>scope</em>, pero también acceden al entorno desde el que se las llama y el global, como cualquier otra función. Habrá que tener esto en cuenta para evitar comportamientos indeseados de la función.</p>
+<p>Las directrices sugieren que las funciones lambda deben utilizarse con moderación y solo cuando realmente conduzcan a un código más claro. Es importante valorar su uso en situaciones específicas para mantener la claridad y eficiencia del código.</p>
+<p><br></p>
+</div>
+<div id="mantente-al-día-de-las-novedades-de-python" class="section level3">
+<h3><strong>Mantente al día de las novedades de Python</strong></h3>
+<p>Espero que esta publicación te haya brindado una comprensión clara y práctica sobre las funciones lambda en Python. Recuerda que, aunque son poderosas, las funciones lambda deben usarse con prudencia para mantener la legibilidad del código. ¡Sigue practicando y pronto las usarás de manera adecuada mientras programas en Python!</p>
+<p>Si deseas mantenerte actualizado y no perderte nada…</p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> ¡Suscribete para más contenido de Python!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="tu mejor email" required><input type="hidden" name="tags" value="7614568"></div>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="¡Dale!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+<style>
+.hljs-keyword,.hljs-selector-tag,.hljs-subst{color:#2e8516;font-weight:bold}.hljs-comment, .hljs-quote {
+    color: #0e847b;
+    font-style: italic;
+}.hljs-number, .hljs-literal, .hljs-variable, .hljs-template-variable, .hljs-tag .hljs-attr {
+    color: #008021;
+}
+</style>
+</div>
+</div>
+</div>
