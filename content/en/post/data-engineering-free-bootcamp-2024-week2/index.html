@@ -101,7 +101,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="#load-data-transform-and-insert-to-dockerized-postgres-database-with-mage" id="toc-load-data-transform-and-insert-to-dockerized-postgres-database-with-mage"><strong>Load data, transform and insert to dockerized Postgres database with Mage</strong></a></li>
 <li><a href="#insert-data-to-google-cloud-storage" id="toc-insert-data-to-google-cloud-storage"><strong>Insert data to Google Cloud Storage</strong></a></li>
 <li><a href="#parametrized-etl-excution" id="toc-parametrized-etl-excution"><strong>Parametrized ETL Excution</strong></a></li>
-<li><a href="#mage-terraform-deployment.-moving-etls-to-the-cloud" id="toc-mage-terraform-deployment.-moving-etls-to-the-cloud"><strong>Mage terraform deployment. Moving ETLs to the cloud</strong></a></li>
 <li><a href="#extra-mage-documentation-and-video-tutorials" id="toc-extra-mage-documentation-and-video-tutorials"><strong>Extra Mage documentation and video tutorials</strong></a></li>
 </ul></li>
 <li><a href="#stay-updated-on-the-data-engineering-and-data-analytics-engineer-career-paths" id="toc-stay-updated-on-the-data-engineering-and-data-analytics-engineer-career-paths"><strong>Stay updated on the Data Engineering and Data Analytics Engineer career paths</strong></a></li>
@@ -109,7 +108,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 </div>
 
-<p><img src="featured.png" width="400px" alt="Vibrant Python logo with the Protocols composability text." /></p>
+<p><img src="featured.png" width="400px" alt="Data Engineering zoomcamp week 2." /></p>
 <p><br></p>
 <div id="data-engenieering-week-2-mage-workflow-orchestation" class="section level1">
 <h1>Data engenieering Week 2: Mage workflow orchestation</h1>
@@ -122,7 +121,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Mage also provides seamless integration of real-time pipelines.</p>
 <p>Hopefully, Mage would also make running tasks backfilling smoother than in Airflow.</p>
 <p>Their promise regarding backfilling, quoting their own words:
-“With Mage you can easily define a backfill for a specific date range. Whether you’re missing data or want to add new columns, Mage has got you covered. Simply specify the start and end dates, and let Mage do the rest. It will simulate multiple runs with different execution dates, fetching the data you need and transforming it as required. :date::repeat: No more worrying about losing data or dealing with duplicate entries. Mage takes care of it all, making your data engineering tasks a lot easier”</p>
+“With Mage you can easily define a backfill for a specific date range. Whether you’re missing data or want to add new columns, Mage has got you covered. Simply specify the start and end dates, and let Mage do the rest. It will simulate multiple runs with different execution dates, fetching the data you need and transforming it as required. No more worrying about losing data or dealing with duplicate entries. Mage takes care of it all, making your data engineering tasks a lot easier”</p>
 <p>Still Airflow has dominated the Data Engenieering market for so many years. We have seen that the software world for a new tool to overtake a market leader needs to be at least 10x better to compensate the cost of migration. Dagster, Prefect… Is it the case now for Mage?</p>
 <p>My feeling is that the demand for real-time analytics will increase in the next years. That’s when a new tool that makes data streaming easier would come up to get a bigger portion of the DE pie toolkit.</p>
 <p><br></p>
@@ -130,12 +129,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h4>Mage core entities</h4>
 <p>To be honest, they are quite the same than the ones from Airflow. In my opinion this fact accelerates the initial flattened part of a sigmoid-shaped learning curve.</p>
 <ul>
-<li><p>🏢 <em>Project</em>: Like a repository on GitHub; this is where you write all your code.</p></li>
-<li><p>🪈 <em>Pipeline</em>: Contains references to all the blocks of code you want to run, charts for visualizing data, and organizes the dependency between each block of code.</p></li>
-<li><p>🧱 <em>Block</em>: A file with code that can be executed independently or within a pipeline.</p></li>
-<li><p>🤓 <em>Data product</em>: Every block produces data after it’s been executed. These are called data products in Mage.</p></li>
-<li><p>⏰ <em>Trigger</em>: A set of instructions that determine when or how a pipeline should run.</p></li>
-<li><p>🏃‍♂️ <em>Run</em>: Stores information about when it was started, its status, when it was completed, any runtime variables used in the execution of the pipeline or block, etc.</p></li>
+<li><p><em>Project</em>: Like a repository on GitHub; this is where you write all your code.</p></li>
+<li><p><em>Pipeline</em>: Contains references to all the blocks of code you want to run, charts for visualizing data, and organizes the dependency between each block of code.</p></li>
+<li><p><em>Block</em>: A file with code that can be executed independently or within a pipeline.</p></li>
+<li><p><em>Data product</em>: Every block produces data after it’s been executed. These are called data products in Mage.</p></li>
+<li><p><em>Trigger</em>: A set of instructions that determine when or how a pipeline should run.</p></li>
+<li><p><em>Run</em>: Stores information about when it was started, its status, when it was completed, any runtime variables used in the execution of the pipeline or block, etc.</p></li>
 </ul>
 <p><br></p>
 </div>
@@ -158,7 +157,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    ├── sqlite_master</span>
 <span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    ├── user</span>
 <span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>    └── user_role</span></code></pre></div>
-<p>You can connect to the SQLite DB like any other database. For Docker installs, the JDBC URL is jdbc:sqlite:/home/src/mage_data/[project_folder]/mage-ai.db</p>
+<p>You can connect to the SQLite DB like any other database. For Docker installs, the JDBC URL is <code>jdbc:sqlite:/home/src/mage_data/[project_folder]/mage-ai.db</code></p>
 <p><br></p>
 </div>
 </div>
@@ -311,6 +310,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a>        filesystem<span class="op">=</span>gcs,</span>
 <span id="cb7-40"><a href="#cb7-40" tabindex="-1"></a>        existing_data_behavior<span class="op">=</span><span class="st">&quot;delete_matching&quot;</span></span>
 <span id="cb7-41"><a href="#cb7-41" tabindex="-1"></a>    )</span></code></pre></div>
+<p>It’s important to note that by setting the <code>existing_data_behavior</code> parameter to <code>delete_matching</code>, we are deleting the whole partition in case it exists. Otherwise, it will add the new files to the existing partition, creating duplicated files.</p>
 <p><br></p>
 </div>
 <div id="parametrized-etl-excution" class="section level3">
@@ -318,13 +318,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The ease of setting up backfills in Mage is particularly beneficial for pipelines that are parameterized based on execution dates. This tool simplifies the process, making it less frustrating and more efficient.
 Data Engineering Best Practices: Matt emphasizes the importance of creating idempotent pipelines, which ensure that rerunning pipelines for the same data doesn’t lead to data loss or duplication.
 While this approach is most useful for pipelines dependent on execution dates, it’s a straightforward method for backfilling data in various scenarios.</p>
-<p><br></p>
-</div>
-<div id="mage-terraform-deployment.-moving-etls-to-the-cloud" class="section level3">
-<h3><strong>Mage terraform deployment. Moving ETLs to the cloud</strong></h3>
-<p>Terraform and gcloud cli configured.</p>
-<p>Configure Cloud Permission</p>
-<p>Create Mage Terraform templates</p>
 <p><br></p>
 </div>
 <div id="extra-mage-documentation-and-video-tutorials" class="section level3">
@@ -338,7 +331,7 @@ While this approach is most useful for pipelines dependent on execution dates, i
 </div>
 <div id="stay-updated-on-the-data-engineering-and-data-analytics-engineer-career-paths" class="section level2">
 <h2><strong>Stay updated on the Data Engineering and Data Analytics Engineer career paths</strong></h2>
-<p>This was the content I gathered for the second week of the <a href="https://datatalks.club/blog/data-engineering-zoomcamp.html">DataTalks Data Engineering bootcamp</a>. We have a Mage pipeline running periodically on GCP and storing data in Google Cloud Storage.</p>
+<p>This was the content I gathered for the second week of the <a href="https://datatalks.club/blog/data-engineering-zoomcamp.html">DataTalks Data Engineering bootcamp</a>. We have a Mage pipeline deployed and running periodically on GCP and storing data in Google Cloud Storage.</p>
 <p>If you want to stay updated, check the homeworks along with explanations…</p>
 <!-- Begin Mailchimp Signup Form -->
 <link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
