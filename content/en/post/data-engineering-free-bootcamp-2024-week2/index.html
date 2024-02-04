@@ -1,0 +1,372 @@
+---
+title: "Data Engineering Bootcamp 2024 (Week 2) Mage & GCP ETL orchestation"
+author: Carlos Vecina Tebar
+date: '2024-01-28'
+slug: "data-engineering-free-bootcamp-2024-week2"
+translationKey: "data-engineering-free-bootcamp-2024-week2"
+output: 
+  blogdown::html_page:
+    highlight: pygments 
+    toc: TRUE
+    toc_depth: 4
+categories:
+  - Python
+  - Post
+  - Data Engineering Bootcamp
+tags: [Python]
+subtitle: "Is Mage a realistic alternative to Airflow? Discover Mage AI for data ETLs, the next gen data engineering tool for streaming pipelines and notebook like pipelines."
+summary: "Is Mage a realistic alternative to Airflow? Discover Mage AI for data ETLs, the next gen data engineering tool for streaming pipelines and notebook like pipelines"
+authors: [carlos-vecina]
+featured: false
+---
+
+<script src="{{< blogdown/postref >}}index_files/header-attrs/header-attrs.js"></script>
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<div id="TOC">
+<ul>
+<li><a href="#data-engenieering-week-2-mage-workflow-orchestation" id="toc-data-engenieering-week-2-mage-workflow-orchestation">Data engenieering Week 2: Mage workflow orchestation</a>
+<ul>
+<li><a href="#data-pipelines-orchestation-with-mage" id="toc-data-pipelines-orchestation-with-mage"><strong>Data Pipelines orchestation with Mage</strong></a>
+<ul>
+<li><a href="#what-is-mage-replacement-for-airflow" id="toc-what-is-mage-replacement-for-airflow"><strong>What is Mage? Replacement for Airflow?</strong></a>
+<ul>
+<li><a href="#mage-core-entities" id="toc-mage-core-entities">Mage core entities</a></li>
+<li><a href="#mage-sqlite-orchestation-data" id="toc-mage-sqlite-orchestation-data">Mage SQLite orchestation data</a></li>
+</ul></li>
+<li><a href="#load-data-transform-and-insert-to-dockerized-postgres-database-with-mage" id="toc-load-data-transform-and-insert-to-dockerized-postgres-database-with-mage"><strong>Load data, transform and insert to dockerized Postgres database with Mage</strong></a></li>
+<li><a href="#insert-data-to-google-cloud-storage" id="toc-insert-data-to-google-cloud-storage"><strong>Insert data to Google Cloud Storage</strong></a></li>
+<li><a href="#parametrized-etl-excution" id="toc-parametrized-etl-excution"><strong>Parametrized ETL Excution</strong></a></li>
+<li><a href="#mage-terraform-deployment.-moving-etls-to-the-cloud" id="toc-mage-terraform-deployment.-moving-etls-to-the-cloud"><strong>Mage terraform deployment. Moving ETLs to the cloud</strong></a></li>
+<li><a href="#extra-mage-documentation-and-video-tutorials" id="toc-extra-mage-documentation-and-video-tutorials"><strong>Extra Mage documentation and video tutorials</strong></a></li>
+</ul></li>
+<li><a href="#stay-updated-on-the-data-engineering-and-data-analytics-engineer-career-paths" id="toc-stay-updated-on-the-data-engineering-and-data-analytics-engineer-career-paths"><strong>Stay updated on the Data Engineering and Data Analytics Engineer career paths</strong></a></li>
+</ul></li>
+</ul>
+</div>
+
+<p><img src="featured.png" width="400px" alt="Vibrant Python logo with the Protocols composability text." /></p>
+<p><br></p>
+<div id="data-engenieering-week-2-mage-workflow-orchestation" class="section level1">
+<h1>Data engenieering Week 2: Mage workflow orchestation</h1>
+<p><br></p>
+<div id="data-pipelines-orchestation-with-mage" class="section level2">
+<h2><strong>Data Pipelines orchestation with Mage</strong></h2>
+<div id="what-is-mage-replacement-for-airflow" class="section level3">
+<h3><strong>What is Mage? Replacement for Airflow?</strong></h3>
+<p>Mage appears as a solid Airflow competitor. A game-changer UI that combines drag-and-drop feelings with organized Notebook editor chunks of code, runnable and testable from the same interface.</p>
+<p>Mage also provides seamless integration of real-time pipelines.</p>
+<p>Hopefully, Mage would also make running tasks backfilling smoother than in Airflow.</p>
+<p>Their promise regarding backfilling, quoting their own words:
+“With Mage you can easily define a backfill for a specific date range. Whether you’re missing data or want to add new columns, Mage has got you covered. Simply specify the start and end dates, and let Mage do the rest. It will simulate multiple runs with different execution dates, fetching the data you need and transforming it as required. :date::repeat: No more worrying about losing data or dealing with duplicate entries. Mage takes care of it all, making your data engineering tasks a lot easier”</p>
+<p>Still Airflow has dominated the Data Engenieering market for so many years. We have seen that the software world for a new tool to overtake a market leader needs to be at least 10x better to compensate the cost of migration. Dagster, Prefect… Is it the case now for Mage?</p>
+<p>My feeling is that the demand for real-time analytics will increase in the next years. That’s when a new tool that makes data streaming easier would come up to get a bigger portion of the DE pie toolkit.</p>
+<p><br></p>
+<div id="mage-core-entities" class="section level4">
+<h4>Mage core entities</h4>
+<p>To be honest, they are quite the same than the ones from Airflow. In my opinion this fact accelerates the initial flattened part of a sigmoid-shaped learning curve.</p>
+<ul>
+<li><p>🏢 <em>Project</em>: Like a repository on GitHub; this is where you write all your code.</p></li>
+<li><p>🪈 <em>Pipeline</em>: Contains references to all the blocks of code you want to run, charts for visualizing data, and organizes the dependency between each block of code.</p></li>
+<li><p>🧱 <em>Block</em>: A file with code that can be executed independently or within a pipeline.</p></li>
+<li><p>🤓 <em>Data product</em>: Every block produces data after it’s been executed. These are called data products in Mage.</p></li>
+<li><p>⏰ <em>Trigger</em>: A set of instructions that determine when or how a pipeline should run.</p></li>
+<li><p>🏃‍♂️ <em>Run</em>: Stores information about when it was started, its status, when it was completed, any runtime variables used in the execution of the pipeline or block, etc.</p></li>
+</ul>
+<p><br></p>
+</div>
+<div id="mage-sqlite-orchestation-data" class="section level4">
+<h4>Mage SQLite orchestation data</h4>
+<p>By default, Mage uses SQLite to store orchestration data such as triggers, pipeline runs, and block runs. If you wish to use a different database for your Mage projects, you can change this by setting the MAGE_DATABASE_CONNECTION_URL environment variable. However, for most default setups and local development, SQLite serves as the primary database for managing orchestration data. Additionally, for project-level data, the mage_data directory holds project-level cache data and stores the result of Block runs within a SQLite database located at mage_data/[project_folder]/mage-ai.db.</p>
+<p>The SQLite database structure used by Mage for project-level data is located in the mage_data directory. The SQLite database, mage-ai.db, stores project-level metadata, such as pipeline and block run data. A sample tree of tables in the tables schema includes:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>└── tables</span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>    ├── backfill</span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>    ├── block_run</span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>    ├── event_matcher</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>    ├── oauth2_access_token</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>    ├── oauth2_application</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a>    ├── permission</span>
+<span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a>    ├── pipeline_run</span>
+<span id="cb1-9"><a href="#cb1-9" tabindex="-1"></a>    ├── pipeline_schedule</span>
+<span id="cb1-10"><a href="#cb1-10" tabindex="-1"></a>    ├── pipeline_schedule_event_matcher_association</span>
+<span id="cb1-11"><a href="#cb1-11" tabindex="-1"></a>    ├── role</span>
+<span id="cb1-12"><a href="#cb1-12" tabindex="-1"></a>    ├── secret</span>
+<span id="cb1-13"><a href="#cb1-13" tabindex="-1"></a>    ├── sqlite_master</span>
+<span id="cb1-14"><a href="#cb1-14" tabindex="-1"></a>    ├── user</span>
+<span id="cb1-15"><a href="#cb1-15" tabindex="-1"></a>    └── user_role</span></code></pre></div>
+<p>You can connect to the SQLite DB like any other database. For Docker installs, the JDBC URL is jdbc:sqlite:/home/src/mage_data/[project_folder]/mage-ai.db</p>
+<p><br></p>
+</div>
+</div>
+<div id="load-data-transform-and-insert-to-dockerized-postgres-database-with-mage" class="section level3">
+<h3><strong>Load data, transform and insert to dockerized Postgres database with Mage</strong></h3>
+<p>Our starting point is starting two containes, one for the Mage image and other for the Postgres database image. The docker-compose.yaml file would look like:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>version: <span class="st">&#39;3&#39;</span></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>services:</span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  magic:</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>    image: mageai<span class="op">/</span>mageai:latest</span>
+<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>    command: mage start ${PROJECT_NAME}</span>
+<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>    env_file:</span>
+<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>      <span class="op">-</span> .env</span>
+<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>    build:</span>
+<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>      context: .</span>
+<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>      dockerfile: Dockerfile</span>
+<span id="cb2-11"><a href="#cb2-11" tabindex="-1"></a>    environment:</span>
+<span id="cb2-12"><a href="#cb2-12" tabindex="-1"></a>      USER_CODE_PATH: <span class="op">/</span>home<span class="op">/</span>src<span class="op">/</span>${PROJECT_NAME}</span>
+<span id="cb2-13"><a href="#cb2-13" tabindex="-1"></a>      POSTGRES_DBNAME: ${POSTGRES_DBNAME}</span>
+<span id="cb2-14"><a href="#cb2-14" tabindex="-1"></a>      POSTGRES_SCHEMA: ${POSTGRES_SCHEMA}</span>
+<span id="cb2-15"><a href="#cb2-15" tabindex="-1"></a>      POSTGRES_USER: ${POSTGRES_USER}</span>
+<span id="cb2-16"><a href="#cb2-16" tabindex="-1"></a>      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}</span>
+<span id="cb2-17"><a href="#cb2-17" tabindex="-1"></a>      POSTGRES_HOST: ${POSTGRES_HOST}</span>
+<span id="cb2-18"><a href="#cb2-18" tabindex="-1"></a>      POSTGRES_PORT: ${POSTGRES_PORT}</span>
+<span id="cb2-19"><a href="#cb2-19" tabindex="-1"></a>    ports:</span>
+<span id="cb2-20"><a href="#cb2-20" tabindex="-1"></a>      <span class="op">-</span> <span class="dv">6789</span>:<span class="dv">6789</span></span>
+<span id="cb2-21"><a href="#cb2-21" tabindex="-1"></a>    volumes:</span>
+<span id="cb2-22"><a href="#cb2-22" tabindex="-1"></a>      <span class="op">-</span> .:<span class="op">/</span>home<span class="op">/</span>src<span class="op">/</span></span>
+<span id="cb2-23"><a href="#cb2-23" tabindex="-1"></a>    restart: on<span class="op">-</span>failure:<span class="dv">5</span></span>
+<span id="cb2-24"><a href="#cb2-24" tabindex="-1"></a>  postgres:</span>
+<span id="cb2-25"><a href="#cb2-25" tabindex="-1"></a>    image: postgres:<span class="dv">14</span></span>
+<span id="cb2-26"><a href="#cb2-26" tabindex="-1"></a>    restart: on<span class="op">-</span>failure</span>
+<span id="cb2-27"><a href="#cb2-27" tabindex="-1"></a>    container_name: ${PROJECT_NAME}<span class="op">-</span>postgres</span>
+<span id="cb2-28"><a href="#cb2-28" tabindex="-1"></a>    env_file:</span>
+<span id="cb2-29"><a href="#cb2-29" tabindex="-1"></a>      <span class="op">-</span> .env</span>
+<span id="cb2-30"><a href="#cb2-30" tabindex="-1"></a>    environment:</span>
+<span id="cb2-31"><a href="#cb2-31" tabindex="-1"></a>      POSTGRES_DB: ${POSTGRES_DBNAME}</span>
+<span id="cb2-32"><a href="#cb2-32" tabindex="-1"></a>      POSTGRES_USER: ${POSTGRES_USER}</span>
+<span id="cb2-33"><a href="#cb2-33" tabindex="-1"></a>      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}</span>
+<span id="cb2-34"><a href="#cb2-34" tabindex="-1"></a>    ports:</span>
+<span id="cb2-35"><a href="#cb2-35" tabindex="-1"></a>      <span class="op">-</span> <span class="st">&quot;$</span><span class="sc">{POSTGRES_PORT}</span><span class="st">:5432&quot;</span></span></code></pre></div>
+<p>A Dockerfile like:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>FROM mageai<span class="op">/</span>mageai:latest</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>ARG USER_CODE_PATH<span class="op">=/</span>home<span class="op">/</span>src<span class="op">/</span>${PROJECT_NAME}</span>
+<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>COPY requirements.txt ${USER_CODE_PATH}requirements.txt </span>
+<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>RUN pip3 install <span class="op">-</span>r ${USER_CODE_PATH}requirements.txt</span></code></pre></div>
+<p>And a .env file as follows:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a>PROJECT_NAME<span class="op">=</span>magic<span class="op">-</span>zoomcamp</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>POSTGRES_DBNAME<span class="op">=</span>postgres</span>
+<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>POSTGRES_SCHEMA<span class="op">=</span>magic</span>
+<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>POSTGRES_USER<span class="op">=</span>postgres</span>
+<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>POSTGRES_PASSWORD<span class="op">=</span>postgres</span>
+<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>POSTGRES_HOST<span class="op">=</span>postgres</span>
+<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>POSTGRES_PORT<span class="op">=</span><span class="dv">5432</span></span></code></pre></div>
+<p>You can access the Mage UI by default: <a href="http://localhost:6789/" class="uri">http://localhost:6789/</a> after running docker-compose up.</p>
+<p>We are creating a <a href="https://docs.mage.ai/design/data-pipeline-management#:~:text=%5B%2B%20New%20pipeline%5D%20button.">new pipeline</a>. You can rename it in the Edit tab.</p>
+<p>Then we are ready for start creating blocks. Let’s start with a basic Ingest-Transform-Insert.</p>
+<p>First of all we need to config the required credentials for the Postgres DB. In the io_config.yaml file, we can create as many profiles as desired, each of them holding the config vars needed to run our pipelines with different configurations, for example in different environments. Let’s create an dev profile, there we should place our env vars defined in the docker-compose.yaml file:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>dev:</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>  POSTGRES_CONNECT_TIMEOUT: <span class="dv">10</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>  POSTGRES_DBNAME: {{ env_var(<span class="st">&#39;POSTGRES_DBNAME&#39;</span>) }}</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>  POSTGRES_SCHEMA: {{ env_var(<span class="st">&#39;POSTGRES_SCHEMA&#39;</span>) }} <span class="co"># Optional</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>  POSTGRES_USER: {{ env_var(<span class="st">&#39;POSTGRES_USER&#39;</span>) }}</span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>  POSTGRES_PASSWORD: {{ env_var(<span class="st">&#39;POSTGRES_PASSWORD&#39;</span>) }}</span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>  POSTGRES_HOST: {{ env_var(<span class="st">&#39;POSTGRES_HOST&#39;</span>) }}</span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>  POSTGRES_PORT: {{ env_var(<span class="st">&#39;POSTGRES_PORT&#39;</span>) }}</span></code></pre></div>
+<p>The ingestion would be a simple Python chuck of code, loading it by using an url. As we will see, all the code bloacks are stored in a way that they could be reused in any other pipeline. So we can reuse this block of code to retrieve this data from diferent pipelines.</p>
+<p>Let’s create a simple transformation. We can simply filter out some records that don’t meet some specs like number of passsengers less than 1 or duration less than 10 seconds.</p>
+<p>Exporting Data to PostgreSQL, by using the previously created configuration profile for database connections. There is an paramount important concept while working with this kind of runned tasks, that is not new and was also present in Airflow, idempotence. You want to make sure that the task data output is the same if called multiple times, and replaces any existing data to avoid duplication.</p>
+<p>Finally, we could verify that the data has been correctly written to PostgreSQL by querying the database and checking the output.</p>
+<p><br></p>
+</div>
+<div id="insert-data-to-google-cloud-storage" class="section level3">
+<h3><strong>Insert data to Google Cloud Storage</strong></h3>
+<p>We are reusing now the load and transform blocks. We only need to configure the GCP connection and implement a new data_exporter code block linked and in the bottom of the pipeline.</p>
+<p>We are going to use the credentials JSON file exported from GCP, with a properly permission granted. You can <a href="">check how to do so here</a></p>
+<p>After that, for the export block, we need to choose Python &gt; Google Cloud Storage.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="im">from</span> mage_ai.settings.repo <span class="im">import</span> get_repo_path</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="im">from</span> mage_ai.io.config <span class="im">import</span> ConfigFileLoader</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="im">from</span> mage_ai.io.google_cloud_storage <span class="im">import</span> GoogleCloudStorage</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="im">from</span> pandas <span class="im">import</span> DataFrame</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="im">from</span> os <span class="im">import</span> path</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="cf">if</span> <span class="st">&#39;data_exporter&#39;</span> <span class="kw">not</span> <span class="kw">in</span> <span class="bu">globals</span>():</span>
+<span id="cb6-8"><a href="#cb6-8" tabindex="-1"></a>    <span class="im">from</span> mage_ai.data_preparation.decorators <span class="im">import</span> data_exporter</span>
+<span id="cb6-9"><a href="#cb6-9" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" tabindex="-1"></a><span class="at">@data_exporter</span></span>
+<span id="cb6-12"><a href="#cb6-12" tabindex="-1"></a><span class="kw">def</span> export_data_to_google_cloud_storage(df: DataFrame, <span class="op">**</span>kwargs) <span class="op">-&gt;</span> <span class="va">None</span>:</span>
+<span id="cb6-13"><a href="#cb6-13" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb6-14"><a href="#cb6-14" tabindex="-1"></a><span class="co">    Template for exporting data to a Google Cloud Storage bucket.</span></span>
+<span id="cb6-15"><a href="#cb6-15" tabindex="-1"></a><span class="co">    Specify your configuration settings in &#39;io_config.yaml&#39;.</span></span>
+<span id="cb6-16"><a href="#cb6-16" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" tabindex="-1"></a><span class="co">    Docs: https://docs.mage.ai/design/data-loading#googlecloudstorage</span></span>
+<span id="cb6-18"><a href="#cb6-18" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb6-19"><a href="#cb6-19" tabindex="-1"></a>    config_path <span class="op">=</span> path.join(get_repo_path(), <span class="st">&#39;io_config.yaml&#39;</span>)</span>
+<span id="cb6-20"><a href="#cb6-20" tabindex="-1"></a>    config_profile <span class="op">=</span> <span class="st">&#39;default&#39;</span></span>
+<span id="cb6-21"><a href="#cb6-21" tabindex="-1"></a></span>
+<span id="cb6-22"><a href="#cb6-22" tabindex="-1"></a>    bucket_name <span class="op">=</span> <span class="st">&#39;terraform-demo-20240115-demo-bucket&#39;</span></span>
+<span id="cb6-23"><a href="#cb6-23" tabindex="-1"></a>    object_key <span class="op">=</span> <span class="st">&#39;nyc_taxi_data_youtube.parquet&#39;</span></span>
+<span id="cb6-24"><a href="#cb6-24" tabindex="-1"></a></span>
+<span id="cb6-25"><a href="#cb6-25" tabindex="-1"></a>    GoogleCloudStorage.with_config(ConfigFileLoader(config_path, config_profile)).export(</span>
+<span id="cb6-26"><a href="#cb6-26" tabindex="-1"></a>        df,</span>
+<span id="cb6-27"><a href="#cb6-27" tabindex="-1"></a>        bucket_name,</span>
+<span id="cb6-28"><a href="#cb6-28" tabindex="-1"></a>        object_key,</span>
+<span id="cb6-29"><a href="#cb6-29" tabindex="-1"></a>    )</span></code></pre></div>
+<p>As simple as that. We can check that everything went as expected by executing a simple query to the X</p>
+<p>But this is not how you’d usually manage that export. You may want to make partitions in your data, in order to have smaller parquets to write and load.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="im">import</span> pyarrow <span class="im">as</span> pa</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="im">import</span> pyarrow.parquet <span class="im">as</span> pq </span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="im">import</span> os</span>
+<span id="cb7-4"><a href="#cb7-4" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" tabindex="-1"></a><span class="cf">if</span> <span class="st">&#39;data_exporter&#39;</span> <span class="kw">not</span> <span class="kw">in</span> <span class="bu">globals</span>():</span>
+<span id="cb7-6"><a href="#cb7-6" tabindex="-1"></a>    <span class="im">from</span> mage_ai.data_preparation.decorators <span class="im">import</span> data_exporter</span>
+<span id="cb7-7"><a href="#cb7-7" tabindex="-1"></a></span>
+<span id="cb7-8"><a href="#cb7-8" tabindex="-1"></a>os.environ[<span class="st">&quot;GOOGLE_APPLICATION_CREDENTIALS&quot;</span>] <span class="op">=</span> <span class="st">&quot;/home/src/keys/my_creds.json&quot;</span></span>
+<span id="cb7-9"><a href="#cb7-9" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" tabindex="-1"></a>bucket_name <span class="op">=</span> <span class="st">&#39;terraform-demo-20240115-demo-bucket&#39;</span></span>
+<span id="cb7-11"><a href="#cb7-11" tabindex="-1"></a>project_id <span class="op">=</span> <span class="st">&quot;concise-quarter-411516&quot;</span></span>
+<span id="cb7-12"><a href="#cb7-12" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" tabindex="-1"></a>table_name <span class="op">=</span> <span class="st">&quot;green_taxi&quot;</span></span>
+<span id="cb7-14"><a href="#cb7-14" tabindex="-1"></a></span>
+<span id="cb7-15"><a href="#cb7-15" tabindex="-1"></a>root_path <span class="op">=</span> <span class="ss">f&#39;</span><span class="sc">{</span>bucket_name<span class="sc">}</span><span class="ss">/</span><span class="sc">{</span>table_name<span class="sc">}</span><span class="ss">&#39;</span></span>
+<span id="cb7-16"><a href="#cb7-16" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" tabindex="-1"></a><span class="at">@data_exporter</span></span>
+<span id="cb7-18"><a href="#cb7-18" tabindex="-1"></a><span class="kw">def</span> export_data(data, <span class="op">*</span>args, <span class="op">**</span>kwargs):</span>
+<span id="cb7-19"><a href="#cb7-19" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;</span></span>
+<span id="cb7-20"><a href="#cb7-20" tabindex="-1"></a><span class="co">    Exports data to some source.</span></span>
+<span id="cb7-21"><a href="#cb7-21" tabindex="-1"></a></span>
+<span id="cb7-22"><a href="#cb7-22" tabindex="-1"></a><span class="co">    Args:</span></span>
+<span id="cb7-23"><a href="#cb7-23" tabindex="-1"></a><span class="co">        data: The output from the upstream parent block</span></span>
+<span id="cb7-24"><a href="#cb7-24" tabindex="-1"></a><span class="co">        args: The output from any additional upstream blocks (if applicable)</span></span>
+<span id="cb7-25"><a href="#cb7-25" tabindex="-1"></a></span>
+<span id="cb7-26"><a href="#cb7-26" tabindex="-1"></a><span class="co">    Output (optional):</span></span>
+<span id="cb7-27"><a href="#cb7-27" tabindex="-1"></a><span class="co">        Optionally return any object and it&#39;ll be logged and</span></span>
+<span id="cb7-28"><a href="#cb7-28" tabindex="-1"></a><span class="co">        displayed when inspecting the block run.</span></span>
+<span id="cb7-29"><a href="#cb7-29" tabindex="-1"></a><span class="co">    &quot;&quot;&quot;</span></span>
+<span id="cb7-30"><a href="#cb7-30" tabindex="-1"></a></span>
+<span id="cb7-31"><a href="#cb7-31" tabindex="-1"></a>    table <span class="op">=</span> pa.Table.from_pandas(data)</span>
+<span id="cb7-32"><a href="#cb7-32" tabindex="-1"></a></span>
+<span id="cb7-33"><a href="#cb7-33" tabindex="-1"></a>    gcs <span class="op">=</span> pa.fs.GcsFileSystem()</span>
+<span id="cb7-34"><a href="#cb7-34" tabindex="-1"></a></span>
+<span id="cb7-35"><a href="#cb7-35" tabindex="-1"></a>    pq.write_to_dataset(</span>
+<span id="cb7-36"><a href="#cb7-36" tabindex="-1"></a>        table,</span>
+<span id="cb7-37"><a href="#cb7-37" tabindex="-1"></a>        root_path<span class="op">=</span>root_path,</span>
+<span id="cb7-38"><a href="#cb7-38" tabindex="-1"></a>        partition_cols<span class="op">=</span>[<span class="st">&quot;lpep_pickup_date&quot;</span>],</span>
+<span id="cb7-39"><a href="#cb7-39" tabindex="-1"></a>        filesystem<span class="op">=</span>gcs,</span>
+<span id="cb7-40"><a href="#cb7-40" tabindex="-1"></a>        existing_data_behavior<span class="op">=</span><span class="st">&quot;delete_matching&quot;</span></span>
+<span id="cb7-41"><a href="#cb7-41" tabindex="-1"></a>    )</span></code></pre></div>
+<p><br></p>
+</div>
+<div id="parametrized-etl-excution" class="section level3">
+<h3><strong>Parametrized ETL Excution</strong></h3>
+<p>The ease of setting up backfills in Mage is particularly beneficial for pipelines that are parameterized based on execution dates. This tool simplifies the process, making it less frustrating and more efficient.
+Data Engineering Best Practices: Matt emphasizes the importance of creating idempotent pipelines, which ensure that rerunning pipelines for the same data doesn’t lead to data loss or duplication.
+While this approach is most useful for pipelines dependent on execution dates, it’s a straightforward method for backfilling data in various scenarios.</p>
+<p><br></p>
+</div>
+<div id="mage-terraform-deployment.-moving-etls-to-the-cloud" class="section level3">
+<h3><strong>Mage terraform deployment. Moving ETLs to the cloud</strong></h3>
+<p>Terraform and gcloud cli configured.</p>
+<p>Configure Cloud Permission</p>
+<p>Create Mage Terraform templates</p>
+<p><br></p>
+</div>
+<div id="extra-mage-documentation-and-video-tutorials" class="section level3">
+<h3><strong>Extra Mage documentation and video tutorials</strong></h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=Li8-MWHhTbo&amp;list=PL3MmuxUbc_hJed7dXYoJw8DoCuVHhGEQb&amp;index=17">Mage zoomcamp videos</a></li>
+<li><a href="https://mageai.slack.com/archives/C03SK7YLZNX/p1706187600563829">Mage backfilling tasks</a></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="stay-updated-on-the-data-engineering-and-data-analytics-engineer-career-paths" class="section level2">
+<h2><strong>Stay updated on the Data Engineering and Data Analytics Engineer career paths</strong></h2>
+<p>This was the content I gathered for the second week of the <a href="https://datatalks.club/blog/data-engineering-zoomcamp.html">DataTalks Data Engineering bootcamp</a>. We have a Mage pipeline running periodically on GCP and storing data in Google Cloud Storage.</p>
+<p>If you want to stay updated, check the homeworks along with explanations…</p>
+<!-- Begin Mailchimp Signup Form -->
+<link href="//cdn-images.mailchimp.com/embedcode/horizontal-slim-10_7.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
+<style type="text/css">
+	#mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif; width:100%;}
+	 #mc_embed_signup .button {
+  background-color: #0294A5; /* Green */
+  color: white;
+  transition-duration: 0.4s;
+}
+#mc_embed_signup .button:hover {
+  background-color: #379392 !important; 
+}
+
+</style>
+<div id="mc_embed_signup">
+<form action="https://typethepipe.us4.list-manage.com/subscribe/post?u=91551f7ed29389a0de4f47665&amp;id=d95c503a48" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+ <div id="mc_embed_signup_scroll">
+	<label for="mce-EMAIL"> Suscribe for Data Eng content and explained homework!</label>
+	<input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="your best email" required>
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_91551f7ed29389a0de4f47665_d95c503a48" tabindex="-1" value=""></div>
+    <div class="clear"><input type="submit" value="Submit!" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+    </div>
+</form>
+</div>
+
+<!--End mc_embed_signup-->
+</div>
+</div>
